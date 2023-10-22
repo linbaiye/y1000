@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://ca1rxwb2uxu2c"]
 
-[ext_resource type="Script" path="res://Character.cs" id="1_0qc35"]
+[ext_resource type="Script" path="res://code/player/Character.cs" id="1_fm3wc"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_n1ku8"]
-[ext_resource type="Script" path="res://Body.cs" id="4_qxgsp"]
+[ext_resource type="Script" path="res://code/player/Body.cs" id="3_3jcts"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6swyu"]
 
@@ -20,7 +20,7 @@ shader_parameter/modulate = Color(0, 0, 0, 0.509804)
 
 [node name="Character" type="CharacterBody2D"]
 position = Vector2(135, 114)
-script = ExtResource("1_0qc35")
+script = ExtResource("1_fm3wc")
 metadata/picNumber = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -37,6 +37,4 @@ metadata/frame = false
 [node name="Body" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_6ts8u")
 centered = false
-script = ExtResource("4_qxgsp")
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationFinished"]
+script = ExtResource("3_3jcts")

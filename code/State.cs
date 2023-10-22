@@ -1,4 +1,4 @@
-namespace test.cide
+namespace y1000.code
 {
     public enum State
     {
@@ -7,5 +7,9 @@ namespace test.cide
         WALK,
 
         Run,
+
+        ENFIGHT,
+
+        ATTACKING,
     }
 }

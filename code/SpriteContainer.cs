@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Godot;
+using y1000.code.player;
 
-namespace test.cide
+namespace y1000.code 
 {
     public class SpriteContainer
     {
@@ -35,6 +33,15 @@ namespace test.cide
             return offsets[nr];
         }
 
+
+        public PositionedTexture Get(int nr)
+        {
+            if (nr < 0 || nr > textures.Length) {
+                throw new FileNotFoundException();
+            }
+            return new PositionedTexture(GetTexture(nr), GetOffset(nr));
+        }
+
         private static Vector2[] ReadOffsets(string text)
         {
             var tokens = text.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -53,12 +60,18 @@ namespace test.cide
             return list.ToArray();
         }
 
+        private static Dictionary<string, SpriteContainer> LoadedContainers = new Dictionary<string, SpriteContainer>();
+
         public static SpriteContainer Load(string resDir) {
             if (!resDir.StartsWith("res://")){
                 resDir = "res://" + resDir;
             }
             if (!resDir.EndsWith("/")) {
                 resDir += "/";
+            }
+            if (LoadedContainers.TryGetValue(resDir, out SpriteContainer container)) 
+            {
+                return container;
             }
             if (!Godot.FileAccess.FileExists(resDir + "offset.txt")) {
                 throw new FileNotFoundException();
@@ -74,8 +87,17 @@ namespace test.cide
                 textures[i] = texture;
             }
 			fileAccess.Dispose();
-            return new SpriteContainer(textures, vectors);
+            var ret = new SpriteContainer(textures, vectors);
+            LoadedContainers.Add(resDir, ret);
+            return ret;
         }
+
+
+        public static SpriteContainer LoadMaleCharacterSprites(string nr)
+        {
+            return Load("res://sprite/char/" + nr + "/");
+        }
+
 
         public static readonly SpriteContainer EmptyContainer = new SpriteContainer(Array.Empty<Texture2D>(), Array.Empty<Vector2>());
     }

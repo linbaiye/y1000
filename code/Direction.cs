@@ -1,4 +1,4 @@
-namespace test.cide
+namespace y1000.code
 {
     public enum Direction
     {
