@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://ca1rxwb2uxu2c"]
+
+[ext_resource type="Script" path="res://Character.cs" id="1_0qc35"]
+[ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_n1ku8"]
+[ext_resource type="Script" path="res://Body.cs" id="4_qxgsp"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6swyu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6758"]
+shader = ExtResource("2_n1ku8")
+shader_parameter/deform = Vector2(0.765, 1.505)
+shader_parameter/offset = Vector2(1, 1.795)
+shader_parameter/modulate = Color(0, 0, 0, 0.443137)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ts8u"]
+shader = ExtResource("2_n1ku8")
+shader_parameter/deform = Vector2(0.6, 2)
+shader_parameter/offset = Vector2(0, 4)
+shader_parameter/modulate = Color(0, 0, 0, 0.509804)
+
+[node name="Character" type="CharacterBody2D"]
+position = Vector2(135, 114)
+script = ExtResource("1_0qc35")
+metadata/picNumber = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6swyu")
+}
+metadata/test = false
+
+[node name="Hand" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_e6758")
+centered = false
+metadata/frame = false
+
+[node name="Body" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_6ts8u")
+centered = false
+script = ExtResource("4_qxgsp")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationFinished"]

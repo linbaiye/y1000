@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd0ych2615hky"]
+
+[ext_resource type="Texture2D" uid="uid://c715qnyw0j63y" path="res://hud_bottom.png" id="1_8f1at"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_8f1at")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 663.0
+offset_right = 88.0
+offset_bottom = 689.0
+text = "无名剑法"
+text_direction = 1

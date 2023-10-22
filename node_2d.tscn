@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://yejs6a2wnjcg"]
+
+[ext_resource type="Script" path="res://Test.cs" id="1_u3n7q"]
+[ext_resource type="Texture2D" uid="uid://dmwi4kvccgj1d" path="res://sprite/char/N02/000000.png" id="2_tgpcv"]
+[ext_resource type="Texture2D" uid="uid://cvdyxu62ihm0j" path="res://sprite/char/N02/000001.png" id="3_vqgi0"]
+[ext_resource type="Texture2D" uid="uid://cwlt3pg0y74l2" path="res://sprite/char/N02/000002.png" id="4_j73hw"]
+[ext_resource type="Texture2D" uid="uid://dqvgd516ub6pl" path="res://sprite/char/N02/000003.png" id="5_f78rx"]
+[ext_resource type="Texture2D" uid="uid://1uh02fbtyhtc" path="res://sprite/char/N02/000004.png" id="6_sivl1"]
+[ext_resource type="Texture2D" uid="uid://2f8ai4w4qr7p" path="res://sprite/char/N02/000005.png" id="7_7hp1y"]
+
+[sub_resource type="Animation" id="Animation_ghuli"]
+resource_name = "walk_up"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-9, -30), Vector2(-9, -31), Vector2(-10, -31), Vector2(-9, -30), Vector2(-9, -31), Vector2(-9, -31)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_tgpcv"), ExtResource("3_vqgi0"), ExtResource("4_j73hw"), ExtResource("5_f78rx"), ExtResource("6_sivl1"), ExtResource("7_7hp1y")]
+}
+
+[sub_resource type="Animation" id="Animation_u21lh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9, -30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_tgpcv")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_18osb"]
+_data = {
+"RESET": SubResource("Animation_u21lh"),
+"walk_up": SubResource("Animation_ghuli")
+}
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(227, 106)
+script = ExtResource("1_u3n7q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9, -30)
+texture = ExtResource("2_tgpcv")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_18osb")
+}
