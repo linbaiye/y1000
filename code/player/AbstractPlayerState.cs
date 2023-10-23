@@ -67,6 +67,35 @@ namespace y1000.code.player
 
         public virtual void OnAnimationFinished(StringName animationName) => new NotImplementedException();
 
+        public virtual void RightMousePressed(Vector2 mousePosition)
+        {
+        }
+
+        public virtual void RightMouseRleased()
+        {
+        }
+
+        public virtual void Attack()
+        {
+        }
+
+        protected static Direction ComputeDirection(Vector2 mousePosition)
+        {
+            var angle = Mathf.Snapped(mousePosition.Angle(), Mathf.Pi / 4) / (Mathf.Pi / 4);
+            int dir = Mathf.Wrap((int)angle, 0, 8);
+            return dir switch
+            {
+                0 => Direction.RIGHT,
+                1 => Direction.DOWN_RIGHT,
+                2 => Direction.DOWN,
+                3 => Direction.DOWN_LEFT,
+                4 => Direction.LEFT,
+                5 => Direction.UP_LEFT,
+                6 => Direction.UP,
+                7 => Direction.UP_RIGHT,
+                _ => throw new NotSupportedException(),
+            };
+        }
         public Character Character => character;
     }
 }
