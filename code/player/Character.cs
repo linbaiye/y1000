@@ -51,4 +51,7 @@ public partial class Character : CharacterBody2D
 
 	public Direction Direction => playerState.Direction;
 
+
+	public static int Add(int a, int b) => a + b;
+
 }

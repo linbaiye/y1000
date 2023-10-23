@@ -1,12 +1,14 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "y1000", "y1000.csproj", "{AA7F5F89-0D3F-43CE-ACB8-740BDB31C92E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "y1000", "code\y1000.csproj", "{AA7F5F89-0D3F-43CE-ACB8-740BDB31C92E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{4E609148-2DE4-45F9-B432-DBCF05853170}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-	Debug|Any CPU = Debug|Any CPU
-	ExportDebug|Any CPU = ExportDebug|Any CPU
-	ExportRelease|Any CPU = ExportRelease|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		ExportDebug|Any CPU = ExportDebug|Any CPU
+		ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AA7F5F89-0D3F-43CE-ACB8-740BDB31C92E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -15,5 +17,11 @@ Global
 		{AA7F5F89-0D3F-43CE-ACB8-740BDB31C92E}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{AA7F5F89-0D3F-43CE-ACB8-740BDB31C92E}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{AA7F5F89-0D3F-43CE-ACB8-740BDB31C92E}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{4E609148-2DE4-45F9-B432-DBCF05853170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E609148-2DE4-45F9-B432-DBCF05853170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E609148-2DE4-45F9-B432-DBCF05853170}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E609148-2DE4-45F9-B432-DBCF05853170}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{4E609148-2DE4-45F9-B432-DBCF05853170}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E609148-2DE4-45F9-B432-DBCF05853170}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
