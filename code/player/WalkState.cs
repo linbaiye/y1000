@@ -36,7 +36,6 @@ namespace y1000.code.player
         public override void OnAnimationFinished(StringName animationName)
         {
             Character.Velocity = Vector2.Zero;
-            GD.Print(Character.Position);
             if (!mouseRightPressed)
             {
                 Character.ChangeState(new IdleState(Character, Direction));
@@ -63,8 +62,6 @@ namespace y1000.code.player
         };
 
         public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) + Character.PictureNumber);
-
-
 
 
         private Vector2 ComputeVelocity()

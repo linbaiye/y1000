@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca1rxwb2uxu2c"]
+[gd_scene load_steps=8 format=3 uid="uid://ca1rxwb2uxu2c"]
 
 [ext_resource type="Script" path="res://code/player/Character.cs" id="1_fm3wc"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_n1ku8"]
@@ -17,6 +17,10 @@ shader = ExtResource("2_n1ku8")
 shader_parameter/deform = Vector2(0.6, 2)
 shader_parameter/offset = Vector2(0, 4)
 shader_parameter/modulate = Color(0, 0, 0, 0.509804)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nlba3"]
+radius = 12.0
+height = 40.0
 
 [node name="Character" type="CharacterBody2D"]
 position = Vector2(135, 114)
@@ -38,3 +42,6 @@ metadata/frame = false
 material = SubResource("ShaderMaterial_6ts8u")
 centered = false
 script = ExtResource("3_3jcts")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_nlba3")

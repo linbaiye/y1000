@@ -12,13 +12,15 @@ config_version=5
 
 config/name="y1000"
 run/main_scene="res://world.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=1024
 window/size/viewport_height=768
+window/size/resizable=false
+window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
 [dotnet]

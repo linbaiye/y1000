@@ -1,81 +1,240 @@
-[gd_scene load_steps=16 format=3 uid="uid://cda61nyakuwop"]
+[gd_scene load_steps=11 format=3 uid="uid://cda61nyakuwop"]
 
-[ext_resource type="Shader" path="res://MaleShadow.gdshader" id="1_8gm71"]
 [ext_resource type="Texture2D" uid="uid://ds1juhhh67fb" path="res://sprite/buffalo/000000.png" id="1_wvjhr"]
-[ext_resource type="Texture2D" uid="uid://5hgfptt3suu7" path="res://sprite/buffalo/000018.png" id="1_yyx0r"]
-[ext_resource type="Texture2D" uid="uid://diqb0rucvhs5b" path="res://sprite/buffalo/000019.png" id="2_3gjd7"]
-[ext_resource type="Texture2D" uid="uid://dybnf5qfn0vii" path="res://sprite/buffalo/000001.png" id="2_fffgn"]
-[ext_resource type="Texture2D" uid="uid://0nbyok4gj7hc" path="res://sprite/buffalo/000002.png" id="3_5jebp"]
-[ext_resource type="Texture2D" uid="uid://j2b0en18p8dn" path="res://sprite/buffalo/000020.png" id="3_qqmu5"]
-[ext_resource type="Texture2D" uid="uid://dado1cf40ybqq" path="res://sprite/buffalo/000003.png" id="4_8tpvu"]
-[ext_resource type="Texture2D" uid="uid://esevfef4csn5" path="res://sprite/buffalo/000021.png" id="4_l10r6"]
-[ext_resource type="Texture2D" uid="uid://bve5gpl6eccwo" path="res://sprite/buffalo/000004.png" id="5_1f2pq"]
-[ext_resource type="Texture2D" uid="uid://byn1um0kbg1aq" path="res://sprite/buffalo/000022.png" id="5_wbrpr"]
-[ext_resource type="Texture2D" uid="uid://bhg2cre3akqj1" path="res://sprite/buffalo/000005.png" id="6_i4qv3"]
-[ext_resource type="Texture2D" uid="uid://da6qc0hj6ndwl" path="res://sprite/buffalo/000006.png" id="7_2gyn5"]
+[ext_resource type="Texture2D" uid="uid://8ac4s1jx8qdt" path="res://sprite/buffalo/000046.png" id="2_mpgqh"]
+[ext_resource type="Texture2D" uid="uid://c1si4elnaoj7t" path="res://sprite/buffalo/000023.png" id="3_fym42"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tqacm"]
-shader = ExtResource("1_8gm71")
-shader_parameter/deform = Vector2(1, 2)
-shader_parameter/offset = Vector2(0, 4)
-shader_parameter/modulate = Color(0, 0, 0, 0.572549)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2dknn"]
+radius = 16.643
+height = 54.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_k5cxk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_yyx0r")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_3gjd7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_qqmu5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_l10r6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_wbrpr")
-}],
-"loop": true,
-"name": &"idle_up",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_wvjhr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_fffgn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_5jebp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_8tpvu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_1f2pq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_i4qv3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_2gyn5")
-}],
-"loop": true,
-"name": &"move_up",
-"speed": 5.0
-}]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hc2qu"]
+height = 54.0
 
-[node name="Monster" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_xluk4"]
+resource_name = "AttackUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_wvjhr")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, 46)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.48787e-16]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape:shape")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CapsuleShape2D_hc2qu")]
+}
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_tqacm")
-position = Vector2(219, 223)
-sprite_frames = SubResource("SpriteFrames_k5cxk")
-animation = &"idle_up"
-autoplay = "idle_up"
-frame_progress = 0.432014
+[sub_resource type="Animation" id="Animation_1qumc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_wvjhr")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, 46)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.00531]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape:shape")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CapsuleShape2D_2dknn")]
+}
+
+[sub_resource type="Animation" id="Animation_3ot45"]
+resource_name = "AttackRight"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(33, 25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_mpgqh")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("CollisionShape:shape")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CapsuleShape2D_2dknn")]
+}
+
+[sub_resource type="Animation" id="Animation_urgvk"]
+resource_name = "AttackLeftUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(23, 41)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_fym42")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.00531]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape:shape")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CapsuleShape2D_2dknn")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rme1h"]
+_data = {
+"AttackLeftUp": SubResource("Animation_urgvk"),
+"AttackRight": SubResource("Animation_3ot45"),
+"AttackUp": SubResource("Animation_xluk4"),
+"RESET": SubResource("Animation_1qumc")
+}
+
+[node name="Buffalo" type="CharacterBody2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_wvjhr")
 centered = false
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(11, 46)
+rotation = 1.00531
+shape = SubResource("CapsuleShape2D_2dknn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rme1h")
+}

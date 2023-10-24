@@ -9,7 +9,7 @@ namespace y1000.code.player
     public abstract class AbstractPlayerState : IPlayerState
     {
 
-        private readonly Character character;
+        private readonly IPlayer character;
 
         public Direction Direction {get; set;}
 
@@ -79,6 +79,11 @@ namespace y1000.code.player
         {
         }
 
+        public virtual void Sit()
+        {
+
+        }
+
         protected static Direction ComputeDirection(Vector2 mousePosition)
         {
             var angle = Mathf.Snapped(mousePosition.Angle(), Mathf.Pi / 4) / (Mathf.Pi / 4);
@@ -96,6 +101,6 @@ namespace y1000.code.player
                 _ => throw new NotSupportedException(),
             };
         }
-        public Character Character => character;
+        public Character Character => (Character)character;
     }
 }

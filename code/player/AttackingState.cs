@@ -127,7 +127,6 @@ namespace y1000.code.player
                         spriteGroup = UNARMED_SPRITE_OFFSET;
                         break;
                 }
-                GD.Print(Character.PictureNumber);
                 return container.Get(spriteGroup.GetValueOrDefault(actionGroup).GetValueOrDefault(Direction) + Character.PictureNumber);
             }
         }

@@ -5,7 +5,7 @@ using System.Runtime;
 using y1000.code.player;
 using y1000.code;
 
-public partial class Character : CharacterBody2D
+public partial class Character : CharacterBody2D, IPlayer
 {
 	public float gravity = 0f;
 
@@ -39,17 +39,25 @@ public partial class Character : CharacterBody2D
 
    public override void _Input(InputEvent @event)
     {
-		if (@event is InputEventMouseButton button && button.ButtonIndex == MouseButton.Right)
+		if (@event is InputEventMouseButton button)
 		{
-			if (button.IsPressed())
+			if (button.ButtonIndex == MouseButton.Right)
 			{
-				playerState.RightMousePressed(GetLocalMousePosition());
-			} else if (button.IsReleased())
+				if (button.IsPressed())
+				{
+					playerState.RightMousePressed(GetLocalMousePosition());
+				}
+				else if (button.IsReleased())
+				{
+					playerState.RightMouseRleased();
+				}
+				else
+				{
+					//playerState.RightMousePressed(GetLocalMousePosition());
+				}
+			} else if (button.ButtonIndex == MouseButton.Left)
 			{
-				playerState.RightMouseRleased();
-			} else 
-			{
-				//playerState.RightMousePressed(GetLocalMousePosition());
+
 			}
 		}
 		else if (@event is InputEventMouseMotion mouseMotion)
@@ -74,20 +82,19 @@ public partial class Character : CharacterBody2D
 			}
 		}
 
-    }
+	}
 
 
-    public PositionedTexture BodyTexture => playerState.BodyTexture;
+	public PositionedTexture BodyTexture => playerState.BodyTexture;
 
-    public override void _PhysicsProcess(double delta)
-    {
+	public override void _PhysicsProcess(double delta)
+	{
 		playerState.PhysicsProcess(delta);
-    }
+	}
 
-    public State State => playerState.State;
+	public State State => playerState.State;
 
 	public Direction Direction => playerState.Direction;
-
 
 	public static int Add(int a, int b) => a + b;
 

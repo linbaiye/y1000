@@ -22,6 +22,8 @@ namespace y1000.code.player
 
         void Attack();
 
+        void Sit();
+
         PositionedTexture BodyTexture { get; }
     }
 }

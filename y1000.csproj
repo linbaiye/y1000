@@ -7,9 +7,9 @@
     <PackageReference Include="NLog" Version="5.2.5" />
   </ItemGroup>
   <ItemGroup>
-   <Content Remove="Tests\**" />
-  <Compile Remove="Tests\**" />
-  <EmbeddedResource Remove="Tests\**" />
-  <None Remove="Tests\**" />
+    <Content Remove="Tests\**" />
+    <Compile Remove="Tests\**" />
+    <EmbeddedResource Remove="Tests\**" />
+    <None Remove="Tests\**" />
   </ItemGroup>
 </Project>
