@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "y1000", "code\y1000.csproj", "{AA7F5F89-0D3F-43CE-ACB8-740BDB31C92E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "y1000", "y1000.csproj", "{AA7F5F89-0D3F-43CE-ACB8-740BDB31C92E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{4E609148-2DE4-45F9-B432-DBCF05853170}"
 EndProject
