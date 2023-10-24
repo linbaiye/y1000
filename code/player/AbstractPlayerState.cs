@@ -84,6 +84,11 @@ namespace y1000.code.player
 
         }
 
+        public virtual void Hurt()
+        {
+
+        }
+
         protected static Direction ComputeDirection(Vector2 mousePosition)
         {
             var angle = Mathf.Snapped(mousePosition.Angle(), Mathf.Pi / 4) / (Mathf.Pi / 4);
@@ -101,6 +106,9 @@ namespace y1000.code.player
                 _ => throw new NotSupportedException(),
             };
         }
+
+
+
         public Character Character => (Character)character;
     }
 }

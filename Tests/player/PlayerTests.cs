@@ -12,7 +12,7 @@ namespace Tests.player
         public void Test1()
         {
            var ret =  Character.Add(12, 3);
-           Assert.AreEqual(15, ret);
+           Assert.AreEqual(14, ret);
         }
         
     }

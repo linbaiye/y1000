@@ -5,7 +5,7 @@ using System.Runtime;
 using y1000.code.player;
 using y1000.code;
 
-public partial class Character : CharacterBody2D, IPlayer
+public partial class Character : StaticBody2D, IPlayer
 {
 	public float gravity = 0f;
 
@@ -16,6 +16,7 @@ public partial class Character : CharacterBody2D, IPlayer
         base._Ready();
 		AnimationPlayer.AnimationFinished += AnimationFinished;
 		playerState = new IdleState(this, Direction.DOWN);
+		Position = new Vector2((float)Math.Floor(Position.X + 0.5f), (float)Math.Floor((double)(Position.Y + 0.5f)));
 	}
 
 	public void ChangeState(IPlayerState newState)
@@ -77,6 +78,7 @@ public partial class Character : CharacterBody2D, IPlayer
 						playerState.Attack();
 						break;
 					case Key.F3:
+						playerState.Hurt();
 						break;
 				}
 			}

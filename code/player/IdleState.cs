@@ -32,7 +32,6 @@ namespace y1000.code.player
                 var animationLibrary = CreateAnimations(3, 0.5f, Animation.LoopModeEnum.Linear);
                 character.AnimationPlayer.AddAnimationLibrary(State.ToString(), animationLibrary);
             }
-            character.Velocity = Vector2.Zero;
             Character.AnimationPlayer.Play(State.ToString() + "/" + Direction.ToString());
         }
 
@@ -49,7 +48,11 @@ namespace y1000.code.player
 
         public override void PhysicsProcess(double delta)
         {
-            Character.MoveAndSlide();
+        }
+
+        public override void Hurt()
+        {
+            Character.ChangeState(new HurtState(Character, Direction, this));
         }
     }
 }

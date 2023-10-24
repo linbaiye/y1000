@@ -11,5 +11,8 @@ namespace y1000.code
         ENFIGHT,
 
         ATTACKING,
+
+
+        HURT,
     }
 }

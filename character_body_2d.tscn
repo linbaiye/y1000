@@ -18,12 +18,12 @@ shader_parameter/deform = Vector2(0.6, 2)
 shader_parameter/offset = Vector2(0, 4)
 shader_parameter/modulate = Color(0, 0, 0, 0.509804)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nlba3"]
-radius = 12.0
-height = 40.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tfk1"]
+size = Vector2(32, 24)
 
-[node name="Character" type="CharacterBody2D"]
-position = Vector2(135, 114)
+[node name="Character" type="StaticBody2D"]
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_fm3wc")
 metadata/picNumber = 0
 
@@ -39,9 +39,13 @@ centered = false
 metadata/frame = false
 
 [node name="Body" type="Sprite2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
+texture_filter = 1
 material = SubResource("ShaderMaterial_6ts8u")
 centered = false
 script = ExtResource("3_3jcts")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_nlba3")
+position = Vector2(5, 25)
+shape = SubResource("RectangleShape2D_1tfk1")
