@@ -35,12 +35,50 @@ public partial class Character : CharacterBody2D
 
 	public void AnimationFinished(StringName animationName)
 	{
-		ResetPictureNumber();
 		playerState.OnAnimationFinished(animationName);
 	}
 
+   public override void _Input(InputEvent @event)
+    {
+		if (@event is InputEventMouseButton button && button.ButtonIndex == MouseButton.Right)
+		{
+			if (button.IsPressed())
+			{
+				playerState.RightMousePressed(GetLocalMousePosition());
+			} else if (button.IsReleased())
+			{
+				playerState.RightMouseRleased();
+			} else 
+			{
+				//playerState.RightMousePressed(GetLocalMousePosition());
+			}
+		}
+		else if (@event is InputEventMouseMotion mouseMotion)
+		{
+			if ((mouseMotion.ButtonMask & MouseButtonMask.Right) != 0)
+			{
+				playerState.RightMousePressed(GetLocalMousePosition());
+			}
+		}
+		else if (@event is InputEventKey eventKey)
+		{
+			if (eventKey.IsPressed())
+			{
+				switch (eventKey.Keycode)
+				{
+					case Key.A:
+						playerState.Attack();
+						break;
+					case Key.F3:
+						break;
+				}
+			}
+		}
 
-	public PositionedTexture BodyTexture => playerState.BodyTexture;
+    }
+
+
+    public PositionedTexture BodyTexture => playerState.BodyTexture;
 
     public override void _PhysicsProcess(double delta)
     {

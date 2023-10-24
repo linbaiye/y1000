@@ -36,25 +36,20 @@ namespace y1000.code.player
             Character.AnimationPlayer.Play(State.ToString() + "/" + Direction.ToString());
         }
 
+
+        public override void RightMousePressed(Vector2 mousePosition)
+        {
+            Character.ChangeState(new WalkState(Character, mousePosition));
+        }
+
+        public override void Attack()
+        {
+            Character.ChangeState(new AttackingState(Character, Direction));
+        }
+
         public override void PhysicsProcess(double delta)
         {
-            if (Input.IsActionPressed("mouse_right"))
-            {
-                Character.ChangeState(new WalkState(Character, Direction));
-            }
-            else if (Input.IsActionPressed("shift"))
-            {
-                Input.ActionRelease("shift");
-                Character.ChangeState(new EnfightState(Character, Direction));
-            } else if (Input.IsActionPressed("attack"))
-            {
-                Input.ActionRelease("attack");
-                Character.ChangeState(new AttackingState(Character, Direction));
-            }
-            else
-            {
-                Character.MoveAndSlide();
-            }
+            Character.MoveAndSlide();
         }
     }
 }

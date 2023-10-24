@@ -40,22 +40,19 @@ namespace y1000.code.player
 
         public override State State => State.ENFIGHT;
 
+        public override void RightMousePressed(Vector2 mousePosition)
+        {
+            Direction = ComputeDirection(mousePosition);
+        }
+
+        public override void Attack()
+        {
+            Character.ChangeState(new AttackingState(Character, Direction));
+        }
+
         public override void PhysicsProcess(double delta)
         {
-            if (Input.IsActionPressed("shift"))
-            {
-                Input.ActionRelease("shift");
-                Character.ChangeState(new IdleState(Character, Direction));
-            }
-            else if (Input.IsActionPressed("attack"))
-            {
-                Input.ActionRelease("attack");
-                Character.ChangeState(new AttackingState(Character, Direction));
-            }
-            else
-            {
-                Character.MoveAndSlide();
-            }
+            Character.MoveAndSlide();
         }
     }
 }

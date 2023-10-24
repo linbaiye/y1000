@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
@@ -8,18 +9,43 @@ namespace y1000.code.player
 {
     public class WalkState : AbstractPlayerState
     {
-        public WalkState(Character character, Direction direction) : base(character, direction)
+
+        private bool mouseRightPressed;
+
+
+        private Vector2 nextPosition;
+
+        public WalkState(Character character, Vector2 mousePosition) : base(character, ComputeDirection(mousePosition))
         {
             if (!character.AnimationPlayer.HasAnimationLibrary(State.ToString())) {
                 character.AnimationPlayer.AddAnimationLibrary(State.ToString(), CreateAnimations(6, 0.1f));
             }
-            character.AnimationPlayer.Play(State + "/" + direction);
+            ContinueMove();
+            mouseRightPressed = false;
+            nextPosition = Vector2.Zero;
         }
 
 
+        private void ContinueMove()
+        {
+            Character.Velocity = ComputeVelocity();
+            Character.ResetPictureNumber();
+            Character.AnimationPlayer.Play(State + "/" + Direction);
+        }
+
         public override void OnAnimationFinished(StringName animationName)
         {
-            Character.ChangeState(new IdleState(Character, Direction));
+            Character.Velocity = Vector2.Zero;
+            GD.Print(Character.Position);
+            if (!mouseRightPressed)
+            {
+                Character.ChangeState(new IdleState(Character, Direction));
+            } 
+            else
+            {
+                Direction = ComputeDirection(nextPosition);
+                ContinueMove();
+            }
         }
 
         public override State State => State.WALK;
@@ -39,29 +65,11 @@ namespace y1000.code.player
         public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) + Character.PictureNumber);
 
 
-        private Direction ComputeDirection()
-        {
-            var clickPosition = Character.GetLocalMousePosition();
-            var angle = Mathf.Snapped(clickPosition.Angle(), Mathf.Pi / 4) / (Mathf.Pi / 4);
-            int dir = Mathf.Wrap((int)angle, 0, 8);
-            return dir switch
-            {
-                0 => Direction.RIGHT,
-                1 => Direction.DOWN_RIGHT,
-                2 => Direction.DOWN,
-                3 => Direction.DOWN_LEFT,
-                4 => Direction.LEFT,
-                5 => Direction.UP_LEFT,
-                6 => Direction.UP,
-                7 => Direction.UP_RIGHT,
-                _ => throw new NotSupportedException(),
-            };
-        }
 
 
-        private Vector2 ComputeVelocity(Direction direction)
+        private Vector2 ComputeVelocity()
         {
-            return direction switch
+            return Direction switch
             {
                 Direction.UP => new Vector2(0, -40),
                 Direction.DOWN => new Vector2(0, 40),
@@ -76,20 +84,22 @@ namespace y1000.code.player
         }
 
 
+
+        public override void RightMouseRleased() 
+        {
+            mouseRightPressed = false;
+        }
+
+
+        public override void RightMousePressed(Vector2 mousePosition)
+        {
+            mouseRightPressed = true;
+            nextPosition = mousePosition;
+        }
+
+
         public override void PhysicsProcess(double delta)
         {
-            if (Input.IsActionPressed("mouse_right"))
-            {
-                var player = Character.AnimationPlayer;
-                Character.Velocity = ComputeVelocity(Direction);
-                Direction = ComputeDirection();
-                player.GetAnimation(player.CurrentAnimation).LoopMode = Animation.LoopModeEnum.Linear;
-            }
-            else if (Input.IsActionJustReleased("mouse_right"))
-            {
-                var player = Character.AnimationPlayer;
-                player.GetAnimation(player.CurrentAnimation).LoopMode = Animation.LoopModeEnum.None;
-            }
             Character.MoveAndSlide();
         }
     }

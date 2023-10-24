@@ -16,7 +16,12 @@ namespace y1000.code.player
 
         void OnAnimationFinished(StringName animationName);
 
-        PositionedTexture BodyTexture { get; }
+        void RightMousePressed(Vector2 mousePosition);
 
+        void RightMouseRleased();
+
+        void Attack();
+
+        PositionedTexture BodyTexture { get; }
     }
 }
