@@ -12,6 +12,6 @@ public class Tests
     [Test]
     public void Test1()
     {
-        Assert.AreEqual(4, Character.Add(1, 2));
+        Assert.AreEqual(3, Character.Add(1, 2));
     }
 }
