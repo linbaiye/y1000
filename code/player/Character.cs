@@ -16,7 +16,7 @@ public partial class Character : StaticBody2D, IPlayer
         base._Ready();
 		AnimationPlayer.AnimationFinished += AnimationFinished;
 		playerState = new IdleState(this, Direction.DOWN);
-		Position = new Vector2((float)Math.Floor(Position.X + 0.5f), (float)Math.Floor((double)(Position.Y + 0.5f)));
+		Position = Position.Snapped(new Vector2(32, 24));
 	}
 
 	public void ChangeState(IPlayerState newState)
@@ -60,7 +60,7 @@ public partial class Character : StaticBody2D, IPlayer
 			{
 				if (button.DoubleClick)
 				{
-					GD.Print("Double");
+				//	GD.Print("Double");
 				}
 			}
 		}

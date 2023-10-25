@@ -1,34 +1,27 @@
 using Godot;
 using System;
+using System.IO;
+using y1000.code.item;
 
-public partial class Item : Node2D
+
+public partial class Item : TextureRect, IItem
 {
 	// Called when the node enters the scene tree for the first time.
 
-	private TextureRect textureRect;
-
-	public void LoadTexture(string resName)
+	public Item(Texture2D texture)
 	{
-		var texture = ResourceLoader.Load("res://sprite/weapon/J42/" + resName + ".png") as Texture2D;
-		textureRect.Texture = texture;
+		Texture = texture;
 	}
 
-	public override void _Ready()
-	{
-		textureRect = GetNode<TextureRect>("Texture");
-	}
+    public string ItemName => "新罗宝剑";
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+    public static Item Load(string name)
 	{
-	}
-
-	public static Item Load(string name)
-	{
-		var scene = ResourceLoader.Load<PackedScene>("res://item.tscn");
-		var item = scene.Instantiate<Item>();
-		item._Ready();
-		item.LoadTexture(name);
-		return item;
+		var texture = ResourceLoader.Load("res://sprite/item/" + name + ".png") as Texture2D;
+		if (texture == null)
+		{
+			throw new FileNotFoundException();
+		}
+		return new Item(texture);
 	}
 }
