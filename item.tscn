@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://baaansavuh5a0"]
+
+[ext_resource type="Script" path="res://code/item/Item.cs" id="1_08ccm"]
+
+[node name="Item" type="Node2D"]
+script = ExtResource("1_08ccm")
+
+[node name="Texture" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

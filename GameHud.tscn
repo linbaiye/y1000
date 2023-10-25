@@ -1,0 +1,131 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4aq7l7kpiqxk"]
+
+[ext_resource type="Script" path="res://code/control/GameHud.cs" id="1_wy2xg"]
+[ext_resource type="Script" path="res://code/control/SkillPanel1.cs" id="2_2d1vg"]
+[ext_resource type="Script" path="res://code/control/Slot.cs" id="2_qfdd8"]
+[ext_resource type="Texture2D" uid="uid://c715qnyw0j63y" path="res://hud_bottom.png" id="2_rkhpl"]
+
+[sub_resource type="SystemFont" id="SystemFont_d6tv1"]
+
+[node name="GameHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wy2xg")
+
+[node name="RightSide" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightSide"]
+custom_minimum_size = Vector2(160, 2.08165e-12)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Panel" parent="RightSide/HBoxContainer"]
+custom_minimum_size = Vector2(80, 120)
+layout_mode = 2
+
+[node name="Panel2" type="Panel" parent="RightSide/HBoxContainer"]
+custom_minimum_size = Vector2(80, 2.08165e-12)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="RightSide"]
+custom_minimum_size = Vector2(2.08165e-12, 14)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_d6tv1")
+text = "银狼皇破仑"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="RightSide"]
+custom_minimum_size = Vector2(160, 2.08165e-12)
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 5
+
+[node name="Panel" type="Panel" parent="RightSide/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_qfdd8")
+
+[node name="Panel2" type="Panel" parent="RightSide/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+script = ExtResource("2_qfdd8")
+
+[node name="Panel3" type="Panel" parent="RightSide/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_qfdd8")
+
+[node name="Panel4" type="Panel" parent="RightSide/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+script = ExtResource("2_qfdd8")
+
+[node name="Panel5" type="Panel" parent="RightSide/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+script = ExtResource("2_qfdd8")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00683594
+anchor_top = 0.744792
+anchor_right = 1.0
+anchor_bottom = 0.744792
+offset_left = -7.0
+offset_top = -2.00002
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(2.08165e-12, 2.08165e-12)
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 66)
+layout_mode = 2
+
+[node name="SkillPanel1" type="Panel" parent="HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 2.08165e-12)
+layout_mode = 2
+script = ExtResource("2_2d1vg")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 132)
+layout_mode = 2
+
+[node name="KeyIcon" type="Panel" parent="HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 2.08165e-12)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_rkhpl")
+
+[connection signal="gui_input" from="HBoxContainer/HBoxContainer/SkillPanel1" to="HBoxContainer/HBoxContainer/SkillPanel1" method="OnInput"]

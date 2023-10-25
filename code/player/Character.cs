@@ -58,7 +58,10 @@ public partial class Character : StaticBody2D, IPlayer
 				}
 			} else if (button.ButtonIndex == MouseButton.Left)
 			{
-
+				if (button.DoubleClick)
+				{
+					GD.Print("Double");
+				}
 			}
 		}
 		else if (@event is InputEventMouseMotion mouseMotion)
@@ -83,7 +86,6 @@ public partial class Character : StaticBody2D, IPlayer
 				}
 			}
 		}
-
 	}
 
 

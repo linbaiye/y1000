@@ -36,7 +36,6 @@ namespace y1000.code.player
         public override void OnAnimationFinished(StringName animationName)
         {
             Character.Position = new Vector2((float)Math.Floor(Character.Position.X + 0.5f), (float)Math.Floor((double)(Character.Position.Y + 0.5f)));
-            GD.Print(Character.Position);
             if (!mouseRightPressed)
             {
                 Character.ChangeState(new IdleState(Character, Direction));
