@@ -26,11 +26,11 @@ public partial class Character : StaticBody2D, IPlayer
 
 	public AnimationPlayer AnimationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
 
-    public int PictureNumber => (int)GetMeta("picNumber");
+    public int PictureNumber => (int)GetMeta("spriteNumber");
 
 	public void ResetPictureNumber()
 	{
-		SetMeta("picNumber", 0);
+		SetMeta("spriteNumber", 0);
 	}
 
 	public void AnimationFinished(StringName animationName)
@@ -102,4 +102,8 @@ public partial class Character : StaticBody2D, IPlayer
 
 	public static int Add(int a, int b) => a + b;
 
+    public void Move(Direction direction)
+    {
+        throw new NotImplementedException();
+    }
 }

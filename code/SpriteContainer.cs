@@ -99,6 +99,11 @@ namespace y1000.code
         }
 
 
+        public static SpriteContainer LoadSprites(string name)
+        {
+            return Load("res://sprite/" + name + "/");
+        }
+
         public static readonly SpriteContainer EmptyContainer = new SpriteContainer(Array.Empty<Texture2D>(), Array.Empty<Vector2>());
     }
 }

@@ -2,18 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Godot;
 using y1000.code.player;
 
 namespace y1000.code.creatures
 {
-    public interface ICreature
+    public interface ICreatureState
     {
-        PositionedTexture BodyTexture { get; }
+        Direction Direction { get; }
 
         State State { get; }
 
-        Direction Direction { get; }
+        int GetSpriteOffset();
 
         void Move(Direction direction);
 

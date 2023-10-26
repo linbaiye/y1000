@@ -25,7 +25,7 @@ size = Vector2(32, 24)
 z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_fm3wc")
-metadata/picNumber = 0
+metadata/spriteNumber = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

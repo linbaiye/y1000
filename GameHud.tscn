@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c715qnyw0j63y" path="res://hud_bottom.png" id="2_rkhpl"]
 
 [sub_resource type="SystemFont" id="SystemFont_d6tv1"]
+subpixel_positioning = 0
 
 [node name="GameHud" type="Control"]
 layout_mode = 3

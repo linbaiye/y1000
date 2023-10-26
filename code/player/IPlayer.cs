@@ -9,7 +9,9 @@ namespace y1000.code.player
 {
     public interface IPlayer : ICreature
     {
-          AnimationPlayer AnimationPlayer { get; }
+        AnimationPlayer AnimationPlayer { get; }
+
+        void ChangeState(IPlayerState newState);
 
     }
 }
