@@ -47,7 +47,7 @@ namespace y1000.code.player
             }
         }
 
-        public override State State => State.WALK;
+        public override State State => State.MOVE;
 
         private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
         {

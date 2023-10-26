@@ -16,5 +16,10 @@ namespace y1000.code.creatures
 
         void Move(Direction direction);
 
+        void ChangeDirection(Direction newDirection);
+
+        void OnAnimationFinised();
+
+        void Attack();
     }
 }

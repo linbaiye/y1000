@@ -39,7 +39,7 @@ namespace y1000.code.player
 
         protected AnimationLibrary CreateAnimations(int total, float step, Animation.LoopModeEnum loopModeEnum)
         {
-            return CreateAnimations(total, step, loopModeEnum);
+            return AnimationUtil.CreateAnimations(total, step, loopModeEnum);
         }
 
 

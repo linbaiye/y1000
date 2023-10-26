@@ -9,12 +9,6 @@ namespace y1000.code
     public static class AnimationUtil
     {
 
-        public static void AddIfAbsent(this AnimationPlayer animationPlayer, StringName name, Func<AnimationLibrary> library)
-        {
-            if (!animationPlayer.HasAnimationLibrary(name))
-                animationPlayer.AddAnimationLibrary(name, library.Invoke());
-        }
-
         public static AnimationLibrary CreateAnimations(int total, float step, Animation.LoopModeEnum loopModeEnum)
         {
             AnimationLibrary library = new AnimationLibrary();

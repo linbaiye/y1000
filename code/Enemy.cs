@@ -5,6 +5,7 @@ public partial class Enemy : Area2D
 {
 	// Called when the node enters the scene tree for the first time.
 	private TextureProgressBar hpBar;
+
 	public override void _Ready()
 	{
 		hpBar = GetNode<TextureProgressBar>("HPBar");
@@ -23,6 +24,5 @@ public partial class Enemy : Area2D
 		else
 		{
 		}
-
 	}
 }

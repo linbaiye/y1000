@@ -106,4 +106,10 @@ public partial class Character : StaticBody2D, IPlayer
     {
         throw new NotImplementedException();
     }
+
+    public void Attack()
+    {
+        throw new NotImplementedException();
+    }
+
 }

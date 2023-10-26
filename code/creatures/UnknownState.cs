@@ -1,14 +1,23 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace y1000.code.creatures
 {
-    public class UnknownState : AbstractCreatureState
+    public partial class UnknownState : AbstractCreatureState
     {
         public static readonly UnknownState INSTANCE = new UnknownState();
-        private UnknownState() : base(Direction.DOWN)
+
+        private partial class UnknownCreature : AbstractCreature
+        {
+
+        }
+
+        private static readonly UnknownCreature UNKNOWN_CREATURE = new UnknownCreature();
+
+        public UnknownState() : base(UNKNOWN_CREATURE, Direction.DOWN)
         {
         }
 
@@ -23,5 +32,11 @@ namespace y1000.code.creatures
         {
             throw new NotImplementedException();
         }
+
+        public override void ChangeDirection(Direction newDirection)
+        {
+            throw new NotImplementedException();
+        }
     }
+
 }

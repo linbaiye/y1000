@@ -17,5 +17,7 @@ namespace y1000.code.creatures
 
         void Move(Direction direction);
 
+
+        void Attack();
     }
 }

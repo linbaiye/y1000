@@ -4,14 +4,13 @@ namespace y1000.code
     {
         IDLE,
 
-        WALK,
+        MOVE,
 
         Run,
 
         ENFIGHT,
 
         ATTACKING,
-
 
         HURT,
     }
