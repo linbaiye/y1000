@@ -115,7 +115,6 @@ namespace y1000.code.player
             {
                 SpriteContainer container;
                 Dictionary<int, Dictionary<Direction, int>> spriteGroup;
-
                 switch (weapon)
                 {
                     case Weapon.SWORD:

@@ -29,11 +29,7 @@ texture = ExtResource("3_10p02")
 centered = false
 script = ExtResource("4_4nmi5")
 
-[node name="HoverLabel" parent="Sprite" instance=ExtResource("5_jouml")]
-offset_left = -10.0
-offset_top = 9.0
-offset_right = 30.0
-offset_bottom = 49.0
+[node name="TextureRect" parent="Sprite" instance=ExtResource("5_jouml")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

@@ -42,6 +42,12 @@ public partial class Testcreature : StaticBody2D
 					case Key.A:
 						buffalo.Attack();
 						break;
+					case Key.H:
+						buffalo.Hurt();
+						break;
+					case Key.D:
+						buffalo.Die();
+						break;
 				}
 			}
 		}

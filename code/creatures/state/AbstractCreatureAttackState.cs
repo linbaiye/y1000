@@ -9,8 +9,7 @@ namespace y1000.code.creatures.state
     {
         protected AbstractCreatureAttackState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
-            creature.AddAnimationLibrary(State.ToString(), () => AnimationUtil.CreateAnimations(6, 0.1f, Godot.Animation.LoopModeEnum.None));
-            Creature.AnimationPlayer.Play(State + "/" + Direction);
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(5, 0.1f, Godot.Animation.LoopModeEnum.None));
         }
 
         private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
@@ -27,22 +26,19 @@ namespace y1000.code.creatures.state
 
         public override State State => State.ATTACKING;
 
-
-        public override void ChangeDirection(Direction newDirection)
-        {
-
-        }
-
-        protected abstract ICreatureState CreateIdleState();
-
         public override void OnAnimationFinised()
         {
-            Creature.ChangeState(CreateIdleState());
+            StopAndChangeState(StateFactory.CreatureIdleState(Creature));
         }
 
         public override int GetSpriteOffset()
         {
             return SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
+        }
+
+        public override void Hurt()
+        {
+            StopAndChangeState(StateFactory.CreatureHurtState(Creature));
         }
     }
 }

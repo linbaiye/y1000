@@ -35,5 +35,13 @@ namespace y1000.code
             animation.Length = total * step;
             return animation;
         }
+
+        public static void AddIfAbsent(this AnimationPlayer animationPlayer, string name, Func<AnimationLibrary> library)
+        {
+            if (!animationPlayer.HasAnimationLibrary(name))
+            {
+                animationPlayer.AddAnimationLibrary(name, library.Invoke());
+            }
+        }
     }
 }

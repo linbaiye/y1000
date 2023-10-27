@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3af3p0ser2ph"]
+
+[ext_resource type="PackedScene" uid="uid://mcypqf2bl7r1" path="res://world.tscn" id="1_0bxrs"]
+[ext_resource type="PackedScene" uid="uid://ca1rxwb2uxu2c" path="res://character_body_2d.tscn" id="2_nolib"]
+[ext_resource type="PackedScene" uid="uid://cda61nyakuwop" path="res://Buffalo.tscn" id="3_rh6qi"]
+[ext_resource type="PackedScene" uid="uid://b4aq7l7kpiqxk" path="res://GameHud.tscn" id="4_s07l2"]
+
+[node name="Game" type="Node2D"]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="World" parent="CanvasLayer2" instance=ExtResource("1_0bxrs")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="GameHud" parent="CanvasLayer" instance=ExtResource("4_s07l2")]
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Character" parent="CanvasLayer3" instance=ExtResource("2_nolib")]
+z_index = 2
+position = Vector2(384, 444)
+
+[node name="Buffalo" parent="CanvasLayer3" instance=ExtResource("3_rh6qi")]
+z_index = 2
+position = Vector2(482, 422)

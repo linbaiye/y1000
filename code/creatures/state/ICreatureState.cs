@@ -21,5 +21,11 @@ namespace y1000.code.creatures
         void OnAnimationFinised();
 
         void Attack();
+
+        void Hurt();
+
+        void PlayAnimation();
+
+        void Die();
     }
 }

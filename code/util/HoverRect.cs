@@ -16,7 +16,16 @@ public partial class HoverRect: TextureRect
 
 	public void RectMouseEntered()
 	{
-		GD.Print("ssss");
+		var parent = GetParent<Sprite2D>();
+		GD.Print("test");
+		if (parent != null)
+		{
+			//int width = (parent.Texture.GetWidth() - 20) / 2;
+			//int height = parent.Texture.GetHeight() / 2;
+			Size = new Vector2(parent.Texture.GetWidth() - 20, parent.Texture.GetHeight());
+			//var p1 = parent.GetParent<StaticBody2D>();
+			//Position = new Vector2(width, height);
+		}
 		GetNode<Label>("Label").Show();
 	}
 
@@ -25,7 +34,6 @@ public partial class HoverRect: TextureRect
 	{
 		if (inputEvent is InputEventMouseButton button && button.DoubleClick && button.ButtonIndex == MouseButton.Left)
 		{
-			GD.Print("double clicked");
 			if (GetParent() is AbstractCreature creature)
 			{
 				GD.Print("clicked creature");

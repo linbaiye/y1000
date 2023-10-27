@@ -112,4 +112,13 @@ public partial class Character : StaticBody2D, IPlayer
         throw new NotImplementedException();
     }
 
+    public void Hurt()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Die()
+    {
+        throw new NotImplementedException();
+    }
 }

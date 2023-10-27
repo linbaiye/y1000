@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.creatures.state;
 using y1000.code.player;
 
 namespace y1000.code.creatures
@@ -13,10 +14,13 @@ namespace y1000.code.creatures
 
         private readonly AbstractCreature creature;
 
-        public AbstractCreatureState(AbstractCreature creature, Direction direction)
+        private readonly AbstractCreatureStateFactory stateFactory;
+
+        protected AbstractCreatureState(AbstractCreature creature, Direction direction)
         {
-            this.direction = direction;
             this.creature = creature;
+            this.direction = direction;
+            stateFactory = new SimpleCreatureStateFactory();
         }
 
         protected AbstractCreature Creature => creature;
@@ -25,6 +29,8 @@ namespace y1000.code.creatures
 
         public abstract State State { get; }
 
+        protected AbstractCreatureStateFactory StateFactory => stateFactory;
+
         public abstract int GetSpriteOffset();
 
         public virtual void Move(Direction direction)
@@ -32,19 +38,36 @@ namespace y1000.code.creatures
 
         }
 
+        public void PlayAnimation()
+        {
+            Creature.AnimationPlayer.Play(State + "/" + Direction);
+        }
+
+        protected void StopAndChangeState(AbstractCreatureState newState)
+        {
+            creature.AnimationPlayer.Stop();
+            creature.ChangeState(newState);
+        }
+
+
         protected void SetDirection(Direction newDirection)
         {
             direction = newDirection;
         }
 
 
-        public abstract void ChangeDirection(Direction newDirection);
+        public virtual void ChangeDirection(Direction newDirection) {}
 
         public virtual void OnAnimationFinised() {}
 
-        public virtual void Attack()
-        {
-        }
+        public virtual void Attack() { }
 
+        public virtual void Hurt() { }
+
+        public virtual void Die()
+        {
+            if (State.DIE != State)
+                StopAndChangeState(StateFactory.CreatureDieState(Creature));
+        }
     }
 }

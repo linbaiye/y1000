@@ -21,8 +21,7 @@ namespace y1000.code.creatures.state
 
         public AbstractCreatureIdleState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
-            creature.AddAnimationLibrary(State.ToString(), () => AnimationUtil.CreateAnimations(5, 0.5f, Godot.Animation.LoopModeEnum.Linear));
-		    creature.AnimationPlayer.Play(State + "/" + Direction);
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(5, 0.5f, Godot.Animation.LoopModeEnum.Linear));
         }
 
         public override State State => State.IDLE;
@@ -32,27 +31,26 @@ namespace y1000.code.creatures.state
             return SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
         }
 
-        protected abstract ICreatureState CreateMoveState(Direction newDirection);
-
-        protected abstract ICreatureState CreateAttackState();
-
         public override void Move(Direction direction)
         {
-            Creature.AnimationPlayer.Stop();
-            Creature.ChangeState(CreateMoveState(direction));
+            StopAndChangeState(StateFactory.CreatureMoveState(Creature, direction));
         }
 
         public override void ChangeDirection(Direction newDirection)
         {
-            Creature.AnimationPlayer.Stop();
             SetDirection(newDirection);
             Creature.AnimationPlayer.Play(State  + "/" + Direction);
         }
 
         public override void Attack()
         {
-            Creature.AnimationPlayer.Stop();
-            Creature.ChangeState(CreateAttackState());
+            StopAndChangeState(StateFactory.CreatureAttackState(Creature));
         }
+
+        public override void Hurt()
+        {
+            StopAndChangeState(StateFactory.CreatureHurtState(Creature));
+        }
+
     }
 }

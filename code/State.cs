@@ -13,5 +13,7 @@ namespace y1000.code
         ATTACKING,
 
         HURT,
+
+        DIE,
     }
 }

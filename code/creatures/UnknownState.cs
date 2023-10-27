@@ -37,6 +37,11 @@ namespace y1000.code.creatures
         {
             throw new NotImplementedException();
         }
+
+        public override void Hurt()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

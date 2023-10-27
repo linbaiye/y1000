@@ -22,15 +22,13 @@ namespace y1000.code.creatures.state
 			{ Direction.UP_LEFT, 161},
         };
 
-        private const int SPRITE_NUMBERS = 6;
+        private const int SPRITE_NUMBERS = 7;
 
         public AbstractCreatureMoveState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
-            velocity = VectorUtil.Velocity(direction) / 0.6f;
-            creature.AddAnimationLibrary(State.ToString(), () => AnimationUtil.CreateAnimations(SPRITE_NUMBERS, 0.1f, Animation.LoopModeEnum.None));
-            creature.AnimationPlayer.Play(State + "/" + Direction);
+            velocity = VectorUtil.Velocity(direction) / 0.7f;
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(SPRITE_NUMBERS, 0.1f, Animation.LoopModeEnum.None));
         }
-
         public override State State => State.MOVE;
 
         public override int GetSpriteOffset()
@@ -43,16 +41,17 @@ namespace y1000.code.creatures.state
             Creature.MoveAndCollide(velocity * (float) delta);
         }
 
-        protected abstract ICreatureState CreateIdleState();
 
         public override void OnAnimationFinised()
         {
             Creature.Position = Creature.Position.Snapped(VectorUtil.TILE_SIZE);
-            Creature.ChangeState(CreateIdleState());
+            StopAndChangeState(StateFactory.CreatureIdleState(Creature));
         }
 
-        public override void ChangeDirection(Direction newDirection)
+
+        public override void Hurt()
         {
+            StopAndChangeState(StateFactory.CreatureHurtState(Creature));
         }
     }
 }

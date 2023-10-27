@@ -38,6 +38,7 @@ namespace y1000.code.creatures
         internal void ChangeState(ICreatureState newState)
         {
             currentState = newState;
+            currentState.PlayAnimation();
         }
 
         public State State => currentState.State;
@@ -60,16 +61,7 @@ namespace y1000.code.creatures
 
         public AnimationPlayer AnimationPlayer => animationPlayer;
 
-        public void AddAnimationLibrary(string name, Func<AnimationLibrary> supplier)
-        {
-            if (!animationPlayer.HasAnimationLibrary(name))
-            {
-                animationPlayer.AddAnimationLibrary(name, supplier.Invoke());
-            }
-        }
-
         public ICreatureState CurrentState => currentState;
-
 
         public override void _Process(double delta)
         {
@@ -87,7 +79,7 @@ namespace y1000.code.creatures
 
         public void ChangeDirection(Direction newDirection)
         {
-            currentState.ChangeDirection(newDirection);
+            CurrentState.ChangeDirection(newDirection);
         }
 
 
@@ -96,5 +88,14 @@ namespace y1000.code.creatures
             CurrentState.Attack();
         }
 
+        public void Hurt()
+        {
+            CurrentState.Hurt();
+        }
+
+        public void Die()
+        {
+            CurrentState.Die();
+        }
     }
 }
