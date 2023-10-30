@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt2s1he262jr3"]
+
+[ext_resource type="PackedScene" uid="uid://mcypqf2bl7r1" path="res://world.tscn" id="1_mf4t5"]
+[ext_resource type="PackedScene" uid="uid://cda61nyakuwop" path="res://Buffalo.tscn" id="2_3l6id"]
+[ext_resource type="PackedScene" uid="uid://ca1rxwb2uxu2c" path="res://character_body_2d.tscn" id="3_f2xua"]
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+z_index = 2
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 600.0
+offset_bottom = -2.0
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(600, 500)
+render_target_update_mode = 4
+
+[node name="World" parent="SubViewport" instance=ExtResource("1_mf4t5")]
+
+[node name="Buffalo" parent="SubViewport/World" instance=ExtResource("2_3l6id")]
+z_index = 8
+position = Vector2(400, 500)
+
+[node name="Character" parent="SubViewport/World" instance=ExtResource("3_f2xua")]
+position = Vector2(400, 650)
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport/World/Character"]

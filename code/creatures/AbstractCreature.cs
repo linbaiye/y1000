@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
@@ -97,5 +98,16 @@ namespace y1000.code.creatures
         {
             CurrentState.Die();
         }
+
+        public Rectangle Rectangle()
+        {
+            throw new NotImplementedException();
+        }
+
+        public long Id()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

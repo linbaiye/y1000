@@ -38,7 +38,7 @@ public partial class Character : StaticBody2D, IPlayer
 		playerState.OnAnimationFinished(animationName);
 	}
 
-   public override void _Input(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
 		if (@event is InputEventMouseButton button)
 		{
@@ -60,7 +60,8 @@ public partial class Character : StaticBody2D, IPlayer
 			{
 				if (button.DoubleClick)
 				{
-				//	GD.Print("Double");
+				GD.Print("received in character: " + @event.AsText());
+				//GetViewport().SetInputAsHandled(); //	GD.Print("Double");
 				}
 			}
 		}

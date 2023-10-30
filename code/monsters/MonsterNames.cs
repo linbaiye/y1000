@@ -7,7 +7,6 @@ namespace y1000.code.monsters
 {
     public sealed class MonsterNames
     {
-
         public const string BUFFALO = "buffalo";
         
     }

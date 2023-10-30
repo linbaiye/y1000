@@ -12,6 +12,9 @@ namespace y1000.code.item
         void PutItem(IItem item);
 
         bool ContainsItem(IItem item);
-        
+
+        bool CanPut(IItem item) { return false; }
+
+        bool AtCursor() { return false; }
     }
 }

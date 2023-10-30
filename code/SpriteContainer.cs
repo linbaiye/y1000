@@ -69,9 +69,12 @@ namespace y1000.code
             if (!resDir.EndsWith("/")) {
                 resDir += "/";
             }
-            if (LoadedContainers.TryGetValue(resDir, out SpriteContainer container)) 
+            if (LoadedContainers.TryGetValue(resDir, out SpriteContainer? container))
             {
-                return container;
+                if (container != null)
+                {
+                    return container;
+                }
             }
             if (!Godot.FileAccess.FileExists(resDir + "offset.txt")) {
                 throw new FileNotFoundException();

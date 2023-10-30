@@ -8,14 +8,18 @@ public partial class GameHud : Control
 	public override void _Ready()
 	{
 		InventorySlot slot = GetNode<InventorySlot>("RightSide/GridContainer/Panel");
-		slot.LoadItem("000080");
 		slot = GetNode<InventorySlot>("RightSide/GridContainer/Panel3");
-		slot.LoadItem("000081");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+
+
+	public void OnMouseEntered()
+	{
+
 	}
 
 

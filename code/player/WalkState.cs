@@ -28,14 +28,14 @@ namespace y1000.code.player
 
         private void PlayAnimation()
         {
-            Character.ResetPictureNumber();
+            Character.AnimationPlayer.Stop();
             Character.AnimationPlayer.Play(State + "/" + Direction);
         }
 
 
         public override void OnAnimationFinished(StringName animationName)
         {
-            Character.Position = new Vector2((float)Math.Floor(Character.Position.X + 0.5f), (float)Math.Floor((double)(Character.Position.Y + 0.5f)));
+            //Character.Position = Character.Position.Snapped()
             if (!mouseRightPressed)
             {
                 Character.ChangeState(new IdleState(Character, Direction));

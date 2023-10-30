@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.entity;
 using y1000.code.player;
 
 namespace y1000.code.creatures
 {
-    public interface ICreature
+    public interface ICreature : IEntity
     {
         PositionedTexture BodyTexture { get; }
 
@@ -22,5 +24,6 @@ namespace y1000.code.creatures
         void Hurt();
 
         void Die();
+
     }
 }

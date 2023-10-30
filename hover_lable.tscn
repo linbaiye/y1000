@@ -9,7 +9,6 @@ offset_bottom = 40.0
 script = ExtResource("1_1gh00")
 
 [node name="Label" type="Label" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

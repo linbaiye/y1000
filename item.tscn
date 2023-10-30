@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://baaansavuh5a0"]
-
-[node name="Item" type="TextureRect"]
-mouse_filter = 2

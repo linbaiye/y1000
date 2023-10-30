@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccjtt8c2qyuap"]
+
+[ext_resource type="Texture2D" uid="uid://bwmuri6fi3404" path="res://icon.svg" id="2_amte8"]
+[ext_resource type="PackedScene" uid="uid://c248xjmpytv38" path="res://hpbar.tscn" id="2_s8p12"]
+[ext_resource type="Script" path="res://TestBody.cs" id="4_e3prr"]
+
+[node name="test" type="Node2D"]
+
+[node name="hpbar" parent="." instance=ExtResource("2_s8p12")]
+offset_left = 339.0
+offset_top = 21.0
+offset_right = 399.0
+offset_bottom = 41.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(122, 246)
+script = ExtResource("4_e3prr")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-37, -37.5)
+scale = Vector2(0.421875, 0.414063)
+texture = ExtResource("2_amte8")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position_smoothing_enabled = true
+position_smoothing_speed = 32.0

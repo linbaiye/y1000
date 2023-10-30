@@ -14,10 +14,12 @@ public partial class InventorySlot: Panel, IItemContainer
 			return;
 		}
 		loadedItem = Item.Load(name);
-		AddChild(loadedItem);
+		var textureRect = GetNode<TextureRect>("TextureRect");
+		textureRect.Texture = loadedItem.Texture;
 	}
 
 
+/*
     public override bool _CanDropData(Vector2 atPosition, Variant data)
     {
 		if (data.VariantType == Variant.Type.Nil)
@@ -51,7 +53,7 @@ public partial class InventorySlot: Panel, IItemContainer
 			AddChild(newItem);
 			loadedItem = newItem;
 		}
-	}
+	}*/
 
 
     public void PutItem(IItem item)
@@ -76,6 +78,14 @@ public partial class InventorySlot: Panel, IItemContainer
 		}
 		return false;
     }
+
+
+	public bool AtCursor()
+	{
+		return GetGlobalRect().HasPoint(GetGlobalMousePosition());
+	}
+
+
 
     public bool ContainsItem(IItem item)
     {

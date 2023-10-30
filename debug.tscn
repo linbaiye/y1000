@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://buy1ftym7sss2"]
-
-[ext_resource type="PackedScene" uid="uid://dshgpd0nloi3s" path="res://Monster.tscn" id="1_pr8nq"]
-
-[node name="Debug" type="Node2D"]
-
-[node name="Buffalo" parent="." instance=ExtResource("1_pr8nq")]
