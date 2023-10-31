@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime;
 using y1000.code.player;
 using y1000.code;
+using System.Drawing;
 
 public partial class Character : Node2D, IPlayer
 {
@@ -18,6 +19,7 @@ public partial class Character : Node2D, IPlayer
 		playerState = new IdleState(this, Direction.DOWN);
 		Position = Position.Snapped(new Vector2(32, 24));
 	}
+
 
 	public void ChangeState(IPlayerState newState)
 	{
@@ -40,7 +42,7 @@ public partial class Character : Node2D, IPlayer
 
     public override void _Input(InputEvent @event)
     {
-		if (@event is InputEventMouseButton button)
+		/*if (@event is InputEventMouseButton button)
 		{
 			if (button.ButtonIndex == MouseButton.Right)
 			{
@@ -72,7 +74,8 @@ public partial class Character : Node2D, IPlayer
 				playerState.RightMousePressed(GetLocalMousePosition());
 			}
 		}
-		else if (@event is InputEventKey eventKey)
+		else*/
+		if (@event is InputEventKey eventKey)
 		{
 			if (eventKey.IsPressed())
 			{
@@ -101,7 +104,9 @@ public partial class Character : Node2D, IPlayer
 
 	public Direction Direction => playerState.Direction;
 
-	public static int Add(int a, int b) => a + b;
+    public Point Coordinate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public static int Add(int a, int b) => a + b;
 
     public void Move(Direction direction)
     {
@@ -119,6 +124,21 @@ public partial class Character : Node2D, IPlayer
     }
 
     public void Die()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Move(Vector2 mousePosition)
+    {
+		playerState.RightMousePressed(GetLocalMousePosition());
+    }
+
+    public void StopMove()
+    {
+		playerState.RightMouseRleased();
+    }
+
+    public Rectangle CollisionRect()
     {
         throw new NotImplementedException();
     }

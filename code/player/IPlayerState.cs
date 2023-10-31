@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.creatures;
 
 namespace y1000.code.player
 {
-    public interface IPlayerState
+    public interface IPlayerState : ICreatureState
     {
-        State State { get; }
-
-        Direction Direction { get; }
-
         void Process(double delta);
 
         void OnAnimationFinished(StringName animationName);
@@ -20,11 +17,7 @@ namespace y1000.code.player
 
         void RightMouseRleased();
 
-        void Attack();
-
         void Sit();
-
-        void Hurt();
 
         PositionedTexture BodyTexture { get; }
     }

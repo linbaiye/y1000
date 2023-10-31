@@ -25,5 +25,6 @@ namespace y1000.code.creatures
 
         void Die();
 
+
     }
 }

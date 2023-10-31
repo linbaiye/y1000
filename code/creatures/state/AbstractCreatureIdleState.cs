@@ -33,7 +33,7 @@ namespace y1000.code.creatures.state
 
         public override void Move(Direction direction)
         {
-            StopAndChangeState(StateFactory.CreatureMoveState(Creature, direction));
+            StopAndChangeState(StateFactory.CreateMoveState(Creature, direction));
         }
 
         public override void ChangeDirection(Direction newDirection)
@@ -44,12 +44,12 @@ namespace y1000.code.creatures.state
 
         public override void Attack()
         {
-            StopAndChangeState(StateFactory.CreatureAttackState(Creature));
+            StopAndChangeState(StateFactory.CreateAttackState(Creature));
         }
 
         public override void Hurt()
         {
-            StopAndChangeState(StateFactory.CreatureHurtState(Creature));
+            StopAndChangeState(StateFactory.CreateHurtState(Creature));
         }
 
     }

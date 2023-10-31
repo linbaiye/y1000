@@ -28,7 +28,7 @@ namespace y1000.code.creatures.state
 
         public override void OnAnimationFinised()
         {
-            StopAndChangeState(StateFactory.CreatureIdleState(Creature));
+            StopAndChangeState(StateFactory.CreateIdleState(Creature));
         }
 
         public override int GetSpriteOffset()
@@ -38,7 +38,7 @@ namespace y1000.code.creatures.state
 
         public override void Hurt()
         {
-            StopAndChangeState(StateFactory.CreatureHurtState(Creature));
+            StopAndChangeState(StateFactory.CreateHurtState(Creature));
         }
     }
 }

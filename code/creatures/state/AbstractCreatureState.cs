@@ -67,7 +67,7 @@ namespace y1000.code.creatures
         public virtual void Die()
         {
             if (State.DIE != State)
-                StopAndChangeState(StateFactory.CreatureDieState(Creature));
+                StopAndChangeState(StateFactory.CreateDieState(Creature));
         }
     }
 }

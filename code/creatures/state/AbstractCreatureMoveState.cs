@@ -26,7 +26,7 @@ namespace y1000.code.creatures.state
 
         public AbstractCreatureMoveState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
-            velocity = VectorUtil.Velocity(direction) / 0.7f;
+            velocity = VectorUtil.Velocity(direction) / (0.1f * SPRITE_NUMBERS);
             creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(SPRITE_NUMBERS, 0.1f, Animation.LoopModeEnum.None));
         }
         public override State State => State.MOVE;
@@ -45,13 +45,13 @@ namespace y1000.code.creatures.state
         public override void OnAnimationFinised()
         {
             Creature.Position = Creature.Position.Snapped(VectorUtil.TILE_SIZE);
-            StopAndChangeState(StateFactory.CreatureIdleState(Creature));
+            StopAndChangeState(StateFactory.CreateIdleState(Creature));
         }
 
 
         public override void Hurt()
         {
-            StopAndChangeState(StateFactory.CreatureHurtState(Creature));
+            StopAndChangeState(StateFactory.CreateHurtState(Creature));
         }
     }
 }

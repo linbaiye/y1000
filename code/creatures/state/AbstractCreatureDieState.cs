@@ -20,7 +20,7 @@ namespace y1000.code.creatures.state
         };
         public AbstractCreatureDieState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
-            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(3, 0.15f, Godot.Animation.LoopModeEnum.None));
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(3, 0.2f, Godot.Animation.LoopModeEnum.None));
         }
 
         public override State State => State.DIE;
@@ -28,6 +28,11 @@ namespace y1000.code.creatures.state
         public override int GetSpriteOffset()
         {
             return SPRITE_OFFSET.GetValueOrDefault(Direction, 1);
+        }
+
+        public override void OnAnimationFinised()
+        {
+            Creature.QueueFree();
         }
     }
 }

@@ -26,11 +26,6 @@ namespace y1000.code.player
         }
 
 
-        private void PlayAnimation()
-        {
-            Character.AnimationPlayer.Stop();
-            Character.AnimationPlayer.Play(State + "/" + Direction);
-        }
 
 
         public override void OnAnimationFinished(StringName animationName)

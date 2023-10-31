@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://bm6apd8pca6v0"]
+
+[ext_resource type="Script" path="res://code/monsters/buffalo/Buffalo.cs" id="1_2patd"]
+[ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_gf5sr"]
+[ext_resource type="Script" path="res://code/monsters/BodySprite.cs" id="2_il47p"]
+[ext_resource type="Texture2D" uid="uid://ds1juhhh67fb" path="res://sprite/buffalo/000000.png" id="3_ge38h"]
+[ext_resource type="PackedScene" path="res://hp_bar.tscn" id="3_yx6ff"]
+[ext_resource type="FontFile" uid="uid://dy7xkb1847v2s" path="res://fonts/wts47.ttf" id="6_x83wx"]
+[ext_resource type="Texture2D" uid="uid://bk1xwhmelwsbl" path="res://sprite/white.png" id="7_m6a3v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pgpck"]
+shader = ExtResource("2_gf5sr")
+shader_parameter/deform = Vector2(1, 2.5)
+shader_parameter/offset = Vector2(2.08165e-12, 4)
+shader_parameter/modulate = Color(0, 0, 0, 0.556863)
+
+[node name="Monster" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(139, 169)
+script = ExtResource("1_2patd")
+
+[node name="Body" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_pgpck")
+position = Vector2(-8, -29)
+texture = ExtResource("3_ge38h")
+centered = false
+script = ExtResource("2_il47p")
+
+[node name="HPBar" parent="." instance=ExtResource("3_yx6ff")]
+offset_left = -11.0
+offset_top = -36.0
+offset_right = 21.0
+offset_bottom = -31.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -4.0
+offset_right = 28.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("6_x83wx")
+theme_override_font_sizes/font_size = 14
+text = "牛"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -16.0
+offset_right = 16.0
+offset_bottom = 24.0
+texture = ExtResource("7_m6a3v")

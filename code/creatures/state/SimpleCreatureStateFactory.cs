@@ -7,27 +7,27 @@ namespace y1000.code.creatures.state
 {
     public class SimpleCreatureStateFactory : AbstractCreatureStateFactory
     {
-        public override AbstractCreatureAttackState CreatureAttackState(AbstractCreature creature)
+        public override AbstractCreatureAttackState CreateAttackState(AbstractCreature creature)
         {
             return new SimpleCreatureAttackState(creature, creature.Direction);
         }
 
-        public override AbstractCreatureDieState CreatureDieState(AbstractCreature creature)
+        public override AbstractCreatureDieState CreateDieState(AbstractCreature creature)
         {
             return new SimpleCreatureDieState(creature, creature.Direction);
         }
 
-        public override AbstractCreatureHurtState CreatureHurtState(AbstractCreature creature)
+        public override AbstractCreatureHurtState CreateHurtState(AbstractCreature creature)
         {
             return new SimpleCreatureHurtState(creature, creature.Direction);
         }
 
-        public override AbstractCreatureIdleState CreatureIdleState(AbstractCreature creature)
+        public override AbstractCreatureIdleState CreateIdleState(AbstractCreature creature)
         {
             return new SimpleCreatureIdleState(creature, creature.Direction);
         }
 
-        public override AbstractCreatureMoveState CreatureMoveState(AbstractCreature creature, Direction newDirection)
+        public override AbstractCreatureMoveState CreateMoveState(AbstractCreature creature, Direction newDirection)
         {
             return new SimpleCreatureMoveState(creature, newDirection);
         }

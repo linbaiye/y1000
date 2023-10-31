@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Godot;
 
 namespace y1000.code.creatures.state
 {
@@ -21,7 +22,7 @@ namespace y1000.code.creatures.state
 
         public AbstractCreatureHurtState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
-            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(3, 0.1f, Godot.Animation.LoopModeEnum.None));
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(3, 0.1f, Animation.LoopModeEnum.None));
         }
 
         public override State State => State.HURT;
@@ -33,7 +34,16 @@ namespace y1000.code.creatures.state
 
         public override void OnAnimationFinised()
         {
-            Creature.ChangeState(StateFactory.CreatureDieState(Creature));
+            TextureProgressBar hpbar = Creature.GetNode<TextureProgressBar>("HPBar");
+            hpbar.Value = Math.Max(0, hpbar.Value - 10);
+            if (hpbar.Value <= 0)
+            {
+                Creature.ChangeState(StateFactory.CreateDieState(Creature));
+            }
+            else
+            {
+                Creature.ChangeState(StateFactory.CreateIdleState(Creature));
+            }
         }
     }
 }

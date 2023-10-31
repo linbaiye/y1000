@@ -21,9 +21,19 @@ namespace y1000.code.creatures
 
 	    private SpriteContainer spriteContainer = SpriteContainer.EmptyContainer;
 
+
         protected AbstractCreature()
         {
             animationPlayer = NULL_PLAYER;
+        }
+
+        public Point Coordinate
+        {
+            get
+            {
+                var t = Position / VectorUtil.TILE_SIZE;
+                return new Point((int)t.X, (int)t.Y);
+            }
         }
 
         protected void Setup(string spriteName)
@@ -35,6 +45,8 @@ namespace y1000.code.creatures
 		    Position = Position.Snapped(VectorUtil.TILE_SIZE);
             animationPlayer.AnimationFinished += OnAnimationFinised;
         }
+
+
 
         internal void ChangeState(ICreatureState newState)
         {
@@ -83,7 +95,6 @@ namespace y1000.code.creatures
             CurrentState.ChangeDirection(newDirection);
         }
 
-
         public void Attack()
         {
             CurrentState.Attack();
@@ -99,9 +110,10 @@ namespace y1000.code.creatures
             CurrentState.Die();
         }
 
-        public Rectangle Rectangle()
+        public Rectangle CollisionRect()
         {
-            throw new NotImplementedException();
+            var p = Coordinate;
+            return new Rectangle(VectorUtil.TILE_SIZE_X * p.X - 16, VectorUtil.TILE_SIZE_Y * p.Y, VectorUtil.TILE_SIZE_X, VectorUtil.TILE_SIZE_Y);
         }
 
         public long Id()

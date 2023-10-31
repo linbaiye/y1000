@@ -8,7 +8,9 @@ namespace y1000.code.entity
 {
     public interface IEntity
     {
-        Rectangle Rectangle() {return System.Drawing.Rectangle.FromLTRB(0, 0, 0, 0); }
+        Rectangle CollisionRect();
+
+        Point Coordinate { get; }
 
         long Id() { return 0;}
     }

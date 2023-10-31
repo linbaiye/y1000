@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca1rxwb2uxu2c"]
+[gd_scene load_steps=8 format=3 uid="uid://ca1rxwb2uxu2c"]
 
 [ext_resource type="Script" path="res://code/player/Character.cs" id="1_fm3wc"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_n1ku8"]
 [ext_resource type="Script" path="res://code/player/Body.cs" id="3_3jcts"]
+[ext_resource type="Texture2D" uid="uid://bk1xwhmelwsbl" path="res://sprite/white.png" id="4_ipwp4"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6swyu"]
 
@@ -42,3 +43,10 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_6ts8u")
 centered = false
 script = ExtResource("3_3jcts")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+clip_contents = true
+offset_left = -16.0
+offset_right = 16.0
+offset_bottom = 24.0
+texture = ExtResource("4_ipwp4")

@@ -90,7 +90,36 @@ namespace y1000.code.player
             };
         }
 
+        public int GetSpriteOffset()
+        {
+            throw new NotImplementedException();
+        }
 
+        public void Move(Direction direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChangeDirection(Direction newDirection)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnAnimationFinised()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PlayAnimation()
+        {
+            Character.AnimationPlayer.Stop();
+            Character.AnimationPlayer.Play(State + "/" + Direction);
+        }
+
+        public void Die()
+        {
+            throw new NotImplementedException();
+        }
 
         public Character Character => (Character)character;
     }
