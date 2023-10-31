@@ -1,40 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=6 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="PackedScene" uid="uid://mcypqf2bl7r1" path="res://world.tscn" id="1_0bxrs"]
-[ext_resource type="PackedScene" uid="uid://c248xjmpytv38" path="res://hpbar.tscn" id="1_n2lbb"]
 [ext_resource type="PackedScene" uid="uid://ca1rxwb2uxu2c" path="res://character_body_2d.tscn" id="2_nolib"]
-[ext_resource type="PackedScene" uid="uid://cda61nyakuwop" path="res://Buffalo.tscn" id="3_rh6qi"]
 [ext_resource type="PackedScene" uid="uid://vg1lgwdiop8g" path="res://right_ui.tscn" id="4_j24ll"]
 [ext_resource type="PackedScene" uid="uid://doa5i8dejap1d" path="res://button_ui.tscn" id="5_3t2rd"]
-[ext_resource type="PackedScene" uid="uid://baihb2njatear" path="res://hp_bar.tscn" id="6_xaq5d"]
+[ext_resource type="PackedScene" uid="uid://e8ttci8m45bv" path="res://monster.tscn" id="5_nmyyi"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 
-[node name="hpbar" parent="." instance=ExtResource("1_n2lbb")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.0
-offset_left = 502.0
-offset_top = 264.0
-offset_right = 622.0
-offset_bottom = 284.0
-grow_vertical = 1
-
 [node name="World" parent="." instance=ExtResource("1_0bxrs")]
 y_sort_enabled = false
-
-[node name="Buffalo" parent="." instance=ExtResource("3_rh6qi")]
-position = Vector2(482, 422)
-input_pickable = true
 
 [node name="Character" parent="." instance=ExtResource("2_nolib")]
 z_as_relative = true
 position = Vector2(619, 398)
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
-position_smoothing_enabled = true
 position_smoothing_speed = 32.0
 
 [node name="UILayer" type="CanvasLayer" parent="."]
@@ -44,11 +26,5 @@ position_smoothing_speed = 32.0
 [node name="ButtonUI" parent="UILayer" instance=ExtResource("5_3t2rd")]
 mouse_filter = 1
 
-[node name="HPBar" parent="." instance=ExtResource("6_xaq5d")]
-offset_left = 730.0
-offset_top = 455.0
-offset_right = 762.0
-offset_bottom = 460.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-nine_patch_stretch = false
+[node name="Monster" parent="." instance=ExtResource("5_nmyyi")]
+position = Vector2(475, 535)

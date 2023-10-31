@@ -130,7 +130,7 @@ namespace y1000.code.player
             }
         }
 
-        public override void PhysicsProcess(double delta)
+        public override void Process(double delta)
         {
 
         }

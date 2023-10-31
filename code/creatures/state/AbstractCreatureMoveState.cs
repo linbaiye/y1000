@@ -36,9 +36,9 @@ namespace y1000.code.creatures.state
             return SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
         }
 
-        public void PhysicsProcess(double delta)
+        public void Process(double delta)
         {
-            Creature.MoveAndCollide(velocity * (float) delta);
+            Creature.Position += velocity * (float) delta;
         }
 
 

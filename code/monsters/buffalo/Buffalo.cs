@@ -17,7 +17,7 @@ public partial class Buffalo : AbstractCreature
 
 	public static Buffalo Load()
 	{
-		PackedScene scene = ResourceLoader.Load<PackedScene>("res://Buffalo.tcsn");
+		PackedScene scene = ResourceLoader.Load<PackedScene>("res://monster.tcsn");
 		Buffalo buffalo = scene.Instantiate<Buffalo>();
 		buffalo._Ready();
 		return buffalo;

@@ -9,18 +9,13 @@
 [node name="hpbar" parent="." instance=ExtResource("2_s8p12")]
 offset_left = 339.0
 offset_top = 21.0
-offset_right = 399.0
-offset_bottom = 41.0
+offset_right = 495.0
+offset_bottom = 51.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(122, 246)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(61, 172)
+scale = Vector2(0.359375, 0.359375)
+texture = ExtResource("2_amte8")
 script = ExtResource("4_e3prr")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(-37, -37.5)
-scale = Vector2(0.421875, 0.414063)
-texture = ExtResource("2_amte8")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-position_smoothing_enabled = true
-position_smoothing_speed = 32.0
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]

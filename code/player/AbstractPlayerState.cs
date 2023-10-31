@@ -28,7 +28,7 @@ namespace y1000.code.player
         public abstract State State { get; }
         public abstract PositionedTexture BodyTexture { get; }
 
-        public abstract void PhysicsProcess(double delta);
+        public abstract void Process(double delta);
 
 
         protected AnimationLibrary CreateAnimations(int total, float step)

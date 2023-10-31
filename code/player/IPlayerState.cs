@@ -12,7 +12,7 @@ namespace y1000.code.player
 
         Direction Direction { get; }
 
-        void PhysicsProcess(double delta);
+        void Process(double delta);
 
         void OnAnimationFinished(StringName animationName);
 

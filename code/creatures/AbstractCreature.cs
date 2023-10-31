@@ -9,7 +9,7 @@ using y1000.code.player;
 
 namespace y1000.code.creatures
 {
-    public abstract partial class AbstractCreature : StaticBody2D, ICreature
+    public abstract partial class AbstractCreature : Node2D, ICreature
     {
         public float gravity = 0;
 
@@ -68,7 +68,7 @@ namespace y1000.code.creatures
         {
             if (CurrentState is AbstractCreatureMoveState moveState)
             {
-                moveState.PhysicsProcess(delta);
+                moveState.Process(delta);
             }
         }
 

@@ -5,7 +5,7 @@ using System.Runtime;
 using y1000.code.player;
 using y1000.code;
 
-public partial class Character : StaticBody2D, IPlayer
+public partial class Character : Node2D, IPlayer
 {
 	public float gravity = 0f;
 
@@ -92,9 +92,9 @@ public partial class Character : StaticBody2D, IPlayer
 
 	public PositionedTexture BodyTexture => playerState.BodyTexture;
 
-	public override void _PhysicsProcess(double delta)
+	public override void _Process(double delta)
 	{
-		playerState.PhysicsProcess(delta);
+		playerState.Process(delta);
 	}
 
 	public State State => playerState.State;

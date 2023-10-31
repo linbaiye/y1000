@@ -40,7 +40,7 @@ namespace y1000.code.player
             Character.ChangeState(new IdleState(Character, Direction));
         }
 
-        public override void PhysicsProcess(double delta)
+        public override void Process(double delta)
         {
         }
 

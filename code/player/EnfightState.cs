@@ -50,7 +50,7 @@ namespace y1000.code.player
             Character.ChangeState(new AttackingState(Character, Direction));
         }
 
-        public override void PhysicsProcess(double delta)
+        public override void Process(double delta)
         {
         }
     }
