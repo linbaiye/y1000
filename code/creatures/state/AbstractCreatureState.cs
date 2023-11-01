@@ -56,7 +56,7 @@ namespace y1000.code.creatures
         }
 
 
-        public virtual void ChangeDirection(Direction newDirection) {}
+        public virtual void Turn(Direction newDirection) {}
 
         public virtual void OnAnimationFinised() {}
 

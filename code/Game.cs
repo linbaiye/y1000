@@ -1,22 +1,52 @@
+using DotNetty.Codecs;
+using DotNetty.Common.Utilities;
+using DotNetty.Transport.Bootstrapping;
+using DotNetty.Transport.Channels;
+using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Net;
 using y1000.code;
 using y1000.code.creatures;
+using y1000.code.networking;
 using y1000.code.util;
 
-public partial class Game : Node2D
+public partial class Game : Node2D, IPacketHandler
 {
 	// Called when the node enters the scene tree for the first time.
 
 	private Character? character;
 
+	private IChannel? channel;
 
+	private readonly Bootstrap bootstrap = new();
+
+	private ConcurrentQueue<string> packets = new ConcurrentQueue<string>();
+
+	private enum ConnectionState {
+		DISCONNECTED,
+		CONNECTING,
+		CONNECTED,
+	}
+
+	private ConnectionState state = ConnectionState.DISCONNECTED;
 
 	public override void _Ready()
 	{
 		character = GetNode<Character>("Character");
-		//Input.MouseMode = Input.MouseModeEnum.Captured;
-		Input.UseAccumulatedInput = true;
+		SetupNetwork();
+	}
+
+
+
+	private async void SetupNetwork()
+	{
+		bootstrap.Group(new MultithreadEventLoopGroup())
+		.Handler(new ActionChannelInitializer<ISocketChannel>( channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new PacketEncoder(), new LengthBasedPacketDecoder(), new PacketHandler(this))))
+		.Channel<TcpSocketChannel>();
+		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}
 
 
@@ -83,6 +113,18 @@ public partial class Game : Node2D
 				case Key.Up:
 					monster.Move(Direction.UP);
 					break;
+				case Key.I:
+					monster.Move(Direction.UP_RIGHT);
+					break;
+				case Key.J:
+					monster.Move(Direction.DOWN_RIGHT);
+					break;
+				case Key.K:
+					monster.Move(Direction.DOWN_LEFT);
+					break;
+				case Key.L:
+					monster.Move(Direction.UP_LEFT);
+					break;
 			}
 		}
 	}
@@ -100,8 +142,78 @@ public partial class Game : Node2D
     }
 
 
+	public async void LogIn()
+	{
+		if (state != ConnectionState.DISCONNECTED)
+		{
+			return;
+		}
+		if (channel != null)
+		{
+			state = ConnectionState.CONNECTING;
+			await channel.WriteAndFlushAsync("Connect");
+			state = ConnectionState.CONNECTED;
+		}
+	}
+
+
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
+		if (state == ConnectionState.DISCONNECTED)
+		{
+			LogIn();
+		}
+		else if (state == ConnectionState.CONNECTED)
+		{
+			HandlePackets();
+		}
+	}
+
+	private void HandlePackets()
+	{
+		if (packets.Count == 0)
+		{
+			return;
+		}
+		if (!packets.TryDequeue(out string? message))
+		{
+			return;
+		}
+		var monster = GetNode<Buffalo>("Monster");
+		switch (message)
+		{
+			case "1":
+				monster.Turn(Direction.LEFT);
+				break;
+			case "2":
+				monster.Turn(Direction.RIGHT);
+				break;
+			case "3":
+				monster.Turn(Direction.DOWN);
+				break;
+			case "4":
+				monster.Turn(Direction.UP);
+				break;
+			case "5":
+				monster.Turn(Direction.UP_RIGHT);
+				break;
+			case "6":
+				monster.Turn(Direction.DOWN_RIGHT);
+				break;
+			case "7":
+				monster.Turn(Direction.DOWN_LEFT);
+				break;
+			case "8":
+				monster.Turn(Direction.UP_LEFT);
+				break;
+		}
+
+	}
+
+    public void Handle(string message)
+    {
+		packets.Enqueue(message);
+
 	}
 }

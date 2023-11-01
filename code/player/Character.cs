@@ -155,4 +155,13 @@ public partial class Character : Node2D, IPlayer
 		playerState.Attack(target);
     }
 
+    public void Remove()
+    {
+		QueueFree();
+    }
+
+    public void Turn(Direction direction)
+    {
+        throw new NotImplementedException();
+    }
 }

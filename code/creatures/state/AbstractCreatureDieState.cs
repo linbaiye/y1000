@@ -30,9 +30,5 @@ namespace y1000.code.creatures.state
             return SPRITE_OFFSET.GetValueOrDefault(Direction, 1);
         }
 
-        public override void OnAnimationFinised()
-        {
-            Creature.QueueFree();
-        }
     }
 }

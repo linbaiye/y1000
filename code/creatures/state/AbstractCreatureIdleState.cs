@@ -36,7 +36,7 @@ namespace y1000.code.creatures.state
             StopAndChangeState(StateFactory.CreateMoveState(Creature, direction));
         }
 
-        public override void ChangeDirection(Direction newDirection)
+        public override void Turn(Direction newDirection)
         {
             SetDirection(newDirection);
             Creature.AnimationPlayer.Play(State  + "/" + Direction);

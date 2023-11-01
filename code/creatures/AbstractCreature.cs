@@ -90,9 +90,9 @@ namespace y1000.code.creatures
             CurrentState.OnAnimationFinised();
         }
 
-        public void ChangeDirection(Direction newDirection)
+        public void Turn(Direction newDirection)
         {
-            CurrentState.ChangeDirection(newDirection);
+            CurrentState.Turn(newDirection);
         }
 
         public void Attack()
@@ -119,6 +119,11 @@ namespace y1000.code.creatures
         public long Id()
         {
             throw new NotImplementedException();
+        }
+
+        public void Remove()
+        {
+            QueueFree();
         }
 
     }

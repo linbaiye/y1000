@@ -112,7 +112,7 @@ namespace y1000.code.player
             throw new NotImplementedException();
         }
 
-        public void ChangeDirection(Direction newDirection)
+        public void Turn(Direction newDirection)
         {
             throw new NotImplementedException();
         }
@@ -135,7 +135,7 @@ namespace y1000.code.player
 
         public Character Character => (Character)character;
 
-        public abstract PositionedTexture HandTexture {get;}
+        public abstract PositionedTexture HandTexture { get; }
 
     }
 }

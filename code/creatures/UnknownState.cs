@@ -33,7 +33,7 @@ namespace y1000.code.creatures
             throw new NotImplementedException();
         }
 
-        public override void ChangeDirection(Direction newDirection)
+        public override void Turn(Direction newDirection)
         {
             throw new NotImplementedException();
         }
