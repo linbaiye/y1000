@@ -20,5 +20,9 @@ namespace y1000.code.player
         void Sit();
 
         PositionedTexture BodyTexture { get; }
+
+        PositionedTexture HandTexture { get; }
+
+        void Attack(ICreature target) {}
     }
 }

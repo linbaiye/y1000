@@ -22,7 +22,7 @@ namespace y1000.code.creatures.state
 
         public AbstractCreatureHurtState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
-            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(3, 0.1f, Animation.LoopModeEnum.None));
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(3, 0.07f, Animation.LoopModeEnum.None));
         }
 
         public override State State => State.HURT;

@@ -17,5 +17,7 @@ namespace y1000.code.player
         void Move(Vector2 mousePosition);
 
         void StopMove();
+
+        void Attack(ICreature target);
     }
 }

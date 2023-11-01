@@ -15,6 +15,8 @@ public partial class Game : Node2D
 	public override void _Ready()
 	{
 		character = GetNode<Character>("Character");
+		//Input.MouseMode = Input.MouseModeEnum.Captured;
+		Input.UseAccumulatedInput = true;
 	}
 
 
@@ -45,7 +47,7 @@ public partial class Game : Node2D
 							{
 								if (Input.IsPhysicalKeyPressed(Key.Shift))
 								{
-									creature.Hurt();
+									character?.Attack(creature);
 								}
 							}
 						}

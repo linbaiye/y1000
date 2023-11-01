@@ -46,5 +46,6 @@ namespace y1000.code.player
 
         public override State State => State.HURT;
 
+        public override PositionedTexture HandTexture => throw new NotImplementedException();
     }
 }

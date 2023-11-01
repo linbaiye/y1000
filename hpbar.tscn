@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://8xbuf40y8ll5"]
+[gd_scene load_steps=3 format=3 uid="uid://c248xjmpytv38"]
 
 [ext_resource type="Texture2D" uid="uid://bygupor5h581m" path="res://assets/healthbarUnder.png" id="1_hwma5"]
 [ext_resource type="Texture2D" uid="uid://c87yq5i3hvr7a" path="res://assets/healthbarProgress.png" id="2_mo0le"]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.creatures;
 
 namespace y1000.code.player
 {
@@ -36,6 +37,12 @@ namespace y1000.code.player
             return CreateAnimations(total, step, Animation.LoopModeEnum.None);
         }
 
+                protected AnimationLibrary CreateAnimations(int total, float step, Action action)
+        {
+            return AnimationUtil.CreateAnimations(total, step, Animation.LoopModeEnum.None, action);
+        }
+
+
 
         protected AnimationLibrary CreateAnimations(int total, float step, Animation.LoopModeEnum loopModeEnum)
         {
@@ -54,6 +61,10 @@ namespace y1000.code.player
         {
         }
 
+        public virtual void Attack(ICreature target)
+        {
+
+        }
         public virtual void RightMouseRleased()
         {
         }
@@ -71,6 +82,7 @@ namespace y1000.code.player
         {
 
         }
+
 
         protected static Direction ComputeDirection(Vector2 mousePosition)
         {
@@ -122,5 +134,8 @@ namespace y1000.code.player
         }
 
         public Character Character => (Character)character;
+
+        public abstract PositionedTexture HandTexture {get;}
+
     }
 }

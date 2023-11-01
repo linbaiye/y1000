@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.creatures;
 
 namespace y1000.code.player
 {
@@ -40,6 +41,9 @@ namespace y1000.code.player
 
         public override State State => State.ENFIGHT;
 
+        public override PositionedTexture HandTexture => throw new NotImplementedException();
+
+
         public override void RightMousePressed(Vector2 mousePosition)
         {
             Direction = ComputeDirection(mousePosition);
@@ -48,6 +52,11 @@ namespace y1000.code.player
         public override void Attack()
         {
             Character.ChangeState(new AttackingState(Character, Direction));
+        }
+
+        public override void Attack(ICreature target)
+        {
+            Character.ChangeState(new AttackingState(Character, Direction, target));
         }
 
         public override void Process(double delta)

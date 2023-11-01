@@ -27,10 +27,9 @@ namespace y1000.code.player
 
 
 
-
         public override void OnAnimationFinished(StringName animationName)
         {
-            //Character.Position = Character.Position.Snapped()
+            Character.Position = Character.Position.Snapped(VectorUtil.TILE_SIZE);
             if (!mouseRightPressed)
             {
                 Character.ChangeState(new IdleState(Character, Direction));
@@ -58,6 +57,7 @@ namespace y1000.code.player
 
         public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) + Character.PictureNumber);
 
+        public override PositionedTexture HandTexture => throw new NotImplementedException();
 
         private Vector2 ComputeVelocity()
         {

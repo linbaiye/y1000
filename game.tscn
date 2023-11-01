@@ -3,23 +3,23 @@
 [ext_resource type="PackedScene" uid="uid://mcypqf2bl7r1" path="res://world.tscn" id="1_0bxrs"]
 [ext_resource type="Script" path="res://code/Game.cs" id="1_jbp1s"]
 [ext_resource type="PackedScene" uid="uid://ca1rxwb2uxu2c" path="res://character_body_2d.tscn" id="2_nolib"]
-[ext_resource type="PackedScene" path="res://right_ui.tscn" id="4_j24ll"]
-[ext_resource type="PackedScene" path="res://button_ui.tscn" id="5_3t2rd"]
-[ext_resource type="PackedScene" uid="uid://bm6apd8pca6v0" path="res://monster.tscn" id="5_nmyyi"]
+[ext_resource type="PackedScene" uid="uid://vg1lgwdiop8g" path="res://right_ui.tscn" id="4_j24ll"]
+[ext_resource type="PackedScene" uid="uid://doa5i8dejap1d" path="res://button_ui.tscn" id="5_3t2rd"]
+[ext_resource type="PackedScene" uid="uid://e8ttci8m45bv" path="res://monster.tscn" id="5_nmyyi"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
+texture_filter = 1
 script = ExtResource("1_jbp1s")
 
 [node name="World" parent="." instance=ExtResource("1_0bxrs")]
 y_sort_enabled = false
+texture_filter = 1
 
 [node name="Character" parent="." instance=ExtResource("2_nolib")]
-z_as_relative = true
 position = Vector2(619, 398)
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
-position_smoothing_speed = 32.0
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
@@ -29,4 +29,5 @@ position_smoothing_speed = 32.0
 mouse_filter = 1
 
 [node name="Monster" parent="." instance=ExtResource("5_nmyyi")]
+texture_filter = 1
 position = Vector2(475, 535)

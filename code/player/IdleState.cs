@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.creatures;
 
 namespace y1000.code.player
 {
@@ -23,7 +24,24 @@ namespace y1000.code.player
 			{ Direction.UP_LEFT, 69},
         };
 
+        private static readonly Dictionary<Direction, int> WEAPON_SPRITE_OFFSET = new Dictionary<Direction, int>()
+        {
+			{ Direction.UP, 48},
+			{ Direction.UP_RIGHT, 51},
+			{ Direction.RIGHT, 54},
+			{ Direction.DOWN_RIGHT, 57},
+			{ Direction.DOWN, 60},
+			{ Direction.DOWN_LEFT, 63},
+			{ Direction.LEFT, 66},
+			{ Direction.UP_LEFT, 69},
+        };
+
+
+        public override PositionedTexture HandTexture => throw new NotImplementedException();
+
         public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) + Character.PictureNumber);
+
+
 
         public IdleState(Character character, Direction direction) : base(character, direction)
         {
@@ -48,6 +66,11 @@ namespace y1000.code.player
 
         public override void Process(double delta)
         {
+        }
+
+        public override void Attack(ICreature target)
+        {
+            Character.ChangeState(new AttackingState(Character, Direction, target));
         }
 
         public override void Hurt()

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1024
 window/size/viewport_height=768
+window/size/resizable=false
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
@@ -50,4 +51,4 @@ attack={
 
 [rendering]
 
-2d/snap/snap_2d_transforms_to_pixel=true
+textures/canvas_textures/default_texture_filter=0

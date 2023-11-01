@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ca1rxwb2uxu2c"]
+[gd_scene load_steps=9 format=3 uid="uid://ca1rxwb2uxu2c"]
 
 [ext_resource type="Script" path="res://code/player/Character.cs" id="1_fm3wc"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_n1ku8"]
+[ext_resource type="Script" path="res://code/player/CharAnimationPlayer.cs" id="2_w1vty"]
 [ext_resource type="Script" path="res://code/player/Body.cs" id="3_3jcts"]
 [ext_resource type="Texture2D" uid="uid://bk1xwhmelwsbl" path="res://sprite/white.png" id="4_ipwp4"]
 
@@ -20,8 +21,8 @@ shader_parameter/offset = Vector2(0, 4)
 shader_parameter/modulate = Color(0, 0, 0, 0.509804)
 
 [node name="Character" type="Node2D"]
-z_as_relative = false
 y_sort_enabled = true
+texture_filter = 1
 script = ExtResource("1_fm3wc")
 metadata/spriteNumber = 0
 
@@ -29,15 +30,16 @@ metadata/spriteNumber = 0
 libraries = {
 "": SubResource("AnimationLibrary_6swyu")
 }
+script = ExtResource("2_w1vty")
 metadata/test = false
 
 [node name="Hand" type="Sprite2D" parent="."]
+texture_filter = 1
 material = SubResource("ShaderMaterial_e6758")
 centered = false
 metadata/frame = false
 
 [node name="Body" type="Sprite2D" parent="."]
-z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_6ts8u")
@@ -45,6 +47,7 @@ centered = false
 script = ExtResource("3_3jcts")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
 clip_contents = true
 offset_left = -16.0
 offset_right = 16.0

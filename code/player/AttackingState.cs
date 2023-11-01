@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.creatures;
 
 namespace y1000.code.player
 {
@@ -63,13 +64,35 @@ namespace y1000.code.player
         private readonly Weapon weapon;
         private readonly int actionGroup;
 
+        private int trackIdx;
+
+        private ICreature? target;
 
         public AttackingState(Character character, Direction direction) : base(character, direction)
         {
             weapon = Weapon.SWORD;
             SetupAnimations();
             actionGroup = RANDOM.Next(2);
-            Character.AnimationPlayer.Play(GetLibraryName(actionGroup) + "/" + Direction);
+            string animationName = GetAnimationName();
+            trackIdx = Character.AnimationPlayer.RegisterCallback(animationName, 
+            actionGroup == 0 ? 0.3 : 0.6, OnHit);
+            Character.AnimationPlayer.Play(animationName);
+        }
+
+        public AttackingState(Character character, Direction direction, ICreature target) : this(character, direction)
+        {
+            this.target = target;
+        }
+
+        private void OnHit()
+        {
+            target?.Hurt();
+        }
+
+
+        private string GetAnimationName()
+        {
+            return GetLibraryName(actionGroup) + "/" + Direction;
         }
 
         private enum Weapon
@@ -130,6 +153,9 @@ namespace y1000.code.player
             }
         }
 
+        public override PositionedTexture HandTexture => throw new NotImplementedException();
+
+
         public override void Process(double delta)
         {
 
@@ -137,6 +163,7 @@ namespace y1000.code.player
 
         public override void OnAnimationFinished(StringName animationName) 
         {
+            Character.AnimationPlayer.DeregisterCallback(GetAnimationName(), trackIdx);
             Character.ChangeState(new EnfightState(Character, Direction));
         }
 

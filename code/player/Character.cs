@@ -5,6 +5,7 @@ using System.Runtime;
 using y1000.code.player;
 using y1000.code;
 using System.Drawing;
+using y1000.code.creatures;
 
 public partial class Character : Node2D, IPlayer
 {
@@ -26,7 +27,7 @@ public partial class Character : Node2D, IPlayer
 		playerState = newState;
 	}
 
-	public AnimationPlayer AnimationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
+	public CharAnimationPlayer AnimationPlayer => GetNode<CharAnimationPlayer>("AnimationPlayer");
 
     public int PictureNumber => (int)GetMeta("spriteNumber");
 
@@ -100,11 +101,17 @@ public partial class Character : Node2D, IPlayer
 		playerState.Process(delta);
 	}
 
+
+	public PositionedTexture HandTexture => playerState.HandTexture;
+
 	public State State => playerState.State;
 
 	public Direction Direction => playerState.Direction;
 
     public Point Coordinate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    AnimationPlayer IPlayer.AnimationPlayer => throw new NotImplementedException();
+
 
     public static int Add(int a, int b) => a + b;
 
@@ -115,7 +122,7 @@ public partial class Character : Node2D, IPlayer
 
     public void Attack()
     {
-        throw new NotImplementedException();
+		playerState.Attack();
     }
 
     public void Hurt()
@@ -142,4 +149,10 @@ public partial class Character : Node2D, IPlayer
     {
         throw new NotImplementedException();
     }
+
+    public void Attack(ICreature target)
+    {
+		playerState.Attack(target);
+    }
+
 }

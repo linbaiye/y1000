@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxgtif6bag0p5"]
+
+[ext_resource type="PackedScene" uid="uid://mcypqf2bl7r1" path="res://world.tscn" id="1_t66yg"]
+[ext_resource type="Texture2D" uid="uid://bwmuri6fi3404" path="res://icon.svg" id="2_bqux5"]
+[ext_resource type="Script" path="res://TestSprite2D.cs" id="3_ppeo1"]
+
+[node name="Testing" type="Node2D"]
+
+[node name="World" parent="." instance=ExtResource("1_t66yg")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(356, 478)
+scale = Vector2(0.328125, 0.355469)
+texture = ExtResource("2_bqux5")
+script = ExtResource("3_ppeo1")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+position_smoothing_speed = 32.0
