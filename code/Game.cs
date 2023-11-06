@@ -36,7 +36,7 @@ public partial class Game : Node2D, IPacketHandler
 	public override void _Ready()
 	{
 		character = GetNode<Character>("Character");
-		SetupNetwork();
+		//SetupNetwork();
 	}
 
 

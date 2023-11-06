@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt1tx83aa3re6"]
+
+[ext_resource type="Texture2D" uid="uid://c8jp3duhmji12" path="res://assets/maps/prison/object/64/image.png" id="1_26nm5"]
+[ext_resource type="Script" path="res://code/world/WorldMap.cs" id="1_28al4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cfk0a"]
+texture = ExtResource("1_26nm5")
+texture_region_size = Vector2i(32, 24)
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+0:8/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jlhjp"]
+tile_size = Vector2i(32, 24)
+sources/1 = SubResource("TileSetAtlasSource_cfk0a")
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource("TileSet_jlhjp")
+format = 2
+layer_0/name = "ground0"
+layer_1/name = "ground1"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "object"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 10
+layer_2/tile_data = PackedInt32Array()
+script = ExtResource("1_28al4")
