@@ -34,6 +34,7 @@ script = ExtResource("2_w1vty")
 metadata/test = false
 
 [node name="Hand" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_e6758")
 centered = false
@@ -47,6 +48,7 @@ centered = false
 script = ExtResource("3_3jcts")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 texture_filter = 1
 clip_contents = true
 offset_left = -16.0

@@ -4,79 +4,40 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Text.Json;
+using y1000.code;
 using y1000.code.world;
 
 public partial class WorldMap : TileMap
 {
-	// Called when the node enters the scene tree for the first time.
-	private MapManager? mapManager;
+	private GameMap? gameMap;
 
-	private int sourceId;
+	private readonly IDictionary<int, int> TILE_ID_TO_SOURCE_ID = new Dictionary<int,int>();
 
-	private IDictionary<int, int> TILE_ID_TO_SOURCE_ID = new Dictionary<int,int>();
-	private IDictionary<int, int> OBJECT_ID_TO_SOURCE_ID = new Dictionary<int,int>();
-
+	private const int GROUND1_ZINDEX = 0;
+	private const int GROUND2_ZINDEX = 1;
 	public override void _Ready()
 	{
-		mapManager = MapManager.Load("res://assets/maps/prison/prison.map");
-		if (mapManager != null)
-		{
-			BuildTileSets();
-			BuildObjects();
-			TileMap();
-			TileObjects();
+		gameMap = GameMap.Load("res://assets/maps/prison/prison.map");
+		BuildTileSets();
+		TileGround();
+		CreateLayer("object");
+		CreateLayer("roof");
+		if (!Godot.FileAccess.FileExists("res://debugmap.tscn")) {
+			PackedScene packedScene = new PackedScene();
+			packedScene.Pack(GetTree().CurrentScene);
+			ResourceSaver.Save(packedScene, "res://debugmap.tscn");
 		}
-		//PackedScene packedScene = new PackedScene();
-		//packedScene.Pack(GetTree().CurrentScene);
-		//ResourceSaver.Save(packedScene, "res://debugmap.tscn");
+        //var objectManager = ObjectManager.Unpack("/Users/ab000785/learn/asset/prison/prisonobj.obj");
+        //objectManager?.Dump1("/Users/ab000785/learn/asset/prison/object");
 	}
-
-
-	public void BuildObjects()
-	{
-		if (mapManager == null)
-		{
-			return;
-		}
-		var ids = mapManager.ObjectIds;
-		foreach(var id in ids)
-		{
-			var dirpath = "res://assets/maps/prison/object/" + id;
-			var path = dirpath + "/image.png";
-			if (!Godot.FileAccess.FileExists(path))
-			{
-				continue;
-			}
-			var texture = ResourceLoader.Load(path) as Texture2D;
-			if (texture == null)
-			{
-				continue;
-			}
-			TileSetAtlasSource source = new TileSetAtlasSource() { Texture = texture , TextureRegionSize = new Vector2I(texture.GetWidth(), texture.GetHeight())};
-			source.CreateTile(new Vector2I(0, 0));
-			using (var fileAccess = Godot.FileAccess.Open(dirpath + "/struct.json", Godot.FileAccess.ModeFlags.Read))
-			{
-				var jsonString = fileAccess.GetAsText();
-				GD.Print("Json : " + jsonString);
-				Object2Json json = Object2Json.FromJsonString(jsonString);
-				int altId = source.GetAlternativeTileId(new Vector2I(0, 0), 0);
-				var tileData = source.GetTileData(new Vector2I(0, 0), altId);
-				tileData.TextureOrigin = new Vector2I(json.X, json.Y);
-			}
-			int sourceId = TileSet.AddSource(source);
-			OBJECT_ID_TO_SOURCE_ID.TryAdd(id, sourceId);
-		}
-	}
-
-
 
 	private void BuildTileSets()
 	{
-		if (mapManager == null)
+		if (gameMap == null)
 		{
 			return;
 		}
-		var ids = mapManager.TileIds;
+		var ids = gameMap.TileIds;
 		foreach(var id in ids)
 		{
 			var path = "res://assets/maps/prison/tile/" + id + ".png";
@@ -84,8 +45,7 @@ public partial class WorldMap : TileMap
 			{
 				continue;
 			}
-			var texture = ResourceLoader.Load(path) as Texture2D;
-			if (texture == null)
+			if (ResourceLoader.Load(path) is not Texture2D texture)
 			{
 				continue;
 			}
@@ -100,32 +60,22 @@ public partial class WorldMap : TileMap
 		}
 	}
 
-	private void TileMap()
+
+	private void TileGround()
 	{
-		if (mapManager == null)
+		gameMap?.ForeachCell((cell, x, y) =>
 		{
-			return;
-		}
-		for (int h = 0; h < mapManager.Height; h ++)
-		{
-			for (int w = 0; w < mapManager.Width; w++)
+			if (TILE_ID_TO_SOURCE_ID.TryGetValue(cell.TileId, out int sourceId))
 			{
-				var cell = mapManager.GetCell(w, h);
-				if (cell == null) 
-				{
-					continue;
-				}
-				if (TILE_ID_TO_SOURCE_ID.TryGetValue(cell.Value.TileId, out int sourceId))
-				{
-					SetCell(0, new Vector2I(w, h), sourceId, new Vector2I(cell.Value.TileNumber, 0));
-				}
-				if (TILE_ID_TO_SOURCE_ID.TryGetValue(cell.Value.TileOverId, out int overtileSourceId))
-				{
-					SetCell(1, new Vector2I(w, h), overtileSourceId, new Vector2I(cell.Value.TileOverNumber, 0));
-				}
+				SetCell(GROUND1_ZINDEX, new Vector2I(x, y), sourceId, new Vector2I(cell.TileNumber, 0));
 			}
-		}
+			if (TILE_ID_TO_SOURCE_ID.TryGetValue(cell.TileOverId, out int overtileSourceId))
+			{
+				SetCell(GROUND2_ZINDEX, new Vector2I(x, y), overtileSourceId, new Vector2I(cell.TileOverNumber, 0));
+			}
+		});
 	}
+
 
 	public struct Object2Json
 	{
@@ -144,34 +94,45 @@ public partial class WorldMap : TileMap
 		}
 	}
 
-	private void TileObjects()
-	{
-		if (mapManager == null)
-		{
-			return;
-		}
-		var ids = mapManager.ObjectIds;
 
-		for (int h = 0; h < mapManager.Height; h++)
+	public void NotifyCharPosition(Vector2I point)
+	{
+		if (gameMap != null && gameMap.HideRoof(point))  
 		{
-			for (int w = 0; w < mapManager.Width; w++)
-			{
-				var cell = mapManager.GetCell(w, h);
-				if (cell == null) 
-				{
-					continue;
-				}
-				if (OBJECT_ID_TO_SOURCE_ID.TryGetValue(cell.Value.ObjectId, out int sourceId))
-				{
-					SetCell(2, new Vector2I(w, h), sourceId, new Vector2I(0, 0));
-				}
-			}
+			GetNode<Node2D>("roof").Hide();
+		} else 
+		{
+			GetNode<Node2D>("roof").Show();
 		}
 	}
 
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	private void CreateLayer(string layer)
 	{
+		var layerNode = GetNode<Node2D>(layer);
+		gameMap?.ForeachCell((cell, x, y) => PutObject("object".Equals(layer)? cell.ObjectId : cell.RoofId, x, y, layer, layerNode));
+	}
+
+	private void PutObject(int objectId, int x, int y, string layer, Node2D parent)
+	{
+		var dirpath = "res://assets/maps/prison/" + layer + "/" + objectId;
+		var imagePath = dirpath + "/image.png";
+		if (!Godot.FileAccess.FileExists(imagePath))
+		{
+			return;
+		}
+		if (ResourceLoader.Load(imagePath) is not Texture2D texture)
+		{
+			return;
+		}
+		using (var fileAccess = Godot.FileAccess.Open(dirpath + "/struct.json", Godot.FileAccess.ModeFlags.Read))
+		{
+			var jsonString = fileAccess.GetAsText();
+			Object2Json json = Object2Json.FromJsonString(jsonString);
+			int xPos = x * VectorUtil.TILE_SIZE_X;
+			int yPos = y * VectorUtil.TILE_SIZE_Y;
+			Sprite2D objectSprite = new Sprite2D() { Texture = texture, Centered = false, Position = new Vector2(xPos, yPos), Offset = new Vector2(json.X, json.Y), YSortEnabled = true};
+			parent.AddChild(objectSprite);
+		}
 	}
 }

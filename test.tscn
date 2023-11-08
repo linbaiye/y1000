@@ -1,21 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccjtt8c2qyuap"]
+[gd_scene load_steps=4 format=3 uid="uid://clwos1oyh535b"]
 
-[ext_resource type="Texture2D" uid="uid://bwmuri6fi3404" path="res://icon.svg" id="2_amte8"]
-[ext_resource type="PackedScene" uid="uid://c248xjmpytv38" path="res://hpbar.tscn" id="2_s8p12"]
-[ext_resource type="Script" path="res://TestBody.cs" id="4_e3prr"]
+[ext_resource type="Script" path="res://code/Game.cs" id="1_cd1w2"]
+[ext_resource type="PackedScene" uid="uid://ca1rxwb2uxu2c" path="res://character_body_2d.tscn" id="2_e6shi"]
+[ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="3_rcx2i"]
 
-[node name="test" type="Node2D"]
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_cd1w2")
 
-[node name="hpbar" parent="." instance=ExtResource("2_s8p12")]
-offset_left = 339.0
-offset_top = 21.0
-offset_right = 495.0
-offset_bottom = 51.0
+[node name="Character" parent="." instance=ExtResource("2_e6shi")]
+z_index = 2
+position = Vector2(508, 314)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(61, 172)
-scale = Vector2(0.359375, 0.359375)
-texture = ExtResource("2_amte8")
-script = ExtResource("4_e3prr")
+[node name="Camera2D" type="Camera2D" parent="Character"]
+position = Vector2(10, 62)
 
-[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+[node name="MapLayer" parent="." instance=ExtResource("3_rcx2i")]
+
+[node name="object" type="Node2D" parent="MapLayer"]
+z_index = 2
+y_sort_enabled = true
+texture_filter = 1
+
+[node name="roof" type="Node2D" parent="MapLayer"]
+z_index = 3
+y_sort_enabled = true

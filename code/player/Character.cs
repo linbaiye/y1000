@@ -6,6 +6,7 @@ using y1000.code.player;
 using y1000.code;
 using System.Drawing;
 using y1000.code.creatures;
+using y1000.code.entity;
 
 public partial class Character : Node2D, IPlayer
 {
@@ -108,9 +109,16 @@ public partial class Character : Node2D, IPlayer
 
 	public Direction Direction => playerState.Direction;
 
-    public Point Coordinate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+	public Point Coordinate
+	{
+		get
+		{
+			return new Point((int)(Position.X / 32), (int)(Position.Y /  24));
+		}
+		set => throw new NotImplementedException();
+	}
 
-    AnimationPlayer IPlayer.AnimationPlayer => throw new NotImplementedException();
+	AnimationPlayer IPlayer.AnimationPlayer => throw new NotImplementedException();
 
 
     public static int Add(int a, int b) => a + b;

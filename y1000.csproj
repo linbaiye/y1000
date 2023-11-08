@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.1.2">
+<Project Sdk="Godot.NET.Sdk/4.1.1">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -11,6 +11,7 @@
     <PackageReference Include="DotNetty.Codecs" Version="0.7.5" />
     <PackageReference Include="DotNetty.Transport" Version="0.7.5" />
     <PackageReference Include="DotNetty.Handlers" Version="0.7.5" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Tests\**" />

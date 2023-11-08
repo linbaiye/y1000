@@ -66,6 +66,8 @@ namespace y1000.code.player
 
         public override void Process(double delta)
         {
+            var po = Character.Coordinate;
+            Character.GetParent().GetNode<WorldMap>("MapLayer").NotifyCharPosition(new Vector2I(po.X, po.Y));
         }
 
         public override void Attack(ICreature target)
