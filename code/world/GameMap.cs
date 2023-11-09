@@ -56,8 +56,8 @@ namespace y1000.code.world
 
         private readonly MapCell[,] _cells;
 
-
         private readonly int _height;
+        
         private readonly int _width;
 
         private ISet<int>? ids;
@@ -99,9 +99,9 @@ namespace y1000.code.world
 
         public void ForeachCell(Action<MapCell, int, int> action)
         {
-            for (int y = 0; y < Height; y++)
+            for (int y = 0; y < 80; y++)
             {
-                for (int x = 0; x < Width; x++)
+                for (int x = 0; x < 80; x++)
                 {
                     action.Invoke(_cells[y, x], x, y);
                 }

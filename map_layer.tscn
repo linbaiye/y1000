@@ -1,16 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://53yxyci6nw2t"]
+[gd_scene load_steps=3 format=3 uid="uid://53yxyci6nw2t"]
 
-[ext_resource type="Texture2D" uid="uid://bk1xwhmelwsbl" path="res://sprite/white.png" id="1_7b101"]
 [ext_resource type="Script" path="res://code/world/WorldMap.cs" id="1_28al4"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bmok6"]
-texture = ExtResource("1_7b101")
-texture_region_size = Vector2i(32, 24)
-0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_jlhjp"]
 tile_size = Vector2i(32, 24)
-sources/0 = SubResource("TileSetAtlasSource_bmok6")
 
 [node name="MapLayer" type="TileMap"]
 y_sort_enabled = true
@@ -27,3 +20,10 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("1_28al4")
+
+[node name="object" type="Node2D" parent="."]
+z_index = 2
+y_sort_enabled = true
+
+[node name="roof" type="Node2D" parent="."]
+z_index = 3

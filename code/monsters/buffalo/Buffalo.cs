@@ -13,6 +13,7 @@ public partial class Buffalo : AbstractCreature
 		Setup(MonsterNames.BUFFALO);
 		ChangeState(new SimpleCreatureIdleState(this, Direction.DOWN));
 		CurrentState.PlayAnimation();
+		Position = Position.Snapped(VectorUtil.TILE_SIZE);
 	}
 
 	public static Buffalo Load()
@@ -22,4 +23,12 @@ public partial class Buffalo : AbstractCreature
 		buffalo._Ready();
 		return buffalo;
 	}
+
+    public override void _Process(double delta)
+    {
+		base._Process(delta);
+		PositionedTexture texture = BodyTexture;
+		GetNode<TextureRect>("Hover").Position = new (texture.Position.X, 0);
+    }
 }
+

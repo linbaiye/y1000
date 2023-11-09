@@ -15,18 +15,19 @@ public partial class WorldMap : TileMap
 
 	private const int GROUND1_ZINDEX = 0;
 	private const int GROUND2_ZINDEX = 1;
+	private const string MAP_DIR = "res://assets/maps/start";
 	public override void _Ready()
 	{
-		gameMap = GameMap.Load("res://assets/maps/prison/prison.map");
+		gameMap = GameMap.Load("res://assets/maps/start/start.map");
 		BuildTileSets();
 		TileGround();
 		CreateLayer("object");
-		CreateLayer("roof");
-		if (!Godot.FileAccess.FileExists("res://debugmap.tscn")) {
+		//CreateLayer("roof");
+		/*if (!Godot.FileAccess.FileExists("res://debugmap.tscn")) {
 			PackedScene packedScene = new PackedScene();
 			packedScene.Pack(GetTree().CurrentScene);
 			ResourceSaver.Save(packedScene, "res://debugmap.tscn");
-		}
+		}*/
         //var objectManager = ObjectManager.Unpack("/Users/ab000785/learn/asset/prison/prisonobj.obj");
         //objectManager?.Dump1("/Users/ab000785/learn/asset/prison/object");
 	}
@@ -40,7 +41,7 @@ public partial class WorldMap : TileMap
 		var ids = gameMap.TileIds;
 		foreach(var id in ids)
 		{
-			var path = "res://assets/maps/prison/tile/" + id + ".png";
+			var path = "res://assets/maps/start/tile/" + id + ".png";
 			if (!Godot.FileAccess.FileExists(path))
 			{
 				continue;
@@ -115,7 +116,7 @@ public partial class WorldMap : TileMap
 
 	private void PutObject(int objectId, int x, int y, string layer, Node2D parent)
 	{
-		var dirpath = "res://assets/maps/prison/" + layer + "/" + objectId;
+		var dirpath = "res://assets/maps/start/" + layer + "/" + objectId;
 		var imagePath = dirpath + "/image.png";
 		if (!Godot.FileAccess.FileExists(imagePath))
 		{

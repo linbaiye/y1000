@@ -17,11 +17,11 @@ position = Vector2(10, 62)
 
 [node name="MapLayer" parent="." instance=ExtResource("3_rcx2i")]
 
-[node name="object" type="Node2D" parent="MapLayer"]
+[node name="object2" type="Node2D" parent="MapLayer"]
 z_index = 2
 y_sort_enabled = true
 texture_filter = 1
 
-[node name="roof" type="Node2D" parent="MapLayer"]
+[node name="roof2" type="Node2D" parent="MapLayer"]
 z_index = 3
 y_sort_enabled = true

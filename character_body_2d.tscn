@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ca1rxwb2uxu2c"]
+[gd_scene load_steps=11 format=3 uid="uid://ca1rxwb2uxu2c"]
 
 [ext_resource type="Script" path="res://code/player/Character.cs" id="1_fm3wc"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_n1ku8"]
@@ -19,6 +19,16 @@ shader = ExtResource("2_n1ku8")
 shader_parameter/deform = Vector2(0.6, 2)
 shader_parameter/offset = Vector2(0, 4)
 shader_parameter/modulate = Color(0, 0, 0, 0.509804)
+
+[sub_resource type="Gradient" id="Gradient_1te53"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.992157, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2agmt"]
+gradient = SubResource("Gradient_1te53")
+width = 32
+height = 24
 
 [node name="Character" type="Node2D"]
 y_sort_enabled = true
@@ -48,10 +58,13 @@ centered = false
 script = ExtResource("3_3jcts")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
 texture_filter = 1
 clip_contents = true
-offset_left = -16.0
-offset_right = 16.0
+offset_right = 32.0
 offset_bottom = 24.0
 texture = ExtResource("4_ipwp4")
+
+[node name="Hover" type="TextureRect" parent="."]
+offset_right = 32.0
+offset_bottom = 24.0
+texture = SubResource("GradientTexture2D_2agmt")

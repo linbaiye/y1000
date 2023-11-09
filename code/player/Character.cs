@@ -7,6 +7,7 @@ using y1000.code;
 using System.Drawing;
 using y1000.code.creatures;
 using y1000.code.entity;
+using y1000.code.world;
 
 public partial class Character : Node2D, IPlayer
 {
@@ -100,6 +101,7 @@ public partial class Character : Node2D, IPlayer
 	public override void _Process(double delta)
 	{
 		playerState.Process(delta);
+		GetNode<TextureRect>("Hover").Position = new (BodyTexture.Position.X, 0);
 	}
 
 

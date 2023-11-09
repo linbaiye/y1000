@@ -38,6 +38,7 @@ namespace y1000.code.creatures.state
 
         public void Process(double delta)
         {
+            GD.Print(velocity);
             Creature.Position += velocity * (float) delta;
         }
 
