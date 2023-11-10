@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://clwos1oyh535b"]
+
+[ext_resource type="Script" path="res://code/Game.cs" id="1_cd1w2"]
+[ext_resource type="PackedScene" uid="uid://ca1rxwb2uxu2c" path="res://character_body_2d.tscn" id="2_e6shi"]
+[ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="3_rcx2i"]
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_cd1w2")
+
+[node name="Character" parent="." instance=ExtResource("2_e6shi")]
+z_index = 2
+position = Vector2(508, 314)
+
+[node name="Camera2D" type="Camera2D" parent="Character"]
+position = Vector2(10, 62)
+
+[node name="MapLayer" parent="." instance=ExtResource("3_rcx2i")]
+
+[node name="object2" type="Node2D" parent="MapLayer"]
+z_index = 2
+y_sort_enabled = true
+texture_filter = 1
+
+[node name="roof2" type="Node2D" parent="MapLayer"]
+z_index = 3
+y_sort_enabled = true

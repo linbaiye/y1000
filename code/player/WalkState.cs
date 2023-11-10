@@ -20,52 +20,44 @@ namespace y1000.code.player
             if (!character.AnimationPlayer.HasAnimationLibrary(State.ToString())) {
                 character.AnimationPlayer.AddAnimationLibrary(State.ToString(), CreateAnimations(6, 0.1f));
             }
-            ContinueMove();
-            mouseRightPressed = false;
-            nextPosition = Vector2.Zero;
+            PlayAnimation();
+            mouseRightPressed = true;
+            nextPosition = mousePosition;
         }
 
 
-        private void ContinueMove()
-        {
-            Character.Velocity = ComputeVelocity();
-            Character.ResetPictureNumber();
-            Character.AnimationPlayer.Play(State + "/" + Direction);
-        }
 
         public override void OnAnimationFinished(StringName animationName)
         {
-            Character.Velocity = Vector2.Zero;
-            GD.Print(Character.Position);
+            Character.Position = Character.Position.Snapped(VectorUtil.TILE_SIZE);
             if (!mouseRightPressed)
             {
                 Character.ChangeState(new IdleState(Character, Direction));
-            } 
+            }
             else
             {
                 Direction = ComputeDirection(nextPosition);
-                ContinueMove();
+                PlayAnimation();
             }
         }
 
-        public override State State => State.WALK;
+        public override State State => State.MOVE;
 
         private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
         {
-			{ Direction.UP, 0},
-			{ Direction.UP_RIGHT, 6},
-			{ Direction.RIGHT, 12},
-			{ Direction.DOWN_RIGHT, 18},
-			{ Direction.DOWN, 24},
-			{ Direction.DOWN_LEFT, 30},
-			{ Direction.LEFT, 36},
-			{ Direction.UP_LEFT, 42},
+            { Direction.UP, 0},
+            { Direction.UP_RIGHT, 6},
+            { Direction.RIGHT, 12},
+            { Direction.DOWN_RIGHT, 18},
+            { Direction.DOWN, 24},
+            { Direction.DOWN_LEFT, 30},
+            { Direction.LEFT, 36},
+            { Direction.UP_LEFT, 42},
         };
 
         public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) + Character.PictureNumber);
 
-
-
+        public override PositionedTexture HandTexture => throw new NotImplementedException();
 
         private Vector2 ComputeVelocity()
         {
@@ -85,7 +77,7 @@ namespace y1000.code.player
 
 
 
-        public override void RightMouseRleased() 
+        public override void RightMouseRleased()
         {
             mouseRightPressed = false;
         }
@@ -98,9 +90,9 @@ namespace y1000.code.player
         }
 
 
-        public override void PhysicsProcess(double delta)
+        public override void Process(double delta)
         {
-            Character.MoveAndSlide();
+            Character.Position += ComputeVelocity() * (float) delta;
         }
     }
 }

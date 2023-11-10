@@ -69,9 +69,12 @@ namespace y1000.code
             if (!resDir.EndsWith("/")) {
                 resDir += "/";
             }
-            if (LoadedContainers.TryGetValue(resDir, out SpriteContainer container)) 
+            if (LoadedContainers.TryGetValue(resDir, out SpriteContainer? container))
             {
-                return container;
+                if (container != null)
+                {
+                    return container;
+                }
             }
             if (!Godot.FileAccess.FileExists(resDir + "offset.txt")) {
                 throw new FileNotFoundException();
@@ -98,6 +101,11 @@ namespace y1000.code
             return Load("res://sprite/char/" + nr + "/");
         }
 
+
+        public static SpriteContainer LoadSprites(string name)
+        {
+            return Load("res://sprite/" + name + "/");
+        }
 
         public static readonly SpriteContainer EmptyContainer = new SpriteContainer(Array.Empty<Texture2D>(), Array.Empty<Vector2>());
     }

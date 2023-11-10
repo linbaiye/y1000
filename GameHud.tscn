@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4aq7l7kpiqxk"]
+
+[ext_resource type="Script" path="res://code/control/GameHud.cs" id="1_wy2xg"]
+[ext_resource type="PackedScene" uid="uid://vg1lgwdiop8g" path="res://right_ui.tscn" id="2_8c3t6"]
+[ext_resource type="PackedScene" uid="uid://doa5i8dejap1d" path="res://button_ui.tscn" id="3_npbas"]
+
+[node name="GameHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wy2xg")
+
+[node name="RightUI" parent="." instance=ExtResource("2_8c3t6")]
+layout_mode = 1
+
+[node name="ButtonUI" parent="." instance=ExtResource("3_npbas")]
+layout_mode = 1

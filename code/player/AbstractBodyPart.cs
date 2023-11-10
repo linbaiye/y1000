@@ -10,14 +10,10 @@ namespace y1000.code.player
     {
         protected abstract PositionedTexture PositionedTexture {get;}
 
-        public override void _Ready()
-        {
-        }
-
         public override void _Process(double delta)
         {
             PositionedTexture positionedTexture = PositionedTexture;
-            Position = positionedTexture.Position;
+            Offset = positionedTexture.Offset;
             Texture = positionedTexture.Texture;
         }
     }

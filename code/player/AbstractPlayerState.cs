@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.creatures;
 
 namespace y1000.code.player
 {
     public abstract class AbstractPlayerState : IPlayerState
     {
 
-        private readonly Character character;
+        private readonly IPlayer character;
 
         public Direction Direction {get; set;}
 
@@ -28,7 +29,7 @@ namespace y1000.code.player
         public abstract State State { get; }
         public abstract PositionedTexture BodyTexture { get; }
 
-        public abstract void PhysicsProcess(double delta);
+        public abstract void Process(double delta);
 
 
         protected AnimationLibrary CreateAnimations(int total, float step)
@@ -36,33 +37,22 @@ namespace y1000.code.player
             return CreateAnimations(total, step, Animation.LoopModeEnum.None);
         }
 
+                protected AnimationLibrary CreateAnimations(int total, float step, Action action)
+        {
+            return AnimationUtil.CreateAnimations(total, step, Animation.LoopModeEnum.None, action);
+        }
+
+
 
         protected AnimationLibrary CreateAnimations(int total, float step, Animation.LoopModeEnum loopModeEnum)
         {
-            AnimationLibrary library = new AnimationLibrary();
-            foreach (Direction direction in Enum.GetValues(typeof(Direction)))
-            {
-                var animation = CreateAnimation(total, step);
-                animation.LoopMode = loopModeEnum;
-                library.AddAnimation(direction.ToString(), animation);
-            }
-            return library;
+            return AnimationUtil.CreateAnimations(total, step, loopModeEnum);
         }
 
 
         protected static Animation CreateAnimation(int total, float step)
         {
-            Animation animation = new Animation();
-            int trackIdx = animation.AddTrack(Animation.TrackType.Value);
-            animation.TrackSetPath(trackIdx, ".:metadata/picNumber");
-            float time = 0.0f;
-            //animation.Step = step;
-            for (int i = 0; i <= total; i++, time += step)
-            {
-                animation.TrackInsertKey(trackIdx, time, Math.Min(i, total - 1));
-            }
-            animation.Length = total * step;
-            return animation;
+            return AnimationUtil.CreateAnimation(total, step);
         }
 
         public virtual void OnAnimationFinished(StringName animationName) => new NotImplementedException();
@@ -71,6 +61,10 @@ namespace y1000.code.player
         {
         }
 
+        public virtual void Attack(ICreature target)
+        {
+
+        }
         public virtual void RightMouseRleased()
         {
         }
@@ -78,6 +72,17 @@ namespace y1000.code.player
         public virtual void Attack()
         {
         }
+
+        public virtual void Sit()
+        {
+
+        }
+
+        public virtual void Hurt()
+        {
+
+        }
+
 
         protected static Direction ComputeDirection(Vector2 mousePosition)
         {
@@ -96,6 +101,41 @@ namespace y1000.code.player
                 _ => throw new NotSupportedException(),
             };
         }
-        public Character Character => character;
+
+        public int GetSpriteOffset()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Move(Direction direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Turn(Direction newDirection)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnAnimationFinised()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PlayAnimation()
+        {
+            Character.AnimationPlayer.Stop();
+            Character.AnimationPlayer.Play(State + "/" + Direction);
+        }
+
+        public void Die()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Character Character => (Character)character;
+
+        public abstract PositionedTexture HandTexture { get; }
+
     }
 }

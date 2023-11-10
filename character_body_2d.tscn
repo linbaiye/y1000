@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca1rxwb2uxu2c"]
+[gd_scene load_steps=11 format=3 uid="uid://ca1rxwb2uxu2c"]
 
 [ext_resource type="Script" path="res://code/player/Character.cs" id="1_fm3wc"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_n1ku8"]
+[ext_resource type="Script" path="res://code/player/CharAnimationPlayer.cs" id="2_w1vty"]
 [ext_resource type="Script" path="res://code/player/Body.cs" id="3_3jcts"]
+[ext_resource type="Texture2D" uid="uid://bk1xwhmelwsbl" path="res://sprite/white.png" id="4_ipwp4"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6swyu"]
 
@@ -18,23 +20,52 @@ shader_parameter/deform = Vector2(0.6, 2)
 shader_parameter/offset = Vector2(0, 4)
 shader_parameter/modulate = Color(0, 0, 0, 0.509804)
 
-[node name="Character" type="CharacterBody2D"]
-position = Vector2(135, 114)
+[sub_resource type="Gradient" id="Gradient_1te53"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.992157, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2agmt"]
+gradient = SubResource("Gradient_1te53")
+width = 32
+height = 24
+
+[node name="Character" type="Node2D"]
+y_sort_enabled = true
+texture_filter = 1
 script = ExtResource("1_fm3wc")
-metadata/picNumber = 0
+metadata/spriteNumber = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_6swyu")
 }
+script = ExtResource("2_w1vty")
 metadata/test = false
 
 [node name="Hand" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
 material = SubResource("ShaderMaterial_e6758")
 centered = false
 metadata/frame = false
 
 [node name="Body" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
 material = SubResource("ShaderMaterial_6ts8u")
 centered = false
 script = ExtResource("3_3jcts")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+clip_contents = true
+offset_right = 32.0
+offset_bottom = 24.0
+texture = ExtResource("4_ipwp4")
+
+[node name="Hover" type="TextureRect" parent="."]
+visible = false
+offset_right = 32.0
+offset_bottom = 24.0
+texture = SubResource("GradientTexture2D_2agmt")
