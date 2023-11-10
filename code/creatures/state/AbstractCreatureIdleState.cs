@@ -7,7 +7,7 @@ namespace y1000.code.creatures.state
 {
     public abstract class AbstractCreatureIdleState : AbstractCreatureState
     {
-        private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new()
+        private static readonly Dictionary<Direction, int> DEFAULT_SPRITE_OFFSET = new()
         {
             { Direction.UP, 18},
 			{ Direction.UP_RIGHT, 41},
@@ -19,16 +19,27 @@ namespace y1000.code.creatures.state
 			{ Direction.UP_LEFT, 179},
         };
 
+
+        private readonly Dictionary<Direction, int> spriteOffset;
+
         public AbstractCreatureIdleState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
             creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(5, 0.5f, Godot.Animation.LoopModeEnum.Linear));
+            spriteOffset = DEFAULT_SPRITE_OFFSET;
         }
+
+        public AbstractCreatureIdleState(AbstractCreature creature, Direction direction, Dictionary<Direction, int> _spriteOffset, int totalSrpite, float step) : base(creature, direction)
+        {
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(totalSrpite, step, Godot.Animation.LoopModeEnum.Linear));
+            spriteOffset = _spriteOffset;
+        }
+
 
         public override State State => State.IDLE;
 
         public override int GetSpriteOffset()
         {
-            return SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
+            return spriteOffset.GetValueOrDefault(Direction, -1);
         }
 
         public override void Move(Direction direction)

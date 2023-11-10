@@ -8,19 +8,23 @@ using y1000.code.player;
 
 public partial class Buffalo : AbstractCreature
 {
-	public override void _Ready()
+
+	private SpriteContainer? spriteContainer;
+
+	private void Setup(SpriteContainer spriteContainer) 
 	{
-		Setup(MonsterNames.BUFFALO);
+		Setup();
+		this.spriteContainer = spriteContainer;
 		ChangeState(new SimpleCreatureIdleState(this, Direction.DOWN));
 		CurrentState.PlayAnimation();
-		Position = Position.Snapped(VectorUtil.TILE_SIZE);
 	}
 
 	public static Buffalo Load()
 	{
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://monster.tcsn");
 		Buffalo buffalo = scene.Instantiate<Buffalo>();
-		buffalo._Ready();
+		SpriteContainer spriteContainer = SpriteContainer.Load(MonsterNames.BUFFALO);
+		buffalo.Setup(spriteContainer);
 		return buffalo;
 	}
 
@@ -29,6 +33,15 @@ public partial class Buffalo : AbstractCreature
 		base._Process(delta);
 		PositionedTexture texture = BodyTexture;
 		GetNode<TextureRect>("Hover").Position = new (texture.Offset.X, 0);
+    }
+
+    protected override SpriteContainer GetSpriteContainer()
+    {
+		if (spriteContainer == null)
+		{
+			throw new NotSupportedException();
+		}
+		return spriteContainer;
     }
 }
 

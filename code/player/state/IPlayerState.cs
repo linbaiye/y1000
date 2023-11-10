@@ -2,15 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Godot;
 using y1000.code.creatures;
 
-namespace y1000.code.player
+namespace y1000.code.player.state
 {
-    public interface IPlayer : ICreature
+    public interface IPlayerState : ICreatureState
     {
-        void Sit();
-
-        void Bow();
+       SpriteContainer SpriteContainer { get; } 
     }
 }

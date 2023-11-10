@@ -9,7 +9,14 @@ using y1000.code.creatures;
 using y1000.code.entity;
 using y1000.code.world;
 
-public partial class Character : Node2D, IPlayer
+public partial class Character : AbstractPlayer
+{
+    public override void _Ready()
+    {
+    }
+
+}
+/* Node2D, IPlayer
 {
 	public float gravity = 0f;
 
@@ -77,7 +84,7 @@ public partial class Character : Node2D, IPlayer
 				playerState.RightMousePressed(GetLocalMousePosition());
 			}
 		}
-		else*/
+		else
 		if (@event is InputEventKey eventKey)
 		{
 			if (eventKey.IsPressed())
@@ -119,8 +126,6 @@ public partial class Character : Node2D, IPlayer
 		}
 		set => throw new NotImplementedException();
 	}
-
-	AnimationPlayer IPlayer.AnimationPlayer => throw new NotImplementedException();
 
 
     public static int Add(int a, int b) => a + b;
@@ -174,4 +179,14 @@ public partial class Character : Node2D, IPlayer
     {
         throw new NotImplementedException();
     }
-}
+
+    public void Sit()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Bow()
+    {
+        throw new NotImplementedException();
+    }
+}*/

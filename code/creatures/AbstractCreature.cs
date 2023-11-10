@@ -19,8 +19,6 @@ namespace y1000.code.creatures
 
         private AnimationPlayer animationPlayer;
 
-	    private SpriteContainer spriteContainer = SpriteContainer.EmptyContainer;
-
 
         protected AbstractCreature()
         {
@@ -36,16 +34,16 @@ namespace y1000.code.creatures
             }
         }
 
-        protected void Setup(string spriteName)
+        protected void Setup()
         {
             // Customing AnimaationPlayer might be a better idea.
             animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
             SetMeta("spriteNumber", 0);
-            spriteContainer= SpriteContainer.LoadSprites(spriteName);
 		    Position = Position.Snapped(VectorUtil.TILE_SIZE);
             animationPlayer.AnimationFinished += OnAnimationFinised;
         }
 
+        protected abstract SpriteContainer GetSpriteContainer();
 
 
         internal void ChangeState(ICreatureState newState)
@@ -63,7 +61,7 @@ namespace y1000.code.creatures
             get
             {
                 int nr = (int)GetMeta("spriteNumber");
-                return spriteContainer.Get(currentState.GetSpriteOffset() + nr);
+                return GetSpriteContainer().Get(currentState.GetSpriteOffset() + nr);
             }
         }
 
@@ -120,6 +118,7 @@ namespace y1000.code.creatures
         {
             throw new NotImplementedException();
         }
+
 
         public void Remove()
         {

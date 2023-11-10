@@ -2,15 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Godot;
 using y1000.code.creatures;
+using y1000.code.world;
 
 namespace y1000.code.player
 {
-    public interface IPlayer : ICreature
+    public interface ICharater : ICreature
     {
-        void Sit();
-
-        void Bow();
+        void Move(GameMap gameMap, IEnumerable<ICreature> creatures);
     }
 }
