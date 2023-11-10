@@ -13,7 +13,7 @@ namespace y1000.code.player
         public override void _Process(double delta)
         {
             PositionedTexture positionedTexture = PositionedTexture;
-            Offset = positionedTexture.Position;
+            Offset = positionedTexture.Offset;
             Texture = positionedTexture.Texture;
         }
     }

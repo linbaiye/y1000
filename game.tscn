@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://code/Game.cs" id="1_jbp1s"]
 [ext_resource type="PackedScene" uid="uid://ca1rxwb2uxu2c" path="res://character_body_2d.tscn" id="2_nolib"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
-[ext_resource type="PackedScene" uid="uid://vg1lgwdiop8g" path="res://right_ui.tscn" id="4_j24ll"]
-[ext_resource type="PackedScene" uid="uid://doa5i8dejap1d" path="res://button_ui.tscn" id="5_3t2rd"]
+[ext_resource type="PackedScene" path="res://right_ui.tscn" id="4_j24ll"]
+[ext_resource type="PackedScene" path="res://button_ui.tscn" id="5_3t2rd"]
 [ext_resource type="PackedScene" uid="uid://e8ttci8m45bv" path="res://monster.tscn" id="5_nmyyi"]
 
 [node name="Game" type="Node2D"]

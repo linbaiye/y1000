@@ -10,8 +10,7 @@ public partial class OffsetRect : TextureRect
     {
         var texture = GetParent<Character>().BodyTexture;
         var parent = GetParent<Character>();
-        Position = new (parent.Position.X + texture.Position.X, parent.Position.Y);
-        GD.Print(Position);
+        Position = new (parent.Position.X + texture.Offset.X, parent.Position.Y);
     }
 
 }

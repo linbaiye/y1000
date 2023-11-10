@@ -28,7 +28,7 @@ public partial class Buffalo : AbstractCreature
     {
 		base._Process(delta);
 		PositionedTexture texture = BodyTexture;
-		GetNode<TextureRect>("Hover").Position = new (texture.Position.X, 0);
+		GetNode<TextureRect>("Hover").Position = new (texture.Offset.X, 0);
     }
 }
 

@@ -8,7 +8,7 @@ public partial class BodySprite : Sprite2D
 	{
 		var parent = GetParent<AbstractCreature>();
 		var texture = parent.BodyTexture;
-		Offset = texture.Position;
+		Offset = texture.Offset;
 		Texture = texture.Texture;
 	}
 }

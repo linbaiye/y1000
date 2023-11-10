@@ -19,7 +19,6 @@ public partial class Enemy : Area2D
 		{
 			hpBar.Visible = true;
 			hpBar.Value = hpBar.Value - 10;
-			GD.Print(hpBar.Value);
 		}
 		else
 		{

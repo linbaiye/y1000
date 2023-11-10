@@ -101,7 +101,7 @@ public partial class Character : Node2D, IPlayer
 	public override void _Process(double delta)
 	{
 		playerState.Process(delta);
-		GetNode<TextureRect>("Hover").Position = new (BodyTexture.Position.X, 0);
+		GetNode<TextureRect>("Hover").Position = new (BodyTexture.Offset.X, 0);
 	}
 
 
