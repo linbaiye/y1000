@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Drawing;
 using y1000.code;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
@@ -11,37 +12,54 @@ public partial class Buffalo : AbstractCreature
 
 	private SpriteContainer? spriteContainer;
 
-	private void Setup(SpriteContainer spriteContainer) 
+	private Point initCoordinate = Point.Empty;
+
+	private long id;
+
+	private Direction initDirection;
+
+    private void Initiliaze(Point i, SpriteContainer spriteContainer, long id, Direction direction)
 	{
-		Setup();
+		initCoordinate = i;
+		this.id = id;
 		this.spriteContainer = spriteContainer;
-		ChangeState(new SimpleCreatureIdleState(this, Direction.DOWN));
-		CurrentState.PlayAnimation();
+		initDirection = direction;
 	}
 
-	public static Buffalo Load()
+    public override long Id => id;
+
+    public override void _Ready()
+    {
+		Setup();
+		ChangeState(new SimpleCreatureIdleState(this, initDirection));
+		ZIndex = 2;
+		YSortEnabled = true;
+		ZAsRelative = true;
+		Coordinate = initCoordinate;
+		CurrentState.PlayAnimation();
+    }
+
+
+	public static Buffalo Load(Point coordinate, long id, Direction direction)
 	{
-		PackedScene scene = ResourceLoader.Load<PackedScene>("res://monster.tcsn");
+		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/Monster.tscn");
 		Buffalo buffalo = scene.Instantiate<Buffalo>();
-		SpriteContainer spriteContainer = SpriteContainer.Load(MonsterNames.BUFFALO);
-		buffalo.Setup(spriteContainer);
+		SpriteContainer spriteContainer = SpriteContainer.LoadMonsterSprites(MonsterNames.BUFFALO);
+		buffalo.Initiliaze(coordinate, spriteContainer, id, direction);
 		return buffalo;
 	}
-
-    public override void _Process(double delta)
-    {
-		base._Process(delta);
-		PositionedTexture texture = BodyTexture;
-		GetNode<TextureRect>("Hover").Position = new (texture.Offset.X, 0);
-    }
+	public static Buffalo Load(Point coordinate, long id)
+	{
+		return Load(coordinate, id, Direction.DOWN);
+	}
 
     protected override SpriteContainer GetSpriteContainer()
     {
-		if (spriteContainer == null)
+		if (spriteContainer != null)
 		{
-			throw new NotSupportedException();
+			return spriteContainer;
 		}
-		return spriteContainer;
+		throw new NotSupportedException();
     }
 }
 

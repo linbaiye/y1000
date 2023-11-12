@@ -41,7 +41,7 @@ namespace y1000.code.player
             }
         }
 
-        public override State State => State.MOVE;
+        public override State State => State.WALK;
 
         private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
         {
@@ -55,7 +55,7 @@ namespace y1000.code.player
             { Direction.UP_LEFT, 42},
         };
 
-        public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) + Character.PictureNumber);
+        public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) );
 
         public override PositionedTexture HandTexture => throw new NotImplementedException();
 

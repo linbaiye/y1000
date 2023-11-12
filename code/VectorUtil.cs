@@ -36,5 +36,23 @@ namespace y1000.code
             }
             return Vector2.Zero;
         }
+
+        public static Direction MouseDirection(this Vector2 mousePosition)
+        {
+            var angle = Mathf.Snapped(mousePosition.Angle(), Mathf.Pi / 3) / (Mathf.Pi / 4);
+            int dir = Mathf.Wrap((int)angle, -1, 8);
+            return dir switch
+            {
+                -1 => Direction.RIGHT,
+                0 => Direction.DOWN_RIGHT,
+                1 => Direction.DOWN,
+                2 => Direction.DOWN_LEFT,
+                3 => Direction.LEFT,
+                4 => Direction.UP_LEFT,
+                5 => Direction.UP,
+                6 => Direction.UP_RIGHT,
+                _ => throw new NotSupportedException(),
+            };
+        }
     }
 }

@@ -11,5 +11,13 @@ namespace y1000.code.creatures.state
         {
 
         }
+
+        public override State State => State.WALK;
+
+        public override void OnAnimationFinised()
+        {
+            ChangeCoordinate();
+            StopAndChangeState(StateFactory.CreateIdleState(Creature));
+        }
     }
 }

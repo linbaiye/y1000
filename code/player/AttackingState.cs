@@ -74,8 +74,8 @@ namespace y1000.code.player
             SetupAnimations();
             actionGroup = RANDOM.Next(2);
             string animationName = GetAnimationName();
-            trackIdx = Character.AnimationPlayer.RegisterCallback(animationName, 
-            actionGroup == 0 ? 0.3 : 0.6, OnHit);
+            //trackIdx = Character.AnimationPlayer.RegisterCallback(animationName, 
+            //actionGroup == 0 ? 0.3 : 0.6, OnHit);
             Character.AnimationPlayer.Play(animationName);
         }
 
@@ -149,7 +149,8 @@ namespace y1000.code.player
                         spriteGroup = UNARMED_SPRITE_OFFSET;
                         break;
                 }
-                return container.Get(spriteGroup.GetValueOrDefault(actionGroup).GetValueOrDefault(Direction) + Character.PictureNumber);
+                throw new NotSupportedException();
+                //return container.Get(spriteGroup.GetValueOrDefault(actionGroup).GetValueOrDefault(Direction) + Character.PictureNumber);
             }
         }
 
@@ -163,7 +164,7 @@ namespace y1000.code.player
 
         public override void OnAnimationFinished(StringName animationName) 
         {
-            Character.AnimationPlayer.DeregisterCallback(GetAnimationName(), trackIdx);
+            //Character.AnimationPlayer.DeregisterCallback(GetAnimationName(), trackIdx);
             Character.ChangeState(new EnfightState(Character, Direction));
         }
 

@@ -1,4 +1,5 @@
 using Godot;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -107,6 +108,7 @@ public partial class WorldMap : TileMap
 		}
 	}
 
+	public GameMap? Map => gameMap;
 
 	private void CreateLayer(string layer)
 	{

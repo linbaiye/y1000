@@ -7,17 +7,22 @@ using Godot;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Threading;
 using y1000.code;
 using y1000.code.creatures;
 using y1000.code.networking;
 using y1000.code.util;
+using y1000.code.world;
 
 public partial class Game : Node2D, IPacketHandler
 {
 	// Called when the node enters the scene tree for the first time.
 
-	private Character? character;
+	private y1000.code.character.Character? character;
 
 	private IChannel? channel;
 
@@ -25,7 +30,10 @@ public partial class Game : Node2D, IPacketHandler
 
 	private ConcurrentQueue<string> packets = new ConcurrentQueue<string>();
 
-	private enum ConnectionState {
+	private Dictionary<long, ICreature> creatures = new Dictionary<long, ICreature>();
+
+	private enum ConnectionState
+	{
 		DISCONNECTED,
 		CONNECTING,
 		CONNECTED,
@@ -35,33 +43,82 @@ public partial class Game : Node2D, IPacketHandler
 
 	public override void _Ready()
 	{
-		character = GetNode<Character>("Character");
+		character = GetNode<y1000.code.character.Character>("Character");
+		character.Coordinate = new Point(36, 31);
+		//GD.Print("Loading");
+		//AddChild(Buffalo.Load(new Point(38, 35)));
+		//GD.Print("Loaded");
 		//SetupNetwork();
+		var map = WorldMap.Map;
+		if (map != null)
+		{
+			int n = 0;
+			map.ForeachCell((cell, x, y) => {
+				if (x == 36 || y == 31 || n >= 10)
+				{
+					return;
+				}
+				if (!map.IsMovable(x, y))
+				{
+					return;
+				}
+				if (x > 27 && y > 27 && x < 51 && y < 45) {
+					AddCreature(Buffalo.Load(new Point(x, y), ++n, (Direction)new Random().Next(0, 7)));
+				}
+			});
+		}
 	}
 
 
+	private void AddCreature(AbstractCreature creature)
+	{
+		AddChild(creature);
+		creatures.Add(creature.Id, creature);
+	}
+
+
+	public bool CanMove(Point coordinate)
+	{
+		WorldMap worldMap = WorldMap;
+		if (worldMap == null || worldMap.Map == null)
+		{
+			return false;
+		}
+		if (!worldMap.Map.IsMovable(coordinate))
+		{
+			return false;
+		}
+		return !creatures.Values.Any(c => c.Coordinate.Equals(coordinate));
+	}
 
 	private async void SetupNetwork()
 	{
 		bootstrap.Group(new MultithreadEventLoopGroup())
-		.Handler(new ActionChannelInitializer<ISocketChannel>( channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new PacketEncoder(), new LengthBasedPacketDecoder(), new PacketHandler(this))))
+		.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new PacketEncoder(), new LengthBasedPacketDecoder(), new PacketHandler(this))))
 		.Channel<TcpSocketChannel>();
 		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}
 
+	public WorldMap WorldMap => GetNode<WorldMap>("MapLayer");
 
 	private void HandleMouseInput(InputEventMouse eventMouse)
 	{
+		var worldMap = GetNode<WorldMap>("MapLayer");
+		if (worldMap != null && worldMap.Map != null)
+		{
+			character?.HandleMouseInput(worldMap.Map, new HashSet<ICreature>(), eventMouse);
+		}
 		if (eventMouse is InputEventMouseButton button)
 		{
 			if (button.ButtonIndex == MouseButton.Right)
 			{
 				if (button.IsPressed())
 				{
-					character?.Move(GetLocalMousePosition());
-				} else if (button.IsReleased())
+					//character?.Move(GetLocalMousePosition());
+				}
+				else if (button.IsReleased())
 				{
-					character?.StopMove();
+					//character?.StopMove();
 				}
 			}
 			else if (button.ButtonIndex == MouseButton.Left)
@@ -73,13 +130,6 @@ public partial class Game : Node2D, IPacketHandler
 					{
 						if (child is AbstractCreature creature)
 						{
-							if (creature.CollisionRect().HasVector(GetGlobalMousePosition()) )
-							{
-								if (Input.IsPhysicalKeyPressed(Key.Shift))
-								{
-									character?.Attack(creature);
-								}
-							}
 						}
 					}
 				}
@@ -89,7 +139,7 @@ public partial class Game : Node2D, IPacketHandler
 		{
 			if ((mouseMotion.ButtonMask & MouseButtonMask.Right) != 0)
 			{
-				character?.Move(GetLocalMousePosition());
+				//character?.Move(GetLocalMousePosition());
 			}
 		}
 	}
@@ -129,8 +179,8 @@ public partial class Game : Node2D, IPacketHandler
 		}
 	}
 
-    public override void _Input(InputEvent @event)
-    {
+	public override void _Input(InputEvent @event)
+	{
 		if (@event is InputEventMouse eventMouse)
 		{
 			HandleMouseInput(eventMouse);
@@ -139,7 +189,7 @@ public partial class Game : Node2D, IPacketHandler
 		{
 			HandleKeyInput(eventKey);
 		}
-    }
+	}
 
 
 	public async void LogIn()
@@ -157,8 +207,8 @@ public partial class Game : Node2D, IPacketHandler
 	}
 
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
 	{
 		if (state == ConnectionState.DISCONNECTED)
 		{
@@ -208,11 +258,10 @@ public partial class Game : Node2D, IPacketHandler
 				monster.Turn(Direction.UP_LEFT);
 				break;
 		}
-
 	}
 
-    public void Handle(string message)
-    {
+	public void Handle(string message)
+	{
 		packets.Enqueue(message);
 
 	}

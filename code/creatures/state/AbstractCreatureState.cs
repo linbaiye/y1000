@@ -23,6 +23,13 @@ namespace y1000.code.creatures
             stateFactory = new SimpleCreatureStateFactory();
         }
 
+        protected AbstractCreatureState(AbstractCreature creature, Direction direction, AbstractCreatureStateFactory _stateFactory)
+        {
+            this.creature = creature;
+            this.direction = direction;
+            stateFactory = _stateFactory;
+        }
+
         protected AbstractCreature Creature => creature;
 
         public Direction Direction => direction;

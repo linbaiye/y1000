@@ -11,6 +11,9 @@ using y1000.code.world;
 
 public partial class Character : AbstractPlayer
 {
+    public override long Id => throw new NotImplementedException();
+
+
     public override void _Ready()
     {
     }

@@ -13,8 +13,6 @@ namespace y1000.code.creatures
     {
         PositionedTexture BodyTexture { get; }
 
-        State State { get; }
-
         Direction Direction { get; }
 
         void Move(Direction direction);

@@ -12,7 +12,12 @@ namespace y1000.code.creatures
 
         private partial class UnknownCreature : AbstractCreature
         {
+            public override long Id => throw new NotImplementedException();
 
+            protected override SpriteContainer GetSpriteContainer()
+            {
+                throw new NotImplementedException();
+            }
         }
 
         private static readonly UnknownCreature UNKNOWN_CREATURE = new UnknownCreature();

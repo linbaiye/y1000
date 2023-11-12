@@ -99,15 +99,30 @@ namespace y1000.code.world
 
         public void ForeachCell(Action<MapCell, int, int> action)
         {
-            for (int y = 0; y < 80; y++)
+            for (int y = 0; y < 60; y++)
             {
-                for (int x = 0; x < 80; x++)
+                for (int x = 0; x < 60; x++)
                 {
                     action.Invoke(_cells[y, x], x, y);
                 }
             }
         }
 
+        private bool IsInRange(int x, int y)
+        {
+            return x >= 0 && x < _width && y >=0 && y < _width;
+        }
+
+
+        public bool IsMovable(Point point)
+        {
+            return IsMovable(point.X, point.Y);
+        }
+
+        public bool IsMovable(int x, int y)
+        {
+            return IsInRange(x, y) && (_cells[y, x].BoMove & 0x1 ) == 0 && (_cells[y, x].BoMove & 0x2 ) == 0;
+        }
 
         public bool HideRoof(Vector2I point)
         {

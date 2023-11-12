@@ -31,5 +31,7 @@ namespace y1000.code.creatures.state
         {
             return new SimpleCreatureMoveState(creature, newDirection);
         }
+
+        public static readonly SimpleCreatureStateFactory INSTANCE = new ();
     }
 }

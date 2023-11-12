@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=6 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://code/Game.cs" id="1_jbp1s"]
-[ext_resource type="PackedScene" uid="uid://ca1rxwb2uxu2c" path="res://character_body_2d.tscn" id="2_nolib"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
-[ext_resource type="PackedScene" path="res://right_ui.tscn" id="4_j24ll"]
-[ext_resource type="PackedScene" path="res://button_ui.tscn" id="5_3t2rd"]
-[ext_resource type="PackedScene" uid="uid://e8ttci8m45bv" path="res://monster.tscn" id="5_nmyyi"]
+[ext_resource type="PackedScene" uid="uid://vg1lgwdiop8g" path="res://right_ui.tscn" id="4_j24ll"]
+[ext_resource type="PackedScene" uid="uid://ck0wrnm4ob8gj" path="res://Player.tscn" id="5_1uwcm"]
+[ext_resource type="PackedScene" uid="uid://doa5i8dejap1d" path="res://button_ui.tscn" id="5_3t2rd"]
 
 [node name="Game" type="Node2D"]
 z_as_relative = false
@@ -14,13 +13,6 @@ texture_filter = 1
 script = ExtResource("1_jbp1s")
 
 [node name="MapLayer" parent="." instance=ExtResource("2_r4kyb")]
-
-[node name="Character" parent="." instance=ExtResource("2_nolib")]
-z_index = 2
-position = Vector2(1255.47, 1077.15)
-
-[node name="Camera2D" type="Camera2D" parent="Character"]
-z_as_relative = false
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
@@ -33,7 +25,8 @@ offset_right = 1.0
 offset_bottom = 2.0
 mouse_filter = 1
 
-[node name="Monster" parent="." instance=ExtResource("5_nmyyi")]
+[node name="Character" parent="." instance=ExtResource("5_1uwcm")]
 z_index = 2
-texture_filter = 1
-position = Vector2(1401, 921)
+position = Vector2(1273, 905)
+
+[node name="Camera2D" type="Camera2D" parent="Character"]

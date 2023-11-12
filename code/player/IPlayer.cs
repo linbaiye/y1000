@@ -12,5 +12,7 @@ namespace y1000.code.player
         void Sit();
 
         void Bow();
+
+        bool IsMale();
     }
 }

@@ -4,7 +4,7 @@ namespace y1000.code
     {
         IDLE,
 
-        MOVE,
+        WALK,
 
         Run,
 

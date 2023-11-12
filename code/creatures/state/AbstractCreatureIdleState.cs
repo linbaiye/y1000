@@ -24,11 +24,13 @@ namespace y1000.code.creatures.state
 
         public AbstractCreatureIdleState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
-            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(5, 0.5f, Godot.Animation.LoopModeEnum.Linear));
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(5, 0.25f, Godot.Animation.LoopModeEnum.Linear));
             spriteOffset = DEFAULT_SPRITE_OFFSET;
         }
 
-        public AbstractCreatureIdleState(AbstractCreature creature, Direction direction, Dictionary<Direction, int> _spriteOffset, int totalSrpite, float step) : base(creature, direction)
+        public AbstractCreatureIdleState(AbstractCreature creature, Direction direction, Dictionary<Direction, int> _spriteOffset,
+        int totalSrpite, float step, AbstractCreatureStateFactory stateFactory) :
+         base(creature, direction, stateFactory)
         {
             creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(totalSrpite, step, Godot.Animation.LoopModeEnum.Linear));
             spriteOffset = _spriteOffset;

@@ -3,8 +3,9 @@ using y1000.code.creatures;
 
 namespace y1000.code.player
 {
-    public partial class AbstractPlayer : AbstractCreature, IPlayer
+    public abstract partial class AbstractPlayer : AbstractCreature, IPlayer
     {
+
         public void Bow()
         {
             throw new NotImplementedException();
@@ -15,11 +16,14 @@ namespace y1000.code.player
             throw new NotImplementedException();
         }
 
-        public state.IPlayerState PlayerState => (state.IPlayerState) CurrentState ;
-
         protected override SpriteContainer GetSpriteContainer()
         {
-            return PlayerState.SpriteContainer;
+            return ((state.IPlayerState)CurrentState).SpriteContainer;
+        }
+
+        public bool IsMale()
+        {
+            return true;
         }
     }
 }
