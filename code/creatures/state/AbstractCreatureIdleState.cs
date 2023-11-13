@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace y1000.code.creatures.state
 {
-    public abstract class AbstractCreatureIdleState : AbstractCreatureState
+    public abstract class AbstractCreatureIdleState<S> : AbstractCreatureState<AbstractCreature<S>, S>  where S : ICreatureState
     {
         private static readonly Dictionary<Direction, int> DEFAULT_SPRITE_OFFSET = new()
         {
@@ -22,13 +22,13 @@ namespace y1000.code.creatures.state
 
         private readonly Dictionary<Direction, int> spriteOffset;
 
-        public AbstractCreatureIdleState(AbstractCreature creature, Direction direction) : base(creature, direction)
+        public AbstractCreatureIdleState(AbstractCreature<S> creature, Direction direction) : base(creature, direction)
         {
             creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(5, 0.25f, Godot.Animation.LoopModeEnum.Linear));
             spriteOffset = DEFAULT_SPRITE_OFFSET;
         }
 
-        public AbstractCreatureIdleState(AbstractCreature creature, Direction direction, Dictionary<Direction, int> _spriteOffset,
+        public AbstractCreatureIdleState(AbstractCreature<S> creature, Direction direction, Dictionary<Direction, int> _spriteOffset,
         int totalSrpite, float step, AbstractCreatureStateFactory stateFactory) :
          base(creature, direction, stateFactory)
         {
@@ -48,7 +48,7 @@ namespace y1000.code.creatures.state
 
         public override void Turn(Direction newDirection)
         {
-            SetDirection(newDirection);
+            Turn(newDirection);
             Creature.AnimationPlayer.Play(State  + "/" + Direction);
         }
 

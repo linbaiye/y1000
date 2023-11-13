@@ -12,11 +12,11 @@ using y1000.code.util;
 
 namespace y1000.code.creatures
 {
-    public abstract partial class AbstractCreature : Node2D, ICreature
+    public abstract partial class AbstractCreature<S> : Node2D, ICreature<S> where S : ICreatureState
     {
         public float gravity = 0;
 
-        private ICreatureState currentState = UnknownState.INSTANCE;
+        private S? currentState;
 
         private static readonly CreatureAnimationPlayer NULL_PLAYER = new();
 
@@ -30,8 +30,9 @@ namespace y1000.code.creatures
         {
             animationPlayer = NULL_PLAYER;
         }
-        
-        public Point Coordinate {
+
+        public Point Coordinate
+        {
             get
             {
                 return coordinate;
@@ -50,27 +51,40 @@ namespace y1000.code.creatures
             animationPlayer.AnimationFinished += OnAnimationFinised;
         }
 
-        internal void ChangeState(ICreatureState newState)
+        internal void ChangeState(S newState)
         {
             currentState = newState;
             currentState.PlayAnimation();
         }
 
-        public Direction Direction => currentState.Direction;
+        public Direction Direction => CurrentState.Direction;
 
         public OffsetTexture BodyTexture => CurrentState.OffsetTexture((int)GetMeta("spriteNumber"));
 
         public void Move(Direction direction)
         {
-            currentState.Move(direction);
+            CurrentState.Move(direction);
         }
 
-        public AnimationPlayer AnimationPlayer => animationPlayer;
-
-        public ICreatureState CurrentState => currentState;
+        public S CurrentState
+        {
+            get
+            {
+                if (currentState != null)
+                {
+                    return currentState;
+                }
+                throw new NotImplementedException();
+            }
+            set
+            {
+                currentState = value;
+            }
+        }
 
         public abstract long Id { get; }
 
+        public CreatureAnimationPlayer AnimationPlayer => animationPlayer;
 
         public override void _Process(double delta)
         {
@@ -116,7 +130,7 @@ namespace y1000.code.creatures
             return EMPTY;
         }
 
- 
+
         public void Remove()
         {
             QueueFree();

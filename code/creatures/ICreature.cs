@@ -9,7 +9,7 @@ using y1000.code.player;
 
 namespace y1000.code.creatures
 {
-    public interface ICreature : IEntity
+    public interface ICreature<S> : IEntity where S : ICreatureState
     {
         OffsetTexture BodyTexture { get; }
 
@@ -26,6 +26,10 @@ namespace y1000.code.creatures
         void Die();
 
         void Remove();
+        
+        S CurrentState { get; set;}
+
+        CreatureAnimationPlayer AnimationPlayer { get; }
 
     }
 }

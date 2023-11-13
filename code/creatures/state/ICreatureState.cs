@@ -29,5 +29,6 @@ namespace y1000.code.creatures
         OffsetTexture OffsetTexture(int animationSpriteNumber);
 
         void Process(double delta) { }
+
     }
 }

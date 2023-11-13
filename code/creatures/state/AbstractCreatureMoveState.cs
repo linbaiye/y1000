@@ -9,7 +9,7 @@ using y1000.code.util;
 
 namespace y1000.code.creatures.state
 {
-    public abstract class AbstractCreatureMoveState : AbstractCreatureState
+    public abstract class AbstractCreatureMoveState<S> : AbstractCreatureState<AbstractCreature<S>, S>  where S : ICreatureState
     {
         private Vector2 velocity;
 
@@ -36,14 +36,14 @@ namespace y1000.code.creatures.state
         private readonly float step;
 
 
-        public AbstractCreatureMoveState(AbstractCreature creature, Direction direction) : this(creature, direction, SPRITE_OFFSET, SPRITE_NUMBERS, 0.1f, SimpleCreatureStateFactory.INSTANCE)
+        public AbstractCreatureMoveState(AbstractCreature<S> creature, Direction direction) : this(creature, direction, SPRITE_OFFSET, SPRITE_NUMBERS, 0.1f, SimpleCreatureStateFactory.INSTANCE)
         {
             nextCoordinate = creature.Coordinate.Next(direction);
             spriteNumber = SPRITE_NUMBERS;
             step = 0.1f;
         }
 
-        public AbstractCreatureMoveState(AbstractCreature creature, Direction direction, 
+        public AbstractCreatureMoveState(AbstractCreature<S> creature, Direction direction, 
             Dictionary<Direction, int> _spriteOffset, int spriteNumber, float step, AbstractCreatureStateFactory abstractCreatureStateFactory) : base(creature, direction, abstractCreatureStateFactory)
         {
             velocity = VectorUtil.Velocity(direction) / (step * spriteNumber);
@@ -71,12 +71,12 @@ namespace y1000.code.creatures.state
         {
             velocity = VectorUtil.Velocity(direction) / (spriteNumber * step);
             nextCoordinate = next;
-            SetDirection(direction);
+            Turn(direction);
         }
 
         public override void Hurt()
         {
-            StopAndChangeState(StateFactory.CreateHurtState(Creature));
+            //StopAndChangeState(StateFactory.CreateHurtState(Creature));
         }
     }
 }

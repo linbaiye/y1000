@@ -8,29 +8,29 @@ using y1000.code.player;
 
 namespace y1000.code.creatures
 {
-    public abstract class AbstractCreatureState : ICreatureState
+    public abstract class AbstractCreatureState<C, S>: ICreatureState where C : ICreature<S> where S : ICreatureState
     {
         private Direction direction;
 
-        private readonly AbstractCreature creature;
+        private readonly C creature;
 
         private readonly AbstractCreatureStateFactory stateFactory;
 
-        protected AbstractCreatureState(AbstractCreature creature, Direction direction)
+        protected AbstractCreatureState(C creature, Direction direction)
         {
             this.creature = creature;
             this.direction = direction;
             stateFactory = new SimpleCreatureStateFactory();
         }
 
-        protected AbstractCreatureState(AbstractCreature creature, Direction direction, AbstractCreatureStateFactory _stateFactory)
+        protected AbstractCreatureState(C creature, Direction direction, AbstractCreatureStateFactory _stateFactory)
         {
             this.creature = creature;
             this.direction = direction;
             stateFactory = _stateFactory;
         }
 
-        protected AbstractCreature Creature => creature;
+        protected C Creature => creature;
 
         public Direction Direction => direction;
 
@@ -52,20 +52,16 @@ namespace y1000.code.creatures
             Creature.AnimationPlayer.Play(State + "/" + Direction);
         }
 
-        protected void StopAndChangeState(AbstractCreatureState newState)
+        protected void StopAndChangeState(S newState)
         {
             creature.AnimationPlayer.Stop();
-            creature.ChangeState(newState);
+            creature.CurrentState = newState;
         }
 
-
-        protected void SetDirection(Direction newDirection)
+        public virtual void Turn(Direction newDirection) 
         {
             direction = newDirection;
         }
-
-
-        public virtual void Turn(Direction newDirection) {}
 
         public virtual void OnAnimationFinised() {}
 
@@ -75,8 +71,6 @@ namespace y1000.code.creatures
 
         public virtual void Die()
         {
-            if (State.DIE != State)
-                StopAndChangeState(StateFactory.CreateDieState(Creature));
         }
 
         public OffsetTexture OffsetTexture(int animationSpriteNumber)
