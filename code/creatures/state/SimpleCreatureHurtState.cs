@@ -6,10 +6,13 @@ using Godot;
 
 namespace y1000.code.creatures.state
 {
-    public class SimpleCreatureHurtState : AbstractCreatureHurtState
+    public sealed class SimpleCreatureHurtState : AbstractCreatureHurtState
     {
         public SimpleCreatureHurtState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
         }
+
+        protected override SpriteContainer SpriteContainer => ((SimpleCreature)Creature).SpriteContainer;
+
     }
 }

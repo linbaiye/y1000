@@ -52,14 +52,5 @@ public partial class Buffalo : AbstractCreature
 	{
 		return Load(coordinate, id, Direction.DOWN);
 	}
-
-    protected override SpriteContainer GetSpriteContainer()
-    {
-		if (spriteContainer != null)
-		{
-			return spriteContainer;
-		}
-		throw new NotSupportedException();
-    }
 }
 

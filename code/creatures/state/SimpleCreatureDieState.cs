@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace y1000.code.creatures.state
 {
-    public class SimpleCreatureDieState : AbstractCreatureDieState
+    public sealed class SimpleCreatureDieState : AbstractCreatureDieState
     {
         public SimpleCreatureDieState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
         }
+
+        protected override SpriteContainer SpriteContainer => ((SimpleCreature)Creature).SpriteContainer;
     }
 }

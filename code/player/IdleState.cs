@@ -37,9 +37,9 @@ namespace y1000.code.player
         };
 
 
-        public override PositionedTexture HandTexture => throw new NotImplementedException();
+        public override OffsetTexture HandTexture => throw new NotImplementedException();
 
-        public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction));
+        public override OffsetTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction));
 
 
 
@@ -78,6 +78,11 @@ namespace y1000.code.player
         public override void Hurt()
         {
             Character.ChangeState(new HurtState(Character, Direction, this));
+        }
+
+        public override OffsetTexture OffsetTexture(int animationSpriteNumber)
+        {
+            throw new NotImplementedException();
         }
     }
 }

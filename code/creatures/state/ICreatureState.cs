@@ -12,8 +12,6 @@ namespace y1000.code.creatures
 
         State State { get; }
 
-        int GetSpriteOffset();
-
         void Move(Direction direction);
 
         void Turn(Direction newDirection);
@@ -27,5 +25,9 @@ namespace y1000.code.creatures
         void PlayAnimation();
 
         void Die();
+
+        OffsetTexture OffsetTexture(int animationSpriteNumber);
+
+        void Process(double delta) { }
     }
 }

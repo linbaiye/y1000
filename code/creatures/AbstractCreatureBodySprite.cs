@@ -18,7 +18,7 @@ namespace y1000.code.creatures
             bodyHoverRect = GetNode<BodyHoverRect>("BodyHoverRect");
         }
 
-        protected abstract PositionedTexture GetPositionedTexture();
+        protected abstract OffsetTexture GetPositionedTexture();
 
         public Rect2I HoverRect()
         {

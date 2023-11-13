@@ -31,10 +31,7 @@ namespace y1000.code.creatures.state
             StopAndChangeState(StateFactory.CreateIdleState(Creature));
         }
 
-        public override int GetSpriteOffset()
-        {
-            return SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
-        }
+        protected override int SpriteOffset => SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 
         public override void Hurt()
         {

@@ -12,7 +12,7 @@ using y1000.code.world;
 
 namespace y1000.code.character.state
 {
-    public class CharacterWalkState : AbstractPlayerWalkState, ICharacterState
+    public class CharacterWalkState : AbstractCharacterMoveState
     {
 
         private bool keepWalking;
@@ -20,42 +20,19 @@ namespace y1000.code.character.state
 
         public override State State => State.WALK;
 
+        protected override SpriteContainer SpriteContainer => throw new NotImplementedException();
+
         public CharacterWalkState(Player _player, Direction direction) : base(_player, direction, CharacterStateFactory.INSTANCE)
         {
             keepWalking = true;
             nextDirection = Direction;
         }
 
-        public void OnMouseMotion( Direction direction)
-        {
-            nextDirection = direction;
-        }
-        
-        public void OnMouseRightClick( Direction clickDirection)
-        {
-            keepWalking = true;
-            nextDirection = clickDirection;
-        }
 
-        public override void OnAnimationFinised()
-        {
-            ChangeCoordinate();
-            if (keepWalking)
-            {
-                var next = Creature.Coordinate.Next(nextDirection);
-                if (((Character)Creature).CanMove(next))
-                {
-                    MoveTo(nextDirection, next);
-                    PlayAnimation();
-                    return;
-                }
-            }
-            StopAndChangeState(StateFactory.CreateIdleState(Creature));
-        }
 
-        public void OnMouseRightReleased()
+        protected override AbstractCreatureState NextState()
         {
-            keepWalking = false;
+            return StateFactory.CreateIdleState(Creature);
         }
     }
 }

@@ -66,6 +66,11 @@ namespace y1000.code.util
             return current;
         }
 
+        public static bool IsNextTo(this Point point, Point another)
+        {
+            return Math.Abs(point.X - another.X) <= 1 && Math.Abs(point.Y - another.Y) <= 1;
+        }
+
         public static Godot.Vector2 CoordinateToPixel(this Point point)
         {
             return new Godot.Vector2 (point.X * VectorUtil.TILE_SIZE_X, point.Y * VectorUtil.TILE_SIZE_Y);

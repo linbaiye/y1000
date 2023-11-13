@@ -45,12 +45,12 @@ namespace y1000.code.character
 
         private void HandleDoubleClick(ICharacterState charState, InputEventMouseButton mouseButton, IEnumerable<ICreature> creatures)
         {
-            GD.Print("Double clicked at " + mouseButton.Position);
             var clickPoint = mouseButton.Position.ToVector2I();
             foreach (var creature in creatures)
             {
                 if (creature.HoverRect().HasPoint(clickPoint))
                 {
+                    GD.Print("Double clicked at " + mouseButton.Position);
                     charState.OnMouseLeftDoubleClick(Input.IsPhysicalKeyPressed(Key.Ctrl), Input.IsPhysicalKeyPressed(Key.Shift), creature);
                     break;
                 }
@@ -97,7 +97,7 @@ namespace y1000.code.character
                 }
                 else if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.DoubleClick)
                 {
-                    //HandleDoubleClick(mouseButton, creatures);
+                    HandleDoubleClick(charState, mouseButton, creatures);
                 }
             }
             else if (inputEvent is InputEventMouseMotion mouseMotion)

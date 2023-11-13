@@ -6,11 +6,11 @@ using y1000.code.player;
 
 public partial class BodySprite : AbstractCreatureBodySprite
 {
-    protected override PositionedTexture GetPositionedTexture()
+    protected override OffsetTexture GetPositionedTexture()
     {
 		var parent = GetParent<AbstractCreature>();
 		var texture = parent.BodyTexture;
-		return new PositionedTexture(texture.Texture, texture.Offset + new Vector2(16, -12));
+		return new OffsetTexture(texture.Texture, texture.Offset + new Vector2(16, -12));
     }
 
 }

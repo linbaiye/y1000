@@ -55,9 +55,9 @@ namespace y1000.code.player
             { Direction.UP_LEFT, 42},
         };
 
-        public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) );
+        public override OffsetTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) );
 
-        public override PositionedTexture HandTexture => throw new NotImplementedException();
+        public override OffsetTexture HandTexture => throw new NotImplementedException();
 
         private Vector2 ComputeVelocity()
         {
@@ -93,6 +93,11 @@ namespace y1000.code.player
         public override void Process(double delta)
         {
             Character.Position += ComputeVelocity() * (float) delta;
+        }
+
+        public override OffsetTexture OffsetTexture(int animationSpriteNumber)
+        {
+            throw new NotImplementedException();
         }
     }
 }

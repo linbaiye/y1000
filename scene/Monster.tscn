@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://yht4jllwikxp"]
 
-[ext_resource type="Script" path="res://code/monsters/buffalo/Buffalo.cs" id="1_7o56w"]
+[ext_resource type="Script" path="res://code/creatures/SimpleCreature.cs" id="1_eo4vf"]
 [ext_resource type="Script" path="res://code/creatures/BodySprite.cs" id="2_a05tm"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_ea6sb"]
 [ext_resource type="PackedScene" uid="uid://cjmh77c4p87tv" path="res://scene/body_hover_rect.tscn" id="3_yuqxo"]
@@ -16,7 +16,7 @@ shader_parameter/modulate = Color(0, 0, 0, 0.490196)
 [node name="Monster" type="Node2D"]
 y_sort_enabled = true
 texture_filter = 1
-script = ExtResource("1_7o56w")
+script = ExtResource("1_eo4vf")
 metadata/spriteNumber = 0
 
 [node name="Body" type="Sprite2D" parent="."]

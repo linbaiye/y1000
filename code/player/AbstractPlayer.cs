@@ -16,11 +16,6 @@ namespace y1000.code.player
             throw new NotImplementedException();
         }
 
-        protected override SpriteContainer GetSpriteContainer()
-        {
-            return ((state.IPlayerState)CurrentState).SpriteContainer;
-        }
-
         public bool IsMale()
         {
             return true;

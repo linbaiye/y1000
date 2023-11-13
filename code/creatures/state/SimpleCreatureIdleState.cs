@@ -12,5 +12,6 @@ namespace y1000.code.creatures.state
         {
         }
 
+        protected override SpriteContainer SpriteContainer => ((SimpleCreature)Creature).SpriteContainer;
     }
 }

@@ -63,7 +63,7 @@ public partial class Game : Node2D, IPacketHandler
 					return;
 				}
 				if (x > 27 && y > 27 && x < 51 && y < 45) {
-					AddCreature(Buffalo.Load(new Point(x, y), ++n, (Direction)new Random().Next(0, 7)));
+					AddCreature(SimpleCreature.Load(new Point(x, y), ++n, (Direction)new Random().Next(0, 7)));
 				}
 			});
 		}
@@ -106,7 +106,7 @@ public partial class Game : Node2D, IPacketHandler
 		var worldMap = GetNode<WorldMap>("MapLayer");
 		if (worldMap != null && worldMap.Map != null)
 		{
-			character?.HandleMouseInput(worldMap.Map, new HashSet<ICreature>(), eventMouse);
+			character?.HandleMouseInput(worldMap.Map, creatures.Values, eventMouse);
 		}
 		if (eventMouse is InputEventMouseButton button)
 		{
@@ -146,7 +146,7 @@ public partial class Game : Node2D, IPacketHandler
 
 	private void HandleKeyInput(InputEventKey eventKey)
 	{
-		var monster = GetNode<Buffalo>("Monster");
+		var monster = GetNode<SimpleCreature>("Monster");
 		if (eventKey.IsPressed())
 		{
 			switch (eventKey.Keycode)

@@ -54,10 +54,7 @@ namespace y1000.code.creatures.state
             this.step = step;
         }
 
-        public override int GetSpriteOffset()
-        {
-            return spriteOffset.GetValueOrDefault(Direction, -1);
-        }
+        protected override int SpriteOffset => spriteOffset.GetValueOrDefault(Direction, -1);
 
         public void Process(double delta)
         {

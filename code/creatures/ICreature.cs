@@ -11,7 +11,7 @@ namespace y1000.code.creatures
 {
     public interface ICreature : IEntity
     {
-        PositionedTexture BodyTexture { get; }
+        OffsetTexture BodyTexture { get; }
 
         Direction Direction { get; }
 
@@ -26,5 +26,6 @@ namespace y1000.code.creatures
         void Die();
 
         void Remove();
+
     }
 }

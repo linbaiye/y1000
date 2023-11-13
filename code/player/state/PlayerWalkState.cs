@@ -6,7 +6,7 @@ using y1000.code.creatures.state;
 
 namespace y1000.code.player.state
 {
-    public class PlayerWalkState: AbstractPlayerWalkState, IPlayerState
+    public class PlayerWalkState: AbstractPlayerWalkState
     {
         public PlayerWalkState(Player _player, Direction direction) : base(_player, direction, PlayerStateFactory.INSTANCE)
         {
@@ -16,7 +16,7 @@ namespace y1000.code.player.state
         {
         }
 
-        public override State State => throw new NotImplementedException();
+        public override State State => State.WALK;
 
         public override void OnAnimationFinised()
         {

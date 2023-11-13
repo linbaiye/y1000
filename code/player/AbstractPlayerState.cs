@@ -27,7 +27,7 @@ namespace y1000.code.player
 
 
         public abstract State State { get; }
-        public abstract PositionedTexture BodyTexture { get; }
+        public abstract OffsetTexture BodyTexture { get; }
 
         public abstract void Process(double delta);
 
@@ -133,9 +133,11 @@ namespace y1000.code.player
             throw new NotImplementedException();
         }
 
+        public abstract OffsetTexture OffsetTexture(int animationSpriteNumber);
+
         public Character Character => (Character)character;
 
-        public abstract PositionedTexture HandTexture { get; }
+        public abstract OffsetTexture HandTexture { get; }
 
     }
 }

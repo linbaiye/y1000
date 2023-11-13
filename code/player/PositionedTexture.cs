@@ -6,12 +6,13 @@ using Godot;
 
 namespace y1000.code.player
 {
-    public class PositionedTexture
+    // A texture with offset.
+    public class OffsetTexture
     {
         private readonly Texture2D texture2D;
         private readonly Vector2 offset;
 
-        public PositionedTexture(Texture2D texture2D, Vector2 position)
+        public OffsetTexture(Texture2D texture2D, Vector2 position)
         {
             this.texture2D = texture2D;
             offset = position;

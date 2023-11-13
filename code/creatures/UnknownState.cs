@@ -6,21 +6,11 @@ using System.Threading.Tasks;
 
 namespace y1000.code.creatures
 {
-    public partial class UnknownState : AbstractCreatureState
+    public class UnknownState : AbstractCreatureState
     {
         public static readonly UnknownState INSTANCE = new UnknownState();
 
-        private partial class UnknownCreature : AbstractCreature
-        {
-            public override long Id => throw new NotImplementedException();
-
-            protected override SpriteContainer GetSpriteContainer()
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        private static readonly UnknownCreature UNKNOWN_CREATURE = new UnknownCreature();
+        private static readonly UnknowCreature UNKNOWN_CREATURE = new UnknowCreature();
 
         public UnknownState() : base(UNKNOWN_CREATURE, Direction.DOWN)
         {
@@ -28,25 +18,9 @@ namespace y1000.code.creatures
 
         public override State State => throw new NotImplementedException();
 
-        public override int GetSpriteOffset()
-        {
-            throw new NotImplementedException();
-        }
 
-        public override void Move(Direction direction)
-        {
-            throw new NotImplementedException();
-        }
+        protected override SpriteContainer SpriteContainer => throw new NotImplementedException();
 
-        public override void Turn(Direction newDirection)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Hurt()
-        {
-            throw new NotImplementedException();
-        }
+        protected override int SpriteOffset => throw new NotImplementedException();
     }
-
 }

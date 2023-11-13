@@ -38,7 +38,9 @@ namespace y1000.code.creatures
 
         protected AbstractCreatureStateFactory StateFactory => stateFactory;
 
-        public abstract int GetSpriteOffset();
+        protected abstract int SpriteOffset { get; }
+
+        protected abstract SpriteContainer SpriteContainer { get; }
 
         public virtual void Move(Direction direction)
         {
@@ -75,6 +77,11 @@ namespace y1000.code.creatures
         {
             if (State.DIE != State)
                 StopAndChangeState(StateFactory.CreateDieState(Creature));
+        }
+
+        public OffsetTexture OffsetTexture(int animationSpriteNumber)
+        {
+            return SpriteContainer.Get(SpriteOffset + animationSpriteNumber);
         }
     }
 }

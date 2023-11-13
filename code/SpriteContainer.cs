@@ -34,12 +34,12 @@ namespace y1000.code
         }
 
 
-        public PositionedTexture Get(int nr)
+        public OffsetTexture Get(int nr)
         {
             if (nr < 0 || nr > textures.Length) {
                 throw new FileNotFoundException();
             }
-            return new PositionedTexture(GetTexture(nr), GetOffset(nr));
+            return new OffsetTexture(GetTexture(nr), GetOffset(nr));
         }
 
         private static Vector2[] ReadOffsets(string text)

@@ -32,6 +32,6 @@ namespace y1000.code.player.state
         {
         }
 
-        public SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMaleCharacterSprites("N02") : SpriteContainer.EmptyContainer;
+        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMaleCharacterSprites("N02") : SpriteContainer.EmptyContainer;
     }
 }

@@ -132,7 +132,7 @@ namespace y1000.code.player
 
         public override State State => State.ATTACKING;
 
-        public override PositionedTexture BodyTexture
+        public override OffsetTexture BodyTexture
         {
             get
             {
@@ -154,7 +154,7 @@ namespace y1000.code.player
             }
         }
 
-        public override PositionedTexture HandTexture => throw new NotImplementedException();
+        public override OffsetTexture HandTexture => throw new NotImplementedException();
 
 
         public override void Process(double delta)
@@ -168,5 +168,9 @@ namespace y1000.code.player
             Character.ChangeState(new EnfightState(Character, Direction));
         }
 
+        public override OffsetTexture OffsetTexture(int animationSpriteNumber)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

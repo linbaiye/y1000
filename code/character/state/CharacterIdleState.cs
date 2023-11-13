@@ -42,5 +42,14 @@ namespace y1000.code.character.state
             MoveOrTurn(direction);
         }
 
+
+        public void OnMouseLeftDoubleClick(bool ctrlPressed, bool shiftPressed, ICreature target)
+        {
+            if ((ctrlPressed && target is Player) || (shiftPressed && target is SimpleCreature))
+            {
+                StopAndChangeState(new CharacterEnfightState((Character)Creature, Direction, target));
+            }
+        }
+
     }
 }

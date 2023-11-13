@@ -8,6 +8,5 @@ namespace y1000.code.player.state
 {
     public interface IPlayerState : ICreatureState
     {
-       SpriteContainer SpriteContainer { get; } 
     }
 }

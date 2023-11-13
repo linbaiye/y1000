@@ -7,7 +7,7 @@ using y1000.code.creatures.state;
 
 namespace y1000.code.player.state
 {
-    public class PlayerIdleState : AbstractCreatureIdleState , IPlayerState
+    public class PlayerIdleState : AbstractCreatureIdleState
     {
 
         private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new ()
@@ -31,6 +31,6 @@ namespace y1000.code.player.state
         {
         }
 
-        public SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMaleCharacterSprites("N02"): SpriteContainer.EmptyContainer;
+        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMaleCharacterSprites("N02"): SpriteContainer.EmptyContainer;
     }
 }

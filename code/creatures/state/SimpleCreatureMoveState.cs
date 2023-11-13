@@ -12,6 +12,8 @@ namespace y1000.code.creatures.state
 
         }
 
+        protected override SpriteContainer SpriteContainer => ((SimpleCreature)Creature).SpriteContainer;
+
         public override State State => State.WALK;
 
         public override void OnAnimationFinised()

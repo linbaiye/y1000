@@ -20,7 +20,7 @@ namespace y1000.code.player
             { Direction.UP_LEFT, 212},
         };
 
-        public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction));
+        public override OffsetTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction));
         //public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) + Character.PictureNumber);
 
         private readonly IPlayerState previousState;
@@ -45,8 +45,13 @@ namespace y1000.code.player
         {
         }
 
+        public override OffsetTexture OffsetTexture(int animationSpriteNumber)
+        {
+            throw new NotImplementedException();
+        }
+
         public override State State => State.HURT;
 
-        public override PositionedTexture HandTexture => throw new NotImplementedException();
+        public override OffsetTexture HandTexture => throw new NotImplementedException();
     }
 }

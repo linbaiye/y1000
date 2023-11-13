@@ -50,9 +50,6 @@ namespace y1000.code.creatures
             animationPlayer.AnimationFinished += OnAnimationFinised;
         }
 
-        protected abstract SpriteContainer GetSpriteContainer();
-
-
         internal void ChangeState(ICreatureState newState)
         {
             currentState = newState;
@@ -61,14 +58,7 @@ namespace y1000.code.creatures
 
         public Direction Direction => currentState.Direction;
 
-        public PositionedTexture BodyTexture
-        {
-            get
-            {
-                int nr = (int)GetMeta("spriteNumber");
-                return GetSpriteContainer().Get(currentState.GetSpriteOffset() + nr);
-            }
-        }
+        public OffsetTexture BodyTexture => CurrentState.OffsetTexture((int)GetMeta("spriteNumber"));
 
         public void Move(Direction direction)
         {
@@ -84,10 +74,7 @@ namespace y1000.code.creatures
 
         public override void _Process(double delta)
         {
-            if (CurrentState is AbstractCreatureMoveState moveState)
-            {
-                moveState.Process(delta);
-            }
+            CurrentState.Process(delta);
         }
 
         protected void OnAnimationFinised(StringName name)
@@ -117,13 +104,15 @@ namespace y1000.code.creatures
 
         public Rect2I HoverRect()
         {
-            foreach (var p in GetChildren())
+            foreach (var child in GetChildren())
             {
-                if (p is ICreatureBodySprite creatureBody)
+                GD.Print("Checking on " + child);
+                if (child is ICreatureBodySprite creatureBody)
                 {
                     return creatureBody.HoverRect();
                 }
             }
+            GD.Print("Got emtpy.");
             return EMPTY;
         }
 
