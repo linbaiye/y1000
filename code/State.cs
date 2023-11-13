@@ -15,5 +15,7 @@ namespace y1000.code
         HURT,
 
         DIE,
+
+        ENFIGHT_WALK,
     }
 }

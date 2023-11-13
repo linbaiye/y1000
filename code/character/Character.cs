@@ -15,9 +15,10 @@ namespace y1000.code.character
 {
     public partial class Character : Player
     {
+        private Weapon equippedWapon;
         public override void _Ready()
         {
-            base.Setup();
+            Setup();
             ChangeState(CharacterStateFactory.INSTANCE.CreateIdleState(this));
         }
 
@@ -32,6 +33,32 @@ namespace y1000.code.character
         {
             var parent = GetParent<Game>();
             return parent != null && parent.CanMove(coordinate);
+        }
+
+        public Weapon EquippedWeapon 
+        {
+            get 
+            {
+                return equippedWapon;
+            }
+            set
+            {
+                equippedWapon = value;
+            }
+
+        }
+
+        internal void MoveOrTurn(Direction clickDirection)
+        {
+            var next = Coordinate.Next(clickDirection);
+            if (CanMove(next))
+            {
+                Move(clickDirection);
+            }
+            else
+            {
+                Turn(clickDirection);
+            }
         }
 
 

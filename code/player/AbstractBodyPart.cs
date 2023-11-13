@@ -8,11 +8,11 @@ namespace y1000.code.player
 {
     public abstract partial class AbstractBodyPart : Sprite2D
     {
-        protected abstract OffsetTexture PositionedTexture {get;}
+        protected abstract OffsetTexture OffsetTexture {get;}
 
         public override void _Process(double delta)
         {
-            OffsetTexture positionedTexture = PositionedTexture;
+            OffsetTexture positionedTexture = OffsetTexture;
             Offset = positionedTexture.Offset;
             Texture = positionedTexture.Texture;
         }

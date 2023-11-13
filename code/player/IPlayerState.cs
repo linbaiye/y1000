@@ -9,8 +9,6 @@ namespace y1000.code.player
 {
     public interface IPlayerState : ICreatureState
     {
-        void Process(double delta);
-
         void OnAnimationFinished(StringName animationName);
 
         void RightMousePressed(Vector2 mousePosition);
@@ -19,9 +17,6 @@ namespace y1000.code.player
 
         void Sit();
 
-        OffsetTexture BodyTexture { get; }
-
-        OffsetTexture HandTexture { get; }
 
         void Attack(ICreature target) {}
     }

@@ -14,5 +14,6 @@ namespace y1000.code.creatures.state
 
         protected override SpriteContainer SpriteContainer => ((SimpleCreature)Creature).SpriteContainer;
 
+        protected override int SpriteOffset => throw new NotImplementedException();
     }
 }

@@ -14,5 +14,7 @@ namespace y1000.code.player
         void Bow();
 
         bool IsMale();
+
+        OffsetTexture ChestTexture { get; }
     }
 }

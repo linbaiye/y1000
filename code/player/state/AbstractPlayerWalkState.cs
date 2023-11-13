@@ -9,7 +9,7 @@ namespace y1000.code.player.state
 {
     public abstract class AbstractPlayerWalkState : AbstractCreatureMoveState
     {
-        private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
+        public static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
         {
             { Direction.UP, 0},
             { Direction.UP_RIGHT, 6},
@@ -21,8 +21,8 @@ namespace y1000.code.player.state
             { Direction.UP_LEFT, 42},
         };
 
-        protected const int SPRITE_NUMBER = 6;
-        protected const float STEP = 0.13f;
+        public const int SPRITE_NUMBER = 6;
+        public const float STEP = 0.13f;
 
         public AbstractPlayerWalkState(Player _player, Direction direction) : base(_player, direction, SPRITE_OFFSET, SPRITE_NUMBER, STEP, PlayerStateFactory.INSTANCE)
         {
@@ -32,6 +32,6 @@ namespace y1000.code.player.state
         {
         }
 
-        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMaleCharacterSprites("N02") : SpriteContainer.EmptyContainer;
+        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
     }
 }

@@ -7,7 +7,7 @@ using y1000.code.creatures;
 
 namespace y1000.code.player
 {
-    public class AttackingState : AbstractPlayerState
+    /*public class AttackingState : AbstractPlayerState
     {
         private static readonly Dictionary<int, Dictionary<Direction, int>> UNARMED_SPRITE_OFFSET = new Dictionary<int, Dictionary<Direction, int>>()
         {
@@ -141,11 +141,11 @@ namespace y1000.code.player
                 switch (weapon)
                 {
                     case Weapon.SWORD:
-                        container = SpriteContainer.LoadMaleCharacterSprites("N00");
+                        container = SpriteContainer.LoadMalePlayerSprites("N00");
                         spriteGroup = SWORD_SPRITE_OFFSET;
                         break;
                     default:
-                        container = SpriteContainer.LoadMaleCharacterSprites("N01");
+                        container = SpriteContainer.LoadMalePlayerSprites("N01");
                         spriteGroup = UNARMED_SPRITE_OFFSET;
                         break;
                 }
@@ -172,5 +172,5 @@ namespace y1000.code.player
         {
             throw new NotImplementedException();
         }
-    }
+    }*/
 }

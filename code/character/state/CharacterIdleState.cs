@@ -19,29 +19,16 @@ namespace y1000.code.character.state
         {
         }
 
-        private void MoveOrTurn(Direction clickDirection)
-        {
-            var next = Creature.Coordinate.Next(clickDirection);
-            if (((Character)Creature).CanMove(next))
-            {
-                Move(clickDirection);
-            }
-            else
-            {
-                Turn(clickDirection);
-            }
-        }
 
         public void OnMouseRightClick( Direction clickDirection)
         {
-            MoveOrTurn(clickDirection);
+            ((Character)Creature).MoveOrTurn(clickDirection);
         }
 
         public void OnMouseMotion(Direction direction)
         {
-            MoveOrTurn(direction);
+            ((Character)Creature).MoveOrTurn(direction);
         }
-
 
         public void OnMouseLeftDoubleClick(bool ctrlPressed, bool shiftPressed, ICreature target)
         {
@@ -51,5 +38,6 @@ namespace y1000.code.character.state
             }
         }
 
+   
     }
 }

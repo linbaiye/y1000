@@ -6,7 +6,7 @@ using Godot;
 
 namespace y1000.code.player
 {
-    public class HurtState : AbstractPlayerState
+    /*public class HurtState 
     {
         private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
         {
@@ -20,7 +20,7 @@ namespace y1000.code.player
             { Direction.UP_LEFT, 212},
         };
 
-        public override OffsetTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction));
+        public override OffsetTexture BodyTexture => SpriteContainer.LoadMalePlayerSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction));
         //public override PositionedTexture BodyTexture => SpriteContainer.LoadMaleCharacterSprites("N02").Get(SPRITE_OFFSET.GetValueOrDefault(Direction) + Character.PictureNumber);
 
         private readonly IPlayerState previousState;
@@ -53,5 +53,5 @@ namespace y1000.code.player
         public override State State => State.HURT;
 
         public override OffsetTexture HandTexture => throw new NotImplementedException();
-    }
+    }*/
 }

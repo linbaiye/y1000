@@ -7,7 +7,7 @@ using y1000.code.creatures.state;
 
 namespace y1000.code.player.state
 {
-    public class PlayerEnfightState : AbstractCreatureState
+    public class PlayerEnfightState : AbstractCreatureState, IPlayerState
     {
         private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
         {
@@ -31,12 +31,23 @@ namespace y1000.code.player.state
             _player.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(SPRITE_NUMBER, STEP, Godot.Animation.LoopModeEnum.Linear));
         }
 
-        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMaleCharacterSprites("N02") : SpriteContainer.EmptyContainer;
+        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
 
         public override void OnAnimationFinised()
         {
             PlayAnimation();
         }
+
+        public override void Turn(Direction newDirection)
+        {
+            SetDirection(newDirection);
+        }
+
+        public OffsetTexture ChestTexture(int animationSpriteNumber)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public override State State => State.ENFIGHT;
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck0wrnm4ob8gj"]
+[gd_scene load_steps=11 format=3 uid="uid://ck0wrnm4ob8gj"]
 
 [ext_resource type="Script" path="res://code/character/Character.cs" id="1_nlcos"]
 [ext_resource type="Script" path="res://code/creatures/CreatureAnimationPlayer.cs" id="2_2338q"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://code/player/PlayerBodySprite.cs" id="4_altaf"]
 [ext_resource type="Texture2D" uid="uid://bk1xwhmelwsbl" path="res://sprite/white.png" id="5_i4t2q"]
 [ext_resource type="PackedScene" uid="uid://cjmh77c4p87tv" path="res://scene/body_hover_rect.tscn" id="5_jjc3p"]
+[ext_resource type="Script" path="res://code/player/ChestSprite.cs" id="7_l1fks"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6swyu"]
 
@@ -58,3 +59,9 @@ clip_contents = true
 offset_right = 32.0
 offset_bottom = 24.0
 texture = ExtResource("5_i4t2q")
+
+[node name="Chest" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+centered = false
+script = ExtResource("7_l1fks")

@@ -38,10 +38,6 @@ namespace y1000.code.creatures
 
         protected AbstractCreatureStateFactory StateFactory => stateFactory;
 
-        protected abstract int SpriteOffset { get; }
-
-        protected abstract SpriteContainer SpriteContainer { get; }
-
         public virtual void Move(Direction direction)
         {
 
@@ -57,8 +53,6 @@ namespace y1000.code.creatures
             creature.AnimationPlayer.Stop();
             creature.ChangeState(newState);
         }
-
-
         protected void SetDirection(Direction newDirection)
         {
             direction = newDirection;
@@ -78,6 +72,10 @@ namespace y1000.code.creatures
             if (State.DIE != State)
                 StopAndChangeState(StateFactory.CreateDieState(Creature));
         }
+
+        protected abstract int SpriteOffset { get; }
+
+        protected abstract SpriteContainer SpriteContainer { get; }
 
         public OffsetTexture OffsetTexture(int animationSpriteNumber)
         {

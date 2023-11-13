@@ -7,10 +7,10 @@ using y1000.code.creatures.state;
 
 namespace y1000.code.player.state
 {
-    public class PlayerIdleState : AbstractCreatureIdleState
+    public class PlayerIdleState : AbstractCreatureIdleState, IPlayerState
     {
 
-        private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new ()
+        private static readonly Dictionary<Direction, int> BODY_SPRITE_OFFSET = new ()
         {
             { Direction.UP, 48},
 			{ Direction.UP_RIGHT, 51},
@@ -22,15 +22,20 @@ namespace y1000.code.player.state
 			{ Direction.UP_LEFT, 69},
         };
 
-        public PlayerIdleState(Player player, Direction direction) : base(player, direction, SPRITE_OFFSET, 3, 0.5f, PlayerStateFactory.INSTANCE)
+        public PlayerIdleState(Player player, Direction direction) : base(player, direction, BODY_SPRITE_OFFSET, 3, 0.5f, PlayerStateFactory.INSTANCE)
         {
         }
 
 
-        public PlayerIdleState(Player player, Direction direction, AbstractCreatureStateFactory stateFactory) : base(player, direction, SPRITE_OFFSET, 3, 0.5f, stateFactory)
+        public PlayerIdleState(Player player, Direction direction, AbstractCreatureStateFactory stateFactory) : base(player, direction, BODY_SPRITE_OFFSET, 3, 0.5f, stateFactory)
         {
         }
 
-        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMaleCharacterSprites("N02"): SpriteContainer.EmptyContainer;
+        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02"): SpriteContainer.EmptyContainer;
+
+        public OffsetTexture ChestTexture(int animationSpriteNumber)
+        {
+            return SpriteContainer.LoadSprites("armor/male/chest/T70").Get(BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
+        }
     }
 }

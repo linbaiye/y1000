@@ -56,9 +56,12 @@ namespace y1000.code.creatures
             currentState.PlayAnimation();
         }
 
+
+        protected int SpriteNumber => (int)GetMeta("spriteNumber");
+
         public Direction Direction => currentState.Direction;
 
-        public OffsetTexture BodyTexture => CurrentState.OffsetTexture((int)GetMeta("spriteNumber"));
+        public OffsetTexture BodyTexture => CurrentState.OffsetTexture(SpriteNumber);
 
         public void Move(Direction direction)
         {

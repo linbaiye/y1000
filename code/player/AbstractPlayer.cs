@@ -5,6 +5,7 @@ namespace y1000.code.player
 {
     public abstract partial class AbstractPlayer : AbstractCreature, IPlayer
     {
+        public OffsetTexture ChestTexture => ((state.IPlayerState)CurrentState).ChestTexture(SpriteNumber);
 
         public void Bow()
         {
@@ -20,5 +21,6 @@ namespace y1000.code.player
         {
             return true;
         }
+
     }
 }

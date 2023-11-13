@@ -12,6 +12,8 @@ namespace y1000.code.player
     {
         public override long Id => throw new NotImplementedException();
 
+        public OffsetTexture ChestTexture => ((state.IPlayerState)CurrentState).ChestTexture(SpriteNumber);
+
         public void Bow()
         {
             throw new NotImplementedException();

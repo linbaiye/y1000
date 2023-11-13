@@ -96,7 +96,7 @@ namespace y1000.code
         }
 
 
-        public static SpriteContainer LoadMaleCharacterSprites(string nr)
+        public static SpriteContainer LoadMalePlayerSprites(string nr)
         {
             return Load("res://sprite/char/" + nr + "/");
         }
