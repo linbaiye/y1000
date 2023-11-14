@@ -12,21 +12,30 @@ namespace y1000.code.player.state
     {
         public override State State => State.ATTACKING;
 
-        private static readonly Random RANDOM = new Random();
+        private readonly Dictionary<Direction, int> spriteOffset;
 
-        protected readonly int actionType;
-
-        protected const int BELOW_50 = 0;
-
-        protected const int ABOVE_50 = 1;
-
-
-        protected AbstractPlayerAttackState(AbstractPlayer creature, Direction direction,
-        AbstractCreatureStateFactory _stateFactory) : base(creature, direction, _stateFactory)
+        protected AbstractPlayerAttackState(Player creature,
+         Direction direction,
+         AbstractCreatureStateFactory _stateFactory,
+         Dictionary<Direction, int> so) : base(creature, direction, _stateFactory)
         {
-            actionType = RANDOM.Next(BELOW_50, ABOVE_50 + 1);
+            spriteOffset = so;
         }
 
-        public abstract OffsetTexture ChestTexture(int animationSpriteNumber, IChestArmor armor);
+        public override void OnAnimationFinised()
+        {
+            StopAndChangeState(new PlayerEnfightState((Player)Creature, Direction));
+        }
+
+
+        protected override int SpriteOffset => spriteOffset.GetValueOrDefault(Direction, -1);
+
+        protected abstract string FullArmorSpriteName(IChestArmor armor);
+
+        public OffsetTexture ChestTexture(int animationSpriteNumber, IChestArmor armor)
+        {
+            string path = "armor/" + (armor.IsMale ? "male/": "female/") + "chest/" + FullArmorSpriteName(armor);
+            return SpriteContainer.LoadSprites(path).Get(SpriteOffset + animationSpriteNumber);
+        }
     }
 }

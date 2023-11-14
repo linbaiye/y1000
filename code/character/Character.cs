@@ -65,7 +65,6 @@ namespace y1000.code.character
             {
                 if (creature.HoverRect().HasPoint(clickPoint))
                 {
-                    GD.Print("Double clicked at " + mouseButton.Position);
                     charState.OnMouseLeftDoubleClick(Input.IsPhysicalKeyPressed(Key.Ctrl), Input.IsPhysicalKeyPressed(Key.Shift), creature);
                     break;
                 }

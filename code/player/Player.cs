@@ -49,20 +49,5 @@ namespace y1000.code.player
         {
             return true;
         }
-
-        void IPlayer.Sit()
-        {
-            throw new NotImplementedException();
-        }
-
-        void IPlayer.Bow()
-        {
-            throw new NotImplementedException();
-        }
-
-        bool IPlayer.IsMale()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

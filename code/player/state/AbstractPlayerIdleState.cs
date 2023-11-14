@@ -20,9 +20,9 @@ namespace y1000.code.player.state
 			{ Direction.LEFT, 66},
 			{ Direction.UP_LEFT, 69},
         };
-        private readonly AbstractPlayer player;
+        private readonly Player player;
 
-        public AbstractPlayerIdleState(AbstractPlayer player, Direction direction, AbstractCreatureStateFactory stateFactory) : base(player, direction, SPRITE_OFFSET, 3, 0.5f, stateFactory)
+        public AbstractPlayerIdleState(Player player, Direction direction, AbstractCreatureStateFactory stateFactory) : base(player, direction, SPRITE_OFFSET, 3, 0.5f, stateFactory)
         {
             this.player = player;
         }

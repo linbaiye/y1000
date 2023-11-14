@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8pmfxkqej1vd"]
 
-[ext_resource type="Texture2D" uid="uid://btb2a7b38cvvd" path="res://assets/ui/bottomui.jpg" id="1_gk8mt"]
+[ext_resource type="Texture2D" uid="uid://c715qnyw0j63y" path="res://hud_bottom.png" id="1_u5gb0"]
 [ext_resource type="Script" path="res://code/control/SkillPanel1.cs" id="2_jbcao"]
 
 [node name="BottomUI" type="Control"]
@@ -23,7 +23,7 @@ anchor_bottom = 1.0
 offset_top = -198.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("1_gk8mt")
+texture = ExtResource("1_u5gb0")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
