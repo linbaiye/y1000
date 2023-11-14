@@ -26,6 +26,8 @@ namespace y1000.code.creatures
 
         public Point coordinate;
 
+        private string name = "test";
+
         protected AbstractCreature()
         {
             animationPlayer = NULL_PLAYER;
@@ -42,6 +44,8 @@ namespace y1000.code.creatures
                 Position = coordinate.CoordinateToPixel();
             }
         }
+
+        public string EntityName  => name;
 
         protected void Setup()
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
+using y1000.code.entity.equipment.chest;
 using y1000.code.player;
 using y1000.code.util;
 
@@ -59,6 +60,6 @@ namespace y1000.code.character.state
             keepWalking = false;
         }
 
-        public abstract OffsetTexture ChestTexture(int animationSpriteNumber);
+        public abstract OffsetTexture ChestTexture(int animationSpriteNumber, IChestArmor armor);
     }
 }

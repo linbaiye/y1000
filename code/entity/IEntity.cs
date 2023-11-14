@@ -9,9 +9,7 @@ namespace y1000.code.entity
 {
     public interface IEntity
     {
-        Rect2I HoverRect();
-
-        Point Coordinate { get; }
+        string EntityName { get; }
 
         long Id { get; }
     }

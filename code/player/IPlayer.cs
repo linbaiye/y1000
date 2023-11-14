@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using y1000.code.creatures;
+using y1000.code.entity.equipment.chest;
 
 namespace y1000.code.player
 {
@@ -15,6 +16,11 @@ namespace y1000.code.player
 
         bool IsMale();
 
-        OffsetTexture ChestTexture { get; }
+        
+
+        OffsetTexture? ChestTexture { get; }
+
+        IChestArmor? ChestArmor { get; set; }
+
     }
 }

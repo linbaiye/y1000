@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://code/Game.cs" id="1_jbp1s"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
-[ext_resource type="PackedScene" uid="uid://vg1lgwdiop8g" path="res://right_ui.tscn" id="4_j24ll"]
-[ext_resource type="PackedScene" uid="uid://ck0wrnm4ob8gj" path="res://Player.tscn" id="5_1uwcm"]
-[ext_resource type="PackedScene" uid="uid://doa5i8dejap1d" path="res://button_ui.tscn" id="5_3t2rd"]
+[ext_resource type="PackedScene" path="res://right_ui.tscn" id="4_j24ll"]
+[ext_resource type="PackedScene" path="res://Player.tscn" id="5_1uwcm"]
+[ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://button_ui.tscn" id="5_3t2rd"]
 
 [node name="Game" type="Node2D"]
 z_as_relative = false

@@ -1,11 +1,13 @@
 using System;
 using y1000.code.creatures;
+using y1000.code.entity.equipment.chest;
 
 namespace y1000.code.player
 {
     public abstract partial class AbstractPlayer : AbstractCreature, IPlayer
     {
-        public OffsetTexture ChestTexture => ((state.IPlayerState)CurrentState).ChestTexture(SpriteNumber);
+        public abstract OffsetTexture? ChestTexture { get; }
+        public abstract IChestArmor ChestArmor { get; set; }
 
         public void Bow()
         {

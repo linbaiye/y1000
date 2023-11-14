@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
+using y1000.code.entity.equipment.chest;
 
 namespace y1000.code.player.state
 {
@@ -25,10 +26,13 @@ namespace y1000.code.player.state
         protected const int SPRITE_NUMBER = 3;
 
         protected const float STEP = 0.5f;
+        
+        public PlayerEnfightState(Player _player, Direction direction) : this(_player, direction, 1.0f) { }
 
-        public PlayerEnfightState(Player _player, Direction direction) : base(_player, direction, PlayerStateFactory.INSTANCE)
+        public PlayerEnfightState(Player player, Direction direction, float speed) : base(player, direction, PlayerStateFactory.INSTANCE)
         {
-            _player.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(SPRITE_NUMBER, STEP, Godot.Animation.LoopModeEnum.Linear));
+            player.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(SPRITE_NUMBER, STEP, Godot.Animation.LoopModeEnum.Linear));
+            player.AnimationPlayer.SpeedScale = speed;
         }
 
         protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
@@ -43,11 +47,11 @@ namespace y1000.code.player.state
             SetDirection(newDirection);
         }
 
-        public OffsetTexture ChestTexture(int animationSpriteNumber)
+        public OffsetTexture ChestTexture(int animationSpriteNumber, IChestArmor armor)
         {
-            throw new NotImplementedException();
+            string path = "armor/" + (armor.IsMale ? "male/": "female/") + "chest/" + armor.SpriteName + "0";
+            return SpriteContainer.LoadSprites(path).Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
         }
-
 
         public override State State => State.ENFIGHT;
 

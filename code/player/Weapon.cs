@@ -1,6 +1,6 @@
 namespace y1000.code.player
 {
-    public enum Weapon
+    public enum WeaponType
     {
         
         // Fist

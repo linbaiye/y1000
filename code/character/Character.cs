@@ -7,6 +7,7 @@ using Godot;
 using SixLabors.ImageSharp.ColorSpaces.Conversion;
 using y1000.code.character.state;
 using y1000.code.creatures;
+using y1000.code.entity.equipment.chest;
 using y1000.code.player;
 using y1000.code.util;
 using y1000.code.world;
@@ -15,18 +16,15 @@ namespace y1000.code.character
 {
     public partial class Character : Player
     {
-        private Weapon equippedWapon;
+        private WeaponType equippedWapon;
+
+
         public override void _Ready()
         {
             Setup();
             ChangeState(CharacterStateFactory.INSTANCE.CreateIdleState(this));
         }
 
-
-        private void HandleLeftButtonInput(IEnumerable<ICreature> creatures, InputEventMouseButton input)
-        {
-            Direction direction = GetLocalMousePosition().MouseDirection();
-        }
 
 
         public bool CanMove(Point coordinate)
@@ -35,7 +33,7 @@ namespace y1000.code.character
             return parent != null && parent.CanMove(coordinate);
         }
 
-        public Weapon EquippedWeapon 
+        public WeaponType EquippedWeapon 
         {
             get 
             {
@@ -45,7 +43,6 @@ namespace y1000.code.character
             {
                 equippedWapon = value;
             }
-
         }
 
         internal void MoveOrTurn(Direction clickDirection)
@@ -59,15 +56,6 @@ namespace y1000.code.character
             {
                 Turn(clickDirection);
             }
-        }
-
-
-        private void HandleRightButtonInput(GameMap map, IEnumerable<ICreature> creatures, InputEventMouseButton input)
-        {
-        }
-
-        private void HanldeMouseMotion(GameMap gameMap, IEnumerable<ICreature> creatures, InputEventMouseMotion mouseMotion)
-        {
         }
 
         private void HandleDoubleClick(ICharacterState charState, InputEventMouseButton mouseButton, IEnumerable<ICreature> creatures)
