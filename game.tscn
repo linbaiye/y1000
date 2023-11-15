@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://code/Game.cs" id="1_jbp1s"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
-[ext_resource type="PackedScene" uid="uid://vg1lgwdiop8g" path="res://right_ui.tscn" id="4_j24ll"]
+[ext_resource type="PackedScene" path="res://right_ui.tscn" id="4_j24ll"]
 [ext_resource type="PackedScene" uid="uid://ck0wrnm4ob8gj" path="res://Player.tscn" id="5_1uwcm"]
-[ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://buttom_ui.tscn" id="5_3t2rd"]
+[ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://bottom_ui.tscn" id="5_3t2rd"]
 
 [node name="Game" type="Node2D"]
 z_as_relative = false
@@ -18,7 +18,7 @@ script = ExtResource("1_jbp1s")
 
 [node name="RightUI" parent="UILayer" instance=ExtResource("4_j24ll")]
 
-[node name="ButtonUI" parent="UILayer" instance=ExtResource("5_3t2rd")]
+[node name="BottomUI" parent="UILayer" instance=ExtResource("5_3t2rd")]
 offset_left = 1.0
 offset_top = -196.0
 offset_right = 1.0
