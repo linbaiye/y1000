@@ -30,6 +30,12 @@ namespace y1000.code.creatures
             return Texture.GetWidth() - 20;
         }
 
+        public Vector2 GlobalTextureCenter(Vector2 ownerPosition)
+        {
+            var pos = ownerPosition + Offset;
+            return new Vector2(pos.X + GetTextureWidth() / 2, pos.Y + Texture.GetHeight() / 2);
+        }
+
         public override void _Process(double delta)
         {
             var positionedTexture = GetPositionedTexture();

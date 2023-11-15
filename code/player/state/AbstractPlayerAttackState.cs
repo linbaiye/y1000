@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
+using y1000.code.entity.equipment.hat;
 
 namespace y1000.code.player.state
 {
@@ -27,15 +28,22 @@ namespace y1000.code.player.state
             StopAndChangeState(new PlayerEnfightState((Player)Creature, Direction));
         }
 
-
         protected override int SpriteOffset => spriteOffset.GetValueOrDefault(Direction, -1);
 
-        protected abstract string FullArmorSpriteName(IChestArmor armor);
+        protected abstract string GetChestSpritePath(ChestArmor armor);
 
-        public OffsetTexture ChestTexture(int animationSpriteNumber, IChestArmor armor)
+        protected abstract string GetHatSpritePath(Hat hat);
+
+        public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
-            string path = "armor/" + (armor.IsMale ? "male/": "female/") + "chest/" + FullArmorSpriteName(armor);
+            string path = "armor/" + (armor.IsMale ? "male/": "female/") + "chest/" + GetChestSpritePath(armor);
             return SpriteContainer.LoadSprites(path).Get(SpriteOffset + animationSpriteNumber);
         }
+
+        public OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
+        {
+            return SpriteContainer.LoadSprites(GetHatSpritePath(hat)).Get(SpriteOffset + animationSpriteNumber);
+        }
+
     }
 }

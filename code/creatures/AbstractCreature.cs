@@ -131,9 +131,7 @@ namespace y1000.code.creatures
         {
             var anotherBody = ((AbstractCreature)another).GetNode<AbstractCreatureBodySprite>("Body");
             var thisBody = GetNode<AbstractCreatureBodySprite>("Body");
-            var dir = anotherBody.Position.DirectionTo(thisBody.Position).GetDirection();
-            GD.Print("Direction " + dir);
-            return dir;
+            return (thisBody.GlobalTextureCenter(thisBody.GlobalPosition) - anotherBody.GlobalTextureCenter(anotherBody.GlobalPosition)).GetDirection();
         }
     }
 }

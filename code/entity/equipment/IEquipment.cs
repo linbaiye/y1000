@@ -7,7 +7,8 @@ namespace y1000.code.entity.equipment
 {
     public interface IEquipment: IEntity
     {
-
         string SpriteName { get; }
+
+        string SpriteBasePath { get; }
     }
 }

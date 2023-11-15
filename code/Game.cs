@@ -15,6 +15,7 @@ using System.Threading;
 using y1000.code;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
+using y1000.code.entity.equipment.hat;
 using y1000.code.networking;
 using y1000.code.util;
 using y1000.code.world;
@@ -47,6 +48,7 @@ public partial class Game : Node2D, IPacketHandler
 		character = GetNode<y1000.code.character.Character>("Character");
 		character.Coordinate = new Point(36, 31);
 		character.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
+		character.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);
 		//GD.Print("Loading");
 		//AddChild(Buffalo.Load(new Point(38, 35)));
 		//GD.Print("Loaded");

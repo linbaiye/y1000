@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
+using y1000.code.entity.equipment.hat;
 
 namespace y1000.code.player.state
 {
@@ -16,9 +17,14 @@ namespace y1000.code.player.state
 
         protected override SpriteContainer SpriteContainer => ((IPlayer)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N01") : SpriteContainer.EmptyContainer;
 
-        protected override string FullArmorSpriteName(IChestArmor chestArmor)
+        protected override string GetChestSpritePath(ChestArmor chestArmor)
         {
             return chestArmor.SpriteName + "1";
+        }
+
+        protected override string GetHatSpritePath(Hat hat)
+        {
+            return hat.SpriteBasePath + "1";
         }
     }
 }

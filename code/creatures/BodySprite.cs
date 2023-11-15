@@ -6,6 +6,8 @@ using y1000.code.player;
 
 public partial class BodySprite : AbstractCreatureBodySprite
 {
+
+
     protected override OffsetTexture GetPositionedTexture()
     {
 		var parent = GetParent<AbstractCreature>();

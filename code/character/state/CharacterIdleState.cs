@@ -32,11 +32,10 @@ namespace y1000.code.character.state
 
         public void OnMouseLeftDoubleClick(bool ctrlPressed, bool shiftPressed, ICreature target)
         {
-            GD.Print(target.DirectionTo(Creature));
-            /*if ((ctrlPressed && target is Player) || (shiftPressed && target is SimpleCreature))
+            if ((ctrlPressed && target is Player) || (shiftPressed && target is SimpleCreature))
             {
                 StopAndChangeState(new CharacterEnfightState((Character)Creature, Direction, target));
-            }*/
+            }
         }
    
     }

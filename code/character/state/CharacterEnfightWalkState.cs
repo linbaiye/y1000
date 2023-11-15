@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
+using y1000.code.entity.equipment.hat;
 using y1000.code.player;
 
 namespace y1000.code.character.state
@@ -40,10 +41,15 @@ namespace y1000.code.character.state
             return new CharacterEnfightState((Character)Creature, Direction, target);
         }
 
-        public override OffsetTexture ChestTexture(int animationSpriteNumber, IChestArmor armor)
+        public override OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
-            string path = "armor/" + (armor.IsMale ? "male/": "female/") + "chest/" + armor.SpriteName + "0";
-            return SpriteContainer.LoadSprites(path).Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
+            return SpriteContainer.LoadSprites(armor.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
         }
+
+        public override OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
+        {
+            return SpriteContainer.LoadSprites(hat.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
+        }
+
     }
 }

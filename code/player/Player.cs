@@ -5,13 +5,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
+using y1000.code.entity.equipment.hat;
 using y1000.code.player.state;
 
 namespace y1000.code.player
 {
     public partial class Player : AbstractCreature, IPlayer
     {
-        private IChestArmor? chestArmor; 
+        private ChestArmor? chestArmor; 
+
+        private Hat? hat; 
 
         public override long Id => throw new NotImplementedException();
 
@@ -23,7 +26,7 @@ namespace y1000.code.player
             }
         }
 
-        public IChestArmor? ChestArmor
+        public ChestArmor? ChestArmor
         {
             get { return chestArmor; }
             set
@@ -34,6 +37,21 @@ namespace y1000.code.player
                 }
             }
         }
+
+        public OffsetTexture? HatTexture => hat != null ? ((IPlayerState)CurrentState).HatTexture(SpriteNumber, hat) : null;
+
+        public Hat? Hat
+        {
+            get {return hat;}
+            set 
+            {
+                if (value != null && IsMale() == value.IsMale)
+                {
+                    hat = value;
+                }
+            }
+        }
+
 
         public void Bow()
         {

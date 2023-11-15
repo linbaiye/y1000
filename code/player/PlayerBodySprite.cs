@@ -9,17 +9,12 @@ namespace y1000.code.player
 {
     public partial class PlayerBodySprite: AbstractCreatureBodySprite
     {
+
         protected override OffsetTexture GetPositionedTexture()
         {
             var parent = GetParent<AbstractCreature>();
             var texture = parent.BodyTexture;
             return new OffsetTexture(texture.Texture, texture.Offset + new Vector2(16, -12));
-        }
-
-
-        protected override int GetTextureWidth()
-        {
-            return Texture.GetWidth() - 20;
         }
     }
 }
