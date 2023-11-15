@@ -113,13 +113,11 @@ namespace y1000.code.creatures
         {
             foreach (var child in GetChildren())
             {
-                GD.Print("Checking on " + child);
                 if (child is ICreatureBodySprite creatureBody)
                 {
                     return creatureBody.HoverRect();
                 }
             }
-            GD.Print("Got emtpy.");
             return EMPTY;
         }
 
@@ -127,6 +125,15 @@ namespace y1000.code.creatures
         public void Remove()
         {
             QueueFree();
+        }
+
+        public Direction DirectionTo(ICreature another)
+        {
+            var anotherBody = ((AbstractCreature)another).GetNode<AbstractCreatureBodySprite>("Body");
+            var thisBody = GetNode<AbstractCreatureBodySprite>("Body");
+            var dir = anotherBody.Position.DirectionTo(thisBody.Position).GetDirection();
+            GD.Print("Direction " + dir);
+            return dir;
         }
     }
 }

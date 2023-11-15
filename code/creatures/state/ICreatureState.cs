@@ -20,6 +20,8 @@ namespace y1000.code.creatures
 
         void Attack();
 
+        void Attack(Direction direction) { }
+
         void Hurt();
 
         void PlayAnimation();

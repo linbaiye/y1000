@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Godot;
 using SixLabors.ImageSharp.ColorSpaces.Conversion;
@@ -71,23 +72,6 @@ namespace y1000.code.character
             }
         }
 
-        protected static Direction ComputeDirection(Vector2 mousePosition)
-        {
-            var angle = Mathf.Snapped(mousePosition.Angle(), Mathf.Pi / 4) / (Mathf.Pi / 4);
-            int dir = Mathf.Wrap((int)angle, 0, 8);
-            return dir switch
-            {
-                0 => Direction.RIGHT,
-                1 => Direction.DOWN_RIGHT,
-                2 => Direction.DOWN,
-                3 => Direction.DOWN_LEFT,
-                4 => Direction.LEFT,
-                5 => Direction.UP_LEFT,
-                6 => Direction.UP,
-                7 => Direction.UP_RIGHT,
-                _ => throw new NotSupportedException(),
-            };
-        }
 
         public void HandleMouseInput(GameMap gameMap, IEnumerable<ICreature> creatures, InputEventMouse inputEvent)
         {
@@ -101,7 +85,7 @@ namespace y1000.code.character
                 {
                     if (mouseButton.IsPressed())
                     {
-                        Direction clickDirection = ComputeDirection(GetLocalMousePosition());
+                        Direction clickDirection = GetLocalMousePosition().GetDirection();
                         charState.OnMouseRightClick(clickDirection);
                     }
                     else if (mouseButton.IsReleased())
@@ -118,7 +102,7 @@ namespace y1000.code.character
             {
                 if (mouseMotion.ButtonMask == MouseButtonMask.Right)
                 {
-                    Direction clickDirection = ComputeDirection(GetLocalMousePosition());
+                    Direction clickDirection = GetLocalMousePosition().GetDirection();
                     charState.OnMouseMotion(clickDirection);
                 }
             }

@@ -27,6 +27,8 @@ namespace y1000.code.creatures
 
         void Remove();
 
+        Direction DirectionTo(ICreature another);
+
         Point Coordinate { get; }
 
         Rect2I HoverRect();

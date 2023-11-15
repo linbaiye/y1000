@@ -42,7 +42,7 @@ namespace y1000.code.character.state
             }
             if (target.Coordinate.IsNextTo(Creature.Coordinate))
             {
-                StopAndChangeState(new CharacterKickAttackState((Character)Creature, Direction));
+                StopAndChangeState(new CharacterKickAttackState((Character)Creature, target.DirectionTo(Creature)));
             }
         }
 

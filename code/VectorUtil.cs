@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -37,21 +38,23 @@ namespace y1000.code
             return Vector2.Zero;
         }
 
-        public static Direction MouseDirection(this Vector2 mousePosition)
+
+
+        public static Direction GetDirection(this Godot.Vector2 vector)
         {
-            var angle = Mathf.Snapped(mousePosition.Angle(), Mathf.Pi / 3) / (Mathf.Pi / 4);
-            int dir = Mathf.Wrap((int)angle, -1, 8);
+            var angle = Mathf.Snapped(vector.Angle(), Mathf.Pi / 4) / (Mathf.Pi / 4);
+            int dir = Mathf.Wrap((int)angle, 0, 8);
             return dir switch
             {
-                -1 => Direction.RIGHT,
-                0 => Direction.DOWN_RIGHT,
-                1 => Direction.DOWN,
-                2 => Direction.DOWN_LEFT,
-                3 => Direction.LEFT,
-                4 => Direction.UP_LEFT,
-                5 => Direction.UP,
-                6 => Direction.UP_RIGHT,
-                _ => throw new NotSupportedException(),
+                0 => Direction.RIGHT,
+                1 => Direction.DOWN_RIGHT,
+                2 => Direction.DOWN,
+                3 => Direction.DOWN_LEFT,
+                4 => Direction.LEFT,
+                5 => Direction.UP_LEFT,
+                6 => Direction.UP,
+                7 => Direction.UP_RIGHT,
+                _ => Direction.RIGHT,
             };
         }
     }
