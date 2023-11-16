@@ -6,6 +6,7 @@ using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
 using y1000.code.player;
 
 namespace y1000.code.character.state
@@ -51,5 +52,9 @@ namespace y1000.code.character.state
             return SpriteContainer.LoadSprites(hat.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
         }
 
+        public override OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
+        {
+            return SpriteContainer.LoadSprites(trousers.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
+        }
     }
 }

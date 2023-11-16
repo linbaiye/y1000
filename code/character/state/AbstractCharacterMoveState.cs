@@ -6,6 +6,7 @@ using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
 using y1000.code.player;
 using y1000.code.util;
 
@@ -42,7 +43,7 @@ namespace y1000.code.character.state
 
         public override void OnAnimationFinised()
         {
-            ChangeCoordinate();
+            UpdateCooridnate();
             if (keepWalking)
             {
                 var next = Creature.Coordinate.Next(nextDirection);
@@ -65,5 +66,6 @@ namespace y1000.code.character.state
 
         public abstract OffsetTexture HatTexture(int animationSpriteNumber, Hat hat);
 
+        public abstract OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers);
     }
 }

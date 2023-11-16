@@ -6,6 +6,7 @@ using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
 
 namespace y1000.code.player.state
 {
@@ -56,6 +57,23 @@ namespace y1000.code.player.state
         public OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
         {
             return SpriteContainer.LoadSprites(hat.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+        }
+
+        public OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
+        {
+            return SpriteContainer.LoadSprites(trousers.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+        }
+
+        private void OnHurtDone()
+        {
+            Creature.ChangeState(this);
+            PlayAnimation();
+        }
+
+
+        public override void Hurt()
+        {
+            StopAndChangeState(new PlayerStandHurtState(Creature, Direction, OnHurtDone));
         }
 
         public override State State => State.ENFIGHT;

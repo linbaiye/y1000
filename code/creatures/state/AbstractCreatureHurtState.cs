@@ -8,17 +8,6 @@ namespace y1000.code.creatures.state
 {
     public abstract class AbstractCreatureHurtState : AbstractCreatureState
     {
-        private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new()
-        {
-            { Direction.UP, 12},
-			{ Direction.UP_RIGHT, 35},
-			{ Direction.RIGHT, 58},
-			{ Direction.DOWN_RIGHT, 81},
-			{ Direction.DOWN, 104},
-			{ Direction.DOWN_LEFT, 127},
-			{ Direction.LEFT, 150},
-			{ Direction.UP_LEFT, 173},
-        };
 
         public AbstractCreatureHurtState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
@@ -27,7 +16,6 @@ namespace y1000.code.creatures.state
 
         public override State State => State.HURT;
 
-        protected override int SpriteOffset => SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 
         public override void OnAnimationFinised()
         {

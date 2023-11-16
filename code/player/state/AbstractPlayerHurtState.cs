@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using y1000.code.creatures;
+using y1000.code.entity.equipment;
+using y1000.code.entity.equipment.chest;
+using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
+
+namespace y1000.code.player.state
+{
+    public abstract class AbstractPlayerHurtState : AbstractCreatureState, IPlayerState
+    {
+        private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
+        {
+            { Direction.UP, 184},
+            { Direction.UP_RIGHT, 188},
+            { Direction.RIGHT, 192},
+            { Direction.DOWN_RIGHT, 196},
+            { Direction.DOWN, 200},
+            { Direction.DOWN_LEFT, 204},
+            { Direction.LEFT, 208},
+            { Direction.UP_LEFT, 212},
+        };
+
+        private readonly Action callback;
+
+        protected AbstractPlayerHurtState(AbstractCreature creature, Direction direction, Action callback) : base(creature, direction)
+        {
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(4, 0.1f, Godot.Animation.LoopModeEnum.None));
+            this.callback = callback;
+        }
+
+        public override State State => State.HURT;
+
+        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
+
+        protected override int SpriteOffset => SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
+
+
+        protected abstract string GetEquipmentSpritePath(IEquipment equipment);
+
+
+        private OffsetTexture GetOffsetTexture(int animationSpriteNumber, IEquipment equipment)
+        {
+            return SpriteContainer.LoadSprites(GetEquipmentSpritePath(equipment)).Get(SpriteOffset + animationSpriteNumber);
+        }
+
+        public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
+        {
+            return GetOffsetTexture(animationSpriteNumber, armor);
+        }
+
+        public override void OnAnimationFinised()
+        {
+            Creature.AnimationPlayer.Stop();
+            callback.Invoke();
+        }
+
+        public OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
+        {
+            return GetOffsetTexture(animationSpriteNumber, hat);
+        }
+
+        public OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
+        {
+            return GetOffsetTexture(animationSpriteNumber, trousers);
+        }
+    }
+}

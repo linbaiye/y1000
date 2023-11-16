@@ -62,7 +62,12 @@ namespace y1000.code
 
         private static Dictionary<string, SpriteContainer> LoadedContainers = new Dictionary<string, SpriteContainer>();
 
-        public static SpriteContainer Load(string resDir) {
+        public static SpriteContainer Load(string resDir)
+        {
+            return Load(resDir, null);
+        }
+
+        public static SpriteContainer Load(string resDir, Vector2? offset) {
             if (!resDir.StartsWith("res://")){
                 resDir = "res://" + resDir;
             }
@@ -88,6 +93,10 @@ namespace y1000.code
             for (int i = 0; i < vectors.Length ; i++) {
                 var texture = ResourceLoader.Load(resDir + "000" + i.ToString("D3") + ".png") as Texture2D;
                 textures[i] = texture;
+                if (offset.HasValue)
+                {
+                    vectors[i] = vectors[i] + offset.Value;
+                }
             }
 			fileAccess.Dispose();
             var ret = new SpriteContainer(textures, vectors);
@@ -106,6 +115,12 @@ namespace y1000.code
         {
             return Load("res://sprite/" + name + "/");
         }
+
+        public static SpriteContainer LoadSprites(string name, Vector2 offset)
+        {
+            return Load("res://sprite/" + name + "/", offset);
+        }
+
 
         public static SpriteContainer LoadMonsterSprites(string name)
         {

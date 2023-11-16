@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Godot;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
+using y1000.code.entity.equipment;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
 
 namespace y1000.code.player.state
 {
@@ -36,17 +39,38 @@ namespace y1000.code.player.state
         protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02"): SpriteContainer.EmptyContainer;
         
 
+        private OffsetTexture GetOffsetTexture(int animationSpriteNumber, IEquipment equipment)
+        {
+            var path = equipment.SpriteBasePath +  "0";
+            return SpriteContainer.LoadSprites(path).Get(BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
+        }
+
         public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
-            var path = armor.SpriteBasePath +  "0";
-            return SpriteContainer.LoadSprites(path).Get(BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
+            return GetOffsetTexture(animationSpriteNumber, armor);
         }
 
         public OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
         {
-            var path = hat.SpriteBasePath +  "0";
-            return SpriteContainer.LoadSprites(path).Get(BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
+            return GetOffsetTexture(animationSpriteNumber, hat);
         }
 
+        public OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
+        {
+            return GetOffsetTexture(animationSpriteNumber, trousers);
+        }
+
+
+        private void OnHurtFinished()
+        {
+            GD.Print("Changed back to idle.");
+            StopAndChangeState(this);
+            PlayAnimation();
+        }
+
+        public override void Hurt()
+        {
+            StopAndChangeState(new PlayerStandHurtState(Creature, Direction, OnHurtFinished));
+        }
     }
 }

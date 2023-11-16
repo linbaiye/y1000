@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
 
 namespace y1000.code.player.state
 {
@@ -25,6 +26,11 @@ namespace y1000.code.player.state
         protected override string GetHatSpritePath(Hat hat)
         {
             return hat.SpriteBasePath + "1";
+        }
+
+        protected override string GetTrousersPath(Trousers trousers)
+        {
+            return trousers.SpriteBasePath + "1";
         }
     }
 }

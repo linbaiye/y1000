@@ -18,7 +18,7 @@ namespace y1000.code.creatures.state
 
         public override void OnAnimationFinised()
         {
-            ChangeCoordinate();
+            UpdateCooridnate();
             StopAndChangeState(StateFactory.CreateIdleState(Creature));
         }
     }

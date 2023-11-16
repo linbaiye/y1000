@@ -11,18 +11,6 @@ namespace y1000.code.player.state
 {
     public class PlayerFistAttackState : AbstractPlayerUnarmedAttackState
     {
-        private static readonly Dictionary<Direction, int> ABOVE_50_SPRITE = new Dictionary<Direction, int>()
-        {
-            { Direction.UP, 0},
-            { Direction.UP_RIGHT, 6},
-            { Direction.RIGHT, 13},
-            { Direction.DOWN_RIGHT, 20},
-            { Direction.DOWN, 27},
-            { Direction.DOWN_LEFT, 34},
-            { Direction.LEFT, 41},
-            { Direction.UP_LEFT, 48}
-        };
-
         private static readonly Dictionary<Direction, int> BELOW_50_SPRITE = new Dictionary<Direction, int>()
         {
             { Direction.UP, 55},
@@ -34,7 +22,6 @@ namespace y1000.code.player.state
             { Direction.LEFT, 85},
             { Direction.UP_LEFT, 90},
         };
-        //player.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(7, 0.1f, Animation.LoopModeEnum.Linear));
 
         public PlayerFistAttackState(Player player, Direction direction, AbstractCreatureStateFactory _stateFactory) : base(player, direction, _stateFactory, BELOW_50_SPRITE)
         {

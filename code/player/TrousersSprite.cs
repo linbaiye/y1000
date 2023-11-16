@@ -6,15 +6,12 @@ using Godot;
 
 namespace y1000.code.player
 {
-    public partial class HatSprite : AbstractEquipmentSprite
+    public partial class TrousersSprite : AbstractEquipmentSprite
     {
-
-        private static readonly Vector2 OFFSET = new Vector2(18, -9);
-
+        private static readonly Vector2 OFF = new Vector2(18, -10);
         protected override OffsetTexture? GetOffsetTexture(IPlayer p)
         {
-            var hat = p.HatTexture;
-            return hat?.Add(OFFSET);
+            return p.TrousersTexture?.Add(OFF);
         }
     }
 }

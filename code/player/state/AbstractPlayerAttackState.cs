@@ -6,6 +6,7 @@ using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
 
 namespace y1000.code.player.state
 {
@@ -34,6 +35,8 @@ namespace y1000.code.player.state
 
         protected abstract string GetHatSpritePath(Hat hat);
 
+        protected abstract string GetTrousersPath(Trousers trousers);
+
         public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
             string path = "armor/" + (armor.IsMale ? "male/": "female/") + "chest/" + GetChestSpritePath(armor);
@@ -45,5 +48,9 @@ namespace y1000.code.player.state
             return SpriteContainer.LoadSprites(GetHatSpritePath(hat)).Get(SpriteOffset + animationSpriteNumber);
         }
 
+        public OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
+        {
+            return SpriteContainer.LoadSprites(GetTrousersPath(trousers)).Get(SpriteOffset + animationSpriteNumber);
+        }
     }
 }

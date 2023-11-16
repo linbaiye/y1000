@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
 using y1000.code.player.state;
 
 namespace y1000.code.player
@@ -15,6 +16,8 @@ namespace y1000.code.player
         private ChestArmor? chestArmor; 
 
         private Hat? hat; 
+
+        private Trousers? trousers; 
 
         public override long Id => throw new NotImplementedException();
 
@@ -52,6 +55,19 @@ namespace y1000.code.player
             }
         }
 
+        public Trousers? Trousers 
+        {
+            get {return trousers;}
+            set 
+            {
+                if (value != null && IsMale() == value.IsMale)
+                {
+                    trousers = value;
+                }
+            }
+        }
+
+        public OffsetTexture? TrousersTexture => trousers != null ? ((IPlayerState)CurrentState).TrousersTexture(SpriteNumber, trousers) : null;
 
         public void Bow()
         {

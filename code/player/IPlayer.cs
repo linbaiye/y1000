@@ -6,6 +6,7 @@ using Godot;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
 
 namespace y1000.code.player
 {
@@ -24,5 +25,9 @@ namespace y1000.code.player
         OffsetTexture? HatTexture { get; }
 
         Hat? Hat { get; set; }
+
+        Trousers? Trousers { get; set; }
+
+        OffsetTexture? TrousersTexture{ get; }
     }
 }

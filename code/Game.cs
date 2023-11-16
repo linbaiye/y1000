@@ -16,6 +16,7 @@ using y1000.code;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
 using y1000.code.networking;
 using y1000.code.util;
 using y1000.code.world;
@@ -49,6 +50,7 @@ public partial class Game : Node2D, IPacketHandler
 		character.Coordinate = new Point(36, 31);
 		character.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
 		character.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);
+		character.Trousers = new Trousers(0L, "R1", "男子长裤", true);
 		//GD.Print("Loading");
 		//AddChild(Buffalo.Load(new Point(38, 35)));
 		//GD.Print("Loaded");
@@ -150,7 +152,11 @@ public partial class Game : Node2D, IPacketHandler
 
 	private void HandleKeyInput(InputEventKey eventKey)
 	{
-		var monster = GetNode<SimpleCreature>("Monster");
+		if (eventKey.Keycode != Key.Shift && eventKey.Keycode != Key.Ctrl)
+		{
+			character?.Hurt();
+		}
+		/*var monster = GetNode<SimpleCreature>("Monster");
 		if (eventKey.IsPressed())
 		{
 			switch (eventKey.Keycode)
@@ -180,7 +186,7 @@ public partial class Game : Node2D, IPacketHandler
 					monster.Move(Direction.UP_LEFT);
 					break;
 			}
-		}
+		}*/
 	}
 
 	public override void _Input(InputEvent @event)

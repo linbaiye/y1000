@@ -10,7 +10,7 @@ namespace y1000.code.player
     public class OffsetTexture
     {
         private readonly Texture2D texture2D;
-        private readonly Vector2 offset;
+        private Vector2 offset;
 
         public OffsetTexture(Texture2D texture2D, Vector2 position)
         {
@@ -20,5 +20,11 @@ namespace y1000.code.player
 
         public Texture2D Texture => texture2D;
         public Vector2 Offset => offset;
+
+        public OffsetTexture Add(Vector2 off)
+        {
+            offset += off;
+            return this;
+        }
     }
 }

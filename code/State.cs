@@ -17,5 +17,7 @@ namespace y1000.code
         DIE,
 
         ENFIGHT_WALK,
+
+        BOW,
     }
 }

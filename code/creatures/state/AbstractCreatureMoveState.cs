@@ -61,7 +61,7 @@ namespace y1000.code.creatures.state
             Creature.Position += velocity * (float) delta;
         }
 
-        protected void ChangeCoordinate()
+        protected void UpdateCooridnate()
         {
             Creature.Coordinate = nextCoordinate;
         }
