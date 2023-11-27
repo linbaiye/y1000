@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using y1000.code.character;
 using y1000.code.creatures;
 using y1000.code.entity.equipment;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.code.entity.equipment.weapon;
+using y1000.code.player.skill;
 
 namespace y1000.code.player.state
 {
@@ -28,7 +31,7 @@ namespace y1000.code.player.state
 
         protected AbstractPlayerHurtState(AbstractCreature creature, Direction direction, Action callback) : base(creature, direction)
         {
-            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(4, 0.1f, Godot.Animation.LoopModeEnum.None));
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(4, 0.075f, Godot.Animation.LoopModeEnum.None));
             this.callback = callback;
         }
 
@@ -39,8 +42,10 @@ namespace y1000.code.player.state
         protected override int SpriteOffset => SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 
 
-        protected abstract string GetEquipmentSpritePath(IEquipment equipment);
-
+        private string GetEquipmentSpritePath(IEquipment equipment)
+        {
+            return equipment.SpriteBasePath + "0";
+        }
 
         private OffsetTexture GetOffsetTexture(int animationSpriteNumber, IEquipment equipment)
         {
@@ -52,9 +57,8 @@ namespace y1000.code.player.state
             return GetOffsetTexture(animationSpriteNumber, armor);
         }
 
-        public override void OnAnimationFinised()
+        protected void InvokeCallback()
         {
-            Creature.AnimationPlayer.Stop();
             callback.Invoke();
         }
 
@@ -67,5 +71,17 @@ namespace y1000.code.player.state
         {
             return GetOffsetTexture(animationSpriteNumber, trousers);
         }
+
+        public bool PressBufa(IBufa bufa)
+        {
+            StopAndChangeState(new PlayerIdleState((Character)Creature, Direction));
+            return true;
+        }
+
+        public OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

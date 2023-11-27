@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://code/creatures/CreatureAnimationPlayer.cs" id="2_2338q"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="3_rxwdt"]
 [ext_resource type="Script" path="res://code/player/PlayerBodySprite.cs" id="4_altaf"]
+[ext_resource type="Script" path="res://code/player/HandSprite.cs" id="4_xfi8r"]
 [ext_resource type="Texture2D" uid="uid://bk1xwhmelwsbl" path="res://sprite/white.png" id="5_i4t2q"]
 [ext_resource type="PackedScene" uid="uid://cjmh77c4p87tv" path="res://scene/body_hover_rect.tscn" id="5_jjc3p"]
 [ext_resource type="Script" path="res://code/player/ChestSprite.cs" id="7_l1fks"]
@@ -12,16 +13,10 @@
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6swyu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6758"]
-shader = ExtResource("3_rxwdt")
-shader_parameter/deform = Vector2(0.765, 1.505)
-shader_parameter/offset = Vector2(1, 1.795)
-shader_parameter/modulate = Color(0, 0, 0, 0.443137)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6ts8u"]
 shader = ExtResource("3_rxwdt")
 shader_parameter/deform = Vector2(0.5, 1)
-shader_parameter/offset = Vector2(2.08165e-12, 4)
+shader_parameter/offset = Vector2(0, 4)
 shader_parameter/modulate = Color(0, 0, 0, 0.509804)
 
 [node name="Player" type="Node2D"]
@@ -37,13 +32,6 @@ libraries = {
 }
 script = ExtResource("2_2338q")
 metadata/test = false
-
-[node name="Hand" type="Sprite2D" parent="."]
-y_sort_enabled = true
-texture_filter = 1
-material = SubResource("ShaderMaterial_e6758")
-centered = false
-metadata/frame = false
 
 [node name="Body" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -77,3 +65,10 @@ y_sort_enabled = true
 texture_filter = 1
 centered = false
 script = ExtResource("7_l1fks")
+
+[node name="Hand" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+centered = false
+script = ExtResource("4_xfi8r")
+metadata/frame = false

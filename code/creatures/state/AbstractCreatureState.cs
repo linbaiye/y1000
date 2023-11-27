@@ -43,7 +43,7 @@ namespace y1000.code.creatures
 
         }
 
-        public void PlayAnimation()
+        public virtual void PlayAnimation()
         {
             Creature.AnimationPlayer.Play(State + "/" + Direction);
         }
@@ -77,7 +77,7 @@ namespace y1000.code.creatures
 
         protected abstract SpriteContainer SpriteContainer { get; }
 
-        public OffsetTexture OffsetTexture(int animationSpriteNumber)
+        public virtual OffsetTexture OffsetTexture(int animationSpriteNumber)
         {
             return SpriteContainer.Get(SpriteOffset + animationSpriteNumber);
         }

@@ -22,7 +22,5 @@ namespace y1000.code.player.state
         {
             StopAndChangeState(StateFactory.CreateIdleState(Creature));
         }
-
-
     }
 }

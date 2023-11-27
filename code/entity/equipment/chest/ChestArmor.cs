@@ -13,5 +13,8 @@ namespace y1000.code.entity.equipment.chest
         }
 
         public override string SpriteBasePath => "armor/" + (IsMale ? "male/": "female/") + "chest/" + SpriteName;
+
+        public override Vector2 Offset => throw new NotImplementedException();
+
     }
 }

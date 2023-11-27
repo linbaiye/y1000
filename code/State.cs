@@ -19,5 +19,7 @@ namespace y1000.code
         ENFIGHT_WALK,
 
         BOW,
+
+        SIT,
     }
 }

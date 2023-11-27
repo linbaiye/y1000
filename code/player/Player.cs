@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using Godot;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.code.entity.equipment.weapon;
+using y1000.code.player.skill;
 using y1000.code.player.state;
 
 namespace y1000.code.player
@@ -21,11 +24,25 @@ namespace y1000.code.player
 
         public override long Id => throw new NotImplementedException();
 
+        private IBufa? bufa = null;
+
+        public IBufa? Bufa => bufa;
+
+        private IWeapon? weapon;
+
         public OffsetTexture? ChestTexture
         {
             get
             {
                 return chestArmor != null ? ((IPlayerState)CurrentState).ChestTexture(SpriteNumber, chestArmor) : null;
+            }
+        }
+
+        public IWeapon? Weapon {
+            get { return weapon; }
+            set
+            {
+                weapon = value;
             }
         }
 
@@ -41,12 +58,14 @@ namespace y1000.code.player
             }
         }
 
+        private IPlayerState MyState => (IPlayerState)CurrentState;
+
         public OffsetTexture? HatTexture => hat != null ? ((IPlayerState)CurrentState).HatTexture(SpriteNumber, hat) : null;
 
         public Hat? Hat
         {
-            get {return hat;}
-            set 
+            get { return hat; }
+            set
             {
                 if (value != null && IsMale() == value.IsMale)
                 {
@@ -55,10 +74,10 @@ namespace y1000.code.player
             }
         }
 
-        public Trousers? Trousers 
+        public Trousers? Trousers
         {
-            get {return trousers;}
-            set 
+            get { return trousers; }
+            set
             {
                 if (value != null && IsMale() == value.IsMale)
                 {
@@ -69,6 +88,9 @@ namespace y1000.code.player
 
         public OffsetTexture? TrousersTexture => trousers != null ? ((IPlayerState)CurrentState).TrousersTexture(SpriteNumber, trousers) : null;
 
+        public OffsetTexture? WeaponTexture => Weapon != null ? MyState.WeaponTexture(SpriteNumber, Weapon) : null;
+
+
         public void Bow()
         {
             throw new NotImplementedException();
@@ -76,12 +98,37 @@ namespace y1000.code.player
 
         public void Sit()
         {
-            throw new NotImplementedException();
+            MyState.Sit();
         }
 
         public bool IsMale()
         {
             return true;
+        }
+
+        public void EnableBufa(IBufa bufa)
+        {
+            GetNode<Body>("Body").OnBufaEnabled();
+            this.bufa = bufa;
+        }
+
+
+        public void DisableBufa(IBufa bufa)
+        {
+            GetNode<Body>("Body").OnBufaDisabled();
+            this.bufa = null;
+        }
+
+        public void PressBufa(IBufa bufa)
+        {
+            if (this.bufa != null)
+            {
+                this.bufa = null;
+            }
+            else if (MyState.PressBufa(bufa))
+            {
+                this.bufa = bufa;
+            }
         }
     }
 }

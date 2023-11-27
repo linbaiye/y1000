@@ -1,0 +1,25 @@
+syntax = "proto3";
+package code.networking.gen;
+
+
+message MovementPacket {
+  int32 type = 1;
+  int32 x = 2;
+  int32 y = 3;
+  int32 direction = 4;
+  int32 id = 5;
+  int64 timestamp = 6;
+}
+
+message Packet {
+  oneof TypedPacket {
+    MovementPacket movementPacket = 1;
+    ShowCreaturePacket showCreaturePacket = 2;
+  }
+}
+
+
+message ShowCreaturePacket {
+  MovementPacket movement = 1;
+  int32 creatureType = 2;
+}

@@ -9,6 +9,8 @@ using y1000.code.entity.equipment;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.code.entity.equipment.weapon;
+using y1000.code.player.skill;
 
 namespace y1000.code.player.state
 {
@@ -39,10 +41,15 @@ namespace y1000.code.player.state
         protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02"): SpriteContainer.EmptyContainer;
         
 
+        private OffsetTexture GetOffsetTexture(SpriteContainer spriteContainer, int animationSpriteNumber)
+        {
+            return spriteContainer.Get(BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
+        }
+
         private OffsetTexture GetOffsetTexture(int animationSpriteNumber, IEquipment equipment)
         {
             var path = equipment.SpriteBasePath +  "0";
-            return SpriteContainer.LoadSprites(path).Get(BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
+            return GetOffsetTexture(SpriteContainer.LoadSprites(path), animationSpriteNumber);
         }
 
         public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
@@ -63,7 +70,6 @@ namespace y1000.code.player.state
 
         private void OnHurtFinished()
         {
-            GD.Print("Changed back to idle.");
             StopAndChangeState(this);
             PlayAnimation();
         }
@@ -72,5 +78,22 @@ namespace y1000.code.player.state
         {
             StopAndChangeState(new PlayerStandHurtState(Creature, Direction, OnHurtFinished));
         }
+
+        public void Sit()
+        {
+            StopAndChangeState(new PlayerSitState(Creature, Direction));
+        }
+
+        public bool PressBufa(IBufa bufa)
+        {
+            return true;
+        }
+
+        public OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)
+        {
+            SpriteContainer container = SpriteContainer.LoadSprites(weapon.SpriteBasePath + "0" , weapon.Offset);
+            return GetOffsetTexture(container, animationSpriteNumber);
+        }
+
     }
 }

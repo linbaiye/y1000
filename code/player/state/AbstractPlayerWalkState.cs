@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
+using y1000.code.entity.equipment.chest;
+using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
 
 namespace y1000.code.player.state
 {
@@ -22,16 +25,18 @@ namespace y1000.code.player.state
         };
 
         public const int SPRITE_NUMBER = 6;
-        public const float STEP = 0.13f;
+        //public const float STEP = 0.065f;
+        public const float STEP = 0.15f;
 
-        public AbstractPlayerWalkState(Player _player, Direction direction) : base(_player, direction, SPRITE_OFFSET, SPRITE_NUMBER, STEP, PlayerStateFactory.INSTANCE)
+        public AbstractPlayerWalkState(Player _player, Direction direction) : base(_player, direction, SPRITE_OFFSET, SPRITE_NUMBER, STEP, PlayerStateFactory.INSTANCE, 1.0f)
         {
         }
 
-        public AbstractPlayerWalkState(Player _player, Direction direction, AbstractCreatureStateFactory stateFactory) : base(_player, direction, SPRITE_OFFSET, SPRITE_NUMBER, STEP, stateFactory)
+        public AbstractPlayerWalkState(Player _player, Direction direction, AbstractCreatureStateFactory stateFactory) : base(_player, direction, SPRITE_OFFSET, SPRITE_NUMBER, STEP, stateFactory, 1.0f)
         {
         }
 
         protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
+    
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Godot;
 
 namespace y1000.code.entity.equipment.hat
 {
@@ -12,5 +13,7 @@ namespace y1000.code.entity.equipment.hat
         }
 
         public override string SpriteBasePath => "armor/" + (IsMale ? "male/": "female/") + "hat/" + SpriteName;
+
+        public override Vector2 Offset => throw new NotImplementedException();
     }
 }

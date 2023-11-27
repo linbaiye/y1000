@@ -9,6 +9,7 @@ using SixLabors.ImageSharp.ColorSpaces.Conversion;
 using y1000.code.character.state;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
+using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.code.util;
 using y1000.code.world;
@@ -32,6 +33,12 @@ namespace y1000.code.character
         {
             var parent = GetParent<Game>();
             return parent != null && parent.CanMove(coordinate);
+        }
+
+        public void SendMessage(IGameMessage message)
+        {
+            var parent = GetParent<Game>();
+            parent.SendMessage(message);
         }
 
         public WeaponType EquippedWeapon 

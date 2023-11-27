@@ -21,5 +21,10 @@ namespace y1000.code.creatures.state
             UpdateCooridnate();
             StopAndChangeState(StateFactory.CreateIdleState(Creature));
         }
+
+        public override void Hurt()
+        {
+            StopAndChangeState(StateFactory.CreateHurtState(Creature));
+        }
     }
 }

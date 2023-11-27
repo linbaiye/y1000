@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Godot;
 
 namespace y1000.code.entity.equipment
 {
@@ -33,5 +34,6 @@ namespace y1000.code.entity.equipment
         public long Id => id;
 
         public abstract string SpriteBasePath { get; }
+        public abstract Vector2 Offset { get; }
     }
 }

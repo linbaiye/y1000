@@ -17,7 +17,11 @@ using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.code.entity.equipment.weapon;
 using y1000.code.networking;
+using y1000.code.networking.message;
+using y1000.code.player.skill;
+using y1000.code.player.skill.bufa;
 using y1000.code.util;
 using y1000.code.world;
 
@@ -51,10 +55,11 @@ public partial class Game : Node2D, IPacketHandler
 		character.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
 		character.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);
 		character.Trousers = new Trousers(0L, "R1", "男子长裤", true);
+		character.Weapon =  new Sword(0, "W68", "耀阳宝剑");
 		//GD.Print("Loading");
 		//AddChild(Buffalo.Load(new Point(38, 35)));
 		//GD.Print("Loaded");
-		//SetupNetwork();
+		SetupNetwork();
 		var map = WorldMap.Map;
 		if (map != null)
 		{
@@ -73,6 +78,7 @@ public partial class Game : Node2D, IPacketHandler
 				}
 			});
 		}
+		UpdateCoordinate();
 	}
 
 
@@ -100,9 +106,19 @@ public partial class Game : Node2D, IPacketHandler
 	private async void SetupNetwork()
 	{
 		bootstrap.Group(new MultithreadEventLoopGroup())
-		.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new PacketEncoder(), new LengthBasedPacketDecoder(), new PacketHandler(this))))
+		.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new PacketHandler(this))))
 		.Channel<TcpSocketChannel>();
 		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
+	}
+
+	public void SendMessage(IGameMessage message)
+	{
+		if (channel != null) {
+			GD.Print("Sending message");
+		} else {
+			GD.Print("Channel null.");
+		}
+		channel?.WriteAndFlushAsync(message);
 	}
 
 	public WorldMap WorldMap => GetNode<WorldMap>("MapLayer");
@@ -154,7 +170,19 @@ public partial class Game : Node2D, IPacketHandler
 	{
 		if (eventKey.Keycode != Key.Shift && eventKey.Keycode != Key.Ctrl)
 		{
-			character?.Hurt();
+			if (eventKey.Keycode == Key.F3)
+			{
+				character?.Sit();
+			}
+			else if (eventKey.Keycode == Key.H)
+			{
+				character?.Hurt();
+			}
+			else if (eventKey.Keycode == Key.F6)
+			{
+				if (eventKey.IsPressed())
+					character?.PressBufa(new UnnamedBufa());
+			}
 		}
 		/*var monster = GetNode<SimpleCreature>("Monster");
 		if (eventKey.IsPressed())
@@ -227,6 +255,22 @@ public partial class Game : Node2D, IPacketHandler
 		else if (state == ConnectionState.CONNECTED)
 		{
 			HandlePackets();
+		}
+		UpdateCoordinate();
+	}
+
+
+	private void UpdateCoordinate()
+	{
+		var coor = character?.Coordinate;
+		if (coor == null)
+		{
+			return;
+		}
+		var label = GetNode<Label>("UILayer/BottomUI/Container/Control/Skill/Coordinate/Label");
+		if (label != null)
+		{
+			label.Text = coor.ToString();
 		}
 	}
 

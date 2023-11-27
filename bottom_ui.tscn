@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("1_u5gb0")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="."]
+[node name="Container" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.00683594
@@ -41,21 +41,38 @@ pivot_offset = Vector2(2.08165e-12, 2.08165e-12)
 theme_override_constants/separation = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+[node name="Skills" type="HBoxContainer" parent="Container"]
 custom_minimum_size = Vector2(2.08165e-12, 66)
 layout_mode = 2
 
-[node name="SkillPanel1" type="Panel" parent="HBoxContainer/HBoxContainer"]
+[node name="SkillPanel1" type="Panel" parent="Container/Skills"]
 custom_minimum_size = Vector2(40, 2.08165e-12)
 layout_mode = 2
 script = ExtResource("2_jbcao")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
+[node name="Control" type="HBoxContainer" parent="Container"]
 custom_minimum_size = Vector2(2.08165e-12, 132)
 layout_mode = 2
 
-[node name="KeyIcon" type="Panel" parent="HBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(30, 2.08165e-12)
+[node name="Skill" type="PanelContainer" parent="Container/Control"]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 
-[connection signal="gui_input" from="HBoxContainer/HBoxContainer/SkillPanel1" to="HBoxContainer/HBoxContainer/SkillPanel1" method="OnInput"]
+[node name="Coordinate" type="Panel" parent="Container/Control/Skill"]
+custom_minimum_size = Vector2(70, 40)
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="Container/Control/Skill/Coordinate"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="Container/Skills/SkillPanel1" to="Container/Skills/SkillPanel1" method="OnInput"]

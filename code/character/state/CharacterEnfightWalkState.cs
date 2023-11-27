@@ -7,6 +7,7 @@ using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.code.entity.equipment.weapon;
 using y1000.code.player;
 
 namespace y1000.code.character.state
@@ -56,5 +57,11 @@ namespace y1000.code.character.state
         {
             return SpriteContainer.LoadSprites(trousers.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
         }
+
+        public override OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

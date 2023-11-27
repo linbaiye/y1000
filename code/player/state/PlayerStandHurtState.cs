@@ -15,9 +15,10 @@ namespace y1000.code.player.state
         {
         }
 
-         protected override string GetEquipmentSpritePath(IEquipment equipment)
+        public override void OnAnimationFinised()
         {
-            return equipment.SpriteBasePath + "0";
+            Creature.AnimationPlayer.Stop();
+            InvokeCallback();
         }
     }
 }

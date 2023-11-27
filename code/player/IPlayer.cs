@@ -7,6 +7,8 @@ using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.code.entity.equipment.weapon;
+using y1000.code.player.skill;
 
 namespace y1000.code.player
 {
@@ -28,6 +30,14 @@ namespace y1000.code.player
 
         Trousers? Trousers { get; set; }
 
-        OffsetTexture? TrousersTexture{ get; }
+        OffsetTexture? TrousersTexture { get; }
+
+        IWeapon? Weapon {get; set;}
+
+        OffsetTexture? WeaponTexture { get; }
+
+        IBufa? Bufa {get;}
+
+        void PressBufa(IBufa bufa);
     }
 }
