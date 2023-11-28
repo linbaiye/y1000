@@ -25,7 +25,7 @@ using y1000.code.player.skill.bufa;
 using y1000.code.util;
 using y1000.code.world;
 
-public partial class Game : Node2D, IPacketHandler
+public partial class Game : Node2D, IConnectionEventListener
 {
 	// Called when the node enters the scene tree for the first time.
 
@@ -36,6 +36,8 @@ public partial class Game : Node2D, IPacketHandler
 	private readonly Bootstrap bootstrap = new();
 
 	private ConcurrentQueue<string> packets = new ConcurrentQueue<string>();
+
+	private ConcurrentQueue<IGameMessage> unprocessedMessages = new ConcurrentQueue<IGameMessage>();
 
 	private Dictionary<long, ICreature> creatures = new Dictionary<long, ICreature>();
 
@@ -106,7 +108,7 @@ public partial class Game : Node2D, IPacketHandler
 	private async void SetupNetwork()
 	{
 		bootstrap.Group(new MultithreadEventLoopGroup())
-		.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new PacketHandler(this))))
+		.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new MessageHandler(this))))
 		.Channel<TcpSocketChannel>();
 		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}
@@ -248,15 +250,17 @@ public partial class Game : Node2D, IPacketHandler
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (state == ConnectionState.DISCONNECTED)
-		{
-			LogIn();
+		HandlePackets();
+	}
+
+	private void HandleMessages()
+	{
+		if (unprocessedMessages.IsEmpty) {
+			return;
 		}
-		else if (state == ConnectionState.CONNECTED)
-		{
-			HandlePackets();
+		if (unprocessedMessages.TryDequeue(out IGameMessage? message)) {
+			character?.HandleMessage(message);
 		}
-		UpdateCoordinate();
 	}
 
 
@@ -317,6 +321,15 @@ public partial class Game : Node2D, IPacketHandler
 	public void Handle(string message)
 	{
 		packets.Enqueue(message);
-
 	}
+
+    public void OnMessageArrived(IGameMessage message)
+    {
+		unprocessedMessages.Enqueue(message);
+    }
+
+    public void OnConnectionClosed()
+    {
+		unprocessedMessages.Clear();
+    }
 }

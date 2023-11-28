@@ -22,20 +22,18 @@ namespace y1000.code.networking.message
             t = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         }
 
+        public AbstractMovementMessage(int _id, Direction _dir, Point _point, long timestamp) : this(_id) {
+            Direction = _dir;
+            Coordinate = _point;
+            t = timestamp;
+        }
+
         public Point Coordinate { get; set; }
 
         public Direction Direction { get; set; }
 
-        public int Id()
-        {
-            return id;
-        }
+        public int Id => id;
 
-        public long Timestamp()
-        {
-            return t;
-        }
-
-        public abstract Code.Networking.Gen.Packet ToPacket();
+        public long Timestamp => t;
     }
 }

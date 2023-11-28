@@ -8,10 +8,9 @@ namespace y1000.code.networking.message
 {
     public interface IGameMessage
     {
-        int Id();
+        int Id { get; }
 
-        long Timestamp();
+        long Timestamp { get; }
 
-        Packet ToPacket();
     }
 }
