@@ -35,7 +35,8 @@ namespace y1000.code.networking
             Packet packet = Packet.Parser.ParseFrom(bytes);
             return packet.TypedPacketCase switch 
             {
-                Packet.TypedPacketOneofCase.MovementPacket => DecodeMovementMessage(packet.MovementPacket)
+                Packet.TypedPacketOneofCase.MovementPacket => DecodeMovementMessage(packet.MovementPacket),
+                _ => throw new NotSupportedException()
             };
         }
     }

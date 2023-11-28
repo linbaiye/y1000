@@ -28,7 +28,6 @@ namespace y1000.code.character
         }
 
 
-
         public bool CanMove(Point coordinate)
         {
             var parent = GetParent<Game>();
@@ -39,6 +38,15 @@ namespace y1000.code.character
         {
             var parent = GetParent<Game>();
             parent.SendMessage(message);
+        }
+
+        public void HandleMessage(IGameMessage message)
+        {
+            if (message is AbstractMovementMessage positionMessage) 
+            {
+                Coordinate = positionMessage.Coordinate;
+                Turn(positionMessage.Direction);
+            }
         }
 
         public WeaponType EquippedWeapon 

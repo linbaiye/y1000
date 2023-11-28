@@ -115,11 +115,6 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	public void SendMessage(IGameMessage message)
 	{
-		if (channel != null) {
-			GD.Print("Sending message");
-		} else {
-			GD.Print("Channel null.");
-		}
 		channel?.WriteAndFlushAsync(message);
 	}
 
@@ -250,7 +245,7 @@ public partial class Game : Node2D, IConnectionEventListener
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		HandlePackets();
+		HandleMessages();
 	}
 
 	private void HandleMessages()
@@ -318,11 +313,6 @@ public partial class Game : Node2D, IConnectionEventListener
 		}
 	}
 
-	public void Handle(string message)
-	{
-		packets.Enqueue(message);
-	}
-
     public void OnMessageArrived(IGameMessage message)
     {
 		unprocessedMessages.Enqueue(message);
@@ -330,6 +320,7 @@ public partial class Game : Node2D, IConnectionEventListener
 
     public void OnConnectionClosed()
     {
+		GD.Print("Closed");
 		unprocessedMessages.Clear();
     }
 }
