@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Threading;
+using System.Threading.Tasks;
 using y1000.code;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
@@ -113,9 +114,19 @@ public partial class Game : Node2D, IConnectionEventListener
 		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}
 
+	private async void WriteMessage(IGameMessage message)
+	{
+		await Task.Run(() =>
+		{
+			Thread.Sleep(200);
+		});
+		channel?.WriteAndFlushAsync(message);
+	}
+
+
 	public void SendMessage(IGameMessage message)
 	{
-		channel?.WriteAndFlushAsync(message);
+		WriteMessage(message);
 	}
 
 	public WorldMap WorldMap => GetNode<WorldMap>("MapLayer");

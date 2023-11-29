@@ -39,9 +39,7 @@ namespace y1000.code.world
             public byte BoMove;
         }
 
-        public const int OFFSET = 28 + 20;
         public const int BLOCK_SIZE = 40;
-        public const int MAPCELL_SIZE = 12;
 
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
