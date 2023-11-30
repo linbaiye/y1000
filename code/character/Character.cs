@@ -20,6 +20,14 @@ namespace y1000.code.character
     {
         private WeaponType equippedWapon;
 
+        private readonly StateBuffers stateBuffers = new();
+
+
+        public void CacheSnapshot(IInput input, IStateSnapshot stateSnapshot)
+        {
+            stateBuffers.Add(input, stateSnapshot);
+        }
+
 
         public override void _Ready()
         {
@@ -31,7 +39,6 @@ namespace y1000.code.character
         public void HandleMessage(IGameMessage message)
         {
             if (message is PositionMessage) {
-                
             }
         }
 

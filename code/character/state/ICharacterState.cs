@@ -10,7 +10,7 @@ using y1000.code.world;
 
 namespace y1000.code.character.state
 {
-    public interface ICharacterState: ICreatureState, IPlayerState
+    public interface ICharacterState: IPlayerState
     {
         void OnMouseRightClick(Direction clickDirection) {}
 
@@ -19,5 +19,11 @@ namespace y1000.code.character.state
         void OnMouseLeftDoubleClick(bool ctrlPressed, bool shiftPressed, ICreature target) { }
 
         void OnMouseRightReleased() { }
+
+        void OnMouseMotion(Character character, Direction direction) {}
+
+        void OnMouseRightClick(Character character, Direction clickDirection) {}
+
+        void OnMouseRightReleased(Character character) { }
     }
 }

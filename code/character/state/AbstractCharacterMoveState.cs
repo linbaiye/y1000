@@ -61,8 +61,8 @@ namespace y1000.code.character.state
                 var next = Creature.Coordinate.Next(nextDirection);
                 if (((Character)Creature).CanMove(next))
                 {
-                    ChangeSpeed(ComputeSpeed((Character)Creature));
                     ((Character)Creature).SendMessage(new MoveMessage(0) {Direction = Direction, Coordinate = next} );
+                    ChangeSpeed(ComputeSpeed((Character)Creature));
                     ReadyToMoveTo(nextDirection, next);
                     PlayAnimation();
                     return;

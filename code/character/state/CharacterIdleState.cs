@@ -19,8 +19,13 @@ namespace y1000.code.character.state
         {
         }
 
+        private void MoveOrTurn(Direction direction)
+        {
+            ((Character)Creature).MoveOrTurn(direction);
+        }
 
-        public void OnMouseRightClick( Direction clickDirection)
+
+        public void OnMouseRightClick(Direction clickDirection)
         {
             ((Character)Creature).MoveOrTurn(clickDirection);
         }

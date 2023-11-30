@@ -32,7 +32,7 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private y1000.code.character.Character? character;
 
-	private IChannel? channel;
+	private volatile IChannel? channel;
 
 	private readonly Bootstrap bootstrap = new();
 
@@ -329,9 +329,18 @@ public partial class Game : Node2D, IConnectionEventListener
 		unprocessedMessages.Enqueue(message);
     }
 
-    public void OnConnectionClosed()
-    {
-		GD.Print("Closed");
+	private async void Reconnect()
+	{
+		await Task.Run(() => {
+			Task.Delay(200);
+			channel = bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999)).Result;
+		});
+	}
+
+	public void OnConnectionClosed()
+	{
+		channel = null;
 		unprocessedMessages.Clear();
-    }
+		Reconnect();
+	}
 }

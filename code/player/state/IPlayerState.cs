@@ -29,5 +29,9 @@ namespace y1000.code.player.state
         * Return true if bufa can be pressed.
         */
         bool PressBufa(IBufa bufa);
+
+
+        
+
     }
 }
