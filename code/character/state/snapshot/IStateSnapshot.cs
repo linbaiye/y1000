@@ -10,6 +10,10 @@ namespace y1000.code.character.state
 {
     public interface IStateSnapshot
     {
+        State State {get;}
+
         bool Match(IUpdateStateMessage message);
+
+        
     }
 }

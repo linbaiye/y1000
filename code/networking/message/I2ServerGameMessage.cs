@@ -7,7 +7,7 @@ using y1000.code.networking.message;
 
 namespace y1000.code.networking
 {
-    public interface I2ServerGameMessage : IGameMessage
+    public interface I2ServerGameMessage 
     {
         Packet ToPacket();
     }

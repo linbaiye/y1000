@@ -2,24 +2,24 @@ namespace y1000.code
 {
     public enum State
     {
-        IDLE,
+        IDLE = 1,
 
-        WALK,
+        WALK = 2,
 
-        Run,
+        Run = 3,
 
-        ENFIGHT,
+        ENFIGHT = 4,
 
-        ATTACKING,
+        ATTACKING = 5,
 
-        HURT,
+        HURT = 6,
 
-        DIE,
+        DIE = 7,
 
-        ENFIGHT_WALK,
+        ENFIGHT_WALK = 8,
 
-        BOW,
+        BOW = 9,
 
-        SIT,
+        SIT = 10,
     }
 }

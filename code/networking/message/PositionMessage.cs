@@ -12,5 +12,7 @@ namespace y1000.code.networking.message
         public PositionMessage(int _id, Direction _dir, Point _point, long timestamp) : base(_id, _dir, _point, timestamp)
         {
         }
+
+        public override MovementType MovementType => MovementType.POSITION;
     }
 }

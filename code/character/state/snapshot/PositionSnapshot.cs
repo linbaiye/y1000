@@ -1,30 +1,34 @@
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using y1000.code.character.state.input;
 using y1000.code.networking;
 using y1000.code.networking.message;
+using y1000.code.player.state;
 
 namespace y1000.code.character.state.snapshot
 {
     public class PositionSnapshot : IStateSnapshot
     {
-        private readonly Point currentPoint;
+        public Point Coordinate {get; set;}
 
-        private readonly Direction currentDirection;
+        public Direction Direction {get; set;}
 
-        public bool Match(IInput input, IUpdateStateMessage message)
+        public State State {get; set;}
+
+        public bool Match(IUpdateStateMessage message)
         {
-            if (input is not MouseMoveInput mouseMoveInput)
+            if (message is UpdateMovmentStateMessage movmentStateMessage)
             {
-                return false;
+                return movmentStateMessage.Direction == Direction &&
+                 movmentStateMessage.Coordinate.Equals(Coordinate) &&
+                 State == movmentStateMessage.ToState;
             }
-            if (message is not MoveStateMessage moveStateMessage)
-            {
-                return false;
-            }
+            return false;
         }
+
+        public static PositionSnapshot ForState(IPlayerState playerState, Character character)
+        {
+            return new PositionSnapshot() { Coordinate  = character.Coordinate, Direction = character.Direction, State = playerState.State};
+        }
+
+
     }
 }

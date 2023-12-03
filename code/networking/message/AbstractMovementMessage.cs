@@ -10,7 +10,7 @@ using Godot;
 
 namespace y1000.code.networking.message
 {
-    public abstract class AbstractMovementMessage : IGameMessage
+    public abstract class AbstractMovementMessage : IUpdateCharacterStateMessage
     {
         private readonly int id;
 
@@ -32,8 +32,15 @@ namespace y1000.code.networking.message
 
         public Direction Direction { get; set; }
 
+        public abstract MovementType MovementType {get;}
+
         public int Id => id;
 
         public long Timestamp => t;
+
+        public long Sequence { get; set; }
+
+        public State ToState => throw new NotImplementedException();
+
     }
 }

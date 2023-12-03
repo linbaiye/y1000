@@ -3,18 +3,33 @@ package code.networking.gen;
 
 
 message MovementPacket {
-  int32 type = 1;
+  int32 state = 1;
   int32 x = 2;
   int32 y = 3;
   int32 direction = 4;
   int32 id = 5;
   int64 timestamp = 6;
+  int64 sequence = 7;
+}
+
+message InputPacket {
+  int32 type = 1;
+  int64 sequence = 2;
+  int32 clickedDirection = 3;
+  int64 timestamp = 4;
+}
+
+message LoginPacket {
+  int32 x = 1;
+  int32 y = 2;
 }
 
 message Packet {
   oneof TypedPacket {
     MovementPacket movementPacket = 1;
     ShowCreaturePacket showCreaturePacket = 2;
+    InputPacket inputPacket = 3;
+    LoginPacket loginPacket = 4;
   }
 }
 
@@ -23,3 +38,5 @@ message ShowCreaturePacket {
   MovementPacket movement = 1;
   int32 creatureType = 2;
 }
+
+

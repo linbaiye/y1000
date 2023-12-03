@@ -8,31 +8,10 @@ using y1000.code.util;
 
 namespace y1000.code.networking.message
 {
-    public class MoveMessage : AbstractMovementMessage, I2ServerGameMessage
+    public class MoveMessage : AbstractMovementMessage
     {
-        public MoveMessage(int _id) : base(_id)
-        {
-        }
+        public MoveMessage(int _id, Direction direction, Point coor, long timestamp) : base(_id, direction, coor, timestamp) {}
 
-        public MoveMessage(Direction direction, Point coor, int _id) : base(_id) {
-            Direction = direction;
-            Coordinate = coor;
-        }
-
-        public Packet ToPacket()
-        {
-            return new Packet()
-            {
-                MovementPacket = new MovementPacket()
-                {
-                    X = Coordinate.X,
-                    Y = Coordinate.Y,
-                    Type = (int)MovementType.MOVE,
-                    Direction = (int)Direction,
-                    Id = Id,
-                    Timestamp = Timestamp,
-                },
-            };
-        }
+        public override MovementType MovementType => MovementType.MOVE;
     }
 }

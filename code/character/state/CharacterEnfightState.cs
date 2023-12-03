@@ -46,5 +46,9 @@ namespace y1000.code.character.state
             }
         }
 
+        public IStateSnapshot TakeSnapshot(Character character)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

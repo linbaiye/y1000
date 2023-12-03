@@ -42,6 +42,11 @@ namespace y1000.code.character.state
                 StopAndChangeState(new CharacterEnfightState((Character)Creature, Direction, target));
             }
         }
-   
+
+        public IStateSnapshot TakeSnapshot(Character character)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -5,12 +5,14 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Godot;
-using SixLabors.ImageSharp.ColorSpaces.Conversion;
 using y1000.code.character.state;
+using y1000.code.character.state.input;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
+using y1000.code.networking;
 using y1000.code.networking.message;
 using y1000.code.player;
+using y1000.code.player.state;
 using y1000.code.util;
 using y1000.code.world;
 
@@ -20,28 +22,46 @@ namespace y1000.code.character
     {
         private WeaponType equippedWapon;
 
-        private readonly StateBuffers stateBuffers = new();
-
-
-        public void CacheSnapshot(IInput input, IStateSnapshot stateSnapshot)
-        {
-            stateBuffers.Add(input, stateSnapshot);
-        }
+        private readonly StateSnapshotManager stateBuffers = new();
 
 
         public override void _Ready()
         {
             Setup();
             ChangeState(CharacterStateFactory.INSTANCE.CreateIdleState(this));
+            Visible = false;
+        }
+
+
+        private void Rewind(UpdateMovmentStateMessage stateMessage)
+        {
+            IPlayerState state = stateMessage.Restore(this);
+            AnimationPlayer.Stop();
+            ChangeState(state);
         }
 
 
         public void HandleMessage(IGameMessage message)
         {
-            if (message is PositionMessage) {
+            if (message is UpdateMovmentStateMessage stateMessage)
+            {
+                if (!stateBuffers.DequeueAndMatchState(stateMessage))
+                {
+                    GD.Print("Need to rewind.");
+                    stateBuffers.Reset(stateMessage.Sequence);
+                    Rewind(stateMessage);
+                }
             }
         }
 
+
+        private void SendInputAndPredict(IInput input, Action afterSnapshot)
+        {
+            SendMessage(input);
+            afterSnapshot.Invoke();
+            var predicted = ((ICharacterState)CurrentState).TakeSnapshot(this);
+            stateBuffers.EnqueueState(input, predicted);
+        }
 
 
         public bool CanMove(Point coordinate)
@@ -50,7 +70,7 @@ namespace y1000.code.character
             return parent != null && parent.CanMove(coordinate);
         }
 
-        public void SendMessage(IGameMessage message)
+        public void SendMessage(I2ServerGameMessage message)
         {
             var parent = GetParent<Game>();
             parent.SendMessage(message);
@@ -108,7 +128,8 @@ namespace y1000.code.character
                     if (mouseButton.IsPressed())
                     {
                         Direction clickDirection = GetLocalMousePosition().GetDirection();
-                        charState.OnMouseRightClick(clickDirection);
+                        var input = InputFactory.CreateMouseMoveInput(clickDirection);
+                        SendInputAndPredict(input, () => charState.OnMouseRightClick(clickDirection));
                     }
                     else if (mouseButton.IsReleased())
                     {

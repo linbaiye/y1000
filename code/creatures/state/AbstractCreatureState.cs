@@ -53,6 +53,7 @@ namespace y1000.code.creatures
             creature.AnimationPlayer.Stop();
             creature.ChangeState(newState);
         }
+
         protected void SetDirection(Direction newDirection)
         {
             direction = newDirection;

@@ -35,7 +35,7 @@ public partial class Test : Node2D
     {
 		if (@event is InputEventKey inputEventKey) {
 			if (inputEventKey.IsPressed() && inputEventKey.Keycode == Key.A) {
-				channel?.WriteAndFlushAsync(new MoveMessage(0) {Direction = y1000.code.Direction.DOWN, Coordinate = new System.Drawing.Point(10, 10)});
+				//channel?.WriteAndFlushAsync(new MoveMessage(y1000.code.Direction.DOWN, new System.Drawing.Point(10, 10), 0, 0));
 			}
 		}
 		if (@event is InputEventMouseButton button)

@@ -18,14 +18,18 @@ namespace y1000.code.networking
 
         }
 
-        private IGameMessage DecodeMovementMessage(MovementPacket movementPacket) {
-            var moveType = (MovementType)movementPacket.Type;
-            return moveType switch
+        private IGameMessage DecodeMovementMessage(MovementPacket movementPacket)
+        {
+            var state = (State)movementPacket.State;
+            GD.Print("Received message " + state);
+            return state switch
             {
-                MovementType.POSITION => new PositionMessage(movementPacket.Id, (Direction)movementPacket.Direction, new(movementPacket.X, movementPacket.Y), movementPacket.Timestamp),
+                State.WALK => UpdateMovmentStateMessage.FromPacket(movementPacket),
+                State.IDLE => UpdateMovmentStateMessage.FromPacket(movementPacket),
                 _ => throw new NotSupportedException(),
             };
         }
+
 
         protected override object Decode(IChannelHandlerContext context, IByteBuffer buffer)
         {
@@ -33,9 +37,10 @@ namespace y1000.code.networking
             byte[] bytes = new byte[input.ReadableBytes];
             input.ReadBytes(bytes);
             Packet packet = Packet.Parser.ParseFrom(bytes);
-            return packet.TypedPacketCase switch 
+            return packet.TypedPacketCase switch
             {
                 Packet.TypedPacketOneofCase.MovementPacket => DecodeMovementMessage(packet.MovementPacket),
+                Packet.TypedPacketOneofCase.LoginPacket => LoginMessage.FromPacket(packet.LoginPacket),
                 _ => throw new NotSupportedException()
             };
         }

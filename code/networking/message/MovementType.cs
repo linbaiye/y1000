@@ -5,5 +5,7 @@ namespace y1000.code.networking.message
         MOVE = 0,
         TURN = 1,
         POSITION = 2,
+
+        LOGIN = 5,
     }
 }

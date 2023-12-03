@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.character.state.snapshot;
 using y1000.code.creatures;
 using y1000.code.player.state;
 using y1000.code.world;
@@ -25,5 +26,7 @@ namespace y1000.code.character.state
         void OnMouseRightClick(Character character, Direction clickDirection) {}
 
         void OnMouseRightReleased(Character character) { }
+
+        IStateSnapshot TakeSnapshot(Character character) { return PositionSnapshot.ForState(this, character); }
     }
 }

@@ -53,12 +53,6 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	public override void _Ready()
 	{
-		character = GetNode<y1000.code.character.Character>("Character");
-		character.Coordinate = new Point(36, 31);
-		character.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
-		character.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);
-		character.Trousers = new Trousers(0L, "R1", "男子长裤", true);
-		character.Weapon =  new Sword(0, "W68", "耀阳宝剑");
 		//GD.Print("Loading");
 		//AddChild(Buffalo.Load(new Point(38, 35)));
 		//GD.Print("Loaded");
@@ -81,9 +75,19 @@ public partial class Game : Node2D, IConnectionEventListener
 				}
 			});
 		}
-		UpdateCoordinate();
 	}
 
+	private void ShowCharacter(LoginMessage loginMessage)
+	{
+		character = GetNode<y1000.code.character.Character>("Character");
+		character.Coordinate = loginMessage.Coordinate;
+		character.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
+		character.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);
+		character.Trousers = new Trousers(0L, "R1", "男子长裤", true);
+		character.Weapon =  new Sword(0, "W68", "耀阳宝剑");
+		character.Visible = true;
+		UpdateCoordinate();
+	}
 
 	private void AddCreature(AbstractCreature creature)
 	{
@@ -114,7 +118,7 @@ public partial class Game : Node2D, IConnectionEventListener
 		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}
 
-	private async void WriteMessage(IGameMessage message)
+	private async void WriteMessage(I2ServerGameMessage message)
 	{
 		await Task.Run(() =>
 		{
@@ -124,7 +128,7 @@ public partial class Game : Node2D, IConnectionEventListener
 	}
 
 
-	public void SendMessage(IGameMessage message)
+	public void SendMessage(I2ServerGameMessage message)
 	{
 		WriteMessage(message);
 	}
@@ -257,15 +261,25 @@ public partial class Game : Node2D, IConnectionEventListener
 	public override void _Process(double delta)
 	{
 		HandleMessages();
+		UpdateCoordinate();
 	}
 
 	private void HandleMessages()
 	{
-		if (unprocessedMessages.IsEmpty) {
+		if (unprocessedMessages.IsEmpty)
+		{
 			return;
 		}
-		if (unprocessedMessages.TryDequeue(out IGameMessage? message)) {
-			character?.HandleMessage(message);
+		if (unprocessedMessages.TryDequeue(out IGameMessage? message))
+		{
+			if (message is LoginMessage loginMessage)
+			{
+				ShowCharacter(loginMessage);
+			}
+			else
+			{
+				character?.HandleMessage(message);
+			}
 		}
 	}
 
@@ -332,9 +346,14 @@ public partial class Game : Node2D, IConnectionEventListener
 	private async void Reconnect()
 	{
 		await Task.Run(() => {
-			Task.Delay(200);
-			channel = bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999)).Result;
+			Task.Delay(2000);
 		});
+		try
+		{
+			channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
+		} catch(Exception) {
+			Reconnect();
+		}
 	}
 
 	public void OnConnectionClosed()
