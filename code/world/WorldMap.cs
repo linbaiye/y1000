@@ -23,14 +23,6 @@ public partial class WorldMap : TileMap
 		BuildTileSets();
 		TileGround();
 		CreateLayer("object");
-		//CreateLayer("roof");
-		/*if (!Godot.FileAccess.FileExists("res://debugmap.tscn")) {
-			PackedScene packedScene = new PackedScene();
-			packedScene.Pack(GetTree().CurrentScene);
-			ResourceSaver.Save(packedScene, "res://debugmap.tscn");
-		}*/
-        //var objectManager = ObjectManager.Unpack("/Users/ab000785/learn/asset/prison/prisonobj.obj");
-        //objectManager?.Dump1("/Users/ab000785/learn/asset/prison/object");
 	}
 
 	private void BuildTileSets()

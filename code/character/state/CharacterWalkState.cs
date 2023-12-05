@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.character.state.snapshot;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
@@ -57,5 +58,16 @@ namespace y1000.code.character.state
         protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
 
 
+
+        public IStateSnapshot Predict(Character character)
+        {
+            Point nextCoor = character.Coordinate.Next(Direction);
+            return new PositionSnapshot()
+            {
+                Direction = Direction,
+                Coordinate = nextCoor,
+                State
+            };
+        }
     }
 }

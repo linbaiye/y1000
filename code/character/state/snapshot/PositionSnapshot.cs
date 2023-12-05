@@ -1,7 +1,10 @@
 using System.Drawing;
+using System.Text.Json;
+using Godot;
 using y1000.code.networking;
 using y1000.code.networking.message;
 using y1000.code.player.state;
+using y1000.code.util;
 
 namespace y1000.code.character.state.snapshot
 {
@@ -28,6 +31,8 @@ namespace y1000.code.character.state.snapshot
         {
             return new PositionSnapshot() { Coordinate  = character.Coordinate, Direction = character.Direction, State = playerState.State};
         }
+
+        public override string? ToString() { return JsonSerializer.Serialize(this); }
 
 
     }

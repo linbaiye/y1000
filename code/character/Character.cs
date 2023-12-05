@@ -59,7 +59,7 @@ namespace y1000.code.character
         {
             SendMessage(input);
             afterSnapshot.Invoke();
-            var predicted = ((ICharacterState)CurrentState).TakeSnapshot(this);
+            var predicted = ((ICharacterState)CurrentState).Predict(this);
             stateBuffers.EnqueueState(input, predicted);
         }
 

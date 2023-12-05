@@ -7,6 +7,7 @@ using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
 using Godot;
 using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
 using y1000.code.networking.message;
 
 namespace y1000.code.networking

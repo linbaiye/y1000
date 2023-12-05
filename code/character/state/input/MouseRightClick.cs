@@ -33,6 +33,5 @@ namespace y1000.code.character.state.input
                 }
             };
         }
-
     }
 }

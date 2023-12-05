@@ -7,6 +7,7 @@ using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
 using Godot;
+using Google.Protobuf.WellKnownTypes;
 using y1000.code.networking.message;
 
 namespace y1000.code.networking
@@ -21,7 +22,7 @@ namespace y1000.code.networking
         private IGameMessage DecodeMovementMessage(MovementPacket movementPacket)
         {
             var state = (State)movementPacket.State;
-            GD.Print("Received message " + state);
+            GD.Print("Received sequence " + movementPacket.Sequence + " at " + DateTimeOffset.Now.ToTimestamp());
             return state switch
             {
                 State.WALK => UpdateMovmentStateMessage.FromPacket(movementPacket),

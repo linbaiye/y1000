@@ -28,6 +28,7 @@ namespace y1000.code.character.state
         public void OnMouseRightClick(Direction clickDirection)
         {
             ((Character)Creature).MoveOrTurn(clickDirection);
+            
         }
 
         public void OnMouseMotion(Direction direction)
@@ -41,11 +42,6 @@ namespace y1000.code.character.state
             {
                 StopAndChangeState(new CharacterEnfightState((Character)Creature, Direction, target));
             }
-        }
-
-        public IStateSnapshot TakeSnapshot(Character character)
-        {
-            throw new NotImplementedException();
         }
 
     }

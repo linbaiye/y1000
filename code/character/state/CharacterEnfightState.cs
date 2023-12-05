@@ -46,7 +46,7 @@ namespace y1000.code.character.state
             }
         }
 
-        public IStateSnapshot TakeSnapshot(Character character)
+        public IStateSnapshot Predict(Character character)
         {
             throw new NotImplementedException();
         }
