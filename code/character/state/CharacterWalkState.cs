@@ -66,7 +66,7 @@ namespace y1000.code.character.state
             {
                 Direction = Direction,
                 Coordinate = nextCoor,
-                State
+                State = State
             };
         }
     }

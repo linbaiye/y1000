@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.character.state.input;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.player;
@@ -34,6 +35,11 @@ namespace y1000.code.character.state
         public void OnMouseMotion(Direction direction)
         {
             ((Character)Creature).MoveOrTurn(direction);
+        }
+
+        public void OnMouseRightClick(Character character, MouseRightClick rightClick)
+        {
+            character.SendActAndSavePredict(rightClick, () => character.MoveOrTurn(rightClick.Direction));
         }
 
         public void OnMouseLeftDoubleClick(bool ctrlPressed, bool shiftPressed, ICreature target)

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.character.state.input;
 using y1000.code.character.state.snapshot;
 using y1000.code.creatures;
 using y1000.code.player.state;
@@ -23,7 +24,7 @@ namespace y1000.code.character.state
 
         void OnMouseMotion(Character character, Direction direction) {}
 
-        void OnMouseRightClick(Character character, Direction clickDirection) {}
+        void OnMouseRightClick(Character character, MouseRightClick mouseRightClick) {}
 
         void OnMouseRightReleased(Character character) { }
 

@@ -26,5 +26,17 @@ namespace y1000.code.character.state.input
         public abstract InputType Type { get; }
 
         public abstract Packet ToPacket();
+
+        public override bool Equals(object? obj)
+        {
+            return obj is IInput input &&
+                   sequence == input.Sequence;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(sequence);
+        }
+
     }
 }

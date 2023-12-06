@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using y1000.code.character.state;
 using y1000.code.networking.message;
 
@@ -6,54 +7,62 @@ namespace y1000.code.character
 {
     public class StateSnapshotManager
     {
-        private readonly Queue<IInput> inputs;
+        private long ackedSequence;
 
-        private readonly Queue<IStateSnapshot> predictedStates;
+        private readonly IDictionary<long, IStateSnapshot> inputPredictions ;
 
-        private const int MAX_SIZE = 1000;
-
-        private long startSequence;
 
         public StateSnapshotManager()
         {
-            inputs = new();
-            predictedStates = new();
-            startSequence = 0;
+            ackedSequence = 0;
+            inputPredictions = new Dictionary<long, IStateSnapshot>();
         }
 
-        public void EnqueueState(IInput input, IStateSnapshot predicted)
+        public void SaveState(IInput input, IStateSnapshot predicted)
         {
-            inputs.Enqueue(input);
-            predictedStates.Enqueue(predicted);
-        }
-
-        public bool DequeueAndMatchState(IUpdateCharacterStateMessage message)
-        {
-            if (message.Sequence < startSequence)
+            if (ackedSequence >= input.Sequence)
             {
-                // Ignore delayed messages.
+                return;
+            }
+            if (!inputPredictions.ContainsKey(input.Sequence))
+            {
+                inputPredictions.Add(input.Sequence, predicted);
+            }
+        }
+
+
+        public bool TryAck(IUpdateCharacterStateMessage message)
+        {
+            if (message.Sequence <=  ackedSequence)
+            {
                 return true;
             }
-            while (true)
+            if (inputPredictions.TryGetValue(message.Sequence, out IStateSnapshot? stateSnapshot))
             {
-                if (!inputs.TryDequeue(out IInput? input))
-                {
-                    return false;
-                }
-                if (!predictedStates.TryDequeue(out IStateSnapshot? result))
-                {
-                    throw new System.Exception("Mismatched queue size.");
-                }
-                if (input.Sequence == message.Sequence)
-                {
-                    return result.Match(message);
-                }
+                inputPredictions.Remove(message.Sequence);
+                ackedSequence = message.Sequence;
+                return stateSnapshot.Match(message);
             }
+            return false;
         }
 
         public void Reset(long newStart)
         {
-            startSequence = newStart;
+            foreach (long v in inputPredictions.Keys)
+            {
+                if (v < newStart)
+                {
+                    inputPredictions.Remove(v);
+                }
+            }
+            ackedSequence = newStart;
+        }
+        
+
+        public void Replace(IInput original, IInput input, IStateSnapshot newSnapshot)
+        {
+            inputPredictions.Remove(original.Sequence);
+            inputPredictions.Add(input.Sequence, newSnapshot);
         }
     }
 }

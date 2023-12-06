@@ -6,12 +6,12 @@ using Code.Networking.Gen;
 
 namespace y1000.code.character.state.input
 {
-    public class MoveRightClick : AbstractInput
+    public class MouseRightClick : AbstractInput
     {
         private readonly Direction direction;
 
 
-        public MoveRightClick(long s, Direction d) : base(s)
+        public MouseRightClick(long s, Direction d) : base(s)
         {
             direction = d;
         }

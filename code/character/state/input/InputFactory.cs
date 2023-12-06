@@ -9,9 +9,9 @@ namespace y1000.code.character.state.input
     {
         private static long sequence = 0;
 
-        public static MoveRightClick CreateMouseMoveInput(Direction direction)
+        public static MouseRightClick CreateMouseMoveInput(Direction direction)
         {
-            return new MoveRightClick(sequence++, direction);
+            return new MouseRightClick(sequence++, direction);
         }
     }
 }

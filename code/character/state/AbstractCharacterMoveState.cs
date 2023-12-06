@@ -27,6 +27,7 @@ namespace y1000.code.character.state
 
         private double pausedPosition = 0;
 
+        private IInput? lastReceivedInput;
 
         protected AbstractCharacterMoveState(Character character, Direction direction,
          Dictionary<Direction, int> spriteOffset, int spriteNumber, float step, AbstractCreatureStateFactory stateFactory) :
@@ -35,6 +36,7 @@ namespace y1000.code.character.state
             keepWalking = true;
             nextDirection = Direction;
         }
+
 
         private static float ComputeSpeed(Character character)
         {
