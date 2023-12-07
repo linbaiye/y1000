@@ -14,6 +14,8 @@ namespace y1000.code.character.state
         InputType Type { get; }
 
         long Timestamp { get; }
+
+
    
     }
 }

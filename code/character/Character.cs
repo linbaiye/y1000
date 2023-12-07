@@ -47,7 +47,6 @@ namespace y1000.code.character
             {
                 if (!stateBuffers.TryAck(stateMessage))
                 {
-                    GD.Print("Need to rewind.");
                     stateBuffers.Reset(stateMessage.Sequence);
                     Rewind(stateMessage);
                 }
@@ -55,10 +54,10 @@ namespace y1000.code.character
         }
 
 
-        public void SendActAndSavePredict(IInput input, Action afterSnapshot)
+        public void SendActAndSavePredict(IInput input, Action? afterSnapshot)
         {
             SendMessage(input);
-            afterSnapshot.Invoke();
+            afterSnapshot?.Invoke();
             var predicted = ((ICharacterState)CurrentState).Predict(this);
             stateBuffers.SaveState(input, predicted);
         }
@@ -129,11 +128,12 @@ namespace y1000.code.character
                     {
                         Direction clickDirection = GetLocalMousePosition().GetDirection();
                         var input = InputFactory.CreateMouseMoveInput(clickDirection);
-                        SendActAndSavePredict(input, () => charState.OnMouseRightClick(clickDirection));
+                        charState.OnMouseRightClick(this, input);
                     }
                     else if (mouseButton.IsReleased())
                     {
-                        charState.OnMouseRightReleased();
+                        var input = InputFactory.CreateMouseRightRelease();
+                        charState.OnMouseRightReleased(this, input);
                     }
                 }
                 else if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.DoubleClick)

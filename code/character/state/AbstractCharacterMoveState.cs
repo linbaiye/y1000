@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.character.state.input;
 using y1000.code.character.state.snapshot;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
@@ -98,6 +99,11 @@ namespace y1000.code.character.state
             Creature.AnimationPlayer.Pause();
             pausedPosition = Creature.AnimationPlayer.CurrentAnimationPosition;
             Creature.ChangeState(new PlayerMoveHurtState(Creature, Direction, OnHurtDone));
+        }
+
+        public void OnMouseRightClick(Character character, MouseRightClick rightClick)
+        {
+            lastReceivedInput = rightClick;
         }
 
         public bool PressBufa(IBufa bufa)

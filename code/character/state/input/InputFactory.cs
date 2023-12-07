@@ -13,5 +13,10 @@ namespace y1000.code.character.state.input
         {
             return new MouseRightClick(sequence++, direction);
         }
+
+        public static MouseRightRelease CreateMouseRightRelease()
+        {
+            return new MouseRightRelease(sequence++);
+        }
     }
 }

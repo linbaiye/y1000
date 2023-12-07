@@ -26,7 +26,7 @@ namespace y1000.code.character.state
 
         void OnMouseRightClick(Character character, MouseRightClick mouseRightClick) {}
 
-        void OnMouseRightReleased(Character character) { }
+        void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease) { }
 
         IStateSnapshot Predict(Character character) { return PositionSnapshot.ForState(this, character); }
     }

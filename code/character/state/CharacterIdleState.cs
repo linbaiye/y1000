@@ -37,6 +37,11 @@ namespace y1000.code.character.state
             ((Character)Creature).MoveOrTurn(direction);
         }
 
+        public void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
+        {
+            character.SendActAndSavePredict(mouseRightRelease, null);
+        }
+
         public void OnMouseRightClick(Character character, MouseRightClick rightClick)
         {
             character.SendActAndSavePredict(rightClick, () => character.MoveOrTurn(rightClick.Direction));
