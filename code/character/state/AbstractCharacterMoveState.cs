@@ -39,6 +39,8 @@ namespace y1000.code.character.state
         }
 
 
+
+
         private static float ComputeSpeed(Character character)
         {
             return character.Bufa != null ? character.Bufa.Speed : 1.0f;
@@ -60,6 +62,10 @@ namespace y1000.code.character.state
         public override void OnAnimationFinised()
         {
             UpdateCooridnate();
+            if (lastReceivedInput == null) 
+            {
+
+            }
             if (keepWalking)
             {
                 var next = Creature.Coordinate.Next(nextDirection);
@@ -101,10 +107,17 @@ namespace y1000.code.character.state
             Creature.ChangeState(new PlayerMoveHurtState(Creature, Direction, OnHurtDone));
         }
 
-        public void OnMouseRightClick(Character character, MouseRightClick rightClick)
+        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
             lastReceivedInput = rightClick;
         }
+
+
+        public void OnMouseRightReleased(Character character, MouseRightRelease rightRelease)
+        {
+            lastReceivedInput = rightRelease;
+        }
+
 
         public bool PressBufa(IBufa bufa)
         {

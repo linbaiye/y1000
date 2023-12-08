@@ -24,6 +24,8 @@ namespace y1000.code.character
 
         private readonly StateSnapshotManager stateBuffers = new();
 
+        private readonly InputSampler inputSampler = new InputSampler();
+
 
         public override void _Ready()
         {
@@ -113,6 +115,25 @@ namespace y1000.code.character
             }
         }
 
+        private ICharacterState MyState => (ICharacterState)CurrentState;
+
+
+        public void HandleInput(InputEvent @event)
+        {
+            var input = inputSampler.Sample(@event, GetLocalMousePosition());
+            if (input == null)
+            {
+                return;
+            }
+            switch (input.Type) {
+                case InputType.MOUSE_RIGH_CLICK:
+                    MyState.OnMouseRightClicked(this, (MouseRightClick)input);
+                    break;
+                case InputType.MOUSE_RIGHT_RELEASE:
+                    MyState.OnMouseRightReleased(this, (MouseRightRelease)input);
+                    break;
+            }
+        }
 
         public void HandleMouseInput(GameMap gameMap, IEnumerable<ICreature> creatures, InputEventMouse inputEvent)
         {
@@ -128,7 +149,7 @@ namespace y1000.code.character
                     {
                         Direction clickDirection = GetLocalMousePosition().GetDirection();
                         var input = InputFactory.CreateMouseMoveInput(clickDirection);
-                        charState.OnMouseRightClick(this, input);
+                        charState.OnMouseRightClicked(this, input);
                     }
                     else if (mouseButton.IsReleased())
                     {

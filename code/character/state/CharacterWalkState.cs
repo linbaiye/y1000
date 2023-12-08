@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.character.state.input;
 using y1000.code.character.state.snapshot;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
@@ -27,6 +28,14 @@ namespace y1000.code.character.state
         {
 
         }
+
+
+        public CharacterWalkState(Character character, MouseRightClick rightClick) : base(character, rightClick.Direction, PlayerWalkState.SPRITE_OFFSET,
+        PlayerWalkState.SPRITE_NUMBER, PlayerWalkState.STEP, CharacterStateFactory.INSTANCE)
+        {
+
+        }
+
 
         protected override AbstractCreatureState NextState()
         {

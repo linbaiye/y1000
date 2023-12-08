@@ -42,7 +42,7 @@ namespace y1000.code.character.state
             character.SendActAndSavePredict(mouseRightRelease, null);
         }
 
-        public void OnMouseRightClick(Character character, MouseRightClick rightClick)
+        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
             character.SendActAndSavePredict(rightClick, () => character.MoveOrTurn(rightClick.Direction));
         }

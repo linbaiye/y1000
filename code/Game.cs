@@ -14,6 +14,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using y1000.code;
+using y1000.code.character.state.input;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
@@ -28,8 +29,6 @@ using y1000.code.world;
 
 public partial class Game : Node2D, IConnectionEventListener
 {
-	// Called when the node enters the scene tree for the first time.
-
 	private y1000.code.character.Character? character;
 
 	private volatile IChannel? channel;
@@ -42,12 +41,17 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private Dictionary<long, ICreature> creatures = new Dictionary<long, ICreature>();
 
+
+	private readonly InputSampler inputSampler = new InputSampler();
+
 	private enum ConnectionState
 	{
 		DISCONNECTED,
 		CONNECTING,
 		CONNECTED,
 	}
+
+
 
 	private ConnectionState state = ConnectionState.DISCONNECTED;
 
@@ -140,7 +144,8 @@ public partial class Game : Node2D, IConnectionEventListener
 		var worldMap = GetNode<WorldMap>("MapLayer");
 		if (worldMap != null && worldMap.Map != null)
 		{
-			character?.HandleMouseInput(worldMap.Map, creatures.Values, eventMouse);
+			character?.HandleInput(eventMouse);
+			//character?.HandleMouseInput(worldMap.Map, creatures.Values, eventMouse);
 		}
 		if (eventMouse is InputEventMouseButton button)
 		{
@@ -231,6 +236,7 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	public override void _Input(InputEvent @event)
 	{
+		inputSampler.Sample(@event, GetLocalMousePosition());
 		if (@event is InputEventMouse eventMouse)
 		{
 			HandleMouseInput(eventMouse);
