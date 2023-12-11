@@ -44,7 +44,7 @@ namespace y1000.code.networking.message
             return ToState switch
             {
                 State.IDLE => new CharacterIdleState(character, Direction),
-                State.WALK => new CharacterWalkState(character, Direction),
+                State.WALK => new CharacterIdleState(character, Direction),
                 _ => new CharacterIdleState(character, Direction),
             };
         }

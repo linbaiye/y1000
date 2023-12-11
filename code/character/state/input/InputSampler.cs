@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.util;
 
 namespace y1000.code.character.state.input
 {
@@ -35,7 +36,7 @@ namespace y1000.code.character.state.input
                 {
                     return null;
                 }
-                var now = DateTimeOffset.Now.ToUnixTimeSeconds();
+                var now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 if (PreviousMotion == null)
                 {
                     PreviousMotion = mouseMotion;

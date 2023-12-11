@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DotNetty.Transport.Channels;
 using Godot;
 using y1000.code.networking.message;
+using y1000.code.util;
 
 namespace y1000.code.networking
 {
@@ -19,6 +20,7 @@ namespace y1000.code.networking
 
         protected override void ChannelRead0(IChannelHandlerContext ctx, IGameMessage msg)
         {
+            LOG.Debug("Received message " + msg);
             eventListener.OnMessageArrived(msg);
         }
 

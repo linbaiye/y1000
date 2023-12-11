@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
@@ -28,7 +29,10 @@ namespace y1000.code.character.state
 
         private double pausedPosition = 0;
 
-        private IInput? lastReceivedInput;
+        private IInput? lastReceivedInput = null;
+
+        private MouseRightClick current;
+
 
         protected AbstractCharacterMoveState(Character character, Direction direction,
          Dictionary<Direction, int> spriteOffset, int spriteNumber, float step, AbstractCreatureStateFactory stateFactory) :
@@ -38,7 +42,18 @@ namespace y1000.code.character.state
             nextDirection = Direction;
         }
 
+         protected AbstractCharacterMoveState(Character character, MouseRightClick current,
+         Dictionary<Direction, int> spriteOffset, int spriteNumber, float step, AbstractCreatureStateFactory stateFactory) :
+          base(character, current.Direction, spriteOffset, spriteNumber, step, stateFactory, ComputeSpeed(character))
+        {
+            keepWalking = true;
+            nextDirection = Direction;
+            this.current = current;
+        }
 
+
+
+        protected Character Character => (Character)Creature;
 
 
         private static float ComputeSpeed(Character character)
@@ -57,16 +72,50 @@ namespace y1000.code.character.state
             nextDirection = clickDirection;
         }
 
+
+        protected abstract AbstractCharacterMoveState CreateMoveState(MouseRightClick rightClick);
+
         protected abstract AbstractCreatureState NextState();
+
+        private void ContinueMoving(MouseRightClick rightClick)
+        {
+            Character.SendActAndSavePredict(rightClick, () =>
+            {
+                var next = Creature.Coordinate.Next(rightClick.Direction);
+                if (Character.CanMove(next))
+                {
+                    LOG.Debug("Changing to move .");
+                    StopAndChangeState(CreateMoveState(rightClick));
+                }
+                else
+                {
+                    StopAndChangeState(NextState());
+                }
+            });
+
+        }
 
         public override void OnAnimationFinised()
         {
             UpdateCooridnate();
-            if (lastReceivedInput == null) 
+            LOG.Debug("Last input :" + lastReceivedInput);
+            if (lastReceivedInput == null)
             {
-
+                MouseRightClick nextInput = InputFactory.CreateMouseMoveInput(current.Direction);
+                ContinueMoving(nextInput);
             }
-            if (keepWalking)
+            else if (lastReceivedInput is MouseRightClick rightClick)
+            {
+                ContinueMoving(rightClick);
+            }
+            else if (lastReceivedInput is MouseRightRelease rightRelease)
+            {
+                Character.SendActAndSavePredict(rightRelease, () =>
+                {
+                    StopAndChangeState(NextState());
+                });
+            }
+            /*if (keepWalking)
             {
                 var next = Creature.Coordinate.Next(nextDirection);
                 if (((Character)Creature).CanMove(next))
@@ -79,7 +128,7 @@ namespace y1000.code.character.state
             } else {
                 Creature.AnimationPlayer.SpeedScale = 1.0f;
                 StopAndChangeState(NextState());
-            }
+            }*/
         }
 
         public void OnMouseRightReleased()
@@ -122,6 +171,17 @@ namespace y1000.code.character.state
         public bool PressBufa(IBufa bufa)
         {
             return true;
+        }
+
+
+        public IStateSnapshot Predict(Character character)
+        {
+            Point nextCoor = character.Coordinate.Next(current.Direction);
+            return new PostionDirectionSnapshot()
+            {
+                Direction = Direction,
+                Coordinate = nextCoor
+            };
         }
 
         public abstract OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon);

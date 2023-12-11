@@ -30,11 +30,13 @@ namespace y1000.code.character.state
         }
 
 
-        public CharacterWalkState(Character character, MouseRightClick rightClick) : base(character, rightClick.Direction, PlayerWalkState.SPRITE_OFFSET,
+        public CharacterWalkState(Character character, MouseRightClick rightClick) : base(character, rightClick, PlayerWalkState.SPRITE_OFFSET,
         PlayerWalkState.SPRITE_NUMBER, PlayerWalkState.STEP, CharacterStateFactory.INSTANCE)
         {
 
         }
+
+
 
 
         protected override AbstractCreatureState NextState()
@@ -68,15 +70,10 @@ namespace y1000.code.character.state
 
 
 
-        public IStateSnapshot Predict(Character character)
+        protected override AbstractCharacterMoveState CreateMoveState(MouseRightClick rightClick)
         {
-            Point nextCoor = character.Coordinate.Next(Direction);
-            return new PositionSnapshot()
-            {
-                Direction = Direction,
-                Coordinate = nextCoor,
-                State = State
-            };
+            return new CharacterWalkState(Character, rightClick);
         }
+
     }
 }

@@ -20,17 +20,13 @@ namespace y1000.code.character.state
         {
         }
 
-        private void MoveOrTurn(Direction direction)
-        {
-            ((Character)Creature).MoveOrTurn(direction);
-        }
-
-
         public void OnMouseRightClick(Direction clickDirection)
         {
             ((Character)Creature).MoveOrTurn(clickDirection);
             
         }
+
+
 
         public void OnMouseMotion(Direction direction)
         {
@@ -44,7 +40,17 @@ namespace y1000.code.character.state
 
         public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
-            character.SendActAndSavePredict(rightClick, () => character.MoveOrTurn(rightClick.Direction));
+            character.SendActAndSavePredict(rightClick, () => {
+                var next = character.Coordinate.Next(rightClick.Direction);
+                if (character.CanMove(next))
+                {
+                    StopAndChangeState(new CharacterWalkState(character, rightClick));
+                }
+                else
+                {
+                    SetDirection(rightClick.Direction);
+                }
+            });
         }
 
         public void OnMouseLeftDoubleClick(bool ctrlPressed, bool shiftPressed, ICreature target)

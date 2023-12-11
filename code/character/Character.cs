@@ -5,6 +5,7 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Godot;
+using NLog;
 using y1000.code.character.state;
 using y1000.code.character.state.input;
 using y1000.code.creatures;
@@ -26,6 +27,7 @@ namespace y1000.code.character
 
         private readonly InputSampler inputSampler = new InputSampler();
 
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         public override void _Ready()
         {
@@ -73,6 +75,8 @@ namespace y1000.code.character
 
         public void SendMessage(I2ServerGameMessage message)
         {
+            //Console.Write("Test");
+            LOG.Debug("Sending message " + message.ToString());
             var parent = GetParent<Game>();
             parent.SendMessage(message);
         }
@@ -99,6 +103,19 @@ namespace y1000.code.character
             else
             {
                 Turn(clickDirection);
+            }
+        }
+
+        internal void MoveOrTurn(MouseRightClick click) 
+        {
+            var next = Coordinate.Next(click.Direction);
+            if (CanMove(next))
+            {
+
+            }
+            else
+            {
+                Turn(click.Direction);
             }
         }
 

@@ -11,5 +11,7 @@ namespace y1000.code.character.state
     public interface IStateSnapshot
     {
         bool Match(IUpdateStateMessage message);
+
+        
     }
 }

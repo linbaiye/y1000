@@ -62,7 +62,7 @@ public partial class Game : Node2D, IConnectionEventListener
 		//GD.Print("Loaded");
 		SetupNetwork();
 		var map = WorldMap.Map;
-		if (map != null)
+		/*if (map != null)
 		{
 			int n = 0;
 			map.ForeachCell((cell, x, y) => {
@@ -78,7 +78,7 @@ public partial class Game : Node2D, IConnectionEventListener
 					AddCreature(SimpleCreature.Load(new Point(x, y), ++n, (Direction)new Random().Next(0, 7)));
 				}
 			});
-		}
+		}*/
 	}
 
 	private void ShowCharacter(LoginMessage loginMessage)

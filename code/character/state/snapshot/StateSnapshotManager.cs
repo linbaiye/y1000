@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using y1000.code.character.state;
 using y1000.code.networking.message;
+using y1000.code.util;
 
 namespace y1000.code.character
 {
@@ -41,7 +42,12 @@ namespace y1000.code.character
             {
                 inputPredictions.Remove(message.Sequence);
                 ackedSequence = message.Sequence;
-                return stateSnapshot.Match(message);
+                var ret = stateSnapshot.Match(message);
+                if (!ret)
+                {
+                    LOG.Debug("Snapshot: " + stateSnapshot + ", message " + message);
+                }
+                return ret;
             }
             return false;
         }

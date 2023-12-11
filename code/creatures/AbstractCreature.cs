@@ -86,6 +86,7 @@ namespace y1000.code.creatures
 
         protected void OnAnimationFinised(StringName name)
         {
+            LOG.Debug("Animation finished.");
             CurrentState.OnAnimationFinised();
         }
 

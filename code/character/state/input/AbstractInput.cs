@@ -33,6 +33,9 @@ namespace y1000.code.character.state.input
                    sequence == input.Sequence;
         }
 
+
+        public String CreatedTime => DateTimeOffset.FromUnixTimeMilliseconds(Timestamp).ToString("yyyy-MM-dd HH:mm:ss.fff");
+
         public override int GetHashCode()
         {
             return HashCode.Combine(sequence);

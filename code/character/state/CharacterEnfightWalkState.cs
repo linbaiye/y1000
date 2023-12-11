@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using y1000.code.character.state.input;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
@@ -63,5 +64,9 @@ namespace y1000.code.character.state
             throw new NotImplementedException();
         }
 
+        protected override AbstractCharacterMoveState CreateMoveState(MouseRightClick rightClick)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
