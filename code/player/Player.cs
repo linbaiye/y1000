@@ -9,6 +9,7 @@ using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
+using y1000.code.networking.message;
 using y1000.code.player.skill;
 using y1000.code.player.state;
 
@@ -22,13 +23,15 @@ namespace y1000.code.player
 
         private Trousers? trousers; 
 
-        public override long Id => throw new NotImplementedException();
+        private long id;
 
         private IBufa? bufa = null;
 
         public IBufa? Bufa => bufa;
 
         private IWeapon? weapon;
+
+        public override long Id => id;
 
         public OffsetTexture? ChestTexture
         {
@@ -86,6 +89,13 @@ namespace y1000.code.player
             }
         }
 
+
+        void SetId(long id) 
+        {
+            this.id = id;
+        }
+
+
         public OffsetTexture? TrousersTexture => trousers != null ? ((IPlayerState)CurrentState).TrousersTexture(SpriteNumber, trousers) : null;
 
         public OffsetTexture? WeaponTexture => Weapon != null ? MyState.WeaponTexture(SpriteNumber, Weapon) : null;
@@ -129,6 +139,22 @@ namespace y1000.code.player
             {
                 this.bufa = bufa;
             }
+        }
+
+        public static Player Create(ShowPlayerMessage message) 
+        {
+            PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/Player.tscn");
+            Player player = scene.Instantiate<Player>();
+            player.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
+            player.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);
+            player.Trousers = new Trousers(0L, "R1", "男子长裤", true);
+            player.Weapon =  new Sword(0, "W68", "耀阳宝剑");
+            player.Visible = true;
+            player.SetId(message.Id);
+            player.SetupAnimationPlayer();
+            player.Coordinate = message.MovmentStateMessage.Coordinate;
+            player.ChangeState(new PlayerIdleState(player, player.Direction));
+            return player;
         }
     }
 }

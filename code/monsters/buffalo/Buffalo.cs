@@ -30,7 +30,7 @@ public partial class Buffalo : AbstractCreature
 
     public override void _Ready()
     {
-		Setup();
+		SetupAnimationPlayer();
 		ChangeState(new SimpleCreatureIdleState(this, initDirection));
 		ZIndex = 2;
 		YSortEnabled = true;
