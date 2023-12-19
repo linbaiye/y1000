@@ -22,13 +22,14 @@ namespace y1000.code.player
 
         private Trousers? trousers; 
 
+        private IWeapon? weapon;
+
         public override long Id => throw new NotImplementedException();
 
         private IBufa? bufa = null;
 
         public IBufa? Bufa => bufa;
 
-        private IWeapon? weapon;
 
         public OffsetTexture? ChestTexture
         {
