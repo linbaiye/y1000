@@ -47,7 +47,7 @@ namespace y1000.code.creatures
 
         public string EntityName  => name;
 
-        protected void Setup()
+        protected void SetupAnimationPlayer()
         {
             SetMeta("spriteNumber", 0);
             animationPlayer = GetNode<CreatureAnimationPlayer>("AnimationPlayer");

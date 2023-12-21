@@ -31,7 +31,7 @@ namespace y1000.code.character
 
         public override void _Ready()
         {
-            Setup();
+            SetupAnimationPlayer();
             ChangeState(CharacterStateFactory.INSTANCE.CreateIdleState(this));
             Visible = false;
         }

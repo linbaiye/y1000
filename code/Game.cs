@@ -22,6 +22,7 @@ using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.networking;
 using y1000.code.networking.message;
+using y1000.code.player;
 using y1000.code.player.skill;
 using y1000.code.player.skill.bufa;
 using y1000.code.util;
@@ -270,6 +271,12 @@ public partial class Game : Node2D, IConnectionEventListener
 		UpdateCoordinate();
 	}
 
+	private void ShowPlayer(ShowPlayerMessage showPlayerMessage)
+	{
+		Player player = Player.Create(showPlayerMessage);
+		AddCreature(player);
+	}
+
 	private void HandleMessages()
 	{
 		if (unprocessedMessages.IsEmpty)
@@ -282,9 +289,14 @@ public partial class Game : Node2D, IConnectionEventListener
 			{
 				ShowCharacter(loginMessage);
 			}
+			else if (message is ShowPlayerMessage showPlayer)
+			{
+				ShowPlayer(showPlayer);
+			}
 			else
 			{
 				character?.HandleMessage(message);
+
 			}
 		}
 	}

@@ -31,7 +31,7 @@ namespace y1000.code.creatures
 
         public override void _Ready()
         {
-            Setup();
+            SetupAnimationPlayer();
             ChangeState(new SimpleCreatureIdleState(this, initDirection));
             ZIndex = 2;
             YSortEnabled = true;
