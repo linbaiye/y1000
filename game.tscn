@@ -27,6 +27,6 @@ mouse_filter = 1
 
 [node name="Character" parent="." instance=ExtResource("5_1uwcm")]
 z_index = 2
-position = Vector2(1273, 905)
+position = Vector2(511, 387)
 
 [node name="Camera2D" type="Camera2D" parent="Character"]

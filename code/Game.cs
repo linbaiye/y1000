@@ -61,7 +61,7 @@ public partial class Game : Node2D, IConnectionEventListener
 		//GD.Print("Loading");
 		//AddChild(Buffalo.Load(new Point(38, 35)));
 		//GD.Print("Loaded");
-		SetupNetwork();
+		//SetupNetwork();
 		var map = WorldMap.Map;
 		/*if (map != null)
 		{
@@ -80,6 +80,9 @@ public partial class Game : Node2D, IConnectionEventListener
 				}
 			});
 		}*/
+		OtherPlayer otherPlayer = OtherPlayer.Test();
+		otherPlayer.Position = new Vector2(200, 200);
+		AddChild(otherPlayer);
 	}
 
 	private void ShowCharacter(LoginMessage loginMessage)
@@ -273,8 +276,8 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private void ShowPlayer(ShowPlayerMessage showPlayerMessage)
 	{
-		Player player = Player.Create(showPlayerMessage);
-		AddCreature(player);
+		//Player player = Player.Create(showPlayerMessage);
+		//AddCreature(player);
 	}
 
 	private void HandleMessages()
