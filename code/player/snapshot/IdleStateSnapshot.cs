@@ -50,6 +50,31 @@ namespace y1000.code.player.snapshot
             {3000, 0},
         };
 
+
+        private static readonly List<TimeMillisSprite> MILLIS_SPRITE_RANGE = new List<TimeMillisSprite>() 
+        {
+            new TimeMillisSprite(500, 0),
+            new TimeMillisSprite(1000, 1),
+            new TimeMillisSprite(1500, 2),
+            new TimeMillisSprite(2000, 2),
+            new TimeMillisSprite(2500, 1),
+            new TimeMillisSprite(3000, 0),
+        };
+
+
+        private class TimeMillisSprite
+        {
+            public int Millis {get; set;}
+
+            public int SpriteNumber {get; set;}
+
+            public TimeMillisSprite(int m, int s) 
+            {
+                Millis = m;
+                SpriteNumber = s;
+            }
+        }
+
         public void CreateAnimation(AnimationPlayer animationPlayer)
         {
             /*if (animationPlayer.HasAnimationLibrary("test")) {
@@ -77,13 +102,27 @@ namespace y1000.code.player.snapshot
             return elapsed - snapshotStartAt >= duration;
         }
 
-        public OffsetTexture BodyTexture(OtherPlayer player, long elapsed)
+
+        private int GetSpriteNumber(long elapsed)
         {
             var currentTime = elapsed - stateStartAt;
             var spriteTime = currentTime % STATE_DURATION;
-            int spriteNumber = MILLIS_SPIRTE_MAP.GetValueOrDefault((int)spriteTime);
-            var offset = STATE_SPRITE_OFFSET.GetValueOrDefault(player.Direction);
-            LOG.Debug("Offset " + spriteNumber + offset);
+            foreach ( var tmp in  MILLIS_SPRITE_RANGE )
+            {
+                if (spriteTime <= tmp.Millis) 
+                {
+                    return tmp.SpriteNumber;
+                }
+            }
+            return 0;
+        }
+
+        public OffsetTexture BodyTexture(OtherPlayer player, long elapsed)
+        {
+            //LOG.Debug("Sprite time:  " + spriteTime);
+            int spriteNumber = GetSpriteNumber(elapsed);
+            int offset = STATE_SPRITE_OFFSET.GetValueOrDefault(player.Direction);
+            //LOG.Debug("Sprite number:  " + spriteNumber + offset);
             return MALE_SPRITES.Get(offset + spriteNumber);
         }
     }

@@ -81,7 +81,7 @@ public partial class Game : Node2D, IConnectionEventListener
 			});
 		}*/
 		OtherPlayer otherPlayer = OtherPlayer.Test();
-		otherPlayer.Position = new Vector2(200, 200);
+		otherPlayer.Position = new Vector2(1248, 696);
 		AddChild(otherPlayer);
 	}
 

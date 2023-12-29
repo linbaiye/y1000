@@ -27,7 +27,6 @@ namespace y1000.code.player
         public override void _Ready()
         {
             createdAt = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-            LOG.Debug("Other player ready");
         }
 
         public void EnqueueSnapshot(ISnapshot stateSnapshot)
@@ -37,7 +36,7 @@ namespace y1000.code.player
 
         public override void _Process(double delta)
         {
-            elapsed = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            elapsed = DateTimeOffset.Now.ToUnixTimeMilliseconds() - createdAt;
             if (currentSnapshot != null)
             {
                 if (!currentSnapshot.DurationEnough(elapsed))
@@ -59,7 +58,7 @@ namespace y1000.code.player
         {
             PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/OtherPlayer.tscn");
             var player = scene.Instantiate<OtherPlayer>();
-            for (int i = 0; i < 6000; i += 50)
+            for (int i = 0; i < 60000; i += 50)
             {
                 player.EnqueueSnapshot(new IdleStateSnapshot(0, i, 50));
             }

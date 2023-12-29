@@ -20,9 +20,6 @@ namespace y1000.code.player
             {
                 Offset = positionedTexture.Offset;
                 Texture = positionedTexture.Texture;
-            } else 
-            {
-                LOG.Debug("Texture not null");
             }
         }
     }
