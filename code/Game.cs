@@ -42,6 +42,7 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private Dictionary<long, ICreature> creatures = new Dictionary<long, ICreature>();
 
+	private Dictionary<long, OtherPlayer> otherPlayers = new Dictionary<long, OtherPlayer>();
 
 	private readonly InputSampler inputSampler = new InputSampler();
 
@@ -61,7 +62,7 @@ public partial class Game : Node2D, IConnectionEventListener
 		//GD.Print("Loading");
 		//AddChild(Buffalo.Load(new Point(38, 35)));
 		//GD.Print("Loaded");
-		//SetupNetwork();
+		SetupNetwork();
 		var map = WorldMap.Map;
 		/*if (map != null)
 		{
@@ -80,9 +81,9 @@ public partial class Game : Node2D, IConnectionEventListener
 				}
 			});
 		}*/
-		OtherPlayer otherPlayer = OtherPlayer.Test();
-		otherPlayer.Position = new Vector2(1248, 696);
-		AddChild(otherPlayer);
+		//OtherPlayer otherPlayer = OtherPlayer.Test();
+		//otherPlayer.Position = new Vector2(1248, 696);
+		//AddChild(otherPlayer);
 	}
 
 	private void ShowCharacter(LoginMessage loginMessage)
@@ -240,7 +241,7 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	public override void _Input(InputEvent @event)
 	{
-		inputSampler.Sample(@event, GetLocalMousePosition());
+		//inputSampler.Sample(@event, GetLocalMousePosition());
 		if (@event is InputEventMouse eventMouse)
 		{
 			HandleMouseInput(eventMouse);
@@ -267,7 +268,6 @@ public partial class Game : Node2D, IConnectionEventListener
 	}
 
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		HandleMessages();
@@ -278,6 +278,23 @@ public partial class Game : Node2D, IConnectionEventListener
 	{
 		//Player player = Player.Create(showPlayerMessage);
 		//AddCreature(player);
+	}
+
+	private void Handle(InterpolationsMessage message)
+	{
+		foreach(IInterpolation interpolation in message.Interpolations)
+		{
+			if (otherPlayers.TryGetValue(interpolation.Id, out OtherPlayer? other))
+			{
+				other.EnqueueInterpolation(interpolation);
+			}
+			else
+			{
+				OtherPlayer player = OtherPlayer.CreatePlayer(interpolation);
+				otherPlayers.Add(interpolation.Id, player);
+				AddChild(player);
+			}
+		}
 	}
 
 	private void HandleMessages()
@@ -292,6 +309,10 @@ public partial class Game : Node2D, IConnectionEventListener
 			{
 				ShowCharacter(loginMessage);
 			}
+			else if (message is InterpolationsMessage interpolations)
+			{
+				Handle(interpolations);
+			}
 			else if (message is ShowPlayerMessage showPlayer)
 			{
 				ShowPlayer(showPlayer);
@@ -299,7 +320,6 @@ public partial class Game : Node2D, IConnectionEventListener
 			else
 			{
 				character?.HandleMessage(message);
-
 			}
 		}
 	}

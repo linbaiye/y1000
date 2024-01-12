@@ -142,12 +142,16 @@ namespace y1000.code.character
             {
                 return;
             }
+            logger.Info("Sampled inputType " + input.Type);
             switch (input.Type) {
                 case InputType.MOUSE_RIGH_CLICK:
                     MyState.OnMouseRightClicked(this, (MouseRightClick)input);
                     break;
                 case InputType.MOUSE_RIGHT_RELEASE:
                     MyState.OnMouseRightReleased(this, (MouseRightRelease)input);
+                    break;
+                case InputType.MOUSE_RIGHT_MOTION:
+                    MyState.OnMouseMotion(this, (RightMousePressedMotion)input);
                     break;
             }
         }

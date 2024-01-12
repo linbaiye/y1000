@@ -6,5 +6,7 @@ namespace y1000.code.character
 
         MOUSE_RIGHT_RELEASE = 2,
 
+        MOUSE_RIGHT_MOTION = 3,
+
     }
 }

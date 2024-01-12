@@ -24,6 +24,8 @@ namespace y1000.code.character.state
 
         void OnMouseMotion(Character character, Direction direction) {}
 
+        void OnMouseMotion(Character character, RightMousePressedMotion mousePressedMotion) {}
+
         void OnMouseRightClicked(Character character, MouseRightClick mouseRightClick) {}
 
         void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease) { }

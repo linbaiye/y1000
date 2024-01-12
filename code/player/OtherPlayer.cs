@@ -15,21 +15,18 @@ namespace y1000.code.player
     {
         private long createdAt;
 
-
         private long elapsed;
 
-        private readonly Queue<ISnapshot> stateSnapshots = new();
+        private readonly Queue<IInterpolation> stateSnapshots = new();
 
-        private ISnapshot? currentSnapshot;
-
-        public Direction Direction {get; set;}
+        private IInterpolation? currentSnapshot;
 
         public override void _Ready()
         {
             createdAt = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         }
 
-        public void EnqueueSnapshot(ISnapshot stateSnapshot)
+        public void EnqueueInterpolation(IInterpolation stateSnapshot)
         {
             stateSnapshots.Enqueue(stateSnapshot);
         }
@@ -39,6 +36,7 @@ namespace y1000.code.player
             elapsed = DateTimeOffset.Now.ToUnixTimeMilliseconds() - createdAt;
             if (currentSnapshot != null)
             {
+                Position = currentSnapshot.Position;
                 if (!currentSnapshot.DurationEnough(elapsed))
                 {
                     return;
@@ -48,6 +46,7 @@ namespace y1000.code.player
             if (stateSnapshots.Any())
             {
                 currentSnapshot = stateSnapshots.Dequeue();
+                Position = currentSnapshot.Position;
             }
         }
 
@@ -60,18 +59,17 @@ namespace y1000.code.player
             var player = scene.Instantiate<OtherPlayer>();
             for (int i = 0; i < 60000; i += 50)
             {
-                player.EnqueueSnapshot(new IdleStateSnapshot(0, i, 50));
+                player.EnqueueInterpolation(new IdleInterpolation(0, i, 50));
             }
-            player.Direction = Direction.RIGHT;
             return player;
         }
 
-        public static OtherPlayer CreatePlayer(ShowPlayerMessage message)
+        public static OtherPlayer CreatePlayer(IInterpolation interpolation)
         {
-            return new OtherPlayer()
-            {
-                 Direction = message.MovmentStateMessage.Direction
-            };
+            PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/OtherPlayer.tscn");
+            var player = scene.Instantiate<OtherPlayer>();
+            player.EnqueueInterpolation(interpolation);
+            return player;
         }
     }
 }

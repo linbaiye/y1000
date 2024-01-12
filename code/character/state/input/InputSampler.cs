@@ -9,9 +9,8 @@ namespace y1000.code.character.state.input
 {
     public class InputSampler
     {
-        private long lastSampleTime = 0;
 
-        private InputEventMouseMotion? PreviousMotion { get; set; }
+        private RightMousePressedMotion? PressedMotion { get; set; }
 
         public IInput? Sample(InputEvent inputEvent, Vector2 mousePosition)
         {
@@ -36,17 +35,12 @@ namespace y1000.code.character.state.input
                 {
                     return null;
                 }
-                var now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                if (PreviousMotion == null)
+                var input = InputFactory.CreateRightMousePressedMotion(mousePosition.GetDirection());
+                if (PressedMotion == null || PressedMotion.Direction != input.Direction)
                 {
-                    PreviousMotion = mouseMotion;
-                    lastSampleTime = now;
+                    PressedMotion = input;
                 }
-                else if (now > lastSampleTime + 30)
-                {
-                    lastSampleTime = now;
-                    return InputFactory.CreateMouseMoveInput(mousePosition.GetDirection());
-                }
+                return input;
             }
             return null;
         }

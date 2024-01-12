@@ -101,8 +101,9 @@ namespace y1000.code.character.state
             LOG.Debug("Last input :" + lastReceivedInput);
             if (lastReceivedInput == null)
             {
-                MouseRightClick nextInput = InputFactory.CreateMouseMoveInput(current.Direction);
-                ContinueMoving(nextInput);
+                StopAndChangeState(NextState());
+                //MouseRightClick nextInput = InputFactory.CreateMouseMoveInput(current.Direction);
+                //ContinueMoving(nextInput);
             }
             else if (lastReceivedInput is MouseRightClick rightClick)
             {
@@ -113,6 +114,13 @@ namespace y1000.code.character.state
                 Character.SendActAndSavePredict(rightRelease, () =>
                 {
                     StopAndChangeState(NextState());
+                });
+            }
+            else if (lastReceivedInput is RightMousePressedMotion rightMousePressedMotion)
+            {
+                Character.SendActAndSavePredict(rightMousePressedMotion, () =>
+                {
+                    ContinueMoving(InputFactory.CreateMouseMoveInput(rightMousePressedMotion.Direction));
                 });
             }
             /*if (keepWalking)
@@ -166,6 +174,12 @@ namespace y1000.code.character.state
         {
             lastReceivedInput = rightRelease;
         }
+
+        public void OnMouseRightReleased(Character character, RightMousePressedMotion rightMousePressedMotion)
+        {
+            lastReceivedInput = rightMousePressedMotion;
+        }
+
 
 
         public bool PressBufa(IBufa bufa)

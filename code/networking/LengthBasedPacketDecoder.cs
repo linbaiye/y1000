@@ -9,6 +9,8 @@ using DotNetty.Transport.Channels;
 using Godot;
 using Google.Protobuf.WellKnownTypes;
 using y1000.code.networking.message;
+using y1000.code.player;
+using y1000.code.player.snapshot;
 using y1000.code.util;
 
 namespace y1000.code.networking
@@ -32,6 +34,29 @@ namespace y1000.code.networking
         }
 
 
+        private IInterpolation DecodeInterpolation(InterpolationPacket packet)
+        {
+            switch ((State)packet.State)
+            {
+                case State.IDLE:
+                    return IdleInterpolation.Parse(packet);
+                default:
+                    throw new NotSupportedException();
+            }
+        }
+
+
+        private IGameMessage DecodeInterpolations(InterpolationsPacket interpolationsPacket)
+        {
+            List<IInterpolation> result = new List<IInterpolation>();
+            foreach (var packet in interpolationsPacket.Interpolations)
+            {
+                result.Add(DecodeInterpolation(packet));
+            }
+            return new InterpolationsMessage(result);
+        }
+
+
         protected override object Decode(IChannelHandlerContext context, IByteBuffer buffer)
         {
             IByteBuffer input = (IByteBuffer)base.Decode(context, buffer);
@@ -42,6 +67,7 @@ namespace y1000.code.networking
             {
                 Packet.TypedPacketOneofCase.MovementPacket => DecodeMovementMessage(packet.MovementPacket),
                 Packet.TypedPacketOneofCase.LoginPacket => LoginMessage.FromPacket(packet.LoginPacket),
+                Packet.TypedPacketOneofCase.Interpolations => DecodeInterpolations(packet.Interpolations),
                 _ => throw new NotSupportedException()
             };
         }

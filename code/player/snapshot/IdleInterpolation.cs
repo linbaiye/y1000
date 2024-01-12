@@ -1,30 +1,50 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using Code.Networking.Gen;
 using Godot;
+using y1000.code.networking.message;
 using y1000.code.util;
 
 namespace y1000.code.player.snapshot
 {
-    public class IdleStateSnapshot : ISnapshot
+    public class IdleInterpolation : IInterpolation
     {
-
         private readonly long stateStartAt;
 
-        private readonly long snapshotStartAt;
+        private readonly long interpolationStartAt;
 
         private readonly long duration;
 
         private const long STATE_DURATION = 3000;
 
+        private readonly long _id;
 
-        public IdleStateSnapshot(long stateStart, long snapshotStart, long d)
+        private readonly long _stamp;
+
+        private readonly Point _coordinate;
+
+        private readonly Direction _direction;
+
+        private readonly Vector2 _position;
+
+        public IdleInterpolation(long stateStart, long snapshotStart, long d) : this(stateStart, snapshotStart, d, 0, 0, Point.Empty, Direction.DOWN)
         {
+        }
+
+        public IdleInterpolation(long stateStart, long snapshotStart, long d, long id, long stamp, Point coor, Direction dir)
+        {
+            _direction = dir;
             stateStartAt = stateStart;
-            snapshotStartAt = snapshotStart;
+            interpolationStartAt = snapshotStart;
             duration = d;
+            _id = id;
+            _stamp = stamp;
+            _coordinate = coor;
+            _position = new Vector2(_coordinate.X * 32, _coordinate.Y * 24);
         }
 
         private static readonly Dictionary<Direction, int> STATE_SPRITE_OFFSET = new()
@@ -41,16 +61,6 @@ namespace y1000.code.player.snapshot
 
         private static readonly SpriteContainer MALE_SPRITES = SpriteContainer.LoadMalePlayerSprites("N02");
 
-        private static readonly Dictionary<int, int> MILLIS_SPIRTE_MAP = new Dictionary<int, int>() {
-            {500, 0},
-            {1000, 1},
-            {1500, 2},
-            {2000, 2},
-            {2500, 1},
-            {3000, 0},
-        };
-
-
         private static readonly List<TimeMillisSprite> MILLIS_SPRITE_RANGE = new List<TimeMillisSprite>() 
         {
             new TimeMillisSprite(500, 0),
@@ -61,6 +71,11 @@ namespace y1000.code.player.snapshot
             new TimeMillisSprite(3000, 0),
         };
 
+        public long Id => _id;
+
+        public long Timestamp => _stamp;
+
+        public Vector2 Position => _position;
 
         private class TimeMillisSprite
         {
@@ -99,7 +114,7 @@ namespace y1000.code.player.snapshot
 
         public bool DurationEnough(long elapsed)
         {
-            return elapsed - snapshotStartAt >= duration;
+            return elapsed - interpolationStartAt >= duration;
         }
 
 
@@ -121,9 +136,14 @@ namespace y1000.code.player.snapshot
         {
             //LOG.Debug("Sprite time:  " + spriteTime);
             int spriteNumber = GetSpriteNumber(elapsed);
-            int offset = STATE_SPRITE_OFFSET.GetValueOrDefault(player.Direction);
+            int offset = STATE_SPRITE_OFFSET.GetValueOrDefault(_direction);
             //LOG.Debug("Sprite number:  " + spriteNumber + offset);
             return MALE_SPRITES.Get(offset + spriteNumber);
+        }
+
+        public static IdleInterpolation Parse(InterpolationPacket packet)
+        {
+            return new IdleInterpolation(packet.StateStart, packet.InterpolationStart, packet.Duration, packet.Id, packet.Timestamp, new Point(packet.X, packet.Y), (Direction)packet.Direction);
         }
     }
 }

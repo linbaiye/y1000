@@ -19,6 +19,22 @@ message InputPacket {
   int64 timestamp = 4;
 }
 
+message InterpolationPacket {
+  int64 id = 1;
+  int32 state = 2;
+  int64 timestamp = 3;
+  int64 stateStart = 4;
+  int64 interpolationStart = 5;
+  int32 duration = 6;
+  int32 direction = 7;
+  int32 x = 8;
+  int32 y = 9;
+}
+
+message InterpolationsPacket {
+  repeated InterpolationPacket interpolations = 1;
+}
+
 message LoginPacket {
   int32 x = 1;
   int32 y = 2;
@@ -30,6 +46,7 @@ message Packet {
     ShowCreaturePacket showCreaturePacket = 2;
     InputPacket inputPacket = 3;
     LoginPacket loginPacket = 4;
+    InterpolationsPacket interpolations = 5;
   }
 }
 
