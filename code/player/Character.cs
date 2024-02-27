@@ -21,6 +21,7 @@ public partial class Character : Node2D, IPlayer
 		AnimationPlayer.AnimationFinished += AnimationFinished;
 		playerState = new IdleState(this, Direction.DOWN);
 		Position = Position.Snapped(new Vector2(32, 24));
+
 	}
 
 
