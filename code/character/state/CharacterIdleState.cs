@@ -15,7 +15,7 @@ using y1000.code.world;
 
 namespace y1000.code.character.state
 {
-    public sealed class CharacterIdleState : PlayerIdleState, ICharacterState
+    public sealed class CharacterIdleState : PlayerIdleState, IOldCharacterState
     {
         public CharacterIdleState(OldCharacter player, Direction direction) : base(player, direction, CharacterStateFactory.INSTANCE)
         {

@@ -10,7 +10,7 @@ using y1000.code.util;
 
 namespace y1000.code.character.state
 {
-    public class CharacterEnfightState : PlayerEnfightState, ICharacterState
+    public class CharacterEnfightState : PlayerEnfightState, IOldCharacterState
     {
         private readonly ICreature? target;
 

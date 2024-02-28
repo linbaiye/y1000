@@ -39,7 +39,7 @@ namespace y1000.code.networking.message
             };
         }
 
-        public ICharacterState Restore(OldCharacter character)
+        public IOldCharacterState Restore(OldCharacter character)
         {
             character.Coordinate = Coordinate;
             return ToState switch

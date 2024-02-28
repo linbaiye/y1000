@@ -62,7 +62,7 @@ namespace y1000.code.character
         {
             SendMessage(input);
             afterSnapshot?.Invoke();
-            var predicted = ((ICharacterState)CurrentState).Snapshot(this);
+            var predicted = ((IOldCharacterState)CurrentState).Snapshot(this);
             stateBuffers.SaveState(input, predicted);
         }
 
@@ -119,7 +119,7 @@ namespace y1000.code.character
             }
         }
 
-        private void HandleDoubleClick(ICharacterState charState, InputEventMouseButton mouseButton, IEnumerable<ICreature> creatures)
+        private void HandleDoubleClick(IOldCharacterState charState, InputEventMouseButton mouseButton, IEnumerable<ICreature> creatures)
         {
             var clickPoint = mouseButton.Position.ToVector2I();
             foreach (var creature in creatures)
@@ -132,7 +132,7 @@ namespace y1000.code.character
             }
         }
 
-        private ICharacterState MyState => (ICharacterState)CurrentState;
+        private IOldCharacterState MyState => (IOldCharacterState)CurrentState;
 
 
         public void HandleInput(InputEvent @event)
@@ -158,7 +158,7 @@ namespace y1000.code.character
 
         public void HandleMouseInput(GameMap gameMap, IEnumerable<ICreature> creatures, InputEventMouse inputEvent)
         {
-            if (CurrentState is not ICharacterState charState)
+            if (CurrentState is not IOldCharacterState charState)
             {
                 return;
             }

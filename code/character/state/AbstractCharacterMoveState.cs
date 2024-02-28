@@ -20,7 +20,7 @@ using y1000.code.util;
 
 namespace y1000.code.character.state
 {
-    public abstract class AbstractCharacterMoveState : AbstractCreatureMoveState, ICharacterState
+    public abstract class AbstractCharacterMoveState : AbstractCreatureMoveState, IOldCharacterState
     {
 
         private bool keepWalking;
