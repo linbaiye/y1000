@@ -29,7 +29,7 @@ namespace y1000.code.player.state
 
         public override void OnAnimationFinised()
         {
-            StopAndChangeState(new CharacterIdleState((Character)Creature, Direction));
+            StopAndChangeState(new CharacterIdleState((OldCharacter)Creature, Direction));
         }
 
         private void OnHurtDone()

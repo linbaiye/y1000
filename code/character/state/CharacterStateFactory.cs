@@ -28,15 +28,15 @@ namespace y1000.code.character.state
 
         public override AbstractCreatureIdleState CreateIdleState(AbstractCreature creature)
         {
-            return new CharacterIdleState((Character)creature, creature.Direction);
+            return new CharacterIdleState((OldCharacter)creature, creature.Direction);
         }
 
         public override AbstractCreatureMoveState CreateMoveState(AbstractCreature creature, Direction newDirection)
         {
-            return new CharacterWalkState((Character)creature, newDirection);
+            return new CharacterWalkState((OldCharacter)creature, newDirection);
         }
 
-        public AbstractCharacterAttackState CreateAttackState(Character character, ICreature? target)
+        public AbstractCharacterAttackState CreateAttackState(OldCharacter character, ICreature? target)
         {
             switch(character.EquippedWeapon)
             {

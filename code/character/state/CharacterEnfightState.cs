@@ -14,24 +14,24 @@ namespace y1000.code.character.state
     {
         private readonly ICreature? target;
 
-        public CharacterEnfightState(Character character, Direction direction, ICreature? target) : base(character, direction)
+        public CharacterEnfightState(OldCharacter character, Direction direction, ICreature? target) : base(character, direction)
         {
             this.target = target;
         }
 
         public void OnMouseRightClick(Direction clickDirection)
         {
-            ((Character)Creature).MoveOrTurn(clickDirection);
+            ((OldCharacter)Creature).MoveOrTurn(clickDirection);
         }
 
         public void OnMouseMotion(Direction direction)
         {
-            ((Character)Creature).MoveOrTurn(direction);
+            ((OldCharacter)Creature).MoveOrTurn(direction);
         }
 
         public override void Move(Direction newDirection)
         {
-            StopAndChangeState(new CharacterEnfightWalkState((Character)Creature, newDirection, target));
+            StopAndChangeState(new CharacterEnfightWalkState((OldCharacter)Creature, newDirection, target));
         }
 
         public void Process(double delta)
@@ -42,11 +42,11 @@ namespace y1000.code.character.state
             }
             if (target.Coordinate.IsNextTo(Creature.Coordinate))
             {
-                StopAndChangeState(new CharacterKickAttackState((Character)Creature, target.DirectionTo(Creature)));
+                StopAndChangeState(new CharacterKickAttackState((OldCharacter)Creature, target.DirectionTo(Creature)));
             }
         }
 
-        public IStateSnapshot Predict(Character character)
+        public IStateSnapshot Snapshot(OldCharacter character)
         {
             throw new NotImplementedException();
         }

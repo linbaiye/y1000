@@ -66,7 +66,7 @@ namespace y1000.code.player.state
 
         public bool PressBufa(IBufa bufa)
         {
-            StopAndChangeState(new PlayerIdleState((Character)Creature, Direction));
+            StopAndChangeState(new PlayerIdleState((OldCharacter)Creature, Direction));
             return true;
         }
 

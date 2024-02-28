@@ -30,7 +30,7 @@ using y1000.code.world;
 
 public partial class Game : Node2D, IConnectionEventListener
 {
-	private y1000.code.character.Character? character;
+	private y1000.code.character.OldCharacter? character;
 
 	private volatile IChannel? channel;
 
@@ -88,7 +88,7 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private void ShowCharacter(LoginMessage loginMessage)
 	{
-		character = GetNode<y1000.code.character.Character>("Character");
+		character = GetNode<y1000.code.character.OldCharacter>("Character");
 		character.Coordinate = loginMessage.Coordinate;
 		character.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
 		character.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);

@@ -29,7 +29,7 @@ namespace y1000.code.character.state
             { Direction.UP_LEFT, 114},
         };
 
-        public CharacterEnfightWalkState(Character character, Direction direction, ICreature? target) :
+        public CharacterEnfightWalkState(OldCharacter character, Direction direction, ICreature? target) :
          base(character, direction, SPRITE_OFFSET, 6, 0.15f, CharacterStateFactory.INSTANCE)
         {
             this.target = target;
@@ -37,11 +37,11 @@ namespace y1000.code.character.state
 
         public override State State => State.ENFIGHT_WALK;
 
-        protected override SpriteContainer SpriteContainer => ((Character)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
+        protected override SpriteContainer SpriteContainer => ((OldCharacter)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
 
         protected override AbstractCreatureState NextState()
         {
-            return new CharacterEnfightState((Character)Creature, Direction, target);
+            return new CharacterEnfightState((OldCharacter)Creature, Direction, target);
         }
 
         public override OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)

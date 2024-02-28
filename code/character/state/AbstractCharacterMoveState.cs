@@ -34,7 +34,7 @@ namespace y1000.code.character.state
         private MouseRightClick current;
 
 
-        protected AbstractCharacterMoveState(Character character, Direction direction,
+        protected AbstractCharacterMoveState(OldCharacter character, Direction direction,
          Dictionary<Direction, int> spriteOffset, int spriteNumber, float step, AbstractCreatureStateFactory stateFactory) :
           base(character, direction, spriteOffset, spriteNumber, step, stateFactory, ComputeSpeed(character))
         {
@@ -42,7 +42,7 @@ namespace y1000.code.character.state
             nextDirection = Direction;
         }
 
-         protected AbstractCharacterMoveState(Character character, MouseRightClick current,
+         protected AbstractCharacterMoveState(OldCharacter character, MouseRightClick current,
          Dictionary<Direction, int> spriteOffset, int spriteNumber, float step, AbstractCreatureStateFactory stateFactory) :
           base(character, current.Direction, spriteOffset, spriteNumber, step, stateFactory, ComputeSpeed(character))
         {
@@ -53,10 +53,10 @@ namespace y1000.code.character.state
 
 
 
-        protected Character Character => (Character)Creature;
+        protected OldCharacter Character => (OldCharacter)Creature;
 
 
-        private static float ComputeSpeed(Character character)
+        private static float ComputeSpeed(OldCharacter character)
         {
             return character.Bufa != null ? character.Bufa.Speed : 1.0f;
         }
@@ -164,18 +164,18 @@ namespace y1000.code.character.state
             Creature.ChangeState(new PlayerMoveHurtState(Creature, Direction, OnHurtDone));
         }
 
-        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        public void OnMouseRightClicked(OldCharacter character, MouseRightClick rightClick)
         {
             lastReceivedInput = rightClick;
         }
 
 
-        public void OnMouseRightReleased(Character character, MouseRightRelease rightRelease)
+        public void OnMouseRightReleased(OldCharacter character, MouseRightRelease rightRelease)
         {
             lastReceivedInput = rightRelease;
         }
 
-        public void OnMouseRightReleased(Character character, RightMousePressedMotion rightMousePressedMotion)
+        public void OnMouseRightReleased(OldCharacter character, RightMousePressedMotion rightMousePressedMotion)
         {
             lastReceivedInput = rightMousePressedMotion;
         }
@@ -188,7 +188,7 @@ namespace y1000.code.character.state
         }
 
 
-        public IStateSnapshot Predict(Character character)
+        public IStateSnapshot Snapshot(OldCharacter character)
         {
             Point nextCoor = character.Coordinate.Next(current.Direction);
             return new PostionDirectionSnapshot()

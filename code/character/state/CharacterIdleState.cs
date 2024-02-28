@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using y1000.code.character.state.input;
+using y1000.code.character.state.Prediction;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.player;
@@ -16,13 +17,13 @@ namespace y1000.code.character.state
 {
     public sealed class CharacterIdleState : PlayerIdleState, ICharacterState
     {
-        public CharacterIdleState(Character player, Direction direction) : base(player, direction, CharacterStateFactory.INSTANCE)
+        public CharacterIdleState(OldCharacter player, Direction direction) : base(player, direction, CharacterStateFactory.INSTANCE)
         {
         }
 
         public void OnMouseRightClick(Direction clickDirection)
         {
-            ((Character)Creature).MoveOrTurn(clickDirection);
+            ((OldCharacter)Creature).MoveOrTurn(clickDirection);
             
         }
 
@@ -30,15 +31,15 @@ namespace y1000.code.character.state
 
         public void OnMouseMotion(Direction direction)
         {
-            ((Character)Creature).MoveOrTurn(direction);
+            ((OldCharacter)Creature).MoveOrTurn(direction);
         }
 
-        public void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
+        public void OnMouseRightReleased(OldCharacter character, MouseRightRelease mouseRightRelease)
         {
             character.SendActAndSavePredict(mouseRightRelease, null);
         }
 
-        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        public void OnMouseRightClicked(OldCharacter character, MouseRightClick rightClick)
         {
             character.SendActAndSavePredict(rightClick, () => {
                 var next = character.Coordinate.Next(rightClick.Direction);
@@ -57,9 +58,13 @@ namespace y1000.code.character.state
         {
             if ((ctrlPressed && target is Player) || (shiftPressed && target is SimpleCreature))
             {
-                StopAndChangeState(new CharacterEnfightState((Character)Creature, Direction, target));
+                StopAndChangeState(new CharacterEnfightState((OldCharacter)Creature, Direction, target));
             }
         }
 
+        public IPrediction Predict(OldCharacter character)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

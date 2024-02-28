@@ -23,14 +23,14 @@ namespace y1000.code.character.state
         public override State State => State.WALK;
 
 
-        public CharacterWalkState(Character character, Direction direction) : base(character, direction, PlayerWalkState.SPRITE_OFFSET,
+        public CharacterWalkState(OldCharacter character, Direction direction) : base(character, direction, PlayerWalkState.SPRITE_OFFSET,
         PlayerWalkState.SPRITE_NUMBER, PlayerWalkState.STEP, CharacterStateFactory.INSTANCE)
         {
 
         }
 
 
-        public CharacterWalkState(Character character, MouseRightClick rightClick) : base(character, rightClick, PlayerWalkState.SPRITE_OFFSET,
+        public CharacterWalkState(OldCharacter character, MouseRightClick rightClick) : base(character, rightClick, PlayerWalkState.SPRITE_OFFSET,
         PlayerWalkState.SPRITE_NUMBER, PlayerWalkState.STEP, CharacterStateFactory.INSTANCE)
         {
 

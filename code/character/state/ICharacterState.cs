@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using y1000.code.character.state.input;
+using y1000.code.character.state.Prediction;
 using y1000.code.character.state.snapshot;
 using y1000.code.creatures;
 using y1000.code.player.state;
@@ -22,14 +23,16 @@ namespace y1000.code.character.state
 
         void OnMouseRightReleased() { }
 
-        void OnMouseMotion(Character character, Direction direction) {}
+        void OnMouseMotion(OldCharacter character, Direction direction) {}
 
-        void OnMouseMotion(Character character, RightMousePressedMotion mousePressedMotion) {}
+        void OnMouseMotion(OldCharacter character, RightMousePressedMotion mousePressedMotion) {}
 
-        void OnMouseRightClicked(Character character, MouseRightClick mouseRightClick) {}
+        void OnMouseRightClicked(OldCharacter character, MouseRightClick mouseRightClick) {}
 
-        void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease) { }
+        void OnMouseRightReleased(OldCharacter character, MouseRightRelease mouseRightRelease) { }
 
-        IStateSnapshot Predict(Character character) { return PositionSnapshot.ForState(this, character); }
+        IPrediction Predict(OldCharacter character);
+
+        IStateSnapshot Snapshot(OldCharacter character) { return PositionSnapshot.ForState(this, character); }
     }
 }

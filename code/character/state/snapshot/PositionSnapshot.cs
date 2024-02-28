@@ -27,7 +27,7 @@ namespace y1000.code.character.state.snapshot
             return false;
         }
 
-        public static PositionSnapshot ForState(IPlayerState playerState, Character character)
+        public static PositionSnapshot ForState(IPlayerState playerState, OldCharacter character)
         {
             return new PositionSnapshot() { Coordinate  = character.Coordinate, Direction = character.Direction, State = playerState.State};
         }

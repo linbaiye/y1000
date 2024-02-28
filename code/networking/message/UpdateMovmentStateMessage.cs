@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Code.Networking.Gen;
 using y1000.code.character;
 using y1000.code.character.state;
+using y1000.code.character.state;
 using y1000.code.util;
 
 namespace y1000.code.networking.message
@@ -38,7 +39,7 @@ namespace y1000.code.networking.message
             };
         }
 
-        public ICharacterState Restore(Character character)
+        public ICharacterState Restore(OldCharacter character)
         {
             character.Coordinate = Coordinate;
             return ToState switch
