@@ -9,6 +9,9 @@ namespace y1000.Code.Character
 {
     public partial class Character : Node2D
     {
+
         private readonly PredictionManager predictionManager;
+
+        
     }
 }

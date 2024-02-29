@@ -39,6 +39,16 @@ namespace y1000.code
         }
 
 
+        public static Vector2I ToCoordinate(this Vector2 vector2)
+        {
+            return new((int)(vector2.X / TILE_SIZE_X), (int)(vector2.Y / TILE_SIZE_Y));
+        }
+
+        public static Vector2 ToPosition(this Vector2I vector2)
+        {
+            return new Vector2(vector2.X * TILE_SIZE_X, vector2.Y * TILE_SIZE_Y);
+        }
+
 
         public static Direction GetDirection(this Godot.Vector2 vector)
         {

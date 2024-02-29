@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Code.Networking.Gen;
+using Godot;
 
 namespace y1000.code.networking.message
 {
@@ -11,7 +12,7 @@ namespace y1000.code.networking.message
     {
         public int Id => 0;
 
-        public Point Coordinate {get;set;}
+        public Vector2I Coordinate {get;set;}
 
         public Direction Direction => Direction.DOWN;
 
@@ -19,7 +20,7 @@ namespace y1000.code.networking.message
 
         public static LoginMessage FromPacket(LoginPacket loginPacket)
         {
-            return new LoginMessage() {Coordinate = new Point(loginPacket.X, loginPacket.Y)};
+            return new LoginMessage() { Coordinate = new Vector2I(loginPacket.X, loginPacket.Y) };
         }
 
     }
