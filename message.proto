@@ -38,6 +38,7 @@ message InterpolationsPacket {
 message LoginPacket {
   int32 x = 1;
   int32 y = 2;
+  int64 id = 3;
 }
 
 message Packet {
