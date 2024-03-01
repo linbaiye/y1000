@@ -24,5 +24,6 @@ namespace y1000.Source.Character.State
 
 
         public int FrameOffset => _frameOffset;
+
     }
 }

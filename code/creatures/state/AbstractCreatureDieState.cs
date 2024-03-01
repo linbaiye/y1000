@@ -25,6 +25,6 @@ namespace y1000.code.creatures.state
 
         protected override int SpriteOffset => SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 
-        public override State State => State.DIE;
+        public override CreatureState State => CreatureState.DIE;
     }
 }

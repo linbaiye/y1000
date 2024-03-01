@@ -37,7 +37,7 @@ namespace y1000.code.creatures.state
         }
 
 
-        public override State State => State.IDLE;
+        public override CreatureState State => CreatureState.IDLE;
 
         protected override int SpriteOffset => spriteOffset.GetValueOrDefault(Direction, -1);
 

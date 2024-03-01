@@ -15,7 +15,7 @@ namespace y1000.code.player.state
 {
     public abstract class AbstractPlayerAttackState : AbstractCreatureState, IPlayerState
     {
-        public override State State => State.ATTACKING;
+        public override CreatureState State => CreatureState.ATTACKING;
 
         private readonly Dictionary<Direction, int> spriteOffset;
 

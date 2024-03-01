@@ -14,7 +14,7 @@ namespace y1000.code.character.state.snapshot
 
         public Direction Direction {get; set;}
 
-        public State State {get; set;}
+        public CreatureState State {get; set;}
 
         public bool Match(IUpdateStateMessage message)
         {

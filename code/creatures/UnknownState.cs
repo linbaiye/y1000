@@ -16,7 +16,7 @@ namespace y1000.code.creatures
         {
         }
 
-        public override State State => throw new NotImplementedException();
+        public override CreatureState State => throw new NotImplementedException();
 
 
         protected override SpriteContainer SpriteContainer => throw new NotImplementedException();

@@ -7,7 +7,7 @@ namespace y1000.code.entity
 {
     public class StateSegment
     {
-        public State State {get; set;}
+        public CreatureState State {get; set;}
 
         public long StateStart {get; set;}
 

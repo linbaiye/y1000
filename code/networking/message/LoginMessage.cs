@@ -5,23 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Code.Networking.Gen;
 using Godot;
+using y1000.code.networking.message.character;
 
 namespace y1000.code.networking.message
 {
-    public class LoginMessage : IGameMessage
+    public class LoginMessage 
     {
-        public int Id => 0;
+        public long Id { get; set; }
 
-        public Vector2I Coordinate {get;set;}
-
-        public Direction Direction => Direction.DOWN;
-
-        public long Timestamp => 0;
+        public Vector2I Coordinate { get; set; }
 
         public static LoginMessage FromPacket(LoginPacket loginPacket)
         {
-            return new LoginMessage() { Coordinate = new Vector2I(loginPacket.X, loginPacket.Y) };
+            return new LoginMessage() { Coordinate = new Vector2I(loginPacket.X, loginPacket.Y), Id = loginPacket.Id };
         }
-
     }
 }

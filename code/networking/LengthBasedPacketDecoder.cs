@@ -24,11 +24,11 @@ namespace y1000.code.networking
 
         private IGameMessage DecodeMovementMessage(MovementPacket movementPacket)
         {
-            var state = (State)movementPacket.State;
+            var state = (CreatureState)movementPacket.State;
             return state switch
             {
-                State.WALK => UpdateMovmentStateMessage.FromPacket(movementPacket),
-                State.IDLE => UpdateMovmentStateMessage.FromPacket(movementPacket),
+                CreatureState.WALK => UpdateMovmentStateMessage.FromPacket(movementPacket),
+                CreatureState.IDLE => UpdateMovmentStateMessage.FromPacket(movementPacket),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -36,9 +36,9 @@ namespace y1000.code.networking
 
         private IInterpolation DecodeInterpolation(InterpolationPacket packet)
         {
-            switch ((State)packet.State)
+            switch ((CreatureState)packet.State)
             {
-                case State.IDLE:
+                case CreatureState.IDLE:
                     return IdleInterpolation.Parse(packet);
                 default:
                     throw new NotSupportedException();

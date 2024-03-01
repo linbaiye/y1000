@@ -34,7 +34,7 @@ namespace y1000.code.creatures
 
         public Direction Direction => direction;
 
-        public abstract State State { get; }
+        public abstract CreatureState State { get; }
 
         protected AbstractCreatureStateFactory StateFactory => stateFactory;
 
@@ -70,7 +70,7 @@ namespace y1000.code.creatures
 
         public virtual void Die()
         {
-            if (State.DIE != State)
+            if (CreatureState.DIE != State)
                 StopAndChangeState(StateFactory.CreateDieState(Creature));
         }
 

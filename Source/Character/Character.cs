@@ -10,12 +10,13 @@ using y1000.code.character.state.input;
 using y1000.code.character.state.Prediction;
 using y1000.code.networking.message;
 using y1000.code.networking.message.character;
+using y1000.code.player;
 using y1000.Source.Character.State;
 using CharacterIdleState = y1000.Source.Character.State.CharacterIdleState;
 
 namespace y1000.Source.Character
 {
-    public partial class Character : Node2D
+    public partial class Character : Node2D, IBody
     {
         //private Character? _character;
         private ICharacterState _state;
@@ -32,7 +33,6 @@ namespace y1000.Source.Character
             _state = EmptyState.Instance;
             _predictionManager = new PredictionManager();
         }
-
 
         public Direction Direction => _direction;
 
@@ -85,15 +85,17 @@ namespace y1000.Source.Character
             }
         }
 
+        public OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
+
 
         public static Character LogedIn(LoginMessage message)
         {
-            PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/OtherPlayer.tscn");
+            PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
             var character = scene.Instantiate<Character>();
-            character.Visible = false;
             character._state = new CharacterIdleState();
             character.Position = message.Coordinate.ToPosition();
-            character._direction = message.Direction;
+            character._direction = Direction.DOWN;
+            character.ZIndex = 1;
             character.Visible = true;
             return character;
         }

@@ -16,7 +16,7 @@ namespace y1000.code.networking.message
     {
         public long Sequence { get; set; }
 
-        public State ToState { get; set; }
+        public CreatureState ToState { get; set; }
 
         public int Id { get; set; }
 
@@ -30,7 +30,7 @@ namespace y1000.code.networking.message
         {
             return new UpdateMovmentStateMessage()
             {
-                ToState = (State)packet.State,
+                ToState = (CreatureState)packet.State,
                 Direction = (Direction)packet.Direction,
                 Coordinate = new (packet.X, packet.Y),
                 Sequence = packet.Sequence,
@@ -44,8 +44,8 @@ namespace y1000.code.networking.message
             character.Coordinate = Coordinate;
             return ToState switch
             {
-                State.IDLE => new CharacterIdleState(character, Direction),
-                State.WALK => new CharacterIdleState(character, Direction),
+                CreatureState.IDLE => new CharacterIdleState(character, Direction),
+                CreatureState.WALK => new CharacterIdleState(character, Direction),
                 _ => new CharacterIdleState(character, Direction),
             };
         }

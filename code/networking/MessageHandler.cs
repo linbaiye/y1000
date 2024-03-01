@@ -9,7 +9,7 @@ using y1000.code.util;
 
 namespace y1000.code.networking
 {
-    public class MessageHandler : SimpleChannelInboundHandler<IGameMessage>
+    public class MessageHandler : SimpleChannelInboundHandler<object>
     {
         private readonly IConnectionEventListener eventListener;
 
@@ -18,7 +18,7 @@ namespace y1000.code.networking
             this.eventListener = eventListener;
         }
 
-        protected override void ChannelRead0(IChannelHandlerContext ctx, IGameMessage msg)
+        protected override void ChannelRead0(IChannelHandlerContext ctx, object msg)
         {
             LOG.Debug("Received message " + msg);
             eventListener.OnMessageArrived(msg);

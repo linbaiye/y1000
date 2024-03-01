@@ -40,7 +40,7 @@ namespace y1000.code.networking.message
 
         public long Sequence { get; set; }
 
-        public State ToState => throw new NotImplementedException();
+        public CreatureState ToState => throw new NotImplementedException();
 
     }
 }

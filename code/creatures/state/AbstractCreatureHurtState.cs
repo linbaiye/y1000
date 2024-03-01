@@ -14,7 +14,7 @@ namespace y1000.code.creatures.state
             creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(3, 0.07f, Animation.LoopModeEnum.None));
         }
 
-        public override State State => State.HURT;
+        public override CreatureState State => CreatureState.HURT;
 
 
         public override void OnAnimationFinised()

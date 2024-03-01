@@ -8,6 +8,6 @@ namespace y1000.code.networking
 {
     public interface IUpdateStateMessage : IGameMessage
     {
-       State ToState { get; }
+       CreatureState ToState { get; }
     }
 }

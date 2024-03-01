@@ -9,7 +9,7 @@ namespace y1000.code.networking.message
     {
         public long Sequence => throw new NotImplementedException();
 
-        public State ToState => throw new NotImplementedException();
+        public CreatureState ToState => throw new NotImplementedException();
 
         public int Id => throw new NotImplementedException();
 

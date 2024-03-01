@@ -12,7 +12,7 @@ namespace y1000.code.player.state
         {
         }
 
-        public override State State => State.BOW;
+        public override CreatureState State => CreatureState.BOW;
 
         protected override int SpriteOffset => throw new NotImplementedException();
 

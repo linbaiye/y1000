@@ -8,7 +8,7 @@ namespace y1000.code.networking
 {
     public interface IConnectionEventListener
     {
-        void OnMessageArrived(IGameMessage message);
+        void OnMessageArrived(object message);
 
         void OnConnectionClosed();
 

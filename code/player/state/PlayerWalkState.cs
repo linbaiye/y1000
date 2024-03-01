@@ -16,7 +16,7 @@ namespace y1000.code.player.state
         {
         }
 
-        public override State State => State.WALK;
+        public override CreatureState State => CreatureState.WALK;
 
         public override void OnAnimationFinised()
         {

@@ -35,7 +35,7 @@ namespace y1000.code.player.state
             this.callback = callback;
         }
 
-        public override State State => State.HURT;
+        public override CreatureState State => CreatureState.HURT;
 
         protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
 

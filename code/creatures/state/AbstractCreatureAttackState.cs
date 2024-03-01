@@ -24,7 +24,7 @@ namespace y1000.code.creatures.state
             {Direction.UP_LEFT, 168}
         };
 
-        public override State State => State.ATTACKING;
+        public override CreatureState State => CreatureState.ATTACKING;
 
         public override void OnAnimationFinised()
         {

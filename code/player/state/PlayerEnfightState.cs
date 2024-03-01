@@ -90,7 +90,7 @@ namespace y1000.code.player.state
             throw new NotImplementedException();
         }
 
-        public override State State => State.ENFIGHT;
+        public override CreatureState State => CreatureState.ENFIGHT;
 
         protected override int SpriteOffset => SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 

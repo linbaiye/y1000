@@ -31,8 +31,6 @@ namespace y1000.code.character.state
 
         void OnMouseRightReleased(OldCharacter character, MouseRightRelease mouseRightRelease) { }
 
-        IPrediction Predict(OldCharacter character);
-
         IStateSnapshot Snapshot(OldCharacter character) { return PositionSnapshot.ForState(this, character); }
     }
 }

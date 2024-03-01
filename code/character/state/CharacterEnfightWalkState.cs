@@ -35,7 +35,7 @@ namespace y1000.code.character.state
             this.target = target;
         }
 
-        public override State State => State.ENFIGHT_WALK;
+        public override CreatureState State => CreatureState.ENFIGHT_WALK;
 
         protected override SpriteContainer SpriteContainer => ((OldCharacter)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
 

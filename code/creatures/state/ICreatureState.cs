@@ -10,7 +10,7 @@ namespace y1000.code.creatures
     {
         Direction Direction { get; }
 
-        State State { get; }
+        CreatureState State { get; }
 
         void Move(Direction direction);
 

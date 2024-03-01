@@ -35,18 +35,18 @@ namespace Code.Networking.Gen {
             "YXJ0GAUgASgDEhAKCGR1cmF0aW9uGAYgASgFEhEKCWRpcmVjdGlvbhgHIAEo",
             "BRIJCgF4GAggASgFEgkKAXkYCSABKAUiWAoUSW50ZXJwb2xhdGlvbnNQYWNr",
             "ZXQSQAoOaW50ZXJwb2xhdGlvbnMYASADKAsyKC5jb2RlLm5ldHdvcmtpbmcu",
-            "Z2VuLkludGVycG9sYXRpb25QYWNrZXQiIwoLTG9naW5QYWNrZXQSCQoBeBgB",
-            "IAEoBRIJCgF5GAIgASgFItQCCgZQYWNrZXQSPQoObW92ZW1lbnRQYWNrZXQY",
-            "ASABKAsyIy5jb2RlLm5ldHdvcmtpbmcuZ2VuLk1vdmVtZW50UGFja2V0SAAS",
-            "RQoSc2hvd0NyZWF0dXJlUGFja2V0GAIgASgLMicuY29kZS5uZXR3b3JraW5n",
-            "Lmdlbi5TaG93Q3JlYXR1cmVQYWNrZXRIABI3CgtpbnB1dFBhY2tldBgDIAEo",
-            "CzIgLmNvZGUubmV0d29ya2luZy5nZW4uSW5wdXRQYWNrZXRIABI3Cgtsb2dp",
-            "blBhY2tldBgEIAEoCzIgLmNvZGUubmV0d29ya2luZy5nZW4uTG9naW5QYWNr",
-            "ZXRIABJDCg5pbnRlcnBvbGF0aW9ucxgFIAEoCzIpLmNvZGUubmV0d29ya2lu",
-            "Zy5nZW4uSW50ZXJwb2xhdGlvbnNQYWNrZXRIAEINCgtUeXBlZFBhY2tldCJh",
-            "ChJTaG93Q3JlYXR1cmVQYWNrZXQSNQoIbW92ZW1lbnQYASABKAsyIy5jb2Rl",
-            "Lm5ldHdvcmtpbmcuZ2VuLk1vdmVtZW50UGFja2V0EhQKDGNyZWF0dXJlVHlw",
-            "ZRgCIAEoBWIGcHJvdG8z"));
+            "Z2VuLkludGVycG9sYXRpb25QYWNrZXQiLwoLTG9naW5QYWNrZXQSCQoBeBgB",
+            "IAEoBRIJCgF5GAIgASgFEgoKAmlkGAMgASgDItQCCgZQYWNrZXQSPQoObW92",
+            "ZW1lbnRQYWNrZXQYASABKAsyIy5jb2RlLm5ldHdvcmtpbmcuZ2VuLk1vdmVt",
+            "ZW50UGFja2V0SAASRQoSc2hvd0NyZWF0dXJlUGFja2V0GAIgASgLMicuY29k",
+            "ZS5uZXR3b3JraW5nLmdlbi5TaG93Q3JlYXR1cmVQYWNrZXRIABI3CgtpbnB1",
+            "dFBhY2tldBgDIAEoCzIgLmNvZGUubmV0d29ya2luZy5nZW4uSW5wdXRQYWNr",
+            "ZXRIABI3Cgtsb2dpblBhY2tldBgEIAEoCzIgLmNvZGUubmV0d29ya2luZy5n",
+            "ZW4uTG9naW5QYWNrZXRIABJDCg5pbnRlcnBvbGF0aW9ucxgFIAEoCzIpLmNv",
+            "ZGUubmV0d29ya2luZy5nZW4uSW50ZXJwb2xhdGlvbnNQYWNrZXRIAEINCgtU",
+            "eXBlZFBhY2tldCJhChJTaG93Q3JlYXR1cmVQYWNrZXQSNQoIbW92ZW1lbnQY",
+            "ASABKAsyIy5jb2RlLm5ldHdvcmtpbmcuZ2VuLk1vdmVtZW50UGFja2V0EhQK",
+            "DGNyZWF0dXJlVHlwZRgCIAEoBWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -54,7 +54,7 @@ namespace Code.Networking.Gen {
             new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.InputPacket), global::Code.Networking.Gen.InputPacket.Parser, new[]{ "Type", "Sequence", "ClickedDirection", "Timestamp" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.InterpolationPacket), global::Code.Networking.Gen.InterpolationPacket.Parser, new[]{ "Id", "State", "Timestamp", "StateStart", "InterpolationStart", "Duration", "Direction", "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.InterpolationsPacket), global::Code.Networking.Gen.InterpolationsPacket.Parser, new[]{ "Interpolations" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.LoginPacket), global::Code.Networking.Gen.LoginPacket.Parser, new[]{ "X", "Y" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.LoginPacket), global::Code.Networking.Gen.LoginPacket.Parser, new[]{ "X", "Y", "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.Packet), global::Code.Networking.Gen.Packet.Parser, new[]{ "MovementPacket", "ShowCreaturePacket", "InputPacket", "LoginPacket", "Interpolations" }, new[]{ "TypedPacket" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.ShowCreaturePacket), global::Code.Networking.Gen.ShowCreaturePacket.Parser, new[]{ "Movement", "CreatureType" }, null, null, null, null)
           }));
@@ -1478,6 +1478,7 @@ namespace Code.Networking.Gen {
     public LoginPacket(LoginPacket other) : this() {
       x_ = other.x_;
       y_ = other.y_;
+      id_ = other.id_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1511,6 +1512,18 @@ namespace Code.Networking.Gen {
       }
     }
 
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 3;
+    private long id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1528,6 +1541,7 @@ namespace Code.Networking.Gen {
       }
       if (X != other.X) return false;
       if (Y != other.Y) return false;
+      if (Id != other.Id) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1537,6 +1551,7 @@ namespace Code.Networking.Gen {
       int hash = 1;
       if (X != 0) hash ^= X.GetHashCode();
       if (Y != 0) hash ^= Y.GetHashCode();
+      if (Id != 0L) hash ^= Id.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1563,6 +1578,10 @@ namespace Code.Networking.Gen {
         output.WriteRawTag(16);
         output.WriteInt32(Y);
       }
+      if (Id != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(Id);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1581,6 +1600,10 @@ namespace Code.Networking.Gen {
         output.WriteRawTag(16);
         output.WriteInt32(Y);
       }
+      if (Id != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(Id);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1596,6 +1619,9 @@ namespace Code.Networking.Gen {
       }
       if (Y != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
+      }
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1614,6 +1640,9 @@ namespace Code.Networking.Gen {
       }
       if (other.Y != 0) {
         Y = other.Y;
+      }
+      if (other.Id != 0L) {
+        Id = other.Id;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1638,6 +1667,10 @@ namespace Code.Networking.Gen {
             Y = input.ReadInt32();
             break;
           }
+          case 24: {
+            Id = input.ReadInt64();
+            break;
+          }
         }
       }
     #endif
@@ -1659,6 +1692,10 @@ namespace Code.Networking.Gen {
           }
           case 16: {
             Y = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Id = input.ReadInt64();
             break;
           }
         }

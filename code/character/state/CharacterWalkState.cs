@@ -20,7 +20,7 @@ namespace y1000.code.character.state
 {
     public class CharacterWalkState : AbstractCharacterMoveState
     {
-        public override State State => State.WALK;
+        public override CreatureState State => CreatureState.WALK;
 
 
         public CharacterWalkState(OldCharacter character, Direction direction) : base(character, direction, PlayerWalkState.SPRITE_OFFSET,
@@ -35,7 +35,6 @@ namespace y1000.code.character.state
         {
 
         }
-
 
 
 

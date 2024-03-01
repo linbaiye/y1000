@@ -1,6 +1,6 @@
 namespace y1000.code
 {
-    public enum State
+    public enum CreatureState
     {
         IDLE = 1,
 

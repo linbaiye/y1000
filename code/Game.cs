@@ -22,11 +22,13 @@ using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.networking;
 using y1000.code.networking.message;
+using y1000.code.networking.message.character;
 using y1000.code.player;
 using y1000.code.player.skill;
 using y1000.code.player.skill.bufa;
 using y1000.code.util;
 using y1000.code.world;
+using y1000.Source.Character;
 
 public partial class Game : Node2D, IConnectionEventListener
 {
@@ -38,13 +40,15 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private ConcurrentQueue<string> packets = new ConcurrentQueue<string>();
 
-	private ConcurrentQueue<IGameMessage> unprocessedMessages = new ConcurrentQueue<IGameMessage>();
+	private ConcurrentQueue<object> unprocessedMessages = new ConcurrentQueue<object>();
 
 	private Dictionary<long, ICreature> creatures = new Dictionary<long, ICreature>();
 
 	private Dictionary<long, OtherPlayer> otherPlayers = new Dictionary<long, OtherPlayer>();
 
 	private readonly InputSampler inputSampler = new InputSampler();
+
+	private Character? _character;
 
 	private enum ConnectionState
 	{
@@ -84,16 +88,29 @@ public partial class Game : Node2D, IConnectionEventListener
 		//OtherPlayer otherPlayer = OtherPlayer.Test();
 		//otherPlayer.Position = new Vector2(1248, 696);
 		//AddChild(otherPlayer);
+		//AddCharacter();
+	}
+
+
+	private void AddCharacter()
+	{
+		AddCharacter(new LoginMessage() { Coordinate = new Vector2I(38, 35) });
+	}
+
+	private void AddCharacter(LoginMessage loginMessage)
+	{
+		_character = Character.LogedIn(loginMessage);
+		AddChild(_character);
 	}
 
 	private void ShowCharacter(LoginMessage loginMessage)
 	{
 		character = GetNode<y1000.code.character.OldCharacter>("Character");
-		character.Coordinate = loginMessage.Coordinate;
+		character.Coordinate = new Point(loginMessage.Coordinate.X, loginMessage.Coordinate.Y);
 		character.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
 		character.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);
 		character.Trousers = new Trousers(0L, "R1", "男子长裤", true);
-		character.Weapon =  new Sword(0, "W68", "耀阳宝剑");
+		character.Weapon = new Sword(0, "W68", "耀阳宝剑");
 		character.Visible = true;
 		UpdateCoordinate();
 	}
@@ -282,7 +299,7 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private void Handle(InterpolationsMessage message)
 	{
-		foreach(IInterpolation interpolation in message.Interpolations)
+		foreach (IInterpolation interpolation in message.Interpolations)
 		{
 			if (otherPlayers.TryGetValue(interpolation.Id, out OtherPlayer? other))
 			{
@@ -303,11 +320,11 @@ public partial class Game : Node2D, IConnectionEventListener
 		{
 			return;
 		}
-		if (unprocessedMessages.TryDequeue(out IGameMessage? message))
+		if (unprocessedMessages.TryDequeue(out object? message))
 		{
 			if (message is LoginMessage loginMessage)
 			{
-				ShowCharacter(loginMessage);
+				AddCharacter(loginMessage);
 			}
 			else if (message is InterpolationsMessage interpolations)
 			{
@@ -317,9 +334,9 @@ public partial class Game : Node2D, IConnectionEventListener
 			{
 				ShowPlayer(showPlayer);
 			}
-			else
+			else if (message is ICharacterMessage characterMessage)
 			{
-				character?.HandleMessage(message);
+				_character?.HandleMessage(characterMessage);
 			}
 		}
 	}
@@ -379,20 +396,23 @@ public partial class Game : Node2D, IConnectionEventListener
 		}
 	}
 
-    public void OnMessageArrived(IGameMessage message)
-    {
+	public void OnMessageArrived(object message)
+	{
 		unprocessedMessages.Enqueue(message);
-    }
+	}
 
 	private async void Reconnect()
 	{
-		await Task.Run(() => {
+		await Task.Run(() =>
+		{
 			Task.Delay(2000);
 		});
 		try
 		{
 			channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
-		} catch(Exception) {
+		}
+		catch (Exception)
+		{
 			Reconnect();
 		}
 	}

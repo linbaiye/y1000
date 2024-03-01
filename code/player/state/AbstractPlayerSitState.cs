@@ -39,7 +39,7 @@ namespace y1000.code.player.state
             creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(total, step));
         }
 
-        public override State State => State.SIT;
+        public override CreatureState State => CreatureState.SIT;
 
         protected override int SpriteOffset => BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 
