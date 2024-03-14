@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using y1000.code.character.state;
 using y1000.code.character.state.input;
 using y1000.code.character.state.Prediction;
 using y1000.code.player;
@@ -22,12 +23,32 @@ namespace y1000.Source.Character.State
             throw new NotImplementedException();
         }
 
+        public void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
+        {
+            throw new NotImplementedException();
+        }
+
         public IPrediction Predict(Character character, MouseRightClick rightClick)
         {
             throw new NotImplementedException();
         }
 
+        public IPrediction Predict(Character character, MouseRightRelease rightClick)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Process(Character character, double delta)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Process(Character character, long deltaMillis)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RespondsTo(IInput input)
         {
             throw new NotImplementedException();
         }

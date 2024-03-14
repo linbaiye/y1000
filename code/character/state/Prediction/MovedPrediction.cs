@@ -13,7 +13,8 @@ namespace y1000.code.character.state.Prediction
     {
         private readonly Vector2I _newCoordinate;
 
-        public MovedPrediction(IInput input, Vector2I nextCoordinate) : base(input)
+        public MovedPrediction(IInput input,
+         Vector2I nextCoordinate) : base(input)
         {
             _newCoordinate = nextCoordinate;
         }

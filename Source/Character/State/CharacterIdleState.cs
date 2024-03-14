@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using y1000.code;
+using y1000.code.character.state;
 using y1000.code.character.state.input;
 using y1000.code.character.state.Prediction;
 using y1000.code.player;
@@ -11,33 +12,8 @@ using y1000.code.util;
 
 namespace y1000.Source.Character.State
 {
-    public class CharacterIdleState : ICharacterState
+    public class CharacterIdleState : AbstractCharacterState
     {
-
-        private int _elpasedMillis;
-
-        private const int ANIMATION_CYCLE_MILLIS = 1500;
-
-        private readonly IEnumerable<TimeFrameMapper> _frameMappers;
-
-        private static readonly List<TimeFrameMapper> FRAME_MAPPERS = CreateFrameMappers(300, 3, true);
-
-        public static List<TimeFrameMapper> CreateFrameMappers(double interval, int total, bool pingpong)
-        {
-            List<TimeFrameMapper> result = new List<TimeFrameMapper>();
-            for (int i = 0; i < total; i++)
-            {
-                result.Add(new TimeFrameMapper(i * interval, i));
-            }
-            if (pingpong)
-            {
-                for (int i = 0; i < total; i++)
-                {
-                    result.Add(new TimeFrameMapper((i + total) * interval, total - i - 1));
-                }
-            }
-            return result;
-        }
 
         private static readonly Dictionary<Direction, int> BODY_SPRITE_OFFSET = new()
         {
@@ -51,43 +27,62 @@ namespace y1000.Source.Character.State
 			{ Direction.UP_LEFT, 69},
         };
 
-        public CharacterIdleState()
+        public CharacterIdleState(AnimatedSpriteManager spriteManager): base(spriteManager)
         {
-            _frameMappers = FRAME_MAPPERS;
         }
 
-        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        public override void OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
-            LOG.Debug("Right clicked.");
-        }
-
-
-        public IPrediction Predict(Character character, MouseRightClick rightClick)
-        {
-            return new MovedPrediction(rightClick, character.Coordinate);
-        }
-
-
-        public void Process(Character character, double delta)
-        {
-            _elpasedMillis += (int)(delta * 1000);
-        }
-
-
-        public OffsetTexture BodyOffsetTexture(Character character)
-        {
-            SpriteContainer SpriteContainer = character.IsMale ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
-            var millis = _elpasedMillis % ANIMATION_CYCLE_MILLIS;
-            int frameOffset = 0;
-            foreach (var m in _frameMappers)
+            character.Direction = rightClick.Direction;
+            var nextCoor = character.Coordinate.Move(rightClick.Direction);
+            if (character.Realm.CanMove(nextCoor))
             {
-                if (millis < m.Time)
-                {
-                    frameOffset = m.FrameOffset;
-                    break;
-                }
+                character.ChangeState(CharacterMoveState.Create(character.IsMale));
             }
-            return SpriteContainer.Get(BODY_SPRITE_OFFSET.GetValueOrDefault(character.Direction) + frameOffset);
+            else
+            {
+                character.ChangeState(Create(character.IsMale));
+            }
+        }
+
+        public override IPrediction Predict(Character character, MouseRightClick rightClick)
+        {
+            var nextCoor = character.Coordinate.Move(rightClick.Direction);
+            if (character.Realm.CanMove(nextCoor))
+            {
+                return new MovedPrediction(rightClick, character.Coordinate);
+            }
+            else
+            {
+                return new IdlePrediction(rightClick, nextCoor);
+            }
+        }
+
+        public override void Process(Character character, long deltaMillis)
+        {
+            ElpasedMillis += deltaMillis;
+        }
+
+        public override bool RespondsTo(IInput input)
+        {
+            return input is MouseRightClick;
+        }
+
+        public static CharacterIdleState ForMale()
+        {
+            var container = SpriteContainer.LoadMalePlayerSprites("N02");
+            var sm = AnimatedSpriteManager.WithPinpong(500, BODY_SPRITE_OFFSET, container);
+            return new CharacterIdleState(sm);
+        }
+
+        public static CharacterIdleState Create(bool forMale)
+        {
+            return ForMale();
+        }
+
+        public override void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
+        {
+            throw new NotImplementedException();
         }
     }
 }

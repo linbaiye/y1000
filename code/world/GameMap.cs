@@ -6,7 +6,7 @@ using Godot;
 
 namespace y1000.code.world
 {
-    public class GameMap
+    public class GameMap: IRealm
     {
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         struct Header
@@ -185,6 +185,11 @@ namespace y1000.code.world
             {
                 Marshal.FreeHGlobal(ptr);
             }
+        }
+
+        public bool CanMove(Vector2I coordinate)
+        {
+            return IsMovable(new Point(coordinate.X, coordinate.Y));
         }
     }
 }

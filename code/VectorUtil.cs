@@ -44,10 +44,20 @@ namespace y1000.code
             return new((int)(vector2.X / TILE_SIZE_X), (int)(vector2.Y / TILE_SIZE_Y));
         }
 
+        public static Vector2I Move(this Vector2I src, Direction direction)
+        {
+            if (VELOCITY_MAP.TryGetValue(direction, out Vector2 vector2))
+            {
+                return src + vector2.ToCoordinate();
+            }
+            return src;
+        }
+
         public static Vector2 ToPosition(this Vector2I vector2)
         {
             return new Vector2(vector2.X * TILE_SIZE_X, vector2.Y * TILE_SIZE_Y);
         }
+
 
 
         public static Direction GetDirection(this Godot.Vector2 vector)

@@ -99,8 +99,11 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private void AddCharacter(LoginMessage loginMessage)
 	{
-		_character = Character.LogedIn(loginMessage);
-		AddChild(_character);
+		if (WorldMap.Map != null)
+		{
+			_character = Character.LogedIn(loginMessage, WorldMap.Map);
+			AddChild(_character);
+		}
 	}
 
 	private void ShowCharacter(LoginMessage loginMessage)
@@ -166,7 +169,8 @@ public partial class Game : Node2D, IConnectionEventListener
 		var worldMap = GetNode<WorldMap>("MapLayer");
 		if (worldMap != null && worldMap.Map != null)
 		{
-			character?.HandleInput(eventMouse);
+			_character?.HandleInputEvent(eventMouse);
+			//character?.HandleInput(eventMouse);
 			//character?.HandleMouseInput(worldMap.Map, creatures.Values, eventMouse);
 		}
 		if (eventMouse is InputEventMouseButton button)
