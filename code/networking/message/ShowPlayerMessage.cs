@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace y1000.code.networking.message
 {
-    public class ShowPlayerMessage : IGameMessage
+    public class ShowPlayerMessage : IEntityMessage
     {
 
         private readonly UpdateMovmentStateMessage movmentStateMessage;
@@ -17,9 +17,6 @@ namespace y1000.code.networking.message
 
         public UpdateMovmentStateMessage MovmentStateMessage => movmentStateMessage;
 
-        public int Id => movmentStateMessage.Id;
-
-        public long Timestamp => throw new NotImplementedException();
-
+        public long Id => movmentStateMessage.Id;
     }
 }

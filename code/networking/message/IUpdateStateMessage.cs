@@ -6,7 +6,7 @@ using y1000.code.networking.message;
 
 namespace y1000.code.networking
 {
-    public interface IUpdateStateMessage : IGameMessage
+    public interface IUpdateStateMessage : IEntityMessage
     {
        CreatureState ToState { get; }
     }

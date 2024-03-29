@@ -23,7 +23,6 @@ namespace y1000.code.character.state.input
                 {
                     Sequence = Sequence,
                     Type = (int)Type,
-                    Timestamp = Timestamp,
                 }
             };
         }

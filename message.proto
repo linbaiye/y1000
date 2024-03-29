@@ -2,27 +2,30 @@ syntax = "proto3";
 package code.networking.gen;
 
 
-message MovementPacket {
-  int32 state = 1;
-  int32 x = 2;
-  int32 y = 3;
-  int32 direction = 4;
-  int32 id = 5;
-  int64 timestamp = 6;
-  int64 sequence = 7;
+message PositionPacket {
+  int32 x = 1;
+  int32 y = 2;
+  int32 direction = 3;
+  int64 id = 4;
+  int32 type = 5;
+}
+
+
+message InputResponsePacket {
+  int64 sequence = 1;
+  PositionPacket positionPacket = 2;
 }
 
 message InputPacket {
   int32 type = 1;
   int64 sequence = 2;
   int32 clickedDirection = 3;
-  int64 timestamp = 4;
 }
+
 
 message InterpolationPacket {
   int64 id = 1;
   int32 state = 2;
-  int64 timestamp = 3;
   int64 stateStart = 4;
   int64 interpolationStart = 5;
   int32 duration = 6;
@@ -43,18 +46,22 @@ message LoginPacket {
 
 message Packet {
   oneof TypedPacket {
-    MovementPacket movementPacket = 1;
+    PositionPacket positionPacket = 1;
     ShowCreaturePacket showCreaturePacket = 2;
     InputPacket inputPacket = 3;
     LoginPacket loginPacket = 4;
     InterpolationsPacket interpolations = 5;
+    InputResponsePacket responsePacket = 6;
   }
 }
 
-
-message ShowCreaturePacket {
-  MovementPacket movement = 1;
-  int32 creatureType = 2;
+message ShowPlayerPacket {
+  PositionPacket movement = 1;
+  int64 id = 2;
 }
 
-
+message ShowCreaturePacket {
+  PositionPacket movement = 1;
+  int32 creatureType = 2;
+  int32 state = 3;
+}

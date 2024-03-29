@@ -30,7 +30,6 @@ namespace y1000.code.character.state.input
                     Sequence = Sequence,
                     ClickedDirection = (int)Direction,
                     Type = (int)Type,
-                    Timestamp = Timestamp,
                 }
             };
         }

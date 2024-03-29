@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using Code.Networking.Gen;
 using y1000.code.character;
 using y1000.code.character.state;
-using y1000.code.character.state;
-using y1000.code.util;
 
 namespace y1000.code.networking.message
 {
@@ -18,24 +16,20 @@ namespace y1000.code.networking.message
 
         public CreatureState ToState { get; set; }
 
-        public int Id { get; set; }
-
-        public long Timestamp { get; set; }
+        public long Id { get; set; }
 
         public Direction Direction {get; set;}
 
         public Point Coordinate {get; set;}
 
-        public static UpdateMovmentStateMessage FromPacket(MovementPacket packet)
+        public static UpdateMovmentStateMessage FromPacket(PositionPacket packet)
         {
             return new UpdateMovmentStateMessage()
             {
-                ToState = (CreatureState)packet.State,
                 Direction = (Direction)packet.Direction,
                 Coordinate = new (packet.X, packet.Y),
-                Sequence = packet.Sequence,
+                Sequence = 0,
                 Id = packet.Id,
-                Timestamp = packet.Timestamp
             };
         }
 

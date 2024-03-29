@@ -45,7 +45,7 @@ namespace y1000.code.character
         }
 
 
-        public void HandleMessage(IGameMessage message)
+        public void HandleMessage(IEntityMessage message)
         {
             if (message is UpdateMovmentStateMessage stateMessage)
             {

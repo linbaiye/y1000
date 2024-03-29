@@ -22,13 +22,12 @@ namespace y1000.code.networking
 
         }
 
-        private IGameMessage DecodeMovementMessage(MovementPacket movementPacket)
+        private AbstractPositionMessage DecodePositionMessage(PositionPacket positionPacket)
         {
-            var state = (CreatureState)movementPacket.State;
-            return state switch
+            return (MovementType)positionPacket.Type switch
             {
-                CreatureState.WALK => UpdateMovmentStateMessage.FromPacket(movementPacket),
-                CreatureState.IDLE => UpdateMovmentStateMessage.FromPacket(movementPacket),
+                MovementType.MOVE => MoveMessage.FromPacket(positionPacket),
+                MovementType.TURN => TurnMessage.FromPacket(positionPacket),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -46,7 +45,7 @@ namespace y1000.code.networking
         }
 
 
-        private IGameMessage DecodeInterpolations(InterpolationsPacket interpolationsPacket)
+        private IEntityMessage DecodeInterpolations(InterpolationsPacket interpolationsPacket)
         {
             List<IInterpolation> result = new List<IInterpolation>();
             foreach (var packet in interpolationsPacket.Interpolations)
@@ -54,6 +53,12 @@ namespace y1000.code.networking
                 result.Add(DecodeInterpolation(packet));
             }
             return new InterpolationsMessage(result);
+        }
+
+        private InputResponseMessage DecodeInputRespoinse(InputResponsePacket packet)
+        {
+            AbstractPositionMessage positionMessage = DecodePositionMessage(packet.PositionPacket);
+            return new InputResponseMessage(packet.Sequence, positionMessage);
         }
 
 
@@ -65,8 +70,9 @@ namespace y1000.code.networking
             Packet packet = Packet.Parser.ParseFrom(bytes);
             return packet.TypedPacketCase switch
             {
-                Packet.TypedPacketOneofCase.MovementPacket => DecodeMovementMessage(packet.MovementPacket),
+                Packet.TypedPacketOneofCase.PositionPacket => DecodePositionMessage(packet.PositionPacket),
                 Packet.TypedPacketOneofCase.LoginPacket => LoginMessage.FromPacket(packet.LoginPacket),
+                Packet.TypedPacketOneofCase.ResponsePacket => DecodeInputRespoinse(packet.ResponsePacket),
                 Packet.TypedPacketOneofCase.Interpolations => DecodeInterpolations(packet.Interpolations),
                 _ => throw new NotSupportedException()
             };

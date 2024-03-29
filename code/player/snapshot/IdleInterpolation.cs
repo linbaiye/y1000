@@ -23,26 +23,23 @@ namespace y1000.code.player.snapshot
 
         private readonly long _id;
 
-        private readonly long _stamp;
-
         private readonly Point _coordinate;
 
         private readonly Direction _direction;
 
         private readonly Vector2 _position;
 
-        public IdleInterpolation(long stateStart, long snapshotStart, long d) : this(stateStart, snapshotStart, d, 0, 0, Point.Empty, Direction.DOWN)
+        public IdleInterpolation(long stateStart, long snapshotStart, long d) : this(stateStart, snapshotStart, d, 0, Point.Empty, Direction.DOWN)
         {
         }
 
-        public IdleInterpolation(long stateStart, long snapshotStart, long d, long id, long stamp, Point coor, Direction dir)
+        public IdleInterpolation(long stateStart, long snapshotStart, long d, long id, Point coor, Direction dir)
         {
             _direction = dir;
             stateStartAt = stateStart;
             interpolationStartAt = snapshotStart;
             duration = d;
             _id = id;
-            _stamp = stamp;
             _coordinate = coor;
             _position = new Vector2(_coordinate.X * 32, _coordinate.Y * 24);
         }
@@ -72,8 +69,6 @@ namespace y1000.code.player.snapshot
         };
 
         public long Id => _id;
-
-        public long Timestamp => _stamp;
 
         public Vector2 Position => _position;
 
@@ -143,7 +138,7 @@ namespace y1000.code.player.snapshot
 
         public static IdleInterpolation Parse(InterpolationPacket packet)
         {
-            return new IdleInterpolation(packet.StateStart, packet.InterpolationStart, packet.Duration, packet.Id, packet.Timestamp, new Point(packet.X, packet.Y), (Direction)packet.Direction);
+            return new IdleInterpolation(packet.StateStart, packet.InterpolationStart, packet.Duration, packet.Id, new Point(packet.X, packet.Y), (Direction)packet.Direction);
         }
     }
 }

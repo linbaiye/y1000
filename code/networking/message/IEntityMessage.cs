@@ -6,11 +6,8 @@ using Code.Networking.Gen;
 
 namespace y1000.code.networking.message
 {
-    public interface IGameMessage
+    public interface IEntityMessage
     {
-        int Id { get; }
-
-        long Timestamp { get; }
-
+        long Id { get; }
     }
 }

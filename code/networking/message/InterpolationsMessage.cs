@@ -6,7 +6,7 @@ using y1000.code.player;
 
 namespace y1000.code.networking.message
 {
-    public class InterpolationsMessage : IGameMessage
+    public class InterpolationsMessage : IEntityMessage
     {
         private readonly List<IInterpolation> _interpolations;
 
@@ -15,10 +15,9 @@ namespace y1000.code.networking.message
             _interpolations = interpolations;
         }
 
-        public int Id => throw new NotImplementedException();
-
-        public long Timestamp => throw new NotImplementedException();
+        public long Id => throw new NotImplementedException();
 
         public List<IInterpolation> Interpolations => _interpolations;
+
     }
 }

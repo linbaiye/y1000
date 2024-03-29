@@ -34,7 +34,7 @@ namespace y1000.code.networking.message
 
         public abstract MovementType MovementType {get;}
 
-        public int Id => id;
+        public long Id => id;
 
         public long Timestamp => t;
 

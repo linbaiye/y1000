@@ -11,7 +11,7 @@ namespace y1000.code.networking.message
 
         public CreatureState ToState => throw new NotImplementedException();
 
-        public int Id => throw new NotImplementedException();
+        public long Id => throw new NotImplementedException();
 
         public long Timestamp => throw new NotImplementedException();
     }
