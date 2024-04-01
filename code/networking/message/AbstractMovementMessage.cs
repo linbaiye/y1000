@@ -32,7 +32,7 @@ namespace y1000.code.networking.message
 
         public Direction Direction { get; set; }
 
-        public abstract MovementType MovementType {get;}
+        public abstract PositionType MovementType {get;}
 
         public long Id => id;
 

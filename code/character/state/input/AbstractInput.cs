@@ -11,15 +11,11 @@ namespace y1000.code.character.state.input
     {
         private readonly long sequence;
 
-        private readonly long t;
 
         protected AbstractInput(long s)
         {
             sequence = s;
-            t = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         }
-
-        public long Timestamp => t;
 
         public long Sequence => sequence;
 
@@ -32,9 +28,6 @@ namespace y1000.code.character.state.input
             return obj is IInput input &&
                    sequence == input.Sequence;
         }
-
-
-        public String CreatedTime => DateTimeOffset.FromUnixTimeMilliseconds(Timestamp).ToString("yyyy-MM-dd HH:mm:ss.fff");
 
         public override int GetHashCode()
         {

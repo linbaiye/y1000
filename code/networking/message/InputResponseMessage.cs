@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
 namespace y1000.code.networking.message
@@ -20,6 +21,16 @@ namespace y1000.code.networking.message
 
         public long Sequence => _sequence;
 
+        public T CastMessage<T>() where T : AbstractPositionMessage
+        {
+            return (T)_positionMessage;
+        }
+
         public AbstractPositionMessage PositionMessage => _positionMessage;
+
+        public override string ToString()
+        {
+            return "Seq:" + _sequence + ", Msg:" + _positionMessage;
+        }
     }
 }

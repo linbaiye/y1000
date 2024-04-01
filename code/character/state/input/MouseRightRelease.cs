@@ -29,7 +29,7 @@ namespace y1000.code.character.state.input
 
         public override string ToString()
         {
-            return JsonSerializer.Serialize(this);
+            return "Type: RightRelease," + ", Seq: " + Sequence;
         }
     }
 }

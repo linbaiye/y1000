@@ -18,5 +18,10 @@ namespace y1000.code.networking.message
         {
             return new MoveMessage(positionPacket.Id, new Vector2I(positionPacket.X, positionPacket.Y), (Direction)positionPacket.Direction);
         }
+
+        public override string ToString()
+        {
+            return FormatLog("MoveMessage");
+        }
     }
 }

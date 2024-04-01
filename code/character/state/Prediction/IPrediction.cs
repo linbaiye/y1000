@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using y1000.code.networking.message;
 using y1000.code.networking.message.character;
 
 namespace y1000.code.character.state.Prediction
@@ -10,6 +11,6 @@ namespace y1000.code.character.state.Prediction
     {
         IInput Input { get; }
 
-        bool SyncWith(ICharacterMessage message);
+        bool SyncWith(InputResponseMessage message);
     }
 }

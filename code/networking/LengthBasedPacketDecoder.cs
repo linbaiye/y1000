@@ -24,10 +24,11 @@ namespace y1000.code.networking
 
         private AbstractPositionMessage DecodePositionMessage(PositionPacket positionPacket)
         {
-            return (MovementType)positionPacket.Type switch
+            return (PositionType)positionPacket.Type switch
             {
-                MovementType.MOVE => MoveMessage.FromPacket(positionPacket),
-                MovementType.TURN => TurnMessage.FromPacket(positionPacket),
+                PositionType.MOVE => MoveMessage.FromPacket(positionPacket),
+                PositionType.TURN => TurnMessage.FromPacket(positionPacket),
+                PositionType.SET => SetPositionMessage.FromPacket(positionPacket),
                 _ => throw new NotSupportedException(),
             };
         }

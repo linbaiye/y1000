@@ -4,6 +4,7 @@ using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
+using NLog;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -49,6 +50,8 @@ public partial class Game : Node2D, IConnectionEventListener
 	private readonly InputSampler inputSampler = new InputSampler();
 
 	private Character? _character;
+
+	private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
 	private enum ConnectionState
 	{
@@ -167,9 +170,9 @@ public partial class Game : Node2D, IConnectionEventListener
 	private void HandleMouseInput(InputEventMouse eventMouse)
 	{
 		var worldMap = GetNode<WorldMap>("MapLayer");
-		if (worldMap != null && worldMap.Map != null)
+		if (worldMap != null && worldMap.Map != null && channel != null)
 		{
-			_character?.HandleInputEvent(eventMouse);
+			_character?.HandleInputEvent(eventMouse, channel);
 			//character?.HandleInput(eventMouse);
 			//character?.HandleMouseInput(worldMap.Map, creatures.Values, eventMouse);
 		}
@@ -338,9 +341,9 @@ public partial class Game : Node2D, IConnectionEventListener
 			{
 				ShowPlayer(showPlayer);
 			}
-			else if (message is ICharacterMessage characterMessage)
+			else if (message is InputResponseMessage responseMessage)
 			{
-				_character?.HandleMessage(characterMessage);
+				_character?.HandleMessage(responseMessage);
 			}
 		}
 	}

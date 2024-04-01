@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Godot;
 
@@ -27,5 +28,11 @@ namespace y1000.code.networking.message
         public Direction Direction => _direction;
 
         public long Id => _id;
+
+
+        protected string FormatLog(string type)
+        {
+            return "Type : " + type + ", coor: " + _coordinate + ", Dir:" + _direction;
+        }
     }
 }

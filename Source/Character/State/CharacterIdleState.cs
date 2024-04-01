@@ -50,11 +50,11 @@ namespace y1000.Source.Character.State
             var nextCoor = character.Coordinate.Move(rightClick.Direction);
             if (character.Realm.CanMove(nextCoor))
             {
-                return new MovedPrediction(rightClick, character.Coordinate);
+                return new MovePrediction(rightClick, character.Coordinate, rightClick.Direction);
             }
             else
             {
-                return new IdlePrediction(rightClick, nextCoor);
+                return new TurnPrediction(rightClick, character.Coordinate, rightClick.Direction);
             }
         }
 

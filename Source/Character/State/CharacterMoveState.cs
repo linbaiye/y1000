@@ -36,7 +36,7 @@ namespace y1000.Source.Character.State
 
         public override bool RespondsTo(IInput input)
         {
-            return input is RightMousePressedMotion || input is MouseRightRelease;
+            return input is RightMousePressedMotion || input is MouseRightRelease || input is MouseRightClick;
         }
 
         public override void OnMouseRightClicked(Character character, MouseRightClick rightClick)
@@ -55,17 +55,18 @@ namespace y1000.Source.Character.State
             int animationLengthMillis = SpriteManager.AnimationLength;
             var velocity = VectorUtil.Velocity(character.Direction);
             character.Position += velocity * ((float)deltaMillis / animationLengthMillis);
-            if (ElpasedMillis >= animationLengthMillis)
+            if (ElpasedMillis <= animationLengthMillis)
             {
-                character.Position = character.Position.Snapped(VectorUtil.TILE_SIZE);
-                if (_input is MouseRightRelease)
-                {
-                    character.ChangeState(CharacterIdleState.Create(character.IsMale));
-                }
-                else
-                {
-                    character.ChangeState(Create(character.IsMale));
-                }
+                return;
+            }
+            character.Position = character.Position.Snapped(VectorUtil.TILE_SIZE);
+            if (_input is MouseRightRelease)
+            {
+                character.ChangeState(CharacterIdleState.Create(character.IsMale));
+            }
+            else
+            {
+                character.ChangeState(Create(character.IsMale));
             }
         }
 
@@ -82,7 +83,8 @@ namespace y1000.Source.Character.State
 
         public override IPrediction Predict(Character character, MouseRightRelease rightClick)
         {
-            return new IdlePrediction(rightClick, character.Coordinate.Move(character.Direction));
+            var next = character.Coordinate.Move(character.Direction);
+            return new SetPositionPrediction(rightClick, next, character.Direction);
         }
     }
 }

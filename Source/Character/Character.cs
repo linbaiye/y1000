@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetty.Transport.Channels;
 using Godot;
+using NLog.Fluent;
 using y1000.code;
 using y1000.code.character;
 using y1000.code.character.state;
@@ -11,6 +13,7 @@ using y1000.code.character.state.Prediction;
 using y1000.code.networking.message;
 using y1000.code.networking.message.character;
 using y1000.code.player;
+using y1000.code.util;
 using y1000.code.world;
 using y1000.Source.Character.State;
 using CharacterIdleState = y1000.Source.Character.State.CharacterIdleState;
@@ -57,14 +60,15 @@ namespace y1000.Source.Character
             _state.Process(this, (long)(delta * 1000));
         }
 
-        private void HandleInput<T>(Func<Character, T, IPrediction> predictionFunc, Action<Character, T> handler, T input) where T : IInput
+        private void HandleInput<T>(Func<Character, T, IPrediction> predictionFunc, Action<Character, T> handler, T input, IChannel channel) where T : IInput
         {
             var prediction = predictionFunc.Invoke(this, input);
             _predictionManager.Save(prediction);
             handler.Invoke(this, input);
+            channel.WriteAndFlushAsync(input);
         }
 
-        public void HandleInputEvent(InputEvent @event)
+        public void HandleInputEvent(InputEvent @event, IChannel channel)
         {
             var input = inputSampler.Sample(@event, GetLocalMousePosition());
             if (input == null)
@@ -78,21 +82,22 @@ namespace y1000.Source.Character
             switch (input.Type)
             {
                 case InputType.MOUSE_RIGH_CLICK:
-                    HandleInput(_state.Predict, _state.OnMouseRightClicked, (MouseRightClick)input);
+                    HandleInput(_state.Predict, _state.OnMouseRightClicked, (MouseRightClick)input, channel);
                     break;
                 case InputType.MOUSE_RIGHT_RELEASE:
-                    HandleInput(_state.Predict, _state.OnMouseRightReleased, (MouseRightRelease)input);
+                    HandleInput(_state.Predict, _state.OnMouseRightReleased, (MouseRightRelease)input, channel);
                     break;
             }
         }
 
         public bool IsMale => true;
 
-        public void HandleMessage(ICharacterMessage characterMessage)
+        public void HandleMessage(InputResponseMessage message)
         {
-            bool ret = _predictionManager.Reconcile(characterMessage);
+            bool ret = _predictionManager.Reconcile(message);
             if (!ret)
             {
+                LOG.Debug("Bad message");
             }
         }
 

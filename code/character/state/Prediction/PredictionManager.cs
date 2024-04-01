@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NLog;
+using y1000.code.networking.message;
 using y1000.code.networking.message.character;
 
 namespace y1000.code.character.state.Prediction
@@ -9,7 +11,7 @@ namespace y1000.code.character.state.Prediction
     public class PredictionManager
     {
         private readonly CircularBuffer<IPrediction> _predictions;
-
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         public PredictionManager()
         {
@@ -26,18 +28,23 @@ namespace y1000.code.character.state.Prediction
         }
 
 
-        public bool Reconcile(ICharacterMessage message)
+        public bool Reconcile(InputResponseMessage message)
         {
             while (!_predictions.IsEmpty)
             {
                 IPrediction prediction = _predictions.Front();
-                if (prediction.Input.Sequence <= message.InputSeqeunce)
+                if (prediction.Input.Sequence == message.Sequence)
                 {
                     _predictions.PopFront();
                     if (prediction.SyncWith(message))
                     {
                         return true;
                     }
+                }
+                else if (prediction.Input.Sequence < message.Sequence)
+                {
+                    logger.Info("Lost input response for input {0}.", prediction.Input);
+                    _predictions.PopFront();
                 }
                 else
                 {
