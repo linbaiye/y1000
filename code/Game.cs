@@ -16,6 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using y1000.code;
 using y1000.code.character.state.input;
+using y1000.code.character.state.Prediction;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
@@ -48,6 +49,8 @@ public partial class Game : Node2D, IConnectionEventListener
 	private Dictionary<long, OtherPlayer> otherPlayers = new Dictionary<long, OtherPlayer>();
 
 	private readonly InputSampler inputSampler = new InputSampler();
+
+	private readonly PredictionManager _predictionManager = new PredictionManager();
 
 	private Character? _character;
 
@@ -167,14 +170,22 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	public WorldMap WorldMap => GetNode<WorldMap>("MapLayer");
 
+
+
 	private void HandleMouseInput(InputEventMouse eventMouse)
 	{
 		var worldMap = GetNode<WorldMap>("MapLayer");
-		if (worldMap != null && worldMap.Map != null && channel != null)
+		if (worldMap != null && worldMap.Map != null && channel != null && _character != null)
 		{
-			_character?.HandleInputEvent(eventMouse, channel);
-			//character?.HandleInput(eventMouse);
-			//character?.HandleMouseInput(worldMap.Map, creatures.Values, eventMouse);
+			var mousePos = _character.GetLocalMousePosition();
+			var input = inputSampler.Sample(eventMouse, mousePos);
+			if (input == null || !_character.CanHandle(input)) 
+			{
+				return;
+			}
+			_predictionManager.Save(_character.Predict(input));
+			_character.HandleInput(input);
+			channel.WriteAndFlushAsync(input);
 		}
 		if (eventMouse is InputEventMouseButton button)
 		{
@@ -343,7 +354,7 @@ public partial class Game : Node2D, IConnectionEventListener
 			}
 			else if (message is InputResponseMessage responseMessage)
 			{
-				_character?.HandleMessage(responseMessage);
+				_predictionManager.Reconcile(responseMessage);
 			}
 		}
 	}

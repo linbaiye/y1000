@@ -28,29 +28,42 @@ namespace y1000.Source.Character.State
 
         private const int SPRITE_LENGTH_MILLIS = 100;
 
-        private IInput? _input;
+        private readonly AbstractRightClickInput _currentInput;
 
-        public CharacterMoveState(AnimatedSpriteManager spriteManager) : base(spriteManager)
+        private IInput? _lastInput;
+
+        public CharacterMoveState(AnimatedSpriteManager spriteManager, AbstractRightClickInput currentInput) : base(spriteManager)
         {
+            _currentInput = currentInput;
         }
 
-        public override bool RespondsTo(IInput input)
+        public override bool CanHandle(IInput input)
         {
-            return input is RightMousePressedMotion || input is MouseRightRelease || input is MouseRightClick;
+            return _lastInput == null && (input is RightMousePressedMotion || input is MouseRightRelease || input is MouseRightClick);
         }
 
         public override void OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
-            throw new NotImplementedException();
+            _lastInput ??= rightClick;
+        }
+
+        private IPrediction NextMovePredict(Character character, AbstractRightClickInput input)
+        {
+            var newCoor = character.Coordinate.Move(character.Direction);
+            return new MovePrediction(input, newCoor, input.Direction);;
         }
 
         public override IPrediction Predict(Character character, MouseRightClick rightClick)
         {
-            throw new NotImplementedException();
+            return NextMovePredict(character, rightClick);
         }
 
         public override void Process(Character character, long deltaMillis)
         {
+            if (ElpasedMillis == 0)
+            {
+                character.Direction = _currentInput.Direction;
+            }
             ElpasedMillis += deltaMillis;
             int animationLengthMillis = SpriteManager.AnimationLength;
             var velocity = VectorUtil.Velocity(character.Direction);
@@ -60,31 +73,45 @@ namespace y1000.Source.Character.State
                 return;
             }
             character.Position = character.Position.Snapped(VectorUtil.TILE_SIZE);
-            if (_input is MouseRightRelease)
+            if (_lastInput is MouseRightRelease)
             {
                 character.ChangeState(CharacterIdleState.Create(character.IsMale));
             }
+            else if (_lastInput is AbstractRightClickInput input)
+            {
+                character.ChangeState(Create(character.IsMale, input));
+            }
             else
             {
-                character.ChangeState(Create(character.IsMale));
+                character.ChangeState(Create(character.IsMale, _currentInput));
             }
         }
 
-        public static CharacterMoveState Create(bool forMale)
+        public static CharacterMoveState Create(bool forMale, AbstractRightClickInput input)
         {
             var asm = AnimatedSpriteManager.Normal(SPRITE_LENGTH_MILLIS, SPRITE_OFFSET, SpriteContainer.LoadMalePlayerSprites("N02"));
-            return new CharacterMoveState(asm);
+            return new CharacterMoveState(asm, input);
         }
 
         public override void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
         {
-            _input = mouseRightRelease;
+            _lastInput ??= mouseRightRelease;
         }
 
-        public override IPrediction Predict(Character character, MouseRightRelease rightClick)
+        public override IPrediction Predict(Character character, MouseRightRelease rightRelease)
         {
             var next = character.Coordinate.Move(character.Direction);
-            return new SetPositionPrediction(rightClick, next, character.Direction);
+            return new SetPositionPrediction(rightRelease, next, character.Direction);
+        }
+
+        public override void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
+        {
+            _lastInput ??= mousePressedMotion;
+        }
+
+        public override IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion)
+        {
+            return NextMovePredict(character, mousePressedMotion);
         }
     }
 }

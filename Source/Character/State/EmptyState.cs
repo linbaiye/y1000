@@ -48,7 +48,17 @@ namespace y1000.Source.Character.State
             throw new NotImplementedException();
         }
 
-        public bool RespondsTo(IInput input)
+        public bool CanHandle(IInput input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion)
         {
             throw new NotImplementedException();
         }

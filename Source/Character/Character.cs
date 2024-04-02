@@ -22,22 +22,15 @@ namespace y1000.Source.Character
 {
     public partial class Character : Node2D, IBody
     {
-        //private Character? _character;
         private ICharacterState _state;
 
         public Direction Direction { get; set; }
-
-        private readonly InputSampler inputSampler;
-
-        private readonly PredictionManager _predictionManager;
 
         public IRealm Realm { get; set; }
 
         private Character()
         {
-            inputSampler = new InputSampler();
             _state = EmptyState.Instance;
-            _predictionManager = new PredictionManager();
             Realm = IRealm.Empty;
         }
 
@@ -45,8 +38,6 @@ namespace y1000.Source.Character
         {
             _state = state;
         }
-
-
 
         public override void _Ready()
         {
@@ -60,49 +51,55 @@ namespace y1000.Source.Character
             _state.Process(this, (long)(delta * 1000));
         }
 
-        private void HandleInput<T>(Func<Character, T, IPrediction> predictionFunc, Action<Character, T> handler, T input, IChannel channel) where T : IInput
+        public bool CanHandle(IInput input)
         {
-            var prediction = predictionFunc.Invoke(this, input);
-            _predictionManager.Save(prediction);
-            handler.Invoke(this, input);
-            channel.WriteAndFlushAsync(input);
+            return _state.CanHandle(input);
         }
 
-        public void HandleInputEvent(InputEvent @event, IChannel channel)
+        public IPrediction Predict(IInput input)
         {
-            var input = inputSampler.Sample(@event, GetLocalMousePosition());
-            if (input == null)
+            switch (input.Type)
             {
-                return;
+                case InputType.MOUSE_RIGH_CLICK:
+                    return _state.Predict(this, (MouseRightClick)input);
+                case InputType.MOUSE_RIGHT_RELEASE:
+                    return _state.Predict(this, (MouseRightRelease)input);
+                case InputType.MOUSE_RIGHT_MOTION:
+                    return _state.Predict(this, (RightMousePressedMotion)input);
+                default:
+                    throw new NotSupportedException();
             }
-            if (!_state.RespondsTo(input))
+        }
+
+        public bool CanMoveOneUnit(Direction direction)
+        {
+            return Realm.CanMove(Coordinate.Move(direction));
+        }
+
+        public void HandleInput(IInput input)
+        {
+            if (!_state.CanHandle(input))
             {
                 return;
             }
             switch (input.Type)
             {
                 case InputType.MOUSE_RIGH_CLICK:
-                    HandleInput(_state.Predict, _state.OnMouseRightClicked, (MouseRightClick)input, channel);
+                    _state.OnMouseRightClicked(this, (MouseRightClick)input);
                     break;
                 case InputType.MOUSE_RIGHT_RELEASE:
-                    HandleInput(_state.Predict, _state.OnMouseRightReleased, (MouseRightRelease)input, channel);
+                    _state.OnMouseRightReleased(this, (MouseRightRelease)input);
+                    break;
+                case InputType.MOUSE_RIGHT_MOTION:
+                    _state.OnMousePressedMotion(this, (RightMousePressedMotion)input);
                     break;
             }
         }
 
         public bool IsMale => true;
 
-        public void HandleMessage(InputResponseMessage message)
-        {
-            bool ret = _predictionManager.Reconcile(message);
-            if (!ret)
-            {
-                LOG.Debug("Bad message");
-            }
-        }
 
         public OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
-
 
         public static Character LogedIn(LoginMessage message, IRealm realm)
         {

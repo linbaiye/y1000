@@ -19,11 +19,15 @@ namespace y1000.Source.Character.State
         
         IPrediction Predict(Character character, MouseRightRelease rightClick);
 
+        void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion);
+        
+        IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion);
+
         void Process(Character character, long deltaMillis);
 
         OffsetTexture BodyOffsetTexture(Character character);
 
-        bool RespondsTo(IInput input);
+        bool CanHandle(IInput input);
 
     }
 }

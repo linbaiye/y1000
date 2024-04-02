@@ -36,13 +36,14 @@ namespace y1000.Source.Character.State
 
         public abstract void Process(Character character, long deltaMillis);
 
-        public abstract bool RespondsTo(IInput input);
+        public abstract bool CanHandle(IInput input);
 
         public abstract void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease);
 
-        public virtual IPrediction Predict(Character character, MouseRightRelease rightClick)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IPrediction Predict(Character character, MouseRightRelease rightClick);
+
+        public abstract void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion);
+
+        public abstract IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion);
     }
 }

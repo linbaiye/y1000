@@ -1,14 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using y1000.code;
 using y1000.code.character.state;
 using y1000.code.character.state.input;
 using y1000.code.character.state.Prediction;
-using y1000.code.player;
-using y1000.code.util;
 
 namespace y1000.Source.Character.State
 {
@@ -31,31 +26,39 @@ namespace y1000.Source.Character.State
         {
         }
 
-        public override void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        private IPrediction ClickPredict(Character character, AbstractRightClickInput input)
         {
-            character.Direction = rightClick.Direction;
-            var nextCoor = character.Coordinate.Move(rightClick.Direction);
-            if (character.Realm.CanMove(nextCoor))
+            if (character.CanMoveOneUnit(input.Direction))
             {
-                character.ChangeState(CharacterMoveState.Create(character.IsMale));
+                return new MovePrediction(input, character.Coordinate, input.Direction);
             }
             else
             {
+                return new TurnPrediction(input, character.Coordinate, input.Direction);
+            }
+        }
+
+        private void MoveByClick(Character character, AbstractRightClickInput input)
+        {
+            if (character.CanMoveOneUnit(input.Direction))
+            {
+                character.ChangeState(CharacterMoveState.Create(character.IsMale, input));
+            }
+            else
+            {
+                character.Direction = input.Direction;
                 character.ChangeState(Create(character.IsMale));
             }
         }
 
+        public override void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        {
+            MoveByClick(character, rightClick);
+        }
+
         public override IPrediction Predict(Character character, MouseRightClick rightClick)
         {
-            var nextCoor = character.Coordinate.Move(rightClick.Direction);
-            if (character.Realm.CanMove(nextCoor))
-            {
-                return new MovePrediction(rightClick, character.Coordinate, rightClick.Direction);
-            }
-            else
-            {
-                return new TurnPrediction(rightClick, character.Coordinate, rightClick.Direction);
-            }
+            return ClickPredict(character, rightClick);
         }
 
         public override void Process(Character character, long deltaMillis)
@@ -63,9 +66,9 @@ namespace y1000.Source.Character.State
             ElpasedMillis += deltaMillis;
         }
 
-        public override bool RespondsTo(IInput input)
+        public override bool CanHandle(IInput input)
         {
-            return input is MouseRightClick;
+            return input is MouseRightClick || input is RightMousePressedMotion;
         }
 
         public static CharacterIdleState ForMale()
@@ -83,6 +86,21 @@ namespace y1000.Source.Character.State
         public override void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
         {
             throw new NotImplementedException();
+        }
+
+        public override IPrediction Predict(Character character, MouseRightRelease rightClick)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
+        {
+            MoveByClick(character, mousePressedMotion);
+        }
+
+        public override IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion)
+        {
+            return ClickPredict(character, mousePressedMotion);
         }
     }
 }
