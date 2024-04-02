@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.creatures;
+using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;

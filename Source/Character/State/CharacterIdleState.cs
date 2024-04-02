@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using y1000.code;
 using y1000.code.character.state;
-using y1000.code.character.state.input;
-using y1000.code.character.state.Prediction;
+using y1000.Source.Character.State.Prediction;
+using y1000.Source.Input;
 
 namespace y1000.Source.Character.State
 {
@@ -26,7 +26,7 @@ namespace y1000.Source.Character.State
         {
         }
 
-        private IPrediction ClickPredict(Character character, AbstractRightClickInput input)
+        private IPrediction PredictRightClick(Character character, AbstractRightClickInput input)
         {
             if (character.CanMoveOneUnit(input.Direction))
             {
@@ -58,7 +58,7 @@ namespace y1000.Source.Character.State
 
         public override IPrediction Predict(Character character, MouseRightClick rightClick)
         {
-            return ClickPredict(character, rightClick);
+            return PredictRightClick(character, rightClick);
         }
 
         public override void Process(Character character, long deltaMillis)
@@ -68,7 +68,7 @@ namespace y1000.Source.Character.State
 
         public override bool CanHandle(IInput input)
         {
-            return input is MouseRightClick || input is RightMousePressedMotion;
+            return input is AbstractRightClickInput;
         }
 
         public static CharacterIdleState ForMale()
@@ -88,7 +88,7 @@ namespace y1000.Source.Character.State
             throw new NotImplementedException();
         }
 
-        public override IPrediction Predict(Character character, MouseRightRelease rightClick)
+        public override IPrediction Predict(Character character, MouseRightRelease release)
         {
             throw new NotImplementedException();
         }
@@ -100,7 +100,7 @@ namespace y1000.Source.Character.State
 
         public override IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion)
         {
-            return ClickPredict(character, mousePressedMotion);
+            return PredictRightClick(character, mousePressedMotion);
         }
     }
 }

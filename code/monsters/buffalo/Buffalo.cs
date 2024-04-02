@@ -1,11 +1,9 @@
-using Godot;
-using System;
 using System.Drawing;
-using y1000.code;
+using Godot;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
-using y1000.code.monsters;
-using y1000.code.player;
+
+namespace y1000.code.monsters.buffalo;
 
 public partial class Buffalo : AbstractCreature
 {
@@ -18,7 +16,7 @@ public partial class Buffalo : AbstractCreature
 
 	private Direction initDirection;
 
-    private void Initiliaze(Point i, SpriteContainer spriteContainer, long id, Direction direction)
+	private void Initiliaze(Point i, SpriteContainer spriteContainer, long id, Direction direction)
 	{
 		initCoordinate = i;
 		this.id = id;
@@ -26,10 +24,10 @@ public partial class Buffalo : AbstractCreature
 		initDirection = direction;
 	}
 
-    public override long Id => id;
+	public override long Id => id;
 
-    public override void _Ready()
-    {
+	public override void _Ready()
+	{
 		SetupAnimationPlayer();
 		ChangeState(new SimpleCreatureIdleState(this, initDirection));
 		ZIndex = 2;
@@ -37,7 +35,7 @@ public partial class Buffalo : AbstractCreature
 		ZAsRelative = true;
 		Coordinate = initCoordinate;
 		CurrentState.PlayAnimation();
-    }
+	}
 
 
 	public static Buffalo Load(Point coordinate, long id, Direction direction)
@@ -53,4 +51,3 @@ public partial class Buffalo : AbstractCreature
 		return Load(coordinate, id, Direction.DOWN);
 	}
 }
-

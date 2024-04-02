@@ -32,7 +32,7 @@ namespace y1000.code.networking.message
 
         protected string FormatLog(string type)
         {
-            return "Type : " + type + ", coor: " + _coordinate + ", Dir:" + _direction;
+            return "[Type: " + type + ", coor: " + _coordinate + ", Dir:" + _direction + "]";
         }
     }
 }

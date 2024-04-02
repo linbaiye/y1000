@@ -1,6 +1,6 @@
 using Godot;
-using System;
-using y1000.code.creatures;
+
+namespace y1000.code.util;
 
 public partial class HoverRect: TextureRect
 {
@@ -17,14 +17,14 @@ public partial class HoverRect: TextureRect
 	public void RectMouseEntered()
 	{
 		/*var parent = GetParent<Sprite2D>();
-		if (parent != null)
-		{
-			int width = (parent.Texture.GetWidth() - 20) / 2;
-			int height = parent.Texture.GetHeight() / 2;
-			Size = new Vector2(parent.Texture.GetWidth() - 20, parent.Texture.GetHeight());
-			var p1 = parent.GetParent<StaticBody2D>();
-			Position = new Vector2(width, height);
-		}*/
+	if (parent != null)
+	{
+		int width = (parent.Texture.GetWidth() - 20) / 2;
+		int height = parent.Texture.GetHeight() / 2;
+		Size = new Vector2(parent.Texture.GetWidth() - 20, parent.Texture.GetHeight());
+		var p1 = parent.GetParent<StaticBody2D>();
+		Position = new Vector2(width, height);
+	}*/
 		GetNode<Label>("Label").Show();
 	}
 

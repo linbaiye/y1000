@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Godot;
 using NLog;
 using y1000.code.character.state;
-using y1000.code.character.state.input;
+using y1000.code.character.state.snapshot;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.networking;
@@ -16,6 +16,7 @@ using y1000.code.player;
 using y1000.code.player.state;
 using y1000.code.util;
 using y1000.code.world;
+using y1000.Source.Input;
 
 namespace y1000.code.character
 {
@@ -69,7 +70,7 @@ namespace y1000.code.character
 
         public bool CanMove(Point coordinate)
         {
-            var parent = GetParent<Game>();
+            var parent = GetParent<Source.Game>();
             return parent != null && parent.CanMove(coordinate);
         }
 
@@ -77,7 +78,7 @@ namespace y1000.code.character
         {
             //Console.Write("Test");
             LOG.Debug("Sending message " + message.ToString());
-            var parent = GetParent<Game>();
+            var parent = GetParent<Source.Game>();
             parent.SendMessage(message);
         }
 
@@ -144,7 +145,7 @@ namespace y1000.code.character
             }
             logger.Info("Sampled inputType " + input.Type);
             switch (input.Type) {
-                case InputType.MOUSE_RIGH_CLICK:
+                case InputType.MOUSE_RIGHT_CLICK:
                     MyState.OnMouseRightClicked(this, (MouseRightClick)input);
                     break;
                 case InputType.MOUSE_RIGHT_RELEASE:

@@ -1,8 +1,8 @@
-namespace y1000.code.character
+namespace y1000.Source.Input
 {
     public enum InputType
     {
-        MOUSE_RIGH_CLICK = 1,
+        MOUSE_RIGHT_CLICK = 1,
 
         MOUSE_RIGHT_RELEASE = 2,
 

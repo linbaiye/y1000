@@ -20,5 +20,7 @@
     <Compile Remove="Tests\**" />
     <EmbeddedResource Remove="Tests\**" />
     <None Remove="Tests\**" />
+    <Compile Remove="Source\Input\Event\**" />
+    <EmbeddedResource Remove="Source\Input\Event\**" />
   </ItemGroup>
 </Project>

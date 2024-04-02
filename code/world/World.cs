@@ -1,7 +1,8 @@
-using Godot;
 using System;
-using y1000.code;
+using Godot;
 using y1000.code.item;
+
+namespace y1000.code.world;
 
 public partial class World : Node2D, IItemContainer
 {
@@ -16,31 +17,31 @@ public partial class World : Node2D, IItemContainer
 	}
 
 
-    /*public override void _Input(InputEvent @event)
-    {
-		if (@event is InputEventMouseButton button)
+	/*public override void _Input(InputEvent @event)
+{
+	if (@event is InputEventMouseButton button)
+	{
+		if (button.DoubleClick)
 		{
-			if (button.DoubleClick)
-			{
-				GD.Print("rteceived in world: " + button.AsText());
-			}
+			GD.Print("rteceived in world: " + button.AsText());
 		}
-    }*/
+	}
+}*/
 
-    public bool RemoveItem(IItem item)
-    {
-        throw new NotImplementedException();
-    }
+	public bool RemoveItem(IItem item)
+	{
+		throw new NotImplementedException();
+	}
 
-    public void PutItem(IItem item)
-    {
-        throw new NotImplementedException();
-    }
+	public void PutItem(IItem item)
+	{
+		throw new NotImplementedException();
+	}
 
-    public bool ContainsItem(IItem item)
-    {
-        throw new NotImplementedException();
-    }
+	public bool ContainsItem(IItem item)
+	{
+		throw new NotImplementedException();
+	}
 
 	public bool AtCursor()
 	{
@@ -48,7 +49,7 @@ public partial class World : Node2D, IItemContainer
 		var mousePos = GetTree().Root.GetMousePosition();
 		var end = map.GetUsedRect().End;
 		return mousePos.X <= end.X * VectorUtil.TILE_SIZE_X && mousePos.X >= 0 &&
-				mousePos.Y <= end.Y * VectorUtil.TILE_SIZE_Y && mousePos.Y >= 0;
+		       mousePos.Y <= end.Y * VectorUtil.TILE_SIZE_Y && mousePos.Y >= 0;
 	}
 
 }

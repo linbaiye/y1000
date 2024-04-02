@@ -21,7 +21,7 @@ namespace y1000.code.networking.message
 
         public override string ToString()
         {
-            return FormatLog("MoveMessage");
+            return FormatLog("Move");
         }
     }
 }

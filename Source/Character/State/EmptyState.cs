@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.character.state;
-using y1000.code.character.state.input;
-using y1000.code.character.state.Prediction;
 using y1000.code.player;
+using y1000.Source.Character.State.Prediction;
+using y1000.Source.Input;
 
 namespace y1000.Source.Character.State
 {

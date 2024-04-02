@@ -20,7 +20,7 @@ namespace y1000.code.networking.message
         }
         public override string ToString()
         {
-            return FormatLog("SetPositionMessage");
+            return FormatLog("SetPosition");
         }
     }
 }

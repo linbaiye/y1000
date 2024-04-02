@@ -8,15 +8,16 @@ using NLog.Fluent;
 using y1000.code;
 using y1000.code.character;
 using y1000.code.character.state;
-using y1000.code.character.state.input;
-using y1000.code.character.state.Prediction;
 using y1000.code.networking.message;
 using y1000.code.networking.message.character;
 using y1000.code.player;
 using y1000.code.util;
 using y1000.code.world;
 using y1000.Source.Character.State;
+using y1000.Source.Character.State.Prediction;
+using y1000.Source.Input;
 using CharacterIdleState = y1000.Source.Character.State.CharacterIdleState;
+using ICharacterState = y1000.Source.Character.State.ICharacterState;
 
 namespace y1000.Source.Character
 {
@@ -58,23 +59,32 @@ namespace y1000.Source.Character
 
         public IPrediction Predict(IInput input)
         {
-            switch (input.Type)
+            return input.Type switch
             {
-                case InputType.MOUSE_RIGH_CLICK:
-                    return _state.Predict(this, (MouseRightClick)input);
-                case InputType.MOUSE_RIGHT_RELEASE:
-                    return _state.Predict(this, (MouseRightRelease)input);
-                case InputType.MOUSE_RIGHT_MOTION:
-                    return _state.Predict(this, (RightMousePressedMotion)input);
-                default:
-                    throw new NotSupportedException();
-            }
+                InputType.MOUSE_RIGHT_CLICK => _state.Predict(this, (MouseRightClick)input),
+                InputType.MOUSE_RIGHT_RELEASE => _state.Predict(this, (MouseRightRelease)input),
+                InputType.MOUSE_RIGHT_MOTION => _state.Predict(this, (RightMousePressedMotion)input),
+                _ => throw new NotSupportedException()
+            };
+        }
+
+        public void Rewind(AbstractPositionMessage positionMessage)
+        {
+            Position = positionMessage.Coordinate.ToPosition();
+            Direction = positionMessage.Direction;
         }
 
         public bool CanMoveOneUnit(Direction direction)
         {
-            return Realm.CanMove(Coordinate.Move(direction));
+            return CanMoveTo(Coordinate.Move(direction));
         }
+
+
+        public bool CanMoveTo(Vector2I point)
+        {
+            return Realm.CanMove(point);
+        }
+
 
         public void HandleInput(IInput input)
         {
@@ -84,7 +94,7 @@ namespace y1000.Source.Character
             }
             switch (input.Type)
             {
-                case InputType.MOUSE_RIGH_CLICK:
+                case InputType.MOUSE_RIGHT_CLICK:
                     _state.OnMouseRightClicked(this, (MouseRightClick)input);
                     break;
                 case InputType.MOUSE_RIGHT_RELEASE:
@@ -93,6 +103,8 @@ namespace y1000.Source.Character
                 case InputType.MOUSE_RIGHT_MOTION:
                     _state.OnMousePressedMotion(this, (RightMousePressedMotion)input);
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -101,7 +113,7 @@ namespace y1000.Source.Character
 
         public OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
 
-        public static Character LogedIn(LoginMessage message, IRealm realm)
+        public static Character LoggedIn(LoginMessage message, IRealm realm)
         {
             PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
             var character = scene.Instantiate<Character>();

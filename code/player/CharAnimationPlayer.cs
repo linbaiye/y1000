@@ -1,7 +1,7 @@
-using Godot;
-using Godot.Collections;
 using System;
-using System.Collections.Generic;
+using Godot;
+
+namespace y1000.code.player;
 
 public partial class CharAnimationPlayer : AnimationPlayer
 {

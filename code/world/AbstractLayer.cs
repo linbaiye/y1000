@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Godot;
-using y1000.code;
-using y1000.code.world;
+
+namespace y1000.code.world;
 
 public abstract partial class AbstractLayer : Node2D
 {
-    protected void Layout(string layer)
-    {
-        var gameMap = GameMap.Load("res://assets/maps/prison/prison.map");
-        gameMap?.ForeachCell((cell, x, y) => Layout("object".Equals(layer) ? cell.ObjectId : cell.RoofId, x, y, layer));
-    }
+	protected void Layout(string layer)
+	{
+		var gameMap = GameMap.Load("res://assets/maps/prison/prison.map");
+		gameMap?.ForeachCell((cell, x, y) => Layout("object".Equals(layer) ? cell.ObjectId : cell.RoofId, x, y, layer));
+	}
 
-    private void Layout(int objectId, int x, int y, string layer)
-    {
+	private void Layout(int objectId, int x, int y, string layer)
+	{
 		var dirpath = "res://assets/maps/prison/" + layer + "/" + objectId;
 		var imagePath = dirpath + "/image.png";
 		if (!Godot.FileAccess.FileExists(imagePath))

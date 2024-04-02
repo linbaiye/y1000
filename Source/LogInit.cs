@@ -1,6 +1,7 @@
 using Godot;
 using NLog;
-using System;
+
+namespace y1000.Source;
 
 public partial class LogInit : Node
 {

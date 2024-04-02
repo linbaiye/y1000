@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace y1000.code.control;
 
 public partial class SkillPanel1 : Panel
 {

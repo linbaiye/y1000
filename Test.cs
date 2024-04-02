@@ -1,12 +1,12 @@
+using System.Net;
 using DotNetty.Codecs;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
-using System;
-using System.Net;
 using y1000.code.networking;
-using y1000.code.networking.message;
+
+namespace y1000;
 
 public partial class Test : Node2D
 {
@@ -24,15 +24,15 @@ public partial class Test : Node2D
 	private async void SetupNetwork()
 	{
 		bootstrap.Group(new MultithreadEventLoopGroup())
-		.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder())))
-		//.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new PacketHandler(this))))
-		.Channel<TcpSocketChannel>();
+			.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder())))
+			//.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new PacketHandler(this))))
+			.Channel<TcpSocketChannel>();
 		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}
 
 
-    public override void _Input(InputEvent @event)
-    {
+	public override void _Input(InputEvent @event)
+	{
 		if (@event is InputEventKey inputEventKey) {
 			if (inputEventKey.IsPressed() && inputEventKey.Keycode == Key.A) {
 				//channel?.WriteAndFlushAsync(new MoveMessage(y1000.code.Direction.DOWN, new System.Drawing.Point(10, 10), 0, 0));
@@ -46,11 +46,11 @@ public partial class Test : Node2D
 				GD.Print(GetLocalMousePosition().Angle());
 			}
 		}
-    }
+	}
 
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
 	{
 	}
 }

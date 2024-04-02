@@ -1,12 +1,8 @@
-using Godot;
-using NLog;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection.Metadata;
 using System.Text.Json;
-using y1000.code;
-using y1000.code.world;
+using Godot;
+
+namespace y1000.code.world;
 
 public partial class WorldMap : TileMap
 {

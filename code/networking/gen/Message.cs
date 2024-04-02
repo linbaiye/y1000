@@ -28,35 +28,36 @@ namespace Code.Networking.Gen {
             "aW9uUGFja2V0EgkKAXgYASABKAUSCQoBeRgCIAEoBRIRCglkaXJlY3Rpb24Y",
             "AyABKAUSCgoCaWQYBCABKAMSDAoEdHlwZRgFIAEoBSJkChNJbnB1dFJlc3Bv",
             "bnNlUGFja2V0EhAKCHNlcXVlbmNlGAEgASgDEjsKDnBvc2l0aW9uUGFja2V0",
-            "GAIgASgLMiMuY29kZS5uZXR3b3JraW5nLmdlbi5Qb3NpdGlvblBhY2tldCJH",
+            "GAIgASgLMiMuY29kZS5uZXR3b3JraW5nLmdlbi5Qb3NpdGlvblBhY2tldCJd",
             "CgtJbnB1dFBhY2tldBIMCgR0eXBlGAEgASgFEhAKCHNlcXVlbmNlGAIgASgD",
-            "EhgKEGNsaWNrZWREaXJlY3Rpb24YAyABKAUimwEKE0ludGVycG9sYXRpb25Q",
-            "YWNrZXQSCgoCaWQYASABKAMSDQoFc3RhdGUYAiABKAUSEgoKc3RhdGVTdGFy",
-            "dBgEIAEoAxIaChJpbnRlcnBvbGF0aW9uU3RhcnQYBSABKAMSEAoIZHVyYXRp",
-            "b24YBiABKAUSEQoJZGlyZWN0aW9uGAcgASgFEgkKAXgYCCABKAUSCQoBeRgJ",
-            "IAEoBSJYChRJbnRlcnBvbGF0aW9uc1BhY2tldBJACg5pbnRlcnBvbGF0aW9u",
-            "cxgBIAMoCzIoLmNvZGUubmV0d29ya2luZy5nZW4uSW50ZXJwb2xhdGlvblBh",
-            "Y2tldCIvCgtMb2dpblBhY2tldBIJCgF4GAEgASgFEgkKAXkYAiABKAUSCgoC",
-            "aWQYAyABKAMimAMKBlBhY2tldBI9Cg5wb3NpdGlvblBhY2tldBgBIAEoCzIj",
-            "LmNvZGUubmV0d29ya2luZy5nZW4uUG9zaXRpb25QYWNrZXRIABJFChJzaG93",
-            "Q3JlYXR1cmVQYWNrZXQYAiABKAsyJy5jb2RlLm5ldHdvcmtpbmcuZ2VuLlNo",
-            "b3dDcmVhdHVyZVBhY2tldEgAEjcKC2lucHV0UGFja2V0GAMgASgLMiAuY29k",
-            "ZS5uZXR3b3JraW5nLmdlbi5JbnB1dFBhY2tldEgAEjcKC2xvZ2luUGFja2V0",
-            "GAQgASgLMiAuY29kZS5uZXR3b3JraW5nLmdlbi5Mb2dpblBhY2tldEgAEkMK",
-            "DmludGVycG9sYXRpb25zGAUgASgLMikuY29kZS5uZXR3b3JraW5nLmdlbi5J",
-            "bnRlcnBvbGF0aW9uc1BhY2tldEgAEkIKDnJlc3BvbnNlUGFja2V0GAYgASgL",
-            "MiguY29kZS5uZXR3b3JraW5nLmdlbi5JbnB1dFJlc3BvbnNlUGFja2V0SABC",
-            "DQoLVHlwZWRQYWNrZXQiVQoQU2hvd1BsYXllclBhY2tldBI1Cghtb3ZlbWVu",
-            "dBgBIAEoCzIjLmNvZGUubmV0d29ya2luZy5nZW4uUG9zaXRpb25QYWNrZXQS",
-            "CgoCaWQYAiABKAMicAoSU2hvd0NyZWF0dXJlUGFja2V0EjUKCG1vdmVtZW50",
-            "GAEgASgLMiMuY29kZS5uZXR3b3JraW5nLmdlbi5Qb3NpdGlvblBhY2tldBIU",
-            "CgxjcmVhdHVyZVR5cGUYAiABKAUSDQoFc3RhdGUYAyABKAViBnByb3RvMw=="));
+            "EhgKEGNsaWNrZWREaXJlY3Rpb24YAyABKAUSCQoBeBgEIAEoBRIJCgF5GAUg",
+            "ASgFIpsBChNJbnRlcnBvbGF0aW9uUGFja2V0EgoKAmlkGAEgASgDEg0KBXN0",
+            "YXRlGAIgASgFEhIKCnN0YXRlU3RhcnQYBCABKAMSGgoSaW50ZXJwb2xhdGlv",
+            "blN0YXJ0GAUgASgDEhAKCGR1cmF0aW9uGAYgASgFEhEKCWRpcmVjdGlvbhgH",
+            "IAEoBRIJCgF4GAggASgFEgkKAXkYCSABKAUiWAoUSW50ZXJwb2xhdGlvbnNQ",
+            "YWNrZXQSQAoOaW50ZXJwb2xhdGlvbnMYASADKAsyKC5jb2RlLm5ldHdvcmtp",
+            "bmcuZ2VuLkludGVycG9sYXRpb25QYWNrZXQiLwoLTG9naW5QYWNrZXQSCQoB",
+            "eBgBIAEoBRIJCgF5GAIgASgFEgoKAmlkGAMgASgDIpgDCgZQYWNrZXQSPQoO",
+            "cG9zaXRpb25QYWNrZXQYASABKAsyIy5jb2RlLm5ldHdvcmtpbmcuZ2VuLlBv",
+            "c2l0aW9uUGFja2V0SAASRQoSc2hvd0NyZWF0dXJlUGFja2V0GAIgASgLMicu",
+            "Y29kZS5uZXR3b3JraW5nLmdlbi5TaG93Q3JlYXR1cmVQYWNrZXRIABI3Cgtp",
+            "bnB1dFBhY2tldBgDIAEoCzIgLmNvZGUubmV0d29ya2luZy5nZW4uSW5wdXRQ",
+            "YWNrZXRIABI3Cgtsb2dpblBhY2tldBgEIAEoCzIgLmNvZGUubmV0d29ya2lu",
+            "Zy5nZW4uTG9naW5QYWNrZXRIABJDCg5pbnRlcnBvbGF0aW9ucxgFIAEoCzIp",
+            "LmNvZGUubmV0d29ya2luZy5nZW4uSW50ZXJwb2xhdGlvbnNQYWNrZXRIABJC",
+            "Cg5yZXNwb25zZVBhY2tldBgGIAEoCzIoLmNvZGUubmV0d29ya2luZy5nZW4u",
+            "SW5wdXRSZXNwb25zZVBhY2tldEgAQg0KC1R5cGVkUGFja2V0IlUKEFNob3dQ",
+            "bGF5ZXJQYWNrZXQSNQoIbW92ZW1lbnQYASABKAsyIy5jb2RlLm5ldHdvcmtp",
+            "bmcuZ2VuLlBvc2l0aW9uUGFja2V0EgoKAmlkGAIgASgDInAKElNob3dDcmVh",
+            "dHVyZVBhY2tldBI1Cghtb3ZlbWVudBgBIAEoCzIjLmNvZGUubmV0d29ya2lu",
+            "Zy5nZW4uUG9zaXRpb25QYWNrZXQSFAoMY3JlYXR1cmVUeXBlGAIgASgFEg0K",
+            "BXN0YXRlGAMgASgFYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.PositionPacket), global::Code.Networking.Gen.PositionPacket.Parser, new[]{ "X", "Y", "Direction", "Id", "Type" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.InputResponsePacket), global::Code.Networking.Gen.InputResponsePacket.Parser, new[]{ "Sequence", "PositionPacket" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.InputPacket), global::Code.Networking.Gen.InputPacket.Parser, new[]{ "Type", "Sequence", "ClickedDirection" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.InputPacket), global::Code.Networking.Gen.InputPacket.Parser, new[]{ "Type", "Sequence", "ClickedDirection", "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.InterpolationPacket), global::Code.Networking.Gen.InterpolationPacket.Parser, new[]{ "Id", "State", "StateStart", "InterpolationStart", "Duration", "Direction", "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.InterpolationsPacket), global::Code.Networking.Gen.InterpolationsPacket.Parser, new[]{ "Interpolations" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Code.Networking.Gen.LoginPacket), global::Code.Networking.Gen.LoginPacket.Parser, new[]{ "X", "Y", "Id" }, null, null, null, null),
@@ -681,6 +682,8 @@ namespace Code.Networking.Gen {
       type_ = other.type_;
       sequence_ = other.sequence_;
       clickedDirection_ = other.clickedDirection_;
+      x_ = other.x_;
+      y_ = other.y_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -726,6 +729,30 @@ namespace Code.Networking.Gen {
       }
     }
 
+    /// <summary>Field number for the "x" field.</summary>
+    public const int XFieldNumber = 4;
+    private int x_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int X {
+      get { return x_; }
+      set {
+        x_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "y" field.</summary>
+    public const int YFieldNumber = 5;
+    private int y_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Y {
+      get { return y_; }
+      set {
+        y_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -744,6 +771,8 @@ namespace Code.Networking.Gen {
       if (Type != other.Type) return false;
       if (Sequence != other.Sequence) return false;
       if (ClickedDirection != other.ClickedDirection) return false;
+      if (X != other.X) return false;
+      if (Y != other.Y) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -754,6 +783,8 @@ namespace Code.Networking.Gen {
       if (Type != 0) hash ^= Type.GetHashCode();
       if (Sequence != 0L) hash ^= Sequence.GetHashCode();
       if (ClickedDirection != 0) hash ^= ClickedDirection.GetHashCode();
+      if (X != 0) hash ^= X.GetHashCode();
+      if (Y != 0) hash ^= Y.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -784,6 +815,14 @@ namespace Code.Networking.Gen {
         output.WriteRawTag(24);
         output.WriteInt32(ClickedDirection);
       }
+      if (X != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(X);
+      }
+      if (Y != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(Y);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -806,6 +845,14 @@ namespace Code.Networking.Gen {
         output.WriteRawTag(24);
         output.WriteInt32(ClickedDirection);
       }
+      if (X != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(X);
+      }
+      if (Y != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(Y);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -824,6 +871,12 @@ namespace Code.Networking.Gen {
       }
       if (ClickedDirection != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ClickedDirection);
+      }
+      if (X != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
+      }
+      if (Y != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -845,6 +898,12 @@ namespace Code.Networking.Gen {
       }
       if (other.ClickedDirection != 0) {
         ClickedDirection = other.ClickedDirection;
+      }
+      if (other.X != 0) {
+        X = other.X;
+      }
+      if (other.Y != 0) {
+        Y = other.Y;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -873,6 +932,14 @@ namespace Code.Networking.Gen {
             ClickedDirection = input.ReadInt32();
             break;
           }
+          case 32: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            Y = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -898,6 +965,14 @@ namespace Code.Networking.Gen {
           }
           case 24: {
             ClickedDirection = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            Y = input.ReadInt32();
             break;
           }
         }

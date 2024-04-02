@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.character.state.snapshot;
 using y1000.code.creatures;
 using y1000.code.player;
 using y1000.code.player.state;

@@ -1,22 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Code.Networking.Gen;
+using Godot;
+using y1000.code;
 
-namespace y1000.code.character.state.input
+namespace y1000.Source.Input
 {
     public abstract class AbstractRightClickInput : AbstractInput
     {
-
-        private readonly Direction _clickedDirection;
-
         protected AbstractRightClickInput(long s, Direction clickedDirection) : base(s)
         {
-            _clickedDirection = clickedDirection;
+            Direction = clickedDirection;
         }
 
-        public Direction Direction => _clickedDirection;
+        public Direction Direction { get; }
 
         public override Packet ToPacket()
         {

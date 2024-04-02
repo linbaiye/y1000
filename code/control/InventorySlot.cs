@@ -1,11 +1,12 @@
 using Godot;
-using System;
 using y1000.code.item;
+
+namespace y1000.code.control;
 
 public partial class InventorySlot: Panel, IItemContainer
 {
 	// Called when the node enters the scene tree for the first time.
-	private Item? loadedItem = null;
+	private item.Item? loadedItem = null;
 
 	public void LoadItem(string name)
 	{
@@ -13,7 +14,7 @@ public partial class InventorySlot: Panel, IItemContainer
 		{
 			return;
 		}
-		loadedItem = Item.Load(name);
+		loadedItem = item.Item.Load(name);
 		var textureRect = GetNode<TextureRect>("TextureRect");
 		textureRect.Texture = loadedItem.Texture;
 	}
@@ -56,18 +57,18 @@ public partial class InventorySlot: Panel, IItemContainer
 	}*/
 
 
-    public void PutItem(IItem item)
-    {
-		if (item is Item target && loadedItem == null)
+	public void PutItem(IItem item)
+	{
+		if (item is item.Item target && loadedItem == null)
 		{
 			loadedItem = target;
 			AddChild(target);
 		}
-    }
+	}
 
-    public bool RemoveItem(IItem item)
-    {
-		if (item is Item target && loadedItem != null)
+	public bool RemoveItem(IItem item)
+	{
+		if (item is item.Item target && loadedItem != null)
 		{
 			if (target == loadedItem)
 			{
@@ -77,7 +78,7 @@ public partial class InventorySlot: Panel, IItemContainer
 			}
 		}
 		return false;
-    }
+	}
 
 
 	public bool AtCursor()
@@ -87,8 +88,8 @@ public partial class InventorySlot: Panel, IItemContainer
 
 
 
-    public bool ContainsItem(IItem item)
-    {
-		return (item is Item) && item == loadedItem;
-    }
+	public bool ContainsItem(IItem item)
+	{
+		return (item is item.Item) && item == loadedItem;
+	}
 }

@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace y1000;
 
 public partial class SkillButton1 : TextureButton
 {

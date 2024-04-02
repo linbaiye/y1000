@@ -1,7 +1,4 @@
-using Godot;
-using System;
-using y1000.code.creatures;
-using y1000.code.player;
+namespace y1000.code.player;
 
 public partial class HandSprite : AbstractEquipmentSprite
 {

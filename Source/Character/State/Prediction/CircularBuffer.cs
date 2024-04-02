@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Godot;
 using System.Collections;
+using System.Collections.Generic;
 
-namespace y1000.code.character.state.Prediction
+namespace y1000.Source.Character.State.Prediction
 {
     public class CircularBuffer<T> : IEnumerable<T>
     {

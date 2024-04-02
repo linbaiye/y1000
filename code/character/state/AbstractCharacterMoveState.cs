@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
-using y1000.code.character.state.input;
 using y1000.code.character.state.snapshot;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
@@ -17,6 +16,7 @@ using y1000.code.player;
 using y1000.code.player.skill;
 using y1000.code.player.state;
 using y1000.code.util;
+using y1000.Source.Input;
 
 namespace y1000.code.character.state
 {

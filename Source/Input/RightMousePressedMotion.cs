@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Code.Networking.Gen;
+using Godot;
+using y1000.code;
 
-namespace y1000.code.character.state.input
+namespace y1000.Source.Input
 {
     public class RightMousePressedMotion : AbstractRightClickInput
     {

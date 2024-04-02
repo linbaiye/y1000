@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using NLog;
 using y1000.code.networking.message;
-using y1000.code.networking.message.character;
 
-namespace y1000.code.character.state.Prediction
+namespace y1000.Source.Character.State.Prediction
 {
     public class PredictionManager
     {
@@ -20,6 +16,8 @@ namespace y1000.code.character.state.Prediction
 
         public void Save(IPrediction prediction)
         {
+            if (prediction.ClearPrevious)
+                _predictions.Clear();
             if (_predictions.IsFull)
             {
                 throw new Exception();

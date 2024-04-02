@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using y1000.code.character.state.input;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
@@ -10,6 +9,7 @@ using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.player;
+using y1000.Source.Input;
 
 namespace y1000.code.character.state
 {

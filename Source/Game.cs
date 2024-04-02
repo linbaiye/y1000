@@ -1,22 +1,18 @@
-using DotNetty.Codecs;
-using DotNetty.Common.Utilities;
-using DotNetty.Transport.Bootstrapping;
-using DotNetty.Transport.Channels;
-using DotNetty.Transport.Channels.Sockets;
-using Godot;
-using NLog;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
+using DotNetty.Codecs;
+using DotNetty.Transport.Bootstrapping;
+using DotNetty.Transport.Channels;
+using DotNetty.Transport.Channels.Sockets;
+using Godot;
+using NLog;
 using y1000.code;
-using y1000.code.character.state.input;
-using y1000.code.character.state.Prediction;
 using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
@@ -24,13 +20,12 @@ using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.networking;
 using y1000.code.networking.message;
-using y1000.code.networking.message.character;
 using y1000.code.player;
-using y1000.code.player.skill;
 using y1000.code.player.skill.bufa;
-using y1000.code.util;
-using y1000.code.world;
-using y1000.Source.Character;
+using y1000.Source.Character.State.Prediction;
+using y1000.Source.Input;
+
+namespace y1000.Source;
 
 public partial class Game : Node2D, IConnectionEventListener
 {
@@ -52,7 +47,7 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private readonly PredictionManager _predictionManager = new PredictionManager();
 
-	private Character? _character;
+	private Character.Character? _character;
 
 	private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
@@ -75,22 +70,22 @@ public partial class Game : Node2D, IConnectionEventListener
 		SetupNetwork();
 		var map = WorldMap.Map;
 		/*if (map != null)
-		{
-			int n = 0;
-			map.ForeachCell((cell, x, y) => {
-				if (x == 36 || y == 31 || n >= 10)
-				{
-					return;
-				}
-				if (!map.IsMovable(x, y))
-				{
-					return;
-				}
-				if (x > 27 && y > 27 && x < 51 && y < 45) {
-					AddCreature(SimpleCreature.Load(new Point(x, y), ++n, (Direction)new Random().Next(0, 7)));
-				}
-			});
-		}*/
+	{
+		int n = 0;
+		map.ForeachCell((cell, x, y) => {
+			if (x == 36 || y == 31 || n >= 10)
+			{
+				return;
+			}
+			if (!map.IsMovable(x, y))
+			{
+				return;
+			}
+			if (x > 27 && y > 27 && x < 51 && y < 45) {
+				AddCreature(SimpleCreature.Load(new Point(x, y), ++n, (Direction)new Random().Next(0, 7)));
+			}
+		});
+	}*/
 		//OtherPlayer otherPlayer = OtherPlayer.Test();
 		//otherPlayer.Position = new Vector2(1248, 696);
 		//AddChild(otherPlayer);
@@ -107,7 +102,7 @@ public partial class Game : Node2D, IConnectionEventListener
 	{
 		if (WorldMap.Map != null)
 		{
-			_character = Character.LogedIn(loginMessage, WorldMap.Map);
+			_character = Character.Character.LoggedIn(loginMessage, WorldMap.Map);
 			AddChild(_character);
 		}
 	}
@@ -133,8 +128,8 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	public bool CanMove(Point coordinate)
 	{
-		WorldMap worldMap = WorldMap;
-		if (worldMap == null || worldMap.Map == null)
+		code.world.WorldMap worldMap = WorldMap;
+		if (worldMap.Map == null)
 		{
 			return false;
 		}
@@ -148,8 +143,8 @@ public partial class Game : Node2D, IConnectionEventListener
 	private async void SetupNetwork()
 	{
 		bootstrap.Group(new MultithreadEventLoopGroup())
-		.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new MessageHandler(this))))
-		.Channel<TcpSocketChannel>();
+			.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new MessageHandler(this))))
+			.Channel<TcpSocketChannel>();
 		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}
 
@@ -168,23 +163,28 @@ public partial class Game : Node2D, IConnectionEventListener
 		WriteMessage(message);
 	}
 
-	public WorldMap WorldMap => GetNode<WorldMap>("MapLayer");
+	public code.world.WorldMap WorldMap => GetNode<code.world.WorldMap>("MapLayer");
 
 
 
 	private void HandleMouseInput(InputEventMouse eventMouse)
 	{
-		var worldMap = GetNode<WorldMap>("MapLayer");
+		var worldMap = GetNode<code.world.WorldMap>("MapLayer");
 		if (worldMap != null && worldMap.Map != null && channel != null && _character != null)
 		{
 			var mousePos = _character.GetLocalMousePosition();
 			var input = inputSampler.Sample(eventMouse, mousePos);
-			if (input == null || !_character.CanHandle(input)) 
+			if (input == null) 
+			{
+				return;
+			}
+			if (!_character.CanHandle(input))
 			{
 				return;
 			}
 			_predictionManager.Save(_character.Predict(input));
 			_character.HandleInput(input);
+			logger.Debug("Sending input {0}.", input);
 			channel.WriteAndFlushAsync(input);
 		}
 		if (eventMouse is InputEventMouseButton button)
@@ -242,36 +242,36 @@ public partial class Game : Node2D, IConnectionEventListener
 			}
 		}
 		/*var monster = GetNode<SimpleCreature>("Monster");
-		if (eventKey.IsPressed())
+	if (eventKey.IsPressed())
+	{
+		switch (eventKey.Keycode)
 		{
-			switch (eventKey.Keycode)
-			{
-				case Key.Left:
-					monster.Move(Direction.LEFT);
-					break;
-				case Key.Right:
-					monster.Move(Direction.RIGHT);
-					break;
-				case Key.Down:
-					monster.Move(Direction.DOWN);
-					break;
-				case Key.Up:
-					monster.Move(Direction.UP);
-					break;
-				case Key.I:
-					monster.Move(Direction.UP_RIGHT);
-					break;
-				case Key.J:
-					monster.Move(Direction.DOWN_RIGHT);
-					break;
-				case Key.K:
-					monster.Move(Direction.DOWN_LEFT);
-					break;
-				case Key.L:
-					monster.Move(Direction.UP_LEFT);
-					break;
-			}
-		}*/
+			case Key.Left:
+				monster.Move(Direction.LEFT);
+				break;
+			case Key.Right:
+				monster.Move(Direction.RIGHT);
+				break;
+			case Key.Down:
+				monster.Move(Direction.DOWN);
+				break;
+			case Key.Up:
+				monster.Move(Direction.UP);
+				break;
+			case Key.I:
+				monster.Move(Direction.UP_RIGHT);
+				break;
+			case Key.J:
+				monster.Move(Direction.DOWN_RIGHT);
+				break;
+			case Key.K:
+				monster.Move(Direction.DOWN_LEFT);
+				break;
+			case Key.L:
+				monster.Move(Direction.UP_LEFT);
+				break;
+		}
+	}*/
 	}
 
 	public override void _Input(InputEvent @event)
@@ -305,8 +305,10 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	public override void _Process(double delta)
 	{
+		bool hasMessage = !unprocessedMessages.IsEmpty;
 		HandleMessages();
-		UpdateCoordinate();
+		if (hasMessage)
+			UpdateCoordinate();
 	}
 
 	private void ShowPlayer(ShowPlayerMessage showPlayerMessage)
@@ -354,7 +356,11 @@ public partial class Game : Node2D, IConnectionEventListener
 			}
 			else if (message is InputResponseMessage responseMessage)
 			{
-				_predictionManager.Reconcile(responseMessage);
+				if (!_predictionManager.Reconcile(responseMessage))
+				{
+					logger.Debug("Need to rewind.");
+					_character?.Rewind(responseMessage.PositionMessage);
+				}
 			}
 		}
 	}
@@ -362,7 +368,7 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private void UpdateCoordinate()
 	{
-		var coor = character?.Coordinate;
+		var coor = _character?.Coordinate;
 		if (coor == null)
 		{
 			return;
@@ -384,7 +390,7 @@ public partial class Game : Node2D, IConnectionEventListener
 		{
 			return;
 		}
-		var monster = GetNode<Buffalo>("Monster");
+		var monster = GetNode<code.monsters.buffalo.Buffalo>("Monster");
 		switch (message)
 		{
 			case "1":
