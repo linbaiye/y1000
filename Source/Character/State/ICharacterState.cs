@@ -11,15 +11,15 @@ namespace y1000.Source.Character.State
 {
     public interface ICharacterState
     {
-        void OnMouseRightClicked(Character character, MouseRightClick rightClick);
+        IClientEvent OnMouseRightClicked(Character character, MouseRightClick rightClick);
 
         IPrediction Predict(Character character, MouseRightClick rightClick);
 
-        void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease);
+        IClientEvent OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease);
         
         IPrediction Predict(Character character, MouseRightRelease rightClick);
 
-        void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion);
+        IClientEvent OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion);
         
         IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion);
 

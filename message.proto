@@ -20,10 +20,20 @@ message InputPacket {
   int32 type = 1;
   int64 sequence = 2;
   int32 clickedDirection = 3;
-  int32 x = 4;
-  int32 y = 5;
 }
 
+
+message MoveEventPacket {
+  InputPacket input = 1;
+  int32 happenedAtX = 2;
+  int32 happenedAtY = 3;
+}
+
+message ClientPacket {
+  oneof Type {
+    MoveEventPacket moveEventPacket = 1;
+  }
+}
 
 message InterpolationPacket {
   int64 id = 1;

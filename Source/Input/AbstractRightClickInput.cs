@@ -13,16 +13,13 @@ namespace y1000.Source.Input
 
         public Direction Direction { get; }
 
-        public override Packet ToPacket()
+        public override InputPacket ToPacket()
         {
-            return new Packet()
+            return new InputPacket()
             {
-                InputPacket = new InputPacket() 
-                {
-                    Sequence = Sequence,
-                    ClickedDirection = (int)Direction,
-                    Type = (int)Type,
-                }
+                Sequence = Sequence,
+                ClickedDirection = (int)Direction,
+                Type = (int)Type,
             };
         }
 

@@ -4,20 +4,27 @@ using y1000.code.networking.message;
 
 namespace y1000.Source.Input;
 
-public class CharacterMoveEvent : I2ServerGameMessage
+public class CharacterMoveEvent : IClientEvent
 {
-    public CharacterMoveEvent(IInput i, Vector2I happenAt)
+    private readonly IInput _input;
+    public CharacterMoveEvent(IInput i, Vector2I happenedAt)
     {
-        Input = i;
-        HappenAt = happenAt;
+        _input = i;
+        HappenedAt = happenedAt;
     }
     
-    public IInput Input { get; }
-    
-    public Vector2I HappenAt { get; }
+    private Vector2I HappenedAt { get; }
 
-    public Packet ToPacket()
+    public ClientPacket ToPacket()
     {
-        throw new System.NotImplementedException();
+        return new ClientPacket()
+        {
+            MoveEventPacket = new MoveEventPacket()
+            {
+                Input = _input.ToPacket(),
+                HappenedAtX = HappenedAt.X,
+                HappenedAtY = HappenedAt.Y,
+            }
+        };
     }
 }

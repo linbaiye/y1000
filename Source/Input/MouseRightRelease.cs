@@ -11,15 +11,12 @@ namespace y1000.Source.Input
 
         public override InputType Type => InputType.MOUSE_RIGHT_RELEASE;
 
-        public override Packet ToPacket()
+        public override InputPacket ToPacket()
         {
-            return new Packet()
+            return new InputPacket()
             {
-                InputPacket = new InputPacket()
-                {
-                    Sequence = Sequence,
-                    Type = (int)Type,
-                }
+                Sequence = Sequence,
+                Type = (int)Type,
             };
         }
 

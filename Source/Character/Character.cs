@@ -86,26 +86,19 @@ namespace y1000.Source.Character
         }
 
 
-        public void HandleInput(IInput input)
+        public IClientEvent HandleInput(IInput input)
         {
             if (!_state.CanHandle(input))
             {
-                return;
+                throw new NotSupportedException();
             }
-            switch (input.Type)
+            return input.Type switch
             {
-                case InputType.MOUSE_RIGHT_CLICK:
-                    _state.OnMouseRightClicked(this, (MouseRightClick)input);
-                    break;
-                case InputType.MOUSE_RIGHT_RELEASE:
-                    _state.OnMouseRightReleased(this, (MouseRightRelease)input);
-                    break;
-                case InputType.MOUSE_RIGHT_MOTION:
-                    _state.OnMousePressedMotion(this, (RightMousePressedMotion)input);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                InputType.MOUSE_RIGHT_CLICK => _state.OnMouseRightClicked(this, (MouseRightClick)input),
+                InputType.MOUSE_RIGHT_RELEASE => _state.OnMouseRightReleased(this, (MouseRightRelease)input),
+                InputType.MOUSE_RIGHT_MOTION => _state.OnMousePressedMotion(this, (RightMousePressedMotion)input),
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
 
         public bool IsMale => true;

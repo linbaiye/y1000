@@ -18,12 +18,12 @@ namespace y1000.Source.Character.State
             throw new NotImplementedException();
         }
 
-        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        public IClientEvent OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
             throw new NotImplementedException();
         }
 
-        public void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
+        public IClientEvent OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
         {
             throw new NotImplementedException();
         }
@@ -53,7 +53,7 @@ namespace y1000.Source.Character.State
             throw new NotImplementedException();
         }
 
-        public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
+        public IClientEvent OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
         {
             throw new NotImplementedException();
         }

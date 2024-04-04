@@ -170,7 +170,7 @@ public partial class Game : Node2D, IConnectionEventListener
 	private void HandleMouseInput(InputEventMouse eventMouse)
 	{
 		var worldMap = GetNode<code.world.WorldMap>("MapLayer");
-		if (worldMap != null && worldMap.Map != null && channel != null && _character != null)
+		if (worldMap is { Map: not null } && channel != null && _character != null)
 		{
 			var mousePos = _character.GetLocalMousePosition();
 			var input = inputSampler.Sample(eventMouse, mousePos);

@@ -38,11 +38,12 @@ namespace y1000.Source.Character.State
             }
         }
 
-        private void MoveByClick(Character character, AbstractRightClickInput input)
+        private IClientEvent MoveByClick(Character character, AbstractRightClickInput input)
         {
             if (character.CanMoveOneUnit(input.Direction))
             {
                 character.ChangeState(CharacterMoveState.Create(character.IsMale, input));
+                return new CharacterMoveEvent()
             }
             else
             {
@@ -51,7 +52,7 @@ namespace y1000.Source.Character.State
             }
         }
 
-        public override void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        public override IClientEvent OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
             MoveByClick(character, rightClick);
         }
