@@ -8,15 +8,19 @@ using DotNetty.Transport.Channels;
 using Godot;
 using Google.Protobuf;
 using Google.Protobuf.WellKnownTypes;
+using NLog;
 using y1000.code.networking.message;
+using y1000.Source.Input;
 
 namespace y1000.code.networking
 {
-    public class MessageEncoder : MessageToByteEncoder<I2ServerGameMessage>
+    public class MessageEncoder : MessageToByteEncoder<IClientEvent>
     {
-        protected override void Encode(IChannelHandlerContext context, I2ServerGameMessage message, IByteBuffer output)
+        private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+        protected override void Encode(IChannelHandlerContext context, IClientEvent clientEvent, IByteBuffer output)
         {
-            output.WriteBytes(message.ToPacket().ToByteArray());
+            LOGGER.Debug("Sending message {0}.", clientEvent);
+            output.WriteBytes(clientEvent.ToPacket().ToByteArray());
         }
     }
 }

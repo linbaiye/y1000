@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using y1000.code;
 using y1000.code.character.state;
+using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
 
@@ -43,24 +44,27 @@ namespace y1000.Source.Character.State
             if (character.CanMoveOneUnit(input.Direction))
             {
                 character.ChangeState(CharacterMoveState.Create(character.IsMale, input));
-                return new CharacterMoveEvent()
             }
             else
             {
                 character.Direction = input.Direction;
                 character.ChangeState(Create(character.IsMale));
             }
+            return new MovementEvent(input, character.Coordinate);
         }
 
-        public override IClientEvent OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        public override void OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
-            MoveByClick(character, rightClick);
+            HandleRightClick(character, rightClick);
         }
 
-        public override IPrediction Predict(Character character, MouseRightClick rightClick)
+        private void HandleRightClick(Character character, AbstractRightClickInput rightClick)
         {
-            return PredictRightClick(character, rightClick);
+            var prediction = PredictRightClick(character, rightClick);
+            var clientEvent = MoveByClick(character, rightClick);
+            character.EmitMovementEvent(prediction, clientEvent);
         }
+
 
         public override void Process(Character character, long deltaMillis)
         {
@@ -86,22 +90,11 @@ namespace y1000.Source.Character.State
 
         public override void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
         {
-            throw new NotImplementedException();
-        }
-
-        public override IPrediction Predict(Character character, MouseRightRelease release)
-        {
-            throw new NotImplementedException();
         }
 
         public override void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
         {
-            MoveByClick(character, mousePressedMotion);
-        }
-
-        public override IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion)
-        {
-            return PredictRightClick(character, mousePressedMotion);
+            HandleRightClick(character, mousePressedMotion);
         }
     }
 }

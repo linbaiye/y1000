@@ -1,5 +1,5 @@
 using System;
-using Code.Networking.Gen;
+using Source.Networking.Protobuf;
 using Godot;
 using y1000.code.networking.message;
 

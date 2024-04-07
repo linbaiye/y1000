@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Code.Networking.Gen;
+using Source.Networking.Protobuf;
 using y1000.code.character;
 using y1000.code.character.state;
 

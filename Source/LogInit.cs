@@ -1,5 +1,6 @@
 using Godot;
 using NLog;
+using NLog.Layouts;
 
 namespace y1000.Source;
 
@@ -9,7 +10,7 @@ public partial class LogInit : Node
 	public override void _Ready()
 	{
 		NLog.LogManager.Setup().LoadConfiguration(builder => {
-			builder.ForLogger().FilterMinLevel(LogLevel.Debug).WriteToConsole();
+			builder.ForLogger().FilterMinLevel(LogLevel.Debug).WriteToConsole(Layout.FromString("${date} | ${level:uppercase=true} | ${logger} | ${message} ${exception}"));
 		});
 	}
 

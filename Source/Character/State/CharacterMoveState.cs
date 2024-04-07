@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 using Godot;
 using NLog;
 using y1000.code;
-using y1000.code.character.state;
-using y1000.code.player;
-using y1000.code.util;
+using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
 
@@ -15,7 +13,7 @@ namespace y1000.Source.Character.State
 {
     public class CharacterMoveState : AbstractCharacterState
     {
-        public static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
+        private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new Dictionary<Direction, int>()
         {
             { Direction.UP, 0},
             { Direction.UP_RIGHT, 6},
@@ -29,7 +27,7 @@ namespace y1000.Source.Character.State
 
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
-        private const int SPRITE_LENGTH_MILLIS = 100;
+        private const int SpriteLengthMillis = 100;
 
         private readonly AbstractRightClickInput _currentInput;
 
@@ -59,7 +57,7 @@ namespace y1000.Source.Character.State
                 : SetPositionPrediction.Overflow(input, dest, input.Direction);
         }
 
-        public override IPrediction Predict(Character character, MouseRightClick rightClick)
+        public IPrediction Predict(Character character, MouseRightClick rightClick)
         {
             return PredictNextMove(character, rightClick);
         }
@@ -83,20 +81,30 @@ namespace y1000.Source.Character.State
             if (_lastInput is MouseRightRelease)
             {
                 character.ChangeState(CharacterIdleState.Create(character.IsMale));
+                character.EmitMovementEvent(
+                    SetPositionPrediction.Overflow(_lastInput, character.Coordinate, character.Direction),
+                    new MovementEvent(_lastInput, character.Coordinate));
             }
             else if (_lastInput is AbstractRightClickInput input)
             {
                 character.ChangeState(Create(character.IsMale, input));
+                character.EmitMovementEvent(
+                    new MovePrediction(input, character.Coordinate, character.Direction),
+                    new MovementEvent(input, character.Coordinate));
             }
-            else
+            else if (_lastInput == null)
             {
-                character.ChangeState(Create(character.IsMale, _currentInput));
+                var nextInput = InputFactory.CreateRightMousePressedMotion(_currentInput.Direction);
+                character.ChangeState(Create(character.IsMale, nextInput));
+                character.EmitMovementEvent(
+                    new MovePrediction(nextInput, character.Coordinate, character.Direction),
+                    new MovementEvent(nextInput, character.Coordinate));
             }
         }
 
         public static CharacterMoveState Create(bool forMale, AbstractRightClickInput input)
         {
-            var asm = AnimatedSpriteManager.Normal(SPRITE_LENGTH_MILLIS, SPRITE_OFFSET, SpriteContainer.LoadMalePlayerSprites("N02"));
+            var asm = AnimatedSpriteManager.Normal(SpriteLengthMillis, SPRITE_OFFSET, SpriteContainer.LoadMalePlayerSprites("N02"));
             return new CharacterMoveState(asm, input);
         }
 
@@ -105,21 +113,9 @@ namespace y1000.Source.Character.State
             _lastInput = mouseRightRelease;
         }
 
-        public override IPrediction Predict(Character character, MouseRightRelease rightRelease)
-        {
-            var next = character.Coordinate.Move(character.Direction);
-            LOGGER.Debug("");
-            return SetPositionPrediction.Overflow(rightRelease, next, character.Direction);
-        }
-
         public override void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
         {
             _lastInput = mousePressedMotion;
-        }
-
-        public override IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion)
-        {
-            return PredictNextMove(character, mousePressedMotion);
         }
     }
 }

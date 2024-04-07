@@ -13,6 +13,7 @@ using y1000.code.networking.message.character;
 using y1000.code.player;
 using y1000.code.util;
 using y1000.code.world;
+using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
@@ -24,10 +25,12 @@ namespace y1000.Source.Character
     public partial class Character : Node2D, IBody
     {
         private ICharacterState _state;
-
+        
         public Direction Direction { get; set; }
 
         public IRealm Realm { get; set; }
+
+        public event EventHandler? OnCharacterUpdated;
 
         private Character()
         {
@@ -57,21 +60,26 @@ namespace y1000.Source.Character
             return _state.CanHandle(input);
         }
 
-        public IPrediction Predict(IInput input)
-        {
-            return input.Type switch
-            {
-                InputType.MOUSE_RIGHT_CLICK => _state.Predict(this, (MouseRightClick)input),
-                InputType.MOUSE_RIGHT_RELEASE => _state.Predict(this, (MouseRightRelease)input),
-                InputType.MOUSE_RIGHT_MOTION => _state.Predict(this, (RightMousePressedMotion)input),
-                _ => throw new NotSupportedException()
-            };
-        }
+        // public IPrediction Predict(IInput input)
+        // {
+        //     return input.Type switch
+        //     {
+        //         InputType.MOUSE_RIGHT_CLICK => _state.Predict(this, (MouseRightClick)input),
+        //         InputType.MOUSE_RIGHT_RELEASE => _state.Predict(this, (MouseRightRelease)input),
+        //         InputType.MOUSE_RIGHT_MOTION => _state.Predict(this, (RightMousePressedMotion)input),
+        //         _ => throw new NotSupportedException()
+        //     };
+        // }
 
         public void Rewind(AbstractPositionMessage positionMessage)
         {
             Position = positionMessage.Coordinate.ToPosition();
             Direction = positionMessage.Direction;
+        }
+
+        public void EmitMovementEvent(IPrediction prediction, IClientEvent movementEvent)
+        {
+            OnCharacterUpdated?.Invoke(this, new CharacterUpdatedEventArgs(prediction, movementEvent));
         }
 
         public bool CanMoveOneUnit(Direction direction)
@@ -86,19 +94,26 @@ namespace y1000.Source.Character
         }
 
 
-        public IClientEvent HandleInput(IInput input)
+        public void HandleInput(IInput input)
         {
             if (!_state.CanHandle(input))
             {
-                throw new NotSupportedException();
+                return;
             }
-            return input.Type switch
+            switch (input.Type)
             {
-                InputType.MOUSE_RIGHT_CLICK => _state.OnMouseRightClicked(this, (MouseRightClick)input),
-                InputType.MOUSE_RIGHT_RELEASE => _state.OnMouseRightReleased(this, (MouseRightRelease)input),
-                InputType.MOUSE_RIGHT_MOTION => _state.OnMousePressedMotion(this, (RightMousePressedMotion)input),
-                _ => throw new ArgumentOutOfRangeException()
-            };
+                case InputType.MOUSE_RIGHT_CLICK:
+                    _state.OnMouseRightClicked(this, (MouseRightClick)input);
+                    break;
+                case InputType.MOUSE_RIGHT_RELEASE:
+                    _state.OnMouseRightReleased(this, (MouseRightRelease)input);
+                    break;
+                case InputType.MOUSE_RIGHT_MOTION:
+                    _state.OnMousePressedMotion(this, (RightMousePressedMotion)input);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public bool IsMale => true;

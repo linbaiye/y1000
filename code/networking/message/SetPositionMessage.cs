@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
-using Code.Networking.Gen;
+using Source.Networking.Protobuf;
 using Godot;
 
 namespace y1000.code.networking.message

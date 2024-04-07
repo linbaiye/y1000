@@ -1,4 +1,4 @@
-using Code.Networking.Gen;
+using Source.Networking.Protobuf;
 
 namespace y1000.Source.Input;
 

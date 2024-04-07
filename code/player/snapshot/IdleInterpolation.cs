@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
-using Code.Networking.Gen;
+using Source.Networking.Protobuf;
 using Godot;
 using y1000.code.networking.message;
 using y1000.code.util;
@@ -138,7 +138,8 @@ namespace y1000.code.player.snapshot
 
         public static IdleInterpolation Parse(InterpolationPacket packet)
         {
-            return new IdleInterpolation(packet.StateStart, packet.InterpolationStart, packet.Duration, packet.Id, new Point(packet.X, packet.Y), (Direction)packet.Direction);
+            throw new Exception();
+            //return new IdleInterpolation(packet.StateStart, packet.InterpolationStart, packet.Duration, packet.Id, new Point(packet.X, packet.Y), (Direction)packet.Direction);
         }
     }
 }

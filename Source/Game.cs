@@ -14,14 +14,11 @@ using Godot;
 using NLog;
 using y1000.code;
 using y1000.code.creatures;
-using y1000.code.entity.equipment.chest;
-using y1000.code.entity.equipment.hat;
-using y1000.code.entity.equipment.trousers;
-using y1000.code.entity.equipment.weapon;
 using y1000.code.networking;
 using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.code.player.skill.bufa;
+using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
 
@@ -29,8 +26,6 @@ namespace y1000.Source;
 
 public partial class Game : Node2D, IConnectionEventListener
 {
-	private y1000.code.character.OldCharacter? character;
-
 	private volatile IChannel? channel;
 
 	private readonly Bootstrap bootstrap = new();
@@ -50,6 +45,7 @@ public partial class Game : Node2D, IConnectionEventListener
 	private Character.Character? _character;
 
 	private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+
 
 	private enum ConnectionState
 	{
@@ -103,19 +99,27 @@ public partial class Game : Node2D, IConnectionEventListener
 		if (WorldMap.Map != null)
 		{
 			_character = Character.Character.LoggedIn(loginMessage, WorldMap.Map);
+			_character.OnCharacterUpdated += OnCharacterUpdated;
 			AddChild(_character);
 		}
 	}
 
+	private void OnCharacterUpdated(object? sender, EventArgs args)
+	{
+		if (args is not CharacterUpdatedEventArgs eventArgs) return;
+		_predictionManager.Save(eventArgs.Prediction);
+		channel?.WriteAndFlushAsync(eventArgs.Event);
+	}
+
 	private void ShowCharacter(LoginMessage loginMessage)
 	{
-		character = GetNode<y1000.code.character.OldCharacter>("Character");
-		character.Coordinate = new Point(loginMessage.Coordinate.X, loginMessage.Coordinate.Y);
-		character.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
-		character.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);
-		character.Trousers = new Trousers(0L, "R1", "男子长裤", true);
-		character.Weapon = new Sword(0, "W68", "耀阳宝剑");
-		character.Visible = true;
+		// character = GetNode<y1000.code.character.OldCharacter>("Character");
+		// character.Coordinate = new Point(loginMessage.Coordinate.X, loginMessage.Coordinate.Y);
+		// character.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
+		// character.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);
+		// character.Trousers = new Trousers(0L, "R1", "男子长裤", true);
+		// character.Weapon = new Sword(0, "W68", "耀阳宝剑");
+		// character.Visible = true;
 		UpdateCoordinate();
 	}
 
@@ -143,7 +147,7 @@ public partial class Game : Node2D, IConnectionEventListener
 	private async void SetupNetwork()
 	{
 		bootstrap.Group(new MultithreadEventLoopGroup())
-			.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new MessageHandler(this))))
+			.Handler(new ActionChannelInitializer<ISocketChannel>(c => c.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new MessageHandler(this))))
 			.Channel<TcpSocketChannel>();
 		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}
@@ -178,14 +182,13 @@ public partial class Game : Node2D, IConnectionEventListener
 			{
 				return;
 			}
-			if (!_character.CanHandle(input))
+			if (_character.CanHandle(input))
 			{
-				return;
+				_character.HandleInput(input);
 			}
-			_predictionManager.Save(_character.Predict(input));
-			_character.HandleInput(input);
-			logger.Debug("Sending input {0}.", input);
-			channel.WriteAndFlushAsync(input);
+			//_predictionManager.Save(_character.Predict(input));
+			//logger.Debug("Sending input {0}.", input);
+			//channel.WriteAndFlushAsync(input);
 		}
 		if (eventMouse is InputEventMouseButton button)
 		{
@@ -229,16 +232,16 @@ public partial class Game : Node2D, IConnectionEventListener
 		{
 			if (eventKey.Keycode == Key.F3)
 			{
-				character?.Sit();
+				//character?.Sit();
 			}
 			else if (eventKey.Keycode == Key.H)
 			{
-				character?.Hurt();
+				//character?.Hurt();
 			}
 			else if (eventKey.Keycode == Key.F6)
 			{
-				if (eventKey.IsPressed())
-					character?.PressBufa(new UnnamedBufa());
+				//if (eventKey.IsPressed())
+				//	character?.PressBufa(new UnnamedBufa());
 			}
 		}
 		/*var monster = GetNode<SimpleCreature>("Monster");
@@ -333,7 +336,7 @@ public partial class Game : Node2D, IConnectionEventListener
 			}
 		}
 	}
-
+	
 	private void HandleMessages()
 	{
 		if (unprocessedMessages.IsEmpty)

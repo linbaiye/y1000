@@ -23,4 +23,8 @@
     <Compile Remove="Source\Input\Event\**" />
     <EmbeddedResource Remove="Source\Input\Event\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="code\networking\gen\" />
+    <Folder Include="Source\Creature\" />
+  </ItemGroup>
 </Project>

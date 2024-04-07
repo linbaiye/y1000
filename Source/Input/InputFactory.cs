@@ -5,8 +5,8 @@ namespace y1000.Source.Input
 {
     public static class InputFactory
     {
-        private static long _sequence = 0;
-
+        private static long _sequence;
+        
         public static MouseRightClick CreateMouseMoveInput(Direction direction)
         {
             return new MouseRightClick(_sequence++, direction);
@@ -16,7 +16,6 @@ namespace y1000.Source.Input
         {
             return new MouseRightRelease(_sequence++);
         }
-
 
         public static RightMousePressedMotion CreateRightMousePressedMotion(Direction direction)
         {

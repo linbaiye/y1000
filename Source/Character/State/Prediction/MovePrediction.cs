@@ -9,11 +9,8 @@ namespace y1000.Source.Character.State.Prediction
     public class MovePrediction : AbstractPositionPrediction<MoveMessage>
     {
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-        public MovePrediction(IInput input, Vector2I currentCoordinate, Direction direction) : this(input, currentCoordinate, direction, false)
-        {
-        }
 
-        public MovePrediction(IInput input, Vector2I currentCoordinate, Direction direction, bool clearPrevious) : base(input, currentCoordinate, direction, clearPrevious)
+        public MovePrediction(IInput input, Vector2I currentCoordinate, Direction direction, bool clearPrevious = false) : base(input, currentCoordinate, direction, clearPrevious)
         {
 
         }

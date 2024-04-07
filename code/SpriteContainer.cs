@@ -12,21 +12,21 @@ namespace y1000.code
 
         private readonly Vector2[] offsets;
 
-        public SpriteContainer(Texture2D[] textures, Vector2[] offsets)
+        private SpriteContainer(Texture2D[] textures, Vector2[] offsets)
         {
             this.textures = textures;
             this.offsets = offsets;
         }
 
 
-        public Texture2D GetTexture(int nr) {
+        private Texture2D GetTexture(int nr) {
             if (nr < 0 || nr > textures.Length) {
                 throw new FileNotFoundException();
             }
             return textures[nr];
         }
 
-        public Vector2 GetOffset(int nr) {
+        private Vector2 GetOffset(int nr) {
             if (nr < 0 || nr > textures.Length) {
                 throw new FileNotFoundException();
             }
@@ -62,24 +62,16 @@ namespace y1000.code
 
         private static Dictionary<string, SpriteContainer> LoadedContainers = new Dictionary<string, SpriteContainer>();
 
-        public static SpriteContainer Load(string resDir)
-        {
-            return Load(resDir, null);
-        }
-
-        public static SpriteContainer Load(string resDir, Vector2? offset) {
+        private static SpriteContainer Load(string resDir, Vector2? offset = null) {
             if (!resDir.StartsWith("res://")){
                 resDir = "res://" + resDir;
             }
             if (!resDir.EndsWith("/")) {
                 resDir += "/";
             }
-            if (LoadedContainers.TryGetValue(resDir, out SpriteContainer? container))
+            if (LoadedContainers.TryGetValue(resDir, out var container))
             {
-                if (container != null)
-                {
-                    return container;
-                }
+                return container;
             }
             if (!Godot.FileAccess.FileExists(resDir + "offset.txt")) {
                 throw new FileNotFoundException();

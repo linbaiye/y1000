@@ -30,20 +30,14 @@ namespace y1000.Source.Character.State
 
         protected AnimatedSpriteManager SpriteManager => _spriteManager;
 
-        public abstract IClientEvent OnMouseRightClicked(Character character, MouseRightClick rightClick);
-
-        public abstract IPrediction Predict(Character character, MouseRightClick rightClick);
+        public abstract void OnMouseRightClicked(Character character, MouseRightClick rightClick);
 
         public abstract void Process(Character character, long deltaMillis);
 
         public abstract bool CanHandle(IInput input);
 
-        public abstract IClientEvent OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease);
+        public abstract void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease);
 
-        public abstract IPrediction Predict(Character character, MouseRightRelease rightClick);
-
-        public abstract IClientEvent OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion);
-
-        public abstract IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion);
+        public abstract void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion);
     }
 }

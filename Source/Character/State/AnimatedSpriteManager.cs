@@ -11,20 +11,15 @@ namespace y1000.Source.Character.State
     {
         private readonly struct TimeSpriteMapper
         {
-            private readonly long _end;
-
-            private readonly int _frameOffset;
-
             public TimeSpriteMapper(long end, int frameOffset)
             {
-                _end = end;
-                _frameOffset = frameOffset;
+                Time = end;
+                SpriteOffset = frameOffset;
             }
 
-            public long Time => _end;
+            public long Time { get; }
 
-            public int SpriteOffset => _frameOffset;
-
+            public int SpriteOffset { get; }
         }
 
         private readonly List<TimeSpriteMapper> _mappers;

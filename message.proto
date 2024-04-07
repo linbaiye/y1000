@@ -1,5 +1,5 @@
 syntax = "proto3";
-package code.networking.gen;
+package Source.Networking.Protobuf;
 
 
 message PositionPacket {
@@ -38,12 +38,11 @@ message ClientPacket {
 message InterpolationPacket {
   int64 id = 1;
   int32 state = 2;
-  int64 stateStart = 4;
-  int64 interpolationStart = 5;
-  int32 duration = 6;
+  int64 elapsedMillis = 5;
   int32 direction = 7;
   int32 x = 8;
   int32 y = 9;
+  bool male = 10;
 }
 
 message InterpolationsPacket {
@@ -60,20 +59,18 @@ message Packet {
   oneof TypedPacket {
     PositionPacket positionPacket = 1;
     ShowCreaturePacket showCreaturePacket = 2;
-    InputPacket inputPacket = 3;
     LoginPacket loginPacket = 4;
     InterpolationsPacket interpolations = 5;
     InputResponsePacket responsePacket = 6;
+    PlayerInterpolationPacket playerInterpolation = 7;
   }
 }
 
-message ShowPlayerPacket {
-  PositionPacket movement = 1;
-  int64 id = 2;
+message ShowCreaturePacket {
+  InterpolationPacket interpolation = 1;
+  int32 type = 2;
 }
 
-message ShowCreaturePacket {
-  PositionPacket movement = 1;
-  int32 creatureType = 2;
-  int32 state = 3;
+message PlayerInterpolationPacket {
+  InterpolationPacket interpolation = 1;
 }

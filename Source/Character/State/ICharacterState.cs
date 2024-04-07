@@ -11,18 +11,12 @@ namespace y1000.Source.Character.State
 {
     public interface ICharacterState
     {
-        IClientEvent OnMouseRightClicked(Character character, MouseRightClick rightClick);
+        void OnMouseRightClicked(Character character, MouseRightClick rightClick);
 
-        IPrediction Predict(Character character, MouseRightClick rightClick);
-
-        IClientEvent OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease);
+        void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease);
         
-        IPrediction Predict(Character character, MouseRightRelease rightClick);
-
-        IClientEvent OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion);
+        void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion);
         
-        IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion);
-
         void Process(Character character, long deltaMillis);
 
         OffsetTexture BodyOffsetTexture(Character character);

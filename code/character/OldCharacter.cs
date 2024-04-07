@@ -61,7 +61,7 @@ namespace y1000.code.character
 
         public void SendActAndSavePredict(IInput input, Action? afterSnapshot)
         {
-            SendMessage(input);
+            //SendMessage(input);
             afterSnapshot?.Invoke();
             var predicted = ((IOldCharacterState)CurrentState).Snapshot(this);
             stateBuffers.SaveState(input, predicted);

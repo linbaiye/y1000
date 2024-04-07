@@ -1,13 +1,13 @@
-using Code.Networking.Gen;
+using Source.Networking.Protobuf;
 using Godot;
-using y1000.code.networking.message;
+using y1000.Source.Input;
 
-namespace y1000.Source.Input;
+namespace y1000.Source.Character.Event;
 
-public class CharacterMoveEvent : IClientEvent
+public class MovementEvent : IClientEvent
 {
     private readonly IInput _input;
-    public CharacterMoveEvent(IInput i, Vector2I happenedAt)
+    public MovementEvent(IInput i, Vector2I happenedAt)
     {
         _input = i;
         HappenedAt = happenedAt;
@@ -26,5 +26,10 @@ public class CharacterMoveEvent : IClientEvent
                 HappenedAtY = HappenedAt.Y,
             }
         };
+    }
+
+    public override string ToString()
+    {
+        return "Input: (" + _input + "), HappenedAt: " + HappenedAt;
     }
 }
