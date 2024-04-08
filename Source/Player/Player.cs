@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Godot;
+using Source.Networking.Protobuf;
 using y1000.code;
 using y1000.code.player;
 using y1000.Source.Character.State;
+using y1000.Source.Networking;
 
 namespace y1000.Source.Player;
 
@@ -20,17 +23,21 @@ public partial class Player: Node2D, IPlayer
         { Direction.UP_LEFT, 69},
     };
 
-    private IPlayerState _state;
+    private IPlayerState _state = IPlayerState.Empty;
 
-    public Player(bool male, IPlayerState state, Direction direction = Direction.DOWN)
+    private void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate)
     {
         IsMale = male;
         _state = state;
         Direction = direction;
+        Position = coordinate.ToPosition();
+        ZIndex = 3;
+        Visible = true;
     }
-    
-    public bool IsMale { get; }
-    public Direction Direction { get; }
+
+    public bool IsMale { get; private set; }
+
+    public Direction Direction { get; set; }
 
     public OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
 
@@ -38,5 +45,30 @@ public partial class Player: Node2D, IPlayer
     {
         var container = SpriteContainer.LoadMalePlayerSprites("N02");
         return AnimatedSpriteManager.WithPinpong(500, IDLE_BODY_SPRITE_OFFSET, container);
+    }
+
+
+    private static IPlayerState CreateState(bool male, CreatureState state, long start)
+    {
+        switch (state)
+        {
+            case CreatureState.IDLE:
+                return PlayerIdleState.StartFrom(male, start);
+            case CreatureState.WALK:
+            
+            default:
+                throw new NotSupportedException();
+        }
+        ;
+    }
+
+    public static Player FromInterpolation(PlayerInterpolation playerInterpolation)
+    {
+        PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/player.tscn");
+        var player = scene.Instantiate<Player>();
+        var state = CreateState(playerInterpolation.Male, playerInterpolation.Interpolation.State, playerInterpolation.Interpolation.ElapsedMillis);
+        player.Init(playerInterpolation.Male, state, 
+            playerInterpolation.Interpolation.Direction, playerInterpolation.Interpolation.Coordinate);
+        return player;
     }
 }

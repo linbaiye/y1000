@@ -23,5 +23,6 @@ public abstract class AbstractPlayerState : IPlayerState
     {
         return _spriteManager.Texture(player.Direction, ElapsedMillis);
     }
-    public abstract void Update(long delta);
+
+    public abstract void Update(Player player, long delta);
 }

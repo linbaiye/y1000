@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Source/Character/Character.cs" id="1_gv1xd"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_r5qwl"]
-[ext_resource type="Script" path="res://Source/Character/BodySprite.cs" id="3_a6e7c"]
+[ext_resource type="Script" path="res://Source/Player/BodySprite.cs" id="3_06f0s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_buy6c"]
 shader = ExtResource("2_r5qwl")
@@ -19,6 +19,6 @@ y_sort_enabled = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_buy6c")
 centered = false
-script = ExtResource("3_a6e7c")
+script = ExtResource("3_06f0s")
 
 [node name="Camera2D" type="Camera2D" parent="."]

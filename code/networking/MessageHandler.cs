@@ -12,17 +12,18 @@ namespace y1000.code.networking
 {
     public class MessageHandler : SimpleChannelInboundHandler<object>
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+        
         private readonly IConnectionEventListener _eventListener;
 
         public MessageHandler(IConnectionEventListener eventListener)
         {
-            this._eventListener = eventListener;
+            _eventListener = eventListener;
         }
 
         protected override void ChannelRead0(IChannelHandlerContext ctx, object msg)
         {
-            logger.Debug("Received message {0}.", msg);
+            LOGGER.Debug("Received message {0}.", msg);
             _eventListener.OnMessageArrived(msg);
         }
 

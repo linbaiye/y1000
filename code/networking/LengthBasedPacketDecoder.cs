@@ -12,6 +12,7 @@ using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.code.player.snapshot;
 using y1000.code.util;
+using y1000.Source.Networking;
 
 namespace y1000.code.networking
 {
@@ -62,7 +63,6 @@ namespace y1000.code.networking
             return new InputResponseMessage(packet.Sequence, positionMessage);
         }
 
-
         protected override object Decode(IChannelHandlerContext context, IByteBuffer buffer)
         {
             IByteBuffer input = (IByteBuffer)base.Decode(context, buffer);
@@ -75,6 +75,7 @@ namespace y1000.code.networking
                 Packet.TypedPacketOneofCase.LoginPacket => LoginMessage.FromPacket(packet.LoginPacket),
                 Packet.TypedPacketOneofCase.ResponsePacket => DecodeInputRespoinse(packet.ResponsePacket),
                 Packet.TypedPacketOneofCase.Interpolations => DecodeInterpolations(packet.Interpolations),
+                Packet.TypedPacketOneofCase.PlayerInterpolation => PlayerInterpolation.FromPacket(packet.PlayerInterpolation),
                 _ => throw new NotSupportedException()
             };
         }

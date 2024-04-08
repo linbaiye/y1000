@@ -16,35 +16,33 @@ using y1000.code;
 using y1000.code.creatures;
 using y1000.code.networking;
 using y1000.code.networking.message;
-using y1000.code.player;
 using y1000.code.player.skill.bufa;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
+using y1000.Source.Networking;
 
 namespace y1000.Source;
 
-public partial class Game : Node2D, IConnectionEventListener
+public partial class Game : Node2D, IConnectionEventListener, IServerMessageHandler
 {
-	private volatile IChannel? channel;
+	private volatile IChannel? _channel;
 
-	private readonly Bootstrap bootstrap = new();
+	private readonly Bootstrap _bootstrap = new();
 
-	private ConcurrentQueue<string> packets = new ConcurrentQueue<string>();
+	private readonly ConcurrentQueue<string> packets = new ConcurrentQueue<string>();
 
-	private ConcurrentQueue<object> unprocessedMessages = new ConcurrentQueue<object>();
+	private readonly ConcurrentQueue<object> unprocessedMessages = new ConcurrentQueue<object>();
 
 	private Dictionary<long, ICreature> creatures = new Dictionary<long, ICreature>();
 
-	private Dictionary<long, OtherPlayer> otherPlayers = new Dictionary<long, OtherPlayer>();
-
-	private readonly InputSampler inputSampler = new InputSampler();
+	private readonly InputSampler _inputSampler = new InputSampler();
 
 	private readonly PredictionManager _predictionManager = new PredictionManager();
 
 	private Character.Character? _character;
 
-	private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
 
 	private enum ConnectionState
@@ -56,7 +54,7 @@ public partial class Game : Node2D, IConnectionEventListener
 
 
 
-	private ConnectionState state = ConnectionState.DISCONNECTED;
+	private ConnectionState _connectionState = ConnectionState.DISCONNECTED;
 
 	public override void _Ready()
 	{
@@ -108,7 +106,7 @@ public partial class Game : Node2D, IConnectionEventListener
 	{
 		if (args is not CharacterUpdatedEventArgs eventArgs) return;
 		_predictionManager.Save(eventArgs.Prediction);
-		channel?.WriteAndFlushAsync(eventArgs.Event);
+		_channel?.WriteAndFlushAsync(eventArgs.Event);
 	}
 
 	private void ShowCharacter(LoginMessage loginMessage)
@@ -128,7 +126,7 @@ public partial class Game : Node2D, IConnectionEventListener
 		AddChild(creature);
 		creatures.Add(creature.Id, creature);
 	}
-
+	
 
 	public bool CanMove(Point coordinate)
 	{
@@ -146,10 +144,10 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	private async void SetupNetwork()
 	{
-		bootstrap.Group(new MultithreadEventLoopGroup())
+		_bootstrap.Group(new MultithreadEventLoopGroup())
 			.Handler(new ActionChannelInitializer<ISocketChannel>(c => c.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new MessageHandler(this))))
 			.Channel<TcpSocketChannel>();
-		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
+		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}
 
 	private async void WriteMessage(I2ServerGameMessage message)
@@ -158,7 +156,7 @@ public partial class Game : Node2D, IConnectionEventListener
 		{
 			Thread.Sleep(200);
 		});
-		channel?.WriteAndFlushAsync(message);
+		_channel?.WriteAndFlushAsync(message);
 	}
 
 
@@ -174,10 +172,10 @@ public partial class Game : Node2D, IConnectionEventListener
 	private void HandleMouseInput(InputEventMouse eventMouse)
 	{
 		var worldMap = GetNode<code.world.WorldMap>("MapLayer");
-		if (worldMap is { Map: not null } && channel != null && _character != null)
+		if (worldMap is { Map: not null } && _channel != null && _character != null)
 		{
 			var mousePos = _character.GetLocalMousePosition();
-			var input = inputSampler.Sample(eventMouse, mousePos);
+			var input = _inputSampler.Sample(eventMouse, mousePos);
 			if (input == null) 
 			{
 				return;
@@ -293,15 +291,15 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	public async void LogIn()
 	{
-		if (state != ConnectionState.DISCONNECTED)
+		if (_connectionState != ConnectionState.DISCONNECTED)
 		{
 			return;
 		}
-		if (channel != null)
+		if (_channel != null)
 		{
-			state = ConnectionState.CONNECTING;
-			await channel.WriteAndFlushAsync("Connect");
-			state = ConnectionState.CONNECTED;
+			_connectionState = ConnectionState.CONNECTING;
+			await _channel.WriteAndFlushAsync("Connect");
+			_connectionState = ConnectionState.CONNECTED;
 		}
 	}
 
@@ -314,28 +312,23 @@ public partial class Game : Node2D, IConnectionEventListener
 			UpdateCoordinate();
 	}
 
-	private void ShowPlayer(ShowPlayerMessage showPlayerMessage)
-	{
-		//Player player = Player.Create(showPlayerMessage);
-		//AddCreature(player);
-	}
 
-	private void Handle(InterpolationsMessage message)
-	{
-		foreach (IInterpolation interpolation in message.Interpolations)
-		{
-			if (otherPlayers.TryGetValue(interpolation.Id, out OtherPlayer? other))
-			{
-				other.EnqueueInterpolation(interpolation);
-			}
-			else
-			{
-				OtherPlayer player = OtherPlayer.CreatePlayer(interpolation);
-				otherPlayers.Add(interpolation.Id, player);
-				AddChild(player);
-			}
-		}
-	}
+	// private void Handle(InterpolationsMessage message)
+	// {
+	// 	foreach (IInterpolation interpolation in message.Interpolations)
+	// 	{
+	// 		if (otherPlayers.TryGetValue(interpolation.Id, out OtherPlayer? other))
+	// 		{
+	// 			other.EnqueueInterpolation(interpolation);
+	// 		}
+	// 		else
+	// 		{
+	// 			OtherPlayer player = OtherPlayer.CreatePlayer(interpolation);
+	// 			otherPlayers.Add(interpolation.Id, player);
+	// 			AddChild(player);
+	// 		}
+	// 	}
+	// }
 	
 	private void HandleMessages()
 	{
@@ -349,21 +342,17 @@ public partial class Game : Node2D, IConnectionEventListener
 			{
 				AddCharacter(loginMessage);
 			}
-			else if (message is InterpolationsMessage interpolations)
-			{
-				Handle(interpolations);
-			}
-			else if (message is ShowPlayerMessage showPlayer)
-			{
-				ShowPlayer(showPlayer);
-			}
 			else if (message is InputResponseMessage responseMessage)
 			{
 				if (!_predictionManager.Reconcile(responseMessage))
 				{
-					logger.Debug("Need to rewind.");
+					LOGGER.Debug("Need to rewind.");
 					_character?.Rewind(responseMessage.PositionMessage);
 				}
+			} 
+			else if (message is IServerMessage serverMessage)
+			{
+				serverMessage.Accept(this);
 			}
 		}
 	}
@@ -436,7 +425,7 @@ public partial class Game : Node2D, IConnectionEventListener
 		});
 		try
 		{
-			channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
+			_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 		}
 		catch (Exception)
 		{
@@ -446,8 +435,19 @@ public partial class Game : Node2D, IConnectionEventListener
 
 	public void OnConnectionClosed()
 	{
-		channel = null;
+		_channel = null;
 		unprocessedMessages.Clear();
 		Reconnect();
+	}
+
+	public void Handle(PlayerInterpolation playerInterpolation)
+	{
+		var player = Player.Player.FromInterpolation(playerInterpolation);
+		AddChild(player);
+	}
+
+	public void Handle(LoginMessage loginMessage)
+	{
+		throw new NotImplementedException();
 	}
 }

@@ -17,121 +17,122 @@ using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
+using y1000.Source.Player;
 using CharacterIdleState = y1000.Source.Character.State.CharacterIdleState;
 using ICharacterState = y1000.Source.Character.State.ICharacterState;
 
 namespace y1000.Source.Character
 {
-    public partial class Character : Node2D, IBody
-    {
-        private ICharacterState _state;
-        
-        public Direction Direction { get; set; }
+	public partial class Character : Node2D, IBody
+	{
+		private ICharacterState _state;
+		
+		public Direction Direction { get; set; }
 
-        public IRealm Realm { get; set; }
+		public IRealm Realm { get; set; }
 
-        public event EventHandler? OnCharacterUpdated;
+		public event EventHandler? OnCharacterUpdated;
 
-        private Character()
-        {
-            _state = EmptyState.Instance;
-            Realm = IRealm.Empty;
-        }
+		private Character()
+		{
+			_state = EmptyState.Instance;
+			Realm = IRealm.Empty;
+		}
 
-        public void ChangeState(ICharacterState state)
-        {
-            _state = state;
-        }
+		public void ChangeState(ICharacterState state)
+		{
+			_state = state;
+		}
 
-        public override void _Ready()
-        {
-            base._Ready();
-        }
+		public override void _Ready()
+		{
+			base._Ready();
+		}
 
-        public Vector2I Coordinate => Position.ToCoordinate();
+		public Vector2I Coordinate => Position.ToCoordinate();
 
-        public override void _Process(double delta)
-        {
-            _state.Process(this, (long)(delta * 1000));
-        }
+		public override void _Process(double delta)
+		{
+			_state.Process(this, (long)(delta * 1000));
+		}
 
-        public bool CanHandle(IInput input)
-        {
-            return _state.CanHandle(input);
-        }
+		public bool CanHandle(IInput input)
+		{
+			return _state.CanHandle(input);
+		}
 
-        // public IPrediction Predict(IInput input)
-        // {
-        //     return input.Type switch
-        //     {
-        //         InputType.MOUSE_RIGHT_CLICK => _state.Predict(this, (MouseRightClick)input),
-        //         InputType.MOUSE_RIGHT_RELEASE => _state.Predict(this, (MouseRightRelease)input),
-        //         InputType.MOUSE_RIGHT_MOTION => _state.Predict(this, (RightMousePressedMotion)input),
-        //         _ => throw new NotSupportedException()
-        //     };
-        // }
+		// public IPrediction Predict(IInput input)
+		// {
+		//     return input.Type switch
+		//     {
+		//         InputType.MOUSE_RIGHT_CLICK => _state.Predict(this, (MouseRightClick)input),
+		//         InputType.MOUSE_RIGHT_RELEASE => _state.Predict(this, (MouseRightRelease)input),
+		//         InputType.MOUSE_RIGHT_MOTION => _state.Predict(this, (RightMousePressedMotion)input),
+		//         _ => throw new NotSupportedException()
+		//     };
+		// }
 
-        public void Rewind(AbstractPositionMessage positionMessage)
-        {
-            Position = positionMessage.Coordinate.ToPosition();
-            Direction = positionMessage.Direction;
-        }
+		public void Rewind(AbstractPositionMessage positionMessage)
+		{
+			Position = positionMessage.Coordinate.ToPosition();
+			Direction = positionMessage.Direction;
+		}
 
-        public void EmitMovementEvent(IPrediction prediction, IClientEvent movementEvent)
-        {
-            OnCharacterUpdated?.Invoke(this, new CharacterUpdatedEventArgs(prediction, movementEvent));
-        }
+		public void EmitMovementEvent(IPrediction prediction, IClientEvent movementEvent)
+		{
+			OnCharacterUpdated?.Invoke(this, new CharacterUpdatedEventArgs(prediction, movementEvent));
+		}
 
-        public bool CanMoveOneUnit(Direction direction)
-        {
-            return CanMoveTo(Coordinate.Move(direction));
-        }
-
-
-        public bool CanMoveTo(Vector2I point)
-        {
-            return Realm.CanMove(point);
-        }
+		public bool CanMoveOneUnit(Direction direction)
+		{
+			return CanMoveTo(Coordinate.Move(direction));
+		}
 
 
-        public void HandleInput(IInput input)
-        {
-            if (!_state.CanHandle(input))
-            {
-                return;
-            }
-            switch (input.Type)
-            {
-                case InputType.MOUSE_RIGHT_CLICK:
-                    _state.OnMouseRightClicked(this, (MouseRightClick)input);
-                    break;
-                case InputType.MOUSE_RIGHT_RELEASE:
-                    _state.OnMouseRightReleased(this, (MouseRightRelease)input);
-                    break;
-                case InputType.MOUSE_RIGHT_MOTION:
-                    _state.OnMousePressedMotion(this, (RightMousePressedMotion)input);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        public bool IsMale => true;
+		public bool CanMoveTo(Vector2I point)
+		{
+			return Realm.CanMove(point);
+		}
 
 
-        public OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
+		public void HandleInput(IInput input)
+		{
+			if (!_state.CanHandle(input))
+			{
+				return;
+			}
+			switch (input.Type)
+			{
+				case InputType.MOUSE_RIGHT_CLICK:
+					_state.OnMouseRightClicked(this, (MouseRightClick)input);
+					break;
+				case InputType.MOUSE_RIGHT_RELEASE:
+					_state.OnMouseRightReleased(this, (MouseRightRelease)input);
+					break;
+				case InputType.MOUSE_RIGHT_MOTION:
+					_state.OnMousePressedMotion(this, (RightMousePressedMotion)input);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
 
-        public static Character LoggedIn(LoginMessage message, IRealm realm)
-        {
-            PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
-            var character = scene.Instantiate<Character>();
-            character._state = CharacterIdleState.ForMale();
-            character.Position = message.Coordinate.ToPosition();
-            character.Direction = Direction.DOWN;
-            character.ZIndex = 3;
-            character.Visible = true;
-            character.Realm = realm;
-            return character;
-        }
-    }
+		public bool IsMale => true;
+
+
+		public OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
+
+		public static Character LoggedIn(LoginMessage message, IRealm realm)
+		{
+			PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
+			var character = scene.Instantiate<Character>();
+			character._state = CharacterIdleState.ForMale();
+			character.Position = message.Coordinate.ToPosition();
+			character.Direction = Direction.DOWN;
+			character.ZIndex = 3;
+			character.Visible = true;
+			character.Realm = realm;
+			return character;
+		}
+	}
 }
