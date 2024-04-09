@@ -16,6 +16,11 @@ public class PlayerInterpolation : IServerMessage
     
     public bool Male { get; }
 
+    public override string ToString()
+    {
+        return $"{nameof(Interpolation)}: {Interpolation}";
+    }
+
     public static PlayerInterpolation FromPacket(PlayerInterpolationPacket packet)
     {
         return new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male);

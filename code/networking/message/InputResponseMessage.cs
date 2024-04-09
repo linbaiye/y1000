@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
+using y1000.Source.Networking;
 
 namespace y1000.code.networking.message
 {
-    public class InputResponseMessage
+    public class InputResponseMessage : IServerMessage
     {
 
         private readonly long _sequence;
@@ -31,6 +32,11 @@ namespace y1000.code.networking.message
         public override string ToString()
         {
             return "Seq:" + _sequence + ", Msg:" + _positionMessage;
+        }
+
+        public void Accept(IServerMessageHandler handler)
+        {
+            handler.Handle(this);
         }
     }
 }

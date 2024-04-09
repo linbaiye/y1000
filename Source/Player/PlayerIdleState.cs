@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using y1000.code;
-using y1000.code.player;
 using y1000.Source.Character.State;
-using y1000.Source.Networking;
 
 namespace y1000.Source.Player;
 
@@ -20,7 +18,7 @@ public class PlayerIdleState  : AbstractPlayerState
         { Direction.UP_LEFT, 69},
     };
 
-    private PlayerIdleState(AnimatedSpriteManager spriteManager, long elapsedMillis = 0) : base(spriteManager, elapsedMillis)
+    private PlayerIdleState(SpriteManager spriteManager, long elapsedMillis = 0) : base(spriteManager, elapsedMillis)
     {
     }
 
@@ -33,7 +31,7 @@ public class PlayerIdleState  : AbstractPlayerState
     {
         SpriteContainer spriteContainer =
             male ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
-        var animatedSpriteManager = AnimatedSpriteManager.WithPinpong(500, BODY_SPRITE_OFFSET, spriteContainer);
+        var animatedSpriteManager = SpriteManager.WithPinpong(500, BODY_SPRITE_OFFSET, spriteContainer);
         return new PlayerIdleState(animatedSpriteManager, elapsedMillis);
     }
 }

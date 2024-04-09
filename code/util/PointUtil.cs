@@ -40,30 +40,25 @@ namespace y1000.code.util
         }
 
 
-        public static Point Add(this Point point, int x, int y)
+        private static Point Add(this Point point, int x, int y)
         {
             return new Point(point.X + x, point.Y + y);
         }
 
         public static Point Next(this Point current, Direction direction)
         {
-            if (direction == Direction.DOWN_LEFT)
-                return new Point(current.X - 1, current.Y + 1);
-            else if (direction == Direction.LEFT)
-                return new Point(current.X - 1, current.Y);
-            else if (direction == Direction.UP_LEFT)
-                return new Point(current.X - 1, current.Y - 1);
-            else if (direction == Direction.UP)
-                return new Point(current.X, current.Y - 1);
-            else if (direction == Direction.DOWN)
-                return new Point(current.X, current.Y + 1);
-            else if (direction == Direction.UP_RIGHT)
-                return new Point(current.X + 1, current.Y - 1);
-            else if (direction == Direction.RIGHT)
-                return new Point(current.X + 1, current.Y);
-            else if (direction == Direction.DOWN_RIGHT)
-                return new Point(current.X + 1, current.Y + 1);
-            return current;
+            return direction switch
+            {
+                Direction.DOWN_LEFT => new Point(current.X - 1, current.Y + 1),
+                Direction.LEFT => new Point(current.X - 1, current.Y),
+                Direction.UP_LEFT => new Point(current.X - 1, current.Y - 1),
+                Direction.UP => new Point(current.X, current.Y - 1),
+                Direction.DOWN => new Point(current.X, current.Y + 1),
+                Direction.UP_RIGHT => new Point(current.X + 1, current.Y - 1),
+                Direction.RIGHT => new Point(current.X + 1, current.Y),
+                Direction.DOWN_RIGHT => new Point(current.X + 1, current.Y + 1),
+                _ => current
+            };
         }
 
         public static bool IsNextTo(this Point point, Point another)

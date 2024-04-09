@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.player;
+using y1000.Source.Networking;
 
 namespace y1000.code.networking.message
 {
@@ -19,5 +20,9 @@ namespace y1000.code.networking.message
 
         public List<IInterpolation> Interpolations => _interpolations;
 
+        public void Accept(IServerMessageHandler handler)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

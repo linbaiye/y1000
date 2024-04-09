@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.networking.message;
 
 namespace y1000.code.entity
 {
@@ -12,5 +13,9 @@ namespace y1000.code.entity
         string EntityName { get; }
 
         long Id { get; }
+
+        void Handle(IEntityMessage message)
+        {
+        }
     }
 }

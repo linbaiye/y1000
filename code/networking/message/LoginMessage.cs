@@ -5,13 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Source.Networking.Protobuf;
 using Godot;
-using y1000.code.networking.message.character;
+using y1000.Source.Networking;
 
 namespace y1000.code.networking.message
 {
-    public class LoginMessage 
+    public class LoginMessage  : IServerMessage
     {
-
         public Vector2I Coordinate { get; init; }
 
         public static LoginMessage FromPacket(LoginPacket loginPacket)
@@ -22,6 +21,11 @@ namespace y1000.code.networking.message
         public override string ToString()
         {
             return $"{nameof(Coordinate)}: {Coordinate}";
+        }
+
+        public void Accept(IServerMessageHandler handler)
+        {
+            handler.Handle(this);
         }
     }
 }

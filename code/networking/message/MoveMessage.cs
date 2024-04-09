@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using Source.Networking.Protobuf;
 using Godot;
 using y1000.code.util;
+using y1000.Source.Networking;
 
 namespace y1000.code.networking.message
 {
     public class MoveMessage : AbstractPositionMessage
     {
-        public MoveMessage(long _id, Vector2I coor, Direction direction) : base(_id, coor, direction) {}
+        private MoveMessage(long id, Vector2I coor, Direction direction) : base(id, coor, direction) {}
 
 
         public static MoveMessage FromPacket(PositionPacket positionPacket)
@@ -22,6 +23,11 @@ namespace y1000.code.networking.message
         public override string ToString()
         {
             return FormatLog("Move");
+        }
+
+        public override void Accept(IServerMessageHandler handler)
+        {
+            handler.Handle(this);
         }
     }
 }

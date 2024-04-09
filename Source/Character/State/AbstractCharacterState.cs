@@ -13,11 +13,11 @@ namespace y1000.Source.Character.State
     public abstract class AbstractCharacterState : ICharacterState
     {
 
-        private readonly AnimatedSpriteManager _spriteManager;
+        private readonly SpriteManager _spriteManager;
 
         protected long ElpasedMillis;
 
-        protected AbstractCharacterState(AnimatedSpriteManager spriteManager)
+        protected AbstractCharacterState(SpriteManager spriteManager)
         {
             _spriteManager = spriteManager;
             ElpasedMillis = 0;
@@ -28,7 +28,7 @@ namespace y1000.Source.Character.State
             return _spriteManager.Texture(character.Direction, ElpasedMillis);
         }
 
-        protected AnimatedSpriteManager SpriteManager => _spriteManager;
+        protected SpriteManager SpriteManager => _spriteManager;
 
         public abstract void OnMouseRightClicked(Character character, MouseRightClick rightClick);
 

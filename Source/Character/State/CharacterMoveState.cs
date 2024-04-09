@@ -33,7 +33,7 @@ namespace y1000.Source.Character.State
 
         private IInput? _lastInput;
 
-        public CharacterMoveState(AnimatedSpriteManager spriteManager, AbstractRightClickInput currentInput) : base(spriteManager)
+        public CharacterMoveState(SpriteManager spriteManager, AbstractRightClickInput currentInput) : base(spriteManager)
         {
             _currentInput = currentInput;
         }
@@ -72,7 +72,7 @@ namespace y1000.Source.Character.State
             int animationLengthMillis = SpriteManager.AnimationLength;
             var velocity = VectorUtil.Velocity(character.Direction);
             character.Position += velocity * ((float)deltaMillis / animationLengthMillis);
-            if (ElpasedMillis <= animationLengthMillis)
+            if (ElpasedMillis < animationLengthMillis)
             {
                 return;
             }
@@ -104,7 +104,7 @@ namespace y1000.Source.Character.State
 
         public static CharacterMoveState Create(bool forMale, AbstractRightClickInput input)
         {
-            var asm = AnimatedSpriteManager.Normal(SpriteLengthMillis, SPRITE_OFFSET, SpriteContainer.LoadMalePlayerSprites("N02"));
+            var asm = State.SpriteManager.Normal(SpriteLengthMillis, SPRITE_OFFSET, SpriteContainer.LoadMalePlayerSprites("N02"));
             return new CharacterMoveState(asm, input);
         }
 

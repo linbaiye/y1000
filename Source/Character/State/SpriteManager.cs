@@ -7,11 +7,11 @@ using y1000.code.player;
 
 namespace y1000.Source.Character.State
 {
-    public class AnimatedSpriteManager
+    public class SpriteManager
     {
-        private readonly struct TimeSpriteMapper
+        private readonly struct PeriodSpritePair
         {
-            public TimeSpriteMapper(long end, int frameOffset)
+            public PeriodSpritePair(long end, int frameOffset)
             {
                 Time = end;
                 SpriteOffset = frameOffset;
@@ -22,7 +22,7 @@ namespace y1000.Source.Character.State
             public int SpriteOffset { get; }
         }
 
-        private readonly List<TimeSpriteMapper> _mappers;
+        private readonly List<PeriodSpritePair> _mappers;
 
         private readonly int _totalMillis;
 
@@ -30,7 +30,7 @@ namespace y1000.Source.Character.State
 
         private readonly SpriteContainer _spriteContainer;
 
-        private AnimatedSpriteManager(List<TimeSpriteMapper> mappers, int totalMillis, Dictionary<Direction, int> directionOffsetMap, SpriteContainer spriteContainer)
+        private SpriteManager(List<PeriodSpritePair> mappers, int totalMillis, Dictionary<Direction, int> directionOffsetMap, SpriteContainer spriteContainer)
         {
             _mappers = mappers;
             _totalMillis = totalMillis;
@@ -56,35 +56,35 @@ namespace y1000.Source.Character.State
 
         public int AnimationLength => _totalMillis;
 
-        private static List<TimeSpriteMapper> CreateFrameMappers(long spriteLastMillis, int total, bool pingpong)
+        private static List<PeriodSpritePair> CreateFrameMappers(long spriteLastMillis, int total, bool pingpong)
         {
-            List<TimeSpriteMapper> result = new List<TimeSpriteMapper>();
+            List<PeriodSpritePair> result = new List<PeriodSpritePair>();
             for (int i = 0; i < total; i++)
             {
-                result.Add(new TimeSpriteMapper(i * spriteLastMillis, i));
+                result.Add(new PeriodSpritePair(i * spriteLastMillis, i));
             }
             if (pingpong)
             {
                 for (int i = 0; i < total; i++)
                 {
-                    result.Add(new TimeSpriteMapper((i + total) * spriteLastMillis, total - i - 1));
+                    result.Add(new PeriodSpritePair((i + total) * spriteLastMillis, total - i - 1));
                 }
             }
             return result;
         }
 
-        private static AnimatedSpriteManager Create(
+        private static SpriteManager Create(
             int spriteLengthMillis,
             Dictionary<Direction, int> directionOffSetMap,
             SpriteContainer spriteContainer, bool pingpong)
         {
             var offsets = new List<int>(directionOffSetMap.Values.OrderBy(p => p));
-            int spriteNumber = offsets[1] - offsets[0];
-            return new AnimatedSpriteManager(CreateFrameMappers(spriteLengthMillis, spriteNumber, pingpong), spriteNumber * spriteLengthMillis, directionOffSetMap, spriteContainer);
+            var spriteNumber = offsets[1] - offsets[0];
+            return new SpriteManager(CreateFrameMappers(spriteLengthMillis, spriteNumber, pingpong), spriteNumber * spriteLengthMillis, directionOffSetMap, spriteContainer);
         }
 
 
-        public static AnimatedSpriteManager Normal(
+        public static SpriteManager Normal(
             int spriteLengthMillis,
             Dictionary<Direction, int> directionOffSetMap,
             SpriteContainer spriteContainer)
@@ -93,7 +93,7 @@ namespace y1000.Source.Character.State
         }
 
 
-        public static AnimatedSpriteManager WithPinpong(
+        public static SpriteManager WithPinpong(
             int spriteLengthMillis,
             Dictionary<Direction, int> directionOffSetMap,
             SpriteContainer spriteContainer)

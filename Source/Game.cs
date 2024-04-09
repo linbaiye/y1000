@@ -12,35 +12,37 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using NLog;
-using y1000.code;
 using y1000.code.creatures;
 using y1000.code.networking;
 using y1000.code.networking.message;
-using y1000.code.player.skill.bufa;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
 using y1000.Source.Networking;
+using y1000.Source.Player;
 
 namespace y1000.Source;
 
 public partial class Game : Node2D, IConnectionEventListener, IServerMessageHandler
 {
-	private volatile IChannel? _channel;
 
 	private readonly Bootstrap _bootstrap = new();
 
-	private readonly ConcurrentQueue<string> packets = new ConcurrentQueue<string>();
+	private readonly ConcurrentQueue<object> _unprocessedMessages = new();
 
-	private readonly ConcurrentQueue<object> unprocessedMessages = new ConcurrentQueue<object>();
+	private readonly Dictionary<long, ICreature> _creatures = new();
+	
+	private readonly Dictionary<long, IPlayer> _players = new();
 
-	private Dictionary<long, ICreature> creatures = new Dictionary<long, ICreature>();
+	private readonly InputSampler _inputSampler = new();
 
-	private readonly InputSampler _inputSampler = new InputSampler();
+	private readonly PredictionManager _predictionManager = new();
 
-	private readonly PredictionManager _predictionManager = new PredictionManager();
+	private ConnectionState _connectionState = ConnectionState.DISCONNECTED;
 
 	private Character.Character? _character;
+
+	private volatile IChannel? _channel;
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
@@ -53,8 +55,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	}
 
 
-
-	private ConnectionState _connectionState = ConnectionState.DISCONNECTED;
 
 	public override void _Ready()
 	{
@@ -124,7 +124,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	private void AddCreature(AbstractCreature creature)
 	{
 		AddChild(creature);
-		creatures.Add(creature.Id, creature);
+		_creatures.Add(creature.Id, creature);
 	}
 	
 
@@ -139,7 +139,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		{
 			return false;
 		}
-		return !creatures.Values.Any(c => c.Coordinate.Equals(coordinate));
+		return true;
+		//return !_creatures.Values.Any(c => c.Coordinate.Equals(coordinate));
 	}
 
 	private async void SetupNetwork()
@@ -165,8 +166,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		WriteMessage(message);
 	}
 
-	public code.world.WorldMap WorldMap => GetNode<code.world.WorldMap>("MapLayer");
-
+	private code.world.WorldMap WorldMap => GetNode<code.world.WorldMap>("MapLayer");
 
 
 	private void HandleMouseInput(InputEventMouse eventMouse)
@@ -289,7 +289,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	}
 
 
-	public async void LogIn()
+	private async void ConnectServer()
 	{
 		if (_connectionState != ConnectionState.DISCONNECTED)
 		{
@@ -306,10 +306,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 
 	public override void _Process(double delta)
 	{
-		bool hasMessage = !unprocessedMessages.IsEmpty;
 		HandleMessages();
-		if (hasMessage)
-			UpdateCoordinate();
+		UpdateCoordinate();
 	}
 
 
@@ -332,25 +330,13 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	
 	private void HandleMessages()
 	{
-		if (unprocessedMessages.IsEmpty)
+		if (_unprocessedMessages.IsEmpty)
 		{
 			return;
 		}
-		if (unprocessedMessages.TryDequeue(out object? message))
+		if (_unprocessedMessages.TryDequeue(out var message))
 		{
-			if (message is LoginMessage loginMessage)
-			{
-				AddCharacter(loginMessage);
-			}
-			else if (message is InputResponseMessage responseMessage)
-			{
-				if (!_predictionManager.Reconcile(responseMessage))
-				{
-					LOGGER.Debug("Need to rewind.");
-					_character?.Rewind(responseMessage.PositionMessage);
-				}
-			} 
-			else if (message is IServerMessage serverMessage)
+			if (message is IServerMessage serverMessage)
 			{
 				serverMessage.Accept(this);
 			}
@@ -372,49 +358,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		}
 	}
 
-	private void HandlePackets()
-	{
-		if (packets.Count == 0)
-		{
-			return;
-		}
-		if (!packets.TryDequeue(out string? message))
-		{
-			return;
-		}
-		var monster = GetNode<code.monsters.buffalo.Buffalo>("Monster");
-		switch (message)
-		{
-			case "1":
-				monster.Turn(Direction.LEFT);
-				break;
-			case "2":
-				monster.Turn(Direction.RIGHT);
-				break;
-			case "3":
-				monster.Turn(Direction.DOWN);
-				break;
-			case "4":
-				monster.Turn(Direction.UP);
-				break;
-			case "5":
-				monster.Turn(Direction.UP_RIGHT);
-				break;
-			case "6":
-				monster.Turn(Direction.DOWN_RIGHT);
-				break;
-			case "7":
-				monster.Turn(Direction.DOWN_LEFT);
-				break;
-			case "8":
-				monster.Turn(Direction.UP_LEFT);
-				break;
-		}
-	}
-
 	public void OnMessageArrived(object message)
 	{
-		unprocessedMessages.Enqueue(message);
+		_unprocessedMessages.Enqueue(message);
 	}
 
 	private async void Reconnect()
@@ -436,18 +382,38 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	public void OnConnectionClosed()
 	{
 		_channel = null;
-		unprocessedMessages.Clear();
+		_unprocessedMessages.Clear();
 		Reconnect();
 	}
 
 	public void Handle(PlayerInterpolation playerInterpolation)
 	{
 		var player = Player.Player.FromInterpolation(playerInterpolation);
+		LOGGER.Debug("Adding player {0}", player.Location());
+		_players.TryAdd(player.Id, player);
 		AddChild(player);
 	}
 
+	public void Handle(InputResponseMessage inputResponseMessage)
+	{
+		if (!_predictionManager.Reconcile(inputResponseMessage))
+		{
+			LOGGER.Debug("Need to rewind.");
+			_character?.Rewind(inputResponseMessage.PositionMessage);
+		}
+	}
+
+	public void Handle(IEntityMessage message)
+	{
+		if (_players.TryGetValue(message.Id, out var player))
+		{
+			player.Handle(message);
+		}
+	}
+
+
 	public void Handle(LoginMessage loginMessage)
 	{
-		throw new NotImplementedException();
+		AddCharacter(loginMessage);
 	}
 }

@@ -4,35 +4,31 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Godot;
+using y1000.Source.Networking;
 
 namespace y1000.code.networking.message
 {
     public abstract class AbstractPositionMessage : IEntityMessage
     {
-
-        private readonly long _id;
-
-        private readonly Vector2I _coordinate;
-
-        private readonly Direction _direction;
-
         protected AbstractPositionMessage(long id, Vector2I coordinate, Direction direction)
         {
-            _id = id;
-            _coordinate = coordinate;
-            _direction = direction;
+            Id = id;
+            Coordinate = coordinate;
+            Direction = direction;
         }
 
-        public Vector2I Coordinate => _coordinate;
+        public Vector2I Coordinate { get; }
 
-        public Direction Direction => _direction;
+        public Direction Direction { get; }
 
-        public long Id => _id;
+        public long Id { get; }
 
 
         protected string FormatLog(string type)
         {
-            return "[Type: " + type + ", coor: " + _coordinate + ", Dir:" + _direction + "]";
+            return "[Id:" + Id + ", Type: " + type + ", Coordinate: " + Coordinate + ", Dir:" + Direction + "]";
         }
+
+        public abstract void Accept(IServerMessageHandler handler);
     }
 }

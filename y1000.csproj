@@ -22,9 +22,19 @@
     <None Remove="Tests\**" />
     <Compile Remove="Source\Input\Event\**" />
     <EmbeddedResource Remove="Source\Input\Event\**" />
+    <Compile Remove="code\networking\gen\**" />
+    <EmbeddedResource Remove="code\networking\gen\**" />
+    <Compile Remove="code\networking\message\MoveStateMessage.cs" />
+    <Compile Remove="code\networking\message\MovingStateMessage.cs" />
+    <Compile Remove="code\networking\message\ShowPlayerMessage.cs" />
+    <Compile Remove="code\networking\message\UpdateMovmentStateMessage.cs" />
+    <Compile Remove="code\networking\message\AbstractMovementMessage.cs" />
+    <Compile Remove="code\networking\message\character\AbstractCharacterMessage.cs" />
+    <Compile Remove="code\networking\message\character\CharacterMovingMessage.cs" />
+    <Compile Remove="code\networking\message\character\**" />
+    <EmbeddedResource Remove="code\networking\message\character\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="code\networking\gen\" />
     <Folder Include="Source\Creature\" />
   </ItemGroup>
 </Project>

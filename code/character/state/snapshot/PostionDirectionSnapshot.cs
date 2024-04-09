@@ -17,10 +17,6 @@ namespace y1000.code.character.state.snapshot
 
         public bool Match(IUpdateStateMessage message)
         {
-            if (message is UpdateMovmentStateMessage movmentStateMessage) {
-                return movmentStateMessage.Direction == Direction &&
-                 movmentStateMessage.Coordinate.Equals(Coordinate);
-            }
             return false;
         }
 

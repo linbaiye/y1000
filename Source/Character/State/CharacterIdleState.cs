@@ -23,7 +23,7 @@ namespace y1000.Source.Character.State
 			{ Direction.UP_LEFT, 69},
         };
 
-        public CharacterIdleState(AnimatedSpriteManager spriteManager): base(spriteManager)
+        public CharacterIdleState(SpriteManager spriteManager): base(spriteManager)
         {
         }
 
@@ -79,7 +79,7 @@ namespace y1000.Source.Character.State
         public static CharacterIdleState ForMale()
         {
             var container = SpriteContainer.LoadMalePlayerSprites("N02");
-            var sm = AnimatedSpriteManager.WithPinpong(500, BODY_SPRITE_OFFSET, container);
+            var sm = SpriteManager.WithPinpong(500, BODY_SPRITE_OFFSET, container);
             return new CharacterIdleState(sm);
         }
 

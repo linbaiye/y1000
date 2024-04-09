@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using Source.Networking.Protobuf;
 using Godot;
+using Source.Networking.Protobuf;
+using y1000.code;
+using y1000.code.networking.message;
 
-namespace y1000.code.networking.message
+namespace y1000.Source.Networking
 {
     public class SetPositionMessage : AbstractPositionMessage
     {
-        public SetPositionMessage(long id, Vector2I coordinate, Direction direction) : base(id, coordinate, direction)
+        private SetPositionMessage(long id, Vector2I coordinate, Direction direction) : base(id, coordinate, direction)
         {
         }
 
@@ -21,6 +18,11 @@ namespace y1000.code.networking.message
         public override string ToString()
         {
             return FormatLog("SetPosition");
+        }
+
+        public override void Accept(IServerMessageHandler handler)
+        {
+            handler.Handle(this);
         }
     }
 }

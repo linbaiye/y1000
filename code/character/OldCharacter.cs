@@ -38,25 +38,6 @@ namespace y1000.code.character
         }
 
 
-        private void Rewind(UpdateMovmentStateMessage stateMessage)
-        {
-            IPlayerState state = stateMessage.Restore(this);
-            AnimationPlayer.Stop();
-            ChangeState(state);
-        }
-
-
-        public void HandleMessage(IEntityMessage message)
-        {
-            if (message is UpdateMovmentStateMessage stateMessage)
-            {
-                if (!stateBuffers.TryAck(stateMessage))
-                {
-                    stateBuffers.Reset(stateMessage.Sequence);
-                    Rewind(stateMessage);
-                }
-            }
-        }
 
 
         public void SendActAndSavePredict(IInput input, Action? afterSnapshot)

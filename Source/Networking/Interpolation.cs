@@ -25,6 +25,11 @@ public class Interpolation
     
     public long Id { get; }
 
+    public override string ToString()
+    {
+        return $"{nameof(Coordinate)}: {Coordinate}, {nameof(State)}: {State}, {nameof(ElapsedMillis)}: {ElapsedMillis}, {nameof(Direction)}: {Direction}, {nameof(Id)}: {Id}";
+    }
+
     public static Interpolation FromPacket(InterpolationPacket packet)
     {
         return new Interpolation(new Vector2I(packet.X, packet.Y), (CreatureState)packet.State, packet.ElapsedMillis,

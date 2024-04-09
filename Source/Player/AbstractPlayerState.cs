@@ -9,14 +9,14 @@ namespace y1000.Source.Player;
 public abstract class AbstractPlayerState : IPlayerState
 {
 
-    private readonly AnimatedSpriteManager _spriteManager;
+    private readonly SpriteManager _spriteManager;
     
-    protected AbstractPlayerState(AnimatedSpriteManager spriteManager, long elapsedMillis = 0)
+    protected AbstractPlayerState(SpriteManager spriteManager, long elapsedMillis = 0)
     {
         _spriteManager = spriteManager;
         ElapsedMillis = elapsedMillis;
     }
-    
+
     protected long ElapsedMillis { get; set; }
 
     public OffsetTexture BodyOffsetTexture(IPlayer player)
@@ -24,5 +24,7 @@ public abstract class AbstractPlayerState : IPlayerState
         return _spriteManager.Texture(player.Direction, ElapsedMillis);
     }
 
+    protected SpriteManager SpriteManager => _spriteManager;
+    
     public abstract void Update(Player player, long delta);
 }
