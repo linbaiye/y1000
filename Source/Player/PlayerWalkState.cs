@@ -51,7 +51,7 @@ public class PlayerWalkState : AbstractPlayerState
             return;
         }
         player.Position = player.Position.Snapped(VectorUtil.TILE_SIZE);
-        //player.ChangeState(PlayerIdleState.StartFrom(player.IsMale,0));
+        player.ChangeState(PlayerIdleState.StartFrom(player.IsMale,0));
         LOGGER.Debug("Player {0} moved to coordinate {1}.", player.Id, player.Coordinate);
     }
 

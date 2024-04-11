@@ -4,74 +4,75 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetty.Transport.Channels;
 using Godot;
-using NLog.Fluent;
 using y1000.code;
 using y1000.code.networking.message;
-using y1000.code.player;
 using y1000.code.world;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
 using y1000.Source.Player;
-using CharacterIdleState = y1000.Source.Character.State.CharacterIdleState;
 using ICharacterState = y1000.Source.Character.State.ICharacterState;
-
 namespace y1000.Source.Character
 {
-	public partial class Character : Node2D, IBody
+	public partial class Character : Node2D, IPlayer
 	{
-		private ICharacterState _state;
-		
-		public Direction Direction { get; set; }
+		private ICharacterState _state = EmptyState.Instance;
 
-		public IRealm Realm { get; set; }
+		public IRealm Realm { get; set; } = IRealm.Empty;
 
 		public event EventHandler? OnCharacterUpdated;
-
-		private Character()
-		{
-			_state = EmptyState.Instance;
-			Realm = IRealm.Empty;
-		}
-
+		
 		public void ChangeState(ICharacterState state)
 		{
 			_state = state;
 		}
 
-		public override void _Ready()
+		public bool IsMale => WrappedPlayer().IsMale;
+		
+		public string EntityName => WrappedPlayer().EntityName;
+		
+		public long Id => WrappedPlayer().Id;
+
+		public Direction Direction
 		{
-			base._Ready();
+			get => WrappedPlayer().Direction;
+			set
+			{
+				{
+					WrappedPlayer().Direction = value;
+				}
+			}
 		}
 
-		public Vector2I Coordinate => Position.ToCoordinate();
-
-		public override void _Process(double delta)
+		public Player.Player WrappedPlayer()
 		{
-			_state.Process(this, (long)(delta * 1000));
+			foreach (var child in GetChildren())
+			{
+				if (child is Player.Player player)
+				{
+					return player;
+				}
+			}
+			throw new NotImplementedException();
 		}
+
+		 public override void _Process(double delta)
+		 {
+			 _state.Update(this, delta);
+		 }
+
+		 public Vector2I Coordinate => WrappedPlayer().Coordinate;
 
 		public bool CanHandle(IInput input)
 		{
 			return _state.CanHandle(input);
 		}
 
-		// public IPrediction Predict(IInput input)
-		// {
-		//     return input.Type switch
-		//     {
-		//         InputType.MOUSE_RIGHT_CLICK => _state.Predict(this, (MouseRightClick)input),
-		//         InputType.MOUSE_RIGHT_RELEASE => _state.Predict(this, (MouseRightRelease)input),
-		//         InputType.MOUSE_RIGHT_MOTION => _state.Predict(this, (RightMousePressedMotion)input),
-		//         _ => throw new NotSupportedException()
-		//     };
-		// }
-
 		public void Rewind(AbstractPositionMessage positionMessage)
 		{
-			Position = positionMessage.Coordinate.ToPosition();
-			Direction = positionMessage.Direction;
+			var player = WrappedPlayer();
+			player.Handle(positionMessage);
 		}
 
 		public void EmitMovementEvent(IPrediction prediction, IClientEvent movementEvent)
@@ -90,6 +91,11 @@ namespace y1000.Source.Character
 			return Realm.CanMove(point);
 		}
 
+
+		private void OnPlayerEvent(object? sender, EventArgs e)
+		{
+			
+		}
 
 		public void HandleInput(IInput input)
 		{
@@ -113,22 +119,19 @@ namespace y1000.Source.Character
 			}
 		}
 
-		public bool IsMale => true;
-
-
-		public OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
-
 		public static Character LoggedIn(LoginMessage message, IRealm realm)
 		{
 			PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
 			var character = scene.Instantiate<Character>();
-			character._state = CharacterIdleState.ForMale();
-			character.Position = message.Coordinate.ToPosition();
-			character.Direction = Direction.DOWN;
-			character.ZIndex = 3;
-			character.Visible = true;
+			var state = PlayerIdleState.StartFrom(message.Male, 0);
+			var player = character.WrappedPlayer();
+			player.Init(message.Male, PlayerIdleState.StartFrom(message.Male, 0),  Direction.DOWN, message.Coordinate, message.Id);
+			player.PlayerEventHandler += character.OnPlayerEvent;
 			character.Realm = realm;
+			player.ProcessMode = ProcessModeEnum.Disabled;
+			character.ChangeState(CharacterIdleState.Wrap(state));
 			return character;
 		}
+
 	}
 }

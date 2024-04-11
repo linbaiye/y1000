@@ -36,7 +36,6 @@ message ClientPacket {
 }
 
 message InterpolationPacket {
-  int64 id = 1;
   int32 state = 2;
   int64 elapsedMillis = 5;
   int32 direction = 7;
@@ -67,10 +66,12 @@ message Packet {
 
 message ShowCreaturePacket {
   InterpolationPacket interpolation = 1;
-  int32 type = 2;
+  int64 id = 2;
+  int32 type = 3;
 }
 
 message PlayerInterpolationPacket {
   InterpolationPacket interpolation = 1;
-  bool male = 2;
+  int64 id = 2;
+  bool male = 3;
 }

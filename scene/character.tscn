@@ -1,24 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cd5x0sshtxe2x"]
+[gd_scene load_steps=3 format=3 uid="uid://cd5x0sshtxe2x"]
 
 [ext_resource type="Script" path="res://Source/Character/Character.cs" id="1_gv1xd"]
-[ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_r5qwl"]
-[ext_resource type="Script" path="res://Source/Player/BodySprite.cs" id="3_06f0s"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_buy6c"]
-shader = ExtResource("2_r5qwl")
-shader_parameter/deform = Vector2(0.5, 1)
-shader_parameter/offset = Vector2(2.08165e-12, 4)
-shader_parameter/modulate = null
+[ext_resource type="PackedScene" uid="uid://duo0butuerf3j" path="res://scene/player.tscn" id="2_od4km"]
 
 [node name="Character" type="Node2D"]
-y_sort_enabled = true
-script = ExtResource("1_gv1xd")
-
-[node name="Body" type="Sprite2D" parent="."]
+z_index = 3
+z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
-material = SubResource("ShaderMaterial_buy6c")
-centered = false
-script = ExtResource("3_06f0s")
+script = ExtResource("1_gv1xd")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="player" parent="." instance=ExtResource("2_od4km")]
+z_index = 3
+y_sort_enabled = true
+texture_filter = 1
+
+[node name="Camera2D" type="Camera2D" parent="player"]

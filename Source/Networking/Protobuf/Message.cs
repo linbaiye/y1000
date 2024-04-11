@@ -35,29 +35,29 @@ namespace Source.Networking.Protobuf {
             "a2luZy5Qcm90b2J1Zi5JbnB1dFBhY2tldBITCgtoYXBwZW5lZEF0WBgCIAEo",
             "BRITCgtoYXBwZW5lZEF0WRgDIAEoBSJeCgxDbGllbnRQYWNrZXQSRgoPbW92",
             "ZUV2ZW50UGFja2V0GAEgASgLMisuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
-            "dWYuTW92ZUV2ZW50UGFja2V0SABCBgoEVHlwZSJwChNJbnRlcnBvbGF0aW9u",
-            "UGFja2V0EgoKAmlkGAEgASgDEg0KBXN0YXRlGAIgASgFEhUKDWVsYXBzZWRN",
-            "aWxsaXMYBSABKAMSEQoJZGlyZWN0aW9uGAcgASgFEgkKAXgYCCABKAUSCQoB",
-            "eRgJIAEoBSJfChRJbnRlcnBvbGF0aW9uc1BhY2tldBJHCg5pbnRlcnBvbGF0",
-            "aW9ucxgBIAMoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVy",
-            "cG9sYXRpb25QYWNrZXQiLwoLTG9naW5QYWNrZXQSCQoBeBgBIAEoBRIJCgF5",
-            "GAIgASgFEgoKAmlkGAMgASgDItgDCgZQYWNrZXQSRAoOcG9zaXRpb25QYWNr",
-            "ZXQYASABKAsyKi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Qb3NpdGlv",
-            "blBhY2tldEgAEkwKEnNob3dDcmVhdHVyZVBhY2tldBgCIAEoCzIuLlNvdXJj",
-            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLlNob3dDcmVhdHVyZVBhY2tldEgAEj4K",
-            "C2xvZ2luUGFja2V0GAQgASgLMicuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
-            "dWYuTG9naW5QYWNrZXRIABJKCg5pbnRlcnBvbGF0aW9ucxgFIAEoCzIwLlNv",
-            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25zUGFja2V0",
-            "SAASSQoOcmVzcG9uc2VQYWNrZXQYBiABKAsyLy5Tb3VyY2UuTmV0d29ya2lu",
-            "Zy5Qcm90b2J1Zi5JbnB1dFJlc3BvbnNlUGFja2V0SAASVAoTcGxheWVySW50",
-            "ZXJwb2xhdGlvbhgHIAEoCzI1LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVm",
-            "LlBsYXllckludGVycG9sYXRpb25QYWNrZXRIAEINCgtUeXBlZFBhY2tldCJq",
-            "ChJTaG93Q3JlYXR1cmVQYWNrZXQSRgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIv",
+            "dWYuTW92ZUV2ZW50UGFja2V0SABCBgoEVHlwZSJkChNJbnRlcnBvbGF0aW9u",
+            "UGFja2V0Eg0KBXN0YXRlGAIgASgFEhUKDWVsYXBzZWRNaWxsaXMYBSABKAMS",
+            "EQoJZGlyZWN0aW9uGAcgASgFEgkKAXgYCCABKAUSCQoBeRgJIAEoBSJfChRJ",
+            "bnRlcnBvbGF0aW9uc1BhY2tldBJHCg5pbnRlcnBvbGF0aW9ucxgBIAMoCzIv",
             "LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25QYWNr",
-            "ZXQSDAoEdHlwZRgCIAEoBSJxChlQbGF5ZXJJbnRlcnBvbGF0aW9uUGFja2V0",
+            "ZXQiLwoLTG9naW5QYWNrZXQSCQoBeBgBIAEoBRIJCgF5GAIgASgFEgoKAmlk",
+            "GAMgASgDItgDCgZQYWNrZXQSRAoOcG9zaXRpb25QYWNrZXQYASABKAsyKi5T",
+            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Qb3NpdGlvblBhY2tldEgAEkwK",
+            "EnNob3dDcmVhdHVyZVBhY2tldBgCIAEoCzIuLlNvdXJjZS5OZXR3b3JraW5n",
+            "LlByb3RvYnVmLlNob3dDcmVhdHVyZVBhY2tldEgAEj4KC2xvZ2luUGFja2V0",
+            "GAQgASgLMicuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuTG9naW5QYWNr",
+            "ZXRIABJKCg5pbnRlcnBvbGF0aW9ucxgFIAEoCzIwLlNvdXJjZS5OZXR3b3Jr",
+            "aW5nLlByb3RvYnVmLkludGVycG9sYXRpb25zUGFja2V0SAASSQoOcmVzcG9u",
+            "c2VQYWNrZXQYBiABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5J",
+            "bnB1dFJlc3BvbnNlUGFja2V0SAASVAoTcGxheWVySW50ZXJwb2xhdGlvbhgH",
+            "IAEoCzI1LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllckludGVy",
+            "cG9sYXRpb25QYWNrZXRIAEINCgtUeXBlZFBhY2tldCJ2ChJTaG93Q3JlYXR1",
+            "cmVQYWNrZXQSRgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIvLlNvdXJjZS5OZXR3",
+            "b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25QYWNrZXQSCgoCaWQYAiAB",
+            "KAMSDAoEdHlwZRgDIAEoBSJ9ChlQbGF5ZXJJbnRlcnBvbGF0aW9uUGFja2V0",
             "EkYKDWludGVycG9sYXRpb24YASABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Q",
-            "cm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EgwKBG1hbGUYAiABKAhiBnBy",
-            "b3RvMw=="));
+            "cm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EgoKAmlkGAIgASgDEgwKBG1h",
+            "bGUYAyABKAhiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -66,12 +66,12 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InputPacket), global::Source.Networking.Protobuf.InputPacket.Parser, new[]{ "Type", "Sequence", "ClickedDirection" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.MoveEventPacket), global::Source.Networking.Protobuf.MoveEventPacket.Parser, new[]{ "Input", "HappenedAtX", "HappenedAtY" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientPacket), global::Source.Networking.Protobuf.ClientPacket.Parser, new[]{ "MoveEventPacket" }, new[]{ "Type" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationPacket), global::Source.Networking.Protobuf.InterpolationPacket.Parser, new[]{ "Id", "State", "ElapsedMillis", "Direction", "X", "Y" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationPacket), global::Source.Networking.Protobuf.InterpolationPacket.Parser, new[]{ "State", "ElapsedMillis", "Direction", "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationsPacket), global::Source.Networking.Protobuf.InterpolationsPacket.Parser, new[]{ "Interpolations" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.LoginPacket), global::Source.Networking.Protobuf.LoginPacket.Parser, new[]{ "X", "Y", "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.Packet), global::Source.Networking.Protobuf.Packet.Parser, new[]{ "PositionPacket", "ShowCreaturePacket", "LoginPacket", "Interpolations", "ResponsePacket", "PlayerInterpolation" }, new[]{ "TypedPacket" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ShowCreaturePacket), global::Source.Networking.Protobuf.ShowCreaturePacket.Parser, new[]{ "Interpolation", "Type" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Male" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ShowCreaturePacket), global::Source.Networking.Protobuf.ShowCreaturePacket.Parser, new[]{ "Interpolation", "Id", "Type" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Male" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1457,7 +1457,6 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public InterpolationPacket(InterpolationPacket other) : this() {
-      id_ = other.id_;
       state_ = other.state_;
       elapsedMillis_ = other.elapsedMillis_;
       direction_ = other.direction_;
@@ -1470,18 +1469,6 @@ namespace Source.Networking.Protobuf {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public InterpolationPacket Clone() {
       return new InterpolationPacket(this);
-    }
-
-    /// <summary>Field number for the "id" field.</summary>
-    public const int IdFieldNumber = 1;
-    private long id_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long Id {
-      get { return id_; }
-      set {
-        id_ = value;
-      }
     }
 
     /// <summary>Field number for the "state" field.</summary>
@@ -1559,7 +1546,6 @@ namespace Source.Networking.Protobuf {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Id != other.Id) return false;
       if (State != other.State) return false;
       if (ElapsedMillis != other.ElapsedMillis) return false;
       if (Direction != other.Direction) return false;
@@ -1572,7 +1558,6 @@ namespace Source.Networking.Protobuf {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Id != 0L) hash ^= Id.GetHashCode();
       if (State != 0) hash ^= State.GetHashCode();
       if (ElapsedMillis != 0L) hash ^= ElapsedMillis.GetHashCode();
       if (Direction != 0) hash ^= Direction.GetHashCode();
@@ -1596,10 +1581,6 @@ namespace Source.Networking.Protobuf {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Id != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(Id);
-      }
       if (State != 0) {
         output.WriteRawTag(16);
         output.WriteInt32(State);
@@ -1630,10 +1611,6 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Id != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(Id);
-      }
       if (State != 0) {
         output.WriteRawTag(16);
         output.WriteInt32(State);
@@ -1664,9 +1641,6 @@ namespace Source.Networking.Protobuf {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Id != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
-      }
       if (State != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(State);
       }
@@ -1693,9 +1667,6 @@ namespace Source.Networking.Protobuf {
     public void MergeFrom(InterpolationPacket other) {
       if (other == null) {
         return;
-      }
-      if (other.Id != 0L) {
-        Id = other.Id;
       }
       if (other.State != 0) {
         State = other.State;
@@ -1727,10 +1698,6 @@ namespace Source.Networking.Protobuf {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            Id = input.ReadInt64();
-            break;
-          }
           case 16: {
             State = input.ReadInt32();
             break;
@@ -1766,10 +1733,6 @@ namespace Source.Networking.Protobuf {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            Id = input.ReadInt64();
-            break;
-          }
           case 16: {
             State = input.ReadInt32();
             break;
@@ -2774,6 +2737,7 @@ namespace Source.Networking.Protobuf {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ShowCreaturePacket(ShowCreaturePacket other) : this() {
       interpolation_ = other.interpolation_ != null ? other.interpolation_.Clone() : null;
+      id_ = other.id_;
       type_ = other.type_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -2796,8 +2760,20 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 2;
+    private long id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
     /// <summary>Field number for the "type" field.</summary>
-    public const int TypeFieldNumber = 2;
+    public const int TypeFieldNumber = 3;
     private int type_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2824,6 +2800,7 @@ namespace Source.Networking.Protobuf {
         return true;
       }
       if (!object.Equals(Interpolation, other.Interpolation)) return false;
+      if (Id != other.Id) return false;
       if (Type != other.Type) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -2833,6 +2810,7 @@ namespace Source.Networking.Protobuf {
     public override int GetHashCode() {
       int hash = 1;
       if (interpolation_ != null) hash ^= Interpolation.GetHashCode();
+      if (Id != 0L) hash ^= Id.GetHashCode();
       if (Type != 0) hash ^= Type.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -2856,8 +2834,12 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(10);
         output.WriteMessage(Interpolation);
       }
-      if (Type != 0) {
+      if (Id != 0L) {
         output.WriteRawTag(16);
+        output.WriteInt64(Id);
+      }
+      if (Type != 0) {
+        output.WriteRawTag(24);
         output.WriteInt32(Type);
       }
       if (_unknownFields != null) {
@@ -2874,8 +2856,12 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(10);
         output.WriteMessage(Interpolation);
       }
-      if (Type != 0) {
+      if (Id != 0L) {
         output.WriteRawTag(16);
+        output.WriteInt64(Id);
+      }
+      if (Type != 0) {
+        output.WriteRawTag(24);
         output.WriteInt32(Type);
       }
       if (_unknownFields != null) {
@@ -2890,6 +2876,9 @@ namespace Source.Networking.Protobuf {
       int size = 0;
       if (interpolation_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Interpolation);
+      }
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
       }
       if (Type != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
@@ -2911,6 +2900,9 @@ namespace Source.Networking.Protobuf {
           Interpolation = new global::Source.Networking.Protobuf.InterpolationPacket();
         }
         Interpolation.MergeFrom(other.Interpolation);
+      }
+      if (other.Id != 0L) {
+        Id = other.Id;
       }
       if (other.Type != 0) {
         Type = other.Type;
@@ -2938,6 +2930,10 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 16: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 24: {
             Type = input.ReadInt32();
             break;
           }
@@ -2964,6 +2960,10 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 16: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 24: {
             Type = input.ReadInt32();
             break;
           }
@@ -3010,6 +3010,7 @@ namespace Source.Networking.Protobuf {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public PlayerInterpolationPacket(PlayerInterpolationPacket other) : this() {
       interpolation_ = other.interpolation_ != null ? other.interpolation_.Clone() : null;
+      id_ = other.id_;
       male_ = other.male_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -3032,8 +3033,20 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 2;
+    private long id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
     /// <summary>Field number for the "male" field.</summary>
-    public const int MaleFieldNumber = 2;
+    public const int MaleFieldNumber = 3;
     private bool male_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3060,6 +3073,7 @@ namespace Source.Networking.Protobuf {
         return true;
       }
       if (!object.Equals(Interpolation, other.Interpolation)) return false;
+      if (Id != other.Id) return false;
       if (Male != other.Male) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3069,6 +3083,7 @@ namespace Source.Networking.Protobuf {
     public override int GetHashCode() {
       int hash = 1;
       if (interpolation_ != null) hash ^= Interpolation.GetHashCode();
+      if (Id != 0L) hash ^= Id.GetHashCode();
       if (Male != false) hash ^= Male.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3092,8 +3107,12 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(10);
         output.WriteMessage(Interpolation);
       }
-      if (Male != false) {
+      if (Id != 0L) {
         output.WriteRawTag(16);
+        output.WriteInt64(Id);
+      }
+      if (Male != false) {
+        output.WriteRawTag(24);
         output.WriteBool(Male);
       }
       if (_unknownFields != null) {
@@ -3110,8 +3129,12 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(10);
         output.WriteMessage(Interpolation);
       }
-      if (Male != false) {
+      if (Id != 0L) {
         output.WriteRawTag(16);
+        output.WriteInt64(Id);
+      }
+      if (Male != false) {
+        output.WriteRawTag(24);
         output.WriteBool(Male);
       }
       if (_unknownFields != null) {
@@ -3126,6 +3149,9 @@ namespace Source.Networking.Protobuf {
       int size = 0;
       if (interpolation_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Interpolation);
+      }
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
       }
       if (Male != false) {
         size += 1 + 1;
@@ -3147,6 +3173,9 @@ namespace Source.Networking.Protobuf {
           Interpolation = new global::Source.Networking.Protobuf.InterpolationPacket();
         }
         Interpolation.MergeFrom(other.Interpolation);
+      }
+      if (other.Id != 0L) {
+        Id = other.Id;
       }
       if (other.Male != false) {
         Male = other.Male;
@@ -3174,6 +3203,10 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 16: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 24: {
             Male = input.ReadBool();
             break;
           }
@@ -3200,6 +3233,10 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 16: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 24: {
             Male = input.ReadBool();
             break;
           }

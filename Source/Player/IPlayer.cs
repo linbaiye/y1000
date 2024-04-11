@@ -12,7 +12,5 @@ public interface IPlayer : IEntity
     
     Direction Direction { get; }
     
-    OffsetTexture BodyOffsetTexture { get; }
-    
     Vector2I Coordinate { get; }
 }

@@ -13,6 +13,11 @@ namespace y1000.Source.Player
 			return new OffsetTexture(texture.Texture, texture.Offset + new Vector2(16, -12));
 		}
 
+		public override void _Ready()
+		{
+			ProcessMode = ProcessModeEnum.Always;
+		}
+
 		public override void _Process(double delta)
 		{
 			var texture = OffsetTexture();

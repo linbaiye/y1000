@@ -1,30 +1,23 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 using y1000.code;
 using y1000.code.character.state;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
+using y1000.Source.Player;
 
 namespace y1000.Source.Character.State
 {
-    public class CharacterIdleState : AbstractCharacterState
+    public class CharacterIdleState : ICharacterState
     {
 
-        private static readonly Dictionary<Direction, int> BODY_SPRITE_OFFSET = new()
-        {
-            { Direction.UP, 48},
-			{ Direction.UP_RIGHT, 51},
-			{ Direction.RIGHT, 54},
-			{ Direction.DOWN_RIGHT, 57},
-			{ Direction.DOWN, 60},
-			{ Direction.DOWN_LEFT, 63},
-			{ Direction.LEFT, 66},
-			{ Direction.UP_LEFT, 69},
-        };
+        private readonly PlayerIdleState _idleState;
 
-        public CharacterIdleState(SpriteManager spriteManager): base(spriteManager)
+        private CharacterIdleState(PlayerIdleState state)
         {
+            _idleState = state;
         }
 
         private IPrediction PredictRightClick(Character character, AbstractRightClickInput input)
@@ -43,7 +36,7 @@ namespace y1000.Source.Character.State
         {
             if (character.CanMoveOneUnit(input.Direction))
             {
-                character.ChangeState(CharacterMoveState.Create(character.IsMale, input));
+                //character.ChangeState(CharacterMoveState.Create(character.IsMale, input));
             }
             else
             {
@@ -53,7 +46,7 @@ namespace y1000.Source.Character.State
             return new MovementEvent(input, character.Coordinate);
         }
 
-        public override void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
             HandleRightClick(character, rightClick);
         }
@@ -66,21 +59,17 @@ namespace y1000.Source.Character.State
         }
 
 
-        public override void Process(Character character, long deltaMillis)
-        {
-            ElpasedMillis += deltaMillis;
-        }
-
-        public override bool CanHandle(IInput input)
+        public bool CanHandle(IInput input)
         {
             return input is AbstractRightClickInput;
         }
 
+        public IPlayerState WrappedState => _idleState;
+
         public static CharacterIdleState ForMale()
         {
-            var container = SpriteContainer.LoadMalePlayerSprites("N02");
-            var sm = SpriteManager.WithPinpong(500, BODY_SPRITE_OFFSET, container);
-            return new CharacterIdleState(sm);
+            var state = PlayerIdleState.StartFrom(true, 0);
+            return new CharacterIdleState(state);
         }
 
         public static CharacterIdleState Create(bool forMale)
@@ -88,11 +77,16 @@ namespace y1000.Source.Character.State
             return ForMale();
         }
 
-        public override void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
+        public void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
         {
         }
 
-        public override void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
+        public static CharacterIdleState Wrap(PlayerIdleState idleState)
+        {
+            return new CharacterIdleState(idleState);
+        }
+
+        public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
         {
             HandleRightClick(character, mousePressedMotion);
         }

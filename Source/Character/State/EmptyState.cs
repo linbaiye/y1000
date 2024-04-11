@@ -6,6 +6,8 @@ using y1000.code.character.state;
 using y1000.code.player;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
+using y1000.Source.Player;
+using IPlayer = y1000.Source.Player.IPlayer;
 
 namespace y1000.Source.Character.State
 {
@@ -53,12 +55,29 @@ namespace y1000.Source.Character.State
             throw new NotImplementedException();
         }
 
+        public void Update(Character character, long delta)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IPlayerState WrappedState => throw new NotImplementedException();
+
         public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
         {
             throw new NotImplementedException();
         }
 
         public IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public OffsetTexture BodyOffsetTexture(IPlayer player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Player.Player player, long delta)
         {
             throw new NotImplementedException();
         }

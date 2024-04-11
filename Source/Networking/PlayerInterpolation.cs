@@ -6,13 +6,16 @@ namespace y1000.Source.Networking;
 
 public class PlayerInterpolation : IServerMessage
 {
-    private PlayerInterpolation(Interpolation interpolation, bool male)
+    private PlayerInterpolation(Interpolation interpolation, bool male, long id)
     {
         Interpolation = interpolation;
         Male = male;
+        Id = id;
     }
 
     public Interpolation Interpolation { get; }
+    
+    public long Id { get; }
     
     public bool Male { get; }
 
@@ -23,7 +26,7 @@ public class PlayerInterpolation : IServerMessage
 
     public static PlayerInterpolation FromPacket(PlayerInterpolationPacket packet)
     {
-        return new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male);
+        return new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male, packet.Id);
     }
 
     public void Accept(IServerMessageHandler handler)
