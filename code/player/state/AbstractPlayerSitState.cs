@@ -11,6 +11,7 @@ using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.player.skill;
+using y1000.Source.Sprite;
 
 namespace y1000.code.player.state
 {
@@ -44,7 +45,7 @@ namespace y1000.code.player.state
 
         protected override int SpriteOffset => BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 
-        protected override SpriteContainer SpriteContainer => ((IPlayer)Creature).IsMale() ?  SpriteContainer.LoadMalePlayerSprites("N02"): SpriteContainer.EmptyContainer;
+        protected override SpriteReader SpriteReader => ((IPlayer)Creature).IsMale() ?  SpriteReader.LoadMalePlayerSprites("N02"): SpriteReader.EmptyReader;
 
         protected abstract OffsetTexture GetTexture(int animationSpriteNumber, IEquipment equipment);
 

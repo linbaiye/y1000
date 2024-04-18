@@ -1,4 +1,5 @@
 using Godot;
+using y1000.Source.Map;
 
 namespace y1000.code.world;
 
@@ -26,8 +27,8 @@ public abstract partial class AbstractLayer : Node2D
 		{
 			var jsonString = fileAccess.GetAsText();
 			Object2Json json = Object2Json.FromJsonString(jsonString);
-			int xPos = x * VectorUtil.TILE_SIZE_X;
-			int yPos = y * VectorUtil.TILE_SIZE_Y;
+			int xPos = x * VectorUtil.TileSizeX;
+			int yPos = y * VectorUtil.TileSizeY;
 			Sprite2D objectSprite = new Sprite2D() { Texture = texture, Centered = false, Position = new Vector2(xPos, yPos), Offset = new Vector2(json.X, json.Y), YSortEnabled = true};
 			AddChild(objectSprite);
 		}

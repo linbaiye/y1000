@@ -6,12 +6,12 @@ public class EmptyPlayerState : IPlayerState
 {
     public static readonly EmptyPlayerState Instance = new EmptyPlayerState();
     private EmptyPlayerState (){}
-    public OffsetTexture BodyOffsetTexture(IPlayer player)
+    public OffsetTexture BodyOffsetTexture(Player player)
     {
         throw new System.NotImplementedException();
     }
 
-    public void Update(Player player, long delta)
+    public void Update(Player c, long delta)
     {
         throw new System.NotImplementedException();
     }

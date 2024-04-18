@@ -13,6 +13,7 @@ namespace y1000.code.entity
         string EntityName { get; }
 
         long Id { get; }
+        
 
         void Handle(IEntityMessage message)
         {

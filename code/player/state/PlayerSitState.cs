@@ -8,6 +8,7 @@ using y1000.code.entity.equipment;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.Source.Sprite;
 
 namespace y1000.code.player.state
 {
@@ -68,7 +69,7 @@ namespace y1000.code.player.state
 
         protected override OffsetTexture GetTexture(int animationSpriteNumber, IEquipment equipment)
         {
-            return SpriteContainer.LoadSprites(equipment.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return SpriteReader.LoadSprites(equipment.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
     }
 }

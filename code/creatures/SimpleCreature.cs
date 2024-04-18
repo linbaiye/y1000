@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using Godot;
 using y1000.code.creatures.state;
 using y1000.code.monsters;
+using y1000.Source.Sprite;
 
 namespace y1000.code.creatures
 {
     public partial class SimpleCreature : AbstractCreature
     {
-        private SpriteContainer? spriteContainer;
+        private SpriteReader? spriteContainer;
 
         private Point initCoordinate = Point.Empty;
 
@@ -19,11 +20,11 @@ namespace y1000.code.creatures
 
         private Direction initDirection;
 
-        private void Initiliaze(Point i, SpriteContainer spriteContainer, long id, Direction direction)
+        private void Initiliaze(Point i, SpriteReader spriteReader, long id, Direction direction)
         {
             initCoordinate = i;
             this.id = id;
-            this.spriteContainer = spriteContainer;
+            this.spriteContainer = spriteReader;
             initDirection = direction;
         }
 
@@ -45,8 +46,8 @@ namespace y1000.code.creatures
         {
             PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/Monster.tscn");
             SimpleCreature buffalo = scene.Instantiate<SimpleCreature>();
-            SpriteContainer spriteContainer = SpriteContainer.LoadMonsterSprites(MonsterNames.BUFFALO);
-            buffalo.Initiliaze(coordinate, spriteContainer, id, direction);
+            SpriteReader spriteReader = SpriteReader.LoadMonsterSprites(MonsterNames.BUFFALO);
+            buffalo.Initiliaze(coordinate, spriteReader, id, direction);
             return buffalo;
         }
 
@@ -55,7 +56,7 @@ namespace y1000.code.creatures
             return Load(coordinate, id, Direction.DOWN);
         }
 
-        public SpriteContainer SpriteContainer
+        public SpriteReader SpriteReader
         {
             get
             {

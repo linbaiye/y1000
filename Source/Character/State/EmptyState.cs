@@ -55,6 +55,16 @@ namespace y1000.Source.Character.State
             throw new NotImplementedException();
         }
 
+        public void OnWrappedPlayerStateChanged(IPlayer player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnWrappedPlayerStateChanged(IPlayerState newState)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Character character, long delta)
         {
             throw new NotImplementedException();

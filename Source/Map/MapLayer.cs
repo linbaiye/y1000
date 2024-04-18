@@ -1,33 +1,54 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Godot;
+using NLog;
+using y1000.code;
+using y1000.Source.Character.Event;
 
-namespace y1000.code.world;
+namespace y1000.Source.Map;
 
-public partial class WorldMap : TileMap
+public partial class MapLayer : TileMap
 {
-	private GameMap? gameMap;
+	private GameMap? _gameMap;
 
-	private readonly IDictionary<int, int> TILE_ID_TO_SOURCE_ID = new Dictionary<int,int>();
+	private readonly IDictionary<int, int> _tileIdToSourceId = new Dictionary<int,int>();
 
-	private const int GROUND1_ZINDEX = 0;
-	private const int GROUND2_ZINDEX = 1;
+	private const int Ground1Zindex = 0;
+	private const int Ground2Zindex = 1;
 	private const string MAP_DIR = "res://assets/maps/start";
+
+	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+
+	private Vector2I _origin;
 	public override void _Ready()
 	{
-		gameMap = GameMap.Load("res://assets/maps/start/start.map");
+		_gameMap = GameMap.Load("res://assets/maps/start/start.map");
 		BuildTileSets();
-		TileGround();
-		CreateLayer("object");
+	}
+
+	public void BindCharacter(Character.Character character)
+	{
+		_origin = character.Coordinate;
+		character.WhenCharacterUpdated += OnCharacterEvent;
+		PaintMap();
+	}
+
+	private void OnCharacterEvent(object? sender, AbstractCharacterEventArgs args)
+	{
+		if (sender is Character.Character character && !character.Coordinate.Equals(_origin))
+		{
+			_origin = character.Coordinate;
+			PaintMap();
+		}
 	}
 
 	private void BuildTileSets()
 	{
-		if (gameMap == null)
+		if (_gameMap == null)
 		{
 			return;
 		}
-		var ids = gameMap.TileIds;
+		var ids = _gameMap.TileIds;
 		foreach(var id in ids)
 		{
 			var path = "res://assets/maps/start/tile/" + id + ".png";
@@ -46,22 +67,34 @@ public partial class WorldMap : TileMap
 				source.CreateTile(new Vector2I(w, 0));
 			}
 			int sourceId = TileSet.AddSource(source);
-			TILE_ID_TO_SOURCE_ID.TryAdd(id, sourceId);
+			_tileIdToSourceId.TryAdd(id, sourceId);
 		}
 	}
 
 
+	private void PaintMap()
+	{
+		TileGround();
+		CreateLayer("object");
+	}
+
+
+	private Vector2I MapStart => _origin.Move(-30, -20);
+	
+	private Vector2I MapEnd => _origin.Move(30, 20);
+	
+
 	private void TileGround()
 	{
-		gameMap?.ForeachCell((cell, x, y) =>
+		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) =>
 		{
-			if (TILE_ID_TO_SOURCE_ID.TryGetValue(cell.TileId, out int sourceId))
+			if (_tileIdToSourceId.TryGetValue(cell.TileId, out var sourceId))
 			{
-				SetCell(GROUND1_ZINDEX, new Vector2I(x, y), sourceId, new Vector2I(cell.TileNumber, 0));
+				SetCell(Ground1Zindex, new Vector2I(x, y), sourceId, new Vector2I(cell.TileNumber, 0));
 			}
-			if (TILE_ID_TO_SOURCE_ID.TryGetValue(cell.TileOverId, out int overtileSourceId))
+			if (_tileIdToSourceId.TryGetValue(cell.TileOverId, out var overtileSourceId))
 			{
-				SetCell(GROUND2_ZINDEX, new Vector2I(x, y), overtileSourceId, new Vector2I(cell.TileOverNumber, 0));
+				SetCell(Ground2Zindex, new Vector2I(x, y), overtileSourceId, new Vector2I(cell.TileOverNumber, 0));
 			}
 		});
 	}
@@ -85,23 +118,29 @@ public partial class WorldMap : TileMap
 	}
 
 
-	public void NotifyCharPosition(Vector2I point)
+	private void NotifyCharPosition(Vector2I point)
 	{
-		if (gameMap != null && gameMap.HideRoof(point))  
+		if (_gameMap != null && _gameMap.HideRoof(point))  
 		{
 			GetNode<Node2D>("roof").Hide();
-		} else 
+		}
+		else 
 		{
 			GetNode<Node2D>("roof").Show();
 		}
 	}
 
-	public GameMap? Map => gameMap;
+	public GameMap? Map => _gameMap;
 
 	private void CreateLayer(string layer)
 	{
 		var layerNode = GetNode<Node2D>(layer);
-		gameMap?.ForeachCell((cell, x, y) => PutObject("object".Equals(layer)? cell.ObjectId : cell.RoofId, x, y, layer, layerNode));
+		foreach (var child in layerNode.GetChildren())
+		{
+			layerNode.RemoveChild(child);
+			child.QueueFree();
+		}
+		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) => PutObject("object".Equals(layer)? cell.ObjectId : cell.RoofId, x, y, layer, layerNode));
 	}
 
 	private void PutObject(int objectId, int x, int y, string layer, Node2D parent)
@@ -120,8 +159,8 @@ public partial class WorldMap : TileMap
 		{
 			var jsonString = fileAccess.GetAsText();
 			Object2Json json = Object2Json.FromJsonString(jsonString);
-			int xPos = x * VectorUtil.TILE_SIZE_X;
-			int yPos = y * VectorUtil.TILE_SIZE_Y;
+			int xPos = x * VectorUtil.TileSizeX;
+			int yPos = y * VectorUtil.TileSizeY;
 			Sprite2D objectSprite = new Sprite2D() { Texture = texture, Centered = false, Position = new Vector2(xPos, yPos), Offset = new Vector2(json.X, json.Y), YSortEnabled = true};
 			parent.AddChild(objectSprite);
 		}

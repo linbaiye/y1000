@@ -3,28 +3,14 @@ using NLog;
 using y1000.code;
 using y1000.code.player;
 using y1000.Source.Character.State;
+using y1000.Source.Creature.State;
+using y1000.Source.Sprite;
 
 namespace y1000.Source.Player;
 
-public abstract class AbstractPlayerState : IPlayerState
+public abstract class AbstractPlayerState : AbstractCreatureState<Player>, IPlayerState
 {
-
-    private readonly SpriteManager _spriteManager;
-    
-    protected AbstractPlayerState(SpriteManager spriteManager, long elapsedMillis = 0)
+    protected AbstractPlayerState(SpriteManager spriteManager, long elapsedMillis = 0) : base(spriteManager, elapsedMillis)
     {
-        _spriteManager = spriteManager;
-        ElapsedMillis = elapsedMillis;
     }
-
-    protected long ElapsedMillis { get; set; }
-
-    public OffsetTexture BodyOffsetTexture(IPlayer player)
-    {
-        return _spriteManager.Texture(player.Direction, ElapsedMillis);
-    }
-
-    protected SpriteManager SpriteManager => _spriteManager;
-    
-    public abstract void Update(Player player, long delta);
 }

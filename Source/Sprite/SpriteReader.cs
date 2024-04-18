@@ -4,15 +4,16 @@ using System.IO;
 using Godot;
 using y1000.code.player;
 
-namespace y1000.code 
+namespace y1000.Source.Sprite 
 {
-    public class SpriteContainer
+    // should not be exposed, SpriteManager should enclose this.
+    public class SpriteReader
     {
         private readonly Texture2D[] textures;
 
         private readonly Vector2[] offsets;
 
-        private SpriteContainer(Texture2D[] textures, Vector2[] offsets)
+        private SpriteReader(Texture2D[] textures, Vector2[] offsets)
         {
             this.textures = textures;
             this.offsets = offsets;
@@ -60,9 +61,9 @@ namespace y1000.code
             return list.ToArray();
         }
 
-        private static Dictionary<string, SpriteContainer> LoadedContainers = new Dictionary<string, SpriteContainer>();
+        private static readonly Dictionary<string, SpriteReader> LoadedContainers = new Dictionary<string, SpriteReader>();
 
-        private static SpriteContainer Load(string resDir, Vector2? offset = null) {
+        private static SpriteReader Load(string resDir, Vector2? offset = null) {
             if (!resDir.StartsWith("res://")){
                 resDir = "res://" + resDir;
             }
@@ -87,38 +88,38 @@ namespace y1000.code
                 textures[i] = texture;
                 if (offset.HasValue)
                 {
-                    vectors[i] = vectors[i] + offset.Value;
+                    vectors[i] += offset.Value;
                 }
             }
 			fileAccess.Dispose();
-            var ret = new SpriteContainer(textures, vectors);
+            var ret = new SpriteReader(textures, vectors);
             LoadedContainers.Add(resDir, ret);
             return ret;
         }
 
 
-        public static SpriteContainer LoadMalePlayerSprites(string nr)
+        public static SpriteReader LoadMalePlayerSprites(string nr)
         {
             return Load("res://sprite/char/" + nr + "/");
         }
 
 
-        public static SpriteContainer LoadSprites(string name)
+        public static SpriteReader LoadSprites(string name)
         {
             return Load("res://sprite/" + name + "/");
         }
 
-        public static SpriteContainer LoadSprites(string name, Vector2 offset)
+        public static SpriteReader LoadSprites(string name, Vector2 offset)
         {
             return Load("res://sprite/" + name + "/", offset);
         }
 
 
-        public static SpriteContainer LoadMonsterSprites(string name)
+        public static SpriteReader LoadMonsterSprites(string name)
         {
             return Load("res://sprite/monster/" + name + "/");
         }
 
-        public static readonly SpriteContainer EmptyContainer = new SpriteContainer(Array.Empty<Texture2D>(), Array.Empty<Vector2>());
+        public static readonly SpriteReader EmptyReader = new SpriteReader(Array.Empty<Texture2D>(), Array.Empty<Vector2>());
     }
 }

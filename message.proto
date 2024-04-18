@@ -8,6 +8,7 @@ message PositionPacket {
   int32 direction = 3;
   int64 id = 4;
   int32 type = 5;
+  optional int32 state = 6;
 }
 
 
@@ -56,22 +57,27 @@ message LoginPacket {
 message Packet {
   oneof TypedPacket {
     PositionPacket positionPacket = 1;
-    ShowCreaturePacket showCreaturePacket = 2;
+    CreatureInterpolationPacket creatureInterpolation = 2;
     LoginPacket loginPacket = 4;
     InterpolationsPacket interpolations = 5;
     InputResponsePacket responsePacket = 6;
     PlayerInterpolationPacket playerInterpolation = 7;
+    RemoveEntityPacket removeEntity = 8;
   }
 }
 
-message ShowCreaturePacket {
+message CreatureInterpolationPacket {
   InterpolationPacket interpolation = 1;
   int64 id = 2;
-  int32 type = 3;
+  string name = 3;
 }
 
 message PlayerInterpolationPacket {
   InterpolationPacket interpolation = 1;
   int64 id = 2;
   bool male = 3;
+}
+
+message RemoveEntityPacket {
+  int64 id = 1;
 }

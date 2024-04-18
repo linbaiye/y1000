@@ -1,11 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://53yxyci6nw2t"]
 
-[ext_resource type="Script" path="res://code/world/WorldMap.cs" id="1_28al4"]
+[ext_resource type="Script" path="res://Source/Map/MapLayer.cs" id="1_hdth7"]
 
 [sub_resource type="TileSet" id="TileSet_jlhjp"]
 tile_size = Vector2i(32, 24)
 
 [node name="MapLayer" type="TileMap"]
+z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
 tile_set = SubResource("TileSet_jlhjp")
@@ -19,7 +20,7 @@ layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 0
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
-script = ExtResource("1_28al4")
+script = ExtResource("1_hdth7")
 
 [node name="object" type="Node2D" parent="."]
 z_index = 2
@@ -27,3 +28,4 @@ y_sort_enabled = true
 
 [node name="roof" type="Node2D" parent="."]
 z_index = 3
+y_sort_enabled = true

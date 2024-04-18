@@ -2,13 +2,14 @@ using System.Drawing;
 using Godot;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
+using y1000.Source.Sprite;
 
 namespace y1000.code.monsters.buffalo;
 
 public partial class Buffalo : AbstractCreature
 {
 
-	private SpriteContainer? spriteContainer;
+	private SpriteReader? spriteContainer;
 
 	private Point initCoordinate = Point.Empty;
 
@@ -16,11 +17,11 @@ public partial class Buffalo : AbstractCreature
 
 	private Direction initDirection;
 
-	private void Initiliaze(Point i, SpriteContainer spriteContainer, long id, Direction direction)
+	private void Initiliaze(Point i, SpriteReader spriteReader, long id, Direction direction)
 	{
 		initCoordinate = i;
 		this.id = id;
-		this.spriteContainer = spriteContainer;
+		this.spriteContainer = spriteReader;
 		initDirection = direction;
 	}
 
@@ -42,8 +43,8 @@ public partial class Buffalo : AbstractCreature
 	{
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/Monster.tscn");
 		Buffalo buffalo = scene.Instantiate<Buffalo>();
-		SpriteContainer spriteContainer = SpriteContainer.LoadMonsterSprites(MonsterNames.BUFFALO);
-		buffalo.Initiliaze(coordinate, spriteContainer, id, direction);
+		SpriteReader spriteReader = SpriteReader.LoadMonsterSprites(MonsterNames.BUFFALO);
+		buffalo.Initiliaze(coordinate, spriteReader, id, direction);
 		return buffalo;
 	}
 	public static Buffalo Load(Point coordinate, long id)

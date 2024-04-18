@@ -2,7 +2,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,13 +11,16 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using NLog;
-using y1000.code.creatures;
-using y1000.code.networking;
 using y1000.code.networking.message;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
+using y1000.Source.Control.Bottom;
+using y1000.Source.Creature;
+using y1000.Source.Creature.Monster;
 using y1000.Source.Input;
+using y1000.Source.Map;
 using y1000.Source.Networking;
+using y1000.Source.Networking.Connection;
 using y1000.Source.Player;
 
 namespace y1000.Source;
@@ -46,6 +48,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
+	private BottomControl? _bottomControl;
+
 
 	private enum ConnectionState
 	{
@@ -58,55 +62,17 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 
 	public override void _Ready()
 	{
-		//GD.Print("Loading");
-		//AddChild(Buffalo.Load(new Point(38, 35)));
-		//GD.Print("Loaded");
 		SetupNetwork();
-		var map = WorldMap.Map;
-		/*if (map != null)
-	{
-		int n = 0;
-		map.ForeachCell((cell, x, y) => {
-			if (x == 36 || y == 31 || n >= 10)
-			{
-				return;
-			}
-			if (!map.IsMovable(x, y))
-			{
-				return;
-			}
-			if (x > 27 && y > 27 && x < 51 && y < 45) {
-				AddCreature(SimpleCreature.Load(new Point(x, y), ++n, (Direction)new Random().Next(0, 7)));
-			}
-		});
-	}*/
-		//OtherPlayer otherPlayer = OtherPlayer.Test();
-		//otherPlayer.Position = new Vector2(1248, 696);
-		//AddChild(otherPlayer);
-		//AddCharacter();
+		_bottomControl = GetNode<BottomControl>("UILayer/BottomUI");
 	}
 
-
-	private void AddCharacter()
+	private void WhenCharacterUpdated(object? sender, AbstractCharacterEventArgs characterEventArgs)
 	{
-		AddCharacter(new LoginMessage() { Coordinate = new Vector2I(38, 35) });
-	}
-
-	private void AddCharacter(LoginMessage loginMessage)
-	{
-		if (WorldMap.Map != null)
+		if (characterEventArgs is CharacterStateEventArgs stateEventArgs)
 		{
-			_character = Character.Character.LoggedIn(loginMessage, WorldMap.Map);
-			_character.OnCharacterUpdated += OnCharacterUpdated;
-			AddChild(_character);
+			_predictionManager.Save(stateEventArgs.Prediction);
+			_channel?.WriteAndFlushAsync(stateEventArgs.Event);
 		}
-	}
-
-	private void OnCharacterUpdated(object? sender, EventArgs args)
-	{
-		if (args is not CharacterUpdatedEventArgs eventArgs) return;
-		_predictionManager.Save(eventArgs.Prediction);
-		_channel?.WriteAndFlushAsync(eventArgs.Event);
 	}
 
 	private void ShowCharacter(LoginMessage loginMessage)
@@ -118,7 +84,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		// character.Trousers = new Trousers(0L, "R1", "男子长裤", true);
 		// character.Weapon = new Sword(0, "W68", "耀阳宝剑");
 		// character.Visible = true;
-		UpdateCoordinate();
 	}
 
 	private void AddCreature(AbstractCreature creature)
@@ -130,12 +95,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 
 	public bool CanMove(Point coordinate)
 	{
-		code.world.WorldMap worldMap = WorldMap;
-		if (worldMap.Map == null)
+		MapLayer mapLayer = MapLayer;
+		if (mapLayer.Map == null)
 		{
 			return false;
 		}
-		if (!worldMap.Map.IsMovable(coordinate))
+		if (!mapLayer.Map.IsMovable(coordinate))
 		{
 			return false;
 		}
@@ -151,7 +116,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}
 
-	private async void WriteMessage(I2ServerGameMessage message)
+	private async void WriteMessage(IClientEvent message)
 	{
 		await Task.Run(() =>
 		{
@@ -161,20 +126,14 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	}
 
 
-	public void SendMessage(I2ServerGameMessage message)
-	{
-		WriteMessage(message);
-	}
-
-	private code.world.WorldMap WorldMap => GetNode<code.world.WorldMap>("MapLayer");
+	private MapLayer MapLayer => GetNode<MapLayer>("MapLayer");
 
 
 	private void HandleMouseInput(InputEventMouse eventMouse)
 	{
-		var worldMap = GetNode<code.world.WorldMap>("MapLayer");
-		if (worldMap is { Map: not null } && _channel != null && _character != null)
+		if (_character != null)
 		{
-			var mousePos = _character.GetLocalMousePosition();
+			var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
 			var input = _inputSampler.Sample(eventMouse, mousePos);
 			if (input == null) 
 			{
@@ -184,100 +143,16 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 			{
 				_character.HandleInput(input);
 			}
-			//_predictionManager.Save(_character.Predict(input));
-			//logger.Debug("Sending input {0}.", input);
-			//channel.WriteAndFlushAsync(input);
-		}
-		if (eventMouse is InputEventMouseButton button)
-		{
-			if (button.ButtonIndex == MouseButton.Right)
-			{
-				if (button.IsPressed())
-				{
-					//character?.Move(GetLocalMousePosition());
-				}
-				else if (button.IsReleased())
-				{
-					//character?.StopMove();
-				}
-			}
-			else if (button.ButtonIndex == MouseButton.Left)
-			{
-				if (button.IsPressed() && button.DoubleClick)
-				{
-					var children = GetChildren();
-					foreach (var child in children)
-					{
-						if (child is AbstractCreature creature)
-						{
-						}
-					}
-				}
-			}
-		}
-		else if (eventMouse is InputEventMouseMotion mouseMotion)
-		{
-			if ((mouseMotion.ButtonMask & MouseButtonMask.Right) != 0)
-			{
-				//character?.Move(GetLocalMousePosition());
-			}
 		}
 	}
+	
 
 	private void HandleKeyInput(InputEventKey eventKey)
 	{
-		if (eventKey.Keycode != Key.Shift && eventKey.Keycode != Key.Ctrl)
-		{
-			if (eventKey.Keycode == Key.F3)
-			{
-				//character?.Sit();
-			}
-			else if (eventKey.Keycode == Key.H)
-			{
-				//character?.Hurt();
-			}
-			else if (eventKey.Keycode == Key.F6)
-			{
-				//if (eventKey.IsPressed())
-				//	character?.PressBufa(new UnnamedBufa());
-			}
-		}
-		/*var monster = GetNode<SimpleCreature>("Monster");
-	if (eventKey.IsPressed())
-	{
-		switch (eventKey.Keycode)
-		{
-			case Key.Left:
-				monster.Move(Direction.LEFT);
-				break;
-			case Key.Right:
-				monster.Move(Direction.RIGHT);
-				break;
-			case Key.Down:
-				monster.Move(Direction.DOWN);
-				break;
-			case Key.Up:
-				monster.Move(Direction.UP);
-				break;
-			case Key.I:
-				monster.Move(Direction.UP_RIGHT);
-				break;
-			case Key.J:
-				monster.Move(Direction.DOWN_RIGHT);
-				break;
-			case Key.K:
-				monster.Move(Direction.DOWN_LEFT);
-				break;
-			case Key.L:
-				monster.Move(Direction.UP_LEFT);
-				break;
-		}
-	}*/
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		//inputSampler.Sample(@event, GetLocalMousePosition());
 		if (@event is InputEventMouse eventMouse)
 		{
 			HandleMouseInput(eventMouse);
@@ -307,56 +182,19 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	public override void _Process(double delta)
 	{
 		HandleMessages();
-		UpdateCoordinate();
 	}
 
 
-	// private void Handle(InterpolationsMessage message)
-	// {
-	// 	foreach (IInterpolation interpolation in message.Interpolations)
-	// 	{
-	// 		if (otherPlayers.TryGetValue(interpolation.Id, out OtherPlayer? other))
-	// 		{
-	// 			other.EnqueueInterpolation(interpolation);
-	// 		}
-	// 		else
-	// 		{
-	// 			OtherPlayer player = OtherPlayer.CreatePlayer(interpolation);
-	// 			otherPlayers.Add(interpolation.Id, player);
-	// 			AddChild(player);
-	// 		}
-	// 	}
-	// }
-	
 	private void HandleMessages()
 	{
-		if (_unprocessedMessages.IsEmpty)
-		{
+		if (!_unprocessedMessages.TryDequeue(out var message))
 			return;
-		}
-		if (_unprocessedMessages.TryDequeue(out var message))
+		if (message is IServerMessage serverMessage)
 		{
-			if (message is IServerMessage serverMessage)
-			{
-				serverMessage.Accept(this);
-			}
+			serverMessage.Accept(this);
 		}
 	}
 
-
-	private void UpdateCoordinate()
-	{
-		var coor = _character?.Coordinate;
-		if (coor == null)
-		{
-			return;
-		}
-		var label = GetNode<Label>("UILayer/BottomUI/Container/Control/Skill/Coordinate/Label");
-		if (label != null)
-		{
-			label.Text = coor.ToString();
-		}
-	}
 
 	public void OnMessageArrived(object message)
 	{
@@ -371,6 +209,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		});
 		try
 		{
+			_channel?.CloseAsync();
 			_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 		}
 		catch (Exception)
@@ -409,11 +248,29 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		{
 			player.Handle(message);
 		}
+		else if (_creatures.TryGetValue(message.Id, out var monster))
+		{
+			monster.Handle(message);
+		}
 	}
 
+	public void Handle(CreatureInterpolation creatureInterpolation)
+	{
+		LOGGER.Debug("Adding creature by interpolation {0}.", creatureInterpolation);
+		var monster = Monster.Create(creatureInterpolation);
+		_creatures.TryAdd(monster.Id, monster);
+		AddChild(monster);
+	}
 
 	public void Handle(LoginMessage loginMessage)
 	{
-		AddCharacter(loginMessage);
+		if (MapLayer.Map != null)
+		{
+			_character = Character.Character.LoggedIn(loginMessage, MapLayer.Map);
+			_character.WhenCharacterUpdated += WhenCharacterUpdated;
+			_bottomControl?.BindCharacter(_character);
+			MapLayer.BindCharacter(_character);
+			AddChild(_character);
+		}
 	}
 }

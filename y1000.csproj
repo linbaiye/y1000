@@ -33,8 +33,13 @@
     <Compile Remove="code\networking\message\character\CharacterMovingMessage.cs" />
     <Compile Remove="code\networking\message\character\**" />
     <EmbeddedResource Remove="code\networking\message\character\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Creature\" />
+    <Compile Remove="Source\Player\PlayerMovedEventArgs.cs" />
+    <Compile Remove="Source\Player\PlayerEventArgs.cs" />
+    <Compile Remove="Source\Character\State\CharacterFlyState.cs" />
+    <Compile Remove="code\world\World.cs" />
+    <Compile Remove="Source\Character\State\AbstractCharacterState.cs" />
+    <Compile Remove="Source\Creature\State\AbstractCreatureIdleState.cs" />
+    <Compile Remove="Source\Creature\Monster\AbstractPassiveMonster.cs" />
+    <Compile Remove="Source\Creature\Monster\Buffalo.cs" />
   </ItemGroup>
 </Project>

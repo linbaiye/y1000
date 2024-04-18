@@ -16,6 +16,7 @@ using y1000.code.player.state;
 using y1000.code.util;
 using y1000.code.world;
 using y1000.Source.Input;
+using y1000.Source.Sprite;
 
 namespace y1000.code.character.state
 {
@@ -46,27 +47,27 @@ namespace y1000.code.character.state
 
         public override OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
-            return SpriteContainer.LoadSprites(armor.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return SpriteReader.LoadSprites(armor.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
         public override OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
         {
-            return SpriteContainer.LoadSprites(hat.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return SpriteReader.LoadSprites(hat.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
         public override OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
         {
-            return SpriteContainer.LoadSprites(trousers.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return SpriteReader.LoadSprites(trousers.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
 
         public override OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)
         {
-            return SpriteContainer.LoadSprites(weapon.SpriteBasePath + "0", weapon.Offset).Get(SpriteOffset + animationSpriteNumber);
+            return SpriteReader.LoadSprites(weapon.SpriteBasePath + "0", weapon.Offset).Get(SpriteOffset + animationSpriteNumber);
         }
 
 
-        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
+        protected override SpriteReader SpriteReader => ((Player)Creature).IsMale() ? SpriteReader.LoadMalePlayerSprites("N02") : SpriteReader.EmptyReader;
 
 
 

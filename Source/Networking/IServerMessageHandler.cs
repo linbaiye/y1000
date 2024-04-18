@@ -16,6 +16,16 @@ public interface IServerMessageHandler
     {
         Handle((IEntityMessage)moveMessage);
     }
+    
+    void Handle(RunMessage runMessage)
+    {
+        Handle((IEntityMessage)runMessage);
+    }
+    
+    void Handle(FlyMessage flyMessage)
+    {
+        Handle((IEntityMessage)flyMessage);
+    }
 
     void Handle(SetPositionMessage setPositionMessage)
     {
@@ -26,4 +36,6 @@ public interface IServerMessageHandler
     {
         Handle((IEntityMessage)turnMessage);
     }
+
+    void Handle(CreatureInterpolation creatureInterpolation);
 }

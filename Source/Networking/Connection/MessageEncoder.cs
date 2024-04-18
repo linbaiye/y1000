@@ -1,18 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
-using Godot;
 using Google.Protobuf;
-using Google.Protobuf.WellKnownTypes;
 using NLog;
-using y1000.code.networking.message;
 using y1000.Source.Input;
 
-namespace y1000.code.networking
+namespace y1000.Source.Networking.Connection
 {
     public class MessageEncoder : MessageToByteEncoder<IClientEvent>
     {

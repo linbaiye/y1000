@@ -32,6 +32,7 @@ namespace y1000.code.entity.equipment
         public string EntityName => armorName;
 
         public long Id => id;
+        public Vector2I Coordinate { get; }
 
         public abstract string SpriteBasePath { get; }
         public abstract Vector2 Offset { get; }

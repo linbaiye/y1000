@@ -5,6 +5,7 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using y1000.code.networking;
+using y1000.Source.Networking.Connection;
 
 namespace y1000;
 

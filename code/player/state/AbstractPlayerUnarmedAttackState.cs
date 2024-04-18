@@ -6,6 +6,7 @@ using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.Source.Sprite;
 
 namespace y1000.code.player.state
 {
@@ -16,7 +17,7 @@ namespace y1000.code.player.state
         {
         }
 
-        protected override SpriteContainer SpriteContainer => ((IPlayer)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N01") : SpriteContainer.EmptyContainer;
+        protected override SpriteReader SpriteReader => ((IPlayer)Creature).IsMale() ? SpriteReader.LoadMalePlayerSprites("N01") : SpriteReader.EmptyReader;
 
         protected override string GetChestSpritePath(ChestArmor chestArmor)
         {

@@ -7,6 +7,7 @@ using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.Source.Sprite;
 
 namespace y1000.code.player.state
 {
@@ -36,7 +37,7 @@ namespace y1000.code.player.state
         {
         }
 
-        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
+        protected override SpriteReader SpriteReader => ((Player)Creature).IsMale() ? SpriteReader.LoadMalePlayerSprites("N02") : SpriteReader.EmptyReader;
     
     }
 }

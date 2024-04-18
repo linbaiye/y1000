@@ -21,5 +21,10 @@ namespace y1000.Source.Input
         {
             return new RightMousePressedMotion(_sequence++, direction);
         }
+        
+        public static KeyboardInput KeyInput(Key key)
+        {
+            return new KeyboardInput(_sequence++, key);
+        }
     }
 }

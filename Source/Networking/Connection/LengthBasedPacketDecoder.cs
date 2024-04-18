@@ -1,20 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Source.Networking.Protobuf;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
-using Godot;
-using Google.Protobuf.WellKnownTypes;
+using Source.Networking.Protobuf;
+using y1000.code;
 using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.code.player.snapshot;
-using y1000.code.util;
-using y1000.Source.Networking;
 
-namespace y1000.code.networking
+namespace y1000.Source.Networking.Connection
 {
     public class LengthBasedPacketDecoder : LengthFieldBasedFrameDecoder
     {
@@ -30,6 +25,8 @@ namespace y1000.code.networking
                 PositionType.MOVE => MoveMessage.FromPacket(positionPacket),
                 PositionType.TURN => TurnMessage.FromPacket(positionPacket),
                 PositionType.SET => SetPositionMessage.FromPacket(positionPacket),
+                PositionType.RUN => RunMessage.FromPacket(positionPacket),
+                PositionType.FLY => FlyMessage.FromPacket(positionPacket),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -76,6 +73,7 @@ namespace y1000.code.networking
                 Packet.TypedPacketOneofCase.ResponsePacket => DecodeInputRespoinse(packet.ResponsePacket),
                 Packet.TypedPacketOneofCase.Interpolations => DecodeInterpolations(packet.Interpolations),
                 Packet.TypedPacketOneofCase.PlayerInterpolation => PlayerInterpolation.FromPacket(packet.PlayerInterpolation),
+                Packet.TypedPacketOneofCase.CreatureInterpolation => CreatureInterpolation.FromPacket(packet.CreatureInterpolation),
                 _ => throw new NotSupportedException()
             };
         }

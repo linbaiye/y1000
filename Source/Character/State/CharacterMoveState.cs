@@ -8,25 +8,25 @@ using y1000.code;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
+using y1000.Source.Magic.Foot;
 using y1000.Source.Player;
 
 namespace y1000.Source.Character.State
 {
     public class CharacterMoveState : ICharacterState
     {
-
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
         private readonly AbstractRightClickInput _currentInput;
 
         private IInput? _lastInput;
         
-        private readonly PlayerWalkState _playerWalkState;
-        
-        public CharacterMoveState(AbstractRightClickInput currentInput, PlayerWalkState playerWalkState)
+        private readonly AbstractPlayerMoveState _playerMoveState;
+
+        private CharacterMoveState(AbstractRightClickInput currentInput, AbstractPlayerMoveState playerMoveState)
         {
             _currentInput = currentInput;
-            _playerWalkState = playerWalkState;
+            _playerMoveState = playerMoveState;
         }
 
         public bool CanHandle(IInput input)
@@ -34,37 +34,41 @@ namespace y1000.Source.Character.State
             return input is AbstractRightClickInput or MouseRightRelease;
         }
 
-        public IPlayerState WrappedState => _playerWalkState;
 
-        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        private void ContinueMove(Character character, AbstractRightClickInput input)
         {
-            _lastInput = rightClick;
+            character.EmitMovementEvent(
+                new MovePrediction(input, character.Coordinate, input.Direction),
+                new MovementEvent(input, character.Coordinate));
+            character.ChangeState(Move(character.FootMagic, character.IsMale, input));
         }
 
-        public void Process(Character character, long deltaMillis)
+        public void OnWrappedPlayerAnimationFinished(Character character)
         {
             if (_lastInput is MouseRightRelease)
             {
-                character.ChangeState(CharacterIdleState.Create(character.IsMale));
                 character.EmitMovementEvent(
                     SetPositionPrediction.Overflow(_lastInput, character.Coordinate, character.Direction),
                     new MovementEvent(_lastInput, character.Coordinate));
+                character.ChangeState(CharacterIdleState.Create(character.IsMale));
             }
             else if (_lastInput is AbstractRightClickInput input)
             {
-                //character.ChangeState(Create(character.IsMale, input));
-                character.EmitMovementEvent(
-                    new MovePrediction(input, character.Coordinate, character.Direction),
-                    new MovementEvent(input, character.Coordinate));
+                ContinueMove(character, input);
             }
             else if (_lastInput == null)
             {
                 var nextInput = InputFactory.CreateRightMousePressedMotion(_currentInput.Direction);
-                //character.ChangeState(Create(character.IsMale, nextInput));
-                character.EmitMovementEvent(
-                    new MovePrediction(nextInput, character.Coordinate, character.Direction),
-                    new MovementEvent(nextInput, character.Coordinate));
+                ContinueMove(character, nextInput);
             }
+        }
+
+        public IPlayerState WrappedState => _playerMoveState;
+        
+        
+        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        {
+            _lastInput = rightClick;
         }
 
         public void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
@@ -75,6 +79,31 @@ namespace y1000.Source.Character.State
         public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
         {
             _lastInput = mousePressedMotion;
+        }
+
+        public static CharacterMoveState Move(IFootMagic? magic, bool male, AbstractRightClickInput rightClickInput)
+        {
+            if (magic != null)
+            {
+                return magic.CanFly ? Fly(male, rightClickInput) : Run(male, rightClickInput);
+            }
+            return Walk(male, rightClickInput);
+        }
+
+
+        private static CharacterMoveState Walk(bool male, AbstractRightClickInput input)
+        {
+            return new CharacterMoveState(input, PlayerMoveState.WalkTowards(male, input.Direction));
+        }
+
+        private static CharacterMoveState Run(bool male, AbstractRightClickInput input)
+        {
+            return new CharacterMoveState(input, PlayerMoveState.RunTowards(male, input.Direction));
+        }
+
+        private static CharacterMoveState Fly(bool male, AbstractRightClickInput input)
+        {
+            return new CharacterMoveState(input, PlayerMoveState.FlyTowards(male, input.Direction));
         }
     }
 }

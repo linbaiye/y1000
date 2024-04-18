@@ -7,18 +7,19 @@ using y1000.code;
 using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.Source.Character.State;
+using y1000.Source.Creature;
+using y1000.Source.Creature.State;
 using y1000.Source.Networking;
 
 namespace y1000.Source.Player;
 
-public partial class Player: Node2D, IPlayer, IBody
+public partial class Player: AbstractCreature, IPlayer
 {
 
 	private IPlayerState _state = IPlayerState.Empty;
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-
-	public event EventHandler? PlayerEventHandler;
+	public event EventHandler<CreatureAnimationDoneEventArgs>? StateAnimationEventHandler;
 
 	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id)
 	{
@@ -39,42 +40,29 @@ public partial class Player: Node2D, IPlayer, IBody
 
 	public bool IsMale { get; private set; }
 	
-	public long Id { get; private set; }
+	public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
 
-	public Direction Direction { get; set; }
-	
-	public OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
-	
-	public Vector2I Coordinate => Position.ToCoordinate();
-
-	private static IPlayerState CreateState(bool male, CreatureState state, long start)
+	private static IPlayerState CreateState(bool male, CreatureState state, long start, Direction direction)
 	{
 		switch (state)
 		{
 			case CreatureState.IDLE:
 				return PlayerIdleState.StartFrom(male, start);
 			case CreatureState.WALK:
-			
+				return PlayerMoveState.WalkTowards(male, direction, start);
+			case CreatureState.RUN:
+				return PlayerMoveState.RunTowards(male, direction, start);
+			case CreatureState.FLY:
+				return PlayerFlyState.Towards(male, direction, start);
 			default:
 				throw new NotSupportedException();
 		}
-	}
-
-	public void EmitEvent(PlayerMovedEvent @event)
-	{
-		PlayerEventHandler?.Invoke(this, new PlayerEventArgs(@event));
 	}
 
 	private void Turn(AbstractPositionMessage turnMessage)
 	{
 		Direction = turnMessage.Direction;
 		_state = PlayerIdleState.StartFrom(IsMale, 0);
-	}
-
-	private void SetPosition(AbstractPositionMessage message)
-	{
-		Position = message.Coordinate.ToPosition();
-		Turn(message);
 	}
 
 	public void ChangeState(IPlayerState newState)
@@ -84,12 +72,28 @@ public partial class Player: Node2D, IPlayer, IBody
 
 	private void Move(MoveMessage message)
 	{
-		_state = PlayerWalkState.Towards(message.Direction, 0);
+		_state = PlayerMoveState.WalkTowards(IsMale, message.Direction);
+	}
+	
+	private void Fly(FlyMessage message)
+	{
+		_state = PlayerMoveState.FlyTowards(IsMale, message.Direction);
+	}
+	
+	private void Run(RunMessage message)
+	{
+		_state = PlayerMoveState.RunTowards(IsMale, message.Direction);
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		_state.Update(this, (long)(delta * 1000));
+	}
+
+
+	public void NotifyAnimationFinished()
+	{
+		StateAnimationEventHandler?.Invoke(this, new CreatureAnimationDoneEventArgs(_state));
 	}
 
 	public void Handle(IEntityMessage message)
@@ -105,6 +109,12 @@ public partial class Player: Node2D, IPlayer, IBody
 			case SetPositionMessage positionMessage:
 				SetPosition(positionMessage);
 				break;
+			case FlyMessage flyMessage:
+				Fly(flyMessage);
+				break;
+			case RunMessage runMessage:
+				Run(runMessage);
+				break;
 		}
 	}
 
@@ -117,19 +127,12 @@ public partial class Player: Node2D, IPlayer, IBody
 	{
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/player.tscn");
 		var player = scene.Instantiate<Player>();
-		var state = CreateState(playerInterpolation.Male, playerInterpolation.Interpolation.State, playerInterpolation.Interpolation.ElapsedMillis);
+		var interpolation = playerInterpolation.Interpolation;
+		var state = CreateState(playerInterpolation.Male, interpolation.State,
+			interpolation.ElapsedMillis,
+			interpolation.Direction);
 		player.Init(playerInterpolation.Male, state, 
-			playerInterpolation.Interpolation.Direction, playerInterpolation.Interpolation.Coordinate, playerInterpolation.Id);
+			interpolation.Direction, interpolation.Coordinate, playerInterpolation.Id);
 		return player;
 	}
-
-	public static Player Load(long id, Vector2I coordinate, bool male)
-	{
-		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/player.tscn");
-		var player = scene.Instantiate<Player>();
-		player.Init(male, PlayerIdleState.StartFrom(male, 0), Direction.DOWN, coordinate, id);
-		return player;
-	}
-
-	public string EntityName => "";
 }

@@ -6,7 +6,7 @@ namespace y1000.Source.Networking;
 
 public class Interpolation
 {
-    private Interpolation(Vector2I coordinate, CreatureState state, long elapsedMillis, Direction direction)
+    public Interpolation(Vector2I coordinate, CreatureState state, long elapsedMillis, Direction direction)
     {
         Coordinate = coordinate;
         State = state;

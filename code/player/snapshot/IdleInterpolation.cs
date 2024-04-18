@@ -8,6 +8,7 @@ using Source.Networking.Protobuf;
 using Godot;
 using y1000.code.networking.message;
 using y1000.code.util;
+using y1000.Source.Sprite;
 
 namespace y1000.code.player.snapshot
 {
@@ -56,7 +57,7 @@ namespace y1000.code.player.snapshot
 			{ Direction.UP_LEFT, 69},
         };
 
-        private static readonly SpriteContainer MALE_SPRITES = SpriteContainer.LoadMalePlayerSprites("N02");
+        private static readonly SpriteReader MALE_SPRITES = SpriteReader.LoadMalePlayerSprites("N02");
 
         private static readonly List<TimeMillisSprite> MILLIS_SPRITE_RANGE = new List<TimeMillisSprite>() 
         {

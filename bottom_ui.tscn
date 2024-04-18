@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8pmfxkqej1vd"]
 
+[ext_resource type="Script" path="res://Source/Control/Bottom/BottomControl.cs" id="1_nx2kl"]
 [ext_resource type="Texture2D" uid="uid://c715qnyw0j63y" path="res://hud_bottom.png" id="1_u5gb0"]
-[ext_resource type="Script" path="res://code/control/SkillPanel1.cs" id="2_jbcao"]
 
 [node name="BottomUI" type="Control"]
 layout_direction = 1
@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 offset_top = -198.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("1_nx2kl")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -45,34 +46,21 @@ metadata/_edit_use_anchors_ = true
 custom_minimum_size = Vector2(2.08165e-12, 66)
 layout_mode = 2
 
-[node name="SkillPanel1" type="Panel" parent="Container/Skills"]
-custom_minimum_size = Vector2(40, 2.08165e-12)
-layout_mode = 2
-script = ExtResource("2_jbcao")
-
 [node name="Control" type="HBoxContainer" parent="Container"]
-custom_minimum_size = Vector2(2.08165e-12, 132)
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_direction = 2
 layout_mode = 2
 
-[node name="Skill" type="PanelContainer" parent="Container/Control"]
-custom_minimum_size = Vector2(130, 0)
+[node name="FirstArea" type="MarginContainer" parent="Container/Control"]
+custom_minimum_size = Vector2(140, 2.08165e-12)
 layout_mode = 2
+theme_override_constants/margin_left = 55
+theme_override_constants/margin_top = 103
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 8
 
-[node name="Coordinate" type="Panel" parent="Container/Control/Skill"]
-custom_minimum_size = Vector2(70, 40)
-layout_direction = 3
+[node name="Coordinate" type="Label" parent="Container/Control/FirstArea"]
+clip_contents = true
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
-[node name="Label" type="Label" parent="Container/Control/Skill/Coordinate"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
+size_flags_vertical = 1
 vertical_alignment = 1
-
-[connection signal="gui_input" from="Container/Skills/SkillPanel1" to="Container/Skills/SkillPanel1" method="OnInput"]

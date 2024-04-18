@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using y1000.Source.Sprite;
 
 namespace y1000.code.creatures.state
 {
@@ -11,6 +12,6 @@ namespace y1000.code.creatures.state
         {
         }
 
-        protected override SpriteContainer SpriteContainer => ((SimpleCreature)Creature).SpriteContainer;
+        protected override SpriteReader SpriteReader => ((SimpleCreature)Creature).SpriteReader;
     }
 }

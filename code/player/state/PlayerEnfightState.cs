@@ -10,6 +10,7 @@ using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.player.skill;
+using y1000.Source.Sprite;
 
 namespace y1000.code.player.state
 {
@@ -40,7 +41,7 @@ namespace y1000.code.player.state
             player.AnimationPlayer.SpeedScale = speed;
         }
 
-        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
+        protected override SpriteReader SpriteReader => ((Player)Creature).IsMale() ? SpriteReader.LoadMalePlayerSprites("N02") : SpriteReader.EmptyReader;
 
         public override void OnAnimationFinised()
         {
@@ -54,17 +55,17 @@ namespace y1000.code.player.state
 
         public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
-            return SpriteContainer.LoadSprites(armor.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return SpriteReader.LoadSprites(armor.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
         public OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
         {
-            return SpriteContainer.LoadSprites(hat.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return SpriteReader.LoadSprites(hat.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
         public OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
         {
-            return SpriteContainer.LoadSprites(trousers.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return SpriteReader.LoadSprites(trousers.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
         private void OnHurtDone()

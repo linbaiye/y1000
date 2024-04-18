@@ -48,8 +48,8 @@ public partial class World : Node2D, IItemContainer
 		var map = GetNode<Godot.TileMap>("Map");
 		var mousePos = GetTree().Root.GetMousePosition();
 		var end = map.GetUsedRect().End;
-		return mousePos.X <= end.X * VectorUtil.TILE_SIZE_X && mousePos.X >= 0 &&
-		       mousePos.Y <= end.Y * VectorUtil.TILE_SIZE_Y && mousePos.Y >= 0;
+		return mousePos.X <= end.X * VectorUtil.TileSizeX && mousePos.X >= 0 &&
+		       mousePos.Y <= end.Y * VectorUtil.TileSizeY && mousePos.Y >= 0;
 	}
 
 }

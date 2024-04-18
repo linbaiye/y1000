@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.creatures.state;
+using y1000.Source.Sprite;
 
 namespace y1000.code.creatures
 {
@@ -20,7 +21,7 @@ namespace y1000.code.creatures
         public override CreatureState State => throw new NotImplementedException();
 
 
-        protected override SpriteContainer SpriteContainer => throw new NotImplementedException();
+        protected override SpriteReader SpriteReader => throw new NotImplementedException();
 
         protected override int SpriteOffset => throw new NotImplementedException();
     }

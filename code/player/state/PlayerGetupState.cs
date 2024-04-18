@@ -10,6 +10,7 @@ using y1000.code.entity.equipment;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.Source.Sprite;
 
 namespace y1000.code.player.state
 {
@@ -58,12 +59,12 @@ namespace y1000.code.player.state
 
         public override OffsetTexture OffsetTexture(int animationSpriteNumber)
         {
-            return SpriteContainer.Get(ComputeAnimationSpriteNumber(animationSpriteNumber)) ;
+            return SpriteReader.Get(ComputeAnimationSpriteNumber(animationSpriteNumber)) ;
         }
 
         protected override OffsetTexture GetTexture(int animationSpriteNumber, IEquipment equipment)
         {
-            return SpriteContainer.LoadSprites(equipment.SpriteBasePath + "0").Get(ComputeAnimationSpriteNumber(animationSpriteNumber));
+            return SpriteReader.LoadSprites(equipment.SpriteBasePath + "0").Get(ComputeAnimationSpriteNumber(animationSpriteNumber));
         }
     }
 }

@@ -4,13 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetty.Transport.Channels;
 using Godot;
+using NLog;
 using y1000.code;
 using y1000.code.networking.message;
 using y1000.code.world;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
 using y1000.Source.Character.State.Prediction;
+using y1000.Source.Creature;
 using y1000.Source.Input;
+using y1000.Source.Magic.Foot;
 using y1000.Source.Player;
 using ICharacterState = y1000.Source.Character.State.ICharacterState;
 namespace y1000.Source.Character
@@ -19,13 +22,19 @@ namespace y1000.Source.Character
 	{
 		private ICharacterState _state = EmptyState.Instance;
 
-		public IRealm Realm { get; set; } = IRealm.Empty;
+		private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
-		public event EventHandler? OnCharacterUpdated;
+		public IRealm Realm { get; set; } = IRealm.Empty;
+		
+		public IFootMagic? FootMagic { get; set; }
+
+		public event EventHandler<AbstractCharacterEventArgs>? WhenCharacterUpdated;
+
 		
 		public void ChangeState(ICharacterState state)
 		{
 			_state = state;
+			WrappedPlayer().ChangeState(state.WrappedState);
 		}
 
 		public bool IsMale => WrappedPlayer().IsMale;
@@ -37,6 +46,7 @@ namespace y1000.Source.Character
 		public Direction Direction
 		{
 			get => WrappedPlayer().Direction;
+			
 			set
 			{
 				{
@@ -57,11 +67,6 @@ namespace y1000.Source.Character
 			throw new NotImplementedException();
 		}
 
-		 public override void _Process(double delta)
-		 {
-			 _state.Update(this, delta);
-		 }
-
 		 public Vector2I Coordinate => WrappedPlayer().Coordinate;
 
 		public bool CanHandle(IInput input)
@@ -69,15 +74,19 @@ namespace y1000.Source.Character
 			return _state.CanHandle(input);
 		}
 
+
 		public void Rewind(AbstractPositionMessage positionMessage)
 		{
 			var player = WrappedPlayer();
-			player.Handle(positionMessage);
+			player.Direction = positionMessage.Direction;
+			player.Position = positionMessage.Coordinate.ToPosition();
+			LOGGER.Debug("Rewind to coordinate {0}, direction {1}.", player.Coordinate, player.Direction);
+			ChangeState(CharacterIdleState.Wrap(PlayerIdleState.StartFrom(IsMale, 0)));
 		}
 
 		public void EmitMovementEvent(IPrediction prediction, IClientEvent movementEvent)
 		{
-			OnCharacterUpdated?.Invoke(this, new CharacterUpdatedEventArgs(prediction, movementEvent));
+			WhenCharacterUpdated?.Invoke(this, new CharacterStateEventArgs(prediction, movementEvent));
 		}
 
 		public bool CanMoveOneUnit(Direction direction)
@@ -85,16 +94,15 @@ namespace y1000.Source.Character
 			return CanMoveTo(Coordinate.Move(direction));
 		}
 
-
 		public bool CanMoveTo(Vector2I point)
 		{
 			return Realm.CanMove(point);
 		}
 
 
-		private void OnPlayerEvent(object? sender, EventArgs e)
+		private void OnPlayerAnimationFinished(object? sender, CreatureAnimationDoneEventArgs args)
 		{
-			
+			_state.OnWrappedPlayerAnimationFinished(this);
 		}
 
 		public void HandleInput(IInput input)
@@ -126,9 +134,9 @@ namespace y1000.Source.Character
 			var state = PlayerIdleState.StartFrom(message.Male, 0);
 			var player = character.WrappedPlayer();
 			player.Init(message.Male, PlayerIdleState.StartFrom(message.Male, 0),  Direction.DOWN, message.Coordinate, message.Id);
-			player.PlayerEventHandler += character.OnPlayerEvent;
+			player.StateAnimationEventHandler += character.OnPlayerAnimationFinished;
 			character.Realm = realm;
-			player.ProcessMode = ProcessModeEnum.Disabled;
+			character.FootMagic = IFootMagic.ByName(UnnamedFootMagic.Name, 85.10f);
 			character.ChangeState(CharacterIdleState.Wrap(state));
 			return character;
 		}

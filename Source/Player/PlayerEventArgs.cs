@@ -4,12 +4,12 @@ namespace y1000.Source.Player;
 
 public class PlayerEventArgs : EventArgs
 {
-    public PlayerEventArgs(PlayerMovedEvent @event)
+    public PlayerEventArgs(PlayerMovedEventArgs eventArgs)
     {
-        Event = @event;
+        EventArgs = eventArgs;
     }
 
-    public PlayerMovedEvent Event { get; }
+    public PlayerMovedEventArgs EventArgs { get; }
     
     
 }

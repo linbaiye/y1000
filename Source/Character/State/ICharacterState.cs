@@ -1,13 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using y1000.code.character.state;
-using y1000.code.player;
-using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
 using y1000.Source.Player;
-using IPlayer = y1000.Source.Player.IPlayer;
 
 namespace y1000.Source.Character.State
 {
@@ -21,7 +13,7 @@ namespace y1000.Source.Character.State
         
         bool CanHandle(IInput input);
 
-        void Update(Character character, double delta) {  }
+        void OnWrappedPlayerAnimationFinished(Character character) {}
 
         IPlayerState WrappedState { get; }
     }

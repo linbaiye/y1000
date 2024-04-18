@@ -11,6 +11,7 @@ using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.player.skill;
+using y1000.Source.Sprite;
 
 namespace y1000.code.player.state
 {
@@ -38,7 +39,7 @@ namespace y1000.code.player.state
 
         public override CreatureState State => CreatureState.HURT;
 
-        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
+        protected override SpriteReader SpriteReader => ((Player)Creature).IsMale() ? SpriteReader.LoadMalePlayerSprites("N02") : SpriteReader.EmptyReader;
 
         protected override int SpriteOffset => SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 
@@ -50,7 +51,7 @@ namespace y1000.code.player.state
 
         private OffsetTexture GetOffsetTexture(int animationSpriteNumber, IEquipment equipment)
         {
-            return SpriteContainer.LoadSprites(GetEquipmentSpritePath(equipment)).Get(SpriteOffset + animationSpriteNumber);
+            return SpriteReader.LoadSprites(GetEquipmentSpritePath(equipment)).Get(SpriteOffset + animationSpriteNumber);
         }
 
         public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)

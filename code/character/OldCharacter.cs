@@ -17,6 +17,7 @@ using y1000.code.player.state;
 using y1000.code.util;
 using y1000.code.world;
 using y1000.Source.Input;
+using y1000.Source.Map;
 
 namespace y1000.code.character
 {
@@ -39,7 +40,6 @@ namespace y1000.code.character
 
 
 
-
         public void SendActAndSavePredict(IInput input, Action? afterSnapshot)
         {
             //SendMessage(input);
@@ -55,13 +55,6 @@ namespace y1000.code.character
             return parent != null && parent.CanMove(coordinate);
         }
 
-        public void SendMessage(I2ServerGameMessage message)
-        {
-            //Console.Write("Test");
-            LOG.Debug("Sending message " + message.ToString());
-            var parent = GetParent<Source.Game>();
-            parent.SendMessage(message);
-        }
 
         public WeaponType EquippedWeapon 
         {

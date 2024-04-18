@@ -11,10 +11,13 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/modulate = null
 
 [node name="player" type="Node2D"]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
+texture_filter = 1
 script = ExtResource("1_myy6j")
 
 [node name="Body" type="Sprite2D" parent="."]
-z_index = 3
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_j55eq")
 centered = false

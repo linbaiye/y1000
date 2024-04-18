@@ -6,7 +6,7 @@ namespace y1000.code
 
         WALK = 2,
 
-        Run = 3,
+        RUN = 3,
 
         ENFIGHT = 4,
 
@@ -21,5 +21,8 @@ namespace y1000.code
         BOW = 9,
 
         SIT = 10,
+        
+        FLY = 11,
+        
     }
 }

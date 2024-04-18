@@ -7,6 +7,8 @@ namespace y1000.Source.Input
         MOUSE_RIGHT_RELEASE = 2,
 
         MOUSE_RIGHT_MOTION = 3,
+        
+        KEY_PRESSED,
 
     }
 }

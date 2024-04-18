@@ -1,4 +1,5 @@
 using y1000.code.player;
+using y1000.Source.Sprite;
 
 namespace y1000.code.creatures.state
 {
@@ -70,11 +71,11 @@ namespace y1000.code.creatures.state
 
         protected abstract int SpriteOffset { get; }
 
-        protected abstract SpriteContainer SpriteContainer { get; }
+        protected abstract SpriteReader SpriteReader { get; }
 
         public virtual OffsetTexture OffsetTexture(int animationSpriteNumber)
         {
-            return SpriteContainer.Get(SpriteOffset + animationSpriteNumber);
+            return SpriteReader.Get(SpriteOffset + animationSpriteNumber);
         }
     }
 }

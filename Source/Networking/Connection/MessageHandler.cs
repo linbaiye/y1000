@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DotNetty.Transport.Channels;
-using Godot;
 using NLog;
-using y1000.code.networking.message;
-using y1000.code.util;
 
-namespace y1000.code.networking
+namespace y1000.Source.Networking.Connection
 {
     public class MessageHandler : SimpleChannelInboundHandler<object>
     {

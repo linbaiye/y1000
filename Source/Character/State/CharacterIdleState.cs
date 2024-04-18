@@ -22,29 +22,11 @@ namespace y1000.Source.Character.State
 
         private IPrediction PredictRightClick(Character character, AbstractRightClickInput input)
         {
-            if (character.CanMoveOneUnit(input.Direction))
-            {
-                return new MovePrediction(input, character.Coordinate, input.Direction);
-            }
-            else
-            {
-                return new TurnPrediction(input, character.Coordinate, input.Direction);
-            }
+            return character.CanMoveOneUnit(input.Direction) ? 
+                new MovePrediction(input, character.Coordinate, input.Direction) :
+                new TurnPrediction(input, character.Coordinate, input.Direction);
         }
 
-        private IClientEvent MoveByClick(Character character, AbstractRightClickInput input)
-        {
-            if (character.CanMoveOneUnit(input.Direction))
-            {
-                //character.ChangeState(CharacterMoveState.Create(character.IsMale, input));
-            }
-            else
-            {
-                character.Direction = input.Direction;
-                character.ChangeState(Create(character.IsMale));
-            }
-            return new MovementEvent(input, character.Coordinate);
-        }
 
         public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
@@ -54,10 +36,18 @@ namespace y1000.Source.Character.State
         private void HandleRightClick(Character character, AbstractRightClickInput rightClick)
         {
             var prediction = PredictRightClick(character, rightClick);
-            var clientEvent = MoveByClick(character, rightClick);
-            character.EmitMovementEvent(prediction, clientEvent);
+            character.EmitMovementEvent(prediction, new MovementEvent(rightClick, character.Coordinate));
+            if (!character.CanMoveOneUnit(rightClick.Direction))
+            {
+                character.Direction = rightClick.Direction;
+                character.ChangeState(Create(character.IsMale));
+            }
+            else
+            {
+                var state = CharacterMoveState.Move(character.FootMagic, character.IsMale, rightClick);
+                character.ChangeState(state);
+            }
         }
-
 
         public bool CanHandle(IInput input)
         {
@@ -66,15 +56,10 @@ namespace y1000.Source.Character.State
 
         public IPlayerState WrappedState => _idleState;
 
-        public static CharacterIdleState ForMale()
+        public static CharacterIdleState Create(bool male)
         {
-            var state = PlayerIdleState.StartFrom(true, 0);
+            var state = PlayerIdleState.StartFrom(male, 0);
             return new CharacterIdleState(state);
-        }
-
-        public static CharacterIdleState Create(bool forMale)
-        {
-            return ForMale();
         }
 
         public void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
@@ -84,6 +69,11 @@ namespace y1000.Source.Character.State
         public static CharacterIdleState Wrap(PlayerIdleState idleState)
         {
             return new CharacterIdleState(idleState);
+        }
+
+        public void OnWrappedPlayerAnimationFinished(Character character)
+        {
+            character.ChangeState(Create(character.IsMale));
         }
 
         public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)

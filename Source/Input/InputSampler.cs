@@ -1,4 +1,5 @@
 using Godot;
+using NLog;
 using y1000.code;
 
 namespace y1000.Source.Input
@@ -6,40 +7,56 @@ namespace y1000.Source.Input
     public class InputSampler
     {
 
-        private RightMousePressedMotion? PressedMotion { get; set; }
+        private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
-        public IInput? Sample(InputEvent inputEvent, Vector2 mousePosition)
+        private IInput? SampleMouseButton(InputEventMouseButton button, Vector2 mouseOffset)
         {
-            switch (inputEvent)
+            if (button.ButtonIndex == MouseButton.Right)
             {
-                case InputEventMouseButton mouseButton:
+                if (button.IsPressed())
                 {
-                    if (mouseButton.ButtonIndex == MouseButton.Right)
-                    {
-                        if (mouseButton.IsPressed())
-                        {
-                            return InputFactory.CreateMouseMoveInput(mousePosition.GetDirection());
-                        }
-                        if (mouseButton.IsReleased())
-                        {
-                            return InputFactory.CreateMouseRightRelease();
-                        }
-                    }
-                    break;
+                    return InputFactory.CreateMouseMoveInput(mouseOffset.GetDirection());
                 }
-                case InputEventMouseMotion mouseMotion when mouseMotion.ButtonMask != MouseButtonMask.Right:
-                    return null;
-                case InputEventMouseMotion:
+
+                if (button.IsReleased())
                 {
-                    var input = InputFactory.CreateRightMousePressedMotion(mousePosition.GetDirection());
-                    if (PressedMotion == null || PressedMotion.Direction != input.Direction)
+                    return InputFactory.CreateMouseRightRelease();
+                }
+            }
+            else if (button.ButtonIndex == MouseButton.Left)
+            {
+                if (button.IsPressed() && button.DoubleClick)
+                {
+                    if ((button.GetModifiersMask() & KeyModifierMask.MaskShift) != 0)
                     {
-                        PressedMotion = input;
+                        LOGGER.Debug("Masked shift.");
                     }
-                    return input;
+                    LOGGER.Debug("Clicked at coordinate {0}, position {1}.", mouseOffset.ToCoordinate(), mouseOffset);
                 }
             }
             return null;
+        }
+
+        private IInput? SampleMouseMotion(InputEventMouseMotion mouseMotion, Vector2 mouseOffset)
+        {
+            return mouseMotion.ButtonMask != MouseButtonMask.Right ? null : 
+                InputFactory.CreateRightMousePressedMotion(mouseOffset.GetDirection());
+        }
+
+        private IInput? SampleKeyEvent(InputEventKey eventKey)
+        {
+            return InputFactory.KeyInput(eventKey.Keycode);
+        }
+        
+        public IInput? Sample(InputEvent inputEvent, Vector2 mouseOffset)
+        {
+            return inputEvent switch
+            {
+                InputEventMouseButton mouseButton => SampleMouseButton(mouseButton, mouseOffset),
+                InputEventMouseMotion mouseMotion => SampleMouseMotion(mouseMotion, mouseOffset),
+                InputEventKey eventKey => SampleKeyEvent(eventKey),
+                _ => null
+            };
         }
     }
 }

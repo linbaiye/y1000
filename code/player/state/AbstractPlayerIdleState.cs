@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
+using y1000.Source.Sprite;
 
 namespace y1000.code.player.state
 {
@@ -27,6 +28,6 @@ namespace y1000.code.player.state
             this.player = player;
         }
 
-        protected override SpriteContainer SpriteContainer => player.IsMale() ?  SpriteContainer.LoadMalePlayerSprites("N02"): SpriteContainer.EmptyContainer;
+        protected override SpriteReader SpriteReader => player.IsMale() ?  SpriteReader.LoadMalePlayerSprites("N02"): SpriteReader.EmptyReader;
     }
 }

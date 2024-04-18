@@ -10,6 +10,7 @@ using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.player;
 using y1000.Source.Input;
+using y1000.Source.Sprite;
 
 namespace y1000.code.character.state
 {
@@ -37,7 +38,7 @@ namespace y1000.code.character.state
 
         public override CreatureState State => CreatureState.ENFIGHT_WALK;
 
-        protected override SpriteContainer SpriteContainer => ((OldCharacter)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02") : SpriteContainer.EmptyContainer;
+        protected override SpriteReader SpriteReader => ((OldCharacter)Creature).IsMale() ? SpriteReader.LoadMalePlayerSprites("N02") : SpriteReader.EmptyReader;
 
         protected override AbstractCreatureState NextState()
         {
@@ -46,17 +47,17 @@ namespace y1000.code.character.state
 
         public override OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
-            return SpriteContainer.LoadSprites(armor.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
+            return SpriteReader.LoadSprites(armor.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
         }
 
         public override OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
         {
-            return SpriteContainer.LoadSprites(hat.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
+            return SpriteReader.LoadSprites(hat.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
         }
 
         public override OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
         {
-            return SpriteContainer.LoadSprites(trousers.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
+            return SpriteReader.LoadSprites(trousers.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
         }
 
         public override OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)

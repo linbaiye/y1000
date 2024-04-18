@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using Godot;
+using y1000.code.world;
 
-namespace y1000.code.world
+namespace y1000.Source.Map
 {
     public class GameMap: IRealm
     {
@@ -105,6 +106,25 @@ namespace y1000.code.world
                 }
             }
         }
+        
+        public void ForeachCell(Vector2I start, Vector2I end, Action<MapCell, int, int> action)
+        {
+            for (var y = start.Y; y <= end.Y; y++)
+            {
+                if (y < 0 || y > Height)
+                {
+                    continue;
+                }
+                for (var x = start.X; x < end.X; x++)
+                {
+                    if (x < 0 || x > Width)
+                    {
+                        continue;
+                    }
+                    action.Invoke(_cells[y, x], x, y);
+                }
+            }
+        }
 
         private bool IsInRange(int x, int y)
         {
@@ -117,7 +137,7 @@ namespace y1000.code.world
             return IsMovable(point.X, point.Y);
         }
 
-        public bool IsMovable(int x, int y)
+        private bool IsMovable(int x, int y)
         {
             return IsInRange(x, y) && (_cells[y, x].BoMove & 0x1 ) == 0 && (_cells[y, x].BoMove & 0x2 ) == 0;
         }
@@ -189,7 +209,7 @@ namespace y1000.code.world
 
         public bool CanMove(Vector2I coordinate)
         {
-            return IsMovable(new Point(coordinate.X, coordinate.Y));
+            return IsMovable(coordinate.X, coordinate.Y);
         }
     }
 }

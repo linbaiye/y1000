@@ -11,6 +11,7 @@ using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.player.skill;
+using y1000.Source.Sprite;
 
 namespace y1000.code.player.state
 {
@@ -38,18 +39,18 @@ namespace y1000.code.player.state
         {
         }
 
-        protected override SpriteContainer SpriteContainer => ((Player)Creature).IsMale() ? SpriteContainer.LoadMalePlayerSprites("N02"): SpriteContainer.EmptyContainer;
+        protected override SpriteReader SpriteReader => ((Player)Creature).IsMale() ? SpriteReader.LoadMalePlayerSprites("N02"): SpriteReader.EmptyReader;
         
 
-        private OffsetTexture GetOffsetTexture(SpriteContainer spriteContainer, int animationSpriteNumber)
+        private OffsetTexture GetOffsetTexture(SpriteReader spriteReader, int animationSpriteNumber)
         {
-            return spriteContainer.Get(BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
+            return spriteReader.Get(BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
         }
 
         private OffsetTexture GetOffsetTexture(int animationSpriteNumber, IEquipment equipment)
         {
             var path = equipment.SpriteBasePath +  "0";
-            return GetOffsetTexture(SpriteContainer.LoadSprites(path), animationSpriteNumber);
+            return GetOffsetTexture(SpriteReader.LoadSprites(path), animationSpriteNumber);
         }
 
         public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
@@ -91,8 +92,8 @@ namespace y1000.code.player.state
 
         public OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)
         {
-            SpriteContainer container = SpriteContainer.LoadSprites(weapon.SpriteBasePath + "0" , weapon.Offset);
-            return GetOffsetTexture(container, animationSpriteNumber);
+            SpriteReader reader = SpriteReader.LoadSprites(weapon.SpriteBasePath + "0" , weapon.Offset);
+            return GetOffsetTexture(reader, animationSpriteNumber);
         }
 
     }
