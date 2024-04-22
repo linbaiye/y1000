@@ -38,7 +38,7 @@ namespace y1000.code.character.state
 
         public override CreatureState State => CreatureState.ENFIGHT_WALK;
 
-        protected override SpriteReader SpriteReader => ((OldCharacter)Creature).IsMale() ? SpriteReader.LoadMalePlayerSprites("N02") : SpriteReader.EmptyReader;
+        protected override SpriteReader SpriteReader => ((OldCharacter)Creature).IsMale() ? SpriteReader.LoadOffsetMalePlayerSprites("N02") : SpriteReader.EmptyReader;
 
         protected override AbstractCreatureState NextState()
         {

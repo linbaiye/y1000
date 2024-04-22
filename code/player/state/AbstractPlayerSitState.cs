@@ -45,7 +45,7 @@ namespace y1000.code.player.state
 
         protected override int SpriteOffset => BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 
-        protected override SpriteReader SpriteReader => ((IPlayer)Creature).IsMale() ?  SpriteReader.LoadMalePlayerSprites("N02"): SpriteReader.EmptyReader;
+        protected override SpriteReader SpriteReader => ((IPlayer)Creature).IsMale() ?  SpriteReader.LoadOffsetMalePlayerSprites("N02"): SpriteReader.EmptyReader;
 
         protected abstract OffsetTexture GetTexture(int animationSpriteNumber, IEquipment equipment);
 

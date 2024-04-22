@@ -1,3 +1,7 @@
+using Godot;
+using Google.Protobuf.WellKnownTypes;
+using NLog;
+using y1000.code;
 using y1000.code.player;
 using y1000.Source.Character.State;
 using y1000.Source.Sprite;
@@ -7,7 +11,9 @@ namespace y1000.Source.Creature.State;
 public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : ICreature
 {
     private readonly SpriteManager _spriteManager;
-    
+
+    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
+
     protected AbstractCreatureState(SpriteManager spriteManager, long elapsedMillis = 0)
     {
         _spriteManager = spriteManager;
@@ -21,6 +27,14 @@ public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : 
     {
         return _spriteManager.Texture(creature.Direction, ElapsedMillis);
     }
+
+    public bool Contains(TC c, Vector2 position)
+    {
+        var creaturePosition = c.Coordinate.ToPosition();
+        
+        return false;
+    }
+
 
     protected SpriteManager SpriteManager => _spriteManager;
 

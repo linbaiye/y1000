@@ -1,4 +1,6 @@
+using System;
 using Godot;
+using NLog;
 using y1000.code;
 using y1000.code.networking.message;
 using y1000.code.player;
@@ -9,18 +11,45 @@ namespace y1000.Source.Creature;
 
 public abstract partial class AbstractCreature : Node2D, ICreature, IBody
 {
+
+    public event EventHandler<CreatureMouseClickEventArgs>? MouseClicked;
+    
+    public override void _Ready()
+    {
+        var bodyTextContainer = GetNode<BodyTextContainer>("Body/NameContainer");
+        bodyTextContainer.GuiInput += MyEvent;
+    }
+
     public string EntityName { get; private set; } = "";
 
-    public long Id { get; protected set; }
+    public long Id { get; private set; }
 
-    public IMap Map { get; set; } = IMap.Empty;
+    public IMap Map { get; private set; } = IMap.Empty;
     
     public Direction Direction { get; set; }
 
     public Vector2I Coordinate => Position.ToCoordinate();
     
     public abstract OffsetTexture BodyOffsetTexture { get; }
+
+    private void MyEvent(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left } mouse && mouse.IsPressed())
+        {
+            MouseClicked?.Invoke(this, new CreatureMouseClickEventArgs(Id, mouse));
+        }
+    }
     
+    public bool Contains(Vector2 position)
+    {
+        var bodyOffsetTexture = BodyOffsetTexture;
+        var start = Coordinate.ToPosition() + bodyOffsetTexture.Offset;
+        var size = bodyOffsetTexture.Texture.GetSize();
+        var end = start + size;
+        return start.X <= position.X && end.X >= position.X &&
+               start.Y <= position.Y && end.Y >= position.Y;
+    }
+
     protected void Init(long id, Direction direction, Vector2I coordinate, IMap map)
     {
         Direction = direction;

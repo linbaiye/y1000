@@ -40,7 +40,7 @@ public partial class Player: AbstractCreature, IPlayer
 	public bool IsMale { get; private set; }
 	
 	public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
-
+	
 	private static IPlayerState CreateState(bool male, CreatureState state, long start, Direction direction)
 	{
 		switch (state)

@@ -29,7 +29,7 @@ namespace y1000.code.character.state
 
         private double pausedPosition = 0;
 
-        private IInput? lastReceivedInput = null;
+        private IPredictableInput? lastReceivedInput = null;
 
         private MouseRightClick current;
 

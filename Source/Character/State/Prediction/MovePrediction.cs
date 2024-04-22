@@ -10,7 +10,7 @@ namespace y1000.Source.Character.State.Prediction
     {
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
-        public MovePrediction(IInput input, Vector2I currentCoordinate, Direction direction, bool clearPrevious = false) : base(input, currentCoordinate, direction, clearPrevious)
+        public MovePrediction(IPredictableInput input, Vector2I currentCoordinate, Direction direction, bool clearPrevious = false) : base(input, currentCoordinate, direction, clearPrevious)
         {
 
         }

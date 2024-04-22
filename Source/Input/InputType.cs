@@ -9,6 +9,8 @@ namespace y1000.Source.Input
         MOUSE_RIGHT_MOTION = 3,
         
         KEY_PRESSED,
+        
+        LEFT_CLICK,
 
     }
 }

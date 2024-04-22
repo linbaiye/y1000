@@ -64,6 +64,10 @@ public partial class Monster : AbstractCreature, IEntity
                 interpolation.ElapsedMillis, "buffalo", interpolation.Direction);
         monster.Init(creatureInterpolation.Id, 
             interpolation.Direction, state, interpolation.Coordinate, map);
+        if (state is AbstractCreatureMoveState<Monster> moveState)
+        {
+            moveState.Init(monster);
+        }
         return monster;
     }
 }

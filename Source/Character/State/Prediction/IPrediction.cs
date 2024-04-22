@@ -5,7 +5,7 @@ namespace y1000.Source.Character.State.Prediction
 {
     public interface IPrediction
     {
-        IInput Input { get; }
+        IPredictableInput Input { get; }
 
         bool ClearPrevious { get; }
 

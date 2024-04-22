@@ -69,7 +69,7 @@ namespace y1000.Source.Character
 
 		 public Vector2I Coordinate => WrappedPlayer().Coordinate;
 
-		public bool CanHandle(IInput input)
+		public bool CanHandle(IPredictableInput input)
 		{
 			return _state.CanHandle(input);
 		}
@@ -99,7 +99,7 @@ namespace y1000.Source.Character
 			_state.OnWrappedPlayerAnimationFinished(this);
 		}
 
-		public void HandleInput(IInput input)
+		public void HandleInput(IPredictableInput input)
 		{
 			if (!_state.CanHandle(input))
 			{

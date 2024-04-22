@@ -134,10 +134,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		if (_character != null)
 		{
 			var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
-			var input = _inputSampler.Sample(eventMouse, mousePos);
+			var input = _inputSampler.SampleMoveInput(eventMouse, mousePos);
 			if (input == null) 
 			{
-				return;
+				return ;
 			}
 			if (_character.CanHandle(input))
 			{
@@ -193,6 +193,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		{
 			serverMessage.Accept(this);
 		}
+	}
+
+	private void OnCreatureClicked(object? sender, CreatureMouseClickEventArgs args)
+	{
+		_inputSampler.SampleLeftClickInput(args.MouseEvent, args.Id);
 	}
 
 
@@ -257,6 +262,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	{
 		LOGGER.Debug("Adding creature by interpolation {0}.", creatureInterpolation);
 		var monster = Monster.Create(creatureInterpolation, MapLayer);
+		monster.MouseClicked += OnCreatureClicked;
 		_creatures.TryAdd(monster.Id, monster);
 		AddChild(monster);
 	}

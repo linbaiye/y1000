@@ -22,7 +22,11 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
     private Direction Towards { get; }
     
     protected abstract ILogger Logger { get; }
-    
+
+    public void Init(TC creature)
+    {
+        creature.Position = _velocity * ((float)ElapsedMillis / SpriteManager.AnimationLength);
+    }
 
     protected void Move(TC creature, long delta)
     {

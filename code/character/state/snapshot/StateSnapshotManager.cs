@@ -18,7 +18,7 @@ namespace y1000.code.character.state.snapshot
             inputPredictions = new Dictionary<long, IStateSnapshot>();
         }
 
-        public void SaveState(IInput input, IStateSnapshot predicted)
+        public void SaveState(IPredictableInput input, IStateSnapshot predicted)
         {
             if (ackedSequence >= input.Sequence)
             {
@@ -64,7 +64,7 @@ namespace y1000.code.character.state.snapshot
         }
         
 
-        public void Replace(IInput original, IInput input, IStateSnapshot newSnapshot)
+        public void Replace(IPredictableInput original, IPredictableInput input, IStateSnapshot newSnapshot)
         {
             inputPredictions.Remove(original.Sequence);
             inputPredictions.Add(input.Sequence, newSnapshot);

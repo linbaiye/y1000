@@ -165,13 +165,13 @@ namespace y1000.Source.Sprite
             return state switch
             {
                 CreatureState.IDLE => WithPinpong(500, MALE_IDLE_DIRECTION_SPRITE_OFFSET,
-                    SpriteReader.LoadMalePlayerSprites("N02")),
+                    SpriteReader.LoadOffsetMalePlayerSprites("N02")),
                 CreatureState.WALK => Normal(150, MALE_WALK_DIRECTION_SPRITE_OFFSET,
-                    SpriteReader.LoadMalePlayerSprites("N02")),
+                    SpriteReader.LoadOffsetMalePlayerSprites("N02")),
                 CreatureState.RUN => Normal(75, MALE_WALK_DIRECTION_SPRITE_OFFSET, 
-                    SpriteReader.LoadMalePlayerSprites("N02")),
+                    SpriteReader.LoadOffsetMalePlayerSprites("N02")),
                 CreatureState.FLY => WithPinpong(75, MALE_IDLE_DIRECTION_SPRITE_OFFSET, 
-                    SpriteReader.LoadMalePlayerSprites("N02")),
+                    SpriteReader.LoadOffsetMalePlayerSprites("N02")),
                 _ => throw new NotSupportedException()
             };
         }
@@ -196,8 +196,8 @@ namespace y1000.Source.Sprite
             var dir = CREATURE_NAME_TO_DIR.GetValueOrDefault(name, "buffalo");
             return state switch
             {
-                CreatureState.IDLE => Create(400, DEFAULT_SPRITE_OFFSET, SpriteReader.LoadMonsterSprites(dir), false, 5),
-                CreatureState.WALK => Create(150, MONSTER_WALK_SPRITE_OFFSET, SpriteReader.LoadMonsterSprites(dir), false, 7),
+                CreatureState.IDLE => Create(400, DEFAULT_SPRITE_OFFSET, SpriteReader.LoadOffsetMonsterSprites(dir), false, 5),
+                CreatureState.WALK => Create(150, MONSTER_WALK_SPRITE_OFFSET, SpriteReader.LoadOffsetMonsterSprites(dir), false, 7),
                 _ => throw new NotSupportedException()
             };
         }

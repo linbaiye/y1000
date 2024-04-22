@@ -15,7 +15,7 @@ namespace y1000.Source.Character.State.Prediction
         
         protected abstract ILogger Logger { get; }
 
-        protected AbstractPositionPrediction(IInput input, Vector2I currentCoordinate, Direction direction, bool clearPrevious) : base(input, clearPrevious)
+        protected AbstractPositionPrediction(IPredictableInput input, Vector2I currentCoordinate, Direction direction, bool clearPrevious) : base(input, clearPrevious)
         {
             _currentCoordinate = currentCoordinate;
             _direction = direction;

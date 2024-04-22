@@ -46,7 +46,7 @@ namespace y1000.Source.Character.State
             }
         }
 
-        public bool CanHandle(IInput input)
+        public bool CanHandle(IPredictableInput input)
         {
             return input is AbstractRightClickInput;
         }

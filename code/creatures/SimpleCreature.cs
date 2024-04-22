@@ -46,7 +46,7 @@ namespace y1000.code.creatures
         {
             PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/Monster.tscn");
             SimpleCreature buffalo = scene.Instantiate<SimpleCreature>();
-            SpriteReader spriteReader = SpriteReader.LoadMonsterSprites(MonsterNames.BUFFALO);
+            SpriteReader spriteReader = SpriteReader.LoadOffsetMonsterSprites(MonsterNames.BUFFALO);
             buffalo.Initiliaze(coordinate, spriteReader, id, direction);
             return buffalo;
         }

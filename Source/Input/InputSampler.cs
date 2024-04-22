@@ -9,7 +9,7 @@ namespace y1000.Source.Input
 
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
-        private IInput? SampleMouseButton(InputEventMouseButton button, Vector2 mouseOffset)
+        private IPredictableInput? SampleMouseButton(InputEventMouseButton button, Vector2 mouseOffset)
         {
             if (button.ButtonIndex == MouseButton.Right)
             {
@@ -17,38 +17,26 @@ namespace y1000.Source.Input
                 {
                     return InputFactory.CreateMouseMoveInput(mouseOffset.GetDirection());
                 }
-
                 if (button.IsReleased())
                 {
                     return InputFactory.CreateMouseRightRelease();
                 }
             }
-            else if (button.ButtonIndex == MouseButton.Left)
-            {
-                if (button.IsPressed() && button.DoubleClick)
-                {
-                    if ((button.GetModifiersMask() & KeyModifierMask.MaskShift) != 0)
-                    {
-                        LOGGER.Debug("Masked shift.");
-                    }
-                    LOGGER.Debug("Clicked at coordinate {0}, position {1}.", mouseOffset.ToCoordinate(), mouseOffset);
-                }
-            }
             return null;
         }
 
-        private IInput? SampleMouseMotion(InputEventMouseMotion mouseMotion, Vector2 mouseOffset)
+        private IPredictableInput? SampleMouseMotion(InputEventMouseMotion mouseMotion, Vector2 mouseOffset)
         {
             return mouseMotion.ButtonMask != MouseButtonMask.Right ? null : 
                 InputFactory.CreateRightMousePressedMotion(mouseOffset.GetDirection());
         }
 
-        private IInput? SampleKeyEvent(InputEventKey eventKey)
+        private IPredictableInput SampleKeyEvent(InputEventKey eventKey)
         {
             return InputFactory.KeyInput(eventKey.Keycode);
         }
         
-        public IInput? Sample(InputEvent inputEvent, Vector2 mouseOffset)
+        public IPredictableInput? SampleMoveInput(InputEvent inputEvent, Vector2 mouseOffset)
         {
             return inputEvent switch
             {
@@ -57,6 +45,26 @@ namespace y1000.Source.Input
                 InputEventKey eventKey => SampleKeyEvent(eventKey),
                 _ => null
             };
+        }
+
+        public IInput? SampleLeftClickInput(InputEventMouseButton button, long targetId)
+        {
+            if (button.DoubleClick)
+            {
+                if ((button.GetModifiersMask() & KeyModifierMask.MaskCtrl) != 0)
+                {
+                    LOGGER.Debug("Player attack");
+                }
+                else if ((button.GetModifiersMask() & KeyModifierMask.MaskShift) != 0)
+                {
+                    LOGGER.Debug("Monster attack");
+                }
+                return null;
+            }
+            else
+            {
+                return new LeftClick(targetId);
+            }
         }
     }
 }

@@ -50,7 +50,7 @@ namespace y1000.Source.Character.State
             throw new NotImplementedException();
         }
 
-        public bool CanHandle(IInput input)
+        public bool CanHandle(IPredictableInput input)
         {
             throw new NotImplementedException();
         }

@@ -9,35 +9,35 @@ namespace y1000.Source.Sprite
     // should not be exposed, SpriteManager should enclose this.
     public class SpriteReader
     {
-        private readonly Texture2D[] textures;
+        private readonly Texture2D[] _textures;
 
-        private readonly Vector2[] offsets;
+        private readonly Vector2[] _offsets;
 
         private SpriteReader(Texture2D[] textures, Vector2[] offsets)
         {
-            this.textures = textures;
-            this.offsets = offsets;
+            _textures = textures;
+            _offsets = offsets;
         }
 
 
         private Texture2D GetTexture(int nr) {
-            if (nr < 0 || nr > textures.Length) {
+            if (nr < 0 || nr > _textures.Length) {
                 throw new FileNotFoundException();
             }
-            return textures[nr];
+            return _textures[nr];
         }
 
         private Vector2 GetOffset(int nr) {
-            if (nr < 0 || nr > textures.Length) {
+            if (nr < 0 || nr > _textures.Length) {
                 throw new FileNotFoundException();
             }
-            return offsets[nr];
+            return _offsets[nr];
         }
 
 
         public OffsetTexture Get(int nr)
         {
-            if (nr < 0 || nr > textures.Length) {
+            if (nr < 0 || nr > _textures.Length) {
                 throw new FileNotFoundException();
             }
             return new OffsetTexture(GetTexture(nr), GetOffset(nr));
@@ -61,7 +61,7 @@ namespace y1000.Source.Sprite
             return list.ToArray();
         }
 
-        private static readonly Dictionary<string, SpriteReader> LoadedContainers = new Dictionary<string, SpriteReader>();
+        private static readonly Dictionary<string, SpriteReader> LOADED_CONTAINERS = new();
 
         private static SpriteReader Load(string resDir, Vector2? offset = null) {
             if (!resDir.StartsWith("res://")){
@@ -70,7 +70,7 @@ namespace y1000.Source.Sprite
             if (!resDir.EndsWith("/")) {
                 resDir += "/";
             }
-            if (LoadedContainers.TryGetValue(resDir, out var container))
+            if (LOADED_CONTAINERS.TryGetValue(resDir, out var container))
             {
                 return container;
             }
@@ -93,14 +93,14 @@ namespace y1000.Source.Sprite
             }
 			fileAccess.Dispose();
             var ret = new SpriteReader(textures, vectors);
-            LoadedContainers.Add(resDir, ret);
+            LOADED_CONTAINERS.Add(resDir, ret);
             return ret;
         }
 
 
-        public static SpriteReader LoadMalePlayerSprites(string nr)
+        public static SpriteReader LoadOffsetMalePlayerSprites(string nr)
         {
-            return Load("res://sprite/char/" + nr + "/");
+            return Load("res://sprite/char/" + nr + "/", new Vector2(16, -12));
         }
 
 
@@ -115,10 +115,11 @@ namespace y1000.Source.Sprite
         }
 
 
-        public static SpriteReader LoadMonsterSprites(string name)
+        public static SpriteReader LoadOffsetMonsterSprites(string name)
         {
-            return Load("res://sprite/monster/" + name + "/");
+            return Load("res://sprite/monster/" + name + "/", new Vector2(16, -12));
         }
+        
 
         public static readonly SpriteReader EmptyReader = new SpriteReader(Array.Empty<Texture2D>(), Array.Empty<Vector2>());
     }

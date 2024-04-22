@@ -41,7 +41,7 @@ namespace y1000.code.player.state
             player.AnimationPlayer.SpeedScale = speed;
         }
 
-        protected override SpriteReader SpriteReader => ((Player)Creature).IsMale() ? SpriteReader.LoadMalePlayerSprites("N02") : SpriteReader.EmptyReader;
+        protected override SpriteReader SpriteReader => ((Player)Creature).IsMale() ? SpriteReader.LoadOffsetMalePlayerSprites("N02") : SpriteReader.EmptyReader;
 
         public override void OnAnimationFinised()
         {

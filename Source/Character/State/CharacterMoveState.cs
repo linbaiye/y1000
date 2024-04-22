@@ -19,7 +19,7 @@ namespace y1000.Source.Character.State
 
         private readonly AbstractRightClickInput _currentInput;
 
-        private IInput? _lastInput;
+        private IPredictableInput? _lastInput;
         
         private readonly PlayerMoveState _playerMoveState;
 
@@ -29,7 +29,7 @@ namespace y1000.Source.Character.State
             _playerMoveState = playerMoveState;
         }
 
-        public bool CanHandle(IInput input)
+        public bool CanHandle(IPredictableInput input)
         {
             return input is AbstractRightClickInput or MouseRightRelease;
         }

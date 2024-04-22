@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctox857khwxv3"]
+[gd_scene load_steps=6 format=3 uid="uid://ctox857khwxv3"]
 
 [ext_resource type="Script" path="res://Source/Creature/Monster/Monster.cs" id="1_k86rw"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_81b44"]
-[ext_resource type="Script" path="res://Source/Player/BodySprite.cs" id="2_lvd2h"]
+[ext_resource type="Script" path="res://Source/Creature/BodySprite.cs" id="3_nn57x"]
+[ext_resource type="Script" path="res://Source/Creature/BodyTextContainer.cs" id="4_oqmri"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j5o4p"]
 shader = ExtResource("2_81b44")
@@ -20,4 +21,14 @@ script = ExtResource("1_k86rw")
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_j5o4p")
 centered = false
-script = ExtResource("2_lvd2h")
+script = ExtResource("3_nn57x")
+
+[node name="NameContainer" type="CenterContainer" parent="Body"]
+z_index = 4
+z_as_relative = false
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_oqmri")
+
+[node name="Label" type="Label" parent="Body/NameContainer"]
+layout_mode = 2

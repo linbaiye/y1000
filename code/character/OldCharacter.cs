@@ -40,7 +40,7 @@ namespace y1000.code.character
 
 
 
-        public void SendActAndSavePredict(IInput input, Action? afterSnapshot)
+        public void SendActAndSavePredict(IPredictableInput input, Action? afterSnapshot)
         {
             //SendMessage(input);
             afterSnapshot?.Invoke();
@@ -112,7 +112,7 @@ namespace y1000.code.character
 
         public void HandleInput(InputEvent @event)
         {
-            var input = inputSampler.Sample(@event, GetLocalMousePosition());
+            var input = inputSampler.SampleMoveInput(@event, GetLocalMousePosition());
             if (input == null)
             {
                 return;

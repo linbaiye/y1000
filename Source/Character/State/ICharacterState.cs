@@ -11,7 +11,7 @@ namespace y1000.Source.Character.State
         
         void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion);
         
-        bool CanHandle(IInput input);
+        bool CanHandle(IPredictableInput input);
 
         void OnWrappedPlayerAnimationFinished(Character character) {}
 

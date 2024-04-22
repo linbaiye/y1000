@@ -6,8 +6,8 @@ namespace y1000.Source.Character.Event;
 
 public class MovementEvent : IClientEvent
 {
-    private readonly IInput _input;
-    public MovementEvent(IInput i, Vector2I happenedAt)
+    private readonly IPredictableInput _input;
+    public MovementEvent(IPredictableInput i, Vector2I happenedAt)
     {
         _input = i;
         HappenedAt = happenedAt;
