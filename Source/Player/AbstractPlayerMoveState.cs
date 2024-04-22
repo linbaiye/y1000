@@ -10,13 +10,13 @@ namespace y1000.Source.Player;
 
 public abstract class AbstractPlayerMoveState: AbstractCreatureMoveState<Player>, IPlayerState
 {
-    
     protected AbstractPlayerMoveState(SpriteManager spriteManager, Direction towards, long elapsedMillis = 0) : base(spriteManager, towards, elapsedMillis)
     {
     }
 
     public override void Update(Player player, long delta)
     {
+        Move(player, delta);
         if (ElapsedMillis >= SpriteManager.AnimationLength)
         {
             player.NotifyAnimationFinished();

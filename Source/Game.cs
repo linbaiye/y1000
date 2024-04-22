@@ -71,7 +71,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		if (characterEventArgs is CharacterStateEventArgs stateEventArgs)
 		{
 			_predictionManager.Save(stateEventArgs.Prediction);
-			_channel?.WriteAndFlushAsync(stateEventArgs.Event);
+			WriteMessage(stateEventArgs.Event);
 		}
 	}
 
@@ -120,7 +120,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	{
 		await Task.Run(() =>
 		{
-			Thread.Sleep(200);
+			Thread.Sleep(50);
 		});
 		_channel?.WriteAndFlushAsync(message);
 	}
@@ -227,7 +227,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 
 	public void Handle(PlayerInterpolation playerInterpolation)
 	{
-		var player = Player.Player.FromInterpolation(playerInterpolation);
+		var player = Player.Player.FromInterpolation(playerInterpolation, MapLayer);
 		LOGGER.Debug("Adding player {0}", player.Location());
 		_players.TryAdd(player.Id, player);
 		AddChild(player);
@@ -237,7 +237,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	{
 		if (!_predictionManager.Reconcile(inputResponseMessage))
 		{
-			LOGGER.Debug("Need to rewind.");
 			_character?.Rewind(inputResponseMessage.PositionMessage);
 		}
 	}
@@ -257,7 +256,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	public void Handle(CreatureInterpolation creatureInterpolation)
 	{
 		LOGGER.Debug("Adding creature by interpolation {0}.", creatureInterpolation);
-		var monster = Monster.Create(creatureInterpolation);
+		var monster = Monster.Create(creatureInterpolation, MapLayer);
 		_creatures.TryAdd(monster.Id, monster);
 		AddChild(monster);
 	}
@@ -266,7 +265,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	{
 		if (MapLayer.Map != null)
 		{
-			_character = Character.Character.LoggedIn(loginMessage, MapLayer.Map);
+			_character = Character.Character.LoggedIn(loginMessage, MapLayer);
 			_character.WhenCharacterUpdated += WhenCharacterUpdated;
 			_bottomControl?.BindCharacter(_character);
 			MapLayer.BindCharacter(_character);

@@ -6,9 +6,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j5o4p"]
 shader = ExtResource("2_81b44")
-shader_parameter/deform = Vector2(2, 2)
-shader_parameter/offset = Vector2(2.08165e-12, 2)
-shader_parameter/modulate = null
+shader_parameter/deform = Vector2(0.5, 1)
+shader_parameter/offset = Vector2(0, 4)
+shader_parameter/modulate = Color(0, 0, 0, 0.427451)
 
 [node name="Monster" type="Node2D"]
 z_index = 2

@@ -16,6 +16,7 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
         Towards = towards;
         _directionChanged = false;
         _velocity = VectorUtil.Velocity(towards);
+        ElapsedMillis = 0;
     }
     
     private Direction Towards { get; }
@@ -23,23 +24,25 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
     protected abstract ILogger Logger { get; }
     
 
-    protected void Elapse(TC creature, long delta)
+    protected void Move(TC creature, long delta)
     {
+        var animationLengthMillis = SpriteManager.AnimationLength;
+        if (ElapsedMillis >= animationLengthMillis)
+        {
+            return;
+        }
         if (!_directionChanged)
         {
             creature.Direction = Towards;
             _directionChanged = true;
         }
-        var animationLengthMillis = SpriteManager.AnimationLength;
-        if (ElapsedMillis < animationLengthMillis)
-        {
-            ElapsedMillis += delta;
-            creature.Position += _velocity * ((float)delta / animationLengthMillis);
-        }
+        ElapsedMillis += delta;
+        creature.Position += _velocity * ((float)delta / animationLengthMillis);
         if (ElapsedMillis >= animationLengthMillis)
         {
             creature.Position = creature.Position.Snapped(VectorUtil.TileSize);
-            Logger.Debug("Player {0} moved to coordinate {1}.", creature.Id, creature.Coordinate);
+            creature.Map.Occupy(creature);
+            Logger.Debug("Creature {0} moved to coordinate {1}.", creature.Id, creature.Coordinate);
         }
     }
 }

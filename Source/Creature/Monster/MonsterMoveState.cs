@@ -17,11 +17,7 @@ public class MonsterMoveState : AbstractCreatureMoveState<Monster>
     
     public override void Update(Monster c, long delta)
     {
-        Elapse(c, delta);
-        if (ElapsedMillis >= SpriteManager.AnimationLength)
-        {
-            
-        }
+        Move(c, delta);
     }
 
     public static MonsterMoveState MoveTowards(string name, Direction towards, long elapsed = 0)

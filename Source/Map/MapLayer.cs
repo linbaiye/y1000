@@ -1,13 +1,16 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using Godot;
 using NLog;
 using y1000.code;
 using y1000.Source.Character.Event;
+using y1000.Source.Creature;
+using FileAccess = Godot.FileAccess;
 
 namespace y1000.Source.Map;
 
-public partial class MapLayer : TileMap
+public partial class MapLayer : TileMap, IMap
 {
 	private GameMap? _gameMap;
 
@@ -20,10 +23,55 @@ public partial class MapLayer : TileMap
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
 	private Vector2I _origin;
+	
+	private const string Object = "object";
+
+	private readonly IDictionary<int, ObjectInfo> _objectInfos = new Dictionary<int, ObjectInfo>();
+
+	private readonly IDictionary<Vector2I, long> _coordinate2Creature = new Dictionary<Vector2I, long>();
+	
+	private readonly IDictionary<long, Vector2I> _creature2Coordinate = new Dictionary<long, Vector2I>();
+
 	public override void _Ready()
 	{
 		_gameMap = GameMap.Load("res://assets/maps/start/start.map");
 		BuildTileSets();
+		BuildObjectSets();
+	}
+	
+	private class ObjectInfo
+	{
+		public ObjectInfo(Texture2D texture, Vector2 offset)
+		{
+			Texture = texture;
+			Offset = offset;
+		}
+
+		public Texture2D Texture { get; }
+		
+		public Vector2 Offset { get;  }
+	
+	}
+
+	private void BuildObjectSets()
+	{
+		var dirpath = "res://assets/maps/start/" + Object;
+		var dirAccess = DirAccess.Open(dirpath);
+		var subdirs = dirAccess.GetDirectories();
+		foreach (var subdir in subdirs)
+		{
+			var imagePath = dirpath + "/" + subdir + "/image.png";
+			if (ResourceLoader.Load(imagePath) is not Texture2D texture)
+			{
+				continue;
+			}
+			var jsonString = FileAccess.GetFileAsString(dirpath + "/" + subdir + "/struct.json");
+			Object2Json json = Object2Json.FromJsonString(jsonString);
+			var offset = new Vector2(json.X, json.Y);
+			_objectInfos.TryAdd(subdir.ToInt(), new ObjectInfo(texture, offset));
+		}
+		dirAccess.Dispose();
+		
 	}
 
 	public void BindCharacter(Character.Character character)
@@ -75,7 +123,7 @@ public partial class MapLayer : TileMap
 	private void PaintMap()
 	{
 		TileGround();
-		CreateLayer("object");
+		CreateLayer(Object);
 	}
 
 
@@ -140,29 +188,42 @@ public partial class MapLayer : TileMap
 			layerNode.RemoveChild(child);
 			child.QueueFree();
 		}
-		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) => PutObject("object".Equals(layer)? cell.ObjectId : cell.RoofId, x, y, layer, layerNode));
+		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) => PutObject(Object.Equals(layer)? cell.ObjectId : cell.RoofId, x, y, layer, layerNode));
 	}
+	
 
 	private void PutObject(int objectId, int x, int y, string layer, Node2D parent)
 	{
-		var dirpath = "res://assets/maps/start/" + layer + "/" + objectId;
-		var imagePath = dirpath + "/image.png";
-		if (!Godot.FileAccess.FileExists(imagePath))
+		if (_objectInfos.TryGetValue(objectId, out var objectInfo))
 		{
-			return;
-		}
-		if (ResourceLoader.Load(imagePath) is not Texture2D texture)
-		{
-			return;
-		}
-		using (var fileAccess = Godot.FileAccess.Open(dirpath + "/struct.json", Godot.FileAccess.ModeFlags.Read))
-		{
-			var jsonString = fileAccess.GetAsText();
-			Object2Json json = Object2Json.FromJsonString(jsonString);
 			int xPos = x * VectorUtil.TileSizeX;
 			int yPos = y * VectorUtil.TileSizeY;
-			Sprite2D objectSprite = new Sprite2D() { Texture = texture, Centered = false, Position = new Vector2(xPos, yPos), Offset = new Vector2(json.X, json.Y), YSortEnabled = true};
+			Sprite2D objectSprite = new Sprite2D() { Texture = objectInfo.Texture, Centered = false, Position = new Vector2(xPos, yPos), Offset = objectInfo.Offset, YSortEnabled = true};
 			parent.AddChild(objectSprite);
+		}
+	}
+
+	public bool Movable(Vector2I coordinate)
+	{
+		return !_coordinate2Creature.ContainsKey(coordinate) && _gameMap!= null && _gameMap.CanMove(coordinate);
+	}
+	
+	
+	public void Occupy(ICreature creature)
+	{
+		Free(creature);
+		_coordinate2Creature.TryAdd(creature.Coordinate, creature.Id);
+		_creature2Coordinate.TryAdd(creature.Id, creature.Coordinate);
+		LOGGER.Debug("Occupied coordinate {0}.", creature.Coordinate);
+	}
+
+	public void Free(ICreature creature)
+	{
+		if (_creature2Coordinate.TryGetValue(creature.Id, out var coor))
+		{
+			_coordinate2Creature.Remove(coor);
+			_creature2Coordinate.Remove(creature.Id);
+			LOGGER.Debug("Freed coordinate {0}.", coor);
 		}
 	}
 }

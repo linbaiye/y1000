@@ -20,14 +20,6 @@ namespace y1000.Source.Character.State
             _idleState = state;
         }
 
-        private IPrediction PredictRightClick(Character character, AbstractRightClickInput input)
-        {
-            return character.CanMoveOneUnit(input.Direction) ? 
-                new MovePrediction(input, character.Coordinate, input.Direction) :
-                new TurnPrediction(input, character.Coordinate, input.Direction);
-        }
-
-
         public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
         {
             HandleRightClick(character, rightClick);
@@ -35,15 +27,20 @@ namespace y1000.Source.Character.State
 
         private void HandleRightClick(Character character, AbstractRightClickInput rightClick)
         {
-            var prediction = PredictRightClick(character, rightClick);
-            character.EmitMovementEvent(prediction, new MovementEvent(rightClick, character.Coordinate));
             if (!character.CanMoveOneUnit(rightClick.Direction))
             {
-                character.Direction = rightClick.Direction;
-                character.ChangeState(Create(character.IsMale));
+                if (character.Direction != rightClick.Direction)
+                {
+                    character.EmitMovementEvent(new SetPositionPrediction(rightClick, character.Coordinate, rightClick.Direction), 
+                        new MovementEvent(rightClick, character.Coordinate));
+                    character.Direction = rightClick.Direction;
+                    character.ChangeState(Create(character.IsMale));
+                }
             }
             else
             {
+                character.EmitMovementEvent(new MovePrediction(rightClick, character.Coordinate, rightClick.Direction),
+                    new MovementEvent(rightClick, character.Coordinate));
                 var state = CharacterMoveState.Move(character.FootMagic, character.IsMale, rightClick);
                 character.ChangeState(state);
             }

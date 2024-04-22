@@ -9,6 +9,7 @@ using y1000.code.player;
 using y1000.Source.Character.State;
 using y1000.Source.Creature;
 using y1000.Source.Creature.State;
+using y1000.Source.Map;
 using y1000.Source.Networking;
 
 namespace y1000.Source.Player;
@@ -21,13 +22,11 @@ public partial class Player: AbstractCreature, IPlayer
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 	public event EventHandler<CreatureAnimationDoneEventArgs>? StateAnimationEventHandler;
 
-	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id)
+	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id, IMap map)
 	{
-		Id = id;
+		base.Init(id, direction, coordinate, map);
 		IsMale = male;
 		_state = state;
-		Direction = direction;
-		Position = coordinate.ToPosition();
 	}
 
 	public override void _Ready()
@@ -53,7 +52,7 @@ public partial class Player: AbstractCreature, IPlayer
 			case CreatureState.RUN:
 				return PlayerMoveState.RunTowards(male, direction, start);
 			case CreatureState.FLY:
-				return PlayerFlyState.Towards(male, direction, start);
+				return PlayerMoveState.FlyTowards(male, direction, start);
 			default:
 				throw new NotSupportedException();
 		}
@@ -123,7 +122,7 @@ public partial class Player: AbstractCreature, IPlayer
 		return $"{base.ToString()}, {nameof(Id)}: {Id}, {nameof(Direction)}: {Direction}, {nameof(Coordinate)}: {Coordinate}";
 	}
 
-	public static Player FromInterpolation(PlayerInterpolation playerInterpolation)
+	public static Player FromInterpolation(PlayerInterpolation playerInterpolation, IMap map)
 	{
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/player.tscn");
 		var player = scene.Instantiate<Player>();
@@ -132,7 +131,7 @@ public partial class Player: AbstractCreature, IPlayer
 			interpolation.ElapsedMillis,
 			interpolation.Direction);
 		player.Init(playerInterpolation.Male, state, 
-			interpolation.Direction, interpolation.Coordinate, playerInterpolation.Id);
+			interpolation.Direction, interpolation.Coordinate, playerInterpolation.Id, map);
 		return player;
 	}
 }

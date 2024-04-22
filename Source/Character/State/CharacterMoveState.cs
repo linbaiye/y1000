@@ -21,9 +21,9 @@ namespace y1000.Source.Character.State
 
         private IInput? _lastInput;
         
-        private readonly AbstractPlayerMoveState _playerMoveState;
+        private readonly PlayerMoveState _playerMoveState;
 
-        private CharacterMoveState(AbstractRightClickInput currentInput, AbstractPlayerMoveState playerMoveState)
+        private CharacterMoveState(AbstractRightClickInput currentInput, PlayerMoveState playerMoveState)
         {
             _currentInput = currentInput;
             _playerMoveState = playerMoveState;
@@ -34,13 +34,25 @@ namespace y1000.Source.Character.State
             return input is AbstractRightClickInput or MouseRightRelease;
         }
 
+        
 
         private void ContinueMove(Character character, AbstractRightClickInput input)
         {
-            character.EmitMovementEvent(
-                new MovePrediction(input, character.Coordinate, input.Direction),
-                new MovementEvent(input, character.Coordinate));
-            character.ChangeState(Move(character.FootMagic, character.IsMale, input));
+            var next = character.Coordinate.Move(input.Direction);
+            if (!character.WrappedPlayer().Map.Movable(next))
+            {
+                character.EmitMovementEvent(
+                    SetPositionPrediction.Overflow(input, character.Coordinate, character.Direction),
+                    new MovementEvent(input, character.Coordinate));
+                character.ChangeState(CharacterIdleState.Create(character.IsMale));
+            }
+            else
+            {
+                character.EmitMovementEvent(
+                    new MovePrediction(input, character.Coordinate, input.Direction),
+                    new MovementEvent(input, character.Coordinate));
+                character.ChangeState(Move(character.FootMagic, character.IsMale, input));
+            }
         }
 
         public void OnWrappedPlayerAnimationFinished(Character character)

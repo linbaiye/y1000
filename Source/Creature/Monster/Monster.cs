@@ -5,6 +5,7 @@ using y1000.code.entity;
 using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.Source.Creature.State;
+using y1000.Source.Map;
 using y1000.Source.Networking;
 
 namespace y1000.Source.Creature.Monster;
@@ -15,12 +16,10 @@ public partial class Monster : AbstractCreature, IEntity
 
     public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
     
-    private void Init(long id, Direction direction, ICreatureState<Monster> state, Vector2I coordinate)
+    private void Init(long id, Direction direction, ICreatureState<Monster> state, Vector2I coordinate, IMap map)
     {
         _state = state;
-        Direction = direction;
-        Id = id;
-        Position = coordinate.ToPosition();
+        base.Init(id, direction, coordinate, map);
     }
 
     private static ICreatureState<Monster> CreateState(CreatureState state, long elapses, string name, Direction direction)
@@ -56,7 +55,7 @@ public partial class Monster : AbstractCreature, IEntity
         }
     }
 
-    public static Monster Create(CreatureInterpolation creatureInterpolation)
+    public static Monster Create(CreatureInterpolation creatureInterpolation, IMap map)
     {
         PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/Monster.tscn");
         var monster = scene.Instantiate<Monster>();
@@ -64,7 +63,7 @@ public partial class Monster : AbstractCreature, IEntity
         var state = CreateState(interpolation.State,
                 interpolation.ElapsedMillis, "buffalo", interpolation.Direction);
         monster.Init(creatureInterpolation.Id, 
-            interpolation.Direction, state, interpolation.Coordinate);
+            interpolation.Direction, state, interpolation.Coordinate, map);
         return monster;
     }
 }

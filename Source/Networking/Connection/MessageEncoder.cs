@@ -12,7 +12,7 @@ namespace y1000.Source.Networking.Connection
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
         protected override void Encode(IChannelHandlerContext context, IClientEvent clientEvent, IByteBuffer output)
         {
-            LOGGER.Debug("Sending message {0}.", clientEvent);
+        //    LOGGER.Debug("Sending message {0}.", clientEvent);
             output.WriteBytes(clientEvent.ToPacket().ToByteArray());
         }
     }

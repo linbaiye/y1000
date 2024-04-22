@@ -14,6 +14,8 @@ using y1000.Source.Character.State.Prediction;
 using y1000.Source.Creature;
 using y1000.Source.Input;
 using y1000.Source.Magic.Foot;
+using y1000.Source.Map;
+using y1000.Source.Networking;
 using y1000.Source.Player;
 using ICharacterState = y1000.Source.Character.State.ICharacterState;
 namespace y1000.Source.Character
@@ -24,8 +26,6 @@ namespace y1000.Source.Character
 
 		private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
-		public IRealm Realm { get; set; } = IRealm.Empty;
-		
 		public IFootMagic? FootMagic { get; set; }
 
 		public event EventHandler<AbstractCharacterEventArgs>? WhenCharacterUpdated;
@@ -33,8 +33,8 @@ namespace y1000.Source.Character
 		
 		public void ChangeState(ICharacterState state)
 		{
-			_state = state;
 			WrappedPlayer().ChangeState(state.WrappedState);
+			_state = state;
 		}
 
 		public bool IsMale => WrappedPlayer().IsMale;
@@ -78,10 +78,9 @@ namespace y1000.Source.Character
 		public void Rewind(AbstractPositionMessage positionMessage)
 		{
 			var player = WrappedPlayer();
-			player.Direction = positionMessage.Direction;
-			player.Position = positionMessage.Coordinate.ToPosition();
+			player.SetPosition(positionMessage);
 			LOGGER.Debug("Rewind to coordinate {0}, direction {1}.", player.Coordinate, player.Direction);
-			ChangeState(CharacterIdleState.Wrap(PlayerIdleState.StartFrom(IsMale, 0)));
+			ChangeState(CharacterIdleState.Create(IsMale));
 		}
 
 		public void EmitMovementEvent(IPrediction prediction, IClientEvent movementEvent)
@@ -91,12 +90,7 @@ namespace y1000.Source.Character
 
 		public bool CanMoveOneUnit(Direction direction)
 		{
-			return CanMoveTo(Coordinate.Move(direction));
-		}
-
-		public bool CanMoveTo(Vector2I point)
-		{
-			return Realm.CanMove(point);
+			return WrappedPlayer().Map.Movable(Coordinate.Move(direction));
 		}
 
 
@@ -127,15 +121,14 @@ namespace y1000.Source.Character
 			}
 		}
 
-		public static Character LoggedIn(LoginMessage message, IRealm realm)
+		public static Character LoggedIn(LoginMessage message, IMap map)
 		{
 			PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
 			var character = scene.Instantiate<Character>();
 			var state = PlayerIdleState.StartFrom(message.Male, 0);
 			var player = character.WrappedPlayer();
-			player.Init(message.Male, PlayerIdleState.StartFrom(message.Male, 0),  Direction.DOWN, message.Coordinate, message.Id);
+			player.Init(message.Male, PlayerIdleState.StartFrom(message.Male, 0),  Direction.DOWN, message.Coordinate, message.Id, map);
 			player.StateAnimationEventHandler += character.OnPlayerAnimationFinished;
-			character.Realm = realm;
 			character.FootMagic = IFootMagic.ByName(UnnamedFootMagic.Name, 85.10f);
 			character.ChangeState(CharacterIdleState.Wrap(state));
 			return character;

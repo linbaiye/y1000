@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.1.1">
+<Project Sdk="Godot.NET.Sdk/4.1.2">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -41,5 +41,8 @@
     <Compile Remove="Source\Creature\State\AbstractCreatureIdleState.cs" />
     <Compile Remove="Source\Creature\Monster\AbstractPassiveMonster.cs" />
     <Compile Remove="Source\Creature\Monster\Buffalo.cs" />
+    <Compile Remove="Source\Player\PlayerFlyState.cs" />
+    <Compile Remove="Source\Player\AbstractPlayerMoveState.cs" />
+    <Compile Remove="Source\Character\State\Prediction\TurnPrediction.cs" />
   </ItemGroup>
 </Project>
