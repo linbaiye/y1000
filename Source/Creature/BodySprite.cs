@@ -12,6 +12,8 @@ namespace y1000.Source.Player
 			return parent.BodyOffsetTexture;
 		}
 
+		public Vector2 Coordinate => GetParent<IBody>().Position;
+
 		public override void _Process(double delta)
 		{
 			var texture = OffsetTexture();

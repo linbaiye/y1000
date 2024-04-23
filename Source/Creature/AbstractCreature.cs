@@ -40,16 +40,6 @@ public abstract partial class AbstractCreature : Node2D, ICreature, IBody
         }
     }
     
-    public bool Contains(Vector2 position)
-    {
-        var bodyOffsetTexture = BodyOffsetTexture;
-        var start = Coordinate.ToPosition() + bodyOffsetTexture.Offset;
-        var size = bodyOffsetTexture.Texture.GetSize();
-        var end = start + size;
-        return start.X <= position.X && end.X >= position.X &&
-               start.Y <= position.Y && end.Y >= position.Y;
-    }
-
     protected void Init(long id, Direction direction, Vector2I coordinate, IMap map)
     {
         Direction = direction;

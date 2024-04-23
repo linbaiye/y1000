@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using NLog;
 using y1000.code;
 using y1000.code.entity;
 using y1000.code.networking.message;
@@ -15,6 +16,8 @@ public partial class Monster : AbstractCreature, IEntity
     private ICreatureState<Monster> _state = new MonsterEmptyState();
 
     public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
+
+    private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
     
     private void Init(long id, Direction direction, ICreatureState<Monster> state, Vector2I coordinate, IMap map)
     {

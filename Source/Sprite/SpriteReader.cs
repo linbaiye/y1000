@@ -100,6 +100,7 @@ namespace y1000.Source.Sprite
 
         public static SpriteReader LoadOffsetMalePlayerSprites(string nr)
         {
+           // return Load("res://sprite/char/" + nr + "/");
             return Load("res://sprite/char/" + nr + "/", new Vector2(16, -12));
         }
 
@@ -117,6 +118,7 @@ namespace y1000.Source.Sprite
 
         public static SpriteReader LoadOffsetMonsterSprites(string name)
         {
+           // return Load("res://sprite/monster/" + name + "/" );
             return Load("res://sprite/monster/" + name + "/", new Vector2(16, -12));
         }
         
