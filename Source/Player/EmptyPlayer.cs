@@ -8,8 +8,15 @@ public class EmptyPlayer : IPlayer
 {
     public string EntityName { get; }
     public long Id { get; }
+    public void Free()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public bool IsMale { get; }
     public Direction Direction { get; }
+    
     public OffsetTexture BodyOffsetTexture { get; }
+    
     public Vector2I Coordinate { get; }
 }

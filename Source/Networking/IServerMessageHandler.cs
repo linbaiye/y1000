@@ -6,7 +6,7 @@ public interface IServerMessageHandler
 {
     void Handle(PlayerInterpolation playerInterpolation);
 
-    void Handle(LoginMessage loginMessage);
+    void Handle(code.networking.message.LoginMessage loginMessage);
     
     void Handle(InputResponseMessage inputResponseMessage);
 
@@ -35,6 +35,11 @@ public interface IServerMessageHandler
     void Handle(TurnMessage turnMessage)
     {
         Handle((IEntityMessage)turnMessage);
+    }
+
+    void Handle(RemoveEntityMessage removeEntityMessage)
+    {
+        
     }
 
     void Handle(CreatureInterpolation creatureInterpolation);

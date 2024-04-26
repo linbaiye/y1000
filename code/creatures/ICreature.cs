@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Godot;
 using y1000.code.entity;
 using y1000.code.player;
+using y1000.Source.Entity;
 
 namespace y1000.code.creatures
 {

@@ -159,6 +159,30 @@ namespace y1000.Source.Sprite
 			{ Direction.UP_LEFT, 161},
         };
         
+        private static readonly Dictionary<Direction, int> BELOW50_FIST_OFFSET = new()
+        {
+            { Direction.UP, 55},
+            { Direction.UP_RIGHT, 60},
+            { Direction.RIGHT, 65},
+            { Direction.DOWN_RIGHT, 70},
+            { Direction.DOWN, 75},
+            { Direction.DOWN_LEFT, 80},
+            { Direction.LEFT, 85},
+            { Direction.UP_LEFT, 90},
+        };
+        
+        private static readonly Dictionary<Direction, int> ABOVE50_FIST_SPRITE = new()
+        {
+            { Direction.UP, 0},
+            { Direction.UP_RIGHT, 6},
+            { Direction.RIGHT, 13},
+            { Direction.DOWN_RIGHT, 20},
+            { Direction.DOWN, 27},
+            { Direction.DOWN_LEFT, 34},
+            { Direction.LEFT, 41},
+            { Direction.UP_LEFT, 48}
+        };
+        
 
         private static SpriteManager LoadMalePlayer(CreatureState state)
         {
@@ -174,6 +198,15 @@ namespace y1000.Source.Sprite
                     SpriteReader.LoadOffsetMalePlayerSprites("N02")),
                 _ => throw new NotSupportedException()
             };
+        }
+        
+
+        public static SpriteManager LoadFistAttackForMale(bool male, bool below50)
+        {
+            var sprites = SpriteReader.LoadOffsetMalePlayerSprites("N01");
+            return below50
+                ? Create(100, BELOW50_FIST_OFFSET, sprites, false, 5)
+                : Create(100, ABOVE50_FIST_SPRITE, sprites, false, 6);
         }
 
         private static SpriteManager LoadFemalePlayer(CreatureState state)

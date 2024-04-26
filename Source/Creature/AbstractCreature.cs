@@ -36,8 +36,14 @@ public abstract partial class AbstractCreature : Node2D, ICreature, IBody
     {
         if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left } mouse && mouse.IsPressed())
         {
-            MouseClicked?.Invoke(this, new CreatureMouseClickEventArgs(Id, mouse));
+            MouseClicked?.Invoke(this, new CreatureMouseClickEventArgs(this, mouse));
         }
+    }
+
+    public void Delete()
+    {
+        Map.Free(this);
+        QueueFree();
     }
     
     protected void Init(long id, Direction direction, Vector2I coordinate, IMap map)

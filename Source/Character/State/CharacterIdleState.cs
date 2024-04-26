@@ -48,7 +48,12 @@ namespace y1000.Source.Character.State
 
         public bool CanHandle(IPredictableInput input)
         {
-            return input is AbstractRightClickInput;
+            return input is AbstractRightClickInput or AttackEntityInput;
+        }
+
+        public void Attack(Character character, AttackEntityInput input)
+        {
+            character.ChangeState(CharacterAttackState.Create(character.IsMale, input.Entity));
         }
 
         public IPlayerState WrappedState => _idleState;
@@ -57,10 +62,6 @@ namespace y1000.Source.Character.State
         {
             var state = PlayerIdleState.StartFrom(male, 0);
             return new CharacterIdleState(state);
-        }
-
-        public void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
-        {
         }
 
         public static CharacterIdleState Wrap(PlayerIdleState idleState)

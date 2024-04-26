@@ -11,6 +11,8 @@ namespace y1000.Source.Input
         KEY_PRESSED,
         
         LEFT_CLICK,
+        
+        ATTACK,
 
     }
 }

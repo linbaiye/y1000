@@ -24,5 +24,7 @@ namespace y1000.code
         
         FLY = 11,
         
+        ATTACK = 12,
+        
     }
 }

@@ -11,17 +11,20 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using NLog;
+using y1000.code.entity;
 using y1000.code.networking.message;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Control.Bottom;
 using y1000.Source.Creature;
 using y1000.Source.Creature.Monster;
+using y1000.Source.Entity;
 using y1000.Source.Input;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Connection;
 using y1000.Source.Player;
+using LoginMessage = y1000.code.networking.message.LoginMessage;
 
 namespace y1000.Source;
 
@@ -32,10 +35,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 
 	private readonly ConcurrentQueue<object> _unprocessedMessages = new();
 
-	private readonly Dictionary<long, ICreature> _creatures = new();
-	
-	private readonly Dictionary<long, IPlayer> _players = new();
 
+	private readonly Dictionary<long, IEntity> _entities = new();
+	
 	private readonly InputSampler _inputSampler = new();
 
 	private readonly PredictionManager _predictionManager = new();
@@ -86,12 +88,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		// character.Visible = true;
 	}
 
-	private void AddCreature(AbstractCreature creature)
-	{
-		AddChild(creature);
-		_creatures.Add(creature.Id, creature);
-	}
-	
 
 	public bool CanMove(Point coordinate)
 	{
@@ -114,6 +110,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 			.Handler(new ActionChannelInitializer<ISocketChannel>(c => c.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new MessageHandler(this))))
 			.Channel<TcpSocketChannel>();
 		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
+		await _channel.WriteAndFlushAsync(new LoginEvent());
 	}
 
 	private async void WriteMessage(IClientEvent message)
@@ -164,26 +161,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	}
 
 
-	private async void ConnectServer()
-	{
-		if (_connectionState != ConnectionState.DISCONNECTED)
-		{
-			return;
-		}
-		if (_channel != null)
-		{
-			_connectionState = ConnectionState.CONNECTING;
-			await _channel.WriteAndFlushAsync("Connect");
-			_connectionState = ConnectionState.CONNECTED;
-		}
-	}
-
 
 	public override void _Process(double delta)
 	{
 		HandleMessages();
 	}
-
 
 	private void HandleMessages()
 	{
@@ -197,7 +179,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 
 	private void OnCreatureClicked(object? sender, CreatureMouseClickEventArgs args)
 	{
-		_inputSampler.SampleLeftClickInput(args.MouseEvent, args.Id);
+		var click = _inputSampler.SampleLeftClickInput(args.MouseEvent, args.Creature);
+		if (click is AttackEntityInput attackEntityEvent)
+		{
+			_character?.HandleInput(attackEntityEvent);
+		}
 	}
 
 
@@ -234,7 +220,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	{
 		var player = Player.Player.FromInterpolation(playerInterpolation, MapLayer);
 		LOGGER.Debug("Adding player {0}", player.Location());
-		_players.TryAdd(player.Id, player);
+		_entities.TryAdd(player.Id, player);
 		AddChild(player);
 	}
 
@@ -248,13 +234,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 
 	public void Handle(IEntityMessage message)
 	{
-		if (_players.TryGetValue(message.Id, out var player))
+		if (_entities.TryGetValue(message.Id, out var entity))
 		{
-			player.Handle(message);
-		}
-		else if (_creatures.TryGetValue(message.Id, out var monster))
-		{
-			monster.Handle(message);
+			entity.Handle(message);
 		}
 	}
 
@@ -263,8 +245,17 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		LOGGER.Debug("Adding creature by interpolation {0}.", creatureInterpolation);
 		var monster = Monster.Create(creatureInterpolation, MapLayer);
 		monster.MouseClicked += OnCreatureClicked;
-		_creatures.TryAdd(monster.Id, monster);
+		_entities.TryAdd(monster.Id, monster);
 		AddChild(monster);
+	}
+
+	public void Handle(RemoveEntityMessage removeEntityMessage)
+	{
+		if (_entities.TryGetValue(removeEntityMessage.Id, out var entity))
+		{
+			entity.Delete();
+			_entities.Remove(removeEntityMessage.Id);
+		}
 	}
 
 	public void Handle(LoginMessage loginMessage)

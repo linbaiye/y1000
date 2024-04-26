@@ -2,6 +2,7 @@ syntax = "proto3";
 package Source.Networking.Protobuf;
 
 
+
 message PositionPacket {
   int32 x = 1;
   int32 y = 2;
@@ -23,6 +24,14 @@ message InputPacket {
   int32 clickedDirection = 3;
 }
 
+message ClickPacket {
+  int64 id = 1;
+}
+
+message PlayerLoginPacket {
+  string token = 1;
+}
+
 
 message MoveEventPacket {
   InputPacket input = 1;
@@ -33,6 +42,8 @@ message MoveEventPacket {
 message ClientPacket {
   oneof Type {
     MoveEventPacket moveEventPacket = 1;
+    ClickPacket clickPacket = 2;
+    PlayerLoginPacket loginPacket = 3;
   }
 }
 

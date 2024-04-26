@@ -1,6 +1,8 @@
 using Godot;
 using NLog;
 using y1000.code;
+using y1000.Source.Character.Event;
+using y1000.Source.Entity;
 
 namespace y1000.Source.Input
 {
@@ -47,7 +49,7 @@ namespace y1000.Source.Input
             };
         }
 
-        public IInput? SampleLeftClickInput(InputEventMouseButton button, long targetId)
+        public IInput? SampleLeftClickInput(InputEventMouseButton button, IEntity entity)
         {
             if (button.DoubleClick)
             {
@@ -58,12 +60,13 @@ namespace y1000.Source.Input
                 else if ((button.GetModifiersMask() & KeyModifierMask.MaskShift) != 0)
                 {
                     LOGGER.Debug("Monster attack");
+                    return InputFactory.CreateAttack(entity);
                 }
                 return null;
             }
             else
             {
-                return new LeftClick(targetId);
+                return null;
             }
         }
     }

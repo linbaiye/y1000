@@ -28,13 +28,6 @@ public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : 
         return _spriteManager.Texture(creature.Direction, ElapsedMillis);
     }
 
-    public bool Contains(TC c, Vector2 position)
-    {
-        var creaturePosition = c.Coordinate.ToPosition();
-        
-        return false;
-    }
-
 
     protected SpriteManager SpriteManager => _spriteManager;
 

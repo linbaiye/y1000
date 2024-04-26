@@ -54,7 +54,7 @@ namespace y1000.Source.Networking.Connection
             return new InterpolationsMessage(result);
         }
 
-        private InputResponseMessage DecodeInputRespoinse(InputResponsePacket packet)
+        private InputResponseMessage DecodeInputResponse(InputResponsePacket packet)
         {
             AbstractPositionMessage positionMessage = DecodePositionMessage(packet.PositionPacket);
             return new InputResponseMessage(packet.Sequence, positionMessage);
@@ -69,11 +69,12 @@ namespace y1000.Source.Networking.Connection
             return packet.TypedPacketCase switch
             {
                 Packet.TypedPacketOneofCase.PositionPacket => DecodePositionMessage(packet.PositionPacket),
-                Packet.TypedPacketOneofCase.LoginPacket => LoginMessage.FromPacket(packet.LoginPacket),
-                Packet.TypedPacketOneofCase.ResponsePacket => DecodeInputRespoinse(packet.ResponsePacket),
+                Packet.TypedPacketOneofCase.LoginPacket => code.networking.message.LoginMessage.FromPacket(packet.LoginPacket),
+                Packet.TypedPacketOneofCase.ResponsePacket => DecodeInputResponse(packet.ResponsePacket),
                 Packet.TypedPacketOneofCase.Interpolations => DecodeInterpolations(packet.Interpolations),
                 Packet.TypedPacketOneofCase.PlayerInterpolation => PlayerInterpolation.FromPacket(packet.PlayerInterpolation),
                 Packet.TypedPacketOneofCase.CreatureInterpolation => CreatureInterpolation.FromPacket(packet.CreatureInterpolation),
+                Packet.TypedPacketOneofCase.RemoveEntity => new RemoveEntityMessage(packet.RemoveEntity.Id),
                 _ => throw new NotSupportedException()
             };
         }

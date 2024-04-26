@@ -5,15 +5,14 @@ namespace y1000.Source.Creature;
 
 public class CreatureMouseClickEventArgs : EventArgs
 {
-    public CreatureMouseClickEventArgs(long id, InputEventMouseButton mouseEvent)
+    public CreatureMouseClickEventArgs(ICreature entity, InputEventMouseButton mouseEvent)
     {
-        Id = id;
         MouseEvent = mouseEvent;
+        Creature = entity;
     }
 
-    public long Id { get; }
+    public ICreature Creature { get; }
     
     public InputEventMouseButton MouseEvent { get; }
-    
     
 }

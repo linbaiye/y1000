@@ -6,6 +6,7 @@ using y1000.code.entity;
 using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.Source.Creature.State;
+using y1000.Source.Entity;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 

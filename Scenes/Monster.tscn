@@ -25,8 +25,8 @@ script = ExtResource("3_nn57x")
 
 [node name="NameContainer" type="MarginContainer" parent="Body"]
 z_index = 4
-offset_right = 1.0
-offset_bottom = 23.0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("4_oqmri")
 
 [node name="Label" type="Label" parent="Body/NameContainer"]

@@ -18,6 +18,8 @@ using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Player;
 using ICharacterState = y1000.Source.Character.State.ICharacterState;
+using LoginMessage = y1000.code.networking.message.LoginMessage;
+
 namespace y1000.Source.Character
 {
 	public partial class Character : Node2D, IPlayer
@@ -99,6 +101,7 @@ namespace y1000.Source.Character
 			_state.OnWrappedPlayerAnimationFinished(this);
 		}
 
+
 		public void HandleInput(IPredictableInput input)
 		{
 			if (!_state.CanHandle(input))
@@ -115,6 +118,9 @@ namespace y1000.Source.Character
 					break;
 				case InputType.MOUSE_RIGHT_MOTION:
 					_state.OnMousePressedMotion(this, (RightMousePressedMotion)input);
+					break;
+				case InputType.ATTACK:
+					_state.Attack(this, (AttackEntityInput)input);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
