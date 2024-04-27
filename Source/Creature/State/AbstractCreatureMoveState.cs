@@ -2,6 +2,7 @@ using Godot;
 using NLog;
 using y1000.code;
 using y1000.Source.Sprite;
+using y1000.Source.Util;
 
 namespace y1000.Source.Creature.State;
 

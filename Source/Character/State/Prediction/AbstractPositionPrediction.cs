@@ -2,7 +2,10 @@ using Godot;
 using NLog;
 using y1000.code;
 using y1000.code.networking.message;
+using y1000.Source.Creature;
 using y1000.Source.Input;
+using y1000.Source.Networking;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Character.State.Prediction
 {
@@ -21,8 +24,12 @@ namespace y1000.Source.Character.State.Prediction
             _direction = direction;
         }
 
-        public override bool SyncWith(InputResponseMessage message)
+        public override bool Predicted(IPredictableResponse response)
         {
+            if (response is not MoveEventResponse message)
+            {
+                return false;
+            }
             if (message.Sequence != Input.Sequence)
             {
                 Logger.Debug("Sequences are not equal, predict {0}, response {1}.", Input.Sequence, message.Sequence);

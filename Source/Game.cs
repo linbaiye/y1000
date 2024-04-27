@@ -11,7 +11,6 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using NLog;
-using y1000.code.entity;
 using y1000.code.networking.message;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
@@ -23,8 +22,8 @@ using y1000.Source.Input;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Connection;
+using y1000.Source.Networking.Server;
 using y1000.Source.Player;
-using LoginMessage = y1000.code.networking.message.LoginMessage;
 
 namespace y1000.Source;
 
@@ -34,7 +33,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 	private readonly Bootstrap _bootstrap = new();
 
 	private readonly ConcurrentQueue<object> _unprocessedMessages = new();
-
 
 	private readonly Dictionary<long, IEntity> _entities = new();
 	
@@ -60,24 +58,19 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		CONNECTED,
 	}
 
-
-
 	public override void _Ready()
 	{
 		SetupNetwork();
 		_bottomControl = GetNode<BottomControl>("UILayer/BottomUI");
 	}
 
-	private void WhenCharacterUpdated(object? sender, AbstractCharacterEventArgs characterEventArgs)
+	private void WhenCharacterUpdated(object? sender, CharacterEventArgs eventArgs)
 	{
-		if (characterEventArgs is CharacterStateEventArgs stateEventArgs)
-		{
-			_predictionManager.Save(stateEventArgs.Prediction);
-			WriteMessage(stateEventArgs.Event);
-		}
+		_predictionManager.Save(eventArgs.Prediction);
+		WriteMessage(eventArgs.Event);
 	}
 
-	private void ShowCharacter(LoginMessage loginMessage)
+	private void ShowCharacter(JoinedRealmMessage joinedRealmMessage)
 	{
 		// character = GetNode<y1000.code.character.OldCharacter>("Character");
 		// character.Coordinate = new Point(loginMessage.Coordinate.X, loginMessage.Coordinate.Y);
@@ -91,24 +84,18 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 
 	public bool CanMove(Point coordinate)
 	{
-		MapLayer mapLayer = MapLayer;
-		if (mapLayer.Map == null)
-		{
-			return false;
-		}
-		if (!mapLayer.Map.IsMovable(coordinate))
-		{
-			return false;
-		}
-		return true;
-		//return !_creatures.Values.Any(c => c.Coordinate.Equals(coordinate));
+		return false;
 	}
 
 	private async void SetupNetwork()
 	{
-		_bootstrap.Group(new MultithreadEventLoopGroup())
-			.Handler(new ActionChannelInitializer<ISocketChannel>(c => c.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder(), new MessageHandler(this))))
-			.Channel<TcpSocketChannel>();
+		_bootstrap.Group(new MultithreadEventLoopGroup()).Handler(
+				new ActionChannelInitializer<ISocketChannel>(c => c.Pipeline.AddLast(
+				new LengthFieldPrepender(4), 
+				new MessageEncoder(),
+				new LengthBasedPacketDecoder(),
+				new MessageHandler(this))
+				)).Channel<TcpSocketChannel>();
 		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 		await _channel.WriteAndFlushAsync(new LoginEvent());
 	}
@@ -128,18 +115,27 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 
 	private void HandleMouseInput(InputEventMouse eventMouse)
 	{
-		if (_character != null)
+		HandleCharacterInput((ch) =>
 		{
-			var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
-			var input = _inputSampler.SampleMoveInput(eventMouse, mousePos);
-			if (input == null) 
-			{
-				return ;
-			}
-			if (_character.CanHandle(input))
-			{
-				_character.HandleInput(input);
-			}
+			var mousePos = ch.WrappedPlayer().GetLocalMousePosition();
+			return _inputSampler.SampleMoveInput(eventMouse, mousePos);
+		});
+	}
+
+	private void HandleCharacterInput(Func<Character.Character, IPredictableInput?> sampleFunction)
+	{
+		if (_character == null)
+		{
+			return;
+		}
+		var input = sampleFunction.Invoke(_character);
+		if (input == null)
+		{
+			return;
+		}
+		if (_character.CanHandle(input))
+		{
+			_character.HandleInput(input);
 		}
 	}
 	
@@ -173,16 +169,16 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 			return;
 		if (message is IServerMessage serverMessage)
 		{
-			serverMessage.Accept(this);
+			serverMessage.HandleBy(this);
 		}
 	}
 
 	private void OnCreatureClicked(object? sender, CreatureMouseClickEventArgs args)
 	{
 		var click = _inputSampler.SampleLeftClickInput(args.MouseEvent, args.Creature);
-		if (click is AttackEntityInput attackEntityEvent)
+		if (click is AttackInput attack)
 		{
-			_character?.HandleInput(attackEntityEvent);
+			_character?.HandleInput(attack);
 		}
 	}
 
@@ -224,11 +220,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		AddChild(player);
 	}
 
-	public void Handle(InputResponseMessage inputResponseMessage)
+	public void Handle(IPredictableResponse response)
 	{
-		if (!_predictionManager.Reconcile(inputResponseMessage))
+		if (!_predictionManager.Reconcile(response))
 		{
-			_character?.Rewind(inputResponseMessage.PositionMessage);
+			_character?.Rewind(response);
 		}
 	}
 
@@ -258,11 +254,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		}
 	}
 
-	public void Handle(LoginMessage loginMessage)
+	public void Handle(JoinedRealmMessage joinedRealmMessage)
 	{
 		if (MapLayer.Map != null)
 		{
-			_character = Character.Character.LoggedIn(loginMessage, MapLayer);
+			_character = Character.Character.LoggedIn(joinedRealmMessage, MapLayer);
 			_character.WhenCharacterUpdated += WhenCharacterUpdated;
 			_bottomControl?.BindCharacter(_character);
 			MapLayer.BindCharacter(_character);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using y1000.code;
 using y1000.code.player;
+using y1000.Source.Creature;
 
 namespace y1000.Source.Sprite
 {
@@ -205,8 +206,8 @@ namespace y1000.Source.Sprite
         {
             var sprites = SpriteReader.LoadOffsetMalePlayerSprites("N01");
             return below50
-                ? Create(100, BELOW50_FIST_OFFSET, sprites, false, 5)
-                : Create(100, ABOVE50_FIST_SPRITE, sprites, false, 6);
+                ? Create(80, BELOW50_FIST_OFFSET, sprites, false, 5)
+                : Create(75, ABOVE50_FIST_SPRITE, sprites, false, 6);
         }
 
         private static SpriteManager LoadFemalePlayer(CreatureState state)

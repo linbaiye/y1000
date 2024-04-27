@@ -26,6 +26,7 @@ namespace y1000.code.entity.equipment.weapon
         public abstract string SpriteBasePath { get; }
         public string EntityName => name;
         public long Id => id;
+        public Vector2I Coordinate { get; }
 
         public abstract Vector2 Offset { get; }
     }

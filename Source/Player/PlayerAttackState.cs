@@ -20,9 +20,9 @@ public class PlayerAttackState : AbstractCreatureAttackState<Player>, IPlayerSta
         }
     }
 
-    public static PlayerAttackState Create(bool male, long elapsedMillis)
+    public static PlayerAttackState Create(bool male, bool below50, long elapsedMillis = 0)
     {
-        var manager = SpriteManager.LoadFistAttackForMale(male, false);
+        var manager = SpriteManager.LoadFistAttackForMale(male, below50);
         return new PlayerAttackState(manager, elapsedMillis);
     }
 }

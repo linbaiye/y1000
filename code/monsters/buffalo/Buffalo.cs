@@ -1,8 +1,9 @@
 using System.Drawing;
 using Godot;
-using y1000.code.creatures;
 using y1000.code.creatures.state;
+using y1000.Source.Creature;
 using y1000.Source.Sprite;
+using AbstractCreature = y1000.code.creatures.AbstractCreature;
 
 namespace y1000.code.monsters.buffalo;
 

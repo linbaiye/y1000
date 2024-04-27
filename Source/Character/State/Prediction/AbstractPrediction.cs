@@ -1,29 +1,26 @@
 using y1000.code.networking.message;
 using y1000.Source.Input;
+using y1000.Source.Networking;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Character.State.Prediction
 {
     public abstract class AbstractPrediction : IPrediction
     {
-
-        private readonly IPredictableInput _input;
-
-        private readonly bool _clearPrevious;
-        
         protected AbstractPrediction(IPredictableInput input) : this(input, false)
         {
         }
 
         protected AbstractPrediction(IPredictableInput input, bool clearPrevious)
         {
-            _clearPrevious = clearPrevious;
-            _input = input;
+            ClearPrevious = clearPrevious;
+            Input = input;
         }
 
-        public IPredictableInput Input => _input;
+        public IPredictableInput Input { get; }
 
-        public bool ClearPrevious => _clearPrevious;
-
-        public abstract bool SyncWith(InputResponseMessage message);
+        public bool ClearPrevious { get; }
+        
+        public abstract bool Predicted(IPredictableResponse response);
     }
 }

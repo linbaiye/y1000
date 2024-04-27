@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using y1000.code.creatures.state;
+using y1000.Source.Creature;
 
 namespace y1000.code.player.state
 {

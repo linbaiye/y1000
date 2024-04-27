@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Godot;
-using y1000.code;
-using y1000.code.character.state;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
@@ -31,7 +29,7 @@ namespace y1000.Source.Character.State
             {
                 if (character.Direction != rightClick.Direction)
                 {
-                    character.EmitMovementEvent(new SetPositionPrediction(rightClick, character.Coordinate, rightClick.Direction), 
+                    character.EmitEvent(new SetPositionPrediction(rightClick, character.Coordinate, rightClick.Direction), 
                         new MovementEvent(rightClick, character.Coordinate));
                     character.Direction = rightClick.Direction;
                     character.ChangeState(Create(character.IsMale));
@@ -39,7 +37,7 @@ namespace y1000.Source.Character.State
             }
             else
             {
-                character.EmitMovementEvent(new MovePrediction(rightClick, character.Coordinate, rightClick.Direction),
+                character.EmitEvent(new MovePrediction(rightClick, character.Coordinate, rightClick.Direction),
                     new MovementEvent(rightClick, character.Coordinate));
                 var state = CharacterMoveState.Move(character.FootMagic, character.IsMale, rightClick);
                 character.ChangeState(state);
@@ -48,12 +46,12 @@ namespace y1000.Source.Character.State
 
         public bool CanHandle(IPredictableInput input)
         {
-            return input is AbstractRightClickInput or AttackEntityInput;
+            return input is AbstractRightClickInput or AttackInput;
         }
 
-        public void Attack(Character character, AttackEntityInput input)
+        public void Attack(Character character, AttackInput input)
         {
-            character.ChangeState(CharacterAttackState.Create(character.IsMale, input.Entity));
+            character.AttackKungFu?.Attack(character, input);
         }
 
         public IPlayerState WrappedState => _idleState;

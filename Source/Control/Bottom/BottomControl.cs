@@ -6,9 +6,9 @@ namespace y1000.Source.Control.Bottom;
 public partial class BottomControl : Godot.Control
 {
 
-    private void WhenCharacterUpdated(object? sender, AbstractCharacterEventArgs eventArgs)
+    private void WhenCharacterUpdated(object? sender, CharacterEventArgs args)
     {
-        if (sender is Character.Character character)
+        if (sender is Character.Character character && args.Event is MovementEvent)
         {
             UpdateCoordinate(character);
         }

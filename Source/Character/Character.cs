@@ -13,12 +13,14 @@ using y1000.Source.Character.State;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Creature;
 using y1000.Source.Input;
-using y1000.Source.Magic.Foot;
+using y1000.Source.KungFu.Attack;
+using y1000.Source.KungFu.Foot;
 using y1000.Source.Map;
 using y1000.Source.Networking;
+using y1000.Source.Networking.Server;
 using y1000.Source.Player;
+using y1000.Source.Util;
 using ICharacterState = y1000.Source.Character.State.ICharacterState;
-using LoginMessage = y1000.code.networking.message.LoginMessage;
 
 namespace y1000.Source.Character
 {
@@ -28,9 +30,11 @@ namespace y1000.Source.Character
 
 		private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
-		public IFootMagic? FootMagic { get; set; }
+		public IFootKungFu? FootMagic { get; private set; }
+		
+		public IAttackKungFu? AttackKungFu { get; private set; }
 
-		public event EventHandler<AbstractCharacterEventArgs>? WhenCharacterUpdated;
+		public event EventHandler<CharacterEventArgs>? WhenCharacterUpdated;
 
 		
 		public void ChangeState(ICharacterState state)
@@ -77,17 +81,25 @@ namespace y1000.Source.Character
 		}
 
 
-		public void Rewind(AbstractPositionMessage positionMessage)
+		public void Rewind(MoveEventResponse response)
 		{
 			var player = WrappedPlayer();
-			player.SetPosition(positionMessage);
+			player.SetPosition(response.PositionMessage);
 			LOGGER.Debug("Rewind to coordinate {0}, direction {1}.", player.Coordinate, player.Direction);
 			ChangeState(CharacterIdleState.Create(IsMale));
 		}
 
-		public void EmitMovementEvent(IPrediction prediction, IClientEvent movementEvent)
+		public void Rewind(IPredictableResponse response)
 		{
-			WhenCharacterUpdated?.Invoke(this, new CharacterStateEventArgs(prediction, movementEvent));
+			if (response is MoveEventResponse moveEventResponse)
+			{
+				Rewind(moveEventResponse);
+			}
+		}
+
+		public void EmitEvent(IPrediction prediction, IClientEvent movementEvent)
+		{
+			WhenCharacterUpdated?.Invoke(this, new CharacterEventArgs(prediction, movementEvent));
 		}
 
 		public bool CanMoveOneUnit(Direction direction)
@@ -120,14 +132,14 @@ namespace y1000.Source.Character
 					_state.OnMousePressedMotion(this, (RightMousePressedMotion)input);
 					break;
 				case InputType.ATTACK:
-					_state.Attack(this, (AttackEntityInput)input);
+					_state.Attack(this, (AttackInput)input);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
 		}
 
-		public static Character LoggedIn(LoginMessage message, IMap map)
+		public static Character LoggedIn(JoinedRealmMessage message, IMap map)
 		{
 			PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
 			var character = scene.Instantiate<Character>();
@@ -135,10 +147,10 @@ namespace y1000.Source.Character
 			var player = character.WrappedPlayer();
 			player.Init(message.Male, PlayerIdleState.StartFrom(message.Male, 0),  Direction.DOWN, message.Coordinate, message.Id, map);
 			player.StateAnimationEventHandler += character.OnPlayerAnimationFinished;
-			character.FootMagic = IFootMagic.ByName(UnnamedFootMagic.Name, 85.10f);
+			character.FootMagic = message.FootKungFu;
+			character.AttackKungFu = message.AttackKungFu;
 			character.ChangeState(CharacterIdleState.Wrap(state));
 			return character;
 		}
-
 	}
 }

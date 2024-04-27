@@ -6,6 +6,7 @@ using Godot;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
 using y1000.code.entity.equipment.chest;
+using y1000.Source.Creature;
 
 namespace y1000.code.player.state
 {

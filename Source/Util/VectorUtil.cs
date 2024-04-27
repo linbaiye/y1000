@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Godot;
+using y1000.Source.Creature;
 
-namespace y1000.code
+namespace y1000.Source.Util
 {
     public static class VectorUtil
     {
@@ -48,6 +45,11 @@ namespace y1000.code
             }
             return src;
         }
+
+        public static int Distance(this Vector2I src, Vector2I dst)
+        {
+            return Math.Max(Math.Abs(src.X - dst.X), Math.Abs(src.Y - dst.Y));
+        }
         
         public static Vector2I Move(this Vector2I src, int x, int y)
         {
@@ -59,6 +61,12 @@ namespace y1000.code
             return new Vector2(vector2.X * TileSizeX, vector2.Y * TileSizeY);
         }
 
+        public static Direction GetDirection(this Vector2I src, Vector2I another)
+        {
+            var p1 = src.ToPosition();
+            var p2 = another.ToPosition();
+            return (p2 - p1).GetDirection();
+        }
 
         public static Direction GetDirection(this Godot.Vector2 vector)
         {

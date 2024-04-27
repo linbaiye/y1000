@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using y1000.code.networking;
 using y1000.code.networking.message;
+using y1000.Source.Creature;
 
 namespace y1000.code.character.state.snapshot
 {

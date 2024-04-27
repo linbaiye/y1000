@@ -44,5 +44,9 @@
     <Compile Remove="Source\Player\PlayerFlyState.cs" />
     <Compile Remove="Source\Player\AbstractPlayerMoveState.cs" />
     <Compile Remove="Source\Character\State\Prediction\TurnPrediction.cs" />
+    <Compile Remove="Source\KungFu\Attack\AbstractAttackKungFu.cs" />
+    <Compile Remove="Source\KungFu\Attack\AbstructAttackKungfu.cs" />
+    <Compile Remove="Source\Character\Event\AttackInput.cs" />
+    <Compile Remove="Source\KungFu\Attack\UnnamedQuanFa.cs" />
   </ItemGroup>
 </Project>

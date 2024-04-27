@@ -1,18 +1,16 @@
 using System;
 using NLog;
 using y1000.code.networking.message;
+using y1000.Source.Networking;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Character.State.Prediction
 {
     public class PredictionManager
     {
-        private readonly CircularBuffer<IPrediction> _predictions;
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
-
-        public PredictionManager()
-        {
-            _predictions = new CircularBuffer<IPrediction>(200);
-        }
+        private readonly CircularBuffer<IPrediction> _predictions = new(200);
+        
+        private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
         public void Save(IPrediction prediction)
         {
@@ -26,7 +24,7 @@ namespace y1000.Source.Character.State.Prediction
         }
 
 
-        public bool Reconcile(InputResponseMessage message)
+        public bool Reconcile(IPredictableResponse message)
         {
             while (!_predictions.IsEmpty)
             {
@@ -34,14 +32,14 @@ namespace y1000.Source.Character.State.Prediction
                 if (prediction.Input.Sequence == message.Sequence)
                 {
                     _predictions.PopFront();
-                    if (prediction.SyncWith(message))
+                    if (prediction.Predicted(message))
                     {
                         return true;
                     }
                 }
                 else if (prediction.Input.Sequence < message.Sequence)
                 {
-                    logger.Info("Lost input response for input {0}.", prediction.Input);
+                    LOGGER.Info("Lost input response for input {0}.", prediction.Input);
                     _predictions.PopFront();
                 }
                 else

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using y1000.code.character.state.snapshot;
-using y1000.code.creatures;
 using y1000.code.player.state;
 using y1000.code.world;
+using y1000.Source.Creature;
 using y1000.Source.Input;
+using ICreature = y1000.code.creatures.ICreature;
 
 namespace y1000.code.character.state
 {

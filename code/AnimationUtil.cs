@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using Godot.NativeInterop;
+using y1000.Source.Creature;
 
 namespace y1000.code
 {

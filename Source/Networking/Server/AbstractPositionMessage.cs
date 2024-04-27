@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
 using Godot;
-using y1000.Source.Networking;
+using y1000.code;
+using y1000.code.networking.message;
+using y1000.Source.Creature;
 
-namespace y1000.code.networking.message
+namespace y1000.Source.Networking.Server
 {
     public abstract class AbstractPositionMessage : IEntityMessage
     {
@@ -29,6 +26,6 @@ namespace y1000.code.networking.message
             return "[Id:" + Id + ", Type: " + type + ", Coordinate: " + Coordinate + ", Dir:" + Direction + "]";
         }
 
-        public abstract void Accept(IServerMessageHandler handler);
+        public abstract void HandleBy(IServerMessageHandler handler);
     }
 }

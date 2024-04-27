@@ -1,4 +1,5 @@
 using y1000.code.player;
+using y1000.Source.Creature;
 
 namespace y1000.code.creatures.state
 {

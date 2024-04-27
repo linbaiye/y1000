@@ -8,6 +8,7 @@ using y1000.code;
 using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.code.player.snapshot;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Networking.Connection
 {
@@ -54,10 +55,10 @@ namespace y1000.Source.Networking.Connection
             return new InterpolationsMessage(result);
         }
 
-        private InputResponseMessage DecodeInputResponse(InputResponsePacket packet)
+        private MoveEventResponse DecodeInputResponse(InputResponsePacket packet)
         {
             AbstractPositionMessage positionMessage = DecodePositionMessage(packet.PositionPacket);
-            return new InputResponseMessage(packet.Sequence, positionMessage);
+            return new MoveEventResponse(packet.Sequence, positionMessage);
         }
 
         protected override object Decode(IChannelHandlerContext context, IByteBuffer buffer)
@@ -69,7 +70,7 @@ namespace y1000.Source.Networking.Connection
             return packet.TypedPacketCase switch
             {
                 Packet.TypedPacketOneofCase.PositionPacket => DecodePositionMessage(packet.PositionPacket),
-                Packet.TypedPacketOneofCase.LoginPacket => code.networking.message.LoginMessage.FromPacket(packet.LoginPacket),
+                Packet.TypedPacketOneofCase.LoginPacket => JoinedRealmMessage.FromPacket(packet.LoginPacket),
                 Packet.TypedPacketOneofCase.ResponsePacket => DecodeInputResponse(packet.ResponsePacket),
                 Packet.TypedPacketOneofCase.Interpolations => DecodeInterpolations(packet.Interpolations),
                 Packet.TypedPacketOneofCase.PlayerInterpolation => PlayerInterpolation.FromPacket(packet.PlayerInterpolation),

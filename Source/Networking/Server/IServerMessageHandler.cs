@@ -1,14 +1,19 @@
 using y1000.code.networking.message;
 
-namespace y1000.Source.Networking;
+namespace y1000.Source.Networking.Server;
 
 public interface IServerMessageHandler
 {
     void Handle(PlayerInterpolation playerInterpolation);
 
-    void Handle(code.networking.message.LoginMessage loginMessage);
-    
-    void Handle(InputResponseMessage inputResponseMessage);
+    void Handle(IPredictableResponse response);
+
+    void Handle(JoinedRealmMessage joinedRealmMessage);
+
+    void Handle(MoveEventResponse moveEventResponse)
+    {
+        Handle((IPredictableResponse)moveEventResponse);
+    }
 
     void Handle(IEntityMessage message);
 
@@ -43,4 +48,5 @@ public interface IServerMessageHandler
     }
 
     void Handle(CreatureInterpolation creatureInterpolation);
+    
 }

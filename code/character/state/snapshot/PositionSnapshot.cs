@@ -5,6 +5,7 @@ using y1000.code.networking;
 using y1000.code.networking.message;
 using y1000.code.player.state;
 using y1000.code.util;
+using y1000.Source.Creature;
 
 namespace y1000.code.character.state.snapshot
 {

@@ -22,11 +22,17 @@ public class CharacterAttackState : ICharacterState
     }
 
     public IPlayerState WrappedState => _playerAttackState;
-    
+
+
+    public static CharacterAttackState Quanfa(bool male, IEntity target, bool below50)
+    {
+        var playerAttackState = PlayerAttackState.Create(male, below50);
+        return new CharacterAttackState(playerAttackState, target);
+    }
 
     public static CharacterAttackState Create(bool male, IEntity target)
     {
-        var playerAttackState = PlayerAttackState.Create(male, 0);
+        var playerAttackState = PlayerAttackState.Create(male, true);
         return new CharacterAttackState(playerAttackState, target);
     }
 }

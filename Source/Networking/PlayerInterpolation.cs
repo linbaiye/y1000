@@ -1,5 +1,6 @@
 using Godot;
 using Source.Networking.Protobuf;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Networking;
 
@@ -28,7 +29,7 @@ public class PlayerInterpolation : IServerMessage
         return new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male, packet.Id);
     }
 
-    public void Accept(IServerMessageHandler handler)
+    public void HandleBy(IServerMessageHandler handler)
     {
         handler.Handle(this);
     }

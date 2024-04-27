@@ -17,7 +17,7 @@ namespace y1000.Source.Character.State
             return false;
         }
         
-        void Attack(Character character, AttackEntityInput input) { }
+        void Attack(Character character, AttackInput @event) { }
 
         void OnWrappedPlayerAnimationFinished(Character character) {}
 

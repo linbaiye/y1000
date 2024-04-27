@@ -5,9 +5,9 @@ using y1000.code.networking.message;
 
 namespace y1000.Source.Input
 {
-    public abstract class AbstractInput : IPredictableInput
+    public abstract class AbstractPredictableInput : IPredictableInput
     {
-        protected AbstractInput(long s)
+        protected AbstractPredictableInput(long s)
         {
             Sequence = s;
         }
@@ -15,7 +15,5 @@ namespace y1000.Source.Input
         public long Sequence { get; }
         
         public abstract InputType Type { get; }
-
-        public abstract InputPacket ToPacket();
     }
 }

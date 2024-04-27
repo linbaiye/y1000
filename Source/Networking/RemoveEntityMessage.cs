@@ -1,3 +1,5 @@
+using y1000.Source.Networking.Server;
+
 namespace y1000.Source.Networking;
 
 public class RemoveEntityMessage : IServerMessage
@@ -9,7 +11,7 @@ public class RemoveEntityMessage : IServerMessage
 
     public long Id { get; }
     
-    public void Accept(IServerMessageHandler handler)
+    public void HandleBy(IServerMessageHandler handler)
     {
         handler.Handle(this);
     }

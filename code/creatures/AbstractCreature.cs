@@ -9,6 +9,9 @@ using y1000.code.creatures.state;
 using y1000.code.entity;
 using y1000.code.player;
 using y1000.code.util;
+using y1000.Source.Creature;
+using y1000.Source.Entity;
+using y1000.Source.Util;
 
 namespace y1000.code.creatures
 {
@@ -27,6 +30,7 @@ namespace y1000.code.creatures
         public Point coordinate;
 
         private string name = "test";
+        private Vector2I coordinate1;
 
         protected AbstractCreature()
         {
@@ -77,6 +81,8 @@ namespace y1000.code.creatures
         public ICreatureState CurrentState => currentState;
 
         public abstract long Id { get; }
+
+        Vector2I IEntity.Coordinate => coordinate1;
 
 
         public override void _Process(double delta)

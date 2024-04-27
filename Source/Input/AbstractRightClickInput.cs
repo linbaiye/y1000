@@ -1,10 +1,11 @@
 using Source.Networking.Protobuf;
 using Godot;
 using y1000.code;
+using y1000.Source.Creature;
 
 namespace y1000.Source.Input
 {
-    public abstract class AbstractRightClickInput : AbstractInput
+    public abstract class AbstractRightClickInput : AbstractPredictableInput, IRightClickInput
     {
         protected AbstractRightClickInput(long s, Direction clickedDirection) : base(s)
         {
@@ -13,7 +14,12 @@ namespace y1000.Source.Input
 
         public Direction Direction { get; }
 
-        public override InputPacket ToPacket()
+        public override string ToString()
+        {
+            return "Type: " + Type + ", Seq: " + Sequence + ", Dir:" + Direction;
+        }
+
+        public InputPacket ToRightClickPacket()
         {
             return new InputPacket()
             {
@@ -21,12 +27,6 @@ namespace y1000.Source.Input
                 ClickedDirection = (int)Direction,
                 Type = (int)Type,
             };
-        }
-
-
-        public override string ToString()
-        {
-            return "Type: " + Type + ", Seq: " + Sequence + ", Dir:" + Direction;
         }
     }
 }

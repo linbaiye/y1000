@@ -6,8 +6,8 @@ namespace y1000.Source.Character.Event;
 
 public class MovementEvent : IClientEvent
 {
-    private readonly IPredictableInput _input;
-    public MovementEvent(IPredictableInput i, Vector2I happenedAt)
+    private readonly IRightClickInput _input;
+    public MovementEvent(IRightClickInput i, Vector2I happenedAt)
     {
         _input = i;
         HappenedAt = happenedAt;
@@ -21,7 +21,7 @@ public class MovementEvent : IClientEvent
         {
             MoveEventPacket = new MoveEventPacket()
             {
-                Input = _input.ToPacket(),
+                Input = _input.ToRightClickPacket(),
                 HappenedAtX = HappenedAt.X,
                 HappenedAtY = HappenedAt.Y,
             }

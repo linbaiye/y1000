@@ -4,9 +4,9 @@ using y1000.Source.Input;
 
 namespace y1000.Source.Character.Event;
 
-public class CharacterStateEventArgs : AbstractCharacterEventArgs
+public class CharacterEventArgs : EventArgs
 {
-    public CharacterStateEventArgs(IPrediction prediction,
+    public CharacterEventArgs(IPrediction prediction,
         IClientEvent @event)
     {
         Prediction = prediction;

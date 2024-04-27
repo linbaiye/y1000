@@ -6,6 +6,8 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Godot;
+using y1000.Source.Creature;
+using y1000.Source.Util;
 
 namespace y1000.code.util
 {

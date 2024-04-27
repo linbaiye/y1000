@@ -8,6 +8,4 @@ namespace y1000.Source.Creature;
 public interface ICreature : IEntity
 {
     Direction Direction { get; }
-    
-    Vector2I Coordinate { get; }
 }

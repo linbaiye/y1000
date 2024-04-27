@@ -2,7 +2,9 @@ using Godot;
 using NLog;
 using y1000.code;
 using y1000.code.networking.message;
+using y1000.Source.Creature;
 using y1000.Source.Input;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Character.State.Prediction
 {

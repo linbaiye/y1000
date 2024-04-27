@@ -35,37 +35,43 @@ namespace Source.Networking.Protobuf {
             "ZBgBIAEoAyIiChFQbGF5ZXJMb2dpblBhY2tldBINCgV0b2tlbhgBIAEoCSJz",
             "Cg9Nb3ZlRXZlbnRQYWNrZXQSNgoFaW5wdXQYASABKAsyJy5Tb3VyY2UuTmV0",
             "d29ya2luZy5Qcm90b2J1Zi5JbnB1dFBhY2tldBITCgtoYXBwZW5lZEF0WBgC",
-            "IAEoBRITCgtoYXBwZW5lZEF0WRgDIAEoBSLkAQoMQ2xpZW50UGFja2V0EkYK",
-            "D21vdmVFdmVudFBhY2tldBgBIAEoCzIrLlNvdXJjZS5OZXR3b3JraW5nLlBy",
-            "b3RvYnVmLk1vdmVFdmVudFBhY2tldEgAEj4KC2NsaWNrUGFja2V0GAIgASgL",
-            "MicuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2xpY2tQYWNrZXRIABJE",
-            "Cgtsb2dpblBhY2tldBgDIAEoCzItLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
-            "YnVmLlBsYXllckxvZ2luUGFja2V0SABCBgoEVHlwZSJkChNJbnRlcnBvbGF0",
-            "aW9uUGFja2V0Eg0KBXN0YXRlGAIgASgFEhUKDWVsYXBzZWRNaWxsaXMYBSAB",
-            "KAMSEQoJZGlyZWN0aW9uGAcgASgFEgkKAXgYCCABKAUSCQoBeRgJIAEoBSJf",
-            "ChRJbnRlcnBvbGF0aW9uc1BhY2tldBJHCg5pbnRlcnBvbGF0aW9ucxgBIAMo",
-            "CzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25Q",
-            "YWNrZXQiLwoLTG9naW5QYWNrZXQSCQoBeBgBIAEoBRIJCgF5GAIgASgFEgoK",
-            "AmlkGAMgASgDIqwECgZQYWNrZXQSRAoOcG9zaXRpb25QYWNrZXQYASABKAsy",
-            "Ki5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Qb3NpdGlvblBhY2tldEgA",
-            "ElgKFWNyZWF0dXJlSW50ZXJwb2xhdGlvbhgCIAEoCzI3LlNvdXJjZS5OZXR3",
-            "b3JraW5nLlByb3RvYnVmLkNyZWF0dXJlSW50ZXJwb2xhdGlvblBhY2tldEgA",
-            "Ej4KC2xvZ2luUGFja2V0GAQgASgLMicuU291cmNlLk5ldHdvcmtpbmcuUHJv",
-            "dG9idWYuTG9naW5QYWNrZXRIABJKCg5pbnRlcnBvbGF0aW9ucxgFIAEoCzIw",
-            "LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25zUGFj",
-            "a2V0SAASSQoOcmVzcG9uc2VQYWNrZXQYBiABKAsyLy5Tb3VyY2UuTmV0d29y",
-            "a2luZy5Qcm90b2J1Zi5JbnB1dFJlc3BvbnNlUGFja2V0SAASVAoTcGxheWVy",
-            "SW50ZXJwb2xhdGlvbhgHIAEoCzI1LlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
-            "YnVmLlBsYXllckludGVycG9sYXRpb25QYWNrZXRIABJGCgxyZW1vdmVFbnRp",
-            "dHkYCCABKAsyLi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5SZW1vdmVF",
-            "bnRpdHlQYWNrZXRIAEINCgtUeXBlZFBhY2tldCJ/ChtDcmVhdHVyZUludGVy",
-            "cG9sYXRpb25QYWNrZXQSRgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIvLlNvdXJj",
-            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25QYWNrZXQSCgoC",
-            "aWQYAiABKAMSDAoEbmFtZRgDIAEoCSJ9ChlQbGF5ZXJJbnRlcnBvbGF0aW9u",
-            "UGFja2V0EkYKDWludGVycG9sYXRpb24YASABKAsyLy5Tb3VyY2UuTmV0d29y",
-            "a2luZy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EgoKAmlkGAIgASgD",
-            "EgwKBG1hbGUYAyABKAgiIAoSUmVtb3ZlRW50aXR5UGFja2V0EgoKAmlkGAEg",
-            "ASgDYgZwcm90bzM="));
+            "IAEoBRITCgtoYXBwZW5lZEF0WRgDIAEoBSJIChFBdHRhY2tFdmVudFBhY2tl",
+            "dBIQCghzZXF1ZW5jZRgBIAEoAxIQCgh0YXJnZXRJZBgCIAEoAxIPCgdiZWxv",
+            "dzUwGAMgASgIIrACCgxDbGllbnRQYWNrZXQSRgoPbW92ZUV2ZW50UGFja2V0",
+            "GAEgASgLMisuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuTW92ZUV2ZW50",
+            "UGFja2V0SAASPgoLY2xpY2tQYWNrZXQYAiABKAsyJy5Tb3VyY2UuTmV0d29y",
+            "a2luZy5Qcm90b2J1Zi5DbGlja1BhY2tldEgAEkQKC2xvZ2luUGFja2V0GAMg",
+            "ASgLMi0uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVyTG9naW5Q",
+            "YWNrZXRIABJKChFhdHRhY2tFdmVudFBhY2tldBgEIAEoCzItLlNvdXJjZS5O",
+            "ZXR3b3JraW5nLlByb3RvYnVmLkF0dGFja0V2ZW50UGFja2V0SABCBgoEVHlw",
+            "ZSJkChNJbnRlcnBvbGF0aW9uUGFja2V0Eg0KBXN0YXRlGAIgASgFEhUKDWVs",
+            "YXBzZWRNaWxsaXMYBSABKAMSEQoJZGlyZWN0aW9uGAcgASgFEgkKAXgYCCAB",
+            "KAUSCQoBeRgJIAEoBSJfChRJbnRlcnBvbGF0aW9uc1BhY2tldBJHCg5pbnRl",
+            "cnBvbGF0aW9ucxgBIAMoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVm",
+            "LkludGVycG9sYXRpb25QYWNrZXQirAEKC0xvZ2luUGFja2V0EgkKAXgYASAB",
+            "KAUSCQoBeRgCIAEoBRIKCgJpZBgDIAEoAxIVCg13ZWFwb25TaGFwZUlkGAQg",
+            "ASgFEhkKEWF0dGFja0t1bmdGdUxldmVsGAUgASgCEhgKEGF0dGFja0t1bmdG",
+            "dU5hbWUYBiABKAkSFwoPZm9vdEt1bmdGdUxldmVsGAcgASgCEhYKDmZvb3RL",
+            "dW5nRnVOYW1lGAggASgJIqwECgZQYWNrZXQSRAoOcG9zaXRpb25QYWNrZXQY",
+            "ASABKAsyKi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Qb3NpdGlvblBh",
+            "Y2tldEgAElgKFWNyZWF0dXJlSW50ZXJwb2xhdGlvbhgCIAEoCzI3LlNvdXJj",
+            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLkNyZWF0dXJlSW50ZXJwb2xhdGlvblBh",
+            "Y2tldEgAEj4KC2xvZ2luUGFja2V0GAQgASgLMicuU291cmNlLk5ldHdvcmtp",
+            "bmcuUHJvdG9idWYuTG9naW5QYWNrZXRIABJKCg5pbnRlcnBvbGF0aW9ucxgF",
+            "IAEoCzIwLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRp",
+            "b25zUGFja2V0SAASSQoOcmVzcG9uc2VQYWNrZXQYBiABKAsyLy5Tb3VyY2Uu",
+            "TmV0d29ya2luZy5Qcm90b2J1Zi5JbnB1dFJlc3BvbnNlUGFja2V0SAASVAoT",
+            "cGxheWVySW50ZXJwb2xhdGlvbhgHIAEoCzI1LlNvdXJjZS5OZXR3b3JraW5n",
+            "LlByb3RvYnVmLlBsYXllckludGVycG9sYXRpb25QYWNrZXRIABJGCgxyZW1v",
+            "dmVFbnRpdHkYCCABKAsyLi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5S",
+            "ZW1vdmVFbnRpdHlQYWNrZXRIAEINCgtUeXBlZFBhY2tldCJ/ChtDcmVhdHVy",
+            "ZUludGVycG9sYXRpb25QYWNrZXQSRgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIv",
+            "LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25QYWNr",
+            "ZXQSCgoCaWQYAiABKAMSDAoEbmFtZRgDIAEoCSJ9ChlQbGF5ZXJJbnRlcnBv",
+            "bGF0aW9uUGFja2V0EkYKDWludGVycG9sYXRpb24YASABKAsyLy5Tb3VyY2Uu",
+            "TmV0d29ya2luZy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EgoKAmlk",
+            "GAIgASgDEgwKBG1hbGUYAyABKAgiIAoSUmVtb3ZlRW50aXR5UGFja2V0EgoK",
+            "AmlkGAEgASgDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -75,10 +81,11 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClickPacket), global::Source.Networking.Protobuf.ClickPacket.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerLoginPacket), global::Source.Networking.Protobuf.PlayerLoginPacket.Parser, new[]{ "Token" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.MoveEventPacket), global::Source.Networking.Protobuf.MoveEventPacket.Parser, new[]{ "Input", "HappenedAtX", "HappenedAtY" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientPacket), global::Source.Networking.Protobuf.ClientPacket.Parser, new[]{ "MoveEventPacket", "ClickPacket", "LoginPacket" }, new[]{ "Type" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.AttackEventPacket), global::Source.Networking.Protobuf.AttackEventPacket.Parser, new[]{ "Sequence", "TargetId", "Below50" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientPacket), global::Source.Networking.Protobuf.ClientPacket.Parser, new[]{ "MoveEventPacket", "ClickPacket", "LoginPacket", "AttackEventPacket" }, new[]{ "Type" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationPacket), global::Source.Networking.Protobuf.InterpolationPacket.Parser, new[]{ "State", "ElapsedMillis", "Direction", "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationsPacket), global::Source.Networking.Protobuf.InterpolationsPacket.Parser, new[]{ "Interpolations" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.LoginPacket), global::Source.Networking.Protobuf.LoginPacket.Parser, new[]{ "X", "Y", "Id" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.LoginPacket), global::Source.Networking.Protobuf.LoginPacket.Parser, new[]{ "X", "Y", "Id", "WeaponShapeId", "AttackKungFuLevel", "AttackKungFuName", "FootKungFuLevel", "FootKungFuName" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.Packet), global::Source.Networking.Protobuf.Packet.Parser, new[]{ "PositionPacket", "CreatureInterpolation", "LoginPacket", "Interpolations", "ResponsePacket", "PlayerInterpolation", "RemoveEntity" }, new[]{ "TypedPacket" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureInterpolationPacket), global::Source.Networking.Protobuf.CreatureInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Male" }, null, null, null, null),
@@ -1635,6 +1642,270 @@ namespace Source.Networking.Protobuf {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class AttackEventPacket : pb::IMessage<AttackEventPacket>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<AttackEventPacket> _parser = new pb::MessageParser<AttackEventPacket>(() => new AttackEventPacket());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<AttackEventPacket> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AttackEventPacket() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AttackEventPacket(AttackEventPacket other) : this() {
+      sequence_ = other.sequence_;
+      targetId_ = other.targetId_;
+      below50_ = other.below50_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AttackEventPacket Clone() {
+      return new AttackEventPacket(this);
+    }
+
+    /// <summary>Field number for the "sequence" field.</summary>
+    public const int SequenceFieldNumber = 1;
+    private long sequence_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Sequence {
+      get { return sequence_; }
+      set {
+        sequence_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "targetId" field.</summary>
+    public const int TargetIdFieldNumber = 2;
+    private long targetId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long TargetId {
+      get { return targetId_; }
+      set {
+        targetId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "below50" field.</summary>
+    public const int Below50FieldNumber = 3;
+    private bool below50_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Below50 {
+      get { return below50_; }
+      set {
+        below50_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as AttackEventPacket);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(AttackEventPacket other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Sequence != other.Sequence) return false;
+      if (TargetId != other.TargetId) return false;
+      if (Below50 != other.Below50) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Sequence != 0L) hash ^= Sequence.GetHashCode();
+      if (TargetId != 0L) hash ^= TargetId.GetHashCode();
+      if (Below50 != false) hash ^= Below50.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Sequence != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Sequence);
+      }
+      if (TargetId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(TargetId);
+      }
+      if (Below50 != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(Below50);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Sequence != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Sequence);
+      }
+      if (TargetId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(TargetId);
+      }
+      if (Below50 != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(Below50);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Sequence != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Sequence);
+      }
+      if (TargetId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TargetId);
+      }
+      if (Below50 != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(AttackEventPacket other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Sequence != 0L) {
+        Sequence = other.Sequence;
+      }
+      if (other.TargetId != 0L) {
+        TargetId = other.TargetId;
+      }
+      if (other.Below50 != false) {
+        Below50 = other.Below50;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Sequence = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            TargetId = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            Below50 = input.ReadBool();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Sequence = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            TargetId = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            Below50 = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class ClientPacket : pb::IMessage<ClientPacket>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1649,7 +1920,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1678,6 +1949,9 @@ namespace Source.Networking.Protobuf {
           break;
         case TypeOneofCase.LoginPacket:
           LoginPacket = other.LoginPacket.Clone();
+          break;
+        case TypeOneofCase.AttackEventPacket:
+          AttackEventPacket = other.AttackEventPacket.Clone();
           break;
       }
 
@@ -1726,6 +2000,18 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "attackEventPacket" field.</summary>
+    public const int AttackEventPacketFieldNumber = 4;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Source.Networking.Protobuf.AttackEventPacket AttackEventPacket {
+      get { return typeCase_ == TypeOneofCase.AttackEventPacket ? (global::Source.Networking.Protobuf.AttackEventPacket) type_ : null; }
+      set {
+        type_ = value;
+        typeCase_ = value == null ? TypeOneofCase.None : TypeOneofCase.AttackEventPacket;
+      }
+    }
+
     private object type_;
     /// <summary>Enum of possible cases for the "Type" oneof.</summary>
     public enum TypeOneofCase {
@@ -1733,6 +2019,7 @@ namespace Source.Networking.Protobuf {
       MoveEventPacket = 1,
       ClickPacket = 2,
       LoginPacket = 3,
+      AttackEventPacket = 4,
     }
     private TypeOneofCase typeCase_ = TypeOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1766,6 +2053,7 @@ namespace Source.Networking.Protobuf {
       if (!object.Equals(MoveEventPacket, other.MoveEventPacket)) return false;
       if (!object.Equals(ClickPacket, other.ClickPacket)) return false;
       if (!object.Equals(LoginPacket, other.LoginPacket)) return false;
+      if (!object.Equals(AttackEventPacket, other.AttackEventPacket)) return false;
       if (TypeCase != other.TypeCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1777,6 +2065,7 @@ namespace Source.Networking.Protobuf {
       if (typeCase_ == TypeOneofCase.MoveEventPacket) hash ^= MoveEventPacket.GetHashCode();
       if (typeCase_ == TypeOneofCase.ClickPacket) hash ^= ClickPacket.GetHashCode();
       if (typeCase_ == TypeOneofCase.LoginPacket) hash ^= LoginPacket.GetHashCode();
+      if (typeCase_ == TypeOneofCase.AttackEventPacket) hash ^= AttackEventPacket.GetHashCode();
       hash ^= (int) typeCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1808,6 +2097,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(26);
         output.WriteMessage(LoginPacket);
       }
+      if (typeCase_ == TypeOneofCase.AttackEventPacket) {
+        output.WriteRawTag(34);
+        output.WriteMessage(AttackEventPacket);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1830,6 +2123,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(26);
         output.WriteMessage(LoginPacket);
       }
+      if (typeCase_ == TypeOneofCase.AttackEventPacket) {
+        output.WriteRawTag(34);
+        output.WriteMessage(AttackEventPacket);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1848,6 +2145,9 @@ namespace Source.Networking.Protobuf {
       }
       if (typeCase_ == TypeOneofCase.LoginPacket) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(LoginPacket);
+      }
+      if (typeCase_ == TypeOneofCase.AttackEventPacket) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(AttackEventPacket);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1879,6 +2179,12 @@ namespace Source.Networking.Protobuf {
             LoginPacket = new global::Source.Networking.Protobuf.PlayerLoginPacket();
           }
           LoginPacket.MergeFrom(other.LoginPacket);
+          break;
+        case TypeOneofCase.AttackEventPacket:
+          if (AttackEventPacket == null) {
+            AttackEventPacket = new global::Source.Networking.Protobuf.AttackEventPacket();
+          }
+          AttackEventPacket.MergeFrom(other.AttackEventPacket);
           break;
       }
 
@@ -1924,6 +2230,15 @@ namespace Source.Networking.Protobuf {
             LoginPacket = subBuilder;
             break;
           }
+          case 34: {
+            global::Source.Networking.Protobuf.AttackEventPacket subBuilder = new global::Source.Networking.Protobuf.AttackEventPacket();
+            if (typeCase_ == TypeOneofCase.AttackEventPacket) {
+              subBuilder.MergeFrom(AttackEventPacket);
+            }
+            input.ReadMessage(subBuilder);
+            AttackEventPacket = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -1966,6 +2281,15 @@ namespace Source.Networking.Protobuf {
             LoginPacket = subBuilder;
             break;
           }
+          case 34: {
+            global::Source.Networking.Protobuf.AttackEventPacket subBuilder = new global::Source.Networking.Protobuf.AttackEventPacket();
+            if (typeCase_ == TypeOneofCase.AttackEventPacket) {
+              subBuilder.MergeFrom(AttackEventPacket);
+            }
+            input.ReadMessage(subBuilder);
+            AttackEventPacket = subBuilder;
+            break;
+          }
         }
       }
     }
@@ -1988,7 +2312,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2326,7 +2650,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2505,7 +2829,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2528,6 +2852,11 @@ namespace Source.Networking.Protobuf {
       x_ = other.x_;
       y_ = other.y_;
       id_ = other.id_;
+      weaponShapeId_ = other.weaponShapeId_;
+      attackKungFuLevel_ = other.attackKungFuLevel_;
+      attackKungFuName_ = other.attackKungFuName_;
+      footKungFuLevel_ = other.footKungFuLevel_;
+      footKungFuName_ = other.footKungFuName_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2573,6 +2902,66 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "weaponShapeId" field.</summary>
+    public const int WeaponShapeIdFieldNumber = 4;
+    private int weaponShapeId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int WeaponShapeId {
+      get { return weaponShapeId_; }
+      set {
+        weaponShapeId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "attackKungFuLevel" field.</summary>
+    public const int AttackKungFuLevelFieldNumber = 5;
+    private float attackKungFuLevel_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float AttackKungFuLevel {
+      get { return attackKungFuLevel_; }
+      set {
+        attackKungFuLevel_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "attackKungFuName" field.</summary>
+    public const int AttackKungFuNameFieldNumber = 6;
+    private string attackKungFuName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string AttackKungFuName {
+      get { return attackKungFuName_; }
+      set {
+        attackKungFuName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "footKungFuLevel" field.</summary>
+    public const int FootKungFuLevelFieldNumber = 7;
+    private float footKungFuLevel_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float FootKungFuLevel {
+      get { return footKungFuLevel_; }
+      set {
+        footKungFuLevel_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "footKungFuName" field.</summary>
+    public const int FootKungFuNameFieldNumber = 8;
+    private string footKungFuName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string FootKungFuName {
+      get { return footKungFuName_; }
+      set {
+        footKungFuName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2591,6 +2980,11 @@ namespace Source.Networking.Protobuf {
       if (X != other.X) return false;
       if (Y != other.Y) return false;
       if (Id != other.Id) return false;
+      if (WeaponShapeId != other.WeaponShapeId) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AttackKungFuLevel, other.AttackKungFuLevel)) return false;
+      if (AttackKungFuName != other.AttackKungFuName) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(FootKungFuLevel, other.FootKungFuLevel)) return false;
+      if (FootKungFuName != other.FootKungFuName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2601,6 +2995,11 @@ namespace Source.Networking.Protobuf {
       if (X != 0) hash ^= X.GetHashCode();
       if (Y != 0) hash ^= Y.GetHashCode();
       if (Id != 0L) hash ^= Id.GetHashCode();
+      if (WeaponShapeId != 0) hash ^= WeaponShapeId.GetHashCode();
+      if (AttackKungFuLevel != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AttackKungFuLevel);
+      if (AttackKungFuName.Length != 0) hash ^= AttackKungFuName.GetHashCode();
+      if (FootKungFuLevel != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(FootKungFuLevel);
+      if (FootKungFuName.Length != 0) hash ^= FootKungFuName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2631,6 +3030,26 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(24);
         output.WriteInt64(Id);
       }
+      if (WeaponShapeId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(WeaponShapeId);
+      }
+      if (AttackKungFuLevel != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(AttackKungFuLevel);
+      }
+      if (AttackKungFuName.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(AttackKungFuName);
+      }
+      if (FootKungFuLevel != 0F) {
+        output.WriteRawTag(61);
+        output.WriteFloat(FootKungFuLevel);
+      }
+      if (FootKungFuName.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(FootKungFuName);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2653,6 +3072,26 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(24);
         output.WriteInt64(Id);
       }
+      if (WeaponShapeId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(WeaponShapeId);
+      }
+      if (AttackKungFuLevel != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(AttackKungFuLevel);
+      }
+      if (AttackKungFuName.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(AttackKungFuName);
+      }
+      if (FootKungFuLevel != 0F) {
+        output.WriteRawTag(61);
+        output.WriteFloat(FootKungFuLevel);
+      }
+      if (FootKungFuName.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(FootKungFuName);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2671,6 +3110,21 @@ namespace Source.Networking.Protobuf {
       }
       if (Id != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (WeaponShapeId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(WeaponShapeId);
+      }
+      if (AttackKungFuLevel != 0F) {
+        size += 1 + 4;
+      }
+      if (AttackKungFuName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(AttackKungFuName);
+      }
+      if (FootKungFuLevel != 0F) {
+        size += 1 + 4;
+      }
+      if (FootKungFuName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(FootKungFuName);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2692,6 +3146,21 @@ namespace Source.Networking.Protobuf {
       }
       if (other.Id != 0L) {
         Id = other.Id;
+      }
+      if (other.WeaponShapeId != 0) {
+        WeaponShapeId = other.WeaponShapeId;
+      }
+      if (other.AttackKungFuLevel != 0F) {
+        AttackKungFuLevel = other.AttackKungFuLevel;
+      }
+      if (other.AttackKungFuName.Length != 0) {
+        AttackKungFuName = other.AttackKungFuName;
+      }
+      if (other.FootKungFuLevel != 0F) {
+        FootKungFuLevel = other.FootKungFuLevel;
+      }
+      if (other.FootKungFuName.Length != 0) {
+        FootKungFuName = other.FootKungFuName;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2718,6 +3187,26 @@ namespace Source.Networking.Protobuf {
           }
           case 24: {
             Id = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            WeaponShapeId = input.ReadInt32();
+            break;
+          }
+          case 45: {
+            AttackKungFuLevel = input.ReadFloat();
+            break;
+          }
+          case 50: {
+            AttackKungFuName = input.ReadString();
+            break;
+          }
+          case 61: {
+            FootKungFuLevel = input.ReadFloat();
+            break;
+          }
+          case 66: {
+            FootKungFuName = input.ReadString();
             break;
           }
         }
@@ -2747,6 +3236,26 @@ namespace Source.Networking.Protobuf {
             Id = input.ReadInt64();
             break;
           }
+          case 32: {
+            WeaponShapeId = input.ReadInt32();
+            break;
+          }
+          case 45: {
+            AttackKungFuLevel = input.ReadFloat();
+            break;
+          }
+          case 50: {
+            AttackKungFuName = input.ReadString();
+            break;
+          }
+          case 61: {
+            FootKungFuLevel = input.ReadFloat();
+            break;
+          }
+          case 66: {
+            FootKungFuName = input.ReadString();
+            break;
+          }
         }
       }
     }
@@ -2769,7 +3278,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3320,7 +3829,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3593,7 +4102,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3866,7 +4375,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

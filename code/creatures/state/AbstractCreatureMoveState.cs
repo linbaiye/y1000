@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Godot;
 using y1000.code.character.state;
 using y1000.code.util;
+using y1000.Source.Creature;
+using y1000.Source.Util;
 
 namespace y1000.code.creatures.state
 {

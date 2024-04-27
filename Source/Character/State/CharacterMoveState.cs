@@ -8,8 +8,9 @@ using y1000.code;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
-using y1000.Source.Magic.Foot;
+using y1000.Source.KungFu.Foot;
 using y1000.Source.Player;
+using y1000.Source.Util;
 
 namespace y1000.Source.Character.State
 {
@@ -19,7 +20,7 @@ namespace y1000.Source.Character.State
 
         private readonly AbstractRightClickInput _currentInput;
 
-        private IPredictableInput? _lastInput;
+        private IRightClickInput? _lastInput;
         
         private readonly PlayerMoveState _playerMoveState;
 
@@ -34,21 +35,19 @@ namespace y1000.Source.Character.State
             return input is AbstractRightClickInput or MouseRightRelease;
         }
 
-        
-
         private void ContinueMove(Character character, AbstractRightClickInput input)
         {
             var next = character.Coordinate.Move(input.Direction);
             if (!character.WrappedPlayer().Map.Movable(next))
             {
-                character.EmitMovementEvent(
+                character.EmitEvent(
                     SetPositionPrediction.Overflow(input, character.Coordinate, character.Direction),
                     new MovementEvent(input, character.Coordinate));
                 character.ChangeState(CharacterIdleState.Create(character.IsMale));
             }
             else
             {
-                character.EmitMovementEvent(
+                character.EmitEvent(
                     new MovePrediction(input, character.Coordinate, input.Direction),
                     new MovementEvent(input, character.Coordinate));
                 character.ChangeState(Move(character.FootMagic, character.IsMale, input));
@@ -59,7 +58,7 @@ namespace y1000.Source.Character.State
         {
             if (_lastInput is MouseRightRelease)
             {
-                character.EmitMovementEvent(
+                character.EmitEvent(
                     SetPositionPrediction.Overflow(_lastInput, character.Coordinate, character.Direction),
                     new MovementEvent(_lastInput, character.Coordinate));
                 character.ChangeState(CharacterIdleState.Create(character.IsMale));
@@ -93,7 +92,7 @@ namespace y1000.Source.Character.State
             _lastInput = mousePressedMotion;
         }
 
-        public static CharacterMoveState Move(IFootMagic? magic, bool male, AbstractRightClickInput rightClickInput)
+        public static CharacterMoveState Move(IFootKungFu? magic, bool male, AbstractRightClickInput rightClickInput)
         {
             if (magic != null)
             {

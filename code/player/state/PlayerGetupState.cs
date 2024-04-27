@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Godot;
 using y1000.code.character;
 using y1000.code.character.state;
-using y1000.code.creatures;
 using y1000.code.entity.equipment;
 using y1000.code.entity.equipment.chest;
 using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
+using y1000.Source.Creature;
 using y1000.Source.Sprite;
+using AbstractCreature = y1000.code.creatures.AbstractCreature;
 
 namespace y1000.code.player.state
 {

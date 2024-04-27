@@ -6,6 +6,7 @@ using NLog;
 using y1000.code;
 using y1000.Source.Character.Event;
 using y1000.Source.Creature;
+using y1000.Source.Util;
 using FileAccess = Godot.FileAccess;
 
 namespace y1000.Source.Map;
@@ -81,9 +82,11 @@ public partial class MapLayer : TileMap, IMap
 		PaintMap();
 	}
 
-	private void OnCharacterEvent(object? sender, AbstractCharacterEventArgs args)
+	private void OnCharacterEvent(object? sender, CharacterEventArgs args)
 	{
-		if (sender is Character.Character character && !character.Coordinate.Equals(_origin))
+		if (sender is Character.Character character && 
+		    args.Event is MovementEvent &&
+		    !character.Coordinate.Equals(_origin))
 		{
 			_origin = character.Coordinate;
 			PaintMap();
@@ -214,7 +217,6 @@ public partial class MapLayer : TileMap, IMap
 		Free(creature);
 		_coordinate2Creature.TryAdd(creature.Coordinate, creature.Id);
 		_creature2Coordinate.TryAdd(creature.Id, creature.Coordinate);
-		LOGGER.Debug("Occupied coordinate {0}.", creature.Coordinate);
 	}
 
 	public void Free(ICreature creature)
@@ -223,7 +225,6 @@ public partial class MapLayer : TileMap, IMap
 		{
 			_coordinate2Creature.Remove(coor);
 			_creature2Coordinate.Remove(creature.Id);
-			LOGGER.Debug("Freed coordinate {0}.", coor);
 		}
 	}
 }

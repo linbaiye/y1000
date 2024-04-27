@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Source.Networking.Protobuf;
 using Godot;
 using y1000.code.util;
+using y1000.Source.Creature;
 using y1000.Source.Networking;
+using y1000.Source.Networking.Server;
 
 namespace y1000.code.networking.message
 {
@@ -25,7 +27,7 @@ namespace y1000.code.networking.message
             return FormatLog("Move");
         }
 
-        public override void Accept(IServerMessageHandler handler)
+        public override void HandleBy(IServerMessageHandler handler)
         {
             handler.Handle(this);
         }

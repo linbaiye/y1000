@@ -1,5 +1,7 @@
 using y1000.code.networking.message;
 using y1000.Source.Input;
+using y1000.Source.Networking;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Character.State.Prediction
 {
@@ -9,6 +11,11 @@ namespace y1000.Source.Character.State.Prediction
 
         bool ClearPrevious { get; }
 
-        bool SyncWith(InputResponseMessage message);
+        /// <summary>
+        /// Did we predict the input correct?
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        bool Predicted(IPredictableResponse response);
     }
 }

@@ -1,6 +1,7 @@
 using Godot;
 using y1000.code;
 using y1000.Source.Character.Event;
+using y1000.Source.Creature;
 using y1000.Source.Entity;
 
 namespace y1000.Source.Input
@@ -14,9 +15,9 @@ namespace y1000.Source.Input
             return new MouseRightClick(_sequence++, direction);
         }
 
-        public static AttackEntityInput CreateAttack(IEntity target)
+        public static AttackInput CreateAttack(IEntity target)
         {
-            return new AttackEntityInput(_sequence++, target);
+            return new AttackInput(_sequence++, target);
         }
 
         public static MouseRightRelease CreateMouseRightRelease()
@@ -29,9 +30,9 @@ namespace y1000.Source.Input
             return new RightMousePressedMotion(_sequence++, direction);
         }
         
-        public static KeyboardInput KeyInput(Key key)
+        public static KeyboardPredictableInput KeyInput(Key key)
         {
-            return new KeyboardInput(_sequence++, key);
+            return new KeyboardPredictableInput(_sequence++, key);
         }
     }
 }

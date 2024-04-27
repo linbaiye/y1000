@@ -4,19 +4,15 @@ using Source.Networking.Protobuf;
 
 namespace y1000.Source.Input;
 
-public class KeyboardInput : AbstractInput
+public class KeyboardPredictableInput : AbstractPredictableInput
 {
     private readonly Key _key;
     
-    public KeyboardInput(long s, Key key) : base(s)
+    public KeyboardPredictableInput(long s, Key key) : base(s)
     {
         _key = key;
     }
 
     public override InputType Type => InputType.KEY_PRESSED;
-    
-    public override InputPacket ToPacket()
-    {
-        throw new NotImplementedException();
-    }
+
 }

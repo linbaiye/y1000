@@ -8,7 +8,6 @@ using Godot;
 using NLog;
 using y1000.code.character.state;
 using y1000.code.character.state.snapshot;
-using y1000.code.creatures;
 using y1000.code.entity.equipment.chest;
 using y1000.code.networking;
 using y1000.code.networking.message;
@@ -16,8 +15,11 @@ using y1000.code.player;
 using y1000.code.player.state;
 using y1000.code.util;
 using y1000.code.world;
+using y1000.Source.Creature;
 using y1000.Source.Input;
 using y1000.Source.Map;
+using y1000.Source.Util;
+using ICreature = y1000.code.creatures.ICreature;
 
 namespace y1000.code.character
 {

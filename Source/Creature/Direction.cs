@@ -1,4 +1,4 @@
-namespace y1000.code
+namespace y1000.Source.Creature
 {
     public enum Direction
     {
