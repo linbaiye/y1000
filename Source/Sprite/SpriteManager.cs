@@ -202,12 +202,12 @@ namespace y1000.Source.Sprite
         }
         
 
-        public static SpriteManager LoadFistAttackForMale(bool male, bool below50)
+        public static SpriteManager LoadQuanfaAttack(bool male, bool below50, int millisPerSprite)
         {
             var sprites = SpriteReader.LoadOffsetMalePlayerSprites("N01");
             return below50
-                ? Create(80, BELOW50_FIST_OFFSET, sprites, false, 5)
-                : Create(75, ABOVE50_FIST_SPRITE, sprites, false, 6);
+                ? Create(millisPerSprite, BELOW50_FIST_OFFSET, sprites, false, 5)
+                : Create(millisPerSprite, ABOVE50_FIST_SPRITE, sprites, false, 6);
         }
 
         private static SpriteManager LoadFemalePlayer(CreatureState state)

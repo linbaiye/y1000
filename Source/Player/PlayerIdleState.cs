@@ -13,14 +13,7 @@ public class PlayerIdleState  : AbstractPlayerState
 
     public override void Update(Player player, long delta)
     {
-        if (ElapsedMillis < SpriteManager.AnimationLength)
-        {
-            ElapsedMillis += delta;
-        }
-        if (ElapsedMillis >= SpriteManager.AnimationLength)
-        {
-            player.NotifyAnimationFinished();
-        }
+        NotifyIfElapsed(player, delta);
     }
 
     public static PlayerIdleState StartFrom(bool male, long elapsedMillis)
