@@ -42,10 +42,7 @@ public class QuangFa : AbstractLevelKungFu, IAttackKungFu
     {
         bool below50 = UseBlow50();
         character.Direction = character.Coordinate.GetDirection(input.Entity.Coordinate);
-        if (input.Entity.Coordinate.Distance(character.Coordinate) <= 1)
-        {
-            character.EmitEvent(new AttackPrediction(input), new AttackEntityEvent(input, below50));
-        }
+        character.EmitEvent(new AttackPrediction(input), new AttackEntityEvent(input, below50));
         var characterAttackState = CharacterAttackState.Quanfa(character.IsMale, input.Entity, below50);
         character.ChangeState(characterAttackState);
     }

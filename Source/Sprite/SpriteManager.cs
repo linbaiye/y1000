@@ -184,6 +184,19 @@ namespace y1000.Source.Sprite
             { Direction.UP_LEFT, 48}
         };
         
+        
+        private static readonly Dictionary<Direction, int> PLAYER_COOLDOWN = new()
+        {
+            { Direction.UP, 120},
+			{ Direction.UP_RIGHT, 123},
+			{ Direction.RIGHT, 126},
+			{ Direction.DOWN_RIGHT, 129},
+			{ Direction.DOWN, 132},
+			{ Direction.DOWN_LEFT, 135},
+			{ Direction.LEFT, 138},
+			{ Direction.UP_LEFT, 141},
+        };
+        
 
         private static SpriteManager LoadMalePlayer(CreatureState state)
         {
@@ -199,6 +212,12 @@ namespace y1000.Source.Sprite
                     SpriteReader.LoadOffsetMalePlayerSprites("N02")),
                 _ => throw new NotSupportedException()
             };
+        }
+
+        public static SpriteManager LoadPlayerCooldown(bool male, int millis)
+        {
+            return
+                Create(millis, PLAYER_COOLDOWN, SpriteReader.LoadOffsetMalePlayerSprites("N02"), false, 3);
         }
         
 

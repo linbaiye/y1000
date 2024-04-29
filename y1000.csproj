@@ -48,5 +48,6 @@
     <Compile Remove="Source\KungFu\Attack\AbstructAttackKungfu.cs" />
     <Compile Remove="Source\Character\Event\AttackInput.cs" />
     <Compile Remove="Source\KungFu\Attack\UnnamedQuanFa.cs" />
+    <Compile Remove="Source\Creature\State\AbstractCreatureAttackState.cs" />
   </ItemGroup>
 </Project>

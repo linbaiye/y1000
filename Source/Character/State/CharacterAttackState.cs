@@ -18,7 +18,7 @@ public class CharacterAttackState : ICharacterState
 
     public void OnWrappedPlayerAnimationFinished(Character character)
     {
-        character.ChangeState(CharacterIdleState.Create(character.IsMale));
+        character.ChangeState(CharacterCooldownState.Cooldown(character.IsMale, _target, 500));
     }
 
     public IPlayerState WrappedState => _playerAttackState;
@@ -28,5 +28,4 @@ public class CharacterAttackState : ICharacterState
         var playerAttackState = PlayerAttackState.QuanfaAttack(male, below50, below50 ? 90 : 75);
         return new CharacterAttackState(playerAttackState, target);
     }
-
 }
