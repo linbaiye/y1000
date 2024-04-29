@@ -16,7 +16,6 @@ namespace y1000.Source.Networking.Connection
 
         protected override void ChannelRead0(IChannelHandlerContext ctx, object msg)
         {
-            //LOGGER.Debug("Received message {0}.", msg);
             _eventListener.OnMessageArrived(msg);
         }
 

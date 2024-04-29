@@ -4,6 +4,5 @@ namespace y1000.Source.Networking.Server
     {
         long Id { get; }
         
-        void Accept(IEntityMessageVisitor entityMessageVisitor) { }
     }
 }

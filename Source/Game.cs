@@ -179,7 +179,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (click is AttackInput attack)
 		{
 			_character?.HandleInput(attack);
-			Visit(new HurtMessage(attack.Entity.Id));
+			//Visit(new HurtMessage(attack.Entity.Id));
 		}
 	}
 

@@ -64,7 +64,6 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
     public void Handle(IEntityMessage message)
     {
-        LOGGER.Debug("Message type {0}", message.GetType());
         message.Accept(this);
     }
 

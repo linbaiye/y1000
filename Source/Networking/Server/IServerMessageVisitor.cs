@@ -34,11 +34,12 @@ public interface IServerMessageVisitor
 
     void Visit(HurtMessage hurtMessage)
     {
+        Visit((IEntityMessage)hurtMessage);
     }
 
     void Visit(CreatureAttackMessage attackMessage)
     {
-        
+        Visit((IEntityMessage)attackMessage);
     }
     
     void Visit(PlayerInterpolation playerInterpolation) {}

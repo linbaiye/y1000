@@ -70,24 +70,30 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		_state = newState;
 	}
 
-	private void Move(MoveMessage message)
+	public void Visit(MoveMessage message)
 	{
 		_state = PlayerMoveState.WalkTowards(IsMale, message.Direction);
 	}
 	
-	private void Fly(FlyMessage message)
+	public void Visit(FlyMessage message)
 	{
 		_state = PlayerMoveState.FlyTowards(IsMale, message.Direction);
 	}
 	
-	private void Run(RunMessage message)
+	public void Visit(RunMessage message)
 	{
 		_state = PlayerMoveState.RunTowards(IsMale, message.Direction);
 	}
+	
 
 	public override void _PhysicsProcess(double delta)
 	{
 		_state.Update(this, (long)(delta * 1000));
+	}
+
+	public void Visit(SetPositionMessage setPositionMessage)
+	{
+		SetPosition(setPositionMessage);
 	}
 
 
@@ -98,31 +104,14 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 
 	public void Handle(IEntityMessage message)
 	{
-		switch (message)
-		{
-			case TurnMessage turnMessage:
-				Turn(turnMessage);
-				break;
-			case MoveMessage moveMessage:
-				Move(moveMessage);
-				break;
-			case SetPositionMessage positionMessage:
-				SetPosition(positionMessage);
-				break;
-			case FlyMessage flyMessage:
-				Fly(flyMessage);
-				break;
-			case RunMessage runMessage:
-				Run(runMessage);
-				break;
-			default:
-				message.Accept(this);
-				break;
-		}
+		LOGGER.Debug("message {0}", message);
+		message.Accept(this);
 	}
+
 
 	public void Visit(CreatureAttackMessage message)
 	{
+		LOGGER.Debug("Attack message");
 		Direction = message.Direction;
 		_state = PlayerAttackState.QuanfaAttack(IsMale, message.Below50, message.SpriteMillis);
 	}
