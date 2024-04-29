@@ -197,6 +197,20 @@ namespace y1000.Source.Sprite
 			{ Direction.UP_LEFT, 141},
         };
         
+        private static readonly Dictionary<Direction, int> MONSTER_HURT_SPRITE_OFFSET = new()
+        {
+            { Direction.UP, 12},
+            { Direction.UP_RIGHT, 35},
+            { Direction.RIGHT, 58},
+            { Direction.DOWN_RIGHT, 81},
+            { Direction.DOWN, 104},
+            { Direction.DOWN_LEFT, 127},
+            { Direction.LEFT, 150},
+            { Direction.UP_LEFT, 173},
+        };
+
+
+        
 
         private static SpriteManager LoadMalePlayer(CreatureState state)
         {
@@ -251,6 +265,7 @@ namespace y1000.Source.Sprite
             {
                 CreatureState.IDLE => Create(400, DEFAULT_SPRITE_OFFSET, SpriteReader.LoadOffsetMonsterSprites(dir), false, 5),
                 CreatureState.WALK => Create(150, MONSTER_WALK_SPRITE_OFFSET, SpriteReader.LoadOffsetMonsterSprites(dir), false, 7),
+                CreatureState.HURT => Create(150, MONSTER_HURT_SPRITE_OFFSET, SpriteReader.LoadOffsetMonsterSprites(dir), false, 3),
                 _ => throw new NotSupportedException()
             };
         }

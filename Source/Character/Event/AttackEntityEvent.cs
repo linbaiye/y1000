@@ -18,7 +18,7 @@ public class AttackEntityEvent : IClientEvent
     {
         return new ClientPacket()
         {
-            AttackEventPacket = new AttackEventPacket()
+            AttackEventPacket = new ClientAttackEventPacket()
             {
                 Below50 = _below50,
                 Sequence = _input.Sequence,

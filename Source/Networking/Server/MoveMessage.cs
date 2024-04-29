@@ -1,16 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using Source.Networking.Protobuf;
 using Godot;
-using y1000.code.util;
+using Source.Networking.Protobuf;
 using y1000.Source.Creature;
-using y1000.Source.Networking;
-using y1000.Source.Networking.Server;
 
-namespace y1000.code.networking.message
+namespace y1000.Source.Networking.Server
 {
     public class MoveMessage : AbstractPositionMessage
     {
@@ -27,9 +19,9 @@ namespace y1000.code.networking.message
             return FormatLog("Move");
         }
 
-        public override void HandleBy(IServerMessageHandler handler)
+        public override void Accept(IServerMessageVisitor visitor)
         {
-            handler.Handle(this);
+            visitor.Visit(this);
         }
     }
 }

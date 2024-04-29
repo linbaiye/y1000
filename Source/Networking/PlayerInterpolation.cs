@@ -29,8 +29,8 @@ public class PlayerInterpolation : IServerMessage
         return new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male, packet.Id);
     }
 
-    public void HandleBy(IServerMessageHandler handler)
+    public void Accept(IServerMessageVisitor visitor)
     {
-        handler.Handle(this);
+        visitor.Visit(this);
     }
 }

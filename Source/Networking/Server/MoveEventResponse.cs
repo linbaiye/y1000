@@ -17,9 +17,9 @@ namespace y1000.Source.Networking.Server
             return "Seq:" + Sequence + ", Msg:" + _positionMessage;
         }
 
-        public override void HandleBy(IServerMessageHandler handler)
+        public override void Accept(IServerMessageVisitor visitor)
         {
-            handler.Handle(this);
+            visitor.Visit(this);
         }
     }
 }

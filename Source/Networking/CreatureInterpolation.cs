@@ -28,9 +28,9 @@ public class CreatureInterpolation : IServerMessage
     
     public long Id { get; }
     
-    public void HandleBy(IServerMessageHandler handler)
+    public void Accept(IServerMessageVisitor visitor)
     {
-        handler.Handle(this);
+        visitor.Visit(this);
     }
 
     public static CreatureInterpolation FromPacket(CreatureInterpolationPacket packet)

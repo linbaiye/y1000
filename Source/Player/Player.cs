@@ -15,7 +15,7 @@ using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Player;
 
-public partial class Player: AbstractCreature, IPlayer
+public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 {
 
 	private IPlayerState _state = IPlayerState.Empty;
@@ -25,7 +25,7 @@ public partial class Player: AbstractCreature, IPlayer
 
 	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id, IMap map)
 	{
-		base.Init(id, direction, coordinate, map);
+		base.Init(id, direction, coordinate, map, "");
 		IsMale = male;
 		_state = state;
 	}
@@ -115,8 +115,22 @@ public partial class Player: AbstractCreature, IPlayer
 			case RunMessage runMessage:
 				Run(runMessage);
 				break;
+			default:
+				message.Accept(this);
+				break;
 		}
 	}
+
+	public void Visit(CreatureAttackMessage message)
+	{
+		Direction = message.Direction;
+		_state = PlayerAttackState.QuanfaAttack(IsMale, message.Below50, message.SpriteMillis);
+	}
+
+	public void Visit(HurtMessage hurtMessage)
+	{
+	}
+
 
 	public string Location()
 	{

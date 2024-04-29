@@ -1,6 +1,4 @@
 using Godot;
-using y1000.code;
-using y1000.code.networking.message;
 using y1000.Source.Creature;
 
 namespace y1000.Source.Networking.Server
@@ -26,6 +24,6 @@ namespace y1000.Source.Networking.Server
             return "[Id:" + Id + ", Type: " + type + ", Coordinate: " + Coordinate + ", Dir:" + Direction + "]";
         }
 
-        public abstract void HandleBy(IServerMessageHandler handler);
+        public abstract void Accept(IServerMessageVisitor visitor);
     }
 }

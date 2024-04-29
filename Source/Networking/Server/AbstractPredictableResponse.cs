@@ -11,5 +11,5 @@ public abstract class AbstractPredictableResponse :  IPredictableResponse
 
     public long Sequence { get; }
     
-    public abstract void HandleBy(IServerMessageHandler handler);
+    public abstract void Accept(IServerMessageVisitor visitor);
 }

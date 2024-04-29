@@ -48,12 +48,13 @@ public abstract partial class AbstractCreature : Node2D, ICreature, IBody
         QueueFree();
     }
     
-    protected void Init(long id, Direction direction, Vector2I coordinate, IMap map)
+    protected void Init(long id, Direction direction, Vector2I coordinate, IMap map, string name)
     {
         Direction = direction;
         Id = id;
         Position = coordinate.ToPosition();
         Map = map;
+        EntityName = name;
         map.Occupy(this);
     }
 

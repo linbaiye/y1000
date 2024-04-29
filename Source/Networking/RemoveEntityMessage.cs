@@ -11,8 +11,8 @@ public class RemoveEntityMessage : IServerMessage
 
     public long Id { get; }
     
-    public void HandleBy(IServerMessageHandler handler)
+    public void Accept(IServerMessageVisitor visitor)
     {
-        handler.Handle(this);
+        visitor.Visit(this);
     }
 }

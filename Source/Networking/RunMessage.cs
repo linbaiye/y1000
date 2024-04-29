@@ -17,9 +17,9 @@ public class RunMessage : AbstractPositionMessage
     {
         return new RunMessage(packet.Id, new Vector2I(packet.X, packet.Y), (Direction)packet.Direction);
     }
-    public override void HandleBy(IServerMessageHandler handler)
+    public override void Accept(IServerMessageVisitor visitor)
     {
-        handler.Handle(this);
+        visitor.Visit(this);
     }
 
     public override string ToString()

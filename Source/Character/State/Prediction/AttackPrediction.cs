@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using y1000.code.networking.message;
+using y1000.Source.Character.Event;
 using y1000.Source.Input;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
@@ -14,6 +15,6 @@ public class AttackPrediction : AbstractPrediction
 
     public override bool Predicted(IPredictableResponse response)
     {
-        throw new System.NotImplementedException();
+        return response is CharacterAttackEventResponse { Accepted: true };
     }
 }

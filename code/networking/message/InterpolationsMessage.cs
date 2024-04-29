@@ -21,7 +21,7 @@ namespace y1000.code.networking.message
 
         public List<IInterpolation> Interpolations => _interpolations;
 
-        public void HandleBy(IServerMessageHandler handler)
+        public void Accept(IServerMessageVisitor visitor)
         {
             throw new NotImplementedException();
         }

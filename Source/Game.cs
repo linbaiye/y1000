@@ -27,7 +27,7 @@ using y1000.Source.Player;
 
 namespace y1000.Source;
 
-public partial class Game : Node2D, IConnectionEventListener, IServerMessageHandler
+public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisitor
 {
 
 	private readonly Bootstrap _bootstrap = new();
@@ -169,7 +169,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 			return;
 		if (message is IServerMessage serverMessage)
 		{
-			serverMessage.HandleBy(this);
+			serverMessage.Accept(this);
 		}
 	}
 
@@ -179,6 +179,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		if (click is AttackInput attack)
 		{
 			_character?.HandleInput(attack);
+			Visit(new HurtMessage(attack.Entity.Id));
 		}
 	}
 
@@ -212,7 +213,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		Reconnect();
 	}
 
-	public void Handle(PlayerInterpolation playerInterpolation)
+	public void Visit(PlayerInterpolation playerInterpolation)
 	{
 		var player = Player.Player.FromInterpolation(playerInterpolation, MapLayer);
 		LOGGER.Debug("Adding player {0}", player.Location());
@@ -220,7 +221,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		AddChild(player);
 	}
 
-	public void Handle(IPredictableResponse response)
+	public void Visit(IPredictableResponse response)
 	{
 		if (!_predictionManager.Reconcile(response))
 		{
@@ -228,7 +229,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		}
 	}
 
-	public void Handle(IEntityMessage message)
+	public void Visit(IEntityMessage message)
 	{
 		if (_entities.TryGetValue(message.Id, out var entity))
 		{
@@ -236,7 +237,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		}
 	}
 
-	public void Handle(CreatureInterpolation creatureInterpolation)
+	public void Visit(CreatureInterpolation creatureInterpolation)
 	{
 		LOGGER.Debug("Adding creature by interpolation {0}.", creatureInterpolation);
 		var monster = Monster.Create(creatureInterpolation, MapLayer);
@@ -245,7 +246,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		AddChild(monster);
 	}
 
-	public void Handle(RemoveEntityMessage removeEntityMessage)
+	public void Visit(RemoveEntityMessage removeEntityMessage)
 	{
 		if (_entities.TryGetValue(removeEntityMessage.Id, out var entity))
 		{
@@ -254,7 +255,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageHand
 		}
 	}
 
-	public void Handle(JoinedRealmMessage joinedRealmMessage)
+	public void Visit(JoinedRealmMessage joinedRealmMessage)
 	{
 		if (MapLayer.Map != null)
 		{

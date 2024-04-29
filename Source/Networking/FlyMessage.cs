@@ -13,9 +13,9 @@ public class FlyMessage : AbstractPositionMessage
     {
     }
 
-    public override void HandleBy(IServerMessageHandler handler)
+    public override void Accept(IServerMessageVisitor visitor)
     {
-        handler.Handle(this);
+        visitor.Visit(this);
     }
     
     public static FlyMessage FromPacket(PositionPacket packet)
@@ -27,4 +27,5 @@ public class FlyMessage : AbstractPositionMessage
     {
         return FormatLog("Fly");
     }
+
 }

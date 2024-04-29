@@ -2,9 +2,8 @@ using Godot;
 using Source.Networking.Protobuf;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.KungFu.Foot;
-using y1000.Source.Networking.Server;
 
-namespace y1000.Source.Networking
+namespace y1000.Source.Networking.Server
 {
     public class JoinedRealmMessage  : IServerMessage
     {
@@ -35,9 +34,9 @@ namespace y1000.Source.Networking
             return $"{nameof(Coordinate)}: {Coordinate}";
         }
 
-        public void HandleBy(IServerMessageHandler handler)
+        public void Accept(IServerMessageVisitor visitor)
         {
-            handler.Handle(this);
+            visitor.Visit(this);
         }
     }
 }

@@ -22,9 +22,9 @@ namespace y1000.Source.Networking
             return FormatLog("SetPosition");
         }
 
-        public override void HandleBy(IServerMessageHandler handler)
+        public override void Accept(IServerMessageVisitor visitor)
         {
-            handler.Handle(this);
+            visitor.Visit(this);
         }
     }
 }

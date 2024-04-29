@@ -25,5 +25,4 @@ public class MonsterMoveState : AbstractCreatureMoveState<Monster>
         return new MonsterMoveState(SpriteManager.LoadForMonster(name, CreatureState.WALK), towards, elapsed);
     }
 
-
 }

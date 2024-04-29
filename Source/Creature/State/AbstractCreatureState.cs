@@ -21,7 +21,15 @@ public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : 
     }
     
     protected long ElapsedMillis { get; set; }
-    
+
+
+    protected void Elapse(long delta)
+    {
+        if (ElapsedMillis < SpriteManager.AnimationLength)
+        {
+            ElapsedMillis += delta;
+        }
+    }
 
     public OffsetTexture BodyOffsetTexture(TC creature)
     {

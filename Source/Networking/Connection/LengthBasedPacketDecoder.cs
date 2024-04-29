@@ -8,6 +8,7 @@ using y1000.code;
 using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.code.player.snapshot;
+using y1000.Source.Character.Event;
 using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Networking.Connection
@@ -76,6 +77,9 @@ namespace y1000.Source.Networking.Connection
                 Packet.TypedPacketOneofCase.PlayerInterpolation => PlayerInterpolation.FromPacket(packet.PlayerInterpolation),
                 Packet.TypedPacketOneofCase.CreatureInterpolation => CreatureInterpolation.FromPacket(packet.CreatureInterpolation),
                 Packet.TypedPacketOneofCase.RemoveEntity => new RemoveEntityMessage(packet.RemoveEntity.Id),
+                Packet.TypedPacketOneofCase.HurtEventPacket => HurtMessage.FromPacket(packet.HurtEventPacket),
+                Packet.TypedPacketOneofCase.AttackEventPacket => CreatureAttackMessage.FromPacket(packet.AttackEventPacket),
+                Packet.TypedPacketOneofCase.AttackEventResponsePacket => CharacterAttackEventResponse.FromPacket(packet.AttackEventResponsePacket),
                 _ => throw new NotSupportedException()
             };
         }

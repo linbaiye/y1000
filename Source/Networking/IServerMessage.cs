@@ -4,5 +4,5 @@ namespace y1000.Source.Networking;
 
 public interface IServerMessage
 {
-    void HandleBy(IServerMessageHandler handler);
+    void Accept(IServerMessageVisitor visitor);
 }

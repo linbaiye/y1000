@@ -2,6 +2,7 @@ syntax = "proto3";
 package Source.Networking.Protobuf;
 
 
+
 message PositionPacket {
   int32 x = 1;
   int32 y = 2;
@@ -31,6 +32,17 @@ message PlayerLoginPacket {
   string token = 1;
 }
 
+message CreatureAttackEventPacket {
+  int64 id = 1;
+  int32 direction = 2;
+  bool below50 = 3;
+  int32 spriteMillis = 4;
+}
+
+message CreatureHurtEventPacket {
+  int64 id = 1;
+}
+
 
 message MoveEventPacket {
   InputPacket input = 1;
@@ -38,10 +50,17 @@ message MoveEventPacket {
   int32 happenedAtY = 3;
 }
 
-message AttackEventPacket {
+
+message ClientAttackEventPacket {
   int64 sequence = 1;
   int64 targetId = 2;
   bool below50 = 3;
+  int32 direction = 4;
+}
+
+message ClientAttackResponsePacket {
+  int64 sequence = 1;
+  bool accepted = 2;
 }
 
 message ClientPacket {
@@ -49,7 +68,7 @@ message ClientPacket {
     MoveEventPacket moveEventPacket = 1;
     ClickPacket clickPacket = 2;
     PlayerLoginPacket loginPacket = 3;
-    AttackEventPacket attackEventPacket = 4;
+    ClientAttackEventPacket attackEventPacket = 4;
   }
 }
 
@@ -85,6 +104,9 @@ message Packet {
     InputResponsePacket responsePacket = 6;
     PlayerInterpolationPacket playerInterpolation = 7;
     RemoveEntityPacket removeEntity = 8;
+    ClientAttackResponsePacket attackEventResponsePacket = 9;
+    CreatureAttackEventPacket attackEventPacket = 10;
+    CreatureHurtEventPacket hurtEventPacket = 11;
   }
 }
 
