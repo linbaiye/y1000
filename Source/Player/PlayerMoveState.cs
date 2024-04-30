@@ -23,13 +23,22 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
     {
         return new PlayerMoveState(SpriteManager.LoadForPlayer(male, CreatureState.WALK), direction, elapsed); 
     }
+
+
+    public void CheckMoving()
+    {
+        if (ElapsedMillis < SpriteManager.AnimationLength)
+        {
+            LOGGER.Debug("{0} millis left.",  SpriteManager.AnimationLength - ElapsedMillis);
+        }
+    }
     
     public override void Update(Player player, long delta)
     {
         Move(player, delta);
         if (ElapsedMillis >= SpriteManager.AnimationLength)
         {
-            player.NotifyAnimationFinished();
+            player.NotifyAnimationFinished(new CreatureAnimationDoneEventArgs(this));
         }
     }
 

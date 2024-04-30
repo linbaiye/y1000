@@ -3,6 +3,7 @@ using NLog;
 using y1000.code;
 using y1000.code.player;
 using y1000.Source.Character.State;
+using y1000.Source.Creature;
 using y1000.Source.Creature.State;
 using y1000.Source.Sprite;
 
@@ -22,7 +23,7 @@ public abstract class AbstractPlayerState : AbstractCreatureState<Player>, IPlay
         }
         if (ElapsedMillis >= SpriteManager.AnimationLength)
         {
-            player.NotifyAnimationFinished();
+            player.NotifyAnimationFinished(new CreatureAnimationDoneEventArgs(this));
         }
     }
 

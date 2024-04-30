@@ -16,6 +16,8 @@ public abstract partial class AbstractCreature : Node2D, ICreature, IBody
 
     public event EventHandler<CreatureMouseClickEventArgs>? MouseClicked;
     
+	public event EventHandler<CreatureAnimationDoneEventArgs>? StateAnimationEventHandler;
+    
     public override void _Ready()
     {
         var bodyTextContainer = GetNode<BodyTextContainer>("Body/NameContainer");
@@ -40,6 +42,11 @@ public abstract partial class AbstractCreature : Node2D, ICreature, IBody
         {
             MouseClicked?.Invoke(this, new CreatureMouseClickEventArgs(this, mouse));
         }
+    }
+    
+    public void NotifyAnimationFinished(CreatureAnimationDoneEventArgs args)
+    {
+        StateAnimationEventHandler?.Invoke(this, args);
     }
 
     public void Delete()

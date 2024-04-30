@@ -218,12 +218,9 @@ namespace y1000.Source.Sprite
             {
                 CreatureState.IDLE => WithPinpong(500, MALE_IDLE_DIRECTION_SPRITE_OFFSET,
                     SpriteReader.LoadOffsetMalePlayerSprites("N02")),
-                CreatureState.WALK => Normal(150, MALE_WALK_DIRECTION_SPRITE_OFFSET,
-                    SpriteReader.LoadOffsetMalePlayerSprites("N02")),
-                CreatureState.RUN => Normal(75, MALE_WALK_DIRECTION_SPRITE_OFFSET, 
-                    SpriteReader.LoadOffsetMalePlayerSprites("N02")),
-                CreatureState.FLY => WithPinpong(75, MALE_IDLE_DIRECTION_SPRITE_OFFSET, 
-                    SpriteReader.LoadOffsetMalePlayerSprites("N02")),
+                CreatureState.WALK => Create(150, MALE_WALK_DIRECTION_SPRITE_OFFSET, SpriteReader.LoadOffsetMalePlayerSprites("N02"), false, 6),
+                CreatureState.RUN => Create(75, MALE_WALK_DIRECTION_SPRITE_OFFSET, SpriteReader.LoadOffsetMalePlayerSprites("N02"), false, 6),
+                CreatureState.FLY => Create(75, MALE_IDLE_DIRECTION_SPRITE_OFFSET, SpriteReader.LoadOffsetMalePlayerSprites("N02"), true, 3),
                 _ => throw new NotSupportedException()
             };
         }

@@ -157,11 +157,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	}
 
 
-
 	public override void _Process(double delta)
 	{
 		HandleMessages();
 	}
+
 
 	private void HandleMessages()
 	{
@@ -216,7 +216,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	public void Visit(PlayerInterpolation playerInterpolation)
 	{
 		var player = Player.Player.FromInterpolation(playerInterpolation, MapLayer);
-		LOGGER.Debug("Adding player {0}", player.Location());
 		_entities.TryAdd(player.Id, player);
 		AddChild(player);
 	}
@@ -229,6 +228,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
+
 	public void Visit(IEntityMessage message)
 	{
 		if (_entities.TryGetValue(message.Id, out var entity))
@@ -239,7 +239,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(CreatureInterpolation creatureInterpolation)
 	{
-		LOGGER.Debug("Adding creature by interpolation {0}.", creatureInterpolation);
 		var monster = Monster.Create(creatureInterpolation, MapLayer);
 		monster.MouseClicked += OnCreatureClicked;
 		_entities.TryAdd(monster.Id, monster);
@@ -263,6 +262,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			_character.WhenCharacterUpdated += WhenCharacterUpdated;
 			_bottomControl?.BindCharacter(_character);
 			MapLayer.BindCharacter(_character);
+			_entities.TryAdd(_character.Id, _character);
 			AddChild(_character);
 		}
 	}
