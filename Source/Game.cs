@@ -165,11 +165,20 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private void HandleMessages()
 	{
-		if (!_unprocessedMessages.TryDequeue(out var message))
-			return;
-		if (message is IServerMessage serverMessage)
+		while (_unprocessedMessages.TryDequeue(out var message))
 		{
-			serverMessage.Accept(this);
+			if (message is not IServerMessage serverMessage)
+			{
+				continue;
+			}
+			try
+			{
+				serverMessage.Accept(this);
+			}
+			catch (Exception e)
+			{
+				LOGGER.Error(e, "Caught exception." );
+			}
 		}
 	}
 
@@ -215,9 +224,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(PlayerInterpolation playerInterpolation)
 	{
-		var player = Player.Player.FromInterpolation(playerInterpolation, MapLayer);
-		_entities.TryAdd(player.Id, player);
-		AddChild(player);
+		var msgDrivenPlayer = MessageDrivenPlayer.FromInterpolation(playerInterpolation, MapLayer);
+		//var player = Player.Player.FromInterpolation(playerInterpolation, MapLayer);
+		_entities.TryAdd(msgDrivenPlayer.Id, msgDrivenPlayer);
+		AddChild(msgDrivenPlayer.Player);
+		LOGGER.Debug("Added anoter player.");
 	}
 
 	public void Visit(IPredictableResponse response)
@@ -249,7 +260,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		if (_entities.TryGetValue(removeEntityMessage.Id, out var entity))
 		{
-			entity.Delete();
+			entity.Handle(removeEntityMessage);
 			_entities.Remove(removeEntityMessage.Id);
 		}
 	}

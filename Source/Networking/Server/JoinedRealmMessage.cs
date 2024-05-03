@@ -31,7 +31,8 @@ namespace y1000.Source.Networking.Server
 
         public override string ToString()
         {
-            return $"{nameof(Coordinate)}: {Coordinate}";
+            return
+                $"{nameof(Coordinate)}: {Coordinate}, {nameof(Id)}: {Id}, {nameof(Male)}: {Male}, {nameof(FootKungFu)}: {FootKungFu}, {nameof(AttackKungFu)}: {AttackKungFu}";
         }
 
         public void Accept(IServerMessageVisitor visitor)

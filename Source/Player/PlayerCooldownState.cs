@@ -16,9 +16,9 @@ public class PlayerCooldownState : AbstractPlayerState
         NotifyIfElapsed(c, delta);
     }
 
-    public static PlayerCooldownState Cooldown(bool male, int millisPerSprite)
+    public static PlayerCooldownState Cooldown(bool male, long elapsed = 0)
     {
-        SpriteManager spriteManager = SpriteManager.LoadPlayerCooldown(male, millisPerSprite);
-        return new PlayerCooldownState(spriteManager);
+        SpriteManager spriteManager = SpriteManager.LoadPlayerCooldown(male, 500);
+        return new PlayerCooldownState(spriteManager, elapsed);
     }
 }

@@ -42,7 +42,14 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
             _directionChanged = true;
         }
         ElapsedMillis += delta;
-        creature.Position += _velocity * ((float)delta / animationLengthMillis);
+        if (ElapsedMillis > animationLengthMillis)
+        {
+            creature.Position += _velocity * ((float)(ElapsedMillis - animationLengthMillis) / animationLengthMillis);
+        }
+        else
+        {
+            creature.Position += _velocity * ((float)delta / animationLengthMillis);
+        }
         if (ElapsedMillis >= animationLengthMillis)
         {
             creature.Position = creature.Position.Snapped(VectorUtil.TileSize);

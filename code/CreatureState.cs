@@ -26,5 +26,7 @@ namespace y1000.code
         
         ATTACK = 12,
         
+        COOLDOWN = 13,
+        
     }
 }

@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
+using NLog;
 using Source.Networking.Protobuf;
 using y1000.code;
 using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.code.player.snapshot;
 using y1000.Source.Character.Event;
+using y1000.Source.Creature.Event;
 using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Networking.Connection
 {
     public class LengthBasedPacketDecoder : LengthFieldBasedFrameDecoder
     {
+        private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+
         public LengthBasedPacketDecoder() : base(short.MaxValue, 0, 4, 0, 4)
         {
 
@@ -53,6 +57,7 @@ namespace y1000.Source.Networking.Connection
             {
                 result.Add(DecodeInterpolation(packet));
             }
+
             return new InterpolationsMessage(result);
         }
 
@@ -62,26 +67,39 @@ namespace y1000.Source.Networking.Connection
             return new MoveEventResponse(packet.Sequence, positionMessage);
         }
 
+
         protected override object Decode(IChannelHandlerContext context, IByteBuffer buffer)
         {
-            IByteBuffer input = (IByteBuffer)base.Decode(context, buffer);
-            byte[] bytes = new byte[input.ReadableBytes];
-            input.ReadBytes(bytes);
-            Packet packet = Packet.Parser.ParseFrom(bytes);
-            return packet.TypedPacketCase switch
+            try
             {
-                Packet.TypedPacketOneofCase.PositionPacket => DecodePositionMessage(packet.PositionPacket),
-                Packet.TypedPacketOneofCase.LoginPacket => JoinedRealmMessage.FromPacket(packet.LoginPacket),
-                Packet.TypedPacketOneofCase.ResponsePacket => DecodeInputResponse(packet.ResponsePacket),
-                Packet.TypedPacketOneofCase.Interpolations => DecodeInterpolations(packet.Interpolations),
-                Packet.TypedPacketOneofCase.PlayerInterpolation => PlayerInterpolation.FromPacket(packet.PlayerInterpolation),
-                Packet.TypedPacketOneofCase.CreatureInterpolation => CreatureInterpolation.FromPacket(packet.CreatureInterpolation),
-                Packet.TypedPacketOneofCase.RemoveEntity => new RemoveEntityMessage(packet.RemoveEntity.Id),
-                Packet.TypedPacketOneofCase.HurtEventPacket => HurtMessage.FromPacket(packet.HurtEventPacket),
-                Packet.TypedPacketOneofCase.AttackEventPacket => CreatureAttackMessage.FromPacket(packet.AttackEventPacket),
-                Packet.TypedPacketOneofCase.AttackEventResponsePacket => CharacterAttackEventResponse.FromPacket(packet.AttackEventResponsePacket),
-                _ => throw new NotSupportedException()
-            };
+                IByteBuffer input = (IByteBuffer)base.Decode(context, buffer);
+                byte[] bytes = new byte[input.ReadableBytes];
+                input.ReadBytes(bytes);
+                Packet packet = Packet.Parser.ParseFrom(bytes);
+                return packet.TypedPacketCase switch
+                {
+                    Packet.TypedPacketOneofCase.PositionPacket => DecodePositionMessage(packet.PositionPacket),
+                    Packet.TypedPacketOneofCase.LoginPacket => JoinedRealmMessage.FromPacket(packet.LoginPacket),
+                    Packet.TypedPacketOneofCase.ResponsePacket => DecodeInputResponse(packet.ResponsePacket),
+                    Packet.TypedPacketOneofCase.Interpolations => DecodeInterpolations(packet.Interpolations),
+                    Packet.TypedPacketOneofCase.PlayerInterpolation => PlayerInterpolation.FromPacket(
+                        packet.PlayerInterpolation),
+                    Packet.TypedPacketOneofCase.CreatureInterpolation => CreatureInterpolation.FromPacket(
+                        packet.CreatureInterpolation),
+                    Packet.TypedPacketOneofCase.RemoveEntity => new RemoveEntityMessage(packet.RemoveEntity.Id),
+                    Packet.TypedPacketOneofCase.HurtEventPacket => HurtMessage.FromPacket(packet.HurtEventPacket),
+                    Packet.TypedPacketOneofCase.AttackEventPacket => AbstractCreatureAttackMessage.FromPacket(
+                        packet.AttackEventPacket),
+                    Packet.TypedPacketOneofCase.AttackEventResponsePacket => CharacterAttackEventResponse.FromPacket(
+                        packet.AttackEventResponsePacket),
+                    _ => throw new NotSupportedException()
+                };
+            }
+            catch (Exception e)
+            {
+                LOGGER.Error(e, "Failed to decode message.");
+                throw new NotImplementedException();
+            }
         }
     }
 }

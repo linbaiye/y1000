@@ -5,11 +5,8 @@ using Google.Protobuf.WellKnownTypes;
 using NLog;
 using Source.Networking.Protobuf;
 using y1000.code;
-using y1000.code.networking.message;
 using y1000.code.player;
-using y1000.Source.Character.State;
 using y1000.Source.Creature;
-using y1000.Source.Creature.State;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
@@ -22,8 +19,6 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 	private IPlayerState _state = IPlayerState.Empty;
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-
-	private readonly Queue<IEntityMessage> _messages = new();
 
 	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id, IMap map)
 	{
@@ -44,18 +39,6 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 	
 	public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
 	
-	private static IPlayerState CreateState(bool male, CreatureState state, long start, Direction direction)
-	{
-		return state switch
-		{
-			CreatureState.IDLE => PlayerIdleState.StartFrom(male, start),
-			CreatureState.WALK => PlayerMoveState.WalkTowards(male, direction, start),
-			CreatureState.RUN => PlayerMoveState.RunTowards(male, direction, start),
-			CreatureState.FLY => PlayerMoveState.FlyTowards(male, direction, start),
-			_ => throw new NotSupportedException()
-		};
-	}
-
 	public void ChangeState(IPlayerState newState)
 	{
 		_state = newState;
@@ -88,32 +71,31 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 	public void Visit(SetPositionMessage setPositionMessage)
 	{
 		SetPosition(setPositionMessage);
+		if (setPositionMessage.State == CreatureState.IDLE)
+		{
+			ChangeState(PlayerIdleState.StartFrom(IsMale, 0));
+		}
 	}
 
 
 	public void Handle(IEntityMessage message)
 	{
 		message.Accept(this);
-		//_messages.Enqueue(message);
 	}
 
+	public void Visit(RemoveEntityMessage message)
+	{
+		Delete();
+	}
 
-	public void Visit(CreatureAttackMessage message)
+	public void Visit(PlayerAttackMessage message)
 	{
 		Direction = message.Direction;
-		_state = PlayerAttackState.QuanfaAttack(IsMale, message.Below50, message.SpriteMillis);
+		_state = PlayerAttackState.Quanfa(IsMale, message.Below50, message.MillisPerSprite);
 	}
 
 	public void Visit(HurtMessage hurtMessage)
 	{
-	}
-
-	private void OnAnimationDone(object? sender, CreatureAnimationDoneEventArgs eventArgs)
-	{
-		if (_messages.TryDequeue(out var msg))
-		{
-			msg.Accept(this);
-		}
 	}
 
 
@@ -127,12 +109,9 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/player.tscn");
 		var player = scene.Instantiate<Player>();
 		var interpolation = playerInterpolation.Interpolation;
-		var state = CreateState(playerInterpolation.Male, interpolation.State,
-			interpolation.ElapsedMillis,
-			interpolation.Direction);
+		var state = IPlayerState.CreateFrom(playerInterpolation);
 		player.Init(playerInterpolation.Male, state, 
 			interpolation.Direction, interpolation.Coordinate, playerInterpolation.Id, map);
-		player.StateAnimationEventHandler += player.OnAnimationDone;
 		return player;
 	}
 }

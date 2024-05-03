@@ -2,7 +2,7 @@ using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Networking;
 
-public class RemoveEntityMessage : IServerMessage
+public class RemoveEntityMessage : IEntityMessage
 {
     public RemoveEntityMessage(long id)
     {

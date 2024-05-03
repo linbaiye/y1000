@@ -16,7 +16,6 @@ using y1000.Source.Input;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.KungFu.Foot;
 using y1000.Source.Map;
-using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 using y1000.Source.Util;
@@ -24,7 +23,7 @@ using ICharacterState = y1000.Source.Character.State.ICharacterState;
 
 namespace y1000.Source.Character
 {
-	public partial class Character : Node2D, IPlayer
+	public partial class Character : Node2D, IPlayer, IServerMessageVisitor
 	{
 		private ICharacterState _state = EmptyState.Instance;
 
@@ -113,6 +112,17 @@ namespace y1000.Source.Character
 			_state.OnWrappedPlayerAnimationFinished(this);
 		}
 
+
+		public void Handle(IEntityMessage message)
+		{
+			message.Accept(this);
+		}
+
+		public void Visit(PlayerAttackMessage message)
+		{
+			Direction = message.Direction;
+			ChangeState(CharacterAttackState.FromMessage(this, message));
+		}
 
 		public void HandleInput(IPredictableInput input)
 		{

@@ -16,7 +16,7 @@ public class PlayerIdleState  : AbstractPlayerState
         NotifyIfElapsed(player, delta);
     }
 
-    public static PlayerIdleState StartFrom(bool male, long elapsedMillis)
+    public static PlayerIdleState StartFrom(bool male, long elapsedMillis = 0)
     {
         return new PlayerIdleState(SpriteManager.LoadForPlayer(male, CreatureState.IDLE), elapsedMillis);
     }

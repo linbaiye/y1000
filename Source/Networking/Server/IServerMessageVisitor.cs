@@ -37,7 +37,7 @@ public interface IServerMessageVisitor
         Visit((IEntityMessage)hurtMessage);
     }
 
-    void Visit(CreatureAttackMessage attackMessage)
+    void Visit(PlayerAttackMessage attackMessage)
     {
         Visit((IEntityMessage)attackMessage);
     }
@@ -58,6 +58,7 @@ public interface IServerMessageVisitor
     {
         
     }
+    
     void Visit(CreatureInterpolation creatureInterpolation) {}
 
     void Visit(CharacterAttackEventResponse response)

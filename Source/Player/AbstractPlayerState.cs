@@ -17,6 +17,10 @@ public abstract class AbstractPlayerState : AbstractCreatureState<Player>, IPlay
 
     protected void NotifyIfElapsed(Player player, long delta)
     {
+        if (ElapsedMillis >= SpriteManager.AnimationLength)
+        {
+            return;
+        }
         if (ElapsedMillis < SpriteManager.AnimationLength)
         {
             ElapsedMillis += delta;

@@ -9,7 +9,7 @@ message PositionPacket {
   int32 direction = 3;
   int64 id = 4;
   int32 type = 5;
-  optional int32 state = 6;
+  int32 state = 6;
 }
 
 
@@ -37,6 +37,7 @@ message CreatureAttackEventPacket {
   int32 direction = 2;
   bool below50 = 3;
   int32 spriteMillis = 4;
+  bool player = 5;
 }
 
 message CreatureHurtEventPacket {
@@ -120,6 +121,10 @@ message PlayerInterpolationPacket {
   InterpolationPacket interpolation = 1;
   int64 id = 2;
   bool male = 3;
+  string name = 4;
+  int32 kungFuType = 5;
+  bool kungFuBelow50 = 6;
+  int32 kungFuSpriteMillis = 7;
 }
 
 message RemoveEntityPacket {
