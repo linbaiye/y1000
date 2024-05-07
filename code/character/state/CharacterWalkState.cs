@@ -16,6 +16,7 @@ using y1000.code.player.state;
 using y1000.code.util;
 using y1000.code.world;
 using y1000.Source.Creature;
+using y1000.Source.Entity.Animation;
 using y1000.Source.Input;
 using y1000.Source.Sprite;
 

@@ -1,5 +1,6 @@
 using y1000.code.player;
 using y1000.Source.Creature;
+using y1000.Source.Entity.Animation;
 using y1000.Source.Sprite;
 
 namespace y1000.code.creatures.state

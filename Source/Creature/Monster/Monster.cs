@@ -5,6 +5,7 @@ using y1000.code;
 using y1000.code.player;
 using y1000.Source.Creature.State;
 using y1000.Source.Entity;
+using y1000.Source.Entity.Animation;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;

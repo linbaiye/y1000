@@ -6,6 +6,7 @@ using y1000.code.character.state;
 using y1000.code.player;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
+using y1000.Source.Entity.Animation;
 using y1000.Source.Input;
 using y1000.Source.Player;
 using IPlayer = y1000.Source.Player.IPlayer;

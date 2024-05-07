@@ -9,6 +9,7 @@ using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.player;
 using y1000.Source.Creature;
+using y1000.Source.Entity.Animation;
 using y1000.Source.Input;
 using y1000.Source.Sprite;
 using ICreature = y1000.code.creatures.ICreature;

@@ -1,3 +1,5 @@
+using y1000.Source.Entity.Animation;
+
 namespace y1000.code.player;
 
 public partial class HandSprite : AbstractEquipmentSprite
