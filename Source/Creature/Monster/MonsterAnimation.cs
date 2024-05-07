@@ -5,7 +5,7 @@ namespace y1000.Source.Creature.Monster;
 
 public class MonsterAnimation : ICreatureAnimation
 {
-    public OffsetTexture NoneOffsetTexture(CreatureState state, Direction direction, int millis)
+    public OffsetTexture NoneAttackOffsetTexture(CreatureState state, Direction direction, int millis)
     {
         throw new System.NotImplementedException();
     }

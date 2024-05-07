@@ -25,7 +25,7 @@ public class PlayerAttackState : AbstractPlayerState
 
     public static PlayerAttackState FromInterpolation(PlayerInterpolation interpolation)
     {
-        if (interpolation.AttackKungFuType == AttackKungFuType.FIST)
+        if (interpolation.AttackKungFuType == AttackKungFuType.QUANFA)
         {
             return Quanfa(interpolation.Male, interpolation.AttackKungFuBelow50, interpolation.KungFuSpriteMillis,
                 interpolation.Interpolation.ElapsedMillis);

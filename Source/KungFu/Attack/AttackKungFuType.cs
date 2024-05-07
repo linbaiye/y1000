@@ -2,7 +2,7 @@
 
 public enum AttackKungFuType
 {
-    FIST = 0,
+    QUANFA = 0,
 
     SWORD = 1,
 
