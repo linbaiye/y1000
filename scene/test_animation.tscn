@@ -1,11 +1,13 @@
-[gd_scene load_steps=44 format=3 uid="uid://cdhrxlx64ks6p"]
+[gd_scene load_steps=51 format=3 uid="uid://cdhrxlx64ks6p"]
 
 [ext_resource type="Texture2D" uid="uid://6e7agsbkde4r" path="res://sprite/char/N00/000000.png" id="1_aa18q"]
 [ext_resource type="Texture2D" uid="uid://cf328w2nq1syi" path="res://sprite/char/N00/000001.png" id="2_23pth"]
 [ext_resource type="Texture2D" uid="uid://dkvl4n7xcb6fu" path="res://sprite/char/N00/000002.png" id="3_k4na6"]
 [ext_resource type="Texture2D" uid="uid://bimc4p5gm1mqx" path="res://sprite/char/N00/000003.png" id="4_sgk7m"]
 [ext_resource type="Texture2D" uid="uid://2bxi1khv2pap" path="res://sprite/char/N00/000004.png" id="5_lx4rc"]
+[ext_resource type="Texture2D" uid="uid://dnyo4ijatvfy2" path="res://sprite/char/N02/000184.png" id="6_6q8wk"]
 [ext_resource type="Texture2D" uid="uid://cw6k2eep3lfj5" path="res://sprite/char/N00/000005.png" id="6_xtq7d"]
+[ext_resource type="Texture2D" uid="uid://ok0704rvacbu" path="res://sprite/char/N02/000120.png" id="7_n02rn"]
 [ext_resource type="Texture2D" uid="uid://cwyj1fvr7ysh5" path="res://sprite/char/N00/000006.png" id="7_x0654"]
 [ext_resource type="Texture2D" uid="uid://bamnu2enjqje" path="res://sprite/char/N00/000007.png" id="8_al1fi"]
 [ext_resource type="Texture2D" uid="uid://dfjflhpsrch1k" path="res://sprite/char/N00/000008.png" id="9_vov2b"]
@@ -40,74 +42,14 @@
 [ext_resource type="Texture2D" uid="uid://fbbnwxec43fi" path="res://sprite/char/N01/000058.png" id="38_mg7cc"]
 [ext_resource type="Texture2D" uid="uid://dxxs7iaxohy6k" path="res://sprite/char/N01/000059.png" id="39_xf702"]
 [ext_resource type="Texture2D" uid="uid://jihbdaeq63yk" path="res://sprite/char/N01/000060.png" id="40_26xeb"]
-
-[sub_resource type="Animation" id="Animation_7ei63"]
-resource_name = "new_animation"
-length = 0.9
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("BladeSwordNormal:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("1_aa18q"), ExtResource("2_23pth"), ExtResource("3_k4na6"), ExtResource("4_sgk7m"), ExtResource("5_lx4rc"), ExtResource("6_xtq7d"), ExtResource("7_x0654"), ExtResource("8_al1fi"), ExtResource("9_vov2b")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("BladeHard:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("10_mugpi"), ExtResource("11_r74aw"), ExtResource("12_4qdn3"), ExtResource("13_th266"), ExtResource("14_1mxrr"), ExtResource("15_jy6bo"), ExtResource("16_plles"), ExtResource("17_rsccq"), ExtResource("18_f674i")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SwordHard:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("19_d16a0"), ExtResource("20_gu56x"), ExtResource("21_skd6c"), ExtResource("22_hvdav"), ExtResource("23_s8cye"), ExtResource("24_asne1"), ExtResource("25_cmkkh"), ExtResource("26_ew0u5"), ExtResource("27_qeyry"), ExtResource("28_bq4we")]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Kick:texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("29_nqy65"), ExtResource("30_cglpx"), ExtResource("31_4xjga"), ExtResource("32_nulwv"), ExtResource("33_u8t76"), ExtResource("34_to4i7"), ExtResource("35_5e8vk")]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Fist:texture")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("36_88a21"), ExtResource("37_ufotr"), ExtResource("38_mg7cc"), ExtResource("39_xf702"), ExtResource("40_26xeb")]
-}
+[ext_resource type="Texture2D" uid="uid://cifv7jhsgr3qw" path="res://sprite/char/N02/000185.png" id="43_gv348"]
+[ext_resource type="Texture2D" uid="uid://1slscxm0kjac" path="res://sprite/char/N02/000186.png" id="44_dnflb"]
+[ext_resource type="Texture2D" uid="uid://823mfa6cirmp" path="res://sprite/char/N02/000187.png" id="45_h5x4n"]
+[ext_resource type="Texture2D" uid="uid://dvnqfabdmu8jr" path="res://sprite/char/N02/000121.png" id="46_jdu6k"]
+[ext_resource type="Texture2D" uid="uid://dq0b4j8fxrrol" path="res://sprite/char/N02/000122.png" id="47_m06r2"]
 
 [sub_resource type="Animation" id="Animation_56fvw"]
-length = 0.001
+length = 0.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -168,6 +110,119 @@ tracks/4/keys = {
 "update": 1,
 "values": [ExtResource("36_88a21")]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hurt:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_6q8wk")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cooldown:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_n02rn")]
+}
+
+[sub_resource type="Animation" id="Animation_7ei63"]
+resource_name = "new_animation"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("BladeSwordNormal:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_aa18q"), ExtResource("2_23pth"), ExtResource("3_k4na6"), ExtResource("4_sgk7m"), ExtResource("5_lx4rc"), ExtResource("6_xtq7d"), ExtResource("7_x0654"), ExtResource("8_al1fi"), ExtResource("9_vov2b")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BladeHard:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("10_mugpi"), ExtResource("11_r74aw"), ExtResource("12_4qdn3"), ExtResource("13_th266"), ExtResource("14_1mxrr"), ExtResource("15_jy6bo"), ExtResource("16_plles"), ExtResource("17_rsccq"), ExtResource("18_f674i")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordHard:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("19_d16a0"), ExtResource("20_gu56x"), ExtResource("21_skd6c"), ExtResource("22_hvdav"), ExtResource("23_s8cye"), ExtResource("24_asne1"), ExtResource("25_cmkkh"), ExtResource("26_ew0u5"), ExtResource("27_qeyry"), ExtResource("28_bq4we")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Kick:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("29_nqy65"), ExtResource("30_cglpx"), ExtResource("31_4xjga"), ExtResource("32_nulwv"), ExtResource("33_u8t76"), ExtResource("34_to4i7"), ExtResource("35_5e8vk")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Fist:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("36_88a21"), ExtResource("37_ufotr"), ExtResource("38_mg7cc"), ExtResource("39_xf702"), ExtResource("40_26xeb")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hurt:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("6_6q8wk"), ExtResource("43_gv348"), ExtResource("44_dnflb"), ExtResource("45_h5x4n")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cooldown:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_n02rn"), ExtResource("7_n02rn"), ExtResource("7_n02rn"), ExtResource("46_jdu6k"), ExtResource("46_jdu6k"), ExtResource("46_jdu6k"), ExtResource("47_m06r2"), ExtResource("47_m06r2"), ExtResource("47_m06r2")]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v3dwp"]
 _data = {
@@ -203,5 +258,21 @@ texture = ExtResource("29_nqy65")
 centered = false
 
 [node name="Fist" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("36_88a21")
 centered = false
+
+[node name="Hurt" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_6q8wk")
+centered = false
+
+[node name="EnfightWalk" type="Sprite2D" parent="."]
+visible = false
+
+[node name="Cooldown" type="Sprite2D" parent="."]
+texture = ExtResource("7_n02rn")
+centered = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
