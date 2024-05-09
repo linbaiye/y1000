@@ -5,5 +5,8 @@ namespace y1000.Source.Entity.Animation;
 
 public interface ICreatureAnimation
 {
-    OffsetTexture NoneAttackOffsetTexture(CreatureState state, Direction direction, int millis);
+    OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis);
+
+    int AnimationMillis(CreatureState state);
+
 }

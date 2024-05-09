@@ -1,7 +1,7 @@
 using NLog;
 using y1000.code;
 using y1000.Source.Creature.State;
-using y1000.Source.Sprite;
+using y1000.Source.Entity.Animation;
 
 namespace y1000.Source.Creature.Monster;
 
@@ -9,20 +9,25 @@ public class MonsterMoveState : AbstractCreatureMoveState<Monster>
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
     
-    public MonsterMoveState(SpriteManager spriteManager, Direction towards, long elapsedMillis = 0) : base(spriteManager, towards, elapsedMillis)
+    private MonsterMoveState(Direction towards, int elapsedMillis = 0) : base(MonsterAnimation.Instance.AnimationMillis(CreatureState.WALK), towards, elapsedMillis)
     {
     }
     
     protected override ILogger Logger => LOGGER;
-    
-    public override void Update(Monster c, long delta)
+
+    public override OffsetTexture BodyOffsetTexture(Monster creature)
+    {
+        return MonsterAnimation.Instance
+    }
+
+    public override void Update(Monster c, int delta)
     {
         Move(c, delta);
     }
 
-    public static MonsterMoveState MoveTowards(string name, Direction towards, long elapsed = 0)
+    public static MonsterMoveState MoveTowards(string name, Direction towards, int elapsed = 0)
     {
-        return new MonsterMoveState(SpriteManager.LoadForMonster(name, CreatureState.WALK), towards, elapsed);
+        return new MonsterMoveState(towards, elapsed);
     }
 
 }

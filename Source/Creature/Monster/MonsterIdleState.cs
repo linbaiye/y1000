@@ -5,15 +5,15 @@ using y1000.Source.Sprite;
 
 namespace y1000.Source.Creature.Monster;
 
-public class MonsterIdleState : AbstractCreatureState<Monster>
+public class MonsterIdleState : AbstractMonsterState
 {
-    private MonsterIdleState(SpriteManager spriteManager, long elapsedMillis = 0) : base(spriteManager, elapsedMillis)
+    private MonsterIdleState(MonsterAnimation animation, int elapsedMillis = 0) : base(, , elapsedMillis)
     {
     }
 
-    public override void Update(Monster c, long delta)
+    public override void Update(Monster c, int delta)
     {
-        if (ElapsedMillis < SpriteManager.AnimationLength)
+        if (ElapsedMillis < TotalMillis)
         {
             ElapsedMillis += delta;
         }
@@ -23,8 +23,10 @@ public class MonsterIdleState : AbstractCreatureState<Monster>
         }
     }
 
-    public static MonsterIdleState Create(string name, long elapsed = 0)
+    public static MonsterIdleState Create(string name, int elapsed = 0)
     {
-        return new MonsterIdleState(SpriteManager.LoadForMonster(name, CreatureState.IDLE), elapsed);
+        return new MonsterIdleState(elapsed);
     }
+
+    protected override CreatureState State => CreatureState.IDLE;
 }

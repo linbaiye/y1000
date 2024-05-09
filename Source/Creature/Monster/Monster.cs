@@ -17,16 +17,22 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
     private ICreatureState<Monster> _state = new MonsterEmptyState();
 
     public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
+    
 
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+
+    private MonsterAnimation _animation = MonsterAnimation.Instance;
     
     private void Init(long id, Direction direction, ICreatureState<Monster> state, Vector2I coordinate, IMap map, string name)
     {
         _state = state;
         base.Init(id, direction, coordinate, map, name);
+        _animation = MonsterAnimation.LoadFor(name);
     }
 
-    private static ICreatureState<Monster> CreateState(CreatureState state, long elapses, string name, Direction direction)
+    public MonsterAnimation MonsterAnimation => _animation;
+
+    private static ICreatureState<Monster> CreateState(CreatureState state, int elapses, string name, Direction direction)
     {
         switch (state)
         {
@@ -43,7 +49,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
     public override void _PhysicsProcess(double delta)
     {
-        _state.Update(this, (long)(delta * 1000));
+        _state.Update(this, (int)(delta * 1000));
     }
 
 

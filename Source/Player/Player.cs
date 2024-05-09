@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
 using Godot;
-using Google.Protobuf.WellKnownTypes;
 using NLog;
-using Source.Networking.Protobuf;
 using y1000.code;
-using y1000.code.player;
 using y1000.Source.Creature;
 using y1000.Source.Entity.Animation;
 using y1000.Source.Map;
@@ -20,7 +15,7 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 	private IPlayerState _state = IPlayerState.Empty;
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-
+	
 	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id, IMap map)
 	{
 		base.Init(id, direction, coordinate, map, "");
@@ -66,7 +61,7 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		_state.Update(this, (long)(delta * 1000));
+		_state.Update(this, (int)(delta * 1000));
 	}
 
 	public void Visit(SetPositionMessage setPositionMessage)

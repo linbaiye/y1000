@@ -1,44 +1,28 @@
-using Godot;
-using Google.Protobuf.WellKnownTypes;
-using NLog;
-using y1000.code;
-using y1000.code.player;
-using y1000.Source.Character.State;
 using y1000.Source.Entity.Animation;
-using y1000.Source.Sprite;
 
 namespace y1000.Source.Creature.State;
 
 public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : ICreature
 {
-    private readonly SpriteManager _spriteManager;
-
-    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
-
-    protected AbstractCreatureState(SpriteManager spriteManager, long elapsedMillis = 0)
+    protected AbstractCreatureState(int totalMillis, int elapsedMillis)
     {
-        _spriteManager = spriteManager;
         ElapsedMillis = elapsedMillis;
+        TotalMillis = totalMillis;
     }
     
-    protected long ElapsedMillis { get; set; }
+    protected int ElapsedMillis { get; set; }
+    
+    protected int TotalMillis { get; }
 
-
-    protected void Elapse(long delta)
+    protected void Elapse(int delta)
     {
-        if (ElapsedMillis < SpriteManager.AnimationLength)
+        if (ElapsedMillis < TotalMillis)
         {
             ElapsedMillis += delta;
         }
     }
 
-    public OffsetTexture BodyOffsetTexture(TC creature)
-    {
-        return _spriteManager.Texture(creature.Direction, ElapsedMillis);
-    }
-
-
-    protected SpriteManager SpriteManager => _spriteManager;
-
-    public abstract void Update(TC c, long delta);
+    public abstract OffsetTexture BodyOffsetTexture(TC creature);
+    
+    public abstract void Update(TC c, int delta);
 }

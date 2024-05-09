@@ -13,12 +13,7 @@ public class EmptyPlayerState : IPlayerState
         throw new System.NotImplementedException();
     }
 
-    public bool Contains(Player c, Vector2 position)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Update(Player c, long delta)
+    public void Update(Player c, int delta)
     {
         throw new System.NotImplementedException();
     }

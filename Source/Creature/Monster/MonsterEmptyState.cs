@@ -7,17 +7,12 @@ namespace y1000.Source.Creature.Monster;
 
 public class MonsterEmptyState : ICreatureState<Monster>
 {
-    public OffsetTexture BodyOffsetTexture(Monster c)
+    public OffsetTexture BodyOffsetTexture(Monster player)
     {
         throw new System.NotImplementedException();
     }
 
-    public bool Contains(Monster c, Vector2 position)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Update(Monster c, long delta)
+    public void Update(Monster c, int delta)
     {
         throw new System.NotImplementedException();
     }

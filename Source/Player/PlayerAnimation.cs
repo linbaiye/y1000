@@ -10,7 +10,6 @@ namespace y1000.Source.Player;
 
 public class PlayerAnimation : ICreatureAnimation
 {
-
     public static readonly PlayerAnimation Male = ForMale();
     
     public static readonly PlayerAnimation Female = ForMale();
@@ -47,6 +46,18 @@ public class PlayerAnimation : ICreatureAnimation
         { CreatureState.HURT, 4 },
         { CreatureState.COOLDOWN, 3 },
     };
+    
+    private readonly IDictionary<CreatureState, int> _stateMillisPerSprite = new Dictionary<CreatureState, int>()
+    {
+        { CreatureState.WALK, 100 },
+        { CreatureState.RUN, 60 },
+        { CreatureState.IDLE, 300 },
+        { CreatureState.FLY, 60 },
+        { CreatureState.HURT, 100 },
+        { CreatureState.ATTACK, 100 },
+        { CreatureState.COOLDOWN, 300 },
+    };
+    
 
     private readonly IDictionary<AttackKungFuType, int> _above50KungFuSpriteNumber = new Dictionary<AttackKungFuType, int>()
     {
@@ -65,8 +76,6 @@ public class PlayerAnimation : ICreatureAnimation
     private readonly IDictionary<AttackKungFuType, DirectionIndexedSpriteReader> _above50AttackSpriteReaders;
 
 
-    private const int DefaultMillisPerSprite = 100;
-    
     private PlayerAnimation(IDictionary<CreatureState, DirectionIndexedSpriteReader> stateSpriteReaders,
         IDictionary<AttackKungFuType, DirectionIndexedSpriteReader> below50AttackSpriteReaders,
         IDictionary<AttackKungFuType, DirectionIndexedSpriteReader> above50AttackSpriteReaders)
@@ -88,10 +97,10 @@ public class PlayerAnimation : ICreatureAnimation
         {
             throw new NotImplementedException();
         }
-        var millisPerSprite = DefaultMillisPerSprite;
-        if (state == CreatureState.RUN || state == CreatureState.FLY)
+
+        if (!_stateMillisPerSprite.TryGetValue(state, out var millisPerSprite))
         {
-            millisPerSprite = 50;
+            throw new NotImplementedException();
         }
         int spriteNumber = MillsToSpriteNumber(millisPerSprite, millis, v);
         return state is CreatureState.IDLE or CreatureState.FLY or CreatureState.COOLDOWN?
@@ -106,25 +115,19 @@ public class PlayerAnimation : ICreatureAnimation
         return millis / millisPerSprite;
     }
 
-    private OffsetTexture ComputeAbove50OffsetTexture(AttackKungFuType type, Direction direction, int millis)
-    {
-        if (!_above50KungFuSpriteNumber.TryGetValue(type, out var total))
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-
+ 
     public OffsetTexture AttackOffsetTexture(AttackKungFuType type, bool above50, Direction direction, int millis)
     {
-        if (above50)
-        {
-            int spriteNumber = ((millis / DefaultMillisPerSprite + (millis % DefaultMillisPerSprite != 0 ? 1 : 0)) % v) - 1;
-        }
+        throw new NotImplementedException();
+    }
+
+    public int AttackAnimationMillis(AttackKungFuType type, bool above50)
+    {
+        throw new NotImplementedException();
     }
 
     
-    public OffsetTexture NoneAttackOffsetTexture(CreatureState state, Direction direction, int millis)
+    public OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis)
     {
         var nr = ComputerSpriteIndex(state, millis);
         if (_stateSpriteReaders.TryGetValue(state, out var spriteReader))
@@ -133,8 +136,13 @@ public class PlayerAnimation : ICreatureAnimation
         }
         throw new NotImplementedException();
     }
-    
-            
+
+    public int AnimationMillis(CreatureState state)
+    {
+        throw new NotImplementedException();
+    }
+
+
     private static readonly Dictionary<Direction, int> MALE_IDLE_DIRECTION_SPRITE_OFFSET = new()
     {
         { Direction.UP, 48},

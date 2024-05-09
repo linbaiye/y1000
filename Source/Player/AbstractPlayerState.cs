@@ -1,34 +1,37 @@
-using System.Collections.Generic;
-using NLog;
-using y1000.code;
-using y1000.code.player;
-using y1000.Source.Character.State;
 using y1000.Source.Creature;
 using y1000.Source.Creature.State;
-using y1000.Source.Sprite;
+using y1000.Source.Entity.Animation;
 
 namespace y1000.Source.Player;
 
 public abstract class AbstractPlayerState : AbstractCreatureState<Player>, IPlayerState
 {
-    protected AbstractPlayerState(SpriteManager spriteManager, long elapsedMillis = 0) : base(spriteManager, elapsedMillis)
+    protected AbstractPlayerState(int total, int elapsedMillis = 0) : base(total, elapsedMillis)
     {
     }
 
-    protected void NotifyIfElapsed(Player player, long delta)
+    protected void NotifyIfElapsed(Player player, int delta)
     {
-        if (ElapsedMillis >= SpriteManager.AnimationLength)
+        if (ElapsedMillis >= TotalMillis)
         {
             return;
         }
-        if (ElapsedMillis < SpriteManager.AnimationLength)
+        if (ElapsedMillis < TotalMillis)
         {
             ElapsedMillis += delta;
         }
-        if (ElapsedMillis >= SpriteManager.AnimationLength)
+        if (ElapsedMillis >= TotalMillis)
         {
             player.NotifyAnimationFinished(new CreatureAnimationDoneEventArgs(this));
         }
     }
 
+    protected abstract OffsetTexture BodyOffsetTexture(Player player, PlayerAnimation playerAnimation);
+
+    
+    public override OffsetTexture BodyOffsetTexture(Player player)
+    {
+        var ani = player.IsMale ? PlayerAnimation.Male : PlayerAnimation.Female;
+        return BodyOffsetTexture(player, ani);
+    }
 }

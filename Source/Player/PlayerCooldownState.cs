@@ -1,24 +1,27 @@
-using Google.Protobuf.WellKnownTypes;
-using y1000.Source.Entity;
-using y1000.Source.Sprite;
+using y1000.code;
+using y1000.Source.Entity.Animation;
 
 namespace y1000.Source.Player;
 
 public class PlayerCooldownState : AbstractPlayerState
 {
-    public PlayerCooldownState(SpriteManager spriteManager,
-        long elapsedMillis = 0) : base(spriteManager, elapsedMillis)
+    private PlayerCooldownState(int elapsedMillis = 0) : base(PlayerAnimation.Male.AnimationMillis(CreatureState.COOLDOWN),
+        elapsedMillis)
     {
     }
 
-    public override void Update(Player c, long delta)
+    public override void Update(Player c, int delta)
     {
         NotifyIfElapsed(c, delta);
     }
 
-    public static PlayerCooldownState Cooldown(bool male, long elapsed = 0)
+    public static PlayerCooldownState Cooldown(bool male, int elapsed = 0)
     {
-        SpriteManager spriteManager = SpriteManager.LoadPlayerCooldown(male, 500);
-        return new PlayerCooldownState(spriteManager, elapsed);
+        return new PlayerCooldownState(elapsed);
+    }
+
+    protected override OffsetTexture BodyOffsetTexture(Player player, PlayerAnimation playerAnimation)
+    {
+        return playerAnimation.OffsetTexture(CreatureState.COOLDOWN, player.Direction, ElapsedMillis);
     }
 }

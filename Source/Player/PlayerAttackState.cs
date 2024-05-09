@@ -1,35 +1,43 @@
 using System;
-using y1000.Source.Creature.State;
+using y1000.Source.Entity.Animation;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.Networking;
-using y1000.Source.Sprite;
 
 namespace y1000.Source.Player;
 
 public class PlayerAttackState : AbstractPlayerState
 {
-    public PlayerAttackState(SpriteManager spriteManager, long elapsedMillis = 0) : base(spriteManager, elapsedMillis)
+    private PlayerAttackState(int total, AttackKungFuType type, bool above50, int elapsedMillis = 0) : base(total, elapsedMillis)
     {
+        Type = type;
+        Above50 = above50;
     }
     
-    public override void Update(Player c, long delta)
+    private AttackKungFuType Type { get; }
+    private bool Above50 { get; }
+
+    public override void Update(Player c, int delta)
     {
         NotifyIfElapsed(c, delta);
     }
     
-    public static PlayerAttackState Quanfa(bool male, bool below50, int millisPerSprite, long elapsedMillis = 0)
+    public static PlayerAttackState Quanfa(bool male, bool below50, int millisPerSprite, int elapsedMillis = 0)
     {
-        var manager = SpriteManager.LoadQuanfaAttack(male, below50, millisPerSprite);
-        return new PlayerAttackState(manager, elapsedMillis);
+        var ani = male ? PlayerAnimation.Male : PlayerAnimation.Female;
+        return new PlayerAttackState(ani.AttackAnimationMillis(AttackKungFuType.QUANFA, !below50), AttackKungFuType.QUANFA, !below50, elapsedMillis);
     }
 
     public static PlayerAttackState FromInterpolation(PlayerInterpolation interpolation)
     {
         if (interpolation.AttackKungFuType == AttackKungFuType.QUANFA)
         {
-            return Quanfa(interpolation.Male, interpolation.AttackKungFuBelow50, interpolation.KungFuSpriteMillis,
-                interpolation.Interpolation.ElapsedMillis);
+            return Quanfa(interpolation.Male, interpolation.AttackKungFuBelow50, 0, (int)interpolation.Interpolation.ElapsedMillis);
         }
         throw new NotSupportedException();
+    }
+
+    protected override OffsetTexture BodyOffsetTexture(Player player, PlayerAnimation playerAnimation)
+    {
+        return playerAnimation.AttackOffsetTexture(Type, Above50, player.Direction, ElapsedMillis);
     }
 }

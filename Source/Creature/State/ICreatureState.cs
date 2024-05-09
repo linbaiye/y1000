@@ -6,7 +6,7 @@ namespace y1000.Source.Creature.State;
 
 public interface ICreatureState<in TC> where TC : ICreature
 {
-    OffsetTexture BodyOffsetTexture(TC c);
+    OffsetTexture BodyOffsetTexture(TC player);
 
-    void Update(TC c, long delta);
+    void Update(TC c, int delta);
 }

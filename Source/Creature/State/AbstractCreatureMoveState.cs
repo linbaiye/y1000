@@ -1,7 +1,5 @@
 using Godot;
 using NLog;
-using y1000.code;
-using y1000.Source.Sprite;
 using y1000.Source.Util;
 
 namespace y1000.Source.Creature.State;
@@ -12,7 +10,7 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
     
     private readonly Vector2 _velocity;
 
-    protected AbstractCreatureMoveState(SpriteManager spriteManager, Direction towards, long elapsedMillis = 0) : base(spriteManager, elapsedMillis)
+    protected AbstractCreatureMoveState(int total, Direction towards, int elapsedMillis = 0) : base(elapsedMillis, total)
     {
         Towards = towards;
         _directionChanged = false;
@@ -20,18 +18,18 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
         ElapsedMillis = 0;
     }
     
-    private Direction Towards { get; }
+    protected Direction Towards { get; }
     
     protected abstract ILogger Logger { get; }
 
     public void Init(TC creature)
     {
-        creature.Position = _velocity * ((float)ElapsedMillis / SpriteManager.AnimationLength);
+        creature.Position = _velocity * ((float)ElapsedMillis / TotalMillis);
     }
 
-    protected void Move(TC creature, long delta)
+    protected void Move(TC creature, int delta)
     {
-        var animationLengthMillis = SpriteManager.AnimationLength;
+        var animationLengthMillis = TotalMillis;
         if (ElapsedMillis >= animationLengthMillis)
         {
             return;
