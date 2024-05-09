@@ -9,7 +9,7 @@ public class MonsterMoveState : AbstractCreatureMoveState<Monster>
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
     
-    private MonsterMoveState(Direction towards, int elapsedMillis = 0) : base(MonsterAnimation.Instance.AnimationMillis(CreatureState.WALK), towards, elapsedMillis)
+    private MonsterMoveState(int total, Direction towards, int elapsedMillis = 0) : base(total, towards, elapsedMillis)
     {
     }
     
@@ -17,7 +17,7 @@ public class MonsterMoveState : AbstractCreatureMoveState<Monster>
 
     public override OffsetTexture BodyOffsetTexture(Monster creature)
     {
-        return MonsterAnimation.Instance
+        return creature.MonsterAnimation.OffsetTexture(CreatureState.WALK, creature.Direction, ElapsedMillis);
     }
 
     public override void Update(Monster c, int delta)
@@ -25,9 +25,8 @@ public class MonsterMoveState : AbstractCreatureMoveState<Monster>
         Move(c, delta);
     }
 
-    public static MonsterMoveState MoveTowards(string name, Direction towards, int elapsed = 0)
+    public static MonsterMoveState Move(MonsterAnimation animation, Direction towards, int elapsed)
     {
-        return new MonsterMoveState(towards, elapsed);
+        return new MonsterMoveState(animation.AnimationMillis(CreatureState.IDLE), towards, elapsed);
     }
-
 }

@@ -23,6 +23,11 @@ public class MonsterAnimation : ICreatureAnimation
 
     public static MonsterAnimation LoadFor(string name)
     {
+        switch (name)
+        {
+            case "牛":
+                return ;
+        }
         return Instance;
     }
 }

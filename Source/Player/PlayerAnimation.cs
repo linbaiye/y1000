@@ -8,36 +8,15 @@ using y1000.Source.Sprite;
 
 namespace y1000.Source.Player;
 
-public class PlayerAnimation : ICreatureAnimation
+public class PlayerAnimation : AbstractCreatureAnimation
 {
     public static readonly PlayerAnimation Male = ForMale();
     
+    
     public static readonly PlayerAnimation Female = ForMale();
-    private class DirectionIndexedSpriteReader
-    {
-        public DirectionIndexedSpriteReader(SpriteReader reader, Dictionary<Direction, int> directionIndex)
-        {
-            Reader = reader;
-            DirectionIndex = directionIndex;
-        }
+    
 
-        private SpriteReader Reader { get; }
-
-        private Dictionary<Direction, int> DirectionIndex { get; }
-
-        public OffsetTexture Get(Direction direction, int nr)
-        {
-            if (DirectionIndex.TryGetValue(direction, out var n))
-            {
-                return Reader.Get(nr + n);
-            }
-
-            throw new IndexOutOfRangeException();
-        }
-    }
-
-
-    private readonly IDictionary<CreatureState, int> _animationSpriteNumber = new Dictionary<CreatureState, int>()
+    private static readonly IDictionary<CreatureState, int> ANIMATION_SPRITE_NUMBER = new Dictionary<CreatureState, int>()
     {
         { CreatureState.WALK, 6 },
         { CreatureState.RUN, 6 },
@@ -47,7 +26,7 @@ public class PlayerAnimation : ICreatureAnimation
         { CreatureState.COOLDOWN, 3 },
     };
     
-    private readonly IDictionary<CreatureState, int> _stateMillisPerSprite = new Dictionary<CreatureState, int>()
+    private static readonly IDictionary<CreatureState, int> STATE_MILLIS_PER_SPRITE = new Dictionary<CreatureState, int>()
     {
         { CreatureState.WALK, 100 },
         { CreatureState.RUN, 60 },
@@ -69,8 +48,6 @@ public class PlayerAnimation : ICreatureAnimation
         { AttackKungFuType.QUANFA, 5 },
     };
 
-    private readonly IDictionary<CreatureState, DirectionIndexedSpriteReader> _stateSpriteReaders;
-
     private readonly IDictionary<AttackKungFuType, DirectionIndexedSpriteReader> _below50AttackSpriteReaders;
     
     private readonly IDictionary<AttackKungFuType, DirectionIndexedSpriteReader> _above50AttackSpriteReaders;
@@ -78,9 +55,8 @@ public class PlayerAnimation : ICreatureAnimation
 
     private PlayerAnimation(IDictionary<CreatureState, DirectionIndexedSpriteReader> stateSpriteReaders,
         IDictionary<AttackKungFuType, DirectionIndexedSpriteReader> below50AttackSpriteReaders,
-        IDictionary<AttackKungFuType, DirectionIndexedSpriteReader> above50AttackSpriteReaders)
+        IDictionary<AttackKungFuType, DirectionIndexedSpriteReader> above50AttackSpriteReaders) : base(stateSpriteReaders, STATE_MILLIS_PER_SPRITE, ANIMATION_SPRITE_NUMBER)
     {
-        _stateSpriteReaders = stateSpriteReaders;
         _below50AttackSpriteReaders = below50AttackSpriteReaders;
         _above50AttackSpriteReaders = above50AttackSpriteReaders;
     }
@@ -93,12 +69,7 @@ public class PlayerAnimation : ICreatureAnimation
 
     private int ComputerSpriteIndex(CreatureState state, int millis)
     {
-        if (!_animationSpriteNumber.TryGetValue(state, out var v))
-        {
-            throw new NotImplementedException();
-        }
-
-        if (!_stateMillisPerSprite.TryGetValue(state, out var millisPerSprite))
+        if (!STATE_MILLIS_PER_SPRITE.TryGetValue(state, out var millisPerSprite))
         {
             throw new NotImplementedException();
         }
@@ -127,7 +98,7 @@ public class PlayerAnimation : ICreatureAnimation
     }
 
     
-    public OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis)
+    public override OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis)
     {
         var nr = ComputerSpriteIndex(state, millis);
         if (_stateSpriteReaders.TryGetValue(state, out var spriteReader))
@@ -137,8 +108,12 @@ public class PlayerAnimation : ICreatureAnimation
         throw new NotImplementedException();
     }
 
-    public int AnimationMillis(CreatureState state)
+    public override int AnimationMillis(CreatureState state)
     {
+        if (STATE_MILLIS_PER_SPRITE.TryGetValue(state, out var number))
+        {
+            return number;
+        }
         throw new NotImplementedException();
     }
 

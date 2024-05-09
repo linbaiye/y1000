@@ -7,7 +7,8 @@ namespace y1000.Source.Creature.Monster;
 
 public class MonsterIdleState : AbstractMonsterState
 {
-    private MonsterIdleState(MonsterAnimation animation, int elapsedMillis = 0) : base(, , elapsedMillis)
+    
+    private MonsterIdleState(int total, int elapsedMillis = 0) : base(total, elapsedMillis)
     {
     }
 
@@ -23,10 +24,12 @@ public class MonsterIdleState : AbstractMonsterState
         }
     }
 
-    public static MonsterIdleState Create(string name, int elapsed = 0)
+    
+    public static MonsterIdleState Create(MonsterAnimation animation, int elapsed)
     {
-        return new MonsterIdleState(elapsed);
+        return new MonsterIdleState(animation.AnimationMillis(CreatureState.IDLE), elapsed);
     }
+
 
     protected override CreatureState State => CreatureState.IDLE;
 }

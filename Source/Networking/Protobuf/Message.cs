@@ -50,7 +50,7 @@ namespace Source.Networking.Protobuf {
             "b2dpblBhY2tldEgAElAKEWF0dGFja0V2ZW50UGFja2V0GAQgASgLMjMuU291",
             "cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2xpZW50QXR0YWNrRXZlbnRQYWNr",
             "ZXRIAEIGCgRUeXBlImQKE0ludGVycG9sYXRpb25QYWNrZXQSDQoFc3RhdGUY",
-            "AiABKAUSFQoNZWxhcHNlZE1pbGxpcxgFIAEoAxIRCglkaXJlY3Rpb24YByAB",
+            "AiABKAUSFQoNZWxhcHNlZE1pbGxpcxgFIAEoBRIRCglkaXJlY3Rpb24YByAB",
             "KAUSCQoBeBgIIAEoBRIJCgF5GAkgASgFIl8KFEludGVycG9sYXRpb25zUGFj",
             "a2V0EkcKDmludGVycG9sYXRpb25zGAEgAygLMi8uU291cmNlLk5ldHdvcmtp",
             "bmcuUHJvdG9idWYuSW50ZXJwb2xhdGlvblBhY2tldCKsAQoLTG9naW5QYWNr",
@@ -3151,10 +3151,10 @@ namespace Source.Networking.Protobuf {
 
     /// <summary>Field number for the "elapsedMillis" field.</summary>
     public const int ElapsedMillisFieldNumber = 5;
-    private long elapsedMillis_;
+    private int elapsedMillis_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long ElapsedMillis {
+    public int ElapsedMillis {
       get { return elapsedMillis_; }
       set {
         elapsedMillis_ = value;
@@ -3225,7 +3225,7 @@ namespace Source.Networking.Protobuf {
     public override int GetHashCode() {
       int hash = 1;
       if (State != 0) hash ^= State.GetHashCode();
-      if (ElapsedMillis != 0L) hash ^= ElapsedMillis.GetHashCode();
+      if (ElapsedMillis != 0) hash ^= ElapsedMillis.GetHashCode();
       if (Direction != 0) hash ^= Direction.GetHashCode();
       if (X != 0) hash ^= X.GetHashCode();
       if (Y != 0) hash ^= Y.GetHashCode();
@@ -3251,9 +3251,9 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(16);
         output.WriteInt32(State);
       }
-      if (ElapsedMillis != 0L) {
+      if (ElapsedMillis != 0) {
         output.WriteRawTag(40);
-        output.WriteInt64(ElapsedMillis);
+        output.WriteInt32(ElapsedMillis);
       }
       if (Direction != 0) {
         output.WriteRawTag(56);
@@ -3281,9 +3281,9 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(16);
         output.WriteInt32(State);
       }
-      if (ElapsedMillis != 0L) {
+      if (ElapsedMillis != 0) {
         output.WriteRawTag(40);
-        output.WriteInt64(ElapsedMillis);
+        output.WriteInt32(ElapsedMillis);
       }
       if (Direction != 0) {
         output.WriteRawTag(56);
@@ -3310,8 +3310,8 @@ namespace Source.Networking.Protobuf {
       if (State != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(State);
       }
-      if (ElapsedMillis != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ElapsedMillis);
+      if (ElapsedMillis != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ElapsedMillis);
       }
       if (Direction != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Direction);
@@ -3337,7 +3337,7 @@ namespace Source.Networking.Protobuf {
       if (other.State != 0) {
         State = other.State;
       }
-      if (other.ElapsedMillis != 0L) {
+      if (other.ElapsedMillis != 0) {
         ElapsedMillis = other.ElapsedMillis;
       }
       if (other.Direction != 0) {
@@ -3369,7 +3369,7 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 40: {
-            ElapsedMillis = input.ReadInt64();
+            ElapsedMillis = input.ReadInt32();
             break;
           }
           case 56: {
@@ -3404,7 +3404,7 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 40: {
-            ElapsedMillis = input.ReadInt64();
+            ElapsedMillis = input.ReadInt32();
             break;
           }
           case 56: {
