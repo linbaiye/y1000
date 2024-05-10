@@ -1,4 +1,5 @@
 using System;
+using y1000.Source.Animation;
 using y1000.Source.Entity.Animation;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.Networking;

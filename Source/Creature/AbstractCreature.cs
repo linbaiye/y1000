@@ -4,6 +4,7 @@ using NLog;
 using y1000.code;
 using y1000.code.networking.message;
 using y1000.code.player;
+using y1000.Source.Animation;
 using y1000.Source.Entity.Animation;
 using y1000.Source.Map;
 using y1000.Source.Networking.Server;

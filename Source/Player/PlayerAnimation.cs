@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using y1000.code;
+using y1000.Source.Animation;
 using y1000.Source.Creature;
-using y1000.Source.Entity.Animation;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.Sprite;
 
@@ -69,21 +69,11 @@ public class PlayerAnimation : AbstractCreatureAnimation
 
     private int ComputerSpriteIndex(CreatureState state, int millis)
     {
-        if (!STATE_MILLIS_PER_SPRITE.TryGetValue(state, out var millisPerSprite))
-        {
-            throw new NotImplementedException();
-        }
-        int spriteNumber = MillsToSpriteNumber(millisPerSprite, millis, v);
+        var millisPerSprite = GetMillisPerSprite(state);
+        var total = GetSpriteNumber(state);
+        int spriteNumber = MillsToSpriteNumber(millisPerSprite, millis, total);
         return state is CreatureState.IDLE or CreatureState.FLY or CreatureState.COOLDOWN?
-            PingPongSpriteIndex(v, spriteNumber) : spriteNumber;
-    }
-
-
-    private int MillsToSpriteNumber(int millisPerSprite, int millis, int totalSprite)
-    {
-        int totalMillis = millisPerSprite * totalSprite;
-        millis %= totalMillis;
-        return millis / millisPerSprite;
+            PingPongSpriteIndex(total, spriteNumber) : spriteNumber;
     }
 
  
@@ -101,20 +91,8 @@ public class PlayerAnimation : AbstractCreatureAnimation
     public override OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis)
     {
         var nr = ComputerSpriteIndex(state, millis);
-        if (_stateSpriteReaders.TryGetValue(state, out var spriteReader))
-        {
-            return spriteReader.Get(direction, nr);
-        }
-        throw new NotImplementedException();
-    }
-
-    public override int AnimationMillis(CreatureState state)
-    {
-        if (STATE_MILLIS_PER_SPRITE.TryGetValue(state, out var number))
-        {
-            return number;
-        }
-        throw new NotImplementedException();
+        var spriteReader = GetSpriteReader(state);
+        return spriteReader.Get(direction, nr);
     }
 
 

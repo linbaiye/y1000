@@ -8,6 +8,7 @@ using y1000.code.character.state;
 using y1000.code.networking.message;
 using y1000.code.player.snapshot;
 using y1000.code.util;
+using y1000.Source.Animation;
 using y1000.Source.Entity.Animation;
 
 namespace y1000.code.player

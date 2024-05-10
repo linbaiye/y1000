@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using y1000.code;
 using y1000.Source.Creature;
+using y1000.Source.Entity.Animation;
 using y1000.Source.Sprite;
 
-namespace y1000.Source.Entity.Animation;
+namespace y1000.Source.Animation;
 
 public abstract class AbstractCreatureAnimation : ICreatureAnimation
 {
@@ -28,9 +29,9 @@ public abstract class AbstractCreatureAnimation : ICreatureAnimation
             DirectionIndex = directionIndex;
         }
 
-        public SpriteReader Reader { get; }
+        private SpriteReader Reader { get; }
 
-        public Dictionary<Direction, int> DirectionIndex { get; }
+        private Dictionary<Direction, int> DirectionIndex { get; }
 
         public OffsetTexture Get(Direction direction, int nr)
         {
@@ -42,6 +43,16 @@ public abstract class AbstractCreatureAnimation : ICreatureAnimation
         }
     }
 
+    protected int GetMillisPerSprite(CreatureState state)
+    {
+        if (_stateMillisPerSprite.TryGetValue(state, out var millis))
+        {
+            return millis;
+        }
+
+        throw new NotImplementedException();
+    }
+
     protected DirectionIndexedSpriteReader GetSpriteReader(CreatureState state)
     {
         if (_stateSpriteReaders.TryGetValue(state, out var reader))
@@ -51,13 +62,27 @@ public abstract class AbstractCreatureAnimation : ICreatureAnimation
         throw new NotImplementedException();
     }
 
-    public int AnimationMillis(CreatureState state)
+    protected int GetSpriteNumber(CreatureState state)
     {
-        if (_stateMillisPerSprite.TryGetValue(state, out var m))
+        if (_stateSpriteNumber.TryGetValue(state, out var number))
         {
-            return m;
+            return number;
         }
         throw new NotImplementedException();
+    }
+
+    public int AnimationMillis(CreatureState state)
+    {
+        var spriteNumber = GetSpriteNumber(state);
+        var millisPerSprite = GetMillisPerSprite(state);
+        return spriteNumber * millisPerSprite;
+    }
+    
+    protected int MillsToSpriteNumber(int millisPerSprite, int millis, int totalSprite)
+    {
+        int totalMillis = millisPerSprite * totalSprite;
+        millis %= totalMillis;
+        return millis / millisPerSprite;
     }
 
     public abstract OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis);

@@ -9,6 +9,7 @@ using y1000.code.entity.equipment.hat;
 using y1000.code.entity.equipment.trousers;
 using y1000.code.entity.equipment.weapon;
 using y1000.code.player.skill;
+using y1000.Source.Animation;
 using y1000.Source.Entity.Animation;
 
 namespace y1000.code.player

@@ -1,7 +1,5 @@
 using y1000.code;
-using y1000.Source.Creature.State;
-using y1000.Source.Entity.Animation;
-using y1000.Source.Sprite;
+using y1000.Source.Animation;
 
 namespace y1000.Source.Creature.Monster;
 
@@ -9,11 +7,6 @@ public class MonsterHurtState : AbstractMonsterState
 {
     private MonsterHurtState(int total, int elapsedMillis = 0) : base(total, elapsedMillis)
     {
-    }
-    
-    public static MonsterHurtState Create(string name, int elapsed = 0)
-    {
-        return null;
     }
 
     public static MonsterHurtState Create(MonsterAnimation animation, int elapsed)
@@ -25,5 +18,6 @@ public class MonsterHurtState : AbstractMonsterState
 
     public override void Update(Monster c, int delta)
     {
+        Elapse(delta);
     }
 }

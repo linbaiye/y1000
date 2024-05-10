@@ -1,13 +1,10 @@
 using y1000.code;
-using y1000.Source.Character.State;
-using y1000.Source.Creature.State;
-using y1000.Source.Sprite;
+using y1000.Source.Animation;
 
 namespace y1000.Source.Creature.Monster;
 
 public class MonsterIdleState : AbstractMonsterState
 {
-    
     private MonsterIdleState(int total, int elapsedMillis = 0) : base(total, elapsedMillis)
     {
     }

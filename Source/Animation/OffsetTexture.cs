@@ -1,6 +1,6 @@
 using Godot;
 
-namespace y1000.Source.Entity.Animation
+namespace y1000.Source.Animation
 {
     // A texture with offset.
     public class OffsetTexture
