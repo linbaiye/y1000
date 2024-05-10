@@ -55,9 +55,9 @@ namespace Source.Networking.Protobuf {
             "a2V0EkcKDmludGVycG9sYXRpb25zGAEgAygLMi8uU291cmNlLk5ldHdvcmtp",
             "bmcuUHJvdG9idWYuSW50ZXJwb2xhdGlvblBhY2tldCKsAQoLTG9naW5QYWNr",
             "ZXQSCQoBeBgBIAEoBRIJCgF5GAIgASgFEgoKAmlkGAMgASgDEhUKDXdlYXBv",
-            "blNoYXBlSWQYBCABKAUSGQoRYXR0YWNrS3VuZ0Z1TGV2ZWwYBSABKAISGAoQ",
+            "blNoYXBlSWQYBCABKAUSGQoRYXR0YWNrS3VuZ0Z1TGV2ZWwYBSABKAUSGAoQ",
             "YXR0YWNrS3VuZ0Z1TmFtZRgGIAEoCRIXCg9mb290S3VuZ0Z1TGV2ZWwYByAB",
-            "KAISFgoOZm9vdEt1bmdGdU5hbWUYCCABKAkirQYKBlBhY2tldBJECg5wb3Np",
+            "KAUSFgoOZm9vdEt1bmdGdU5hbWUYCCABKAkirQYKBlBhY2tldBJECg5wb3Np",
             "dGlvblBhY2tldBgBIAEoCzIqLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVm",
             "LlBvc2l0aW9uUGFja2V0SAASWAoVY3JlYXR1cmVJbnRlcnBvbGF0aW9uGAIg",
             "ASgLMjcuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ3JlYXR1cmVJbnRl",
@@ -3707,10 +3707,10 @@ namespace Source.Networking.Protobuf {
 
     /// <summary>Field number for the "attackKungFuLevel" field.</summary>
     public const int AttackKungFuLevelFieldNumber = 5;
-    private float attackKungFuLevel_;
+    private int attackKungFuLevel_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public float AttackKungFuLevel {
+    public int AttackKungFuLevel {
       get { return attackKungFuLevel_; }
       set {
         attackKungFuLevel_ = value;
@@ -3731,10 +3731,10 @@ namespace Source.Networking.Protobuf {
 
     /// <summary>Field number for the "footKungFuLevel" field.</summary>
     public const int FootKungFuLevelFieldNumber = 7;
-    private float footKungFuLevel_;
+    private int footKungFuLevel_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public float FootKungFuLevel {
+    public int FootKungFuLevel {
       get { return footKungFuLevel_; }
       set {
         footKungFuLevel_ = value;
@@ -3772,9 +3772,9 @@ namespace Source.Networking.Protobuf {
       if (Y != other.Y) return false;
       if (Id != other.Id) return false;
       if (WeaponShapeId != other.WeaponShapeId) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AttackKungFuLevel, other.AttackKungFuLevel)) return false;
+      if (AttackKungFuLevel != other.AttackKungFuLevel) return false;
       if (AttackKungFuName != other.AttackKungFuName) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(FootKungFuLevel, other.FootKungFuLevel)) return false;
+      if (FootKungFuLevel != other.FootKungFuLevel) return false;
       if (FootKungFuName != other.FootKungFuName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3787,9 +3787,9 @@ namespace Source.Networking.Protobuf {
       if (Y != 0) hash ^= Y.GetHashCode();
       if (Id != 0L) hash ^= Id.GetHashCode();
       if (WeaponShapeId != 0) hash ^= WeaponShapeId.GetHashCode();
-      if (AttackKungFuLevel != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AttackKungFuLevel);
+      if (AttackKungFuLevel != 0) hash ^= AttackKungFuLevel.GetHashCode();
       if (AttackKungFuName.Length != 0) hash ^= AttackKungFuName.GetHashCode();
-      if (FootKungFuLevel != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(FootKungFuLevel);
+      if (FootKungFuLevel != 0) hash ^= FootKungFuLevel.GetHashCode();
       if (FootKungFuName.Length != 0) hash ^= FootKungFuName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3825,17 +3825,17 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(32);
         output.WriteInt32(WeaponShapeId);
       }
-      if (AttackKungFuLevel != 0F) {
-        output.WriteRawTag(45);
-        output.WriteFloat(AttackKungFuLevel);
+      if (AttackKungFuLevel != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(AttackKungFuLevel);
       }
       if (AttackKungFuName.Length != 0) {
         output.WriteRawTag(50);
         output.WriteString(AttackKungFuName);
       }
-      if (FootKungFuLevel != 0F) {
-        output.WriteRawTag(61);
-        output.WriteFloat(FootKungFuLevel);
+      if (FootKungFuLevel != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(FootKungFuLevel);
       }
       if (FootKungFuName.Length != 0) {
         output.WriteRawTag(66);
@@ -3867,17 +3867,17 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(32);
         output.WriteInt32(WeaponShapeId);
       }
-      if (AttackKungFuLevel != 0F) {
-        output.WriteRawTag(45);
-        output.WriteFloat(AttackKungFuLevel);
+      if (AttackKungFuLevel != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(AttackKungFuLevel);
       }
       if (AttackKungFuName.Length != 0) {
         output.WriteRawTag(50);
         output.WriteString(AttackKungFuName);
       }
-      if (FootKungFuLevel != 0F) {
-        output.WriteRawTag(61);
-        output.WriteFloat(FootKungFuLevel);
+      if (FootKungFuLevel != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(FootKungFuLevel);
       }
       if (FootKungFuName.Length != 0) {
         output.WriteRawTag(66);
@@ -3905,14 +3905,14 @@ namespace Source.Networking.Protobuf {
       if (WeaponShapeId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(WeaponShapeId);
       }
-      if (AttackKungFuLevel != 0F) {
-        size += 1 + 4;
+      if (AttackKungFuLevel != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(AttackKungFuLevel);
       }
       if (AttackKungFuName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(AttackKungFuName);
       }
-      if (FootKungFuLevel != 0F) {
-        size += 1 + 4;
+      if (FootKungFuLevel != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FootKungFuLevel);
       }
       if (FootKungFuName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(FootKungFuName);
@@ -3941,13 +3941,13 @@ namespace Source.Networking.Protobuf {
       if (other.WeaponShapeId != 0) {
         WeaponShapeId = other.WeaponShapeId;
       }
-      if (other.AttackKungFuLevel != 0F) {
+      if (other.AttackKungFuLevel != 0) {
         AttackKungFuLevel = other.AttackKungFuLevel;
       }
       if (other.AttackKungFuName.Length != 0) {
         AttackKungFuName = other.AttackKungFuName;
       }
-      if (other.FootKungFuLevel != 0F) {
+      if (other.FootKungFuLevel != 0) {
         FootKungFuLevel = other.FootKungFuLevel;
       }
       if (other.FootKungFuName.Length != 0) {
@@ -3984,16 +3984,16 @@ namespace Source.Networking.Protobuf {
             WeaponShapeId = input.ReadInt32();
             break;
           }
-          case 45: {
-            AttackKungFuLevel = input.ReadFloat();
+          case 40: {
+            AttackKungFuLevel = input.ReadInt32();
             break;
           }
           case 50: {
             AttackKungFuName = input.ReadString();
             break;
           }
-          case 61: {
-            FootKungFuLevel = input.ReadFloat();
+          case 56: {
+            FootKungFuLevel = input.ReadInt32();
             break;
           }
           case 66: {
@@ -4031,16 +4031,16 @@ namespace Source.Networking.Protobuf {
             WeaponShapeId = input.ReadInt32();
             break;
           }
-          case 45: {
-            AttackKungFuLevel = input.ReadFloat();
+          case 40: {
+            AttackKungFuLevel = input.ReadInt32();
             break;
           }
           case 50: {
             AttackKungFuName = input.ReadString();
             break;
           }
-          case 61: {
-            FootKungFuLevel = input.ReadFloat();
+          case 56: {
+            FootKungFuLevel = input.ReadInt32();
             break;
           }
           case 66: {

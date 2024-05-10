@@ -62,7 +62,7 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
     
     public static PlayerMoveState FlyTowards(bool male, Direction direction, int elapsed = 0)
     {
-        return Create(CreatureState.RUN, direction, elapsed);
+        return Create(CreatureState.FLY, direction, elapsed);
     }
 
 }

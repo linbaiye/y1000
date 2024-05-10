@@ -90,9 +90,9 @@ message LoginPacket {
   int32 y = 2;
   int64 id = 3;
   int32 weaponShapeId = 4;
-  float attackKungFuLevel = 5;
+  int32 attackKungFuLevel = 5;
   string attackKungFuName = 6;
-  float footKungFuLevel = 7;
+  int32 footKungFuLevel = 7;
   string footKungFuName = 8;
 }
 

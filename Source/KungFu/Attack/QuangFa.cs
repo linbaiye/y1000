@@ -14,7 +14,7 @@ public class QuangFa : AbstractLevelKungFu, IAttackKungFu
 
     private static readonly Random RANDOM = new();
     
-    public QuangFa(float level, string name) : base(level)
+    public QuangFa(int level, string name) : base(level)
     {
         Name = name;
     }

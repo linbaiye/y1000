@@ -4,7 +4,7 @@ public class UnnamedBufa : AbstractLevelKungFu, IFootKungFu
 {
     public const string NAME = "无名步法";
     
-    public UnnamedBufa(float level) : base(level)
+    public UnnamedBufa(int level) : base(level)
     {
     }
 

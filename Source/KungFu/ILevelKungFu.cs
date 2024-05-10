@@ -3,6 +3,6 @@
 public interface ILevelKungFu : IKungFu
 {
     
-    float Level { get; }
+    int Level { get; }
     
 }
