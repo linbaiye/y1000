@@ -9,7 +9,7 @@ public interface IAttackKungFu : ILevelKungFu
 {
     void Attack(Character.Character character, AttackInput input);
 
-    public static IAttackKungFu? ByName(string name, float level)
+    public static IAttackKungFu? ByName(string name, int level)
     {
         if (QuangFa.Knows(name))
         {
