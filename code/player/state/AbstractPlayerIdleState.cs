@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using y1000.code.creatures;
 using y1000.code.creatures.state;
+using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Sprite;
 

@@ -271,6 +271,7 @@ centered = false
 visible = false
 
 [node name="Cooldown" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("7_n02rn")
 centered = false
 

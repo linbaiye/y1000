@@ -2,7 +2,6 @@ using NLog;
 using y1000.code;
 using y1000.Source.Animation;
 using y1000.Source.Creature.State;
-using y1000.Source.Entity.Animation;
 
 namespace y1000.Source.Creature.Monster;
 
@@ -26,8 +25,8 @@ public class MonsterMoveState : AbstractCreatureMoveState<Monster>
         Move(c, delta);
     }
 
-    public static MonsterMoveState Move(MonsterAnimation animation, Direction towards, int elapsed)
+    public static MonsterMoveState Move(MonsterAnimation animation, Direction towards, int elapsed = 0)
     {
-        return new MonsterMoveState(animation.AnimationMillis(CreatureState.IDLE), towards, elapsed);
+        return new MonsterMoveState(animation.AnimationMillis(CreatureState.WALK), towards, elapsed);
     }
 }

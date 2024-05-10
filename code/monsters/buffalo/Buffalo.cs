@@ -1,6 +1,7 @@
 using System.Drawing;
 using Godot;
 using y1000.code.creatures.state;
+using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Sprite;
 using AbstractCreature = y1000.code.creatures.AbstractCreature;

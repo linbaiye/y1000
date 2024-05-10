@@ -6,7 +6,6 @@ using y1000.code.player;
 using y1000.Source.Animation;
 using y1000.Source.Creature.State;
 using y1000.Source.Entity;
-using y1000.Source.Entity.Animation;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
@@ -54,7 +53,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
     public void Visit(MoveMessage moveMessage)
     {
-        _state = CreateState(CreatureState.WALK, 0, moveMessage.Direction, MonsterAnimation);
+        _state = MonsterMoveState.Move(MonsterAnimation, moveMessage.Direction);
     }
 
     public void Visit(HurtMessage hurtMessage)

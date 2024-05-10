@@ -3,7 +3,6 @@ using y1000.code;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Creature.State;
-using y1000.Source.Entity.Animation;
 using y1000.Source.Sprite;
 
 namespace y1000.Source.Player;
@@ -19,7 +18,7 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
     
     protected override ILogger Logger => LOGGER;
 
-    private CreatureState State { get; set; }
+    private CreatureState State { get; }
 
 
     private static PlayerMoveState Create(CreatureState state, Direction dir, int e = 0)

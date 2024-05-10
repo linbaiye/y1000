@@ -10,7 +10,7 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
     
     private readonly Vector2 _velocity;
 
-    protected AbstractCreatureMoveState(int total, Direction towards, int elapsedMillis = 0) : base(elapsedMillis, total)
+    protected AbstractCreatureMoveState(int total, Direction towards, int elapsedMillis = 0) : base(total, elapsedMillis)
     {
         Towards = towards;
         _directionChanged = false;

@@ -16,8 +16,6 @@ namespace y1000.Source.Character.State
 {
     public class CharacterMoveState : ICharacterState
     {
-        private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-
         private readonly AbstractRightClickInput _currentInput;
 
         private IRightClickInput? _lastInput;

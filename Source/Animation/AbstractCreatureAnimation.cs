@@ -1,89 +1,78 @@
 using System;
 using System.Collections.Generic;
+using Godot;
+using NLog;
 using y1000.code;
 using y1000.Source.Creature;
-using y1000.Source.Entity.Animation;
 using y1000.Source.Sprite;
 
 namespace y1000.Source.Animation;
 
-public abstract class AbstractCreatureAnimation : ICreatureAnimation
+public abstract class AbstractCreatureAnimation<TA> : ICreatureAnimation  where TA : AbstractCreatureAnimation<TA>
 {
-    private readonly IDictionary<CreatureState, DirectionIndexedSpriteReader> _stateSpriteReaders;
-    private readonly IDictionary<CreatureState, int> _stateMillisPerSprite;
-    private readonly IDictionary<CreatureState, int> _stateSpriteNumber;
-
-    protected AbstractCreatureAnimation(IDictionary<CreatureState, DirectionIndexedSpriteReader> stateSpriteReaders,
-        IDictionary<CreatureState, int> stateMillisPerSprite, IDictionary<CreatureState, int> stateSpriteNumber)
+    private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+    protected class StateAnimation
     {
-        _stateSpriteReaders = stateSpriteReaders;
-        _stateMillisPerSprite = stateMillisPerSprite;
-        _stateSpriteNumber = stateSpriteNumber;
-    }
-
-    protected class DirectionIndexedSpriteReader
-    {
-        public DirectionIndexedSpriteReader(SpriteReader reader, Dictionary<Direction, int> directionIndex)
+        public StateAnimation(int frameNumber, int millisPerSprite, IDictionary<Direction, int> offset, SpriteReader spriteReader)
         {
-            Reader = reader;
-            DirectionIndex = directionIndex;
+            FrameNumber = frameNumber;
+            MillisPerSprite = millisPerSprite;
+            SpriteReader = spriteReader;
+            Offset = offset;
         }
 
-        private SpriteReader Reader { get; }
+        public int FrameNumber { get; }
 
-        private Dictionary<Direction, int> DirectionIndex { get; }
+        private int MillisPerSprite { get; }
+
+        private SpriteReader SpriteReader { get; }
+        
+        private IDictionary<Direction, int> Offset { get; }
+        
+        public int TotalMillis => FrameNumber * MillisPerSprite;
 
         public OffsetTexture Get(Direction direction, int nr)
         {
-            if (DirectionIndex.TryGetValue(direction, out var n))
+            if (Offset.TryGetValue(direction, out var off))
             {
-                return Reader.Get(nr + n);
+                return SpriteReader.Get(off+ nr);
             }
-            throw new IndexOutOfRangeException();
-        }
-    }
-
-    protected int GetMillisPerSprite(CreatureState state)
-    {
-        if (_stateMillisPerSprite.TryGetValue(state, out var millis))
-        {
-            return millis;
+            throw new NotImplementedException();
         }
 
-        throw new NotImplementedException();
-    }
-
-    protected DirectionIndexedSpriteReader GetSpriteReader(CreatureState state)
-    {
-        if (_stateSpriteReaders.TryGetValue(state, out var reader))
+        public int MillisToFrameNumber(int millis)
         {
-            return reader;
+            millis %= TotalMillis;
+            return millis / MillisPerSprite;
         }
-        throw new NotImplementedException();
+
+        public OffsetTexture GetFrame(Direction direction, int millis)
+        {
+            return Get(direction, MillisToFrameNumber(millis));
+        }
+    }
+    
+    private readonly IDictionary<CreatureState, StateAnimation> _configs = new Dictionary<CreatureState, StateAnimation>();
+    
+    protected TA ConfigureState(CreatureState state, int totalNumber, int millisPer, IDictionary<Direction, int> offset, SpriteReader spriteReader)
+    {
+        _configs.TryAdd(state, new StateAnimation(totalNumber, millisPer, offset, spriteReader));
+        return (TA)this;
     }
 
-    protected int GetSpriteNumber(CreatureState state)
+    protected StateAnimation GetOrThrow(CreatureState state)
     {
-        if (_stateSpriteNumber.TryGetValue(state, out var number))
+        if (_configs.TryGetValue(state, out var config))
         {
-            return number;
+            return config;
         }
         throw new NotImplementedException();
     }
 
     public int AnimationMillis(CreatureState state)
     {
-        var spriteNumber = GetSpriteNumber(state);
-        var millisPerSprite = GetMillisPerSprite(state);
-        return spriteNumber * millisPerSprite;
+        return GetOrThrow(state).TotalMillis;
     }
     
-    protected int MillsToSpriteNumber(int millisPerSprite, int millis, int totalSprite)
-    {
-        int totalMillis = millisPerSprite * totalSprite;
-        millis %= totalMillis;
-        return millis / millisPerSprite;
-    }
-
     public abstract OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis);
 }

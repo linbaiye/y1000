@@ -20,7 +20,6 @@ public partial class BodyTextContainer : MarginContainer
         var bodySprite = GetParent<BodySprite>();
         var position = bodySprite.Coordinate + new Vector2(16, -16);
         GlobalPosition = position;
-        LOGGER.Debug("Position {0}.", GlobalPosition);
         var label = GetNode<Label>("Label");
         label.Text = "牛";
         label.Show();

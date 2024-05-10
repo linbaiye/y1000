@@ -1,31 +1,22 @@
 ﻿using System.Collections.Generic;
+using Godot;
 using y1000.code;
 using y1000.Source.Creature;
+using y1000.Source.Creature.Monster;
 using y1000.Source.Sprite;
 
 namespace y1000.Source.Animation;
 
-public class MonsterAnimation : AbstractCreatureAnimation
+public class MonsterAnimation : AbstractCreatureAnimation<MonsterAnimation>
 {
-
-    public static readonly MonsterAnimation Instance = new MonsterAnimation(new Dictionary<CreatureState, DirectionIndexedSpriteReader>(),
-        new Dictionary<CreatureState, int>(), new Dictionary<CreatureState, int>());
-
-    private MonsterAnimation(IDictionary<CreatureState, DirectionIndexedSpriteReader>
-        stateSpriteReaders, IDictionary<CreatureState, int> stateMillisPerSprite,
-        IDictionary<CreatureState, int> stateSpriteNumber) : base(stateSpriteReaders, stateMillisPerSprite, stateSpriteNumber)
-    {
-    }
-
-    public override OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis)
-    {
-        var reader = GetSpriteReader(state);
-        var total = GetSpriteNumber(state);
-        var unit = GetMillisPerSprite(state);
-        var nr = MillsToSpriteNumber(unit, millis, total);
-        return reader.Get(direction, nr);
-    }
+    public static readonly MonsterAnimation Instance = new();
     
+    private MonsterAnimation()
+    {
+        
+    }
+
+    public override OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis) => GetOrThrow(state).GetFrame(direction, millis);
     
     private static readonly Dictionary<Direction, int> BUFFALO_IDLE_OFFSET = new()
     {
@@ -51,44 +42,34 @@ public class MonsterAnimation : AbstractCreatureAnimation
         { Direction.UP_LEFT, 161},
     };
     
-    private static readonly Dictionary<CreatureState, int> BUFFALO_SPRITE_MILLIS = new()
+
+    
+    private static readonly Dictionary<Direction, int> BUFFALO_HURT_OFFSET = new()
     {
-        { CreatureState.IDLE, 400 },
-        { CreatureState.WALK, 150 },
-        { CreatureState.HURT, 100 },
+        { Direction.UP, 12},
+        { Direction.UP_RIGHT, 35},
+        { Direction.RIGHT, 58},
+        { Direction.DOWN_RIGHT, 81},
+        { Direction.DOWN, 104},
+        { Direction.DOWN_LEFT, 127},
+        { Direction.LEFT, 150},
+        { Direction.UP_LEFT, 173},
     };
-
-    private static readonly Dictionary<CreatureState, int> BUFFALO_SPRITE_NUMBER = new()
-    {
-        { CreatureState.IDLE, 5 },
-        { CreatureState.WALK, 7 },
-        { CreatureState.HURT, 3 },
-    };
-
-    private static Dictionary<CreatureState, DirectionIndexedSpriteReader> BuildReaders(SpriteReader reader)
-    {
-        DirectionIndexedSpriteReader idle = new DirectionIndexedSpriteReader(reader, BUFFALO_IDLE_OFFSET);
-        return new Dictionary<CreatureState, DirectionIndexedSpriteReader>()
-        {
-            { CreatureState.IDLE, idle},
-            { CreatureState.WALK, new DirectionIndexedSpriteReader(reader, BUFFALO_WALK_OFFSET)},
-        };
-    }
-
 
     private static MonsterAnimation CreateBuffalo(SpriteReader reader)
     {
-        var directionIndexedSpriteReaders = BuildReaders(reader);
-        return new MonsterAnimation(directionIndexedSpriteReaders, BUFFALO_SPRITE_MILLIS , BUFFALO_SPRITE_NUMBER);
+        return new MonsterAnimation()
+            .ConfigureState(CreatureState.IDLE, 5, 400, BUFFALO_IDLE_OFFSET, reader)
+            .ConfigureState(CreatureState.WALK, 7, 150, BUFFALO_WALK_OFFSET, reader)
+            .ConfigureState(CreatureState.HURT, 3, 100, BUFFALO_HURT_OFFSET, reader);
     }
     
-
     public static MonsterAnimation LoadFor(string name)
     {
         switch (name)
         {
             case "牛":
-                return CreateBuffalo(SpriteReader.LoadSprites("buffalo"));
+                return CreateBuffalo(SpriteReader.LoadOffsetMonsterSprites("buffalo"));
         }
         return Instance;
     }

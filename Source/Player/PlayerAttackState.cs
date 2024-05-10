@@ -1,6 +1,5 @@
 using System;
 using y1000.Source.Animation;
-using y1000.Source.Entity.Animation;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.Networking;
 
@@ -15,6 +14,7 @@ public class PlayerAttackState : AbstractPlayerState
     }
     
     private AttackKungFuType Type { get; }
+    
     private bool Above50 { get; }
 
     public override void Update(Player c, int delta)
@@ -39,6 +39,8 @@ public class PlayerAttackState : AbstractPlayerState
 
     protected override OffsetTexture BodyOffsetTexture(Player player, PlayerAnimation playerAnimation)
     {
-        return playerAnimation.AttackOffsetTexture(Type, Above50, player.Direction, ElapsedMillis);
+        return Above50
+            ? playerAnimation.Above50AttackTexture(Type, player.Direction, ElapsedMillis)
+            : playerAnimation.Below50AttackTexture(Type, player.Direction, ElapsedMillis);
     }
 }

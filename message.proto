@@ -75,7 +75,7 @@ message ClientPacket {
 
 message InterpolationPacket {
   int32 state = 2;
-  int64 elapsedMillis = 5;
+  int32 elapsedMillis = 5;
   int32 direction = 7;
   int32 x = 8;
   int32 y = 9;

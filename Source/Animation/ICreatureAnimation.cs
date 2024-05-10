@@ -1,8 +1,7 @@
 ﻿using y1000.code;
-using y1000.Source.Animation;
 using y1000.Source.Creature;
 
-namespace y1000.Source.Entity.Animation;
+namespace y1000.Source.Animation;
 
 public interface ICreatureAnimation
 {
