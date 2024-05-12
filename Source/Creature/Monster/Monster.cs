@@ -41,9 +41,16 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
                 return MonsterMoveState.Move(animation, direction, elapses);
             case CreatureState.HURT:
                 return MonsterHurtState.Create(animation, elapses);
+            case CreatureState.ATTACK:
+                return MonsterAttackState.Create(animation, elapses);
             default:
                 throw new NotImplementedException();
         }
+    }
+
+    public void GoIdle()
+    {
+        _state = MonsterIdleState.Create(MonsterAnimation);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -60,11 +67,18 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
     {
         _state = CreateState(CreatureState.HURT, 0, Direction, MonsterAnimation);
     }
+    
 
     public void Visit(SetPositionMessage message)
     {
         SetPosition(message);
         _state = MonsterIdleState.Create(MonsterAnimation, 0);
+    }
+
+    public void Visit(CreatureAttackMessage attackMessage)
+    {
+        Direction = attackMessage.Direction;
+        _state = MonsterAttackState.Create(MonsterAnimation);
     }
 
     public void Handle(IEntityMessage message)

@@ -65,4 +65,9 @@ public interface IServerMessageVisitor
     {
         Visit((IPredictableResponse)response);
     }
+
+    void Visit(CreatureAttackMessage attackMessage)
+    {
+        Visit((IEntityMessage)attackMessage);
+    }
 }

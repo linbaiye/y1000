@@ -19,18 +19,12 @@ public class QuangFa : AbstractLevelKungFu, IAttackKungFu
         Name = name;
     }
 
-    private int MillisPerSprite(bool below)
-    {
-        return below ? 90 : 75;
-    }
-
     public override string Name { get; }
 
     private static readonly ISet<string> NAMES = new HashSet<string>()
     {
         "无名拳法",
     };
-    
     
     public static bool Knows(string name)
     {
@@ -47,7 +41,7 @@ public class QuangFa : AbstractLevelKungFu, IAttackKungFu
         bool below50 = UseBlow50();
         character.Direction = character.Coordinate.GetDirection(input.Entity.Coordinate);
         character.EmitEvent(new AttackPrediction(input), new AttackEntityEvent(input, below50, character.Direction));
-        var characterAttackState = CharacterAttackState.Quanfa(character.IsMale, below50, MillisPerSprite(below50));
+        var characterAttackState = CharacterAttackState.Quanfa(character.IsMale, below50);
         character.ChangeState(characterAttackState);
     }
 }

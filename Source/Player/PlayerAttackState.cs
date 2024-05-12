@@ -22,7 +22,7 @@ public class PlayerAttackState : AbstractPlayerState
         NotifyIfElapsed(c, delta);
     }
     
-    public static PlayerAttackState Quanfa(bool male, bool below50, int millisPerSprite, int elapsedMillis = 0)
+    public static PlayerAttackState Quanfa(bool male, bool below50, int elapsedMillis = 0)
     {
         var ani = male ? PlayerAnimation.Male : PlayerAnimation.Female;
         return new PlayerAttackState(ani.AttackAnimationMillis(AttackKungFuType.QUANFA, !below50), AttackKungFuType.QUANFA, !below50, elapsedMillis);
@@ -32,7 +32,7 @@ public class PlayerAttackState : AbstractPlayerState
     {
         if (interpolation.AttackKungFuType == AttackKungFuType.QUANFA)
         {
-            return Quanfa(interpolation.Male, interpolation.AttackKungFuBelow50, 0, (int)interpolation.Interpolation.ElapsedMillis);
+            return Quanfa(interpolation.Male, interpolation.AttackKungFuBelow50, interpolation.Interpolation.ElapsedMillis);
         }
         throw new NotSupportedException();
     }

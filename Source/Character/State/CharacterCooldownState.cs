@@ -9,14 +9,13 @@ public class CharacterCooldownState : ICharacterState
     public CharacterCooldownState(PlayerCooldownState state)
     {
         _state = state;
-        //_target = target;
     }
     
     public void OnWrappedPlayerAnimationFinished(Character character)
     {
         //character.AttackKungFu?.Attack(character, InputFactory.CreateAttack());
         //character.ChangeState(CharacterAttackState.Quanfa());
-        //character.ChangeState(Cooldown(character.IsMale, _target, _millisPerSprite));
+        character.ChangeState(Cooldown(character.IsMale));
     }
     
     public IPlayerState WrappedState => _state;

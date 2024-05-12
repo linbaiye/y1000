@@ -87,7 +87,7 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 	public void Visit(PlayerAttackMessage message)
 	{
 		Direction = message.Direction;
-		_state = PlayerAttackState.Quanfa(IsMale, message.Below50, message.MillisPerSprite);
+		_state = PlayerAttackState.Quanfa(IsMale, message.Below50);
 	}
 
 	public void Visit(HurtMessage hurtMessage)

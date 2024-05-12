@@ -243,7 +243,6 @@ libraries = {
 }
 
 [node name="BladeHard" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("10_mugpi")
 centered = false
 

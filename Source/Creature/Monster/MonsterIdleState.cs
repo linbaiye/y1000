@@ -22,7 +22,7 @@ public class MonsterIdleState : AbstractMonsterState
     }
 
     
-    public static MonsterIdleState Create(MonsterAnimation animation, int elapsed)
+    public static MonsterIdleState Create(MonsterAnimation animation, int elapsed = 0)
     {
         return new MonsterIdleState(animation.AnimationMillis(CreatureState.IDLE), elapsed);
     }

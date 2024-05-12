@@ -56,11 +56,9 @@ namespace y1000.Source.Input
             {
                 if ((button.GetModifiersMask() & KeyModifierMask.MaskCtrl) != 0)
                 {
-                    LOGGER.Debug("Player attack");
                 }
                 else if ((button.GetModifiersMask() & KeyModifierMask.MaskShift) != 0)
                 {
-                    LOGGER.Debug("Monster attack");
                     return InputFactory.CreateAttack(entity);
                 }
                 return null;

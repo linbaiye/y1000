@@ -21,9 +21,9 @@ public class CharacterAttackState : ICharacterState
 
     public IPlayerState WrappedState => _playerAttackState;
 
-    public static CharacterAttackState Quanfa(bool male, bool below50, int spriteMillis)
+    public static CharacterAttackState Quanfa(bool male, bool below50)
     {
-        var playerAttackState = PlayerAttackState.Quanfa(male, below50, spriteMillis);
+        var playerAttackState = PlayerAttackState.Quanfa(male, below50);
         return new CharacterAttackState(playerAttackState);
     }
 
@@ -31,7 +31,7 @@ public class CharacterAttackState : ICharacterState
     {
         if (character.AttackKungFu is QuangFa)
         {
-            return Quanfa(character.IsMale, message.Below50, message.MillisPerSprite);
+            return Quanfa(character.IsMale, message.Below50);
         }
         throw new Exception();
     }

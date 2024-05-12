@@ -11,7 +11,7 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using NLog;
-using y1000.code.networking.message;
+using y1000.Source.Animation;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Control.Bottom;
@@ -62,6 +62,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		SetupNetwork();
 		_bottomControl = GetNode<BottomControl>("UILayer/BottomUI");
+		AtdReader.Load("0.atd");
 	}
 
 	private void WhenCharacterUpdated(object? sender, CharacterEventArgs eventArgs)

@@ -6,14 +6,10 @@ namespace y1000.Source.Creature.Event;
 
 public abstract class AbstractCreatureAttackMessage : AbstractEntityMessage
 {
-    
-    public AbstractCreatureAttackMessage(long id, int millisPerSprite, Direction direction) : base(id)
+    public AbstractCreatureAttackMessage(long id, Direction direction) : base(id)
     {
-        MillisPerSprite = millisPerSprite;
         Direction = direction;
     }
-    
-    public int MillisPerSprite { get; }
     
     public Direction Direction { get; }
 
@@ -21,12 +17,10 @@ public abstract class AbstractCreatureAttackMessage : AbstractEntityMessage
 
     public static AbstractCreatureAttackMessage FromPacket(CreatureAttackEventPacket packet)
     {
-        if (packet.Player) {
-            return PlayerAttackMessage.FromPacket(packet);
-        }
-        else
+        if (packet.Player)
         {
-            throw new Exception();
+            return new PlayerAttackMessage(packet.Id, packet.Below50, (Direction)packet.Direction);
         }
+        return new CreatureAttackMessage(packet.Id, (Direction)packet.Direction);
     }
 }
