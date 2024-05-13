@@ -84,85 +84,57 @@ public class PlayerAnimation : AbstractCreatureAnimation<PlayerAnimation>
         { Direction.UP_LEFT, 212 },
     };
 
-    
-    private readonly IDictionary<AttackKungFuType, StateAnimation> _above50AttackAnimations;
-    
-    private readonly IDictionary<AttackKungFuType, StateAnimation> _below50AttackAnimations;
+
+    private static readonly ISet<CreatureState> PLAYER_STATES = new HashSet<CreatureState>()
+    {
+        CreatureState.IDLE,
+
+        CreatureState.WALK,
+
+        CreatureState.RUN,
+        
+        CreatureState.STANDUP,
+
+        CreatureState.HURT,
+
+        CreatureState.DIE,
+
+        CreatureState.ENFIGHT_WALK,
+
+        CreatureState.BOW,
+
+        CreatureState.SIT,
+        
+        CreatureState.FLY,
+        
+        CreatureState.COOLDOWN,
+        
+        CreatureState.HELLO,
+        
+        CreatureState.FIST,
+        
+        CreatureState.KICK,
+        
+        CreatureState.SWORD,
+        
+        CreatureState.SWORD2H,
+        
+        CreatureState.BLADE,
+        
+        CreatureState.BLADE2H,
+        
+        CreatureState.AXE,
+        
+        CreatureState.SPEAR,
+        
+        CreatureState.THROW,
+    };
+
 
     private PlayerAnimation()
     {
-        _above50AttackAnimations = new Dictionary<AttackKungFuType, StateAnimation>();
-        _below50AttackAnimations = new Dictionary<AttackKungFuType, StateAnimation>();
     }
 
-    private int PingPongSpriteIndex(int total, int computed)
-    {
-        int half = total / 2;
-        return computed >= half ? total - 1 - computed : computed;
-    }
-
-    private int ComputerSpriteIndex(CreatureState state, int millis)
-    {
-        var stateAni = GetOrThrow(state);
-        int spriteNumber = stateAni.MillisToFrameNumber(millis);
-        return state is CreatureState.IDLE or CreatureState.FLY or CreatureState.COOLDOWN?
-            PingPongSpriteIndex(stateAni.FrameNumber, spriteNumber) : spriteNumber;
-    }
-
-    public OffsetTexture Above50AttackTexture(AttackKungFuType type, Direction direction, int millis)
-    {
-        return GetOrThrow(type, true).GetFrame(direction, millis);
-    }
-
-    private StateAnimation GetOrThrow(AttackKungFuType attackKungFuType, bool above50)
-    {
-        if (above50)
-        {
-            if (_above50AttackAnimations.TryGetValue(attackKungFuType, out var animation))
-            {
-                return animation;
-            }
-        }
-        else
-        {
-            if (_below50AttackAnimations.TryGetValue(attackKungFuType, out var animation))
-            {
-                return animation;
-            }
-        }
-        
-        throw new NotImplementedException();
-    }
-    
-    public OffsetTexture Below50AttackTexture(AttackKungFuType type, Direction direction, int millis)
-    {
-        return GetOrThrow(type, false).GetFrame(direction, millis);
-    }
-    
-    public int AttackAnimationMillis(AttackKungFuType type, bool above50)
-    {
-        return GetOrThrow(type, above50).TotalMillis;
-    }
-
-    public override OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis)
-    {
-        var nr = ComputerSpriteIndex(state, millis);
-        return GetOrThrow(state).Get(direction, nr);
-    }
-
-    private PlayerAnimation ConfigureAbove50Attack(AttackKungFuType type, int totalNumber, int millisPerSprite,
-        Dictionary<Direction, int> offset, SpriteReader reader)
-    {
-        _above50AttackAnimations.TryAdd(type, new StateAnimation(totalNumber, millisPerSprite, offset, reader));
-        return this;
-    }
-    
-    private PlayerAnimation ConfigureBelow50Attack(AttackKungFuType type, int totalNumber, int millisPerSprite,
-        Dictionary<Direction, int> offset, SpriteReader reader)
-    {
-        _below50AttackAnimations.TryAdd(type, new StateAnimation(totalNumber, millisPerSprite, offset, reader));
-        return this;
-    }
 
 
     public static readonly PlayerAnimation Male = ForMale();
@@ -173,14 +145,16 @@ public class PlayerAnimation : AbstractCreatureAnimation<PlayerAnimation>
     {
         SpriteReader N02 = SpriteReader.LoadOffsetMalePlayerSprites("N02");
         SpriteReader N01 = SpriteReader.LoadOffsetMalePlayerSprites("N01");
+        AtdReader atdReader = AtdReader.Load("0.atd");
         var playerAnimation = new PlayerAnimation();
-        return playerAnimation.ConfigureState(CreatureState.IDLE, 6, 300, IDLE_OFFSET, N02)
-                .ConfigureState(CreatureState.FLY, 6, 60, IDLE_OFFSET, N02)
-                .ConfigureState(CreatureState.WALK, 6, 100, WALK_OFFSET, N02)
-                .ConfigureState(CreatureState.RUN, 6, 60, WALK_OFFSET, N02)
-                .ConfigureState(CreatureState.HURT, 4, 100, HURT_OFFSET, N02)
-                .ConfigureState(CreatureState.COOLDOWN, 6, 300, COOLDOWN_OFFSET, N02)
-                .ConfigureAbove50Attack(AttackKungFuType.QUANFA, 7, 100, MALE_ABOVE50_FIST_SPRITE, N01)
-                .ConfigureBelow50Attack(AttackKungFuType.QUANFA, 5, 100, MALE_BELOW50_FIST_OFFSET, N01);
+        return playerAnimation.ConfigureState(CreatureState.IDLE, atdReader, N02)
+                .ConfigureState(CreatureState.FLY, atdReader, N02)
+                .ConfigureState(CreatureState.WALK, atdReader, N02)
+                .ConfigureState(CreatureState.RUN, atdReader, N02)
+                .ConfigureState(CreatureState.HURT, atdReader, N02)
+                .ConfigureState(CreatureState.COOLDOWN, atdReader, N02)
+                //.ConfigureState(CreatureState.KICK, atdReader, N01)
+                //.ConfigureState(CreatureState.FIST, atdReader, N01)
+            ;
     }
 }

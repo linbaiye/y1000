@@ -20,5 +20,11 @@ namespace y1000.Source.Animation
             Offset += off;
             return this;
         }
+        
+        public OffsetTexture Add(int x, int y)
+        {
+            Offset += new Vector2(x, y);
+            return this;
+        }
     }
 }

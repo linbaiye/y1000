@@ -1,4 +1,5 @@
 using System;
+using y1000.code;
 using y1000.Source.Animation;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.Networking;
@@ -7,16 +8,13 @@ namespace y1000.Source.Player;
 
 public class PlayerAttackState : AbstractPlayerState
 {
-    private PlayerAttackState(int total, AttackKungFuType type, bool above50, int elapsedMillis = 0) : base(total, elapsedMillis)
+    private PlayerAttackState(CreatureState state, int total, int elapsedMillis = 0) : base(total, elapsedMillis)
     {
-        Type = type;
-        Above50 = above50;
+        State = state;
     }
     
-    private AttackKungFuType Type { get; }
+    private CreatureState State { get; }
     
-    private bool Above50 { get; }
-
     public override void Update(Player c, int delta)
     {
         NotifyIfElapsed(c, delta);
@@ -25,7 +23,8 @@ public class PlayerAttackState : AbstractPlayerState
     public static PlayerAttackState Quanfa(bool male, bool below50, int elapsedMillis = 0)
     {
         var ani = male ? PlayerAnimation.Male : PlayerAnimation.Female;
-        return new PlayerAttackState(ani.AttackAnimationMillis(AttackKungFuType.QUANFA, !below50), AttackKungFuType.QUANFA, !below50, elapsedMillis);
+        CreatureState state = below50 ? CreatureState.FIST : CreatureState.KICK;
+        return new PlayerAttackState(state, ani.AnimationMillis(state), elapsedMillis);
     }
 
     public static PlayerAttackState FromInterpolation(PlayerInterpolation interpolation)
@@ -39,8 +38,6 @@ public class PlayerAttackState : AbstractPlayerState
 
     protected override OffsetTexture BodyOffsetTexture(Player player, PlayerAnimation playerAnimation)
     {
-        return Above50
-            ? playerAnimation.Above50AttackTexture(Type, player.Direction, ElapsedMillis)
-            : playerAnimation.Below50AttackTexture(Type, player.Direction, ElapsedMillis);
+        return playerAnimation.OffsetTexture(State, player.Direction, ElapsedMillis);
     }
 }

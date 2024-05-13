@@ -15,8 +15,6 @@ public class MonsterAnimation : AbstractCreatureAnimation<MonsterAnimation>
     {
         
     }
-
-    public override OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis) => GetOrThrow(state).GetFrame(direction, millis);
     
     private static readonly Dictionary<Direction, int> BUFFALO_IDLE_OFFSET = new()
     {

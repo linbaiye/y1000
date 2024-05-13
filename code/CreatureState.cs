@@ -7,10 +7,8 @@ namespace y1000.code
         WALK = 2,
 
         RUN = 3,
-
-        ENFIGHT = 4,
-
-        ATTACKING = 5,
+        
+        STANDUP = 4,
 
         HURT = 6,
 
@@ -27,6 +25,26 @@ namespace y1000.code
         ATTACK = 12,
         
         COOLDOWN = 13,
+        
+        HELLO = 14,
+        
+        FIST = 15,
+        
+        KICK = 16,
+        
+        SWORD = 17,
+        
+        SWORD2H = 18,
+        
+        BLADE = 19,
+        
+        BLADE2H = 20,
+        
+        AXE = 21,
+        
+        SPEAR = 22,
+        
+        THROW = 23,
         
     }
 }

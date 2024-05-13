@@ -2,6 +2,9 @@
 
 namespace y1000.Source.Animation;
 
+/// <summary>
+/// Each AtdStruct represents 8 directions of animations for a given state/action.
+/// </summary>
 public class AtdStruct
 {
     public AtdStruct(string action, string direction, int frame, int frameTime, List<AtdFrameDescriptor> frameDescriptors)

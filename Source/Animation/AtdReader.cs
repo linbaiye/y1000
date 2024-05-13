@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Godot;
 using NLog;
+using y1000.code;
+using y1000.Source.Creature;
 
 namespace y1000.Source.Animation;
 
@@ -15,6 +18,43 @@ public class AtdReader
     {
         this.structs = structs;
     }
+
+    private static readonly IDictionary<CreatureState, string> ACTION_MAP = new Dictionary<CreatureState, string>()
+    {
+        { CreatureState.WALK, "MOVE" },
+        { CreatureState.ENFIGHT_WALK, "MOVE1" },
+        { CreatureState.RUN, "MOVE4" },
+        { CreatureState.FLY, "MOVE5" },
+        { CreatureState.IDLE, "TURN" },
+        { CreatureState.COOLDOWN, "TURN1" },
+        { CreatureState.STANDUP, "STANDUP" },
+        { CreatureState.SIT, "SEATDOWN" },
+        { CreatureState.HURT, "STRUCTED" },
+        { CreatureState.DIE, "DIE" },
+        { CreatureState.HELLO, "HELLO" },
+        { CreatureState.FIST, "HIT" },
+        { CreatureState.KICK, "HIT1" },
+        { CreatureState.BLADE, "HIT2" },
+        { CreatureState.SWORD, "HIT2" },
+        { CreatureState.THROW, "HIT2" },
+        { CreatureState.AXE, "HIT3" },
+        { CreatureState.SPEAR, "HIT3" },
+        { CreatureState.BOW, "HIT4" },
+        { CreatureState.BLADE2H, "HIT7" },
+        { CreatureState.SWORD2H, "HIT8" },
+    };
+
+    private static readonly IDictionary<Direction, string> DIRECTION_MAP = new Dictionary<Direction, string>()
+    {
+        { Direction.UP, "DR_0" },
+        { Direction.UP_RIGHT, "DR_1" },
+        { Direction.RIGHT, "DR_2" },
+        { Direction.DOWN_RIGHT, "DR_3" },
+        { Direction.DOWN, "DR_4" },
+        { Direction.DOWN_LEFT, "DR_5" },
+        { Direction.LEFT, "DR_6" },
+        { Direction.UP_LEFT, "DR_7" },
+    };
 
     private static string? Convert(byte[] bytes)
     {
@@ -32,7 +72,24 @@ public class AtdReader
         }
         return System.Text.Encoding.UTF8.GetString(bytes, 1, len);
     }
-    
+
+    public List<AtdStruct> Find(CreatureState state)
+    {
+        if (!ACTION_MAP.TryGetValue(state, out var stateStr))
+        {
+            throw new NotImplementedException("No state string mapping found.");
+        }
+        if (!structs.TryGetValue(stateStr, out var list))
+        {
+            throw new NotImplementedException("No state mapping found.");
+        }
+        return list;
+    }
+
+    public AtdStruct FindFirst(CreatureState state)
+    {
+        return Find(state)[0];
+    }
 
     private static List<AtdFrameDescriptor> ToArray(string[] strings)
     {
@@ -44,7 +101,6 @@ public class AtdReader
             {
                 continue;
             }
-
             var px = strings[index + 1];
             var py  = strings[index + 2];
             result.Add(new AtdFrameDescriptor(frame.ToInt(), string.IsNullOrEmpty(px) ? 0 : px.ToInt(), string.IsNullOrEmpty(py) ? 0 : py.ToInt()));
@@ -90,7 +146,7 @@ public class AtdReader
     }
     
 
-    public static AtdReader? Load(string atdName)
+    public static AtdReader Load(string atdName)
     {
         FileAccess fileAccess = FileAccess.Open( "res://sprite/char/" + atdName, FileAccess.ModeFlags.Read);
         if (fileAccess == null)
@@ -118,6 +174,7 @@ public class AtdReader
                 list.Add(atdStruct);
             }
         }
+        fileAccess.Dispose();
         return new AtdReader(dictionary);
     }
 }
