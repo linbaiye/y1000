@@ -10,6 +10,7 @@ using y1000.code.networking.message;
 using y1000.code.player;
 using y1000.code.player.snapshot;
 using y1000.Source.Character.Event;
+using y1000.Source.Creature;
 using y1000.Source.Creature.Event;
 using y1000.Source.Networking.Server;
 

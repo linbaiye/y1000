@@ -1,5 +1,6 @@
 using y1000.code;
 using y1000.Source.Animation;
+using y1000.Source.Creature;
 
 namespace y1000.Source.Player;
 
@@ -20,8 +21,5 @@ public class PlayerCooldownState : AbstractPlayerState
         return new PlayerCooldownState(elapsed);
     }
 
-    protected override OffsetTexture BodyOffsetTexture(Player player, PlayerAnimation playerAnimation)
-    {
-        return playerAnimation.OffsetTexture(CreatureState.COOLDOWN, player.Direction, ElapsedMillis);
-    }
+    protected override CreatureState State => CreatureState.COOLDOWN;
 }

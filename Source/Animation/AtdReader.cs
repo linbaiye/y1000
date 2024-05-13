@@ -10,16 +10,27 @@ namespace y1000.Source.Animation;
 
 public class AtdReader
 {
-    private readonly IDictionary<string, List<AtdStruct>> structs;
+    private readonly IDictionary<string, List<AtdStruct>> _structs;
 
+    private readonly IDictionary<CreatureState, string> _actionMap;
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
-    private AtdReader(IDictionary<string, List<AtdStruct>> structs)
+    private AtdReader(IDictionary<string, List<AtdStruct>> structs, IDictionary<CreatureState, string> actionmap)
     {
-        this.structs = structs;
+        _structs = structs;
+        _actionMap = actionmap;
     }
 
-    private static readonly IDictionary<CreatureState, string> ACTION_MAP = new Dictionary<CreatureState, string>()
+    private static readonly IDictionary<CreatureState, string> MONSTER_ACTION_MAP = new Dictionary<CreatureState, string>()
+    {
+        { CreatureState.WALK, "MOVE" },
+        { CreatureState.IDLE, "TURNNING" },
+        { CreatureState.HURT, "STRUCTED" },
+        { CreatureState.ATTACK, "HIT1" },
+        { CreatureState.DIE, "DIE" },
+    };
+
+    private static readonly IDictionary<CreatureState, string> PLAYER_ACTION_MAP = new Dictionary<CreatureState, string>()
     {
         { CreatureState.WALK, "MOVE" },
         { CreatureState.ENFIGHT_WALK, "MOVE1" },
@@ -75,13 +86,13 @@ public class AtdReader
 
     public List<AtdStruct> Find(CreatureState state)
     {
-        if (!ACTION_MAP.TryGetValue(state, out var stateStr))
+        if (!_actionMap.TryGetValue(state, out var stateStr))
         {
             throw new NotImplementedException("No state string mapping found.");
         }
-        if (!structs.TryGetValue(stateStr, out var list))
+        if (!_structs.TryGetValue(stateStr, out var list))
         {
-            throw new NotImplementedException("No state mapping found.");
+            throw new NotImplementedException("No state mapping found: " + stateStr);
         }
         return list;
     }
@@ -94,7 +105,7 @@ public class AtdReader
     private static List<AtdFrameDescriptor> ToArray(string[] strings)
     {
         List<AtdFrameDescriptor> result = new List<AtdFrameDescriptor>();
-        for (int i = 'A', index = 5; i <= 'P'; i++, index += 3)
+        for (int i = 'A', index = 5; i <= 'P' && index + 2 < strings.Length; i++, index += 3)
         {
             var frame = strings[index];
             if (string.IsNullOrEmpty(frame))
@@ -144,26 +155,29 @@ public class AtdReader
         }
         return list;
     }
-    
 
-    public static AtdReader Load(string atdName)
+    private static AtdReader Load(string path, IDictionary<CreatureState, string> actionMap)
     {
-        FileAccess fileAccess = FileAccess.Open( "res://sprite/char/" + atdName, FileAccess.ModeFlags.Read);
+        FileAccess fileAccess = FileAccess.Open( path, FileAccess.ModeFlags.Read);
         if (fileAccess == null)
         {
-            throw new ArgumentException("Invalid atd:" + atdName);
+            throw new ArgumentException("Invalid atd:" + path);
         }
         var readStrings = ReadStrings(fileAccess);
         var atdStructs = Convert(readStrings);
         IDictionary<string, List<AtdStruct>> dictionary = new Dictionary<string, List<AtdStruct>>();
         foreach (var atdStruct in atdStructs)
         {
-            Logger.Debug("Struct {0}.", atdStruct );
-            foreach (var atdStructFrameDescriptor in atdStruct.FrameDescriptors)
+            /*if (atdStruct.Action.Contains("MOVE"))
             {
-                Logger.Debug("Offset {0}", atdStructFrameDescriptor);
-            }
-            Logger.Debug("----------------------------------------------------------");
+                Logger.Debug("Struct {0}.", atdStruct);
+                foreach (var atdStructFrameDescriptor in atdStruct.FrameDescriptors)
+                {
+                    Logger.Debug("Offset {0}", atdStructFrameDescriptor);
+                }
+                Logger.Debug("----------------------------------------------------------");
+            }*/
+
             if (!dictionary.ContainsKey(atdStruct.Action))
             {
                 dictionary.Add(atdStruct.Action, new List<AtdStruct>());
@@ -175,6 +189,16 @@ public class AtdReader
             }
         }
         fileAccess.Dispose();
-        return new AtdReader(dictionary);
+        return new AtdReader(dictionary, actionMap);
+    }
+
+    public static AtdReader LoadMonster(string monster, string atdName)
+    {
+        return Load("res://sprite/monster/" + monster + "/" + atdName, MONSTER_ACTION_MAP);
+    }
+    
+    public static AtdReader LoadPlayer(string atdName)
+    {
+        return Load( "res://sprite/char/" + atdName, PLAYER_ACTION_MAP);
     }
 }

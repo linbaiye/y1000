@@ -1,4 +1,4 @@
-namespace y1000.code
+namespace y1000.Source.Creature
 {
     public enum CreatureState
     {
@@ -45,6 +45,8 @@ namespace y1000.code
         SPEAR = 22,
         
         THROW = 23,
+        
+        TURN = 24,
         
     }
 }

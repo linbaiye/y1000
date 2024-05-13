@@ -115,6 +115,7 @@ namespace y1000.Source.Character
 
 		public void Handle(IEntityMessage message)
 		{
+			LOGGER.Debug("Character message {0}.", message);
 			message.Accept(this);
 		}
 
@@ -122,6 +123,11 @@ namespace y1000.Source.Character
 		{
 			Direction = message.Direction;
 			ChangeState(CharacterAttackState.FromMessage(this, message));
+		}
+
+		public void Visit(HurtMessage hurtMessage)
+		{
+			ChangeState(CharacterHurtState.Hurt());
 		}
 
 		public void HandleInput(IPredictableInput input)

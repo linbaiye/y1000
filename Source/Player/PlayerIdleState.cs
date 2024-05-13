@@ -1,5 +1,6 @@
 using y1000.code;
 using y1000.Source.Animation;
+using y1000.Source.Creature;
 
 namespace y1000.Source.Player;
 
@@ -19,8 +20,5 @@ public class PlayerIdleState  : AbstractPlayerState
         return new PlayerIdleState(elapsedMillis);
     }
 
-    protected override OffsetTexture BodyOffsetTexture(Player player, PlayerAnimation playerAnimation)
-    {
-        return playerAnimation.OffsetTexture(CreatureState.IDLE, player.Direction, ElapsedMillis);
-    }
+    protected override CreatureState State => CreatureState.IDLE;
 }

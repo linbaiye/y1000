@@ -25,13 +25,13 @@ public abstract class AbstractPlayerState : AbstractCreatureState<Player>, IPlay
             player.NotifyAnimationFinished(new CreatureAnimationDoneEventArgs(this));
         }
     }
-
-    protected abstract OffsetTexture BodyOffsetTexture(Player player, PlayerAnimation playerAnimation);
+    
+    protected abstract CreatureState State { get; }
 
     
     public override OffsetTexture BodyOffsetTexture(Player player)
     {
         var ani = player.IsMale ? PlayerAnimation.Male : PlayerAnimation.Female;
-        return BodyOffsetTexture(player, ani);
+        return ani.OffsetTexture(State, player.Direction, ElapsedMillis);
     }
 }

@@ -62,7 +62,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		SetupNetwork();
 		_bottomControl = GetNode<BottomControl>("UILayer/BottomUI");
-		AtdReader.Load("0.atd");
+		AtdReader.LoadPlayer("0.atd");
 	}
 
 	private void WhenCharacterUpdated(object? sender, CharacterEventArgs eventArgs)
@@ -275,7 +275,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			_bottomControl?.BindCharacter(_character);
 			MapLayer.BindCharacter(_character);
 			_entities.TryAdd(_character.Id, _character);
-			AddChild(_character);
+			AddChild(_character, false, InternalMode.Back);
 		}
 	}
 }

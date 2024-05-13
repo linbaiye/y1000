@@ -1,6 +1,7 @@
 using System;
 using y1000.code;
 using y1000.Source.Animation;
+using y1000.Source.Creature;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.Networking;
 
@@ -13,7 +14,7 @@ public class PlayerAttackState : AbstractPlayerState
         State = state;
     }
     
-    private CreatureState State { get; }
+    protected override CreatureState State { get; }
     
     public override void Update(Player c, int delta)
     {
@@ -35,9 +36,5 @@ public class PlayerAttackState : AbstractPlayerState
         }
         throw new NotSupportedException();
     }
-
-    protected override OffsetTexture BodyOffsetTexture(Player player, PlayerAnimation playerAnimation)
-    {
-        return playerAnimation.OffsetTexture(State, player.Direction, ElapsedMillis);
-    }
+ 
 }

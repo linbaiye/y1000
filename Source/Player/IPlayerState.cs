@@ -2,6 +2,7 @@ using System;
 using System.Xml.Linq;
 using y1000.code;
 using y1000.code.player;
+using y1000.Source.Creature;
 using y1000.Source.Creature.State;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;

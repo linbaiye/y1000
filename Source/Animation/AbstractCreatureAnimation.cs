@@ -75,25 +75,18 @@ public abstract class AbstractCreatureAnimation<TA> : ICreatureAnimation  where 
                 return;
             }
             OffsetTexture[] textures = new OffsetTexture[atdStruct.Frame];
-            int index = 0;
-            foreach (var descriptor in atdStruct.FrameDescriptors)
-            {
-                var offsetTexture = reader.Get(descriptor.Number);
-                var texture = offsetTexture.Add(descriptor.XOffset, descriptor.YOffset);
-                textures[index++] = texture;
+            for (int i = 0; i < atdStruct.Frame; i++) {
+                var descriptor = atdStruct.FrameDescriptors[i];
+                var descriptorNumber = descriptor.Number;
+                var offsetTexture = reader.Get(descriptorNumber % 500);
+                textures[i] = offsetTexture;
             }
-            LOGGER.Debug("Added for direction {0} of state {1}.", dir, atdStruct.Action);
             DirectionFrames.TryAdd(dir, textures);
         }
     }
     
     
     private readonly IDictionary<CreatureState, StateAnimation> _animations = new Dictionary<CreatureState, StateAnimation>();
-    
-    protected TA ConfigureState(CreatureState state, int totalNumber, int millisPer, IDictionary<Direction, int> offset, SpriteReader spriteReader)
-    {
-        return (TA)this;
-    }
     
     protected TA ConfigureState(CreatureState state, AtdReader atdReader, SpriteReader spriteReader)
     {
@@ -129,7 +122,6 @@ public abstract class AbstractCreatureAnimation<TA> : ICreatureAnimation  where 
 
     public OffsetTexture OffsetTexture(CreatureState state, Direction direction, int millis)
     {
-        LOGGER.Debug("Getting animation for state {0}.", state);
         return GetOrThrow(state).GetFrame(direction, millis);
     }
 }
