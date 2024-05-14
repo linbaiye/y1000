@@ -43,6 +43,11 @@ message CreatureHurtEventPacket {
   int64 id = 1;
 }
 
+message ChangeStatePacket {
+  int64 id = 1;
+  int32 state = 2;
+}
+
 
 message MoveEventPacket {
   InputPacket input = 1;
@@ -107,6 +112,7 @@ message Packet {
     ClientAttackResponsePacket attackEventResponsePacket = 9;
     CreatureAttackEventPacket attackEventPacket = 10;
     CreatureHurtEventPacket hurtEventPacket = 11;
+    ChangeStatePacket changeStatePacket = 12;
   }
 }
 

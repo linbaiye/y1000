@@ -70,4 +70,9 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)attackMessage);
     }
+
+    void Visit(ChangeStateMessage stateMessage)
+    {
+        Visit((IEntityMessage)stateMessage);
+    }
 }

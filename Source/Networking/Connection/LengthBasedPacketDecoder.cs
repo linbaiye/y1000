@@ -93,6 +93,7 @@ namespace y1000.Source.Networking.Connection
                         packet.AttackEventPacket),
                     Packet.TypedPacketOneofCase.AttackEventResponsePacket => CharacterAttackEventResponse.FromPacket(
                         packet.AttackEventResponsePacket),
+                    Packet.TypedPacketOneofCase.ChangeStatePacket => ChangeStateMessage.FromPacket(packet.ChangeStatePacket),
                     _ => throw new NotSupportedException()
                 };
             }
