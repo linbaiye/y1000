@@ -5,7 +5,7 @@ namespace y1000.Source.Networking.Server;
 
 public class CreatureAttackMessage : AbstractCreatureAttackMessage
 {
-    public CreatureAttackMessage(long id, Direction direction) : base(id, direction)
+    public CreatureAttackMessage(long id, Direction direction, CreatureState state) : base(id, direction, state)
     {
     }
 

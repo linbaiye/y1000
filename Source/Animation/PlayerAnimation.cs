@@ -64,7 +64,7 @@ public class PlayerAnimation : AbstractCreatureAnimation<PlayerAnimation>
     public static readonly PlayerAnimation Male = ForMale();
     
     public static readonly PlayerAnimation Female = ForMale();
-    
+
     private static PlayerAnimation ForMale()
     {
         SpriteReader N02 = SpriteReader.LoadOffsetMalePlayerSprites("N02");

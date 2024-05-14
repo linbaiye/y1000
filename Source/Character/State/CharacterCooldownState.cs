@@ -4,26 +4,20 @@ namespace y1000.Source.Character.State;
 
 public class CharacterCooldownState : ICharacterState
 {
-    private readonly PlayerCooldownState _state;
-
-    public CharacterCooldownState(PlayerCooldownState state)
+    private CharacterCooldownState(IPlayerState state)
     {
-        _state = state;
+        WrappedState = state;
     }
     
     public void OnWrappedPlayerAnimationFinished(Character character)
     {
-        //character.AttackKungFu?.Attack(character, InputFactory.CreateAttack());
-        //character.ChangeState(CharacterAttackState.Quanfa());
-        character.ChangeState(Cooldown(character.IsMale));
+        character.ChangeState(Cooldown());
     }
     
-    public IPlayerState WrappedState => _state;
+    public IPlayerState WrappedState { get; }
 
-    public static CharacterCooldownState Cooldown(bool male)
+    public static CharacterCooldownState Cooldown()
     {
-        var playerCooldownState = PlayerCooldownState.Cooldown(male);
-        return new CharacterCooldownState(playerCooldownState);
+        return new CharacterCooldownState(IPlayerState.Cooldown());
     }
-
 }

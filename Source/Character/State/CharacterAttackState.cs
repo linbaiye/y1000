@@ -1,5 +1,4 @@
-using System;
-using y1000.Source.KungFu.Attack;
+using y1000.Source.Creature;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 
@@ -7,32 +6,26 @@ namespace y1000.Source.Character.State;
 
 public class CharacterAttackState : ICharacterState
 {
-    private readonly PlayerAttackState _playerAttackState;
-
-    public CharacterAttackState(PlayerAttackState playerAttackState)
+    private CharacterAttackState(IPlayerState playerAttackState)
     {
-        _playerAttackState = playerAttackState;
+        WrappedState = playerAttackState;
     }
 
     public void OnWrappedPlayerAnimationFinished(Character character)
     {
-        character.ChangeState(CharacterCooldownState.Cooldown(character.IsMale));
+        character.ChangeState(CharacterCooldownState.Cooldown());
     }
 
-    public IPlayerState WrappedState => _playerAttackState;
+    public IPlayerState WrappedState { get; }
 
-    public static CharacterAttackState Quanfa(bool male, bool below50)
+    public static CharacterAttackState FromMessage(PlayerAttackMessage message)
     {
-        var playerAttackState = PlayerAttackState.Quanfa(male, below50);
-        return new CharacterAttackState(playerAttackState);
+        var playerState = IPlayerState.Attack(message.State);
+        return new CharacterAttackState(playerState);
     }
 
-    public static CharacterAttackState FromMessage(Character character, PlayerAttackMessage message)
+    public static CharacterAttackState Attack(CreatureState state)
     {
-        if (character.AttackKungFu is QuangFa)
-        {
-            return Quanfa(character.IsMale, message.Below50);
-        }
-        throw new Exception();
+        return new CharacterAttackState(IPlayerState.Attack(state));
     }
 }

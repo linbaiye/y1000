@@ -41,14 +41,14 @@ namespace y1000.Source.Character.State
                 character.EmitEvent(
                     SetPositionPrediction.Overflow(input, character.Coordinate, character.Direction),
                     new MovementEvent(input, character.Coordinate));
-                character.ChangeState(CharacterIdleState.Create(character.IsMale));
+                character.ChangeState(CharacterIdleState.Create());
             }
             else
             {
                 character.EmitEvent(
                     new MovePrediction(input, character.Coordinate, input.Direction),
                     new MovementEvent(input, character.Coordinate));
-                character.ChangeState(Move(character.FootMagic, character.IsMale, input));
+                character.ChangeState(Move(character.FootMagic, input));
             }
         }
 
@@ -59,7 +59,7 @@ namespace y1000.Source.Character.State
                 character.EmitEvent(
                     SetPositionPrediction.Overflow(_lastInput, character.Coordinate, character.Direction),
                     new MovementEvent(_lastInput, character.Coordinate));
-                character.ChangeState(CharacterIdleState.Create(character.IsMale));
+                character.ChangeState(CharacterIdleState.Create());
             }
             else if (_lastInput is AbstractRightClickInput input)
             {
@@ -90,29 +90,29 @@ namespace y1000.Source.Character.State
             _lastInput = mousePressedMotion;
         }
 
-        public static CharacterMoveState Move(IFootKungFu? magic, bool male, AbstractRightClickInput rightClickInput)
+        public static CharacterMoveState Move(IFootKungFu? magic, AbstractRightClickInput rightClickInput)
         {
             if (magic != null)
             {
-                return magic.CanFly ? Fly(male, rightClickInput) : Run(male, rightClickInput);
+                return magic.CanFly ? Fly(rightClickInput) : Run(rightClickInput);
             }
-            return Walk(male, rightClickInput);
+            return Walk(rightClickInput);
         }
 
 
-        private static CharacterMoveState Walk(bool male, AbstractRightClickInput input)
+        private static CharacterMoveState Walk(AbstractRightClickInput input)
         {
-            return new CharacterMoveState(input, PlayerMoveState.WalkTowards(male, input.Direction));
+            return new CharacterMoveState(input, PlayerMoveState.WalkTowards(input.Direction));
         }
 
-        private static CharacterMoveState Run(bool male, AbstractRightClickInput input)
+        private static CharacterMoveState Run(AbstractRightClickInput input)
         {
-            return new CharacterMoveState(input, PlayerMoveState.RunTowards(male, input.Direction));
+            return new CharacterMoveState(input, PlayerMoveState.RunTowards(input.Direction));
         }
 
-        private static CharacterMoveState Fly(bool male, AbstractRightClickInput input)
+        private static CharacterMoveState Fly(AbstractRightClickInput input)
         {
-            return new CharacterMoveState(input, PlayerMoveState.FlyTowards(male, input.Direction));
+            return new CharacterMoveState(input, PlayerMoveState.FlyTowards(input.Direction));
         }
     }
 }

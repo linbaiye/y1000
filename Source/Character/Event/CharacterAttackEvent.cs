@@ -5,16 +5,16 @@ using y1000.Source.Input;
 
 namespace y1000.Source.Character.Event;
 
-public class AttackEntityEvent : IClientEvent
+public class CharacterAttackEvent : IClientEvent
 {
     private readonly AttackInput _input;
-    private readonly bool _below50;
+    private readonly CreatureState _state;
     private readonly Direction _direction;
 
-    public AttackEntityEvent(AttackInput input, bool below50, Direction d)
+    public CharacterAttackEvent(AttackInput input, CreatureState state, Direction d)
     {
         _input = input;
-        _below50 = below50;
+        _state = state;
         _direction = d;
     }
 
@@ -24,7 +24,7 @@ public class AttackEntityEvent : IClientEvent
         {
             AttackEventPacket = new ClientAttackEventPacket()
             {
-                Below50 = _below50,
+                State = (int)_state,
                 Sequence = _input.Sequence,
                 TargetId = _input.Entity.Id,
                 Direction = (int)_direction,

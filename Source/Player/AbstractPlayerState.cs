@@ -25,8 +25,8 @@ public abstract class AbstractPlayerState : AbstractCreatureState<Player>, IPlay
             player.NotifyAnimationFinished(new CreatureAnimationDoneEventArgs(this));
         }
     }
-    
-    protected abstract CreatureState State { get; }
+
+    public abstract CreatureState State { get; }
 
     
     public override OffsetTexture BodyOffsetTexture(Player player)

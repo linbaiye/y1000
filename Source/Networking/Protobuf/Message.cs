@@ -32,59 +32,57 @@ namespace Source.Networking.Protobuf {
             "aW5nLlByb3RvYnVmLlBvc2l0aW9uUGFja2V0IkcKC0lucHV0UGFja2V0EgwK",
             "BHR5cGUYASABKAUSEAoIc2VxdWVuY2UYAiABKAMSGAoQY2xpY2tlZERpcmVj",
             "dGlvbhgDIAEoBSIZCgtDbGlja1BhY2tldBIKCgJpZBgBIAEoAyIiChFQbGF5",
-            "ZXJMb2dpblBhY2tldBINCgV0b2tlbhgBIAEoCSJxChlDcmVhdHVyZUF0dGFj",
-            "a0V2ZW50UGFja2V0EgoKAmlkGAEgASgDEhEKCWRpcmVjdGlvbhgCIAEoBRIP",
-            "CgdiZWxvdzUwGAMgASgIEhQKDHNwcml0ZU1pbGxpcxgEIAEoBRIOCgZwbGF5",
-            "ZXIYBSABKAgiJQoXQ3JlYXR1cmVIdXJ0RXZlbnRQYWNrZXQSCgoCaWQYASAB",
-            "KAMicwoPTW92ZUV2ZW50UGFja2V0EjYKBWlucHV0GAEgASgLMicuU291cmNl",
-            "Lk5ldHdvcmtpbmcuUHJvdG9idWYuSW5wdXRQYWNrZXQSEwoLaGFwcGVuZWRB",
-            "dFgYAiABKAUSEwoLaGFwcGVuZWRBdFkYAyABKAUiYQoXQ2xpZW50QXR0YWNr",
-            "RXZlbnRQYWNrZXQSEAoIc2VxdWVuY2UYASABKAMSEAoIdGFyZ2V0SWQYAiAB",
-            "KAMSDwoHYmVsb3c1MBgDIAEoCBIRCglkaXJlY3Rpb24YBCABKAUiQAoaQ2xp",
-            "ZW50QXR0YWNrUmVzcG9uc2VQYWNrZXQSEAoIc2VxdWVuY2UYASABKAMSEAoI",
-            "YWNjZXB0ZWQYAiABKAgitgIKDENsaWVudFBhY2tldBJGCg9tb3ZlRXZlbnRQ",
-            "YWNrZXQYASABKAsyKy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Nb3Zl",
-            "RXZlbnRQYWNrZXRIABI+CgtjbGlja1BhY2tldBgCIAEoCzInLlNvdXJjZS5O",
-            "ZXR3b3JraW5nLlByb3RvYnVmLkNsaWNrUGFja2V0SAASRAoLbG9naW5QYWNr",
-            "ZXQYAyABKAsyLS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJM",
-            "b2dpblBhY2tldEgAElAKEWF0dGFja0V2ZW50UGFja2V0GAQgASgLMjMuU291",
-            "cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2xpZW50QXR0YWNrRXZlbnRQYWNr",
-            "ZXRIAEIGCgRUeXBlImQKE0ludGVycG9sYXRpb25QYWNrZXQSDQoFc3RhdGUY",
-            "AiABKAUSFQoNZWxhcHNlZE1pbGxpcxgFIAEoBRIRCglkaXJlY3Rpb24YByAB",
-            "KAUSCQoBeBgIIAEoBRIJCgF5GAkgASgFIl8KFEludGVycG9sYXRpb25zUGFj",
-            "a2V0EkcKDmludGVycG9sYXRpb25zGAEgAygLMi8uU291cmNlLk5ldHdvcmtp",
-            "bmcuUHJvdG9idWYuSW50ZXJwb2xhdGlvblBhY2tldCKsAQoLTG9naW5QYWNr",
-            "ZXQSCQoBeBgBIAEoBRIJCgF5GAIgASgFEgoKAmlkGAMgASgDEhUKDXdlYXBv",
-            "blNoYXBlSWQYBCABKAUSGQoRYXR0YWNrS3VuZ0Z1TGV2ZWwYBSABKAUSGAoQ",
-            "YXR0YWNrS3VuZ0Z1TmFtZRgGIAEoCRIXCg9mb290S3VuZ0Z1TGV2ZWwYByAB",
-            "KAUSFgoOZm9vdEt1bmdGdU5hbWUYCCABKAkirQYKBlBhY2tldBJECg5wb3Np",
-            "dGlvblBhY2tldBgBIAEoCzIqLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVm",
-            "LlBvc2l0aW9uUGFja2V0SAASWAoVY3JlYXR1cmVJbnRlcnBvbGF0aW9uGAIg",
-            "ASgLMjcuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ3JlYXR1cmVJbnRl",
-            "cnBvbGF0aW9uUGFja2V0SAASPgoLbG9naW5QYWNrZXQYBCABKAsyJy5Tb3Vy",
-            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Mb2dpblBhY2tldEgAEkoKDmludGVy",
-            "cG9sYXRpb25zGAUgASgLMjAuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
-            "SW50ZXJwb2xhdGlvbnNQYWNrZXRIABJJCg5yZXNwb25zZVBhY2tldBgGIAEo",
-            "CzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLklucHV0UmVzcG9uc2VQ",
-            "YWNrZXRIABJUChNwbGF5ZXJJbnRlcnBvbGF0aW9uGAcgASgLMjUuU291cmNl",
-            "Lk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVySW50ZXJwb2xhdGlvblBhY2tl",
-            "dEgAEkYKDHJlbW92ZUVudGl0eRgIIAEoCzIuLlNvdXJjZS5OZXR3b3JraW5n",
-            "LlByb3RvYnVmLlJlbW92ZUVudGl0eVBhY2tldEgAElsKGWF0dGFja0V2ZW50",
-            "UmVzcG9uc2VQYWNrZXQYCSABKAsyNi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
-            "b2J1Zi5DbGllbnRBdHRhY2tSZXNwb25zZVBhY2tldEgAElIKEWF0dGFja0V2",
-            "ZW50UGFja2V0GAogASgLMjUuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
-            "Q3JlYXR1cmVBdHRhY2tFdmVudFBhY2tldEgAEk4KD2h1cnRFdmVudFBhY2tl",
-            "dBgLIAEoCzIzLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNyZWF0dXJl",
-            "SHVydEV2ZW50UGFja2V0SABCDQoLVHlwZWRQYWNrZXQifwobQ3JlYXR1cmVJ",
-            "bnRlcnBvbGF0aW9uUGFja2V0EkYKDWludGVycG9sYXRpb24YASABKAsyLy5T",
-            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0",
-            "EgoKAmlkGAIgASgDEgwKBG5hbWUYAyABKAki0gEKGVBsYXllckludGVycG9s",
-            "YXRpb25QYWNrZXQSRgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIvLlNvdXJjZS5O",
-            "ZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25QYWNrZXQSCgoCaWQY",
-            "AiABKAMSDAoEbWFsZRgDIAEoCBIMCgRuYW1lGAQgASgJEhIKCmt1bmdGdVR5",
-            "cGUYBSABKAUSFQoNa3VuZ0Z1QmVsb3c1MBgGIAEoCBIaChJrdW5nRnVTcHJp",
-            "dGVNaWxsaXMYByABKAUiIAoSUmVtb3ZlRW50aXR5UGFja2V0EgoKAmlkGAEg",
-            "ASgDYgZwcm90bzM="));
+            "ZXJMb2dpblBhY2tldBINCgV0b2tlbhgBIAEoCSJZChlDcmVhdHVyZUF0dGFj",
+            "a0V2ZW50UGFja2V0EgoKAmlkGAEgASgDEhEKCWRpcmVjdGlvbhgCIAEoBRIN",
+            "CgVzdGF0ZRgDIAEoBRIOCgZwbGF5ZXIYBCABKAgiJQoXQ3JlYXR1cmVIdXJ0",
+            "RXZlbnRQYWNrZXQSCgoCaWQYASABKAMicwoPTW92ZUV2ZW50UGFja2V0EjYK",
+            "BWlucHV0GAEgASgLMicuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSW5w",
+            "dXRQYWNrZXQSEwoLaGFwcGVuZWRBdFgYAiABKAUSEwoLaGFwcGVuZWRBdFkY",
+            "AyABKAUiXwoXQ2xpZW50QXR0YWNrRXZlbnRQYWNrZXQSEAoIc2VxdWVuY2UY",
+            "ASABKAMSEAoIdGFyZ2V0SWQYAiABKAMSDQoFc3RhdGUYAyABKAUSEQoJZGly",
+            "ZWN0aW9uGAQgASgFIkAKGkNsaWVudEF0dGFja1Jlc3BvbnNlUGFja2V0EhAK",
+            "CHNlcXVlbmNlGAEgASgDEhAKCGFjY2VwdGVkGAIgASgIIrYCCgxDbGllbnRQ",
+            "YWNrZXQSRgoPbW92ZUV2ZW50UGFja2V0GAEgASgLMisuU291cmNlLk5ldHdv",
+            "cmtpbmcuUHJvdG9idWYuTW92ZUV2ZW50UGFja2V0SAASPgoLY2xpY2tQYWNr",
+            "ZXQYAiABKAsyJy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGlja1Bh",
+            "Y2tldEgAEkQKC2xvZ2luUGFja2V0GAMgASgLMi0uU291cmNlLk5ldHdvcmtp",
+            "bmcuUHJvdG9idWYuUGxheWVyTG9naW5QYWNrZXRIABJQChFhdHRhY2tFdmVu",
+            "dFBhY2tldBgEIAEoCzIzLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNs",
+            "aWVudEF0dGFja0V2ZW50UGFja2V0SABCBgoEVHlwZSJkChNJbnRlcnBvbGF0",
+            "aW9uUGFja2V0Eg0KBXN0YXRlGAIgASgFEhUKDWVsYXBzZWRNaWxsaXMYBSAB",
+            "KAUSEQoJZGlyZWN0aW9uGAcgASgFEgkKAXgYCCABKAUSCQoBeRgJIAEoBSJf",
+            "ChRJbnRlcnBvbGF0aW9uc1BhY2tldBJHCg5pbnRlcnBvbGF0aW9ucxgBIAMo",
+            "CzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25Q",
+            "YWNrZXQirAEKC0xvZ2luUGFja2V0EgkKAXgYASABKAUSCQoBeRgCIAEoBRIK",
+            "CgJpZBgDIAEoAxIVCg13ZWFwb25TaGFwZUlkGAQgASgFEhkKEWF0dGFja0t1",
+            "bmdGdUxldmVsGAUgASgFEhgKEGF0dGFja0t1bmdGdU5hbWUYBiABKAkSFwoP",
+            "Zm9vdEt1bmdGdUxldmVsGAcgASgFEhYKDmZvb3RLdW5nRnVOYW1lGAggASgJ",
+            "Iq0GCgZQYWNrZXQSRAoOcG9zaXRpb25QYWNrZXQYASABKAsyKi5Tb3VyY2Uu",
+            "TmV0d29ya2luZy5Qcm90b2J1Zi5Qb3NpdGlvblBhY2tldEgAElgKFWNyZWF0",
+            "dXJlSW50ZXJwb2xhdGlvbhgCIAEoCzI3LlNvdXJjZS5OZXR3b3JraW5nLlBy",
+            "b3RvYnVmLkNyZWF0dXJlSW50ZXJwb2xhdGlvblBhY2tldEgAEj4KC2xvZ2lu",
+            "UGFja2V0GAQgASgLMicuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuTG9n",
+            "aW5QYWNrZXRIABJKCg5pbnRlcnBvbGF0aW9ucxgFIAEoCzIwLlNvdXJjZS5O",
+            "ZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25zUGFja2V0SAASSQoO",
+            "cmVzcG9uc2VQYWNrZXQYBiABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
+            "b2J1Zi5JbnB1dFJlc3BvbnNlUGFja2V0SAASVAoTcGxheWVySW50ZXJwb2xh",
+            "dGlvbhgHIAEoCzI1LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXll",
+            "ckludGVycG9sYXRpb25QYWNrZXRIABJGCgxyZW1vdmVFbnRpdHkYCCABKAsy",
+            "Li5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5SZW1vdmVFbnRpdHlQYWNr",
+            "ZXRIABJbChlhdHRhY2tFdmVudFJlc3BvbnNlUGFja2V0GAkgASgLMjYuU291",
+            "cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2xpZW50QXR0YWNrUmVzcG9uc2VQ",
+            "YWNrZXRIABJSChFhdHRhY2tFdmVudFBhY2tldBgKIAEoCzI1LlNvdXJjZS5O",
+            "ZXR3b3JraW5nLlByb3RvYnVmLkNyZWF0dXJlQXR0YWNrRXZlbnRQYWNrZXRI",
+            "ABJOCg9odXJ0RXZlbnRQYWNrZXQYCyABKAsyMy5Tb3VyY2UuTmV0d29ya2lu",
+            "Zy5Qcm90b2J1Zi5DcmVhdHVyZUh1cnRFdmVudFBhY2tldEgAQg0KC1R5cGVk",
+            "UGFja2V0In8KG0NyZWF0dXJlSW50ZXJwb2xhdGlvblBhY2tldBJGCg1pbnRl",
+            "cnBvbGF0aW9uGAEgASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
+            "SW50ZXJwb2xhdGlvblBhY2tldBIKCgJpZBgCIAEoAxIMCgRuYW1lGAMgASgJ",
+            "IosBChlQbGF5ZXJJbnRlcnBvbGF0aW9uUGFja2V0EkYKDWludGVycG9sYXRp",
+            "b24YASABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnRlcnBv",
+            "bGF0aW9uUGFja2V0EgoKAmlkGAIgASgDEgwKBG1hbGUYAyABKAgSDAoEbmFt",
+            "ZRgEIAEoCSIgChJSZW1vdmVFbnRpdHlQYWNrZXQSCgoCaWQYASABKANiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -93,10 +91,10 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InputPacket), global::Source.Networking.Protobuf.InputPacket.Parser, new[]{ "Type", "Sequence", "ClickedDirection" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClickPacket), global::Source.Networking.Protobuf.ClickPacket.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerLoginPacket), global::Source.Networking.Protobuf.PlayerLoginPacket.Parser, new[]{ "Token" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureAttackEventPacket), global::Source.Networking.Protobuf.CreatureAttackEventPacket.Parser, new[]{ "Id", "Direction", "Below50", "SpriteMillis", "Player" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureAttackEventPacket), global::Source.Networking.Protobuf.CreatureAttackEventPacket.Parser, new[]{ "Id", "Direction", "State", "Player" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureHurtEventPacket), global::Source.Networking.Protobuf.CreatureHurtEventPacket.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.MoveEventPacket), global::Source.Networking.Protobuf.MoveEventPacket.Parser, new[]{ "Input", "HappenedAtX", "HappenedAtY" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientAttackEventPacket), global::Source.Networking.Protobuf.ClientAttackEventPacket.Parser, new[]{ "Sequence", "TargetId", "Below50", "Direction" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientAttackEventPacket), global::Source.Networking.Protobuf.ClientAttackEventPacket.Parser, new[]{ "Sequence", "TargetId", "State", "Direction" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientAttackResponsePacket), global::Source.Networking.Protobuf.ClientAttackResponsePacket.Parser, new[]{ "Sequence", "Accepted" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientPacket), global::Source.Networking.Protobuf.ClientPacket.Parser, new[]{ "MoveEventPacket", "ClickPacket", "LoginPacket", "AttackEventPacket" }, new[]{ "Type" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationPacket), global::Source.Networking.Protobuf.InterpolationPacket.Parser, new[]{ "State", "ElapsedMillis", "Direction", "X", "Y" }, null, null, null, null),
@@ -104,7 +102,7 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.LoginPacket), global::Source.Networking.Protobuf.LoginPacket.Parser, new[]{ "X", "Y", "Id", "WeaponShapeId", "AttackKungFuLevel", "AttackKungFuName", "FootKungFuLevel", "FootKungFuName" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.Packet), global::Source.Networking.Protobuf.Packet.Parser, new[]{ "PositionPacket", "CreatureInterpolation", "LoginPacket", "Interpolations", "ResponsePacket", "PlayerInterpolation", "RemoveEntity", "AttackEventResponsePacket", "AttackEventPacket", "HurtEventPacket" }, new[]{ "TypedPacket" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureInterpolationPacket), global::Source.Networking.Protobuf.CreatureInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Name" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Male", "Name", "KungFuType", "KungFuBelow50", "KungFuSpriteMillis" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Male", "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.RemoveEntityPacket), global::Source.Networking.Protobuf.RemoveEntityPacket.Parser, new[]{ "Id" }, null, null, null, null)
           }));
     }
@@ -1404,8 +1402,7 @@ namespace Source.Networking.Protobuf {
     public CreatureAttackEventPacket(CreatureAttackEventPacket other) : this() {
       id_ = other.id_;
       direction_ = other.direction_;
-      below50_ = other.below50_;
-      spriteMillis_ = other.spriteMillis_;
+      state_ = other.state_;
       player_ = other.player_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1440,32 +1437,20 @@ namespace Source.Networking.Protobuf {
       }
     }
 
-    /// <summary>Field number for the "below50" field.</summary>
-    public const int Below50FieldNumber = 3;
-    private bool below50_;
+    /// <summary>Field number for the "state" field.</summary>
+    public const int StateFieldNumber = 3;
+    private int state_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Below50 {
-      get { return below50_; }
+    public int State {
+      get { return state_; }
       set {
-        below50_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "spriteMillis" field.</summary>
-    public const int SpriteMillisFieldNumber = 4;
-    private int spriteMillis_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int SpriteMillis {
-      get { return spriteMillis_; }
-      set {
-        spriteMillis_ = value;
+        state_ = value;
       }
     }
 
     /// <summary>Field number for the "player" field.</summary>
-    public const int PlayerFieldNumber = 5;
+    public const int PlayerFieldNumber = 4;
     private bool player_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1493,8 +1478,7 @@ namespace Source.Networking.Protobuf {
       }
       if (Id != other.Id) return false;
       if (Direction != other.Direction) return false;
-      if (Below50 != other.Below50) return false;
-      if (SpriteMillis != other.SpriteMillis) return false;
+      if (State != other.State) return false;
       if (Player != other.Player) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1505,8 +1489,7 @@ namespace Source.Networking.Protobuf {
       int hash = 1;
       if (Id != 0L) hash ^= Id.GetHashCode();
       if (Direction != 0) hash ^= Direction.GetHashCode();
-      if (Below50 != false) hash ^= Below50.GetHashCode();
-      if (SpriteMillis != 0) hash ^= SpriteMillis.GetHashCode();
+      if (State != 0) hash ^= State.GetHashCode();
       if (Player != false) hash ^= Player.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1534,16 +1517,12 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(16);
         output.WriteInt32(Direction);
       }
-      if (Below50 != false) {
+      if (State != 0) {
         output.WriteRawTag(24);
-        output.WriteBool(Below50);
-      }
-      if (SpriteMillis != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(SpriteMillis);
+        output.WriteInt32(State);
       }
       if (Player != false) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(32);
         output.WriteBool(Player);
       }
       if (_unknownFields != null) {
@@ -1564,16 +1543,12 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(16);
         output.WriteInt32(Direction);
       }
-      if (Below50 != false) {
+      if (State != 0) {
         output.WriteRawTag(24);
-        output.WriteBool(Below50);
-      }
-      if (SpriteMillis != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(SpriteMillis);
+        output.WriteInt32(State);
       }
       if (Player != false) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(32);
         output.WriteBool(Player);
       }
       if (_unknownFields != null) {
@@ -1592,11 +1567,8 @@ namespace Source.Networking.Protobuf {
       if (Direction != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Direction);
       }
-      if (Below50 != false) {
-        size += 1 + 1;
-      }
-      if (SpriteMillis != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SpriteMillis);
+      if (State != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(State);
       }
       if (Player != false) {
         size += 1 + 1;
@@ -1619,11 +1591,8 @@ namespace Source.Networking.Protobuf {
       if (other.Direction != 0) {
         Direction = other.Direction;
       }
-      if (other.Below50 != false) {
-        Below50 = other.Below50;
-      }
-      if (other.SpriteMillis != 0) {
-        SpriteMillis = other.SpriteMillis;
+      if (other.State != 0) {
+        State = other.State;
       }
       if (other.Player != false) {
         Player = other.Player;
@@ -1652,14 +1621,10 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 24: {
-            Below50 = input.ReadBool();
+            State = input.ReadInt32();
             break;
           }
           case 32: {
-            SpriteMillis = input.ReadInt32();
-            break;
-          }
-          case 40: {
             Player = input.ReadBool();
             break;
           }
@@ -1687,14 +1652,10 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 24: {
-            Below50 = input.ReadBool();
+            State = input.ReadInt32();
             break;
           }
           case 32: {
-            SpriteMillis = input.ReadInt32();
-            break;
-          }
-          case 40: {
             Player = input.ReadBool();
             break;
           }
@@ -2205,7 +2166,7 @@ namespace Source.Networking.Protobuf {
     public ClientAttackEventPacket(ClientAttackEventPacket other) : this() {
       sequence_ = other.sequence_;
       targetId_ = other.targetId_;
-      below50_ = other.below50_;
+      state_ = other.state_;
       direction_ = other.direction_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -2240,15 +2201,15 @@ namespace Source.Networking.Protobuf {
       }
     }
 
-    /// <summary>Field number for the "below50" field.</summary>
-    public const int Below50FieldNumber = 3;
-    private bool below50_;
+    /// <summary>Field number for the "state" field.</summary>
+    public const int StateFieldNumber = 3;
+    private int state_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Below50 {
-      get { return below50_; }
+    public int State {
+      get { return state_; }
       set {
-        below50_ = value;
+        state_ = value;
       }
     }
 
@@ -2281,7 +2242,7 @@ namespace Source.Networking.Protobuf {
       }
       if (Sequence != other.Sequence) return false;
       if (TargetId != other.TargetId) return false;
-      if (Below50 != other.Below50) return false;
+      if (State != other.State) return false;
       if (Direction != other.Direction) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -2292,7 +2253,7 @@ namespace Source.Networking.Protobuf {
       int hash = 1;
       if (Sequence != 0L) hash ^= Sequence.GetHashCode();
       if (TargetId != 0L) hash ^= TargetId.GetHashCode();
-      if (Below50 != false) hash ^= Below50.GetHashCode();
+      if (State != 0) hash ^= State.GetHashCode();
       if (Direction != 0) hash ^= Direction.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -2320,9 +2281,9 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(16);
         output.WriteInt64(TargetId);
       }
-      if (Below50 != false) {
+      if (State != 0) {
         output.WriteRawTag(24);
-        output.WriteBool(Below50);
+        output.WriteInt32(State);
       }
       if (Direction != 0) {
         output.WriteRawTag(32);
@@ -2346,9 +2307,9 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(16);
         output.WriteInt64(TargetId);
       }
-      if (Below50 != false) {
+      if (State != 0) {
         output.WriteRawTag(24);
-        output.WriteBool(Below50);
+        output.WriteInt32(State);
       }
       if (Direction != 0) {
         output.WriteRawTag(32);
@@ -2370,8 +2331,8 @@ namespace Source.Networking.Protobuf {
       if (TargetId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(TargetId);
       }
-      if (Below50 != false) {
-        size += 1 + 1;
+      if (State != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(State);
       }
       if (Direction != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Direction);
@@ -2394,8 +2355,8 @@ namespace Source.Networking.Protobuf {
       if (other.TargetId != 0L) {
         TargetId = other.TargetId;
       }
-      if (other.Below50 != false) {
-        Below50 = other.Below50;
+      if (other.State != 0) {
+        State = other.State;
       }
       if (other.Direction != 0) {
         Direction = other.Direction;
@@ -2424,7 +2385,7 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 24: {
-            Below50 = input.ReadBool();
+            State = input.ReadInt32();
             break;
           }
           case 32: {
@@ -2455,7 +2416,7 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 24: {
-            Below50 = input.ReadBool();
+            State = input.ReadInt32();
             break;
           }
           case 32: {
@@ -5076,9 +5037,6 @@ namespace Source.Networking.Protobuf {
       id_ = other.id_;
       male_ = other.male_;
       name_ = other.name_;
-      kungFuType_ = other.kungFuType_;
-      kungFuBelow50_ = other.kungFuBelow50_;
-      kungFuSpriteMillis_ = other.kungFuSpriteMillis_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5136,42 +5094,6 @@ namespace Source.Networking.Protobuf {
       }
     }
 
-    /// <summary>Field number for the "kungFuType" field.</summary>
-    public const int KungFuTypeFieldNumber = 5;
-    private int kungFuType_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int KungFuType {
-      get { return kungFuType_; }
-      set {
-        kungFuType_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "kungFuBelow50" field.</summary>
-    public const int KungFuBelow50FieldNumber = 6;
-    private bool kungFuBelow50_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool KungFuBelow50 {
-      get { return kungFuBelow50_; }
-      set {
-        kungFuBelow50_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "kungFuSpriteMillis" field.</summary>
-    public const int KungFuSpriteMillisFieldNumber = 7;
-    private int kungFuSpriteMillis_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int KungFuSpriteMillis {
-      get { return kungFuSpriteMillis_; }
-      set {
-        kungFuSpriteMillis_ = value;
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -5191,9 +5113,6 @@ namespace Source.Networking.Protobuf {
       if (Id != other.Id) return false;
       if (Male != other.Male) return false;
       if (Name != other.Name) return false;
-      if (KungFuType != other.KungFuType) return false;
-      if (KungFuBelow50 != other.KungFuBelow50) return false;
-      if (KungFuSpriteMillis != other.KungFuSpriteMillis) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -5205,9 +5124,6 @@ namespace Source.Networking.Protobuf {
       if (Id != 0L) hash ^= Id.GetHashCode();
       if (Male != false) hash ^= Male.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (KungFuType != 0) hash ^= KungFuType.GetHashCode();
-      if (KungFuBelow50 != false) hash ^= KungFuBelow50.GetHashCode();
-      if (KungFuSpriteMillis != 0) hash ^= KungFuSpriteMillis.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5242,18 +5158,6 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(34);
         output.WriteString(Name);
       }
-      if (KungFuType != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(KungFuType);
-      }
-      if (KungFuBelow50 != false) {
-        output.WriteRawTag(48);
-        output.WriteBool(KungFuBelow50);
-      }
-      if (KungFuSpriteMillis != 0) {
-        output.WriteRawTag(56);
-        output.WriteInt32(KungFuSpriteMillis);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5280,18 +5184,6 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(34);
         output.WriteString(Name);
       }
-      if (KungFuType != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(KungFuType);
-      }
-      if (KungFuBelow50 != false) {
-        output.WriteRawTag(48);
-        output.WriteBool(KungFuBelow50);
-      }
-      if (KungFuSpriteMillis != 0) {
-        output.WriteRawTag(56);
-        output.WriteInt32(KungFuSpriteMillis);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -5313,15 +5205,6 @@ namespace Source.Networking.Protobuf {
       }
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      if (KungFuType != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(KungFuType);
-      }
-      if (KungFuBelow50 != false) {
-        size += 1 + 1;
-      }
-      if (KungFuSpriteMillis != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(KungFuSpriteMillis);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -5349,15 +5232,6 @@ namespace Source.Networking.Protobuf {
       }
       if (other.Name.Length != 0) {
         Name = other.Name;
-      }
-      if (other.KungFuType != 0) {
-        KungFuType = other.KungFuType;
-      }
-      if (other.KungFuBelow50 != false) {
-        KungFuBelow50 = other.KungFuBelow50;
-      }
-      if (other.KungFuSpriteMillis != 0) {
-        KungFuSpriteMillis = other.KungFuSpriteMillis;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -5393,18 +5267,6 @@ namespace Source.Networking.Protobuf {
             Name = input.ReadString();
             break;
           }
-          case 40: {
-            KungFuType = input.ReadInt32();
-            break;
-          }
-          case 48: {
-            KungFuBelow50 = input.ReadBool();
-            break;
-          }
-          case 56: {
-            KungFuSpriteMillis = input.ReadInt32();
-            break;
-          }
         }
       }
     #endif
@@ -5437,18 +5299,6 @@ namespace Source.Networking.Protobuf {
           }
           case 34: {
             Name = input.ReadString();
-            break;
-          }
-          case 40: {
-            KungFuType = input.ReadInt32();
-            break;
-          }
-          case 48: {
-            KungFuBelow50 = input.ReadBool();
-            break;
-          }
-          case 56: {
-            KungFuSpriteMillis = input.ReadInt32();
             break;
           }
         }

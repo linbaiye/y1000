@@ -27,7 +27,7 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 	{
 		if (_state == IPlayerState.Empty)
 		{
-			_state = PlayerIdleState.StartFrom(true, 0);
+			_state = IPlayerState.Idle();
 		}
 	}
 
@@ -40,9 +40,15 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		_state = newState;
 	}
 
+	private void ChangeDirectionAndState(Direction direction, IPlayerState state)
+	{
+		Direction = direction;
+		ChangeState(state);
+	}
+
 	public void Visit(MoveMessage message)
 	{
-		_state = PlayerMoveState.WalkTowards(IsMale, message.Direction);
+		ChangeState(IPlayerState.Walk(message.Direction));
 	}
 	
 	public void Visit(FlyMessage message)
@@ -51,12 +57,12 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		{
 			moveState.CheckMoving();
 		}
-		_state = PlayerMoveState.FlyTowards(IsMale, message.Direction);
+		ChangeState(IPlayerState.Fly(message.Direction));
 	}
 	
 	public void Visit(RunMessage message)
 	{
-		_state = PlayerMoveState.RunTowards(IsMale, message.Direction);
+		ChangeState(IPlayerState.Run(message.Direction));
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -69,10 +75,9 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		SetPosition(setPositionMessage);
 		if (setPositionMessage.State == CreatureState.IDLE)
 		{
-			ChangeState(PlayerIdleState.StartFrom(IsMale, 0));
+			ChangeState(IPlayerState.Idle());
 		}
 	}
-
 
 	public void Handle(IEntityMessage message)
 	{
@@ -86,14 +91,13 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 
 	public void Visit(PlayerAttackMessage message)
 	{
-		Direction = message.Direction;
-		_state = PlayerAttackState.Quanfa(IsMale, message.Below50);
+		ChangeDirectionAndState(message.Direction, IPlayerState.Attack(message.State));
 	}
 
 	public void Visit(HurtMessage hurtMessage)
 	{
+		_state = IPlayerState.Hurt();
 	}
-
 
 	public string Location()
 	{
@@ -105,7 +109,7 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/player.tscn");
 		var player = scene.Instantiate<Player>();
 		var interpolation = playerInterpolation.Interpolation;
-		var state = IPlayerState.CreateFrom(playerInterpolation);
+		var state = PlayerStillState.CreateFrom(playerInterpolation);
 		player.Init(playerInterpolation.Male, state, 
 			interpolation.Direction, interpolation.Coordinate, playerInterpolation.Id, map);
 		return player;

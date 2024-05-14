@@ -1,6 +1,8 @@
+using System;
 using Godot;
 using y1000.code.player;
 using y1000.Source.Animation;
+using y1000.Source.Creature;
 
 namespace y1000.Source.Player;
 
@@ -17,4 +19,6 @@ public class EmptyPlayerState : IPlayerState
     {
         throw new System.NotImplementedException();
     }
+
+    public CreatureState State => throw new NotImplementedException();
 }

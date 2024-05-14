@@ -9,16 +9,11 @@ namespace y1000.Source.Networking;
 public class PlayerInterpolation : IServerMessage
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-    private PlayerInterpolation(Interpolation interpolation, bool male, long id, AttackKungFuType attackKungFuType,
-        bool attackKungFuBelow50,
-        int kungFuSpriteMillis)
+    private PlayerInterpolation(Interpolation interpolation, bool male, long id)
     {
         Interpolation = interpolation;
         Male = male;
         Id = id;
-        AttackKungFuType = attackKungFuType;
-        AttackKungFuBelow50 = attackKungFuBelow50;
-        KungFuSpriteMillis = kungFuSpriteMillis;
     }
 
     public Interpolation Interpolation { get; }
@@ -27,11 +22,6 @@ public class PlayerInterpolation : IServerMessage
     
     public bool Male { get; }
 
-    public AttackKungFuType AttackKungFuType { get; }
-    
-    public bool AttackKungFuBelow50 { get; }
-    
-    public int KungFuSpriteMillis { get; }
 
     public override string ToString()
     {
@@ -40,9 +30,7 @@ public class PlayerInterpolation : IServerMessage
 
     public static PlayerInterpolation FromPacket(PlayerInterpolationPacket packet)
     {
-        return new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male, packet.Id, 
-            (AttackKungFuType)packet.KungFuType, packet.KungFuBelow50,
-            packet.KungFuSpriteMillis);
+        return new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male, packet.Id);
     }
 
     public void Accept(IServerMessageVisitor visitor)

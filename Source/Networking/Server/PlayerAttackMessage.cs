@@ -7,9 +7,8 @@ namespace y1000.Source.Networking.Server;
 
 public sealed class PlayerAttackMessage : AbstractCreatureAttackMessage
 {
-    public PlayerAttackMessage(long id, bool below50, Direction direction) : base(id, direction)
+    public PlayerAttackMessage(long id, Direction direction, CreatureState state) : base(id, direction, state)
     {
-        Below50 = below50;
     }
 
     public override void Accept(IServerMessageVisitor visitor)
@@ -17,5 +16,4 @@ public sealed class PlayerAttackMessage : AbstractCreatureAttackMessage
         visitor.Visit(this);
     }
     
-    public bool Below50 { get; }
 }

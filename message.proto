@@ -35,9 +35,8 @@ message PlayerLoginPacket {
 message CreatureAttackEventPacket {
   int64 id = 1;
   int32 direction = 2;
-  bool below50 = 3;
-  int32 spriteMillis = 4;
-  bool player = 5;
+  int32 state = 3;
+  bool player = 4;
 }
 
 message CreatureHurtEventPacket {
@@ -55,7 +54,7 @@ message MoveEventPacket {
 message ClientAttackEventPacket {
   int64 sequence = 1;
   int64 targetId = 2;
-  bool below50 = 3;
+  int32 state = 3;
   int32 direction = 4;
 }
 
@@ -122,9 +121,6 @@ message PlayerInterpolationPacket {
   int64 id = 2;
   bool male = 3;
   string name = 4;
-  int32 kungFuType = 5;
-  bool kungFuBelow50 = 6;
-  int32 kungFuSpriteMillis = 7;
 }
 
 message RemoveEntityPacket {

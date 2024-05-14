@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
 using y1000.Source.Character.State.Prediction;
+using y1000.Source.Creature;
 using y1000.Source.Input;
 using y1000.Source.Util;
 
@@ -31,17 +32,18 @@ public class QuangFa : AbstractLevelKungFu, IAttackKungFu
         return NAMES.Contains(name);
     }
 
-    private bool UseBlow50()
+
+    private CreatureState AttackState()
     {
-        return Level < 50 || RANDOM.Next() % 2 == 1;
+        return Level < 50 || RANDOM.Next() % 2 == 1 ? CreatureState.FIST : CreatureState.KICK;
     }
 
     public void Attack(Character.Character character, AttackInput input)
     {
-        bool below50 = UseBlow50();
+        var state = AttackState();
         character.Direction = character.Coordinate.GetDirection(input.Entity.Coordinate);
-        character.EmitEvent(new AttackPrediction(input), new AttackEntityEvent(input, below50, character.Direction));
-        var characterAttackState = CharacterAttackState.Quanfa(character.IsMale, below50);
+        character.EmitEvent(new AttackPrediction(input), new CharacterAttackEvent(input, state, character.Direction));
+        var characterAttackState = CharacterAttackState.Attack(state);
         character.ChangeState(characterAttackState);
     }
 }

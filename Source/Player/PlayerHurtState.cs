@@ -14,10 +14,11 @@ public sealed class PlayerHurtState : AbstractPlayerState
         NotifyIfElapsed(c, delta);
     }
 
-    protected override CreatureState State => CreatureState.HURT;
+    public override CreatureState State => CreatureState.HURT;
 
     public static PlayerHurtState Hurt()
     {
         return new PlayerHurtState(PlayerAnimation.Male.AnimationMillis(CreatureState.HURT));
     }
+    
 }

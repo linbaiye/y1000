@@ -6,12 +6,15 @@ namespace y1000.Source.Creature.Event;
 
 public abstract class AbstractCreatureAttackMessage : AbstractEntityMessage
 {
-    public AbstractCreatureAttackMessage(long id, Direction direction) : base(id)
+    protected AbstractCreatureAttackMessage(long id, Direction direction, CreatureState state) : base(id)
     {
         Direction = direction;
+        State = state;
     }
     
     public Direction Direction { get; }
+    
+    public CreatureState State { get; }
 
     public abstract override void Accept(IServerMessageVisitor visitor);
 
@@ -19,8 +22,8 @@ public abstract class AbstractCreatureAttackMessage : AbstractEntityMessage
     {
         if (packet.Player)
         {
-            return new PlayerAttackMessage(packet.Id, packet.Below50, (Direction)packet.Direction);
+            return new PlayerAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State);
         }
-        return new CreatureAttackMessage(packet.Id, (Direction)packet.Direction);
+        return new CreatureAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State);
     }
 }

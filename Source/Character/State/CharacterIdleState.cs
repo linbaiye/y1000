@@ -10,12 +10,9 @@ namespace y1000.Source.Character.State
 {
     public class CharacterIdleState : ICharacterState
     {
-
-        private readonly PlayerIdleState _idleState;
-
-        private CharacterIdleState(PlayerIdleState state)
+        private CharacterIdleState(IPlayerState state)
         {
-            _idleState = state;
+            WrappedState = state;
         }
 
         public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
@@ -32,14 +29,14 @@ namespace y1000.Source.Character.State
                     character.EmitEvent(new SetPositionPrediction(rightClick, character.Coordinate, rightClick.Direction), 
                         new MovementEvent(rightClick, character.Coordinate));
                     character.Direction = rightClick.Direction;
-                    character.ChangeState(Create(character.IsMale));
+                    character.ChangeState(Create());
                 }
             }
             else
             {
                 character.EmitEvent(new MovePrediction(rightClick, character.Coordinate, rightClick.Direction),
                     new MovementEvent(rightClick, character.Coordinate));
-                var state = CharacterMoveState.Move(character.FootMagic, character.IsMale, rightClick);
+                var state = CharacterMoveState.Move(character.FootMagic, rightClick);
                 character.ChangeState(state);
             }
         }
@@ -54,22 +51,21 @@ namespace y1000.Source.Character.State
             character.AttackKungFu?.Attack(character, input);
         }
 
-        public IPlayerState WrappedState => _idleState;
+        public IPlayerState WrappedState { get; }
 
-        public static CharacterIdleState Create(bool male)
+        public static CharacterIdleState Create()
         {
-            var state = PlayerIdleState.StartFrom(male, 0);
-            return new CharacterIdleState(state);
+            return new CharacterIdleState(IPlayerState.Idle());
         }
 
-        public static CharacterIdleState Wrap(PlayerIdleState idleState)
+        public static CharacterIdleState Wrap(IPlayerState idleState)
         {
             return new CharacterIdleState(idleState);
         }
 
         public void OnWrappedPlayerAnimationFinished(Character character)
         {
-            character.ChangeState(Create(character.IsMale));
+            character.ChangeState(Create());
         }
 
         public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)

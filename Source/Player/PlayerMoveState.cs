@@ -1,9 +1,7 @@
 using NLog;
-using y1000.code;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Creature.State;
-using y1000.Source.Sprite;
 
 namespace y1000.Source.Player;
 
@@ -18,7 +16,7 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
     
     protected override ILogger Logger => LOGGER;
 
-    private CreatureState State { get; }
+    public CreatureState State { get; }
 
 
     private static PlayerMoveState Create(CreatureState state, Direction dir, int e = 0)
@@ -26,7 +24,7 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
         return new PlayerMoveState(PlayerAnimation.Male.AnimationMillis(state), state, dir, e);
     }
     
-    public static PlayerMoveState WalkTowards(bool male, Direction direction, int elapsed = 0)
+    public static PlayerMoveState WalkTowards(Direction direction, int elapsed = 0)
     {
         return Create(CreatureState.WALK, direction, elapsed);
     }
@@ -55,12 +53,12 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
         }
     }
 
-    public static PlayerMoveState RunTowards(bool male, Direction direction, int elapsed = 0)
+    public static PlayerMoveState RunTowards(Direction direction, int elapsed = 0)
     {
         return Create(CreatureState.RUN, direction, elapsed);
     }
     
-    public static PlayerMoveState FlyTowards(bool male, Direction direction, int elapsed = 0)
+    public static PlayerMoveState FlyTowards(Direction direction, int elapsed = 0)
     {
         return Create(CreatureState.FLY, direction, elapsed);
     }

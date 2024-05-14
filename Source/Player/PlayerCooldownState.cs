@@ -21,5 +21,5 @@ public class PlayerCooldownState : AbstractPlayerState
         return new PlayerCooldownState(elapsed);
     }
 
-    protected override CreatureState State => CreatureState.COOLDOWN;
+    public override CreatureState State => CreatureState.COOLDOWN;
 }

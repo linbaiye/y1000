@@ -28,13 +28,13 @@ public class MessageDrivenPlayer : IEntity
 
     private void OnStateAnimationDone(object? sender, CreatureAnimationDoneEventArgs args)
     {
-        switch (args.FinishedState)
+        switch (args.FinishedState.State)
         {
-            case PlayerAttackState:
-                _player.ChangeState(PlayerCooldownState.Cooldown(_player.IsMale));
+            case CreatureState.ATTACK:
+                _player.ChangeState(IPlayerState.Cooldown());
                 break;
-            case PlayerIdleState:
-                _player.ChangeState(PlayerIdleState.StartFrom(_player.IsMale));
+            case CreatureState.IDLE:
+                _player.ChangeState(IPlayerState.Idle());
                 break;
         }
     }

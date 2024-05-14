@@ -1,31 +1,59 @@
 using System;
-using System.Xml.Linq;
-using y1000.code;
-using y1000.code.player;
 using y1000.Source.Creature;
 using y1000.Source.Creature.State;
-using y1000.Source.Networking;
-using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Player;
 
 public interface IPlayerState : ICreatureState<Player>
 {
     static readonly IPlayerState Empty = EmptyPlayerState.Instance;
-
-    static IPlayerState CreateFrom(PlayerInterpolation playerInterpolation)
+    
+    CreatureState State { get; }
+    
+    
+    public static IPlayerState Attack(CreatureState state)
     {
-        var interpolation = playerInterpolation.Interpolation;
-        return interpolation.State switch
+        return new PlayerStillState(state);
+    }
+
+    public static IPlayerState Hurt()
+    {
+        return new PlayerStillState(CreatureState.HURT);
+    }
+    
+    public static IPlayerState Walk(Direction direction)
+    {
+        return PlayerMoveState.WalkTowards(direction);
+    }
+    
+    public static IPlayerState Run(Direction direction)
+    {
+        return PlayerMoveState.RunTowards(direction);
+    }
+    
+    public static IPlayerState Fly(Direction direction)
+    {
+        return PlayerMoveState.FlyTowards(direction);
+    }
+
+    public static IPlayerState Move(CreatureState movingState, Direction direction)
+    {
+        return movingState switch
         {
-            CreatureState.IDLE => PlayerIdleState.StartFrom(playerInterpolation.Male, interpolation.ElapsedMillis),
-            CreatureState.FLY => PlayerMoveState.FlyTowards(playerInterpolation.Male, interpolation.Direction, interpolation.ElapsedMillis),
-            CreatureState.WALK => PlayerMoveState.WalkTowards(playerInterpolation.Male, interpolation.Direction, interpolation.ElapsedMillis),
-            CreatureState.RUN => PlayerMoveState.RunTowards(playerInterpolation.Male, interpolation.Direction, interpolation.ElapsedMillis),
-            CreatureState.ATTACK => PlayerAttackState.FromInterpolation(playerInterpolation),
-            CreatureState.COOLDOWN => PlayerCooldownState.Cooldown(playerInterpolation.Male, interpolation.ElapsedMillis),
-            _ => throw new ArgumentOutOfRangeException()
-        }
-        ;
+            CreatureState.WALK => Walk(direction),
+            CreatureState.RUN => Run(direction),
+            CreatureState.FLY => Run(direction),
+            _ => throw new NotImplementedException("Bad moving state: " + movingState)
+        };
+    }
+
+    public static IPlayerState Idle()
+    {
+        return new PlayerStillState(CreatureState.IDLE);
+    }
+    
+    public static IPlayerState Cooldown()
+    {
+        return new PlayerStillState(CreatureState.COOLDOWN);
     }
 }

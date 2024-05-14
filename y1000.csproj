@@ -49,5 +49,8 @@
     <Compile Remove="Source\Character\Event\AttackInput.cs" />
     <Compile Remove="Source\KungFu\Attack\UnnamedQuanFa.cs" />
     <Compile Remove="Source\Creature\State\AbstractCreatureAttackState.cs" />
+    <Compile Remove="Source\Player\PlayerAttackState.cs" />
+    <Compile Remove="Source\Player\PlayerCooldownState.cs" />
+    <Compile Remove="Source\Player\PlayerIdleState.cs" />
   </ItemGroup>
 </Project>

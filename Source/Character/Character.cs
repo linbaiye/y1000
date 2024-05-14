@@ -80,12 +80,12 @@ namespace y1000.Source.Character
 		}
 
 
-		public void Rewind(MoveEventResponse response)
+		private void Rewind(MoveEventResponse response)
 		{
 			var player = WrappedPlayer();
 			player.SetPosition(response.PositionMessage);
 			LOGGER.Debug("Rewind to coordinate {0}, direction {1}.", player.Coordinate, player.Direction);
-			ChangeState(CharacterIdleState.Create(IsMale));
+			ChangeState(CharacterIdleState.Create());
 		}
 
 		public void Rewind(IPredictableResponse response)
@@ -115,14 +115,13 @@ namespace y1000.Source.Character
 
 		public void Handle(IEntityMessage message)
 		{
-			LOGGER.Debug("Character message {0}.", message);
 			message.Accept(this);
 		}
 
 		public void Visit(PlayerAttackMessage message)
 		{
 			Direction = message.Direction;
-			ChangeState(CharacterAttackState.FromMessage(this, message));
+			ChangeState(CharacterAttackState.FromMessage(message));
 		}
 
 		public void Visit(HurtMessage hurtMessage)
@@ -159,9 +158,9 @@ namespace y1000.Source.Character
 		{
 			PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
 			var character = scene.Instantiate<Character>();
-			var state = PlayerIdleState.StartFrom(message.Male, 0);
+			var state = IPlayerState.Idle();
 			var player = character.WrappedPlayer();
-			player.Init(message.Male, PlayerIdleState.StartFrom(message.Male, 0),  Direction.DOWN, message.Coordinate, message.Id, map);
+			player.Init(message.Male, state, Direction.DOWN, message.Coordinate, message.Id, map);
 			player.StateAnimationEventHandler += character.OnPlayerAnimationFinished;
 			character.FootMagic = message.FootKungFu;
 			character.AttackKungFu = message.AttackKungFu;

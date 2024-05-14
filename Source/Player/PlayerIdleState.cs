@@ -4,7 +4,7 @@ using y1000.Source.Creature;
 
 namespace y1000.Source.Player;
 
-public class PlayerIdleState  : AbstractPlayerState
+public class PlayerIdleState : AbstractPlayerState
 {
     private PlayerIdleState(int elapsedMillis = 0) : base(PlayerAnimation.Male.AnimationMillis(CreatureState.IDLE), elapsedMillis)
     {
@@ -15,10 +15,6 @@ public class PlayerIdleState  : AbstractPlayerState
         NotifyIfElapsed(player, delta);
     }
 
-    public static PlayerIdleState StartFrom(bool male, int elapsedMillis = 0)
-    {
-        return new PlayerIdleState(elapsedMillis);
-    }
 
-    protected override CreatureState State => CreatureState.IDLE;
+    public override CreatureState State => CreatureState.IDLE;
 }

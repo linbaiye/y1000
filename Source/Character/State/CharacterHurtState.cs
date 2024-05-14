@@ -4,22 +4,20 @@ namespace y1000.Source.Character.State;
 
 public sealed class CharacterHurtState : ICharacterState
 {
-    private readonly PlayerHurtState _playerHurtState;
-
-    public CharacterHurtState(PlayerHurtState playerHurtState)
+    private CharacterHurtState(IPlayerState playerHurtState)
     {
-        _playerHurtState = playerHurtState;
+        WrappedState = playerHurtState;
     }
 
     public void OnWrappedPlayerAnimationFinished(Character character)
     {
-        character.ChangeState(CharacterCooldownState.Cooldown(character.IsMale));
+        character.ChangeState(CharacterCooldownState.Cooldown());
     }
 
-    public IPlayerState WrappedState => _playerHurtState;
+    public IPlayerState WrappedState { get; }
 
     public static CharacterHurtState Hurt()
     {
-        return new CharacterHurtState(PlayerHurtState.Hurt());
+        return new CharacterHurtState(IPlayerState.Hurt());
     }
 }
