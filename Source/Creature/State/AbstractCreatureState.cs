@@ -14,12 +14,14 @@ public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : 
     
     protected int TotalMillis { get; }
 
-    protected void Elapse(int delta)
+    protected bool Elapse(int delta)
     {
         if (ElapsedMillis < TotalMillis)
         {
             ElapsedMillis += delta;
         }
+
+        return ElapsedMillis >= TotalMillis;
     }
 
     public abstract OffsetTexture BodyOffsetTexture(TC creature);

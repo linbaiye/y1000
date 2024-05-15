@@ -24,6 +24,11 @@ namespace y1000.Source.Character.State.Prediction
         }
 
 
+        public void Clear()
+        {
+            _predictions.Clear();
+        }
+
         public bool Reconcile(IPredictableResponse message)
         {
             while (!_predictions.IsEmpty)

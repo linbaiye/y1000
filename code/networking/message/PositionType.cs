@@ -7,5 +7,6 @@ namespace y1000.code.networking.message
         SET = 3,
         RUN = 4,
         FLY = 5,
+        REWIND = 6,
     }
 }

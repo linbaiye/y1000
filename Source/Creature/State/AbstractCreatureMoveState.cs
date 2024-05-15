@@ -52,7 +52,6 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
         {
             creature.Position = creature.Position.Snapped(VectorUtil.TileSize);
             creature.Map.Occupy(creature);
-            Logger.Debug("Creature {0} moved to coordinate {1}.", creature.Id, creature.Coordinate);
         }
     }
 }

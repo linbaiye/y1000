@@ -13,8 +13,7 @@ public class MonsterAttackState : AbstractMonsterState
 
     public override void Update(Monster c, int delta)
     {
-        Elapse(delta);
-        if (ElapsedMillis >= TotalMillis)
+        if (Elapse(delta))
         {
             c.GoIdle();
         }

@@ -240,6 +240,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
+	public void Visit(RewindMessage rewindMessage)
+	{
+		_predictionManager.Clear();
+		Visit((IEntityMessage)rewindMessage);
+	}
 
 	public void Visit(IEntityMessage message)
 	{

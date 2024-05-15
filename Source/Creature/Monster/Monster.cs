@@ -36,13 +36,13 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
         switch (state)
         {
             case CreatureState.IDLE:
-                return MonsterIdleState.Create(animation, elapses);
+                return MonsterStillState.Idle(animation, elapses);
             case CreatureState.WALK:
                 return MonsterMoveState.Move(animation, direction, elapses);
             case CreatureState.HURT:
-                return MonsterHurtState.Create(animation, elapses);
+                return MonsterStillState.Hurt(animation, elapses);
             case CreatureState.ATTACK:
-                return MonsterAttackState.Create(animation, elapses);
+                return MonsterStillState.Attack(animation, elapses);
             default:
                 throw new NotImplementedException();
         }
@@ -50,7 +50,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
     public void GoIdle()
     {
-        _state = MonsterIdleState.Create(MonsterAnimation);
+        _state = MonsterStillState.Idle(MonsterAnimation);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -65,24 +65,30 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
     public void Visit(HurtMessage hurtMessage)
     {
-        _state = CreateState(CreatureState.HURT, 0, Direction, MonsterAnimation);
+        _state = MonsterStillState.Hurt(MonsterAnimation);
     }
     
 
     public void Visit(SetPositionMessage message)
     {
         SetPosition(message);
-        _state = MonsterIdleState.Create(MonsterAnimation, 0);
+        _state = MonsterStillState.Idle(MonsterAnimation);
+    }
+
+    public void Visit(ChangeStateMessage message)
+    {
+        _state = CreateState(message.NewState, 0, Direction, MonsterAnimation);
     }
 
     public void Visit(CreatureAttackMessage attackMessage)
     {
         Direction = attackMessage.Direction;
-        _state = MonsterAttackState.Create(MonsterAnimation);
+        _state = MonsterStillState.Attack(MonsterAnimation);
     }
 
     public void Handle(IEntityMessage message)
     {
+        LOGGER.Debug("Recieved message {0}.", message);
         message.Accept(this);
     }
 

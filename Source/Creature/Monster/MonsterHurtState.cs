@@ -18,6 +18,9 @@ public class MonsterHurtState : AbstractMonsterState
 
     public override void Update(Monster c, int delta)
     {
-        Elapse(delta);
+        if (Elapse(delta))
+        {
+            c.GoIdle();
+        }
     }
 }

@@ -75,4 +75,9 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)stateMessage);
     }
+
+    void Visit(RewindMessage rewindMessage)
+    {
+        Visit((IEntityMessage)rewindMessage);
+    }
 }

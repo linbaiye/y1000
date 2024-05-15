@@ -34,6 +34,7 @@ namespace y1000.Source.Networking.Connection
                 PositionType.SET => SetPositionMessage.FromPacket(positionPacket),
                 PositionType.RUN => RunMessage.FromPacket(positionPacket),
                 PositionType.FLY => FlyMessage.FromPacket(positionPacket),
+                PositionType.REWIND=> RewindMessage.FromPacket(positionPacket),
                 _ => throw new NotSupportedException(),
             };
         }

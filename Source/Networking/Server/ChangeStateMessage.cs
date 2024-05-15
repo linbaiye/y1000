@@ -9,7 +9,7 @@ public class ChangeStateMessage : AbstractEntityMessage
     {
         NewState = newState;
     }
-    private CreatureState NewState { get; }
+    public CreatureState NewState { get; }
 
     public override void Accept(IServerMessageVisitor visitor)
     {

@@ -1,13 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DotNetty.Transport.Channels;
 using Godot;
 using NLog;
-using y1000.code;
-using y1000.code.networking.message;
-using y1000.code.world;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
 using y1000.Source.Character.State.Prediction;
@@ -16,6 +9,7 @@ using y1000.Source.Input;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.KungFu.Foot;
 using y1000.Source.Map;
+using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 using y1000.Source.Util;
@@ -87,7 +81,7 @@ namespace y1000.Source.Character
 			LOGGER.Debug("Rewind to coordinate {0}, direction {1}.", player.Coordinate, player.Direction);
 			ChangeState(CharacterIdleState.Create());
 		}
-
+		
 		public void Rewind(IPredictableResponse response)
 		{
 			if (response is MoveEventResponse moveEventResponse)
@@ -112,6 +106,12 @@ namespace y1000.Source.Character
 			_state.OnWrappedPlayerAnimationFinished(this);
 		}
 
+
+		public void Visit(RewindMessage rewindMessage)
+		{
+			WrappedPlayer().SetPosition(rewindMessage);
+			//_state = 
+		}
 
 		public void Handle(IEntityMessage message)
 		{

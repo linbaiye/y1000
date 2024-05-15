@@ -5,7 +5,7 @@ using y1000.Source.Creature.State;
 
 namespace y1000.Source.Creature.Monster;
 
-public class MonsterMoveState : AbstractCreatureMoveState<Monster>
+public sealed class MonsterMoveState : AbstractCreatureMoveState<Monster>
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
     

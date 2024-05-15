@@ -52,5 +52,10 @@
     <Compile Remove="Source\Player\PlayerAttackState.cs" />
     <Compile Remove="Source\Player\PlayerCooldownState.cs" />
     <Compile Remove="Source\Player\PlayerIdleState.cs" />
+    <Compile Remove="Source\Creature\Monster\MonsterIdleState.cs" />
+    <Compile Remove="Source\Creature\Monster\MonsterHurtState.cs" />
+    <Compile Remove="Source\Creature\Monster\MonsterAttackState.cs" />
+    <Compile Remove="Source\Creature\CreatureChangedStateEventArgs.cs" />
+    <Compile Remove="Source\Creature\State\AbstractCreatureHitState.cs" />
   </ItemGroup>
 </Project>
