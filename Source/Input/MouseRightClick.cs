@@ -11,6 +11,19 @@ namespace y1000.Source.Input
         {
         }
 
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return ((MouseRightClick)obj).Sequence == Sequence;
+        }
+
+        public override int GetHashCode()
+        {
+            return Sequence.GetHashCode();
+        }
+
         public override InputType Type => InputType.MOUSE_RIGHT_CLICK;
     }
 }

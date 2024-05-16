@@ -5,16 +5,19 @@ namespace y1000.Source.Networking.Server
 {
     public abstract class AbstractPositionMessage : IEntityMessage
     {
-        protected AbstractPositionMessage(long id, Vector2I coordinate, Direction direction)
+        protected AbstractPositionMessage(long id, Vector2I coordinate, Direction direction, CreatureState state)
         {
             Id = id;
             Coordinate = coordinate;
             Direction = direction;
+            State = state;
         }
 
         public Vector2I Coordinate { get; }
 
         public Direction Direction { get; }
+        
+        public CreatureState State { get; }
 
         public long Id { get; }
 

@@ -88,7 +88,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
     public void Handle(IEntityMessage message)
     {
-        LOGGER.Debug("Recieved message {0}.", message);
+        //LOGGER.Debug("Recieved message {0}.", message);
         message.Accept(this);
     }
 

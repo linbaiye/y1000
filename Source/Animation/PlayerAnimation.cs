@@ -74,6 +74,7 @@ public class PlayerAnimation : AbstractCreatureAnimation<PlayerAnimation>
                 .ConfigureState(CreatureState.FLY, AtdReader, N02)
                 .ConfigureState(CreatureState.WALK, AtdReader, N02)
                 .ConfigureState(CreatureState.RUN, AtdReader, N02)
+                .ConfigureState(CreatureState.ENFIGHT_WALK, AtdReader, N02)
                 .ConfigureState(CreatureState.HURT, AtdReader, N02)
                 .ConfigureState(CreatureState.COOLDOWN, AtdReader, N02)
                 .ConfigureState(CreatureState.KICK, AtdReader, N01)

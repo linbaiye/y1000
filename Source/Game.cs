@@ -134,7 +134,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			return;
 		}
-		_character.EnqueueInput(input);
+		_character.HandleInput(input);
 	}
 	
 
@@ -185,7 +185,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		var click = _inputSampler.SampleLeftClickInput(args.MouseEvent, args.Creature);
 		if (click is AttackInput attack)
 		{
-			_character?.EnqueueInput(attack);
+			_character?.HandleInput(attack);
 			//Visit(new HurtMessage(attack.Entity.Id));
 		}
 	}
@@ -277,7 +277,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			_bottomControl?.BindCharacter(_character);
 			MapLayer.BindCharacter(_character);
 			_entities.TryAdd(_character.Id, _character);
-			AddChild(_character, false, InternalMode.Back);
+			AddChild(_character);
+			//AddChild(_character, false, InternalMode.Back);
 		}
 	}
 }

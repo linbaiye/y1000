@@ -4,25 +4,22 @@ namespace y1000.Source.Character.State;
 
 public sealed class CharacterHurtState : ICharacterState
 {
-    private CharacterHurtState(IPlayerState playerHurtState)
+    private readonly ICharacterState _beforeHurtState;
+    private CharacterHurtState(IPlayerState playerHurtState, ICharacterState beforeHurtState)
     {
         WrappedState = playerHurtState;
+        _beforeHurtState = beforeHurtState;
     }
 
     public void OnWrappedPlayerAnimationFinished(Character character)
     {
-        if (WrappedState is not PlayerHurtState hurtState)
-        {
-            return;
-        }
-        var interruptedState = hurtState.InterruptedState;
-        character.ChangeState(CharacterCooldownState.Cooldown());
+        character.ChangeState(_beforeHurtState);
     }
 
     public IPlayerState WrappedState { get; }
 
     public static CharacterHurtState Hurt(ICharacterState state)
     {
-        return new CharacterHurtState(IPlayerState.Hurt(state.WrappedState));
+        return new CharacterHurtState(IPlayerState.Hurt(state.WrappedState), state);
     }
 }

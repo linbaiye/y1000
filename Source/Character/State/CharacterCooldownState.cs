@@ -1,10 +1,12 @@
-﻿using y1000.Source.Input;
+﻿using NLog;
+using y1000.Source.Input;
 using y1000.Source.Player;
 
 namespace y1000.Source.Character.State;
 
 public sealed class CharacterCooldownState : AbstractCharacterIdleState
 {
+    private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
     private CharacterCooldownState(IPlayerState wrappedState) : base(wrappedState)
     {
     }
@@ -13,6 +15,8 @@ public sealed class CharacterCooldownState : AbstractCharacterIdleState
     {
         return new CharacterCooldownState(IPlayerState.Cooldown());
     }
+
+    protected override ILogger Logger => LOGGER;
 
     protected override ICharacterState MoveState(Character character, AbstractRightClickInput rightClickInput)
     {

@@ -58,5 +58,6 @@
     <Compile Remove="Source\Creature\CreatureChangedStateEventArgs.cs" />
     <Compile Remove="Source\Creature\State\AbstractCreatureHitState.cs" />
     <Compile Remove="Source\Character\State\CharacterEnfightState.cs" />
+    <Compile Remove="Source\Character\State\AbstractCharacterMoveState.cs" />
   </ItemGroup>
 </Project>

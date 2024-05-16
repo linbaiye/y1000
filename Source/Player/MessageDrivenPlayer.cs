@@ -58,7 +58,7 @@ public class MessageDrivenPlayer : IEntity
             case CreatureState.HURT:
                 Player.ChangeState(args.FinishedState is PlayerStillState ?
                         IPlayerState.Idle()
-                    : ((PlayerHurtState)args.FinishedState).InterruptedState.AfterHurt());
+                    : ((PlayerHurtState)args.FinishedState).InterruptedState);
                 break;
             case CreatureState.DIE:
             case CreatureState.SIT:

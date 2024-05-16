@@ -9,7 +9,7 @@ namespace y1000.Source.Networking;
 
 public class RunMessage : AbstractPositionMessage
 {
-    public RunMessage(long id, Vector2I coordinate, Direction direction) : base(id, coordinate, direction)
+    public RunMessage(long id, Vector2I coordinate, Direction direction) : base(id, coordinate, direction, CreatureState.RUN)
     {
     }
 

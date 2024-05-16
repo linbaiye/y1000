@@ -17,11 +17,6 @@ public sealed class PlayerStillState : AbstractPlayerState, IPlayerState
         NotifyIfElapsed(c, delta);
     }
 
-    public IPlayerState AfterHurt()
-    {
-        return State == CreatureState.ATTACK ? IPlayerState.Cooldown() : this;
-    }
-
     public override CreatureState State { get; }
     
     public static IPlayerState CreateFrom(PlayerInterpolation playerInterpolation)

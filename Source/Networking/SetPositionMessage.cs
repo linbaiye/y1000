@@ -9,18 +9,15 @@ namespace y1000.Source.Networking
 {
     public class SetPositionMessage : AbstractPositionMessage
     {
-        
-        private SetPositionMessage(long id, Vector2I coordinate, Direction direction, CreatureState state) : base(id, coordinate, direction)
+        private SetPositionMessage(long id, Vector2I coordinate, Direction direction, CreatureState state) : base(id, coordinate, direction, state)
         {
-            State = state;
         }
         
-        public CreatureState State { get; }
-
         public static SetPositionMessage FromPacket(PositionPacket packet)
         {
             return new SetPositionMessage(packet.Id, new Vector2I(packet.X, packet.Y), (Direction)packet.Direction, (CreatureState)packet.State);
         }
+        
         public override string ToString()
         {
             return FormatLog("SetPosition");

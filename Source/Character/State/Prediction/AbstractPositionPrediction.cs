@@ -42,12 +42,12 @@ namespace y1000.Source.Character.State.Prediction
             }
             if (t.Direction != _direction)
             {
-                Logger.Debug("Position mismatch, client direction {0}, server direction {1}.", _direction, t.Direction);
+                Logger.Debug("Direction mismatch, client direction {0}, server direction {1}, id {2}.", _direction, t.Direction, Input.Sequence);
                 return false;
             }
             if (!_currentCoordinate.Equals(t.Coordinate))
             {
-                Logger.Debug("Position mismatch, client coordinate {0}, server coordinate {1}.", _currentCoordinate, t.Coordinate);
+                Logger.Debug("Position mismatch, client coordinate {0}, server coordinate {1}, id {2}.", _currentCoordinate, t.Coordinate, Input.Sequence);
                 return false;
             }
             return true;

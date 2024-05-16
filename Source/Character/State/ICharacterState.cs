@@ -1,4 +1,5 @@
-using y1000.Source.Character.Event;
+
+using y1000.Source.Creature;
 using y1000.Source.Input;
 using y1000.Source.Player;
 
@@ -12,20 +13,16 @@ namespace y1000.Source.Character.State
         
         void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion) {}
 
-        bool AcceptInput()
+        bool CanHandle(IPredictableInput input)
         {
             return false;
         }
 
-        bool IsValid(IPredictableInput input)
-        {
-            return true;
-        }
-        
         void Attack(Character character, AttackInput @event) { }
 
         void OnWrappedPlayerAnimationFinished(Character character) {}
 
         IPlayerState WrappedState { get; }
+
     }
 }

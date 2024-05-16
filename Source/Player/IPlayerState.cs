@@ -17,10 +17,6 @@ public interface IPlayerState : ICreatureState<Player>
         return new PlayerStillState(state);
     }
 
-    IPlayerState AfterHurt()
-    {
-        return this;
-    }
 
     public static IPlayerState Hurt(IPlayerState current)
     {
@@ -49,6 +45,7 @@ public interface IPlayerState : ICreatureState<Player>
             CreatureState.WALK => Walk(direction),
             CreatureState.RUN => Run(direction),
             CreatureState.FLY => Run(direction),
+            CreatureState.ENFIGHT_WALK => Run(direction),
             _ => throw new NotImplementedException("Bad moving state: " + movingState)
         };
     }

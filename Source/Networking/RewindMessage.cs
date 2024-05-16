@@ -7,7 +7,7 @@ namespace y1000.Source.Networking;
 
 public class RewindMessage : AbstractPositionMessage
 {
-    private RewindMessage(long id, Vector2I coordinate, Direction direction) : base(id, coordinate, direction)
+    private RewindMessage(long id, Vector2I coordinate, Direction direction, CreatureState state) : base(id, coordinate, direction, state)
     {
     }
 
@@ -17,6 +17,6 @@ public class RewindMessage : AbstractPositionMessage
 
     public static RewindMessage FromPacket(PositionPacket packet)
     {
-        return new RewindMessage(packet.Id, new Vector2I(packet.X, packet.Y), (Direction)packet.Direction);
+        return new RewindMessage(packet.Id, new Vector2I(packet.X, packet.Y), (Direction)packet.Direction, (CreatureState)packet.State);
     }
 }

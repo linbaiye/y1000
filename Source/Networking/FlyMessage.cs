@@ -9,7 +9,7 @@ namespace y1000.Source.Networking;
 
 public class FlyMessage : AbstractPositionMessage
 {
-    public FlyMessage(long id, Vector2I coordinate, Direction direction) : base(id, coordinate, direction)
+    public FlyMessage(long id, Vector2I coordinate, Direction direction) : base(id, coordinate, direction, CreatureState.IDLE)
     {
     }
 

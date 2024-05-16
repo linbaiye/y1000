@@ -1,6 +1,5 @@
 using Godot;
 using NLog;
-using y1000.code;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Map;
@@ -48,7 +47,8 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 
 	public void Visit(MoveMessage message)
 	{
-		ChangeState(IPlayerState.Walk(message.Direction));
+		var playerState = IPlayerState.Move(message.State, message.Direction);
+		ChangeState(playerState);
 	}
 	
 	public void Visit(FlyMessage message)

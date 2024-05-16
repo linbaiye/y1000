@@ -1,7 +1,5 @@
 using System;
 using NLog;
-using y1000.code.networking.message;
-using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Character.State.Prediction
@@ -31,29 +29,22 @@ namespace y1000.Source.Character.State.Prediction
 
         public bool Reconcile(IPredictableResponse message)
         {
+            var predicted = false;
             while (!_predictions.IsEmpty)
             {
                 IPrediction prediction = _predictions.Front();
+                _predictions.PopFront();
                 if (prediction.Input.Sequence == message.Sequence)
                 {
-                    _predictions.PopFront();
-                    if (prediction.Predicted(message))
-                    {
-                        return true;
-                    }
-                }
-                else if (prediction.Input.Sequence < message.Sequence)
-                {
-                    LOGGER.Info("Lost input response for input {0}.", prediction.Input);
-                    _predictions.PopFront();
-                }
-                else
-                {
-                    // Probably a stale message.
-                    return true;
+                    predicted = prediction.Predicted(message);
+                    break;
                 }
             }
-            return false;
+            if (!predicted)
+            {
+                _predictions.Clear();
+            }
+            return predicted;
         }
     }
 }

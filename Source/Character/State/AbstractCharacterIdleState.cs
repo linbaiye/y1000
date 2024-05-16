@@ -1,7 +1,9 @@
+using Microsoft.Extensions.Logging;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
 using y1000.Source.Player;
+using ILogger = NLog.ILogger;
 
 namespace y1000.Source.Character.State;
 
@@ -17,6 +19,8 @@ public abstract class AbstractCharacterIdleState : ICharacterState
     {
         HandleRightClick(character, rightClick);
     }
+    
+    protected abstract ILogger Logger { get; }
 
     
     protected abstract ICharacterState MoveState(Character character, AbstractRightClickInput rightClickInput);
@@ -37,20 +41,17 @@ public abstract class AbstractCharacterIdleState : ICharacterState
         {
             character.EmitEvent(new MovePrediction(rightClick, character.Coordinate, rightClick.Direction),
                 new MovementEvent(rightClick, character.Coordinate));
-            character.ChangeState(MoveState(character, rightClick));
+            var characterState = MoveState(character, rightClick);
+            Logger.Debug("Change to move state {0} from {1}, trigger id {2}..", characterState.WrappedState.State, WrappedState.State, rightClick.Sequence);
+            character.ChangeState(characterState);
         }
     }
 
-    public bool AcceptInput()
+    public bool CanHandle(IPredictableInput input)
     {
         return true;
     }
 
-    public bool IsValid(IPredictableInput input)
-    {
-        return true;
-    }
-        
     public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
     {
         HandleRightClick(character, mousePressedMotion);

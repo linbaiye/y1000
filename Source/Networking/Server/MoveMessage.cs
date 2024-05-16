@@ -6,12 +6,12 @@ namespace y1000.Source.Networking.Server
 {
     public class MoveMessage : AbstractPositionMessage
     {
-        private MoveMessage(long id, Vector2I coor, Direction direction) : base(id, coor, direction) {}
+        private MoveMessage(long id, Vector2I coor, Direction direction, CreatureState state) : base(id, coor, direction, state) {}
 
 
         public static MoveMessage FromPacket(PositionPacket positionPacket)
         {
-            return new MoveMessage(positionPacket.Id, new Vector2I(positionPacket.X, positionPacket.Y), (Direction)positionPacket.Direction);
+            return new MoveMessage(positionPacket.Id, new Vector2I(positionPacket.X, positionPacket.Y), (Direction)positionPacket.Direction, (CreatureState)positionPacket.State);
         }
 
         public override string ToString()

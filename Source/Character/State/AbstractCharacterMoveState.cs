@@ -9,5 +9,10 @@ public abstract class AbstractCharacterMoveState: ICharacterState
         WrappedState = wrappedState;
     }
 
+    public ICharacterState AfterHurt()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public IPlayerState WrappedState { get; }
 }
