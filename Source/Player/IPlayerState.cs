@@ -9,16 +9,22 @@ public interface IPlayerState : ICreatureState<Player>
     static readonly IPlayerState Empty = EmptyPlayerState.Instance;
     
     CreatureState State { get; }
-    
+
+    void Reset() { }
     
     public static IPlayerState Attack(CreatureState state)
     {
         return new PlayerStillState(state);
     }
 
-    public static IPlayerState Hurt()
+    IPlayerState AfterHurt()
     {
-        return new PlayerStillState(CreatureState.HURT);
+        return this;
+    }
+
+    public static IPlayerState Hurt(IPlayerState current)
+    {
+        return PlayerHurtState.Hurt(current);
     }
     
     public static IPlayerState Walk(Direction direction)
@@ -47,6 +53,7 @@ public interface IPlayerState : ICreatureState<Player>
         };
     }
 
+
     public static IPlayerState Idle()
     {
         return new PlayerStillState(CreatureState.IDLE);
@@ -56,4 +63,5 @@ public interface IPlayerState : ICreatureState<Player>
     {
         return new PlayerStillState(CreatureState.COOLDOWN);
     }
+    
 }

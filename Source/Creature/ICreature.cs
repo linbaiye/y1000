@@ -8,4 +8,5 @@ namespace y1000.Source.Creature;
 public interface ICreature : IEntity
 {
     Direction Direction { get; }
+
 }

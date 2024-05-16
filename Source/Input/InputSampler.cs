@@ -11,7 +11,7 @@ namespace y1000.Source.Input
     {
 
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-
+        
         private IPredictableInput? SampleMouseButton(InputEventMouseButton button, Vector2 mouseOffset)
         {
             if (button.ButtonIndex == MouseButton.Right)

@@ -23,12 +23,6 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
     {
         return new PlayerMoveState(PlayerAnimation.Male.AnimationMillis(state), state, dir, e);
     }
-    
-    public static PlayerMoveState WalkTowards(Direction direction, int elapsed = 0)
-    {
-        return Create(CreatureState.WALK, direction, elapsed);
-    }
-
 
     public void CheckMoving()
     {
@@ -57,10 +51,20 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
     {
         return Create(CreatureState.RUN, direction, elapsed);
     }
+
+    public static PlayerMoveState EnfightWalk(Direction direction, int elapsed = 0)
+    {
+        return Create(CreatureState.ENFIGHT_WALK, direction, elapsed);
+    }
     
     public static PlayerMoveState FlyTowards(Direction direction, int elapsed = 0)
     {
         return Create(CreatureState.FLY, direction, elapsed);
+    }
+    
+    public static PlayerMoveState WalkTowards(Direction direction, int elapsed = 0)
+    {
+        return Create(CreatureState.WALK, direction, elapsed);
     }
 
 }

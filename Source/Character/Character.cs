@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Godot;
+using Godot.NativeInterop;
 using NLog;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
@@ -28,6 +30,8 @@ namespace y1000.Source.Character
 		public IAttackKungFu? AttackKungFu { get; private set; }
 
 		public event EventHandler<CharacterEventArgs>? WhenCharacterUpdated;
+
+		private readonly Queue<IPredictableInput> _inputs = new();
 
 		
 		public void ChangeState(ICharacterState state)
@@ -66,12 +70,7 @@ namespace y1000.Source.Character
 			throw new NotImplementedException();
 		}
 
-		 public Vector2I Coordinate => WrappedPlayer().Coordinate;
-
-		public bool CanHandle(IPredictableInput input)
-		{
-			return _state.CanHandle(input);
-		}
+		public Vector2I Coordinate => WrappedPlayer().Coordinate;
 
 
 		private void Rewind(MoveEventResponse response)
@@ -79,7 +78,7 @@ namespace y1000.Source.Character
 			var player = WrappedPlayer();
 			player.SetPosition(response.PositionMessage);
 			LOGGER.Debug("Rewind to coordinate {0}, direction {1}.", player.Coordinate, player.Direction);
-			ChangeState(CharacterIdleState.Create());
+			ChangeState(CharacterIdleState.Idle());
 		}
 		
 		public void Rewind(IPredictableResponse response)
@@ -126,15 +125,26 @@ namespace y1000.Source.Character
 
 		public void Visit(HurtMessage hurtMessage)
 		{
-			ChangeState(CharacterHurtState.Hurt());
+			ChangeState(CharacterHurtState.Hurt(_state));
 		}
 
-		public void HandleInput(IPredictableInput input)
+		public override void _PhysicsProcess(double delta)
 		{
-			if (!_state.CanHandle(input))
+			if (_inputs.Count <= 0 || !_state.AcceptInput())
 			{
 				return;
 			}
+			while (_inputs.TryDequeue(out var result))
+			{
+				if (_state.IsValid(result))
+				{
+					DispatchInput(result);
+				}
+			}
+		}
+
+		private void DispatchInput(IPredictableInput input)
+		{
 			switch (input.Type)
 			{
 				case InputType.MOUSE_RIGHT_CLICK:
@@ -152,6 +162,11 @@ namespace y1000.Source.Character
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+		}
+
+		public void EnqueueInput(IPredictableInput input)
+		{
+			_inputs.Enqueue(input);
 		}
 
 		public static Character LoggedIn(JoinedRealmMessage message, IMap map)

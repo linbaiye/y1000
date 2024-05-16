@@ -77,6 +77,10 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		{
 			ChangeState(IPlayerState.Idle());
 		}
+		else if (setPositionMessage.State == CreatureState.COOLDOWN)
+		{
+			ChangeState(IPlayerState.Cooldown());
+		}
 	}
 
 	public void Handle(IEntityMessage message)
@@ -89,6 +93,11 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		Delete();
 	}
 
+	public void ResetState()
+	{
+		_state.Reset();
+	}
+
 	public void Visit(PlayerAttackMessage message)
 	{
 		ChangeDirectionAndState(message.Direction, IPlayerState.Attack(message.State));
@@ -96,10 +105,10 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 
 	public void Visit(HurtMessage hurtMessage)
 	{
-		_state = IPlayerState.Hurt();
+		_state = IPlayerState.Hurt(_state);
 	}
 
-	public string Location()
+	private string Location()
 	{
 		return $"{base.ToString()}, {nameof(Id)}: {Id}, {nameof(Direction)}: {Direction}, {nameof(Coordinate)}: {Coordinate}";
 	}

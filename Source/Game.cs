@@ -134,10 +134,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			return;
 		}
-		if (_character.CanHandle(input))
-		{
-			_character.HandleInput(input);
-		}
+		_character.EnqueueInput(input);
 	}
 	
 
@@ -188,7 +185,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		var click = _inputSampler.SampleLeftClickInput(args.MouseEvent, args.Creature);
 		if (click is AttackInput attack)
 		{
-			_character?.HandleInput(attack);
+			_character?.EnqueueInput(attack);
 			//Visit(new HurtMessage(attack.Entity.Id));
 		}
 	}

@@ -6,4 +6,6 @@ namespace y1000.Source.Player;
 public interface IPlayer : ICreature
 {
     bool IsMale { get; }
+
+    void ResetState() { }
 }

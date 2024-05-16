@@ -5,7 +5,7 @@ using y1000.Source.Networking;
 
 namespace y1000.Source.Player;
 
-public sealed class PlayerStillState : AbstractPlayerState
+public sealed class PlayerStillState : AbstractPlayerState, IPlayerState
 {
     public PlayerStillState(CreatureState state, int elapsedMillis = 0) : base(PlayerAnimation.Male.AnimationMillis(state), elapsedMillis)
     {
@@ -15,6 +15,11 @@ public sealed class PlayerStillState : AbstractPlayerState
     public override void Update(Player c, int delta)
     {
         NotifyIfElapsed(c, delta);
+    }
+
+    public IPlayerState AfterHurt()
+    {
+        return State == CreatureState.ATTACK ? IPlayerState.Cooldown() : this;
     }
 
     public override CreatureState State { get; }

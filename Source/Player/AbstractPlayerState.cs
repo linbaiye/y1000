@@ -26,6 +26,11 @@ public abstract class AbstractPlayerState : AbstractCreatureState<Player>, IPlay
         }
     }
 
+    public void Reset()
+    {
+        ElapsedMillis = 0;
+    }
+
     public abstract CreatureState State { get; }
 
     

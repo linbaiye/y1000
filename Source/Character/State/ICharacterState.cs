@@ -12,9 +12,14 @@ namespace y1000.Source.Character.State
         
         void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion) {}
 
-        bool CanHandle(IPredictableInput input)
+        bool AcceptInput()
         {
             return false;
+        }
+
+        bool IsValid(IPredictableInput input)
+        {
+            return true;
         }
         
         void Attack(Character character, AttackInput @event) { }

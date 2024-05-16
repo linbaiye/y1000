@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Godot;
 using y1000.Source.Creature;
@@ -11,37 +12,64 @@ namespace y1000.Source.Player;
 
 public class MessageDrivenPlayer : IEntity
 {
-    private readonly Player _player;
-    
     private readonly Queue<IEntityMessage> _messages;
-    public MessageDrivenPlayer(Player player)
+
+    private MessageDrivenPlayer(Player player)
     {
-        player.StateAnimationEventHandler += OnStateAnimationDone;
-        _player = player;
+        Player = player;
+        Player.StateAnimationEventHandler += OnStateAnimationDone;
         _messages = new Queue<IEntityMessage>();
     }
 
-    public Player Player => _player;
-    public string EntityName => _player.EntityName;
-    public long Id => _player.Id;
-    public Vector2I Coordinate => _player.Coordinate;
+    public Player Player { get; }
+
+    public string EntityName => Player.EntityName;
+    public long Id => Player.Id;
+    public Vector2I Coordinate => Player.Coordinate;
 
     private void OnStateAnimationDone(object? sender, CreatureAnimationDoneEventArgs args)
     {
         switch (args.FinishedState.State)
         {
-            case CreatureState.ATTACK:
-                _player.ChangeState(IPlayerState.Cooldown());
-                break;
             case CreatureState.IDLE:
-                _player.ChangeState(IPlayerState.Idle());
+            case CreatureState.COOLDOWN:
+                Player.ResetState();
+                break;
+            case CreatureState.STANDUP:
+            case CreatureState.HELLO:
+            case CreatureState.FLY:
+            case CreatureState.WALK:
+            case CreatureState.RUN:
+                Player.ChangeState(IPlayerState.Idle());
+                break;
+            case CreatureState.AXE:
+            case CreatureState.BOW:
+            case CreatureState.FIST:
+            case CreatureState.KICK:
+            case CreatureState.SWORD:
+            case CreatureState.SWORD2H:
+            case CreatureState.BLADE:
+            case CreatureState.BLADE2H:
+            case CreatureState.SPEAR:
+            case CreatureState.ENFIGHT_WALK:
+            case CreatureState.THROW:
+                Player.ChangeState(IPlayerState.Cooldown());
+                break;
+            case CreatureState.HURT:
+                Player.ChangeState(args.FinishedState is PlayerStillState ?
+                        IPlayerState.Idle()
+                    : ((PlayerHurtState)args.FinishedState).InterruptedState.AfterHurt());
+                break;
+            case CreatureState.DIE:
+            case CreatureState.SIT:
+            case CreatureState.TURN:
                 break;
         }
     }
 
     public void Handle(IEntityMessage message)
     {
-        _player.Handle(message);
+        Player.Handle(message);
     }
 
     public static MessageDrivenPlayer FromInterpolation(PlayerInterpolation playerInterpolation, IMap map)
