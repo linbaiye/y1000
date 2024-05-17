@@ -47,23 +47,11 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 
 	public void Visit(MoveMessage message)
 	{
+		LOGGER.Debug("Received message {0}.", message);
 		var playerState = IPlayerState.Move(message.State, message.Direction);
 		ChangeState(playerState);
 	}
 	
-	public void Visit(FlyMessage message)
-	{
-		if (_state is PlayerMoveState moveState)
-		{
-			moveState.CheckMoving();
-		}
-		ChangeState(IPlayerState.Fly(message.Direction));
-	}
-	
-	public void Visit(RunMessage message)
-	{
-		ChangeState(IPlayerState.Run(message.Direction));
-	}
 	
 	public override void _PhysicsProcess(double delta)
 	{

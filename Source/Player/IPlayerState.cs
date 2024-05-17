@@ -44,8 +44,8 @@ public interface IPlayerState : ICreatureState<Player>
         {
             CreatureState.WALK => Walk(direction),
             CreatureState.RUN => Run(direction),
-            CreatureState.FLY => Run(direction),
-            CreatureState.ENFIGHT_WALK => Run(direction),
+            CreatureState.FLY => Fly(direction),
+            CreatureState.ENFIGHT_WALK => PlayerMoveState.EnfightWalk(direction),
             _ => throw new NotImplementedException("Bad moving state: " + movingState)
         };
     }

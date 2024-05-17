@@ -24,7 +24,7 @@ namespace y1000.Source.Networking.Server
 
         protected string FormatLog(string type)
         {
-            return "[Id:" + Id + ", Type: " + type + ", Coordinate: " + Coordinate + ", Dir:" + Direction + "]";
+            return "[Id:" + Id + ", Type: " + type + ", Coordinate: " + Coordinate + ", Dir:" + Direction + ", State:" + State + "]";
         }
 
         public abstract void Accept(IServerMessageVisitor visitor);

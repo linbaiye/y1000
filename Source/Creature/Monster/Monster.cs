@@ -86,6 +86,11 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
         _state = MonsterStillState.Attack(MonsterAnimation);
     }
 
+    public void Visit(RemoveEntityMessage removeEntityMessage)
+    {
+        Delete();
+    }
+
     public void Handle(IEntityMessage message)
     {
         //LOGGER.Debug("Recieved message {0}.", message);
