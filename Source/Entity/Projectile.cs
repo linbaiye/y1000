@@ -24,10 +24,10 @@ public partial class Projectile : Sprite2D
         lengthSeconds = distance * 0.05f;
         vect = ((tpos +  (size / 2)) - player.Coordinate.ToPosition()) / lengthSeconds;
         //vect = (target.Coordinate - player.Coordinate).ToPosition() + (VectorUtil.TileSize / 2);
-        Position = player.Position;
-        //Position = player.Coordinate.Move(player.Direction).ToPosition();
+        Position = player.OffsetPosition;
+        Position = player.Coordinate.Move(player.Direction).ToPosition();
         var arrowTexture = ArrowAnimation.Instance.OffsetTexture(player.Direction);
-        Offset = arrowTexture.Offset;
+        Offset = arrowTexture.Offset + new Vector2(16, 12);
         Texture = arrowTexture.Texture;
     }
 

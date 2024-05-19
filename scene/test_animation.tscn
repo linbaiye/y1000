@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cdhrxlx64ks6p"]
+[gd_scene load_steps=66 format=3 uid="uid://cdhrxlx64ks6p"]
 
 [ext_resource type="Texture2D" uid="uid://6e7agsbkde4r" path="res://sprite/char/N00/000000.png" id="1_aa18q"]
 [ext_resource type="Texture2D" uid="uid://cf328w2nq1syi" path="res://sprite/char/N00/000001.png" id="2_23pth"]
@@ -60,6 +60,7 @@
 [ext_resource type="Texture2D" uid="uid://dvnqfabdmu8jr" path="res://sprite/char/N02/000121.png" id="46_jdu6k"]
 [ext_resource type="Texture2D" uid="uid://dq0b4j8fxrrol" path="res://sprite/char/N02/000122.png" id="47_m06r2"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="54_3lv3l"]
+[ext_resource type="Texture2D" uid="uid://cwf20qhswsg8v" path="res://sprite/Effect/Arrow/000000.png" id="61_jko8c"]
 
 [sub_resource type="Animation" id="Animation_56fvw"]
 length = 0.6
@@ -314,16 +315,21 @@ centered = false
 [node name="EnfightWalk" type="Sprite2D" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_h71lt")
-texture = ExtResource("11_t0qxf")
+texture = ExtResource("15_ix3ms")
 centered = false
 
 [node name="Cooldown" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("46_jdu6k")
+texture = ExtResource("47_m06r2")
 centered = false
 
 [node name="Bow" type="Sprite2D" parent="."]
-texture = ExtResource("17_1oox5")
+visible = false
+texture = ExtResource("21_1vvyy")
 centered = false
 
 [node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(100, 100)
+rotation = -6.28319
+texture = ExtResource("61_jko8c")
+centered = false
