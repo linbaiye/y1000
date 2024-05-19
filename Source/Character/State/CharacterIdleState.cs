@@ -4,7 +4,7 @@ using y1000.Source.Player;
 
 namespace y1000.Source.Character.State
 {
-    public class CharacterIdleState : AbstractCharacterIdleState
+    public class CharacterIdleState : AbstractCharacterStillState
     {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
         private CharacterIdleState(IPlayerState wrappedState) : base(wrappedState)

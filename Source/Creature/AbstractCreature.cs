@@ -34,7 +34,9 @@ public abstract partial class AbstractCreature : Node2D, ICreature, IBody
     public Direction Direction { get; set; }
 
     public Vector2I Coordinate => Position.ToCoordinate();
-    
+
+    public Vector2 OffsetPosition => Position + BodyOffsetTexture.Offset;
+
     public abstract OffsetTexture BodyOffsetTexture { get; }
 
     private void MyEvent(InputEvent @event)
@@ -66,10 +68,15 @@ public abstract partial class AbstractCreature : Node2D, ICreature, IBody
         map.Occupy(this);
     }
 
+    public void SetPosition(Vector2I coordinate, Direction direction)
+    {
+        Direction = direction;
+        Position = coordinate.ToPosition();
+        Map.Occupy(this);
+    }
+
     public void SetPosition(AbstractPositionMessage positionMessage)
     {
-        Direction = positionMessage.Direction;
-        Position = positionMessage.Coordinate.ToPosition();
-        Map.Occupy(this);
+        SetPosition(positionMessage.Coordinate, positionMessage.Direction);
     }
 }

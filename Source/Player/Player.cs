@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using NLog;
 using y1000.Source.Animation;
@@ -10,10 +11,11 @@ namespace y1000.Source.Player;
 
 public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 {
-
 	private IPlayerState _state = IPlayerState.Empty;
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+
+	public event EventHandler<PlayerRangedAttackEventArgs>? OnPlayerShoot;
 	
 	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id, IMap map)
 	{
@@ -39,16 +41,15 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		_state = newState;
 	}
 
-	private void ChangeDirectionAndState(Direction direction, IPlayerState state)
+	public void EmitRangedAttackEvent(long id)
 	{
-		Direction = direction;
-		ChangeState(state);
+		OnPlayerShoot?.Invoke(this, new PlayerRangedAttackEventArgs(id));
 	}
 
 	public void Visit(MoveMessage message)
 	{
 		LOGGER.Debug("Received message {0}.", message);
-		var playerState = IPlayerState.Move(message.State, message.Direction);
+		var playerState = IPlayerState.NonHurtState(message.State, message.Direction);
 		ChangeState(playerState);
 	}
 	
@@ -88,12 +89,14 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 
 	public void Visit(PlayerAttackMessage message)
 	{
-		ChangeDirectionAndState(message.Direction, IPlayerState.Attack(message.State));
+		SetPosition(message.Coordinate, message.Direction);
+		_state = IPlayerState.Attack(message);
 	}
 
 	public void Visit(HurtMessage hurtMessage)
 	{
-		_state = IPlayerState.Hurt(_state);
+		SetPosition(hurtMessage.Coordinate, hurtMessage.Direction);
+		_state = IPlayerState.Hurt(hurtMessage.AfterHurtState);
 	}
 
 	private string Location()
@@ -106,9 +109,13 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/player.tscn");
 		var player = scene.Instantiate<Player>();
 		var interpolation = playerInterpolation.Interpolation;
-		var state = PlayerStillState.CreateFrom(playerInterpolation);
+		var state = IPlayerState.CreateFrom(playerInterpolation);
 		player.Init(playerInterpolation.Male, state, 
 			interpolation.Direction, interpolation.Coordinate, playerInterpolation.Id, map);
+		if (state is PlayerMoveState moveState)
+		{
+			moveState.Init(player);
+		}
 		return player;
 	}
 }

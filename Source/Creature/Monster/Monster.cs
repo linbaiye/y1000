@@ -43,14 +43,23 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
                 return MonsterStillState.Hurt(animation, elapses);
             case CreatureState.ATTACK:
                 return MonsterStillState.Attack(animation, elapses);
+            case CreatureState.FROZEN:
+                return MonsterStillState.Frozen(animation, elapses);
             default:
                 throw new NotImplementedException();
         }
     }
 
-    public void GoIdle()
+    public void AnimationDone(CreatureState state = CreatureState.FROZEN)
     {
-        _state = MonsterStillState.Idle(MonsterAnimation);
+        if (state == CreatureState.IDLE)
+        {
+            _state = MonsterStillState.Frozen(MonsterAnimation);
+        }
+        else
+        {
+            _state = MonsterStillState.Idle(MonsterAnimation);
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -65,6 +74,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
     public void Visit(HurtMessage hurtMessage)
     {
+        SetPosition(hurtMessage.Coordinate, hurtMessage.Direction);
         _state = MonsterStillState.Hurt(MonsterAnimation);
     }
     
@@ -82,12 +92,13 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
     public void Visit(CreatureAttackMessage attackMessage)
     {
-        Direction = attackMessage.Direction;
+        SetPosition(attackMessage.Coordinate, attackMessage.Direction);
         _state = MonsterStillState.Attack(MonsterAnimation);
     }
 
     public void Visit(RemoveEntityMessage removeEntityMessage)
     {
+        LOGGER.Debug("Delete message received.");
         Delete();
     }
 

@@ -8,11 +8,16 @@ namespace y1000.Source.Player;
 public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-    
+
     private PlayerMoveState(int total, CreatureState state, Direction towards, int elapsedMillis = 0) : base(total, towards, elapsedMillis)
     {
         State = state;
     }
+    
+    public PlayerMoveState(CreatureState state, Direction towards, int elapsedMillis = 0) : this(PlayerAnimation.Male.AnimationMillis(state), state, towards, elapsedMillis)
+    {
+    }
+    
     
     protected override ILogger Logger => LOGGER;
 

@@ -1,0 +1,74 @@
+using Microsoft.Extensions.Logging;
+using y1000.Source.Character.Event;
+using y1000.Source.Character.State.Prediction;
+using y1000.Source.Input;
+using y1000.Source.Player;
+using y1000.Source.Util;
+using ILogger = NLog.ILogger;
+
+namespace y1000.Source.Character.State;
+
+public abstract class AbstractCharacterStillState : ICharacterState
+{
+    protected AbstractCharacterStillState(IPlayerState wrappedState)
+    {
+        WrappedState = wrappedState;
+    }
+    public IPlayerState WrappedState { get; }
+    
+    public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+    {
+        HandleRightClick(character, rightClick);
+    }
+    
+    protected abstract ILogger Logger { get; }
+
+    
+    protected abstract ICharacterState MoveState(Character character, AbstractRightClickInput rightClickInput);
+
+    private void HandleRightClick(Character character, AbstractRightClickInput rightClick)
+    {
+        if (!character.CanMoveOneUnit(rightClick.Direction))
+        {
+            if (character.Direction != rightClick.Direction)
+            {
+                character.EmitPredictionEvent(new SetPositionPrediction(rightClick, character.Coordinate, rightClick.Direction), 
+                    new PredictMovementEvent(rightClick, character.Coordinate));
+                character.Direction = rightClick.Direction;
+                WrappedState.Reset();
+            }
+        }
+        else
+        {
+            character.EmitPredictionEvent(new MovePrediction(rightClick, character.Coordinate, rightClick.Direction),
+                new PredictMovementEvent(rightClick, character.Coordinate));
+            var characterState = MoveState(character, rightClick);
+            Logger.Debug("Change to move state {0} from {1}, trigger id {2}..", characterState.WrappedState.State, WrappedState.State, rightClick.Sequence);
+            character.ChangeState(characterState);
+        }
+    }
+
+    public bool CanHandle(IPredictableInput input)
+    {
+        return true;
+    }
+
+    public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
+    {
+        HandleRightClick(character, mousePressedMotion);
+    }
+
+    public void Attack(Character character, AttackInput input)
+    {
+        var state = character.AttackKungFu.RandomAttackState();
+        character.Direction = character.Coordinate.GetDirection(input.Entity.Coordinate);
+        character.EmitPredictionEvent(new AttackPrediction(input), new CharacterAttackEvent(input, state, character.Direction));
+        var characterAttackState = CharacterAttackState.Attack(state);
+        character.ChangeState(characterAttackState);
+    }
+    
+    public void OnWrappedPlayerAnimationFinished(Character character)
+    {
+        WrappedState.Reset();
+    }
+}

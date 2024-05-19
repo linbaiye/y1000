@@ -56,13 +56,11 @@ public class MessageDrivenPlayer : IEntity
                 Player.ChangeState(IPlayerState.Cooldown());
                 break;
             case CreatureState.HURT:
-                Player.ChangeState(args.FinishedState is PlayerStillState ?
-                        IPlayerState.Idle()
-                    : ((PlayerHurtState)args.FinishedState).InterruptedState);
+                Player.ChangeState(IPlayerState.NonHurtState(((PlayerHurtState)args.FinishedState).AfterHurt));
                 break;
             case CreatureState.DIE:
             case CreatureState.SIT:
-            case CreatureState.TURN:
+            case CreatureState.FROZEN:
                 break;
         }
     }

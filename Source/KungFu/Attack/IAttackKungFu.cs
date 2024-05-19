@@ -1,20 +1,25 @@
 ﻿using System;
-using y1000.Source.Entity;
-using y1000.Source.Input;
-using y1000.Source.Sprite;
+using y1000.Source.Creature;
 
 namespace y1000.Source.KungFu.Attack;
 
 public interface IAttackKungFu : ILevelKungFu
 {
-    void Attack(Character.Character character, AttackInput input);
-
-    public static IAttackKungFu? ByName(string name, int level)
+    public CreatureState RandomAttackState();
+    
+    public static IAttackKungFu ByName(string name, int level)
     {
-        if (QuangFa.Knows(name))
+        if (QuanFa.Knows(name))
         {
-            return new QuangFa(level, name);
+            return new QuanFa(level, name);
         }
-        return null;
+        if (Bow.Knows(name))
+        {
+            return new Bow(level, name);
+        }
+        throw new NotImplementedException();
     }
+    
+    public static readonly IAttackKungFu Empty = EmptyAttackKungFu.Instance;
+    
 }

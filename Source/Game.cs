@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +10,6 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using NLog;
-using y1000.Source.Animation;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Control.Bottom;
@@ -50,7 +48,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private BottomControl? _bottomControl;
 
-
 	private enum ConnectionState
 	{
 		DISCONNECTED,
@@ -62,13 +59,16 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		SetupNetwork();
 		_bottomControl = GetNode<BottomControl>("UILayer/BottomUI");
-		AtdReader.LoadPlayer("0.atd");
 	}
 
-	private void WhenCharacterUpdated(object? sender, CharacterEventArgs eventArgs)
+	private void OnPredictionEvent(object? sender, EventArgs eventArgs)
 	{
-		_predictionManager.Save(eventArgs.Prediction);
-		WriteMessage(eventArgs.Event);
+		if (sender is not Character.Character character || eventArgs is not CharacterPredictionEventArgs predictionEventArgs)
+		{
+			return;
+		}
+		_predictionManager.Save(predictionEventArgs.Prediction);
+		WriteMessage(predictionEventArgs.Event);
 	}
 
 	private void ShowCharacter(JoinedRealmMessage joinedRealmMessage)
@@ -82,11 +82,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		// character.Visible = true;
 	}
 
-
-	public bool CanMove(Point coordinate)
-	{
-		return false;
-	}
 
 	private async void SetupNetwork()
 	{
@@ -137,9 +132,31 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_character.HandleInput(input);
 	}
 	
-
+	
 	private void HandleKeyInput(InputEventKey eventKey)
 	{
+		IEntity? entity = null;
+		if (_character == null)
+		{
+			return;
+		}
+		foreach (var valuePair in _entities)
+		{
+			if (valuePair.Key != _character.Id)
+			{
+				entity = valuePair.Value;
+				break;
+			}
+		}
+		if (entity == null)
+		{
+			return;
+		}
+		if (eventKey.Pressed && eventKey.Keycode == Key.A)
+		{
+			var arrow = Projectile.Arrow(_character, (ICreature)entity);
+			AddChild(arrow);
+		}
 	}
 
 	public override void _Input(InputEvent @event)
@@ -186,7 +203,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (click is AttackInput attack)
 		{
 			_character?.HandleInput(attack);
-			//Visit(new HurtMessage(attack.Entity.Id));
 		}
 	}
 
@@ -220,10 +236,27 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		Reconnect();
 	}
 
+	private void OnPlayerShoot(object? sender, PlayerRangedAttackEventArgs args)
+	{
+		if (sender is not IPlayer player)
+		{
+			return;
+		}
+		if (!_entities.TryGetValue(args.TargetId, out var entity))
+		{
+			return;
+		}
+		if (entity is not ICreature creature)
+		{
+			return;
+		}
+		AddChild(Projectile.Arrow(player, creature));
+	}
+
 	public void Visit(PlayerInterpolation playerInterpolation)
 	{
 		var msgDrivenPlayer = MessageDrivenPlayer.FromInterpolation(playerInterpolation, MapLayer);
-		//var player = Player.Player.FromInterpolation(playerInterpolation, MapLayer);
+		msgDrivenPlayer.Player.OnPlayerShoot += OnPlayerShoot;
 		_entities.TryAdd(msgDrivenPlayer.Id, msgDrivenPlayer);
 		AddChild(msgDrivenPlayer.Player);
 		LOGGER.Debug("Added anoter player.");
@@ -265,6 +298,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			entity.Handle(removeEntityMessage);
 			_entities.Remove(removeEntityMessage.Id);
+			LOGGER.Debug("Removed creature {0}.", removeEntityMessage.Id);
 		}
 	}
 
@@ -273,9 +307,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (MapLayer.Map != null)
 		{
 			_character = Character.Character.LoggedIn(joinedRealmMessage, MapLayer);
-			_character.WhenCharacterUpdated += WhenCharacterUpdated;
+			_character.WhenCharacterUpdated += OnPredictionEvent;
 			_bottomControl?.BindCharacter(_character);
 			MapLayer.BindCharacter(_character);
+			_character.WrappedPlayer().OnPlayerShoot += OnPlayerShoot;
 			_entities.TryAdd(_character.Id, _character);
 			AddChild(_character);
 			//AddChild(_character, false, InternalMode.Back);

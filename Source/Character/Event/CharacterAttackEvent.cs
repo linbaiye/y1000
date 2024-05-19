@@ -1,5 +1,4 @@
-﻿using Godot;
-using Source.Networking.Protobuf;
+﻿using Source.Networking.Protobuf;
 using y1000.Source.Creature;
 using y1000.Source.Input;
 
@@ -17,6 +16,8 @@ public class CharacterAttackEvent : IClientEvent
         _state = state;
         _direction = d;
     }
+
+    public CreatureState State => _state;
 
     public ClientPacket ToPacket()
     {

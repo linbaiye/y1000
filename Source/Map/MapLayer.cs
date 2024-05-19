@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -82,13 +83,12 @@ public partial class MapLayer : TileMap, IMap
 		PaintMap();
 	}
 
-	private void OnCharacterEvent(object? sender, CharacterEventArgs args)
+	private void OnCharacterEvent(object? sender, EventArgs args)
 	{
-		if (sender is Character.Character character && 
-		    args.Event is MovementEvent &&
-		    !character.Coordinate.Equals(_origin))
+		if (sender is Character.Character && args is CharacterMoveEventArgs eventArgs &&
+		    !_origin.Equals(eventArgs.Coordinate))
 		{
-			_origin = character.Coordinate;
+			_origin = eventArgs.Coordinate;
 			PaintMap();
 		}
 	}

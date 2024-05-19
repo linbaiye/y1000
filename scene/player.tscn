@@ -6,9 +6,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j55eq"]
 shader = ExtResource("2_bsr1w")
-shader_parameter/deform = Vector2(2, 2)
+shader_parameter/deform = Vector2(1, 1.5)
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/modulate = null
+shader_parameter/modulate = Color(0, 0, 0, 0.698039)
 
 [node name="player" type="Node2D"]
 z_index = 2

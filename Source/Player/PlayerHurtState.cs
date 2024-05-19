@@ -5,9 +5,9 @@ namespace y1000.Source.Player;
 
 public sealed class PlayerHurtState : AbstractPlayerState
 {
-    private PlayerHurtState(int total, IPlayerState interruptedState, int elapsedMillis = 0) : base(total, elapsedMillis)
+    private PlayerHurtState(CreatureState afterHurt, int elapsedMillis = 0) : base(PlayerAnimation.Male.AnimationMillis(CreatureState.HURT), elapsedMillis)
     {
-        InterruptedState = interruptedState;
+        AfterHurt = afterHurt;
     }
 
     public override void Update(Player c, int delta)
@@ -15,14 +15,12 @@ public sealed class PlayerHurtState : AbstractPlayerState
         NotifyIfElapsed(c, delta);
     }
 
-    public IPlayerState InterruptedState { get; }
-
+    public CreatureState AfterHurt { get; }
 
     public override CreatureState State => CreatureState.HURT;
 
-    public static PlayerHurtState Hurt(IPlayerState state)
+    public static PlayerHurtState Hurt(CreatureState after)
     {
-        return new PlayerHurtState(PlayerAnimation.Male.AnimationMillis(CreatureState.HURT), state);
+        return new PlayerHurtState(after);
     }
-    
 }

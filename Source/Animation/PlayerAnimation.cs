@@ -69,6 +69,7 @@ public class PlayerAnimation : AbstractCreatureAnimation<PlayerAnimation>
     {
         SpriteReader N02 = SpriteReader.LoadOffsetMalePlayerSprites("N02");
         SpriteReader N01 = SpriteReader.LoadOffsetMalePlayerSprites("N01");
+        SpriteReader N04 = SpriteReader.LoadOffsetMalePlayerSprites("N04");
         var playerAnimation = new PlayerAnimation();
         return playerAnimation.ConfigureState(CreatureState.IDLE, AtdReader, N02)
                 .ConfigureState(CreatureState.FLY, AtdReader, N02)
@@ -79,6 +80,7 @@ public class PlayerAnimation : AbstractCreatureAnimation<PlayerAnimation>
                 .ConfigureState(CreatureState.COOLDOWN, AtdReader, N02)
                 .ConfigureState(CreatureState.KICK, AtdReader, N01)
                 .ConfigureState(CreatureState.FIST, AtdReader, N01)
+                .ConfigureState(CreatureState.BOW, AtdReader, N04)
             ;
     }
 }

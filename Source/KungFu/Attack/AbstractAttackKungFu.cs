@@ -1,6 +1,8 @@
-﻿namespace y1000.Source.KungFu.Attack;
+﻿using y1000.Source.Creature;
 
-public class AbstractAttackKungFu :Ab
+namespace y1000.Source.KungFu.Attack;
+
+public abstract class AbstractAttackKungFu : AbstractLevelKungFu, IAttackKungFu
 {
-    
+ 
 }

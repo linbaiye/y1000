@@ -20,7 +20,7 @@ public class CharacterAttackState : ICharacterState
 
     public static CharacterAttackState FromMessage(PlayerAttackMessage message)
     {
-        var playerState = IPlayerState.Attack(message.State);
+        var playerState = IPlayerState.Attack(message);
         return new CharacterAttackState(playerState);
     }
 

@@ -4,18 +4,10 @@ using y1000.Source.Input;
 
 namespace y1000.Source.Character.Event;
 
-public class CharacterEventArgs : EventArgs
+public class CharacterEventArgs : AbstractCharacterEventArgs
 {
-    public CharacterEventArgs(IPrediction prediction,
-        IClientEvent @event)
+    public CharacterEventArgs(IClientEvent @event) : base(@event)
     {
-        Prediction = prediction;
-        Event = @event;
     }
-
-
-    public IPrediction Prediction { get; }
-    
-    public IClientEvent Event { get; }
     
 }

@@ -1,6 +1,8 @@
 using System;
 using y1000.Source.Creature;
 using y1000.Source.Creature.State;
+using y1000.Source.Networking;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Player;
 
@@ -16,40 +18,65 @@ public interface IPlayerState : ICreatureState<Player>
     {
         return new PlayerStillState(state);
     }
-
-
-    public static IPlayerState Hurt(IPlayerState current)
-    {
-        return PlayerHurtState.Hurt(current);
-    }
     
-    public static IPlayerState Walk(Direction direction)
+    public static IPlayerState Attack(PlayerAttackMessage message)
     {
-        return PlayerMoveState.WalkTowards(direction);
-    }
-    
-    public static IPlayerState Run(Direction direction)
-    {
-        return PlayerMoveState.RunTowards(direction);
-    }
-    
-    public static IPlayerState Fly(Direction direction)
-    {
-        return PlayerMoveState.FlyTowards(direction);
-    }
-
-    public static IPlayerState Move(CreatureState movingState, Direction direction)
-    {
-        return movingState switch
+        if (message.State == CreatureState.BOW)
         {
-            CreatureState.WALK => Walk(direction),
-            CreatureState.RUN => Run(direction),
-            CreatureState.FLY => Fly(direction),
-            CreatureState.ENFIGHT_WALK => PlayerMoveState.EnfightWalk(direction),
-            _ => throw new NotImplementedException("Bad moving state: " + movingState)
-        };
+            return new PlayerRangedAttackState(message.State, message.TargetId);
+        }
+        else
+        {
+            return new PlayerStillState(message.State);
+        }
     }
 
+
+    public static PlayerHurtState Hurt(CreatureState after)
+    {
+        return PlayerHurtState.Hurt(after);
+    }
+ 
+    public static IPlayerState NonHurtState(CreatureState state, Direction direction = Direction.UP, int elapsed = 0)
+    {
+        switch (state)
+        {
+            case CreatureState.FLY:
+            case CreatureState.WALK:
+            case CreatureState.RUN:
+            case CreatureState.ENFIGHT_WALK:
+                return new PlayerMoveState(state, direction, elapsed);
+            case CreatureState.AXE:
+            case CreatureState.BOW:
+            case CreatureState.FIST:
+            case CreatureState.KICK:
+            case CreatureState.SWORD:
+            case CreatureState.SWORD2H:
+            case CreatureState.BLADE:
+            case CreatureState.BLADE2H:
+            case CreatureState.SPEAR:
+            case CreatureState.THROW:
+            case CreatureState.IDLE:
+            case CreatureState.COOLDOWN:
+            case CreatureState.STANDUP:
+            case CreatureState.HELLO:
+            case CreatureState.DIE:
+            case CreatureState.SIT:
+                return new PlayerStillState(state, elapsed);
+            default:
+                throw new NotImplementedException("Can not create state " + state);
+        }
+    }
+
+    public static IPlayerState CreateFrom(PlayerInterpolation playerInterpolation)
+    {
+        if (playerInterpolation.Interpolation.State == CreatureState.HURT)
+        {
+            return PlayerHurtState.Hurt(CreatureState.IDLE);
+        }
+        return NonHurtState(playerInterpolation.Interpolation.State, playerInterpolation.Interpolation.Direction,
+            playerInterpolation.Interpolation.ElapsedMillis);
+    }
 
     public static IPlayerState Idle()
     {

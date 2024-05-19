@@ -2,12 +2,13 @@ namespace y1000.Source.KungFu;
 
 public abstract class AbstractLevelKungFu : ILevelKungFu
 {
-    protected AbstractLevelKungFu(int level)
+    protected AbstractLevelKungFu(int level, string name)
     {
         Level = level;
+        Name = name;
     }
     
     public int Level { get; }
 
-    public abstract string Name { get; }
+    public string Name { get; }
 }

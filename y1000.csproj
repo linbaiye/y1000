@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.1.1">
+<Project Sdk="Godot.NET.Sdk/4.1.2">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -33,31 +33,31 @@
     <Compile Remove="code\networking\message\character\CharacterMovingMessage.cs" />
     <Compile Remove="code\networking\message\character\**" />
     <EmbeddedResource Remove="code\networking\message\character\**" />
-    <Compile Remove="Source\Player\PlayerMovedEventArgs.cs" />
-    <Compile Remove="Source\Player\PlayerEventArgs.cs" />
     <Compile Remove="Source\Character\State\CharacterFlyState.cs" />
     <Compile Remove="code\world\World.cs" />
     <Compile Remove="Source\Character\State\AbstractCharacterState.cs" />
     <Compile Remove="Source\Creature\State\AbstractCreatureIdleState.cs" />
     <Compile Remove="Source\Creature\Monster\AbstractPassiveMonster.cs" />
     <Compile Remove="Source\Creature\Monster\Buffalo.cs" />
-    <Compile Remove="Source\Player\PlayerFlyState.cs" />
-    <Compile Remove="Source\Player\AbstractPlayerMoveState.cs" />
     <Compile Remove="Source\Character\State\Prediction\TurnPrediction.cs" />
-    <Compile Remove="Source\KungFu\Attack\AbstractAttackKungFu.cs" />
     <Compile Remove="Source\KungFu\Attack\AbstructAttackKungfu.cs" />
     <Compile Remove="Source\Character\Event\AttackInput.cs" />
     <Compile Remove="Source\KungFu\Attack\UnnamedQuanFa.cs" />
     <Compile Remove="Source\Creature\State\AbstractCreatureAttackState.cs" />
-    <Compile Remove="Source\Player\PlayerAttackState.cs" />
-    <Compile Remove="Source\Player\PlayerCooldownState.cs" />
-    <Compile Remove="Source\Player\PlayerIdleState.cs" />
     <Compile Remove="Source\Creature\Monster\MonsterIdleState.cs" />
-    <Compile Remove="Source\Creature\Monster\MonsterHurtState.cs" />
     <Compile Remove="Source\Creature\Monster\MonsterAttackState.cs" />
     <Compile Remove="Source\Creature\CreatureChangedStateEventArgs.cs" />
     <Compile Remove="Source\Creature\State\AbstractCreatureHitState.cs" />
     <Compile Remove="Source\Character\State\CharacterEnfightState.cs" />
     <Compile Remove="Source\Character\State\AbstractCharacterMoveState.cs" />
+    <Compile Remove="Source\Player\PlayerFlyState.cs" />
+    <Compile Remove="Source\Player\PlayerMovedEventArgs.cs" />
+    <Compile Remove="Source\Player\AbstractPlayerMoveState.cs" />
+    <Compile Remove="Source\Player\PlayerEventArgs.cs" />
+    <Compile Remove="Source\Player\PlayerIdleState.cs" />
+    <Compile Remove="Source\Player\PlayerCooldownState.cs" />
+    <Compile Remove="Source\Player\PlayerAttackState.cs" />
+    <Compile Remove="Source\Creature\MessageDrivenCreature.cs" />
+    <Compile Remove="Source\KungFu\Attack\AbstractAttackKungFu.cs" />
   </ItemGroup>
 </Project>

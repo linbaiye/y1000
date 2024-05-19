@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using DotNetty.Common;
 using Godot;
-using Godot.NativeInterop;
 using NLog;
+using y1000.Source.Animation;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
 using y1000.Source.Character.State.Prediction;
@@ -27,12 +25,11 @@ namespace y1000.Source.Character
 		private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
 		public IFootKungFu? FootMagic { get; private set; }
-		
-		public IAttackKungFu? AttackKungFu { get; private set; }
 
-		public event EventHandler<CharacterEventArgs>? WhenCharacterUpdated;
+		public IAttackKungFu AttackKungFu { get; private set; } = IAttackKungFu.Empty;
 
-		
+		public event EventHandler<EventArgs>? WhenCharacterUpdated;
+
 		public void ChangeState(ICharacterState state)
 		{
 			WrappedPlayer().ChangeState(state.WrappedState);
@@ -71,7 +68,6 @@ namespace y1000.Source.Character
 
 		public Vector2I Coordinate => WrappedPlayer().Coordinate;
 
-
 		public void Rewind(IPredictableResponse response)
 		{
 			LOGGER.Debug("Need to rewind, message {0}.", response);
@@ -81,9 +77,14 @@ namespace y1000.Source.Character
 			}
 		}
 
-		public void EmitEvent(IPrediction prediction, IClientEvent movementEvent)
+		public void EmitPredictionEvent(IPrediction prediction, IClientEvent movementEvent)
 		{
-			WhenCharacterUpdated?.Invoke(this, new CharacterEventArgs(prediction, movementEvent));
+			WhenCharacterUpdated?.Invoke(this, new CharacterPredictionEventArgs(prediction, movementEvent));
+		}
+
+		public void EmitMoveEvent()
+		{
+			WhenCharacterUpdated?.Invoke(this, new CharacterMoveEventArgs(Coordinate));
 		}
 
 		public bool CanMoveOneUnit(Direction direction)
@@ -110,16 +111,21 @@ namespace y1000.Source.Character
 	        _state.OnWrappedPlayerAnimationFinished(this);
         }
 
+        private void SetPositionAndState(Vector2I coordinate, Direction direction, ICharacterState state)
+        {
+	        WrappedPlayer().SetPosition(coordinate, direction);
+	        ChangeState(state);
+	        EmitMoveEvent();
+        }
+
         public void Visit(RewindMessage rewindMessage)
         {
-	        WrappedPlayer().SetPosition(rewindMessage);
-	        ChangeState(Rewind(rewindMessage.State));
+	        SetPositionAndState(rewindMessage.Coordinate, rewindMessage.Direction, Rewind(rewindMessage.State));
         }
 
         public void Visit(SetPositionMessage setPositionMessage)
         {
-	        WrappedPlayer().SetPosition(setPositionMessage);
-	        ChangeState(Rewind(setPositionMessage.State));
+	        SetPositionAndState(setPositionMessage.Coordinate, setPositionMessage.Direction, Rewind(setPositionMessage.State));
         }
 
         public void Handle(IEntityMessage message)
@@ -130,15 +136,13 @@ namespace y1000.Source.Character
 
         public void Visit(PlayerAttackMessage message)
         {
-	        Direction = message.Direction;
-	        ChangeState(CharacterAttackState.FromMessage(message));
+	        SetPositionAndState(message.Coordinate, message.Direction, CharacterAttackState.FromMessage(message));
         }
 
-        public void Visit(HurtMessage hurtMessage)
+        public void Visit(HurtMessage message)
         {
-	        ChangeState(CharacterHurtState.Hurt(_state));
+	        SetPositionAndState(message.Coordinate, message.Direction, CharacterHurtState.Hurt(message.AfterHurtState));
         }
-
 
         private void DispatchInput(IPredictableInput input)
         {
@@ -182,5 +186,7 @@ namespace y1000.Source.Character
 	        character.ChangeState(CharacterIdleState.Wrap(state));
 	        return character;
         }
+
+        public OffsetTexture BodyOffsetTexture => WrappedPlayer().BodyOffsetTexture;
 	}
 }

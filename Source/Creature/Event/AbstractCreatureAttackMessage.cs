@@ -1,4 +1,5 @@
 ﻿using System;
+using Godot;
 using Source.Networking.Protobuf;
 using y1000.Source.Networking.Server;
 
@@ -6,12 +7,14 @@ namespace y1000.Source.Creature.Event;
 
 public abstract class AbstractCreatureAttackMessage : AbstractEntityMessage
 {
-    protected AbstractCreatureAttackMessage(long id, Direction direction, CreatureState state) : base(id)
+    protected AbstractCreatureAttackMessage(long id, Direction direction, CreatureState state, Vector2I coordinate) : base(id)
     {
         Direction = direction;
         State = state;
+        Coordinate = coordinate;
     }
     
+    public Vector2I Coordinate { get; }
     public Direction Direction { get; }
     
     public CreatureState State { get; }
@@ -22,8 +25,8 @@ public abstract class AbstractCreatureAttackMessage : AbstractEntityMessage
     {
         if (packet.Player)
         {
-            return new PlayerAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State);
+            return new PlayerAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State, new Vector2I(packet.X, packet.Y), packet.TargetId);
         }
-        return new CreatureAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State);
+        return new CreatureAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State, new Vector2I(packet.X, packet.Y));
     }
 }

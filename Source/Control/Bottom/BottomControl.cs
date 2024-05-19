@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using y1000.Source.Character.Event;
 
@@ -6,17 +7,16 @@ namespace y1000.Source.Control.Bottom;
 public partial class BottomControl : Godot.Control
 {
 
-    private void WhenCharacterUpdated(object? sender, CharacterEventArgs args)
+    private void WhenCoordinateUpdated(object? sender, EventArgs args)
     {
-        if (sender is Character.Character character && args.Event is MovementEvent)
+        if (sender is Character.Character && args is CharacterMoveEventArgs eventArgs)
         {
-            UpdateCoordinate(character);
+            UpdateCoordinate(eventArgs.Coordinate);
         }
     }
 
-    private void UpdateCoordinate(Character.Character character)
+    private void UpdateCoordinate(Vector2I coordinate)
     {
-        var coordinate = character.Coordinate;
         var label = GetNode<Label>("Container/Control/FirstArea/Coordinate");
         if (label != null)
         {
@@ -26,8 +26,8 @@ public partial class BottomControl : Godot.Control
 
     public void BindCharacter(Character.Character character)
     {
-        character.WhenCharacterUpdated += WhenCharacterUpdated;
-        UpdateCoordinate(character);
+        character.WhenCharacterUpdated += WhenCoordinateUpdated;
+        UpdateCoordinate(character.Coordinate);
     }
     
 }

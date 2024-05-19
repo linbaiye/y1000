@@ -108,6 +108,11 @@ namespace y1000.Source.Animation
         {
             return Load("res://sprite/" + name + "/");
         }
+        
+        public static SpriteReader LoadEffect(string name)
+        {
+            return Load("res://sprite/Effect/" + name + "/");
+        }
 
         public static SpriteReader LoadSprites(string name, Vector2 offset)
         {

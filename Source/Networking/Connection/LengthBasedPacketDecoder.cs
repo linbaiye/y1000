@@ -78,6 +78,7 @@ namespace y1000.Source.Networking.Connection
                 byte[] bytes = new byte[input.ReadableBytes];
                 input.ReadBytes(bytes);
                 Packet packet = Packet.Parser.ParseFrom(bytes);
+                input.Release();
                 return packet.TypedPacketCase switch
                 {
                     Packet.TypedPacketOneofCase.PositionPacket => DecodePositionMessage(packet.PositionPacket),

@@ -1,26 +1,30 @@
 using y1000.code;
 using y1000.Source.Animation;
+using y1000.Source.Creature.State;
 
 namespace y1000.Source.Creature.Monster;
 
-public class MonsterHurtState : AbstractMonsterState
+public class MonsterHurtState : AbstractCreatureHurtState<Monster>
 {
-    private MonsterHurtState(int total, int elapsedMillis = 0) : base(total, elapsedMillis)
+    private MonsterHurtState(CreatureState afterHurt, int total, int elapsedMillis = 0) : base(total, elapsedMillis, afterHurt)
     {
     }
 
-    public static MonsterHurtState Create(MonsterAnimation animation, int elapsed)
+    public static MonsterHurtState Create(MonsterAnimation animation, CreatureState after, int elapsed = 0)
     {
-        return new MonsterHurtState(animation.AnimationMillis(CreatureState.HURT), elapsed);
+        return new MonsterHurtState(after, animation.AnimationMillis(CreatureState.HURT), elapsed);
     }
 
-    protected override CreatureState State => CreatureState.HURT;
-
+    public override OffsetTexture BodyOffsetTexture(Monster creature)
+    {
+        return creature.MonsterAnimation.OffsetTexture(CreatureState.HURT, creature.Direction, ElapsedMillis);
+    }
+    
     public override void Update(Monster c, int delta)
     {
         if (Elapse(delta))
         {
-            c.GoIdle();
+            c.AnimationDone();
         }
     }
 }

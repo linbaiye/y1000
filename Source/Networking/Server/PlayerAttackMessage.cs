@@ -7,9 +7,13 @@ namespace y1000.Source.Networking.Server;
 
 public sealed class PlayerAttackMessage : AbstractCreatureAttackMessage
 {
-    public PlayerAttackMessage(long id, Direction direction, CreatureState state) : base(id, direction, state)
+    
+    public PlayerAttackMessage(long id, Direction direction, CreatureState state, Vector2I coor, long targetId) : base(id, direction, state, coor)
     {
+        TargetId = targetId;
     }
+    
+    public long TargetId { get; }
 
     public override void Accept(IServerMessageVisitor visitor)
     {

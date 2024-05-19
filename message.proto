@@ -39,6 +39,7 @@ message CreatureAttackEventPacket {
   bool player = 4;
   int32 x = 5;
   int32 y = 6;
+  optional int64 targetId = 7;
 }
 
 message CreatureHurtEventPacket {
@@ -46,9 +47,7 @@ message CreatureHurtEventPacket {
   int32 direction = 2;
   int32 x = 3;
   int32 y = 4;
-  int32 interruptedState = 5;
-  int32 interruptedElapse = 6;
-  bool player = 7;
+  int32 afterHurtState = 5;
 }
 
 message ChangeStatePacket {

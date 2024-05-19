@@ -54,7 +54,7 @@ namespace y1000.code.character
         public bool CanMove(Point coordinate)
         {
             var parent = GetParent<Source.Game>();
-            return parent != null && parent.CanMove(coordinate);
+            return false;
         }
 
 
@@ -86,14 +86,7 @@ namespace y1000.code.character
         internal void MoveOrTurn(MouseRightClick click) 
         {
             var next = Coordinate.Next(click.Direction);
-            if (CanMove(next))
-            {
-
-            }
-            else
-            {
-                Turn(click.Direction);
-            }
+            Turn(click.Direction);
         }
 
         private void HandleDoubleClick(IOldCharacterState charState, InputEventMouseButton mouseButton, IEnumerable<ICreature> creatures)

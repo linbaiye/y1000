@@ -28,6 +28,7 @@ public class AtdReader
         { CreatureState.HURT, "STRUCTED" },
         { CreatureState.ATTACK, "HIT1" },
         { CreatureState.DIE, "DIE" },
+        { CreatureState.FROZEN, "TURN" },
     };
 
     private static readonly IDictionary<CreatureState, string> PLAYER_ACTION_MAP = new Dictionary<CreatureState, string>()

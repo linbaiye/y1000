@@ -13,7 +13,7 @@ public sealed class MonsterStillState : AbstractMonsterState
     {
         if (Elapse(delta))
         {
-            c.GoIdle();
+            c.AnimationDone(State);
         }
     }
     
@@ -39,4 +39,8 @@ public sealed class MonsterStillState : AbstractMonsterState
         return Create(animation, CreatureState.HURT, elapsed);
     }
 
+    public static MonsterStillState Frozen(MonsterAnimation animation, int e = 0)
+    {
+        return Create(animation, CreatureState.FROZEN, e);
+    }
 }

@@ -32,59 +32,62 @@ namespace Source.Networking.Protobuf {
             "aW5nLlByb3RvYnVmLlBvc2l0aW9uUGFja2V0IkcKC0lucHV0UGFja2V0EgwK",
             "BHR5cGUYASABKAUSEAoIc2VxdWVuY2UYAiABKAMSGAoQY2xpY2tlZERpcmVj",
             "dGlvbhgDIAEoBSIZCgtDbGlja1BhY2tldBIKCgJpZBgBIAEoAyIiChFQbGF5",
-            "ZXJMb2dpblBhY2tldBINCgV0b2tlbhgBIAEoCSJZChlDcmVhdHVyZUF0dGFj",
-            "a0V2ZW50UGFja2V0EgoKAmlkGAEgASgDEhEKCWRpcmVjdGlvbhgCIAEoBRIN",
-            "CgVzdGF0ZRgDIAEoBRIOCgZwbGF5ZXIYBCABKAgiJQoXQ3JlYXR1cmVIdXJ0",
-            "RXZlbnRQYWNrZXQSCgoCaWQYASABKAMiLgoRQ2hhbmdlU3RhdGVQYWNrZXQS",
-            "CgoCaWQYASABKAMSDQoFc3RhdGUYAiABKAUicwoPTW92ZUV2ZW50UGFja2V0",
-            "EjYKBWlucHV0GAEgASgLMicuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
-            "SW5wdXRQYWNrZXQSEwoLaGFwcGVuZWRBdFgYAiABKAUSEwoLaGFwcGVuZWRB",
-            "dFkYAyABKAUiXwoXQ2xpZW50QXR0YWNrRXZlbnRQYWNrZXQSEAoIc2VxdWVu",
-            "Y2UYASABKAMSEAoIdGFyZ2V0SWQYAiABKAMSDQoFc3RhdGUYAyABKAUSEQoJ",
-            "ZGlyZWN0aW9uGAQgASgFIkAKGkNsaWVudEF0dGFja1Jlc3BvbnNlUGFja2V0",
-            "EhAKCHNlcXVlbmNlGAEgASgDEhAKCGFjY2VwdGVkGAIgASgIIrYCCgxDbGll",
-            "bnRQYWNrZXQSRgoPbW92ZUV2ZW50UGFja2V0GAEgASgLMisuU291cmNlLk5l",
-            "dHdvcmtpbmcuUHJvdG9idWYuTW92ZUV2ZW50UGFja2V0SAASPgoLY2xpY2tQ",
-            "YWNrZXQYAiABKAsyJy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGlj",
-            "a1BhY2tldEgAEkQKC2xvZ2luUGFja2V0GAMgASgLMi0uU291cmNlLk5ldHdv",
-            "cmtpbmcuUHJvdG9idWYuUGxheWVyTG9naW5QYWNrZXRIABJQChFhdHRhY2tF",
-            "dmVudFBhY2tldBgEIAEoCzIzLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVm",
-            "LkNsaWVudEF0dGFja0V2ZW50UGFja2V0SABCBgoEVHlwZSJkChNJbnRlcnBv",
-            "bGF0aW9uUGFja2V0Eg0KBXN0YXRlGAIgASgFEhUKDWVsYXBzZWRNaWxsaXMY",
-            "BSABKAUSEQoJZGlyZWN0aW9uGAcgASgFEgkKAXgYCCABKAUSCQoBeRgJIAEo",
-            "BSJfChRJbnRlcnBvbGF0aW9uc1BhY2tldBJHCg5pbnRlcnBvbGF0aW9ucxgB",
-            "IAMoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRp",
-            "b25QYWNrZXQirAEKC0xvZ2luUGFja2V0EgkKAXgYASABKAUSCQoBeRgCIAEo",
-            "BRIKCgJpZBgDIAEoAxIVCg13ZWFwb25TaGFwZUlkGAQgASgFEhkKEWF0dGFj",
-            "a0t1bmdGdUxldmVsGAUgASgFEhgKEGF0dGFja0t1bmdGdU5hbWUYBiABKAkS",
-            "FwoPZm9vdEt1bmdGdUxldmVsGAcgASgFEhYKDmZvb3RLdW5nRnVOYW1lGAgg",
-            "ASgJIvkGCgZQYWNrZXQSRAoOcG9zaXRpb25QYWNrZXQYASABKAsyKi5Tb3Vy",
-            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Qb3NpdGlvblBhY2tldEgAElgKFWNy",
-            "ZWF0dXJlSW50ZXJwb2xhdGlvbhgCIAEoCzI3LlNvdXJjZS5OZXR3b3JraW5n",
-            "LlByb3RvYnVmLkNyZWF0dXJlSW50ZXJwb2xhdGlvblBhY2tldEgAEj4KC2xv",
-            "Z2luUGFja2V0GAQgASgLMicuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
-            "TG9naW5QYWNrZXRIABJKCg5pbnRlcnBvbGF0aW9ucxgFIAEoCzIwLlNvdXJj",
-            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25zUGFja2V0SAAS",
-            "SQoOcmVzcG9uc2VQYWNrZXQYBiABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Q",
-            "cm90b2J1Zi5JbnB1dFJlc3BvbnNlUGFja2V0SAASVAoTcGxheWVySW50ZXJw",
-            "b2xhdGlvbhgHIAEoCzI1LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBs",
-            "YXllckludGVycG9sYXRpb25QYWNrZXRIABJGCgxyZW1vdmVFbnRpdHkYCCAB",
-            "KAsyLi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5SZW1vdmVFbnRpdHlQ",
-            "YWNrZXRIABJbChlhdHRhY2tFdmVudFJlc3BvbnNlUGFja2V0GAkgASgLMjYu",
-            "U291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2xpZW50QXR0YWNrUmVzcG9u",
-            "c2VQYWNrZXRIABJSChFhdHRhY2tFdmVudFBhY2tldBgKIAEoCzI1LlNvdXJj",
-            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLkNyZWF0dXJlQXR0YWNrRXZlbnRQYWNr",
-            "ZXRIABJOCg9odXJ0RXZlbnRQYWNrZXQYCyABKAsyMy5Tb3VyY2UuTmV0d29y",
-            "a2luZy5Qcm90b2J1Zi5DcmVhdHVyZUh1cnRFdmVudFBhY2tldEgAEkoKEWNo",
-            "YW5nZVN0YXRlUGFja2V0GAwgASgLMi0uU291cmNlLk5ldHdvcmtpbmcuUHJv",
-            "dG9idWYuQ2hhbmdlU3RhdGVQYWNrZXRIAEINCgtUeXBlZFBhY2tldCJ/ChtD",
-            "cmVhdHVyZUludGVycG9sYXRpb25QYWNrZXQSRgoNaW50ZXJwb2xhdGlvbhgB",
-            "IAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRp",
-            "b25QYWNrZXQSCgoCaWQYAiABKAMSDAoEbmFtZRgDIAEoCSKLAQoZUGxheWVy",
-            "SW50ZXJwb2xhdGlvblBhY2tldBJGCg1pbnRlcnBvbGF0aW9uGAEgASgLMi8u",
-            "U291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSW50ZXJwb2xhdGlvblBhY2tl",
-            "dBIKCgJpZBgCIAEoAxIMCgRtYWxlGAMgASgIEgwKBG5hbWUYBCABKAkiIAoS",
-            "UmVtb3ZlRW50aXR5UGFja2V0EgoKAmlkGAEgASgDYgZwcm90bzM="));
+            "ZXJMb2dpblBhY2tldBINCgV0b2tlbhgBIAEoCSKTAQoZQ3JlYXR1cmVBdHRh",
+            "Y2tFdmVudFBhY2tldBIKCgJpZBgBIAEoAxIRCglkaXJlY3Rpb24YAiABKAUS",
+            "DQoFc3RhdGUYAyABKAUSDgoGcGxheWVyGAQgASgIEgkKAXgYBSABKAUSCQoB",
+            "eRgGIAEoBRIVCgh0YXJnZXRJZBgHIAEoA0gAiAEBQgsKCV90YXJnZXRJZCJm",
+            "ChdDcmVhdHVyZUh1cnRFdmVudFBhY2tldBIKCgJpZBgBIAEoAxIRCglkaXJl",
+            "Y3Rpb24YAiABKAUSCQoBeBgDIAEoBRIJCgF5GAQgASgFEhYKDmFmdGVySHVy",
+            "dFN0YXRlGAUgASgFIi4KEUNoYW5nZVN0YXRlUGFja2V0EgoKAmlkGAEgASgD",
+            "Eg0KBXN0YXRlGAIgASgFInMKD01vdmVFdmVudFBhY2tldBI2CgVpbnB1dBgB",
+            "IAEoCzInLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLklucHV0UGFja2V0",
+            "EhMKC2hhcHBlbmVkQXRYGAIgASgFEhMKC2hhcHBlbmVkQXRZGAMgASgFIl8K",
+            "F0NsaWVudEF0dGFja0V2ZW50UGFja2V0EhAKCHNlcXVlbmNlGAEgASgDEhAK",
+            "CHRhcmdldElkGAIgASgDEg0KBXN0YXRlGAMgASgFEhEKCWRpcmVjdGlvbhgE",
+            "IAEoBSJAChpDbGllbnRBdHRhY2tSZXNwb25zZVBhY2tldBIQCghzZXF1ZW5j",
+            "ZRgBIAEoAxIQCghhY2NlcHRlZBgCIAEoCCK2AgoMQ2xpZW50UGFja2V0EkYK",
+            "D21vdmVFdmVudFBhY2tldBgBIAEoCzIrLlNvdXJjZS5OZXR3b3JraW5nLlBy",
+            "b3RvYnVmLk1vdmVFdmVudFBhY2tldEgAEj4KC2NsaWNrUGFja2V0GAIgASgL",
+            "MicuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2xpY2tQYWNrZXRIABJE",
+            "Cgtsb2dpblBhY2tldBgDIAEoCzItLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
+            "YnVmLlBsYXllckxvZ2luUGFja2V0SAASUAoRYXR0YWNrRXZlbnRQYWNrZXQY",
+            "BCABKAsyMy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGllbnRBdHRh",
+            "Y2tFdmVudFBhY2tldEgAQgYKBFR5cGUiZAoTSW50ZXJwb2xhdGlvblBhY2tl",
+            "dBINCgVzdGF0ZRgCIAEoBRIVCg1lbGFwc2VkTWlsbGlzGAUgASgFEhEKCWRp",
+            "cmVjdGlvbhgHIAEoBRIJCgF4GAggASgFEgkKAXkYCSABKAUiXwoUSW50ZXJw",
+            "b2xhdGlvbnNQYWNrZXQSRwoOaW50ZXJwb2xhdGlvbnMYASADKAsyLy5Tb3Vy",
+            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0IqwB",
+            "CgtMb2dpblBhY2tldBIJCgF4GAEgASgFEgkKAXkYAiABKAUSCgoCaWQYAyAB",
+            "KAMSFQoNd2VhcG9uU2hhcGVJZBgEIAEoBRIZChFhdHRhY2tLdW5nRnVMZXZl",
+            "bBgFIAEoBRIYChBhdHRhY2tLdW5nRnVOYW1lGAYgASgJEhcKD2Zvb3RLdW5n",
+            "RnVMZXZlbBgHIAEoBRIWCg5mb290S3VuZ0Z1TmFtZRgIIAEoCSL5BgoGUGFj",
+            "a2V0EkQKDnBvc2l0aW9uUGFja2V0GAEgASgLMiouU291cmNlLk5ldHdvcmtp",
+            "bmcuUHJvdG9idWYuUG9zaXRpb25QYWNrZXRIABJYChVjcmVhdHVyZUludGVy",
+            "cG9sYXRpb24YAiABKAsyNy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5D",
+            "cmVhdHVyZUludGVycG9sYXRpb25QYWNrZXRIABI+Cgtsb2dpblBhY2tldBgE",
+            "IAEoCzInLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkxvZ2luUGFja2V0",
+            "SAASSgoOaW50ZXJwb2xhdGlvbnMYBSABKAsyMC5Tb3VyY2UuTmV0d29ya2lu",
+            "Zy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uc1BhY2tldEgAEkkKDnJlc3BvbnNl",
+            "UGFja2V0GAYgASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSW5w",
+            "dXRSZXNwb25zZVBhY2tldEgAElQKE3BsYXllckludGVycG9sYXRpb24YByAB",
+            "KAsyNS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJJbnRlcnBv",
+            "bGF0aW9uUGFja2V0SAASRgoMcmVtb3ZlRW50aXR5GAggASgLMi4uU291cmNl",
+            "Lk5ldHdvcmtpbmcuUHJvdG9idWYuUmVtb3ZlRW50aXR5UGFja2V0SAASWwoZ",
+            "YXR0YWNrRXZlbnRSZXNwb25zZVBhY2tldBgJIAEoCzI2LlNvdXJjZS5OZXR3",
+            "b3JraW5nLlByb3RvYnVmLkNsaWVudEF0dGFja1Jlc3BvbnNlUGFja2V0SAAS",
+            "UgoRYXR0YWNrRXZlbnRQYWNrZXQYCiABKAsyNS5Tb3VyY2UuTmV0d29ya2lu",
+            "Zy5Qcm90b2J1Zi5DcmVhdHVyZUF0dGFja0V2ZW50UGFja2V0SAASTgoPaHVy",
+            "dEV2ZW50UGFja2V0GAsgASgLMjMuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
+            "dWYuQ3JlYXR1cmVIdXJ0RXZlbnRQYWNrZXRIABJKChFjaGFuZ2VTdGF0ZVBh",
+            "Y2tldBgMIAEoCzItLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNoYW5n",
+            "ZVN0YXRlUGFja2V0SABCDQoLVHlwZWRQYWNrZXQifwobQ3JlYXR1cmVJbnRl",
+            "cnBvbGF0aW9uUGFja2V0EkYKDWludGVycG9sYXRpb24YASABKAsyLy5Tb3Vy",
+            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EgoK",
+            "AmlkGAIgASgDEgwKBG5hbWUYAyABKAkiiwEKGVBsYXllckludGVycG9sYXRp",
+            "b25QYWNrZXQSRgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIvLlNvdXJjZS5OZXR3",
+            "b3JraW5nLlByb3RvYnVmLkludGVycG9sYXRpb25QYWNrZXQSCgoCaWQYAiAB",
+            "KAMSDAoEbWFsZRgDIAEoCBIMCgRuYW1lGAQgASgJIiAKElJlbW92ZUVudGl0",
+            "eVBhY2tldBIKCgJpZBgBIAEoA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -93,8 +96,8 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InputPacket), global::Source.Networking.Protobuf.InputPacket.Parser, new[]{ "Type", "Sequence", "ClickedDirection" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClickPacket), global::Source.Networking.Protobuf.ClickPacket.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerLoginPacket), global::Source.Networking.Protobuf.PlayerLoginPacket.Parser, new[]{ "Token" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureAttackEventPacket), global::Source.Networking.Protobuf.CreatureAttackEventPacket.Parser, new[]{ "Id", "Direction", "State", "Player" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureHurtEventPacket), global::Source.Networking.Protobuf.CreatureHurtEventPacket.Parser, new[]{ "Id" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureAttackEventPacket), global::Source.Networking.Protobuf.CreatureAttackEventPacket.Parser, new[]{ "Id", "Direction", "State", "Player", "X", "Y", "TargetId" }, new[]{ "TargetId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureHurtEventPacket), global::Source.Networking.Protobuf.CreatureHurtEventPacket.Parser, new[]{ "Id", "Direction", "X", "Y", "AfterHurtState" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ChangeStatePacket), global::Source.Networking.Protobuf.ChangeStatePacket.Parser, new[]{ "Id", "State" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.MoveEventPacket), global::Source.Networking.Protobuf.MoveEventPacket.Parser, new[]{ "Input", "HappenedAtX", "HappenedAtY" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientAttackEventPacket), global::Source.Networking.Protobuf.ClientAttackEventPacket.Parser, new[]{ "Sequence", "TargetId", "State", "Direction" }, null, null, null, null),
@@ -1376,6 +1379,7 @@ namespace Source.Networking.Protobuf {
   {
     private static readonly pb::MessageParser<CreatureAttackEventPacket> _parser = new pb::MessageParser<CreatureAttackEventPacket>(() => new CreatureAttackEventPacket());
     private pb::UnknownFieldSet _unknownFields;
+    private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<CreatureAttackEventPacket> Parser { get { return _parser; } }
@@ -1403,10 +1407,14 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public CreatureAttackEventPacket(CreatureAttackEventPacket other) : this() {
+      _hasBits0 = other._hasBits0;
       id_ = other.id_;
       direction_ = other.direction_;
       state_ = other.state_;
       player_ = other.player_;
+      x_ = other.x_;
+      y_ = other.y_;
+      targetId_ = other.targetId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1464,6 +1472,57 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "x" field.</summary>
+    public const int XFieldNumber = 5;
+    private int x_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int X {
+      get { return x_; }
+      set {
+        x_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "y" field.</summary>
+    public const int YFieldNumber = 6;
+    private int y_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Y {
+      get { return y_; }
+      set {
+        y_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "targetId" field.</summary>
+    public const int TargetIdFieldNumber = 7;
+    private readonly static long TargetIdDefaultValue = 0L;
+
+    private long targetId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long TargetId {
+      get { if ((_hasBits0 & 1) != 0) { return targetId_; } else { return TargetIdDefaultValue; } }
+      set {
+        _hasBits0 |= 1;
+        targetId_ = value;
+      }
+    }
+    /// <summary>Gets whether the "targetId" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasTargetId {
+      get { return (_hasBits0 & 1) != 0; }
+    }
+    /// <summary>Clears the value of the "targetId" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearTargetId() {
+      _hasBits0 &= ~1;
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1483,6 +1542,9 @@ namespace Source.Networking.Protobuf {
       if (Direction != other.Direction) return false;
       if (State != other.State) return false;
       if (Player != other.Player) return false;
+      if (X != other.X) return false;
+      if (Y != other.Y) return false;
+      if (TargetId != other.TargetId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1494,6 +1556,9 @@ namespace Source.Networking.Protobuf {
       if (Direction != 0) hash ^= Direction.GetHashCode();
       if (State != 0) hash ^= State.GetHashCode();
       if (Player != false) hash ^= Player.GetHashCode();
+      if (X != 0) hash ^= X.GetHashCode();
+      if (Y != 0) hash ^= Y.GetHashCode();
+      if (HasTargetId) hash ^= TargetId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1528,6 +1593,18 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(32);
         output.WriteBool(Player);
       }
+      if (X != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(X);
+      }
+      if (Y != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Y);
+      }
+      if (HasTargetId) {
+        output.WriteRawTag(56);
+        output.WriteInt64(TargetId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1554,6 +1631,18 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(32);
         output.WriteBool(Player);
       }
+      if (X != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(X);
+      }
+      if (Y != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Y);
+      }
+      if (HasTargetId) {
+        output.WriteRawTag(56);
+        output.WriteInt64(TargetId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1575,6 +1664,15 @@ namespace Source.Networking.Protobuf {
       }
       if (Player != false) {
         size += 1 + 1;
+      }
+      if (X != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
+      }
+      if (Y != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
+      }
+      if (HasTargetId) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TargetId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1599,6 +1697,15 @@ namespace Source.Networking.Protobuf {
       }
       if (other.Player != false) {
         Player = other.Player;
+      }
+      if (other.X != 0) {
+        X = other.X;
+      }
+      if (other.Y != 0) {
+        Y = other.Y;
+      }
+      if (other.HasTargetId) {
+        TargetId = other.TargetId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1631,6 +1738,18 @@ namespace Source.Networking.Protobuf {
             Player = input.ReadBool();
             break;
           }
+          case 40: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            Y = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            TargetId = input.ReadInt64();
+            break;
+          }
         }
       }
     #endif
@@ -1660,6 +1779,18 @@ namespace Source.Networking.Protobuf {
           }
           case 32: {
             Player = input.ReadBool();
+            break;
+          }
+          case 40: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            Y = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            TargetId = input.ReadInt64();
             break;
           }
         }
@@ -1705,6 +1836,10 @@ namespace Source.Networking.Protobuf {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public CreatureHurtEventPacket(CreatureHurtEventPacket other) : this() {
       id_ = other.id_;
+      direction_ = other.direction_;
+      x_ = other.x_;
+      y_ = other.y_;
+      afterHurtState_ = other.afterHurtState_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1726,6 +1861,54 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "direction" field.</summary>
+    public const int DirectionFieldNumber = 2;
+    private int direction_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Direction {
+      get { return direction_; }
+      set {
+        direction_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "x" field.</summary>
+    public const int XFieldNumber = 3;
+    private int x_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int X {
+      get { return x_; }
+      set {
+        x_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "y" field.</summary>
+    public const int YFieldNumber = 4;
+    private int y_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Y {
+      get { return y_; }
+      set {
+        y_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "afterHurtState" field.</summary>
+    public const int AfterHurtStateFieldNumber = 5;
+    private int afterHurtState_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int AfterHurtState {
+      get { return afterHurtState_; }
+      set {
+        afterHurtState_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1742,6 +1925,10 @@ namespace Source.Networking.Protobuf {
         return true;
       }
       if (Id != other.Id) return false;
+      if (Direction != other.Direction) return false;
+      if (X != other.X) return false;
+      if (Y != other.Y) return false;
+      if (AfterHurtState != other.AfterHurtState) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1750,6 +1937,10 @@ namespace Source.Networking.Protobuf {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0L) hash ^= Id.GetHashCode();
+      if (Direction != 0) hash ^= Direction.GetHashCode();
+      if (X != 0) hash ^= X.GetHashCode();
+      if (Y != 0) hash ^= Y.GetHashCode();
+      if (AfterHurtState != 0) hash ^= AfterHurtState.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1772,6 +1963,22 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(8);
         output.WriteInt64(Id);
       }
+      if (Direction != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Direction);
+      }
+      if (X != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(X);
+      }
+      if (Y != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Y);
+      }
+      if (AfterHurtState != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(AfterHurtState);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1786,6 +1993,22 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(8);
         output.WriteInt64(Id);
       }
+      if (Direction != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Direction);
+      }
+      if (X != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(X);
+      }
+      if (Y != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Y);
+      }
+      if (AfterHurtState != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(AfterHurtState);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1798,6 +2021,18 @@ namespace Source.Networking.Protobuf {
       int size = 0;
       if (Id != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (Direction != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Direction);
+      }
+      if (X != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
+      }
+      if (Y != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
+      }
+      if (AfterHurtState != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(AfterHurtState);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1813,6 +2048,18 @@ namespace Source.Networking.Protobuf {
       }
       if (other.Id != 0L) {
         Id = other.Id;
+      }
+      if (other.Direction != 0) {
+        Direction = other.Direction;
+      }
+      if (other.X != 0) {
+        X = other.X;
+      }
+      if (other.Y != 0) {
+        Y = other.Y;
+      }
+      if (other.AfterHurtState != 0) {
+        AfterHurtState = other.AfterHurtState;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1833,6 +2080,22 @@ namespace Source.Networking.Protobuf {
             Id = input.ReadInt64();
             break;
           }
+          case 16: {
+            Direction = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            Y = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            AfterHurtState = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -1850,6 +2113,22 @@ namespace Source.Networking.Protobuf {
             break;
           case 8: {
             Id = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            Direction = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            Y = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            AfterHurtState = input.ReadInt32();
             break;
           }
         }

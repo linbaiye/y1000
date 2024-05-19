@@ -5,13 +5,11 @@ namespace y1000.Source.KungFu.Foot;
 public interface IFootKungFu : ILevelKungFu
 {
     bool CanFly => Level >= 8501;
-    
-    public static IFootKungFu? ByName(string name, int level)
+
+    public static IFootKungFu ByName(string name, int level)
     {
-        return name switch
-        {
-            UnnamedBufa.NAME => new UnnamedBufa(level),
-            _ => null,
-        };
+        if (name.Equals("无名步法"))
+            return new Bufa(level, name);
+        throw new NotImplementedException();
     }
 }

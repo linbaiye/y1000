@@ -46,7 +46,7 @@ namespace y1000.Source.Creature
         
         THROW = 23,
         
-        TURN = 24,
+        FROZEN = 24,
         
     }
 }

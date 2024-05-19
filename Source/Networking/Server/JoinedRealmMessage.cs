@@ -7,6 +7,11 @@ namespace y1000.Source.Networking.Server
 {
     public class JoinedRealmMessage  : IServerMessage
     {
+        private JoinedRealmMessage(IAttackKungFu attackKungFu)
+        {
+            AttackKungFu = attackKungFu;
+        }
+
         public Vector2I Coordinate { get; init; }
         
         public long Id { get; private init; }
@@ -15,17 +20,16 @@ namespace y1000.Source.Networking.Server
         
         public IFootKungFu? FootKungFu { get; private init; }
         
-        public IAttackKungFu? AttackKungFu { get; private init; }
+        public IAttackKungFu AttackKungFu { get; private init; }
 
         public static JoinedRealmMessage FromPacket(LoginPacket loginPacket)
         {
-            return new JoinedRealmMessage()
+            return new JoinedRealmMessage(IAttackKungFu.ByName(loginPacket.AttackKungFuName, loginPacket.AttackKungFuLevel))
             {
                 Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
                 Id = loginPacket.Id,
                 Male = true,
                 FootKungFu = IFootKungFu.ByName(loginPacket.FootKungFuName, loginPacket.FootKungFuLevel),
-                AttackKungFu = IAttackKungFu.ByName(loginPacket.AttackKungFuName, loginPacket.AttackKungFuLevel),
             };
         }
 

@@ -33,6 +33,7 @@ namespace y1000.Source.Character.State
 
         public void OnWrappedPlayerAnimationFinished(Character character)
         {
+            character.EmitMoveEvent();
             if (WrappedState.State == CreatureState.ENFIGHT_WALK)
             {
                 character.ChangeState(CharacterCooldownState.Cooldown());

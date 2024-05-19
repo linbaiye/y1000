@@ -1,6 +1,7 @@
 using Godot;
-using y1000.code.networking.message;
+using y1000.Source.Animation;
 using y1000.Source.Networking.Server;
+using y1000.Source.Util;
 
 namespace y1000.Source.Entity
 {
@@ -12,6 +13,8 @@ namespace y1000.Source.Entity
 
         Vector2I Coordinate { get; }
 
+        Vector2 OffsetPosition => Coordinate.ToPosition();
+        
         void Delete() { }
 
         void Handle(IEntityMessage message)

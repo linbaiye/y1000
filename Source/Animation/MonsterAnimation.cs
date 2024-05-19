@@ -21,6 +21,7 @@ public class MonsterAnimation : AbstractCreatureAnimation<MonsterAnimation>
             .ConfigureState(CreatureState.WALK, atdReader, spriteReader)
             .ConfigureState(CreatureState.HURT, atdReader, spriteReader)
             .ConfigureState(CreatureState.ATTACK, atdReader, spriteReader)
+            .ConfigureState(CreatureState.FROZEN, atdReader, spriteReader)
             .ConfigureState(CreatureState.DIE, atdReader, spriteReader);
     }
     
