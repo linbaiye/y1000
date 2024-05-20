@@ -16,6 +16,7 @@ script = ExtResource("1_yu5bc")
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="RightUI" parent="UILayer" instance=ExtResource("4_j24ll")]
+visible = false
 
 [node name="BottomUI" parent="UILayer" instance=ExtResource("5_3t2rd")]
 mouse_filter = 1
