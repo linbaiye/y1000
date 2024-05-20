@@ -315,21 +315,20 @@ centered = false
 [node name="EnfightWalk" type="Sprite2D" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_h71lt")
-texture = ExtResource("15_ix3ms")
+texture = ExtResource("10_j4d7q")
 centered = false
 
 [node name="Cooldown" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("47_m06r2")
+texture = ExtResource("7_n02rn")
 centered = false
 
 [node name="Bow" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("21_1vvyy")
+texture = ExtResource("16_qkhqr")
 centered = false
 
 [node name="Arrow" type="Sprite2D" parent="."]
 position = Vector2(100, 100)
-rotation = -6.28319
 texture = ExtResource("61_jko8c")
 centered = false

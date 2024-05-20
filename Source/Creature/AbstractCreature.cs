@@ -38,6 +38,8 @@ public abstract partial class AbstractCreature : Node2D, ICreature, IBody
     public Vector2 OffsetPosition => Position + BodyOffsetTexture.Offset;
 
     public abstract OffsetTexture BodyOffsetTexture { get; }
+    
+    public Vector2 BodyPosition => Position;
 
     private void MyEvent(InputEvent @event)
     {

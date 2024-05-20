@@ -188,5 +188,7 @@ namespace y1000.Source.Character
         }
 
         public OffsetTexture BodyOffsetTexture => WrappedPlayer().BodyOffsetTexture;
+
+        public Vector2 BodyPosition => WrappedPlayer().BodyPosition;
 	}
 }

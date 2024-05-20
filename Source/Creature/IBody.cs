@@ -8,6 +8,6 @@ namespace y1000.Source.Creature
     {
         OffsetTexture BodyOffsetTexture { get; }
         
-        Vector2 Position { get; }
+        Vector2 BodyPosition { get; }
     }
 }

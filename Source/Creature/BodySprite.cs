@@ -11,7 +11,7 @@ namespace y1000.Source.Creature
 			return parent.BodyOffsetTexture;
 		}
 
-		public Vector2 OwnerPosition => GetParent<IBody>().Position;
+		public Vector2 OwnerPosition => GetParent<IBody>().BodyPosition;
 
 		public override void _Process(double delta)
 		{

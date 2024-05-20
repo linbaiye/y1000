@@ -10,32 +10,46 @@ public partial class Projectile : Sprite2D
 {
     private static readonly ILogger LOG = LogManager.GetCurrentClassLogger();
 
-    private Vector2 vect;
+    private Vector2 _vect;
 
-    private float lengthSeconds;
+    private float _lengthSeconds;
 
-    private float elapsed = 0;
+    private float _elapsed = 0;
+    private float _speed;
     
     private void Init(Player.IPlayer player, ICreature target)
     {
-        var tpos = target.OffsetPosition;
-        var size = target.BodyOffsetTexture.Texture.GetSize();
+        var tpos = target.BodyPosition;
         var distance = target.Coordinate.Distance(player.Coordinate);
-        lengthSeconds = distance * 0.05f;
-        vect = ((tpos +  (size / 2)) - player.Coordinate.ToPosition()) / lengthSeconds;
+        _lengthSeconds = distance * 0.03f;
+        _vect = tpos - player.BodyPosition;
+        //_vect = ((tpos +  (size / 2)) - player.Coordinate.ToPosition()) / _lengthSeconds;
         //vect = (target.Coordinate - player.Coordinate).ToPosition() + (VectorUtil.TileSize / 2);
-        Position = player.OffsetPosition;
-        Position = player.Coordinate.Move(player.Direction).ToPosition();
-        var arrowTexture = ArrowAnimation.Instance.OffsetTexture(player.Direction);
-        Offset = arrowTexture.Offset + new Vector2(16, 12);
+        //Position = player.BodyPosition;
+        Position = player.BodyPosition;
+        Rotation = _vect.Angle();
+        _vect /= _lengthSeconds;
+        var arrowTexture = ArrowAnimation.Instance.OffsetTexture(Direction.RIGHT);
+        var offsetTexture = ArrowAnimation.Instance.OffsetTexture(player.Direction);
+        //Rotation = tpos.AngleTo(Position);
+        LOG.Debug("Rotation {0}.", Rotation);
+        if (Rotation == 0)
+        {
+            LOG.Debug("Target Id {0}, player Id {1}.", target.Id, player.Id);
+        }
+        //Rotation = angle;
+        //var transform = Transform;
+        //var newTrans = new Transform2D(angle, transform.Origin);
+        //Transform = newTrans;
+        Offset = offsetTexture.Offset + new Vector2(16, 12);
         Texture = arrowTexture.Texture;
     }
 
     public override void _Process(double delta)
     {
-        elapsed += (float)delta;
-        Position += (vect * (float)delta);
-        if (elapsed >= lengthSeconds)
+        _elapsed += (float)delta;
+        Position += (_vect * (float)delta);
+        if (_elapsed >= _lengthSeconds)
         {
             LOG.Debug("Enough time, delete now.");
             QueueFree();

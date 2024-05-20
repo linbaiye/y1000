@@ -19,5 +19,10 @@ public sealed class PlayerAttackMessage : AbstractCreatureAttackMessage
     {
         visitor.Visit(this);
     }
-    
+
+
+    public override string ToString()
+    {
+        return "Id: " + Id + ", TargetId: " + TargetId;
+    }
 }

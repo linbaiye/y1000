@@ -13,7 +13,6 @@ namespace y1000.Source.Entity
 
         Vector2I Coordinate { get; }
 
-        Vector2 OffsetPosition => Coordinate.ToPosition();
         
         void Delete() { }
 
