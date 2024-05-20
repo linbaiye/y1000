@@ -5,7 +5,7 @@ namespace y1000.Source.Player;
 
 public sealed class PlayerHurtState : AbstractPlayerState
 {
-    private PlayerHurtState(CreatureState afterHurt, int elapsedMillis = 0) : base(PlayerAnimation.Male.AnimationMillis(CreatureState.HURT), elapsedMillis)
+    private PlayerHurtState(CreatureState afterHurt, int elapsedMillis = 0) : base(PlayerBodyAnimation.Male.AnimationMillis(CreatureState.HURT), elapsedMillis)
     {
         AfterHurt = afterHurt;
     }

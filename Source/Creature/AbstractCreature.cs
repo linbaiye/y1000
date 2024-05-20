@@ -12,9 +12,8 @@ using y1000.Source.Util;
 
 namespace y1000.Source.Creature;
 
-public abstract partial class AbstractCreature : Node2D, ICreature, IBody
+public abstract partial class AbstractCreature : Node2D, ICreature 
 {
-
     public event EventHandler<CreatureMouseClickEventArgs>? MouseClicked;
     
 	public event EventHandler<CreatureAnimationDoneEventArgs>? StateAnimationEventHandler;
@@ -34,8 +33,6 @@ public abstract partial class AbstractCreature : Node2D, ICreature, IBody
     public Direction Direction { get; set; }
 
     public Vector2I Coordinate => Position.ToCoordinate();
-
-    public Vector2 OffsetPosition => Position + BodyOffsetTexture.Offset;
 
     public abstract OffsetTexture BodyOffsetTexture { get; }
     

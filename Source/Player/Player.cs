@@ -3,6 +3,7 @@ using Godot;
 using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
+using y1000.Source.Item.Weapon;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
@@ -15,6 +16,10 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
+	private Weapon? _weapon;
+
+	private PlayerHandAnimation? _handAnimation;
+	
 	public event EventHandler<PlayerRangedAttackEventArgs>? OnPlayerShoot;
 	
 	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id, IMap map)
@@ -22,6 +27,8 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		base.Init(id, direction, coordinate, map, "");
 		IsMale = male;
 		_state = state;
+		_weapon = Weapon.SWORD;
+		_handAnimation = PlayerHandAnimation.LoadSword(_weapon.AnimationId);
 	}
 
 	public override void _Ready()
@@ -86,6 +93,8 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 	{
 		_state.Reset();
 	}
+
+	public OffsetTexture? HandTexture => _handAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 
 	public void Visit(PlayerAttackMessage message)
 	{

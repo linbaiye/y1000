@@ -14,6 +14,8 @@ public interface IPlayerState : ICreatureState<Player>
 
     void Reset() { }
     
+    int ElapsedMillis { get; }
+    
     public static IPlayerState Attack(CreatureState state)
     {
         return new PlayerStillState(state);

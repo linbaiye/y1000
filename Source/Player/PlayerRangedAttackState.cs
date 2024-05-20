@@ -6,7 +6,7 @@ namespace y1000.Source.Player;
 
 public class PlayerRangedAttackState : AbstractPlayerState
 {
-    public PlayerRangedAttackState(CreatureState state, long targetId, int elapsedMillis = 0) : base(PlayerAnimation.Male.AnimationMillis(state), elapsedMillis)
+    public PlayerRangedAttackState(CreatureState state, long targetId, int elapsedMillis = 0) : base(PlayerBodyAnimation.Male.AnimationMillis(state), elapsedMillis)
     {
         TargetId = targetId;
         State = state;

@@ -10,7 +10,7 @@ public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : 
         TotalMillis = totalMillis;
     }
     
-    protected int ElapsedMillis { get; set; }
+    public int ElapsedMillis { get; set; }
     
     protected int TotalMillis { get; }
 

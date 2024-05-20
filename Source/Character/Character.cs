@@ -38,6 +38,8 @@ namespace y1000.Source.Character
 
 		public bool IsMale => WrappedPlayer().IsMale;
 		
+		public OffsetTexture? HandTexture => WrappedPlayer().HandTexture;
+
 		public string EntityName => WrappedPlayer().EntityName;
 		
 		public long Id => WrappedPlayer().Id;

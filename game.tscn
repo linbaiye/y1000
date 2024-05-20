@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=6 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
-[ext_resource type="PackedScene" uid="uid://vg1lgwdiop8g" path="res://right_ui.tscn" id="4_j24ll"]
+[ext_resource type="Script" path="res://Source/Control/UIController.cs" id="3_akyoc"]
+[ext_resource type="PackedScene" uid="uid://7ghuvlfmi4pd" path="res://Scenes/RightSideUI.tscn" id="4_fqpt3"]
 [ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://bottom_ui.tscn" id="5_3t2rd"]
 
 [node name="Game" type="Node2D"]
@@ -14,9 +15,15 @@ script = ExtResource("1_yu5bc")
 [node name="MapLayer" parent="." instance=ExtResource("2_r4kyb")]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
-
-[node name="RightUI" parent="UILayer" instance=ExtResource("4_j24ll")]
-visible = false
+script = ExtResource("3_akyoc")
 
 [node name="BottomUI" parent="UILayer" instance=ExtResource("5_3t2rd")]
 mouse_filter = 1
+
+[node name="RightSideUI" parent="UILayer" instance=ExtResource("4_fqpt3")]
+anchors_preset = -1
+anchor_left = 0.75
+anchor_bottom = 0.75
+offset_left = 5.0
+offset_top = 220.0
+offset_bottom = 29.0

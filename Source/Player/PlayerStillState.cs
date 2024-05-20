@@ -5,7 +5,7 @@ namespace y1000.Source.Player;
 
 public sealed class PlayerStillState : AbstractPlayerState, IPlayerState
 {
-    public PlayerStillState(CreatureState state, int elapsedMillis = 0) : base(PlayerAnimation.Male.AnimationMillis(state), elapsedMillis)
+    public PlayerStillState(CreatureState state, int elapsedMillis = 0) : base(PlayerBodyAnimation.Male.AnimationMillis(state), elapsedMillis)
     {
         State = state;
     }

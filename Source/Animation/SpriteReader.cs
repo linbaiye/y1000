@@ -69,10 +69,6 @@ namespace y1000.Source.Animation
             if (!resDir.EndsWith("/")) {
                 resDir += "/";
             }
-            if (LOADED_CONTAINERS.TryGetValue(resDir, out var container))
-            {
-                return container;
-            }
             if (!Godot.FileAccess.FileExists(resDir + "offset.txt")) {
                 throw new FileNotFoundException();
             }
@@ -92,17 +88,20 @@ namespace y1000.Source.Animation
             }
 			fileAccess.Dispose();
             var ret = new SpriteReader(textures, vectors);
-            LOADED_CONTAINERS.Add(resDir, ret);
             return ret;
         }
 
-
         public static SpriteReader LoadOffsetMalePlayerSprites(string nr)
         {
-           // return Load("res://sprite/char/" + nr + "/");
-            return Load("res://sprite/char/" + nr + "/", new Vector2(16, -12));
+            return Load("res://sprite/char/" + nr + "/");
+            //return Load("res://sprite/char/" + nr + "/", new Vector2(16, -12));
         }
-
+        
+        public static SpriteReader LoadOffsetWeaponSprites(string nr)
+        {
+            return Load("res://sprite/weapon/" + nr + "/");
+            return Load("res://sprite/weapon/" + nr + "/", new Vector2(12, -9));
+        }
 
         public static SpriteReader LoadSprites(string name)
         {
@@ -123,10 +122,11 @@ namespace y1000.Source.Animation
         public static SpriteReader LoadOffsetMonsterSprites(string name)
         {
            // return Load("res://sprite/monster/" + name + "/" );
+            return Load("res://sprite/monster/" + name + "/");
             return Load("res://sprite/monster/" + name + "/", new Vector2(16, -12));
         }
         
 
-        public static readonly SpriteReader EmptyReader = new SpriteReader(Array.Empty<Texture2D>(), Array.Empty<Vector2>());
+        public static readonly SpriteReader EmptyReader = new(Array.Empty<Texture2D>(), Array.Empty<Vector2>());
     }
 }

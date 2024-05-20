@@ -17,7 +17,7 @@ public partial class BodyTextContainer : MarginContainer
 
     private void OnMouseEntered()
     {
-        var bodySprite = GetParent<BodySprite>();
+        var bodySprite = GetParent<Animation.BodySprite>();
         var position = bodySprite.OwnerPosition + new Vector2(16, -16);
         GlobalPosition = position;
         var label = GetNode<Label>("Label");

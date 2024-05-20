@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Godot;
 using NLog;
-using y1000.code;
 using y1000.Source.Creature;
-using y1000.Source.Sprite;
 
 namespace y1000.Source.Animation;
 
-public abstract class AbstractCreatureAnimation<TA> : ICreatureAnimation  where TA : AbstractCreatureAnimation<TA>
+public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : AbstractCreatureAnimation<TA>
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
@@ -102,7 +99,6 @@ public abstract class AbstractCreatureAnimation<TA> : ICreatureAnimation  where 
             stateAnimation.Add(@struct, spriteReader);
         }
         _animations.TryAdd(state, stateAnimation);
-        LOGGER.Debug("Added animation for {0}.", state);
         return (TA)this;
     }
 

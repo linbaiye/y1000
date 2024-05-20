@@ -19,7 +19,7 @@ public sealed class MonsterStillState : AbstractMonsterState
     
     protected override CreatureState State { get; }
 
-    private static MonsterStillState Create(ICreatureAnimation animation, CreatureState st, int e = 0)
+    private static MonsterStillState Create(IAnimation animation, CreatureState st, int e = 0)
     {
         return new MonsterStillState(st, animation.AnimationMillis(st), e);
     }

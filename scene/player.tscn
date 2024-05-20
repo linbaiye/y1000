@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://duo0butuerf3j"]
+[gd_scene load_steps=6 format=3 uid="uid://duo0butuerf3j"]
 
 [ext_resource type="Script" path="res://Source/Player/Player.cs" id="1_myy6j"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_bsr1w"]
-[ext_resource type="Script" path="res://Source/Creature/BodySprite.cs" id="3_1hr0m"]
+[ext_resource type="Script" path="res://Source/Animation/BodySprite.cs" id="3_oncfd"]
+[ext_resource type="Script" path="res://Source/Animation/HandSprite.cs" id="4_5vjql"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j55eq"]
 shader = ExtResource("2_bsr1w")
@@ -21,4 +22,9 @@ script = ExtResource("1_myy6j")
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_j55eq")
 centered = false
-script = ExtResource("3_1hr0m")
+script = ExtResource("3_oncfd")
+
+[node name="Hand" type="Sprite2D" parent="."]
+y_sort_enabled = true
+centered = false
+script = ExtResource("4_5vjql")

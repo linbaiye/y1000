@@ -13,9 +13,13 @@ public interface IAttackKungFu : ILevelKungFu
         {
             return new QuanFa(level, name);
         }
-        if (Bow.Knows(name))
+        if (BowKungFu.Knows(name))
         {
-            return new Bow(level, name);
+            return new BowKungFu(level, name);
+        }
+        if (SwordKungFu.Knows(name))
+        {
+            return new SwordKungFu(level, name);
         }
         throw new NotImplementedException();
     }

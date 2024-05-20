@@ -14,7 +14,7 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
         State = state;
     }
     
-    public PlayerMoveState(CreatureState state, Direction towards, int elapsedMillis = 0) : this(PlayerAnimation.Male.AnimationMillis(state), state, towards, elapsedMillis)
+    public PlayerMoveState(CreatureState state, Direction towards, int elapsedMillis = 0) : this(PlayerBodyAnimation.Male.AnimationMillis(state), state, towards, elapsedMillis)
     {
     }
     
@@ -26,7 +26,7 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
 
     private static PlayerMoveState Create(CreatureState state, Direction dir, int e = 0)
     {
-        return new PlayerMoveState(PlayerAnimation.Male.AnimationMillis(state), state, dir, e);
+        return new PlayerMoveState(PlayerBodyAnimation.Male.AnimationMillis(state), state, dir, e);
     }
 
     public void CheckMoving()
@@ -39,7 +39,7 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
 
     public override OffsetTexture BodyOffsetTexture(Player player)
     {
-        var ani = player.IsMale ? PlayerAnimation.Male : PlayerAnimation.Female;
+        var ani = player.IsMale ? PlayerBodyAnimation.Male : PlayerBodyAnimation.Female;
         return ani.OffsetTexture(State, Towards, ElapsedMillis);
     }
 

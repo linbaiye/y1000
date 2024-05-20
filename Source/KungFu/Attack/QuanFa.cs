@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.Collections.Generic;
 using y1000.Source.Creature;
 
@@ -7,10 +6,6 @@ namespace y1000.Source.KungFu.Attack;
 
 public class QuanFa : AbstractLevelKungFu, IAttackKungFu
 {
-
-    private static readonly Random RANDOM = new();
-    
-
 
     private static readonly ISet<string> NAMES = new HashSet<string>()
     {

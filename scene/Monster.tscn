@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://yht4jllwikxp"]
 
 [ext_resource type="Script" path="res://code/creatures/SimpleCreature.cs" id="1_eo4vf"]
-[ext_resource type="Script" path="res://code/creatures/BodySprite.cs" id="2_a05tm"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_ea6sb"]
+[ext_resource type="Script" path="res://Source/Animation/BodySprite.cs" id="3_xhflp"]
 [ext_resource type="PackedScene" uid="uid://cjmh77c4p87tv" path="res://scene/body_hover_rect.tscn" id="3_yuqxo"]
 [ext_resource type="Script" path="res://code/creatures/CreatureAnimationPlayer.cs" id="4_u1528"]
 [ext_resource type="Texture2D" uid="uid://bk1xwhmelwsbl" path="res://sprite/white.png" id="6_2tyng"]
@@ -22,7 +22,7 @@ metadata/spriteNumber = 0
 [node name="Body" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_lyljc")
 centered = false
-script = ExtResource("2_a05tm")
+script = ExtResource("3_xhflp")
 
 [node name="BodyHoverRect" parent="Body" instance=ExtResource("3_yuqxo")]
 

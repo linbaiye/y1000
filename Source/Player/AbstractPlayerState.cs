@@ -36,7 +36,7 @@ public abstract class AbstractPlayerState : AbstractCreatureState<Player>, IPlay
     
     public override OffsetTexture BodyOffsetTexture(Player player)
     {
-        var ani = player.IsMale ? PlayerAnimation.Male : PlayerAnimation.Female;
+        var ani = player.IsMale ? PlayerBodyAnimation.Male : PlayerBodyAnimation.Female;
         return ani.OffsetTexture(State, player.Direction, ElapsedMillis);
     }
 }
