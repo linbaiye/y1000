@@ -29,5 +29,9 @@ public partial class BottomControl : Godot.Control
         character.WhenCharacterUpdated += WhenCoordinateUpdated;
         UpdateCoordinate(character.Coordinate);
     }
-    
+
+
+    public TextureButton InventoryButton => GetNode<TextureButton>("Container2/InventoryButton");
+
+
 }

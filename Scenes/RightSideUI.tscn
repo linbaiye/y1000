@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://7ghuvlfmi4pd"]
+[gd_scene load_steps=6 format=3 uid="uid://7ghuvlfmi4pd"]
 
-[ext_resource type="Texture2D" uid="uid://cf1d4h51iglpd" path="res://assets/ui/inventory.png" id="1_ka7tb"]
+[ext_resource type="Script" path="res://Source/Control/RightSide/RightControl.cs" id="1_j2rwp"]
+[ext_resource type="Texture2D" uid="uid://b50oaa3iiic8f" path="res://assets/ui/inventory.png" id="1_ka7tb"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/InventoryView.cs" id="2_px3kf"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_qq6s2"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/CloseButton.cs" id="4_4n8tp"]
@@ -12,12 +13,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_j2rwp")
 
 [node name="Inventory" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(252, 384)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 0
 texture = ExtResource("1_ka7tb")
 script = ExtResource("2_px3kf")
 
@@ -76,6 +79,51 @@ layout_mode = 2
 [node name="Slot15" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
 layout_mode = 2
 
+[node name="Slot16" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot17" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot18" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot19" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot20" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot21" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot22" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot23" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot24" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot25" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot26" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot27" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot28" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot29" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="Slot30" parent="Inventory/InventorySlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
 [node name="CloseButton" type="TextureButton" parent="Inventory"]
 layout_mode = 0
 offset_left = 221.0
@@ -83,3 +131,10 @@ offset_top = 2.0
 offset_right = 249.0
 offset_bottom = 32.0
 script = ExtResource("4_4n8tp")
+
+[node name="TextLabel" type="Label" parent="Inventory"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 322.0
+offset_right = 236.0
+offset_bottom = 354.0

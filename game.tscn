@@ -18,7 +18,6 @@ script = ExtResource("1_yu5bc")
 script = ExtResource("3_akyoc")
 
 [node name="BottomUI" parent="UILayer" instance=ExtResource("5_3t2rd")]
-mouse_filter = 1
 
 [node name="RightSideUI" parent="UILayer" instance=ExtResource("4_fqpt3")]
 anchors_preset = -1
@@ -27,3 +26,4 @@ anchor_bottom = 0.75
 offset_left = 5.0
 offset_top = 220.0
 offset_bottom = 29.0
+mouse_filter = 0

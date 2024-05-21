@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Godot;
 using y1000.Source.Creature;
 using y1000.Source.Entity;
+using y1000.Source.Item;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
@@ -70,9 +71,10 @@ public class MessageDrivenPlayer : IEntity
         Player.Handle(message);
     }
 
-    public static MessageDrivenPlayer FromInterpolation(PlayerInterpolation playerInterpolation, IMap map)
+    public static MessageDrivenPlayer FromInterpolation(PlayerInterpolation playerInterpolation,
+        IMap map, ItemFactory _itemFactory)
     {
-        var player = PlayerImpl.FromInterpolation(playerInterpolation, map);
+        var player = PlayerImpl.FromInterpolation(playerInterpolation, map, _itemFactory);
         return new MessageDrivenPlayer(player);
     }
 }

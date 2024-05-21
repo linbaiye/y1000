@@ -22,7 +22,7 @@ public class PlayerInterpolation : IServerMessage
     
     public bool Male { get; }
     
-    public string? WeaponName { get; set; }
+    public string? WeaponName { get; private set; }
 
     public override string ToString()
     {

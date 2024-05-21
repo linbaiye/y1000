@@ -6,11 +6,11 @@ public class CharacterWeapon : PlayerWeapon, ICharacterItem
 {
     public long Id { get; }
 
-    public long IconId { get; }
+    public int IconId { get; }
     
     public string Name { get; }
 
-    public CharacterWeapon(long id, string name, long iconId, string nonAttackAnimation, string attackAnimation, AttackKungFuType attackKungFuType) : base(nonAttackAnimation, attackAnimation, attackKungFuType)
+    public CharacterWeapon(long id, string name, int iconId, string nonAttackAnimation, string attackAnimation, AttackKungFuType attackKungFuType) : base(nonAttackAnimation, attackAnimation, attackKungFuType)
     {
         Id = id;
         IconId = iconId;

@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Godot;
 using NLog;
-using Source.Networking.Protobuf;
 using y1000.Source.Animation;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
@@ -33,12 +31,12 @@ namespace y1000.Source.Character
 
 		public event EventHandler<EventArgs>? WhenCharacterUpdated;
 
-
 		public void ChangeState(ICharacterState state)
 		{
 			WrappedPlayer().ChangeState(state.WrappedState);
 			_state = state;
 		}
+		
 
 		public bool IsMale => WrappedPlayer().IsMale;
 		
@@ -60,11 +58,11 @@ namespace y1000.Source.Character
 			}
 		}
 
-		public Player.PlayerImpl WrappedPlayer()
+		public PlayerImpl WrappedPlayer()
 		{
 			foreach (var child in GetChildren())
 			{
-				if (child is Player.PlayerImpl player)
+				if (child is PlayerImpl player)
 				{
 					return player;
 				}
@@ -179,12 +177,14 @@ namespace y1000.Source.Character
 	        }
         }
 
-        private CharacterInventory CreateInventory(JoinedRealmMessage message, ItemFactory itemFactory)
+        public CharacterInventory Inventory { get; } = new();
+
+        private static void AddItems(CharacterImpl characterImpl, JoinedRealmMessage message, ItemFactory itemFactory)
         {
-	        CharacterInventory inventory = new CharacterInventory();
 	        foreach (var inventoryItemMessage in message.Items)
 	        {
-		        itemFactory.CreateCharacterItem(inventoryItemMessage.Id)
+		        var characterItem = itemFactory.CreateCharacterItem(inventoryItemMessage.Id, inventoryItemMessage.Name, inventoryItemMessage.Type);
+		        characterImpl.Inventory.AddItem(inventoryItemMessage.SlotId, characterItem);
 	        }
         }
 
@@ -205,6 +205,7 @@ namespace y1000.Source.Character
 	        character.FootMagic = message.FootKungFu;
 	        character.AttackKungFu = message.AttackKungFu;
 	        character.ChangeState(CharacterIdleState.Wrap(state));
+	        AddItems(character, message, itemFactory);
 	        return character;
         }
 

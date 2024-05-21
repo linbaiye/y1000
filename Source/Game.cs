@@ -13,6 +13,7 @@ using NLog;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
+using y1000.Source.Control;
 using y1000.Source.Control.Bottom;
 using y1000.Source.Creature;
 using y1000.Source.Creature.Monster;
@@ -29,7 +30,6 @@ namespace y1000.Source;
 
 public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisitor
 {
-
 	private readonly Bootstrap _bootstrap = new();
 
 	private readonly ConcurrentQueue<object> _unprocessedMessages = new();
@@ -42,13 +42,13 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private ConnectionState _connectionState = ConnectionState.DISCONNECTED;
 
-	private Character.CharacterImpl? _character;
+	private CharacterImpl? _character;
 
 	private volatile IChannel? _channel;
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
-	private BottomControl? _bottomControl;
+	private UIController? _uiController;
 
 	private readonly CreatureFactory _creatureFactory = new ();
 
@@ -64,12 +64,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	public override void _Ready()
 	{
 		SetupNetwork();
-		_bottomControl = GetNode<BottomControl>("UILayer/BottomUI");
+		_uiController = GetNode<UIController>("UILayer");
 	}
 
 	private void OnPredictionEvent(object? sender, EventArgs eventArgs)
 	{
-		if (sender is not Character.CharacterImpl character || eventArgs is not CharacterPredictionEventArgs predictionEventArgs)
+		if (sender is not CharacterImpl || eventArgs is not CharacterPredictionEventArgs predictionEventArgs)
 		{
 			return;
 		}
@@ -165,7 +165,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
-	public override void _Input(InputEvent @event)
+	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event is InputEventMouse eventMouse)
 		{
@@ -261,7 +261,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(PlayerInterpolation playerInterpolation)
 	{
-		var msgDrivenPlayer = MessageDrivenPlayer.FromInterpolation(playerInterpolation, MapLayer);
+		var msgDrivenPlayer = MessageDrivenPlayer.FromInterpolation(playerInterpolation, MapLayer, _itemFactory);
 		msgDrivenPlayer.Player.OnPlayerShoot += OnPlayerShoot;
 		_entities.TryAdd(msgDrivenPlayer.Id, msgDrivenPlayer);
 		AddChild(msgDrivenPlayer.Player);
@@ -310,17 +310,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(JoinedRealmMessage joinedRealmMessage)
 	{
-		if (MapLayer.Map != null)
-		{
-			_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, new List<IItem>());
-			_character.WhenCharacterUpdated += OnPredictionEvent;
-			_bottomControl?.BindCharacter(_character);
-			MapLayer.BindCharacter(_character);
-			_character.WrappedPlayer().OnPlayerShoot += OnPlayerShoot;
-			_entities.TryAdd(_character.Id, _character);
-			_itemFactory.Create()
-			AddChild(_character);
-			//AddChild(_character, false, InternalMode.Back);
-		}
+		_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, _itemFactory);
+		_character.WhenCharacterUpdated += OnPredictionEvent;
+		_uiController?.BindCharacter(_character);
+		MapLayer.BindCharacter(_character);
+		_character.WrappedPlayer().OnPlayerShoot += OnPlayerShoot;
+		_entities.TryAdd(_character.Id, _character);
+		AddChild(_character);
 	}
 }

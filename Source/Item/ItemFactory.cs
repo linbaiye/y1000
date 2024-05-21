@@ -39,25 +39,28 @@ public class ItemFactory
     private static readonly List<ItemConfig> WeaponConfigs = new List<ItemConfig>()
     {
         new ItemConfig("长剑", 1, "j10", "j12", AttackKungFuType.SWORD),
-        new ItemConfig("木弓", 4, "j210", "j214", AttackKungFuType.BOW)
+        new ItemConfig("木弓", 4, "j210", "j214", AttackKungFuType.BOW),
+        new ItemConfig("长刀", 1, "j10", "j11", AttackKungFuType.BLADE)
     };
 
     public PlayerWeapon CreatePlayerWeapon(string name)
+    {
+
+        return CreateWeapon(name,
+            config => new PlayerWeapon(config.NonAttackAni, config.AttackAni, config.AttackKungFuType));
+    }
+
+
+    private T CreateWeapon<T>(string name, Func<ItemConfig, T> creator)
     {
         foreach (var config in WeaponConfigs)
         {
             if (name.Equals(config.Name))
             {
-                return new PlayerWeapon( config.NonAttackAni, config.NonAttackAni, config.AttackKungFuType);
+                return creator.Invoke(config);
             }
         }
         throw new NotSupportedException("Not supported name " + name);
-    }
-
-
-    private T CreateWeapon<T>(string name, Func<>)
-    {
-        
     }
     
 
@@ -65,8 +68,8 @@ public class ItemFactory
     {
         if (type == ItemType.WEAPON)
         {
-            return new CharacterWeapon(id,  name, iconId, config.NonAttackAni, config.NonAttackAni, config.AttackKungFuType);
+            return CreateWeapon<CharacterWeapon>(name, config => new CharacterWeapon(id, name, config.IconId, config.NonAttackAni, config.AttackAni, config.AttackKungFuType));
         }
-        throw new NotSupportedException();
+        throw new NotSupportedException("Not supported type " + type);
     }
 }

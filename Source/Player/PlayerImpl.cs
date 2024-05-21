@@ -125,7 +125,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		return $"{base.ToString()}, {nameof(Id)}: {Id}, {nameof(Direction)}: {Direction}, {nameof(Coordinate)}: {Coordinate}";
 	}
 
-	public static PlayerImpl FromInterpolation(PlayerInterpolation playerInterpolation, IMap map)
+	public static PlayerImpl FromInterpolation(PlayerInterpolation playerInterpolation, IMap map, ItemFactory itemFactory)
 	{
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/player.tscn");
 		var player = scene.Instantiate<PlayerImpl>();
@@ -136,6 +136,10 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		if (state is PlayerMoveState moveState)
 		{
 			moveState.Init(player);
+		}
+		if (playerInterpolation.WeaponName != null)
+		{
+			player.ChangeWeapon(itemFactory.CreatePlayerWeapon(playerInterpolation.WeaponName));
 		}
 		return player;
 	}
