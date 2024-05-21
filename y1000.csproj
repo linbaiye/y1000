@@ -62,5 +62,10 @@
     <Compile Remove="Source\Entity\Item\**" />
     <EmbeddedResource Remove="Source\Entity\Item\**" />
     <Compile Remove="Source\Player\HandSprite.cs" />
+    <Compile Remove="Source\Item\Weapon\**" />
+    <EmbeddedResource Remove="Source\Item\Weapon\**" />
+    <Compile Remove="Source\Item\WeaponType.cs" />
+    <Compile Remove="Source\Character\Inventory\**" />
+    <EmbeddedResource Remove="Source\Character\Inventory\**" />
   </ItemGroup>
 </Project>

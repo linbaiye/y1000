@@ -21,7 +21,8 @@ public class PlayerInterpolation : IServerMessage
     public long Id { get; }
     
     public bool Male { get; }
-
+    
+    public string? WeaponName { get; set; }
 
     public override string ToString()
     {
@@ -30,7 +31,13 @@ public class PlayerInterpolation : IServerMessage
 
     public static PlayerInterpolation FromPacket(PlayerInterpolationPacket packet)
     {
-        return new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male, packet.Id);
+        var i = new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male, packet.Id);
+        if (packet.HasWeaponName)
+        {
+            i.WeaponName = packet.WeaponName;
+        }
+
+        return i;
     }
 
     public void Accept(IServerMessageVisitor visitor)

@@ -11,7 +11,7 @@ public class CharacterAttackState : ICharacterState
         WrappedState = playerAttackState;
     }
 
-    public void OnWrappedPlayerAnimationFinished(Character character)
+    public void OnWrappedPlayerAnimationFinished(CharacterImpl character)
     {
         character.ChangeState(CharacterCooldownState.Cooldown());
     }

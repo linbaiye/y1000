@@ -11,37 +11,37 @@ namespace y1000.Source.Character.State
     {
         public static readonly EmptyState Instance = new EmptyState();
 
-        public OffsetTexture BodyOffsetTexture(Character character)
+        public OffsetTexture BodyOffsetTexture(CharacterImpl character)
         {
             throw new NotImplementedException();
         }
 
-        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        public void OnMouseRightClicked(CharacterImpl character, MouseRightClick rightClick)
         {
             throw new NotImplementedException();
         }
 
-        public void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
+        public void OnMouseRightReleased(CharacterImpl character, MouseRightRelease mouseRightRelease)
         {
             throw new NotImplementedException();
         }
 
-        public IPrediction Predict(Character character, MouseRightClick rightClick)
+        public IPrediction Predict(CharacterImpl character, MouseRightClick rightClick)
         {
             throw new NotImplementedException();
         }
 
-        public IPrediction Predict(Character character, MouseRightRelease rightClick)
+        public IPrediction Predict(CharacterImpl character, MouseRightRelease rightClick)
         {
             throw new NotImplementedException();
         }
 
-        public void Process(Character character, double delta)
+        public void Process(CharacterImpl character, double delta)
         {
             throw new NotImplementedException();
         }
 
-        public void Process(Character character, long deltaMillis)
+        public void Process(CharacterImpl character, long deltaMillis)
         {
             throw new NotImplementedException();
         }
@@ -66,19 +66,19 @@ namespace y1000.Source.Character.State
             throw new NotImplementedException();
         }
 
-        public void Update(Character character, long delta)
+        public void Update(CharacterImpl character, long delta)
         {
             throw new NotImplementedException();
         }
 
         public IPlayerState WrappedState => throw new NotImplementedException();
 
-        public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
+        public void OnMousePressedMotion(CharacterImpl character, RightMousePressedMotion mousePressedMotion)
         {
             throw new NotImplementedException();
         }
 
-        public IPrediction Predict(Character character, RightMousePressedMotion mousePressedMotion)
+        public IPrediction Predict(CharacterImpl character, RightMousePressedMotion mousePressedMotion)
         {
             throw new NotImplementedException();
         }
@@ -88,7 +88,7 @@ namespace y1000.Source.Character.State
             throw new NotImplementedException();
         }
 
-        public void Update(Player.Player player, long delta)
+        public void Update(Player.PlayerImpl player, long delta)
         {
             throw new NotImplementedException();
         }

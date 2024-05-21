@@ -96,15 +96,23 @@ message InterpolationsPacket {
   repeated InterpolationPacket interpolations = 1;
 }
 
+message InventoryItemPacket {
+  int64 id = 1;
+  string name = 2;
+  int32 itemType = 4;
+  int32 slotId = 5;
+}
+
 message LoginPacket {
   int32 x = 1;
   int32 y = 2;
   int64 id = 3;
-  int32 weaponShapeId = 4;
+  optional string weaponName = 4;
   int32 attackKungFuLevel = 5;
   string attackKungFuName = 6;
-  int32 footKungFuLevel = 7;
-  string footKungFuName = 8;
+  optional int32 footKungFuLevel = 7;
+  optional string footKungFuName = 8;
+  repeated InventoryItemPacket inventoryItems = 9;
 }
 
 message Packet {
@@ -134,6 +142,7 @@ message PlayerInterpolationPacket {
   int64 id = 2;
   bool male = 3;
   string name = 4;
+  optional string weaponName = 5;
 }
 
 message RemoveEntityPacket {

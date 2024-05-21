@@ -16,7 +16,7 @@ public abstract class AbstractCharacterStillState : ICharacterState
     }
     public IPlayerState WrappedState { get; }
     
-    public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+    public void OnMouseRightClicked(CharacterImpl character, MouseRightClick rightClick)
     {
         HandleRightClick(character, rightClick);
     }
@@ -24,9 +24,9 @@ public abstract class AbstractCharacterStillState : ICharacterState
     protected abstract ILogger Logger { get; }
 
     
-    protected abstract ICharacterState MoveState(Character character, AbstractRightClickInput rightClickInput);
+    protected abstract ICharacterState MoveState(CharacterImpl character, AbstractRightClickInput rightClickInput);
 
-    private void HandleRightClick(Character character, AbstractRightClickInput rightClick)
+    private void HandleRightClick(CharacterImpl character, AbstractRightClickInput rightClick)
     {
         if (!character.CanMoveOneUnit(rightClick.Direction))
         {
@@ -53,12 +53,12 @@ public abstract class AbstractCharacterStillState : ICharacterState
         return true;
     }
 
-    public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
+    public void OnMousePressedMotion(CharacterImpl character, RightMousePressedMotion mousePressedMotion)
     {
         HandleRightClick(character, mousePressedMotion);
     }
 
-    public void Attack(Character character, AttackInput input)
+    public void Attack(CharacterImpl character, AttackInput input)
     {
         var state = character.AttackKungFu.RandomAttackState();
         character.Direction = character.Coordinate.GetDirection(input.Entity.Coordinate);
@@ -67,7 +67,7 @@ public abstract class AbstractCharacterStillState : ICharacterState
         character.ChangeState(characterAttackState);
     }
     
-    public void OnWrappedPlayerAnimationFinished(Character character)
+    public void OnWrappedPlayerAnimationFinished(CharacterImpl character)
     {
         WrappedState.Reset();
     }

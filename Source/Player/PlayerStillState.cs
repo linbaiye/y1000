@@ -10,7 +10,7 @@ public sealed class PlayerStillState : AbstractPlayerState, IPlayerState
         State = state;
     }
 
-    public override void Update(Player c, int delta)
+    public override void Update(PlayerImpl c, int delta)
     {
         NotifyIfElapsed(c, delta);
     }

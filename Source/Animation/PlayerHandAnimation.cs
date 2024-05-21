@@ -4,19 +4,36 @@ namespace y1000.Source.Animation;
 
 public class PlayerHandAnimation: AbstractPlayerAnimation<PlayerHandAnimation>
 {
-    public static PlayerHandAnimation LoadSword(string name)
+
+    private PlayerHandAnimation ConfigureNoneAttack(SpriteReader nonattack)
     {
-        SpriteReader weaponSprites = SpriteReader.LoadOffsetWeaponSprites(name);
+        return ConfigureState(CreatureState.FLY, AtdReader, nonattack)
+            .ConfigureState(CreatureState.WALK, AtdReader, nonattack)
+            .ConfigureState(CreatureState.RUN, AtdReader, nonattack)
+            .ConfigureState(CreatureState.ENFIGHT_WALK, AtdReader, nonattack)
+            .ConfigureState(CreatureState.HURT, AtdReader, nonattack)
+            .ConfigureState(CreatureState.COOLDOWN, AtdReader, nonattack);
+    }
+    public static PlayerHandAnimation LoadSword(string name, string attackName)
+    {
+        SpriteReader nonattack = SpriteReader.LoadOffsetWeaponSprites(name);
+        SpriteReader attack = SpriteReader.LoadOffsetWeaponSprites(attackName);
         var playerAnimation = new PlayerHandAnimation();
-        return playerAnimation.ConfigureState(CreatureState.IDLE, AtdReader, weaponSprites)
-            .ConfigureState(CreatureState.FLY, AtdReader, weaponSprites)
-            .ConfigureState(CreatureState.WALK, AtdReader, weaponSprites)
-            .ConfigureState(CreatureState.RUN, AtdReader, weaponSprites)
-            .ConfigureState(CreatureState.ENFIGHT_WALK, AtdReader, weaponSprites)
-            .ConfigureState(CreatureState.HURT, AtdReader, weaponSprites)
-            .ConfigureState(CreatureState.COOLDOWN, AtdReader, weaponSprites)
-            .ConfigureState(CreatureState.SWORD, AtdReader, weaponSprites)
-            .ConfigureState(CreatureState.SWORD2H, AtdReader, weaponSprites)
+        return playerAnimation.ConfigureState(CreatureState.IDLE, AtdReader, nonattack)
+            .ConfigureNoneAttack(nonattack)
+            .ConfigureState(CreatureState.SWORD, AtdReader, attack)
+            .ConfigureState(CreatureState.SWORD2H, AtdReader, attack)
+            ;
+    }
+
+    public static PlayerHandAnimation LoadBow(string name, string attackName)
+    {
+        SpriteReader nonattack = SpriteReader.LoadOffsetWeaponSprites(name);
+        SpriteReader attack = SpriteReader.LoadOffsetWeaponSprites(attackName);
+        var playerAnimation = new PlayerHandAnimation();
+        return playerAnimation.ConfigureState(CreatureState.IDLE, AtdReader, nonattack)
+                .ConfigureNoneAttack(nonattack)
+                .ConfigureState(CreatureState.BOW, AtdReader, attack)
             ;
     }
 }

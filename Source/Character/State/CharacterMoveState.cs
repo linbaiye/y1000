@@ -31,7 +31,7 @@ namespace y1000.Source.Character.State
         }
 
 
-        public void OnWrappedPlayerAnimationFinished(Character character)
+        public void OnWrappedPlayerAnimationFinished(CharacterImpl character)
         {
             character.EmitMoveEvent();
             if (WrappedState.State == CreatureState.ENFIGHT_WALK)
@@ -57,17 +57,17 @@ namespace y1000.Source.Character.State
             return input is AbstractRightClickInput or MouseRightRelease;
         }
 
-        public void OnMouseRightClicked(Character character, MouseRightClick rightClick)
+        public void OnMouseRightClicked(CharacterImpl character, MouseRightClick rightClick)
         {
             _current = rightClick;
         }
 
-        public void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion)
+        public void OnMousePressedMotion(CharacterImpl character, RightMousePressedMotion mousePressedMotion)
         {
             _current = mousePressedMotion;
         }
 
-        public void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease)
+        public void OnMouseRightReleased(CharacterImpl character, MouseRightRelease mouseRightRelease)
         {
             _current = mouseRightRelease;
         }

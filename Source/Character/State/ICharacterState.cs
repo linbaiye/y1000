@@ -7,20 +7,20 @@ namespace y1000.Source.Character.State
 {
     public interface ICharacterState
     {
-        void OnMouseRightClicked(Character character, MouseRightClick rightClick) {}
+        void OnMouseRightClicked(CharacterImpl character, MouseRightClick rightClick) {}
 
-        void OnMouseRightReleased(Character character, MouseRightRelease mouseRightRelease) {}
+        void OnMouseRightReleased(CharacterImpl character, MouseRightRelease mouseRightRelease) {}
         
-        void OnMousePressedMotion(Character character, RightMousePressedMotion mousePressedMotion) {}
+        void OnMousePressedMotion(CharacterImpl character, RightMousePressedMotion mousePressedMotion) {}
 
         bool CanHandle(IPredictableInput input)
         {
             return false;
         }
 
-        void Attack(Character character, AttackInput @event) { }
+        void Attack(CharacterImpl character, AttackInput @event) { }
 
-        void OnWrappedPlayerAnimationFinished(Character character) {}
+        void OnWrappedPlayerAnimationFinished(CharacterImpl character) {}
 
         IPlayerState WrappedState { get; }
 

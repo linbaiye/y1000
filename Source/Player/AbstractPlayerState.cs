@@ -4,13 +4,13 @@ using y1000.Source.Creature.State;
 
 namespace y1000.Source.Player;
 
-public abstract class AbstractPlayerState : AbstractCreatureState<Player>, IPlayerState
+public abstract class AbstractPlayerState : AbstractCreatureState<PlayerImpl>, IPlayerState
 {
     protected AbstractPlayerState(int total, int elapsedMillis = 0) : base(total, elapsedMillis)
     {
     }
 
-    protected void NotifyIfElapsed(Player player, int delta)
+    protected void NotifyIfElapsed(PlayerImpl player, int delta)
     {
         if (ElapsedMillis >= TotalMillis)
         {
@@ -34,7 +34,7 @@ public abstract class AbstractPlayerState : AbstractCreatureState<Player>, IPlay
     public abstract CreatureState State { get; }
 
     
-    public override OffsetTexture BodyOffsetTexture(Player player)
+    public override OffsetTexture BodyOffsetTexture(PlayerImpl player)
     {
         var ani = player.IsMale ? PlayerBodyAnimation.Male : PlayerBodyAnimation.Female;
         return ani.OffsetTexture(State, player.Direction, ElapsedMillis);

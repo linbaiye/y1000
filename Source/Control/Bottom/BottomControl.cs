@@ -9,7 +9,7 @@ public partial class BottomControl : Godot.Control
 
     private void WhenCoordinateUpdated(object? sender, EventArgs args)
     {
-        if (sender is Character.Character && args is CharacterMoveEventArgs eventArgs)
+        if (sender is Character.CharacterImpl && args is CharacterMoveEventArgs eventArgs)
         {
             UpdateCoordinate(eventArgs.Coordinate);
         }
@@ -24,7 +24,7 @@ public partial class BottomControl : Godot.Control
         }
     }
 
-    public void BindCharacter(Character.Character character)
+    public void BindCharacter(Character.CharacterImpl character)
     {
         character.WhenCharacterUpdated += WhenCoordinateUpdated;
         UpdateCoordinate(character.Coordinate);

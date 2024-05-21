@@ -14,14 +14,14 @@ public class MessageDrivenPlayer : IEntity
 {
     private readonly Queue<IEntityMessage> _messages;
 
-    private MessageDrivenPlayer(Player player)
+    private MessageDrivenPlayer(PlayerImpl player)
     {
         Player = player;
         Player.StateAnimationEventHandler += OnStateAnimationDone;
         _messages = new Queue<IEntityMessage>();
     }
 
-    public Player Player { get; }
+    public PlayerImpl Player { get; }
 
     public string EntityName => Player.EntityName;
     public long Id => Player.Id;
@@ -72,7 +72,7 @@ public class MessageDrivenPlayer : IEntity
 
     public static MessageDrivenPlayer FromInterpolation(PlayerInterpolation playerInterpolation, IMap map)
     {
-        var player = Player.FromInterpolation(playerInterpolation, map);
+        var player = PlayerImpl.FromInterpolation(playerInterpolation, map);
         return new MessageDrivenPlayer(player);
     }
 }

@@ -10,6 +10,7 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using NLog;
+using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Control.Bottom;
@@ -17,6 +18,7 @@ using y1000.Source.Creature;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Entity;
 using y1000.Source.Input;
+using y1000.Source.Item;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Connection;
@@ -40,13 +42,17 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private ConnectionState _connectionState = ConnectionState.DISCONNECTED;
 
-	private Character.Character? _character;
+	private Character.CharacterImpl? _character;
 
 	private volatile IChannel? _channel;
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
 	private BottomControl? _bottomControl;
+
+	private readonly CreatureFactory _creatureFactory = new ();
+
+	private readonly ItemFactory _itemFactory = ItemFactory.Instance;
 
 	private enum ConnectionState
 	{
@@ -63,7 +69,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private void OnPredictionEvent(object? sender, EventArgs eventArgs)
 	{
-		if (sender is not Character.Character character || eventArgs is not CharacterPredictionEventArgs predictionEventArgs)
+		if (sender is not Character.CharacterImpl character || eventArgs is not CharacterPredictionEventArgs predictionEventArgs)
 		{
 			return;
 		}
@@ -118,7 +124,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		});
 	}
 
-	private void HandleCharacterInput(Func<Character.Character, IPredictableInput?> sampleFunction)
+	private void HandleCharacterInput(Func<Character.CharacterImpl, IPredictableInput?> sampleFunction)
 	{
 		if (_character == null)
 		{
@@ -306,12 +312,13 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		if (MapLayer.Map != null)
 		{
-			_character = Character.Character.LoggedIn(joinedRealmMessage, MapLayer);
+			_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, new List<IItem>());
 			_character.WhenCharacterUpdated += OnPredictionEvent;
 			_bottomControl?.BindCharacter(_character);
 			MapLayer.BindCharacter(_character);
 			_character.WrappedPlayer().OnPlayerShoot += OnPlayerShoot;
 			_entities.TryAdd(_character.Id, _character);
+			_itemFactory.Create()
 			AddChild(_character);
 			//AddChild(_character, false, InternalMode.Back);
 		}

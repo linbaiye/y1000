@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Godot;
 using Source.Networking.Protobuf;
+using y1000.Source.Item;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.KungFu.Foot;
 
@@ -7,10 +9,29 @@ namespace y1000.Source.Networking.Server
 {
     public class JoinedRealmMessage  : IServerMessage
     {
-        private JoinedRealmMessage(IAttackKungFu attackKungFu)
+        public class InventoryItemMessage
+        {
+            public InventoryItemMessage(long id, string name, ItemType type, int slotId)
+            {
+                Id = id;
+                Name = name;
+                Type = type;
+                SlotId = slotId;
+            }
+            public long Id { get; }
+            public string Name { get; }
+            public ItemType Type { get; }
+            public int SlotId { get; }
+        }
+        private JoinedRealmMessage(IAttackKungFu attackKungFu, List<InventoryItemMessage> items)
         {
             AttackKungFu = attackKungFu;
+            Items = items;
         }
+        
+        public List<InventoryItemMessage> Items { get; }
+        
+        public string? WeaponName { get; set; }
 
         public Vector2I Coordinate { get; init; }
         
@@ -22,15 +43,36 @@ namespace y1000.Source.Networking.Server
         
         public IAttackKungFu AttackKungFu { get; private init; }
 
+
+        private static List<InventoryItemMessage> ItemMessages(LoginPacket loginPacket)
+        {
+            List<InventoryItemMessage> itemMessages = new List<InventoryItemMessage>();
+            foreach (var loginPacketInventoryItem in loginPacket.InventoryItems)
+            {
+                itemMessages.Add(new InventoryItemMessage(loginPacketInventoryItem.Id, loginPacketInventoryItem.Name, (ItemType)loginPacketInventoryItem.ItemType, loginPacketInventoryItem.SlotId));
+            }
+            return itemMessages;
+        }
+
         public static JoinedRealmMessage FromPacket(LoginPacket loginPacket)
         {
-            return new JoinedRealmMessage(IAttackKungFu.ByName(loginPacket.AttackKungFuName, loginPacket.AttackKungFuLevel))
+            List<InventoryItemMessage> itemMessages = ItemMessages(loginPacket);
+            var attackKungFu = IAttackKungFu.ByName(loginPacket.AttackKungFuName, loginPacket.AttackKungFuLevel);
+            var footKungFu = loginPacket.HasFootKungFuName
+                ? IFootKungFu.ByName(loginPacket.FootKungFuName, loginPacket.FootKungFuLevel)
+                : null;
+            var message = new JoinedRealmMessage(attackKungFu, itemMessages)
             {
                 Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
                 Id = loginPacket.Id,
                 Male = true,
-                FootKungFu = IFootKungFu.ByName(loginPacket.FootKungFuName, loginPacket.FootKungFuLevel),
+                FootKungFu = footKungFu,
             };
+            if (loginPacket.HasWeaponName)
+            {
+                message.WeaponName = loginPacket.WeaponName;
+            }
+            return message;
         }
 
         public override string ToString()

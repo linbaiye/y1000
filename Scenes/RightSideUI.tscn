@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://7ghuvlfmi4pd"]
 
 [ext_resource type="Texture2D" uid="uid://cf1d4h51iglpd" path="res://assets/ui/inventory.png" id="1_ka7tb"]
-[ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/Inventory.cs" id="2_5kg3v"]
+[ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/InventoryView.cs" id="2_px3kf"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_qq6s2"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/CloseButton.cs" id="4_4n8tp"]
 
@@ -19,7 +19,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_ka7tb")
-script = ExtResource("2_5kg3v")
+script = ExtResource("2_px3kf")
 
 [node name="InventorySlots" type="GridContainer" parent="Inventory"]
 layout_mode = 0

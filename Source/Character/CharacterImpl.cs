@@ -1,12 +1,15 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 using NLog;
+using Source.Networking.Protobuf;
 using y1000.Source.Animation;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Creature;
 using y1000.Source.Input;
+using y1000.Source.Item;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.KungFu.Foot;
 using y1000.Source.Map;
@@ -18,7 +21,7 @@ using ICharacterState = y1000.Source.Character.State.ICharacterState;
 
 namespace y1000.Source.Character
 {
-	public partial class Character : Node2D, IPlayer, IServerMessageVisitor
+	public partial class CharacterImpl : Node2D, IPlayer, IServerMessageVisitor
 	{
 		private ICharacterState _state = EmptyState.Instance;
 
@@ -29,6 +32,7 @@ namespace y1000.Source.Character
 		public IAttackKungFu AttackKungFu { get; private set; } = IAttackKungFu.Empty;
 
 		public event EventHandler<EventArgs>? WhenCharacterUpdated;
+
 
 		public void ChangeState(ICharacterState state)
 		{
@@ -56,11 +60,11 @@ namespace y1000.Source.Character
 			}
 		}
 
-		public Player.Player WrappedPlayer()
+		public Player.PlayerImpl WrappedPlayer()
 		{
 			foreach (var child in GetChildren())
 			{
-				if (child is Player.Player player)
+				if (child is Player.PlayerImpl player)
 				{
 					return player;
 				}
@@ -175,13 +179,28 @@ namespace y1000.Source.Character
 	        }
         }
 
-        public static Character LoggedIn(JoinedRealmMessage message, IMap map)
+        private CharacterInventory CreateInventory(JoinedRealmMessage message, ItemFactory itemFactory)
+        {
+	        CharacterInventory inventory = new CharacterInventory();
+	        foreach (var inventoryItemMessage in message.Items)
+	        {
+		        itemFactory.CreateCharacterItem(inventoryItemMessage.Id)
+	        }
+        }
+
+        public static CharacterImpl LoggedIn(JoinedRealmMessage message,
+	        IMap map,  ItemFactory itemFactory)
         {
 	        PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
-	        var character = scene.Instantiate<Character>();
+	        var character = scene.Instantiate<CharacterImpl>();
 	        var state = IPlayerState.Idle();
 	        var player = character.WrappedPlayer();
 	        player.Init(message.Male, state, Direction.DOWN, message.Coordinate, message.Id, map);
+	        if (message.WeaponName != null)
+	        {
+		        var weapon = ItemFactory.Instance.CreatePlayerWeapon(message.WeaponName);
+		        player.ChangeWeapon(weapon);
+	        }
 	        player.StateAnimationEventHandler += character.OnPlayerAnimationFinished;
 	        character.FootMagic = message.FootKungFu;
 	        character.AttackKungFu = message.AttackKungFu;

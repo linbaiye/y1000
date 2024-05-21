@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://duo0butuerf3j"]
 
-[ext_resource type="Script" path="res://Source/Player/Player.cs" id="1_myy6j"]
+[ext_resource type="Script" path="res://Source/Player/PlayerImpl.cs" id="1_68hen"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_bsr1w"]
 [ext_resource type="Script" path="res://Source/Animation/BodySprite.cs" id="3_oncfd"]
 [ext_resource type="Script" path="res://Source/Animation/HandSprite.cs" id="4_5vjql"]
@@ -16,7 +16,7 @@ z_index = 2
 z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
-script = ExtResource("1_myy6j")
+script = ExtResource("1_68hen")
 
 [node name="Body" type="Sprite2D" parent="."]
 y_sort_enabled = true

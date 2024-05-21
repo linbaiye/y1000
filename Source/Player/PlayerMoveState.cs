@@ -5,7 +5,7 @@ using y1000.Source.Creature.State;
 
 namespace y1000.Source.Player;
 
-public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
+public class PlayerMoveState : AbstractCreatureMoveState<PlayerImpl>, IPlayerState
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
@@ -37,13 +37,13 @@ public class PlayerMoveState : AbstractCreatureMoveState<Player>, IPlayerState
         }
     }
 
-    public override OffsetTexture BodyOffsetTexture(Player player)
+    public override OffsetTexture BodyOffsetTexture(PlayerImpl player)
     {
         var ani = player.IsMale ? PlayerBodyAnimation.Male : PlayerBodyAnimation.Female;
         return ani.OffsetTexture(State, Towards, ElapsedMillis);
     }
 
-    public override void Update(Player player, int delta)
+    public override void Update(PlayerImpl player, int delta)
     {
         Move(player, delta);
         if (ElapsedMillis >= TotalMillis)

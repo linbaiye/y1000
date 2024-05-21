@@ -18,7 +18,7 @@ public sealed class CharacterCooldownState : AbstractCharacterStillState
 
     protected override ILogger Logger => LOGGER;
 
-    protected override ICharacterState MoveState(Character character, AbstractRightClickInput rightClickInput)
+    protected override ICharacterState MoveState(CharacterImpl character, AbstractRightClickInput rightClickInput)
     {
         return CharacterMoveState.EnfightWalk(rightClickInput);
     }

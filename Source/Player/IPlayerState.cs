@@ -6,7 +6,7 @@ using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Player;
 
-public interface IPlayerState : ICreatureState<Player>
+public interface IPlayerState : ICreatureState<PlayerImpl>
 {
     static readonly IPlayerState Empty = EmptyPlayerState.Instance;
     

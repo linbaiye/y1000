@@ -14,7 +14,7 @@ public class PlayerRangedAttackState : AbstractPlayerState
     
     private long TargetId { get; }
     
-    public override void Update(Player c, int delta)
+    public override void Update(PlayerImpl c, int delta)
     {
         NotifyIfElapsed(c, delta);
         if (ElapsedMillis >= TotalMillis)

@@ -76,7 +76,7 @@ public partial class MapLayer : TileMap, IMap
 		
 	}
 
-	public void BindCharacter(Character.Character character)
+	public void BindCharacter(Character.CharacterImpl character)
 	{
 		_origin = character.Coordinate;
 		character.WhenCharacterUpdated += OnCharacterEvent;
@@ -85,7 +85,7 @@ public partial class MapLayer : TileMap, IMap
 
 	private void OnCharacterEvent(object? sender, EventArgs args)
 	{
-		if (sender is Character.Character && args is CharacterMoveEventArgs eventArgs &&
+		if (sender is Character.CharacterImpl && args is CharacterMoveEventArgs eventArgs &&
 		    !_origin.Equals(eventArgs.Coordinate))
 		{
 			_origin = eventArgs.Coordinate;

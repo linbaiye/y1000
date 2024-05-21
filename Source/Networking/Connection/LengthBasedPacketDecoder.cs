@@ -19,6 +19,7 @@ namespace y1000.Source.Networking.Connection
     public class LengthBasedPacketDecoder : LengthFieldBasedFrameDecoder
     {
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+        
 
         public LengthBasedPacketDecoder() : base(short.MaxValue, 0, 4, 0, 4)
         {

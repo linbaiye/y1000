@@ -14,7 +14,7 @@ public partial class UIController : CanvasLayer
 
     public void BindButtons()
     {
-        var inventory = GetNode<Inventory>("RightSideUI/Inventory");
+        var inventory = GetNode<InventoryView>("RightSideUI/Inventory");
         GetNode<TextureButton>("BottomUI/Container2/InventoryButton").Pressed += inventory.ButtonClicked;
     }
 

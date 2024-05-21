@@ -4,13 +4,13 @@ using y1000.Source.Item;
 
 namespace y1000.Source.Control.RightSide.Inventory;
 
-public partial class Inventory : NinePatchRect
+public partial class InventoryView : NinePatchRect
 {
     private static readonly ItemTextureReader TEXTURE_READER = ItemTextureReader.LoadItems();
     public override void _Ready()
     {
         Visible = false;
-        GetNode<CloseButton>("CloseButton").Pressed += OnClosed;
+        GetNode<TextureButton>("CloseButton").Pressed += OnClosed;
         AddItems(new int[] {1, // 长剑
             1, //  长刀
             4, //  弓
@@ -19,7 +19,7 @@ public partial class Inventory : NinePatchRect
 
     private void AddToSlot(int slot, Texture2D texture)
     {
-        GetNode<InventorySlot>("InventorySlots/Slot" + slot).PutItem(texture);
+        GetNode<InventorySlotView>("InventorySlots/Slot" + slot).PutItem(texture);
     }
 
     public void AddItems(IEnumerable<int> shapeIds)
@@ -30,9 +30,8 @@ public partial class Inventory : NinePatchRect
             var texture = TEXTURE_READER.Get(shapeId);
             if (texture != null)
             {
-                GetNode<InventorySlot>("InventorySlots/Slot" + slot).PutItem(texture);
+                GetNode<InventorySlotView>("InventorySlots/Slot" + slot).PutItem(texture);
                 slot++;
-                
             }
         }
     }

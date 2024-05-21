@@ -3,20 +3,20 @@ using Godot;
 using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
-using y1000.Source.Item.Weapon;
+using y1000.Source.Item;
+using y1000.Source.KungFu.Attack;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Player;
 
-public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
+public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisitor
 {
 	private IPlayerState _state = IPlayerState.Empty;
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
-	private Weapon? _weapon;
 
 	private PlayerHandAnimation? _handAnimation;
 	
@@ -27,8 +27,20 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		base.Init(id, direction, coordinate, map, "");
 		IsMale = male;
 		_state = state;
-		_weapon = Weapon.SWORD;
-		_handAnimation = PlayerHandAnimation.LoadSword(_weapon.AnimationId);
+	}
+	
+	public PlayerWeapon? Weapon { get; private set; }
+
+	public void ChangeWeapon(PlayerWeapon weapon)
+	{
+		Weapon = weapon;
+		if (weapon.AttackKungFuType == AttackKungFuType.SWORD)
+		{
+			_handAnimation = PlayerHandAnimation.LoadSword(weapon.NonAttackAnimation, weapon.AttackAnimation);
+		} else if (weapon.AttackKungFuType == AttackKungFuType.BOW)
+		{
+			_handAnimation = PlayerHandAnimation.LoadBow(weapon.NonAttackAnimation, weapon.AttackAnimation);
+		}
 	}
 
 	public override void _Ready()
@@ -113,10 +125,10 @@ public partial class Player: AbstractCreature, IPlayer, IServerMessageVisitor
 		return $"{base.ToString()}, {nameof(Id)}: {Id}, {nameof(Direction)}: {Direction}, {nameof(Coordinate)}: {Coordinate}";
 	}
 
-	public static Player FromInterpolation(PlayerInterpolation playerInterpolation, IMap map)
+	public static PlayerImpl FromInterpolation(PlayerInterpolation playerInterpolation, IMap map)
 	{
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/player.tscn");
-		var player = scene.Instantiate<Player>();
+		var player = scene.Instantiate<PlayerImpl>();
 		var interpolation = playerInterpolation.Interpolation;
 		var state = IPlayerState.CreateFrom(playerInterpolation);
 		player.Init(playerInterpolation.Male, state, 
