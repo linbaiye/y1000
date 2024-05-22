@@ -80,4 +80,9 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)rewindMessage);
     }
+
+    void Visit(SwapInventorySlotMessage message)
+    {
+        
+    }
 }

@@ -64,7 +64,7 @@ public partial class InventorySlotView : Panel
         GetNode<TextureRect>("CenterContainer/TextureRect").Texture = texture2D;
     }
 
-    public void Clear()
+    public void ClearTexture()
     {
         GetNode<TextureRect>("CenterContainer/TextureRect").Texture = null;
     }

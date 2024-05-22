@@ -14,7 +14,6 @@ using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Control;
-using y1000.Source.Control.Bottom;
 using y1000.Source.Creature;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Entity;
@@ -67,14 +66,21 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController = GetNode<UIController>("UILayer");
 	}
 
-	private void OnPredictionEvent(object? sender, EventArgs eventArgs)
+	private void OnCharacterEvent(object? sender, EventArgs eventArgs)
 	{
-		if (sender is not CharacterImpl || eventArgs is not CharacterPredictionEventArgs predictionEventArgs)
+		if (sender is not CharacterImpl)
 		{
 			return;
 		}
-		_predictionManager.Save(predictionEventArgs.Prediction);
-		WriteMessage(predictionEventArgs.Event);
+		if (eventArgs is CharacterPredictionEventArgs predictionEventArgs)
+		{
+			_predictionManager.Save(predictionEventArgs.Prediction);
+			WriteMessage(predictionEventArgs.Event);
+		} 
+		else if (eventArgs is IClientEvent clientEvent)
+		{
+			WriteMessage(clientEvent);
+		}
 	}
 
 	private void ShowCharacter(JoinedRealmMessage joinedRealmMessage)
@@ -124,7 +130,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		});
 	}
 
-	private void HandleCharacterInput(Func<Character.CharacterImpl, IPredictableInput?> sampleFunction)
+	private void HandleCharacterInput(Func<CharacterImpl, IPredictableInput?> sampleFunction)
 	{
 		if (_character == null)
 		{
@@ -308,10 +314,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
+
 	public void Visit(JoinedRealmMessage joinedRealmMessage)
 	{
 		_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, _itemFactory);
-		_character.WhenCharacterUpdated += OnPredictionEvent;
+		_character.WhenCharacterUpdated += OnCharacterEvent;
 		_uiController?.BindCharacter(_character);
 		MapLayer.BindCharacter(_character);
 		_character.WrappedPlayer().OnPlayerShoot += OnPlayerShoot;

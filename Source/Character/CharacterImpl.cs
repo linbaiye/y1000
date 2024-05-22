@@ -36,7 +36,11 @@ namespace y1000.Source.Character
 			WrappedPlayer().ChangeState(state.WrappedState);
 			_state = state;
 		}
-		
+
+		private void OnInventoryEvent(IClientEvent clientEvent)
+		{
+			
+		}
 
 		public bool IsMale => WrappedPlayer().IsMale;
 		
@@ -177,7 +181,12 @@ namespace y1000.Source.Character
 	        }
         }
 
-        public CharacterInventory Inventory { get; } = new();
+        public CharacterImpl()
+        {
+	        Inventory = new CharacterInventory(OnInventoryEvent);
+        }
+
+        public CharacterInventory Inventory { get; }
 
         private static void AddItems(CharacterImpl characterImpl, JoinedRealmMessage message, ItemFactory itemFactory)
         {

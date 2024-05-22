@@ -73,6 +73,8 @@ public partial class InventoryView : NinePatchRect
         {
             return;
         }
+
+        _inventory.Swap(picked.Number, _currentFocused.Number);
         LOGGER.Debug("Swap {0} and {1}.", picked.Number, _currentFocused.Number);
     }
     
@@ -87,7 +89,7 @@ public partial class InventoryView : NinePatchRect
     {
         if (sender is CharacterInventory inventory)
         {
-            ForeachSlot(slot=>slot.Clear());
+            ForeachSlot(slot=>slot.ClearTexture());
             inventory.Foreach(SetIconToSlot);
         }
     }

@@ -2,7 +2,6 @@ syntax = "proto3";
 package Source.Networking.Protobuf;
 
 
-
 message PositionPacket {
   int32 x = 1;
   int32 y = 2;
@@ -11,7 +10,6 @@ message PositionPacket {
   int32 type = 5;
   int32 state = 6;
 }
-
 
 message InputResponsePacket {
   int64 sequence = 1;
@@ -55,13 +53,16 @@ message ChangeStatePacket {
   int32 state = 2;
 }
 
+message ChangeWeaponPacket {
+  int64 id = 1;
+  string name = 2;
+}
 
 message MoveEventPacket {
   InputPacket input = 1;
   int32 happenedAtX = 2;
   int32 happenedAtY = 3;
 }
-
 
 message ClientAttackEventPacket {
   int64 sequence = 1;
@@ -75,12 +76,18 @@ message ClientAttackResponsePacket {
   bool accepted = 2;
 }
 
+message SwapInventorySlotPacket {
+  int32 slot1 = 1;
+  int32 slot2 = 2;
+}
+
 message ClientPacket {
   oneof Type {
     MoveEventPacket moveEventPacket = 1;
     ClickPacket clickPacket = 2;
     PlayerLoginPacket loginPacket = 3;
     ClientAttackEventPacket attackEventPacket = 4;
+    SwapInventorySlotPacket swapInventorySlotPacket = 5;
   }
 }
 
@@ -99,6 +106,7 @@ message InterpolationsPacket {
 message InventoryItemPacket {
   int64 id = 1;
   string name = 2;
+  int32 shapeId = 3;
   int32 itemType = 4;
   int32 slotId = 5;
 }
@@ -128,6 +136,7 @@ message Packet {
     CreatureAttackEventPacket attackEventPacket = 10;
     CreatureHurtEventPacket hurtEventPacket = 11;
     ChangeStatePacket changeStatePacket = 12;
+    SwapInventorySlotPacket swapInventorySlotPacket = 13;
   }
 }
 
