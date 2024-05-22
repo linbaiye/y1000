@@ -7,21 +7,16 @@ public interface IAttackKungFu : ILevelKungFu
 {
     public CreatureState RandomAttackState();
     
-    public static IAttackKungFu ByName(string name, int level)
+    public static IAttackKungFu ByType(AttackKungFuType type, string name, int level)
     {
-        if (QuanFa.Knows(name))
+        return type switch
         {
-            return new QuanFa(level, name);
-        }
-        if (BowKungFu.Knows(name))
-        {
-            return new BowKungFu(level, name);
-        }
-        if (SwordKungFu.Knows(name))
-        {
-            return new SwordKungFu(level, name);
-        }
-        throw new NotImplementedException();
+            AttackKungFuType.BLADE => new BladeKungFu(level, name),
+            AttackKungFuType.SWORD => new SwordKungFu(level, name),
+            AttackKungFuType.BOW => new BowKungFu(level, name),
+            AttackKungFuType.QUANFA => new QuanFa(level, name),
+            _ => throw new NotImplementedException("Type " + type + " not supported.")
+        };
     }
     
     public static readonly IAttackKungFu Empty = EmptyAttackKungFu.Instance;

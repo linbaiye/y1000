@@ -14,7 +14,7 @@ public partial class InventoryView : NinePatchRect
 
     private InventorySlotView? _currentFocused;
 
-    private CharacterInventory _inventory = new();
+    private CharacterInventory _inventory = CharacterInventory.Empty;
 
     private Label? _textLabel;
     
@@ -39,13 +39,17 @@ public partial class InventoryView : NinePatchRect
         }
         else if (type == SlotEvent.Type.MOUSE_GONE)
         {
-            OnMouseLeft();
+            OnMouseGone();
         }
         else if (type == SlotEvent.Type.MOUSE_LEFT_RELEASE)
         {
             SwapItem(slot);
         }
-        LOGGER.Debug("Received event {0} from slot {1}.", type, slot.Number);
+        else if (type == SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
+        {
+            LOGGER.Debug("Double clicked.");
+            _inventory.OnDoubleClick(slot.Number);
+        }
     }
 
     private void OnMouseEntered(InventorySlotView slot)
@@ -58,7 +62,7 @@ public partial class InventoryView : NinePatchRect
         }
     }
 
-    private void OnMouseLeft()
+    private void OnMouseGone()
     {
         _currentFocused = null;
         if (_textLabel != null)
@@ -73,9 +77,7 @@ public partial class InventoryView : NinePatchRect
         {
             return;
         }
-
-        _inventory.Swap(picked.Number, _currentFocused.Number);
-        LOGGER.Debug("Swap {0} and {1}.", picked.Number, _currentFocused.Number);
+        _inventory.OnUISwap(picked.Number, _currentFocused.Number);
     }
     
     public void BindInventory(CharacterInventory inventory)

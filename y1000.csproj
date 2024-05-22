@@ -58,7 +58,6 @@
     <Compile Remove="Source\Player\PlayerCooldownState.cs" />
     <Compile Remove="Source\Player\PlayerAttackState.cs" />
     <Compile Remove="Source\Creature\MessageDrivenCreature.cs" />
-    <Compile Remove="Source\KungFu\Attack\AbstractAttackKungFu.cs" />
     <Compile Remove="Source\Entity\Item\**" />
     <EmbeddedResource Remove="Source\Entity\Item\**" />
     <Compile Remove="Source\Player\HandSprite.cs" />

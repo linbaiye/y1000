@@ -53,6 +53,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private readonly ItemFactory _itemFactory = ItemFactory.Instance;
 
+	private MessageFactory _messageFactory;
+
 	private enum ConnectionState
 	{
 		DISCONNECTED,
@@ -62,6 +64,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public override void _Ready()
 	{
+		_messageFactory = new MessageFactory(_itemFactory);
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
 	}
@@ -101,7 +104,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 				new ActionChannelInitializer<ISocketChannel>(c => c.Pipeline.AddLast(
 				new LengthFieldPrepender(4), 
 				new MessageEncoder(),
-				new LengthBasedPacketDecoder(),
+				new LengthBasedPacketDecoder(_messageFactory),
 				new MessageHandler(this))
 				)).Channel<TcpSocketChannel>();
 		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
@@ -280,6 +283,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			_character?.Rewind(response);
 		}
+	}
+
+	public void Visit(ICharacterMessage characterMessage)
+	{
+		_character?.Handle(characterMessage);
 	}
 
 	public void Visit(RewindMessage rewindMessage)

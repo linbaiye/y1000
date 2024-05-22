@@ -1,4 +1,5 @@
 
+using y1000.Source.Character;
 using y1000.Source.Character.Event;
 
 namespace y1000.Source.Networking.Server;
@@ -81,8 +82,12 @@ public interface IServerMessageVisitor
         Visit((IEntityMessage)rewindMessage);
     }
 
-    void Visit(SwapInventorySlotMessage message)
+    void Visit(ICharacterMessage characterMessage)
     {
-        
+    }
+
+    void Visit(PlayerChangeWeaponMessage message)
+    {
+        Visit((IEntityMessage)message);
     }
 }

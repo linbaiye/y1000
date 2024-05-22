@@ -1,11 +1,12 @@
 using System;
 using Source.Networking.Protobuf;
+using y1000.Source.Character;
 using y1000.Source.Input;
 using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Networking;
 
-public class SwapInventorySlotMessage : EventArgs, IServerMessage, IClientEvent
+public class SwapInventorySlotMessage : EventArgs, IServerMessage, IClientEvent, ICharacterMessage
 {
     public SwapInventorySlotMessage(int slot1, int slot2)
     {
@@ -33,5 +34,15 @@ public class SwapInventorySlotMessage : EventArgs, IServerMessage, IClientEvent
                     Slot2 = Slot2
                 }
         };
+    }
+
+    public void Accept(ICharacterMessageVisitor visitor)
+    {
+        visitor.Visit(this);
+    }
+
+    public static SwapInventorySlotMessage FromPacket(SwapInventorySlotPacket packet)
+    {
+        return new SwapInventorySlotMessage(packet.Slot1, packet.Slot2);
     }
 }

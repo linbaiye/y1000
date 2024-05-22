@@ -79,6 +79,8 @@ public class PlayerBodyAnimation : AbstractPlayerAnimation<PlayerBodyAnimation>
                 .ConfigureState(CreatureState.BOW, AtdReader, N04)
                 .ConfigureState(CreatureState.SWORD, AtdReader, N00)
                 .ConfigureState(CreatureState.SWORD2H, AtdReader, N00)
+                .ConfigureState(CreatureState.BLADE, AtdReader, N00)
+                .ConfigureState(CreatureState.BLADE2H, AtdReader, N00)
             ;
     }
 }

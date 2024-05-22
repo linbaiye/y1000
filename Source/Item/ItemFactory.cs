@@ -40,7 +40,7 @@ public class ItemFactory
     {
         new ItemConfig("长剑", 1, "j10", "j12", AttackKungFuType.SWORD),
         new ItemConfig("木弓", 4, "j210", "j214", AttackKungFuType.BOW),
-        new ItemConfig("长刀", 1, "j10", "j11", AttackKungFuType.BLADE)
+        new ItemConfig("长刀", 1, "j10", "j12", AttackKungFuType.BLADE)
     };
 
     public PlayerWeapon CreatePlayerWeapon(string name)
@@ -64,11 +64,11 @@ public class ItemFactory
     }
     
 
-    public ICharacterItem CreateCharacterItem(long id, string name, ItemType type)
+    public ICharacterItem CreateCharacterItem(string name, ItemType type)
     {
         if (type == ItemType.WEAPON)
         {
-            return CreateWeapon<CharacterWeapon>(name, config => new CharacterWeapon(id, name, config.IconId, config.NonAttackAni, config.AttackAni, config.AttackKungFuType));
+            return CreateWeapon<CharacterWeapon>(name, config => new CharacterWeapon(name, config.IconId, config.NonAttackAni, config.AttackAni, config.AttackKungFuType));
         }
         throw new NotSupportedException("Not supported type " + type);
     }

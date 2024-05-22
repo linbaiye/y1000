@@ -11,6 +11,8 @@ public class CharacterInventory
 {
     
     public const int MaxSize = 30;
+
+    public static readonly CharacterInventory Empty = new(i => { });
     
     
     private readonly IDictionary<int, ICharacterItem> _items = new Dictionary<int, ICharacterItem>(MaxSize);
@@ -49,6 +51,21 @@ public class CharacterInventory
         return _items.TryGetValue(slot, out var item) ? item : null;
     }
 
+    public void PutOrRemove(int slot, ICharacterItem? item)
+    {
+        _items.Remove(slot);
+        if (item != null)
+        {
+            _items.TryAdd(slot, item);
+        }
+        Notify();
+    }
+
+    private void Notify()
+    {
+        InventoryChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     public bool AddItem(int slot, ICharacterItem item)
     {
         if (slot < 1 || slot > MaxSize)
@@ -63,6 +80,15 @@ public class CharacterInventory
         return ret;
     }
 
+    public void OnDoubleClick(int slot)
+    {
+        if (_items.ContainsKey(slot))
+        {
+            _eventSender.Invoke(new DoubleClickInventorySlotMessage(slot));
+        }
+    }
+    
+
     public void Foreach(Action<int, ICharacterItem> consumer)
     {
         foreach (var keyValuePair in _items)
@@ -71,24 +97,32 @@ public class CharacterInventory
         }
     }
 
+
     public void Swap(int slot1, int slot2)
     {
-        if (_items.ContainsKey(slot1) && _items.ContainsKey(slot2))
+        _items.TryGetValue(slot1, out var item1);
+        _items.TryGetValue(slot2, out var item2);
+        if (item1 != null || item2 != null)
         {
-            _eventSender?.Invoke(new SwapInventorySlotMessage(slot1, slot2));
+            _items.Remove(slot1);
+            _items.Remove(slot2);
+            if (item1 != null)
+            {
+                _items.TryAdd(slot2, item1);
+            }
+            if (item2 != null)
+            {
+                _items.TryAdd(slot1, item2);
+            }
+            InventoryChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
-    public void AddItems(Collection<ICharacterItem> items)
+    public void OnUISwap(int pickedSlot, int slot2)
     {
-        if (items.Count + _items.Count >= MaxSize)
+        if (_items.ContainsKey(pickedSlot))
         {
-            return;
+            _eventSender.Invoke(new SwapInventorySlotMessage(pickedSlot, slot2));
         }
-        foreach (var item in items)
-        {
-            AddItem(item);
-        }
-        InventoryChanged?.Invoke(this, EventArgs.Empty);
     }
 }

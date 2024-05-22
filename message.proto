@@ -58,6 +58,23 @@ message ChangeWeaponPacket {
   string name = 2;
 }
 
+
+message CharacterChangeWeaponPacket {
+  string name = 1;
+  int32 affectedSlot = 2;
+  optional string slotNewItemName = 4;
+  optional int32 slotNewItemType = 5;
+  optional string attackKungFuName = 6;
+  optional int32 attackKungFuLevel = 7;
+  optional int32 attackKungFuType = 8;
+}
+
+message CharacterKungFuPacket {
+  string attackKungFuName = 1;
+  int32 attackKungFuLevel = 2;
+  int32 attackKungFuType = 3;
+}
+
 message MoveEventPacket {
   InputPacket input = 1;
   int32 happenedAtX = 2;
@@ -76,6 +93,10 @@ message ClientAttackResponsePacket {
   bool accepted = 2;
 }
 
+message DoubleClickInventorySlotPacket {
+  int32 slot = 1;
+}
+
 message SwapInventorySlotPacket {
   int32 slot1 = 1;
   int32 slot2 = 2;
@@ -88,6 +109,7 @@ message ClientPacket {
     PlayerLoginPacket loginPacket = 3;
     ClientAttackEventPacket attackEventPacket = 4;
     SwapInventorySlotPacket swapInventorySlotPacket = 5;
+    DoubleClickInventorySlotPacket doubleClickInventorySlotPacket = 6;
   }
 }
 
@@ -104,7 +126,6 @@ message InterpolationsPacket {
 }
 
 message InventoryItemPacket {
-  int64 id = 1;
   string name = 2;
   int32 shapeId = 3;
   int32 itemType = 4;
@@ -121,6 +142,7 @@ message LoginPacket {
   optional int32 footKungFuLevel = 7;
   optional string footKungFuName = 8;
   repeated InventoryItemPacket inventoryItems = 9;
+  int32 attackKungFuType = 10;
 }
 
 message Packet {
@@ -137,6 +159,8 @@ message Packet {
     CreatureHurtEventPacket hurtEventPacket = 11;
     ChangeStatePacket changeStatePacket = 12;
     SwapInventorySlotPacket swapInventorySlotPacket = 13;
+    CharacterChangeWeaponPacket characterChangeWeaponPacket = 14;
+    ChangeWeaponPacket changeWeaponPacket = 15;
   }
 }
 

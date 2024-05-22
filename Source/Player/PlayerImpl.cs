@@ -33,14 +33,26 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	public void ChangeWeapon(PlayerWeapon weapon)
 	{
-		Weapon = weapon;
+		LOGGER.Debug("Changing weapon to {0}.", weapon.AttackKungFuType);
 		if (weapon.AttackKungFuType == AttackKungFuType.SWORD)
 		{
 			_handAnimation = PlayerHandAnimation.LoadSword(weapon.NonAttackAnimation, weapon.AttackAnimation);
-		} else if (weapon.AttackKungFuType == AttackKungFuType.BOW)
+		}
+		else if (weapon.AttackKungFuType == AttackKungFuType.BOW)
 		{
 			_handAnimation = PlayerHandAnimation.LoadBow(weapon.NonAttackAnimation, weapon.AttackAnimation);
 		}
+		else if (weapon.AttackKungFuType == AttackKungFuType.BLADE)
+		{
+			_handAnimation = PlayerHandAnimation.LoadBlade(weapon.NonAttackAnimation, weapon.AttackAnimation);
+		}
+		Weapon = weapon;
+		LOGGER.Debug("Changed weapon to {0}.", weapon.AttackKungFuType);
+	}
+
+	public void Visit(PlayerChangeWeaponMessage message)
+	{
+		ChangeWeapon(message.Weapon);
 	}
 
 	public override void _Ready()

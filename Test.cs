@@ -25,7 +25,7 @@ public partial class Test : Node2D
 	private async void SetupNetwork()
 	{
 		bootstrap.Group(new MultithreadEventLoopGroup())
-			.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder(), new LengthBasedPacketDecoder())))
+			.Handler(new ActionChannelInitializer<ISocketChannel>(channel => channel.Pipeline.AddLast(new LengthFieldPrepender(4), new MessageEncoder() )))
 			.Channel<TcpSocketChannel>();
 		channel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
 	}

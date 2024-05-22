@@ -19,7 +19,7 @@ using ICharacterState = y1000.Source.Character.State.ICharacterState;
 
 namespace y1000.Source.Character
 {
-	public partial class CharacterImpl : Node2D, IPlayer, IServerMessageVisitor
+	public partial class CharacterImpl : Node2D, IPlayer, IServerMessageVisitor, ICharacterMessageVisitor
 	{
 		private ICharacterState _state = EmptyState.Instance;
 
@@ -39,7 +39,10 @@ namespace y1000.Source.Character
 
 		private void OnInventoryEvent(IClientEvent clientEvent)
 		{
-			
+			if (clientEvent is EventArgs eventArgs)
+			{
+				WhenCharacterUpdated?.Invoke(this, eventArgs);
+			}
 		}
 
 		public bool IsMale => WrappedPlayer().IsMale;
@@ -152,6 +155,11 @@ namespace y1000.Source.Character
 	        SetPositionAndState(message.Coordinate, message.Direction, CharacterHurtState.Hurt(message.AfterHurtState));
         }
 
+        public void Handle(ICharacterMessage message)
+        {
+	        message.Accept(this);
+        }
+
         private void DispatchInput(IPredictableInput input)
         {
 	        switch (input.Type)
@@ -192,11 +200,31 @@ namespace y1000.Source.Character
         {
 	        foreach (var inventoryItemMessage in message.Items)
 	        {
-		        var characterItem = itemFactory.CreateCharacterItem(inventoryItemMessage.Id, inventoryItemMessage.Name, inventoryItemMessage.Type);
+		        var characterItem = itemFactory.CreateCharacterItem(inventoryItemMessage.Name, inventoryItemMessage.Type);
 		        characterImpl.Inventory.AddItem(inventoryItemMessage.SlotId, characterItem);
 	        }
         }
 
+ 
+
+        public OffsetTexture BodyOffsetTexture => WrappedPlayer().BodyOffsetTexture;
+
+        public Vector2 BodyPosition => WrappedPlayer().BodyPosition;
+        
+        public void Visit(SwapInventorySlotMessage message)
+        {
+	        Inventory.Swap(message.Slot1, message.Slot2);
+        }
+
+        public void Visit(CharacterChangeWeaponMessage message)
+        {
+	        LOGGER.Debug("Changed to weapon {0}.", message.Weapon.Name);
+	        WrappedPlayer().ChangeWeapon(message.Weapon);
+	        if (message.AttackKungFu != null)
+		        AttackKungFu = message.AttackKungFu;
+	        Inventory.PutOrRemove(message.AffectedSlotId, message.NewItem);
+        }
+        
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,
 	        IMap map,  ItemFactory itemFactory)
         {
@@ -217,9 +245,5 @@ namespace y1000.Source.Character
 	        AddItems(character, message, itemFactory);
 	        return character;
         }
-
-        public OffsetTexture BodyOffsetTexture => WrappedPlayer().BodyOffsetTexture;
-
-        public Vector2 BodyPosition => WrappedPlayer().BodyPosition;
 	}
 }

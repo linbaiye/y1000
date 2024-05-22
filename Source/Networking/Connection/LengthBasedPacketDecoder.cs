@@ -1,104 +1,38 @@
 using System;
-using System.Collections.Generic;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
 using NLog;
 using Source.Networking.Protobuf;
-using y1000.code;
-using y1000.code.networking.message;
-using y1000.code.player;
-using y1000.code.player.snapshot;
-using y1000.Source.Character.Event;
-using y1000.Source.Creature;
-using y1000.Source.Creature.Event;
-using y1000.Source.Networking.Server;
+
 
 namespace y1000.Source.Networking.Connection
 {
     public class LengthBasedPacketDecoder : LengthFieldBasedFrameDecoder
     {
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-        
 
-        public LengthBasedPacketDecoder() : base(short.MaxValue, 0, 4, 0, 4)
+        private readonly MessageFactory _messageFactory;
+
+        public LengthBasedPacketDecoder(MessageFactory messageFactory) : base(short.MaxValue, 0, 4, 0, 4)
         {
-
+            _messageFactory = messageFactory;
         }
 
-        private AbstractPositionMessage DecodePositionMessage(PositionPacket positionPacket)
-        {
-            return (PositionType)positionPacket.Type switch
-            {
-                PositionType.MOVE => MoveMessage.FromPacket(positionPacket),
-                PositionType.TURN => TurnMessage.FromPacket(positionPacket),
-                PositionType.SET => SetPositionMessage.FromPacket(positionPacket),
-                PositionType.RUN => RunMessage.FromPacket(positionPacket),
-                PositionType.FLY => FlyMessage.FromPacket(positionPacket),
-                PositionType.REWIND=> RewindMessage.FromPacket(positionPacket),
-                _ => throw new NotSupportedException(),
-            };
-        }
-
-
-        private IInterpolation DecodeInterpolation(InterpolationPacket packet)
-        {
-            switch ((CreatureState)packet.State)
-            {
-                case CreatureState.IDLE:
-                    return IdleInterpolation.Parse(packet);
-                default:
-                    throw new NotSupportedException();
-            }
-        }
-
-
-        private IEntityMessage DecodeInterpolations(InterpolationsPacket interpolationsPacket)
-        {
-            List<IInterpolation> result = new List<IInterpolation>();
-            foreach (var packet in interpolationsPacket.Interpolations)
-            {
-                result.Add(DecodeInterpolation(packet));
-            }
-
-            return new InterpolationsMessage(result);
-        }
-
-        private MoveEventResponse DecodeInputResponse(InputResponsePacket packet)
-        {
-            AbstractPositionMessage positionMessage = DecodePositionMessage(packet.PositionPacket);
-            return new MoveEventResponse(packet.Sequence, positionMessage);
-        }
-
-
-        protected override object Decode(IChannelHandlerContext context, IByteBuffer buffer)
+        protected override object? Decode(IChannelHandlerContext context, IByteBuffer buffer)
         {
             try
             {
                 IByteBuffer input = (IByteBuffer)base.Decode(context, buffer);
+                if (input == null)
+                {
+                    return null;
+                }
                 byte[] bytes = new byte[input.ReadableBytes];
                 input.ReadBytes(bytes);
                 Packet packet = Packet.Parser.ParseFrom(bytes);
                 input.Release();
-                return packet.TypedPacketCase switch
-                {
-                    Packet.TypedPacketOneofCase.PositionPacket => DecodePositionMessage(packet.PositionPacket),
-                    Packet.TypedPacketOneofCase.LoginPacket => JoinedRealmMessage.FromPacket(packet.LoginPacket),
-                    Packet.TypedPacketOneofCase.ResponsePacket => DecodeInputResponse(packet.ResponsePacket),
-                    Packet.TypedPacketOneofCase.Interpolations => DecodeInterpolations(packet.Interpolations),
-                    Packet.TypedPacketOneofCase.PlayerInterpolation => PlayerInterpolation.FromPacket(
-                        packet.PlayerInterpolation),
-                    Packet.TypedPacketOneofCase.CreatureInterpolation => CreatureInterpolation.FromPacket(
-                        packet.CreatureInterpolation),
-                    Packet.TypedPacketOneofCase.RemoveEntity => new RemoveEntityMessage(packet.RemoveEntity.Id),
-                    Packet.TypedPacketOneofCase.HurtEventPacket => HurtMessage.FromPacket(packet.HurtEventPacket),
-                    Packet.TypedPacketOneofCase.AttackEventPacket => AbstractCreatureAttackMessage.FromPacket(
-                        packet.AttackEventPacket),
-                    Packet.TypedPacketOneofCase.AttackEventResponsePacket => CharacterAttackEventResponse.FromPacket(
-                        packet.AttackEventResponsePacket),
-                    Packet.TypedPacketOneofCase.ChangeStatePacket => ChangeStateMessage.FromPacket(packet.ChangeStatePacket),
-                    _ => throw new NotSupportedException()
-                };
+                return _messageFactory.Create(packet);
             }
             catch (Exception e)
             {

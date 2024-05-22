@@ -11,14 +11,12 @@ namespace y1000.Source.Networking.Server
     {
         public class InventoryItemMessage
         {
-            public InventoryItemMessage(long id, string name, ItemType type, int slotId)
+            public InventoryItemMessage(string name, ItemType type, int slotId)
             {
-                Id = id;
                 Name = name;
                 Type = type;
                 SlotId = slotId;
             }
-            public long Id { get; }
             public string Name { get; }
             public ItemType Type { get; }
             public int SlotId { get; }
@@ -49,7 +47,7 @@ namespace y1000.Source.Networking.Server
             List<InventoryItemMessage> itemMessages = new List<InventoryItemMessage>();
             foreach (var loginPacketInventoryItem in loginPacket.InventoryItems)
             {
-                itemMessages.Add(new InventoryItemMessage(loginPacketInventoryItem.Id, loginPacketInventoryItem.Name, (ItemType)loginPacketInventoryItem.ItemType, loginPacketInventoryItem.SlotId));
+                itemMessages.Add(new InventoryItemMessage(loginPacketInventoryItem.Name, (ItemType)loginPacketInventoryItem.ItemType, loginPacketInventoryItem.SlotId));
             }
             return itemMessages;
         }
@@ -57,7 +55,7 @@ namespace y1000.Source.Networking.Server
         public static JoinedRealmMessage FromPacket(LoginPacket loginPacket)
         {
             List<InventoryItemMessage> itemMessages = ItemMessages(loginPacket);
-            var attackKungFu = IAttackKungFu.ByName(loginPacket.AttackKungFuName, loginPacket.AttackKungFuLevel);
+            var attackKungFu = IAttackKungFu.ByType((AttackKungFuType)loginPacket.AttackKungFuType, loginPacket.AttackKungFuName, loginPacket.AttackKungFuLevel);
             var footKungFu = loginPacket.HasFootKungFuName
                 ? IFootKungFu.ByName(loginPacket.FootKungFuName, loginPacket.FootKungFuLevel)
                 : null;
