@@ -200,12 +200,11 @@ namespace y1000.Source.Character
         {
 	        foreach (var inventoryItemMessage in message.Items)
 	        {
-		        var characterItem = itemFactory.CreateCharacterItem(inventoryItemMessage.Name, inventoryItemMessage.Type);
+		        var characterItem = itemFactory.CreateCharacterItem(inventoryItemMessage);
 		        characterImpl.Inventory.AddItem(inventoryItemMessage.SlotId, characterItem);
 	        }
         }
 
- 
 
         public OffsetTexture BodyOffsetTexture => WrappedPlayer().BodyOffsetTexture;
         public Vector2 OffsetBodyPosition => WrappedPlayer().OffsetBodyPosition;
@@ -235,7 +234,7 @@ namespace y1000.Source.Character
 	        var character = scene.Instantiate<CharacterImpl>();
 	        var state = IPlayerState.Idle();
 	        var player = character.WrappedPlayer();
-	        player.Init(message.Male, state, Direction.DOWN, message.Coordinate, message.Id, map);
+	        player.Init(message.Male, state, Direction.DOWN, message.Coordinate, message.Id, map, message.Name);
 	        if (message.WeaponName != null)
 	        {
 		        var weapon = ItemFactory.Instance.CreatePlayerWeapon(message.WeaponName);

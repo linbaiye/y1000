@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Map;
 using y1000.Source.Networking.Server;
@@ -12,11 +13,16 @@ public abstract partial class AbstractCreature : Node2D, ICreature
     public event EventHandler<CreatureMouseClickEventArgs>? MouseClicked;
     
 	public event EventHandler<CreatureAnimationDoneEventArgs>? StateAnimationEventHandler;
+
+    private BodySprite? _bodySprite;
+    private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
     
     public override void _Ready()
     {
-        var bodyTextContainer = GetNode<BodyTextContainer>("Body/NameContainer");
-        bodyTextContainer.GuiInput += MyEvent;
+        _bodySprite = GetNode<BodySprite>("Body");
+        _bodySprite.Area.GuiInput += MyEvent;
+        _bodySprite.SetName(EntityName);
+        Log.Debug("Ready for {0}.", EntityName);
     }
 
     public string EntityName { get; private set; } = "";
@@ -33,7 +39,7 @@ public abstract partial class AbstractCreature : Node2D, ICreature
     
     public Vector2 OffsetBodyPosition => Position + BodyOffsetTexture.Offset;
     
-    public Vector2 BodyPosition => Position;
+    public Vector2 BodyPosition => Coordinate.ToPosition();
 
     private void MyEvent(InputEvent @event)
     {
@@ -61,6 +67,7 @@ public abstract partial class AbstractCreature : Node2D, ICreature
         Position = coordinate.ToPosition();
         Map = map;
         EntityName = name;
+        _bodySprite?.SetName(name);
         map.Occupy(this);
     }
 

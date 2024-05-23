@@ -1,15 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctox857khwxv3"]
+[gd_scene load_steps=3 format=3 uid="uid://ctox857khwxv3"]
 
 [ext_resource type="Script" path="res://Source/Creature/Monster/Monster.cs" id="1_k86rw"]
-[ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_81b44"]
-[ext_resource type="Script" path="res://Source/Animation/BodySprite.cs" id="3_atrel"]
-[ext_resource type="Script" path="res://Source/Creature/BodyTextContainer.cs" id="4_oqmri"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j5o4p"]
-shader = ExtResource("2_81b44")
-shader_parameter/deform = Vector2(0.5, 1)
-shader_parameter/offset = Vector2(0, 4)
-shader_parameter/modulate = Color(0, 0, 0, 0.427451)
+[ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_qsi3r"]
 
 [node name="Monster" type="Node2D"]
 z_index = 2
@@ -17,24 +9,4 @@ z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_k86rw")
 
-[node name="Body" type="Sprite2D" parent="."]
-y_sort_enabled = true
-material = SubResource("ShaderMaterial_j5o4p")
-centered = false
-script = ExtResource("3_atrel")
-
-[node name="NameContainer" type="Panel" parent="Body"]
-self_modulate = Color(1, 1, 1, 0)
-z_index = 4
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 22.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("4_oqmri")
-
-[node name="Label" type="Label" parent="Body/NameContainer"]
-layout_mode = 2
-offset_right = 1.0
-offset_bottom = 23.0
+[node name="Body" parent="." instance=ExtResource("2_qsi3r")]

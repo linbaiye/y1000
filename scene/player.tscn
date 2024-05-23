@@ -1,15 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://duo0butuerf3j"]
+[gd_scene load_steps=4 format=3 uid="uid://duo0butuerf3j"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerImpl.cs" id="1_68hen"]
-[ext_resource type="Shader" path="res://MaleShadow.gdshader" id="2_bsr1w"]
-[ext_resource type="Script" path="res://Source/Animation/BodySprite.cs" id="3_oncfd"]
+[ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_1av6c"]
 [ext_resource type="Script" path="res://Source/Animation/HandSprite.cs" id="4_5vjql"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j55eq"]
-shader = ExtResource("2_bsr1w")
-shader_parameter/deform = Vector2(1, 1.5)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/modulate = Color(0, 0, 0, 0.698039)
 
 [node name="player" type="Node2D"]
 z_index = 2
@@ -18,11 +11,7 @@ y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_68hen")
 
-[node name="Body" type="Sprite2D" parent="."]
-y_sort_enabled = true
-material = SubResource("ShaderMaterial_j55eq")
-centered = false
-script = ExtResource("3_oncfd")
+[node name="Body" parent="." instance=ExtResource("2_1av6c")]
 
 [node name="Hand" type="Sprite2D" parent="."]
 y_sort_enabled = true

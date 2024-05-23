@@ -22,9 +22,9 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	
 	public event EventHandler<PlayerRangedAttackEventArgs>? OnPlayerShoot;
 	
-	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id, IMap map)
+	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id, IMap map, string name)
 	{
-		base.Init(id, direction, coordinate, map, "");
+		base.Init(id, direction, coordinate, map, name);
 		IsMale = male;
 		_state = state;
 	}
@@ -33,7 +33,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	public void ChangeWeapon(PlayerWeapon weapon)
 	{
-		LOGGER.Debug("Changing weapon to {0}.", weapon.AttackKungFuType);
 		if (weapon.AttackKungFuType == AttackKungFuType.SWORD)
 		{
 			_handAnimation = PlayerHandAnimation.LoadSword(weapon.NonAttackAnimation, weapon.AttackAnimation);
@@ -47,7 +46,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			_handAnimation = PlayerHandAnimation.LoadBlade(weapon.NonAttackAnimation, weapon.AttackAnimation);
 		}
 		Weapon = weapon;
-		LOGGER.Debug("Changed weapon to {0}.", weapon.AttackKungFuType);
 	}
 
 	public void Visit(PlayerChangeWeaponMessage message)
@@ -61,6 +59,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	public override void _Ready()
 	{
+		base._Ready();
 		if (_state == IPlayerState.Empty)
 		{
 			_state = IPlayerState.Idle();
@@ -148,7 +147,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		var interpolation = playerInterpolation.Interpolation;
 		var state = IPlayerState.CreateFrom(playerInterpolation);
 		player.Init(playerInterpolation.Male, state, 
-			interpolation.Direction, interpolation.Coordinate, playerInterpolation.Id, map);
+			interpolation.Direction, interpolation.Coordinate, playerInterpolation.Id, map, playerInterpolation.Name);
 		if (state is PlayerMoveState moveState)
 		{
 			moveState.Init(player);

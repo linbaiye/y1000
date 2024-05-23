@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using y1000.Source.KungFu.Attack;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Item;
 
@@ -13,9 +14,9 @@ public class ItemFactory
     {
     }
 
-    private class ItemConfig
+    private class WeaponConfig
     {
-        public ItemConfig(string name, int iconId,  string nonAttackAni, string attackAni, AttackKungFuType attackKungFuType)
+        public WeaponConfig(string name, int iconId,  string nonAttackAni, string attackAni, AttackKungFuType attackKungFuType)
         {
             Name = name;
             IconId = iconId;
@@ -35,12 +36,29 @@ public class ItemFactory
         public AttackKungFuType AttackKungFuType { get; }
         
     }
-
-    private static readonly List<ItemConfig> WeaponConfigs = new List<ItemConfig>()
+    
+    private class ItemConfig
     {
-        new ItemConfig("长剑", 1, "j10", "j12", AttackKungFuType.SWORD),
-        new ItemConfig("木弓", 4, "j210", "j214", AttackKungFuType.BOW),
-        new ItemConfig("长刀", 1, "j10", "j12", AttackKungFuType.BLADE)
+        public ItemConfig(string name, int iconId)
+        {
+            Name = name;
+            IconId = iconId;
+        }
+
+        public string Name { get; }
+        public int IconId { get; }
+    }
+
+    private static readonly List<WeaponConfig> WeaponConfigs = new List<WeaponConfig>()
+    {
+        new WeaponConfig("长剑", 1, "j10", "j12", AttackKungFuType.SWORD),
+        new WeaponConfig("木弓", 4, "j210", "j214", AttackKungFuType.BOW),
+        new WeaponConfig("长刀", 1, "j10", "j12", AttackKungFuType.BLADE)
+    };
+
+    private static readonly List<ItemConfig> ItemConfigs = new List<ItemConfig>()
+    {
+        new ItemConfig("箭", 60),
     };
 
     public PlayerWeapon CreatePlayerWeapon(string name)
@@ -51,7 +69,7 @@ public class ItemFactory
     }
 
 
-    private T CreateWeapon<T>(string name, Func<ItemConfig, T> creator)
+    private T CreateWeapon<T>(string name, Func<WeaponConfig, T> creator)
     {
         foreach (var config in WeaponConfigs)
         {
@@ -62,9 +80,34 @@ public class ItemFactory
         }
         throw new NotSupportedException("Not supported name " + name);
     }
-    
 
-    public ICharacterItem CreateCharacterItem(string name, ItemType type)
+    private CharacterStackItem CreateItem(string name, int number)
+    {
+        foreach (var itemConfig in ItemConfigs)
+        {
+            if (itemConfig.Name.Equals(name))
+            {
+                return new CharacterStackItem(itemConfig.IconId, name, number);
+            }
+        }
+        throw new NotSupportedException("Not supported name " + name);
+    }
+
+
+    public ICharacterItem CreateCharacterItem(JoinedRealmMessage.InventoryItemMessage message)
+    {
+        if (message.Type == ItemType.WEAPON)
+        {
+            return CreateCharacterWeapon(message.Name, message.Type);
+        }
+        else if (message.Type == ItemType.STACK)
+        {
+            return CreateItem(message.Name, message.Number);
+        }
+        throw new NotSupportedException("Not supported name " + message.Name);
+    }
+
+    public ICharacterItem CreateCharacterWeapon(string name, ItemType type)
     {
         if (type == ItemType.WEAPON)
         {

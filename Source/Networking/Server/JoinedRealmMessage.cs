@@ -11,20 +11,24 @@ namespace y1000.Source.Networking.Server
     {
         public class InventoryItemMessage
         {
-            public InventoryItemMessage(string name, ItemType type, int slotId)
+            public InventoryItemMessage(string name, ItemType type, int slotId, int number)
             {
                 Name = name;
                 Type = type;
                 SlotId = slotId;
+                Number = number;
             }
             public string Name { get; }
             public ItemType Type { get; }
             public int SlotId { get; }
+            
+            public int Number { get; }
         }
-        private JoinedRealmMessage(IAttackKungFu attackKungFu, List<InventoryItemMessage> items)
+        private JoinedRealmMessage(IAttackKungFu attackKungFu, List<InventoryItemMessage> items, string name)
         {
             AttackKungFu = attackKungFu;
             Items = items;
+            Name = name;
         }
         
         public List<InventoryItemMessage> Items { get; }
@@ -40,14 +44,16 @@ namespace y1000.Source.Networking.Server
         public IFootKungFu? FootKungFu { get; private init; }
         
         public IAttackKungFu AttackKungFu { get; private init; }
+        
+        public string Name { get; }
 
 
         private static List<InventoryItemMessage> ItemMessages(LoginPacket loginPacket)
         {
             List<InventoryItemMessage> itemMessages = new List<InventoryItemMessage>();
-            foreach (var loginPacketInventoryItem in loginPacket.InventoryItems)
+            foreach (var inventoryItem in loginPacket.InventoryItems)
             {
-                itemMessages.Add(new InventoryItemMessage(loginPacketInventoryItem.Name, (ItemType)loginPacketInventoryItem.ItemType, loginPacketInventoryItem.SlotId));
+                itemMessages.Add(new InventoryItemMessage(inventoryItem.Name, (ItemType)inventoryItem.ItemType, inventoryItem.SlotId, inventoryItem.Number));
             }
             return itemMessages;
         }
@@ -59,7 +65,7 @@ namespace y1000.Source.Networking.Server
             var footKungFu = loginPacket.HasFootKungFuName
                 ? IFootKungFu.ByName(loginPacket.FootKungFuName, loginPacket.FootKungFuLevel)
                 : null;
-            var message = new JoinedRealmMessage(attackKungFu, itemMessages)
+            var message = new JoinedRealmMessage(attackKungFu, itemMessages, loginPacket.Name)
             {
                 Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
                 Id = loginPacket.Id,

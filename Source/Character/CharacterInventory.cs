@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using NLog;
 using y1000.Source.Input;
 using y1000.Source.Item;
 using y1000.Source.Networking;
@@ -80,11 +81,19 @@ public class CharacterInventory
         return ret;
     }
 
-    public void OnDoubleClick(int slot)
+    public void OnUIDoubleClick(int slot)
     {
         if (_items.ContainsKey(slot))
         {
             _eventSender.Invoke(new DoubleClickInventorySlotMessage(slot));
+        }
+    }
+
+    public void OnUIDragItem(int slot)
+    {
+        if (_items.ContainsKey(slot))
+        {
+            _eventSender.Invoke(new DragInventorySlotMessage(slot));
         }
     }
     

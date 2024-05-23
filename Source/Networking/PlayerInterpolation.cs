@@ -9,11 +9,12 @@ namespace y1000.Source.Networking;
 public class PlayerInterpolation : IServerMessage
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-    private PlayerInterpolation(Interpolation interpolation, bool male, long id)
+    private PlayerInterpolation(Interpolation interpolation, bool male, long id, string name)
     {
         Interpolation = interpolation;
         Male = male;
         Id = id;
+        Name = name;
     }
 
     public Interpolation Interpolation { get; }
@@ -21,6 +22,8 @@ public class PlayerInterpolation : IServerMessage
     public long Id { get; }
     
     public bool Male { get; }
+    
+    public string Name { get; }
     
     public string? WeaponName { get; private set; }
 
@@ -31,7 +34,7 @@ public class PlayerInterpolation : IServerMessage
 
     public static PlayerInterpolation FromPacket(PlayerInterpolationPacket packet)
     {
-        var i = new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male, packet.Id);
+        var i = new PlayerInterpolation(Interpolation.FromPacket(packet.Interpolation), packet.Male, packet.Id, packet.Name);
         if (packet.HasWeaponName)
         {
             i.WeaponName = packet.WeaponName;

@@ -132,6 +132,7 @@ message InventoryItemPacket {
   int32 shapeId = 3;
   int32 itemType = 4;
   int32 slotId = 5;
+  optional int32 number = 6;
 }
 
 message LoginPacket {
@@ -145,6 +146,7 @@ message LoginPacket {
   optional string footKungFuName = 8;
   repeated InventoryItemPacket inventoryItems = 9;
   int32 attackKungFuType = 10;
+  string name = 11;
 }
 
 message Packet {

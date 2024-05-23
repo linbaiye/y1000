@@ -93,14 +93,14 @@ namespace y1000.Source.Animation
 
         public static SpriteReader LoadOffsetMalePlayerSprites(string nr)
         {
-            return Load("res://sprite/char/" + nr + "/");
-            //return Load("res://sprite/char/" + nr + "/", new Vector2(16, -12));
+            //return Load("res://sprite/char/" + nr + "/");
+            return Load("res://sprite/char/" + nr + "/", new Vector2(16, -12));
         }
         
         public static SpriteReader LoadOffsetWeaponSprites(string nr)
         {
-            return Load("res://sprite/weapon/" + nr + "/");
-            return Load("res://sprite/weapon/" + nr + "/", new Vector2(12, -9));
+            //return Load("res://sprite/weapon/" + nr + "/");
+            return Load("res://sprite/weapon/" + nr + "/", new Vector2(16, -12));
         }
 
         public static SpriteReader LoadSprites(string name)
@@ -122,7 +122,7 @@ namespace y1000.Source.Animation
         public static SpriteReader LoadOffsetMonsterSprites(string name)
         {
            // return Load("res://sprite/monster/" + name + "/" );
-            return Load("res://sprite/monster/" + name + "/");
+            //return Load("res://sprite/monster/" + name + "/");
             return Load("res://sprite/monster/" + name + "/", new Vector2(16, -12));
         }
         

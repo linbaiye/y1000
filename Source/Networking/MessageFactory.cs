@@ -41,11 +41,11 @@ public class MessageFactory
 
     private CharacterChangeWeaponMessage Parse(CharacterChangeWeaponPacket packet)
     {
-        var weapon = (CharacterWeapon)_itemFactory.CreateCharacterItem(packet.Name, ItemType.WEAPON);
+        var weapon = (CharacterWeapon)_itemFactory.CreateCharacterWeapon(packet.Name, ItemType.WEAPON);
         ICharacterItem? newItem = null;
         if (packet.HasSlotNewItemName)
         {
-            newItem = _itemFactory.CreateCharacterItem(packet.SlotNewItemName, (ItemType)packet.SlotNewItemType);
+            newItem = _itemFactory.CreateCharacterWeapon(packet.SlotNewItemName, (ItemType)packet.SlotNewItemType);
         }
         IAttackKungFu? attackKungFu = null;
         if (packet.HasAttackKungFuName)

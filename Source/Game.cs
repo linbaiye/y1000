@@ -24,6 +24,7 @@ using y1000.Source.Networking;
 using y1000.Source.Networking.Connection;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
+using y1000.Source.Util;
 
 namespace y1000.Source;
 
@@ -82,6 +83,21 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		} 
 		else if (eventArgs is IClientEvent clientEvent)
 		{
+			HandleClientEvent(clientEvent);
+		}
+	}
+
+	private void HandleClientEvent(IClientEvent clientEvent)
+	{
+		if (clientEvent is DragInventorySlotMessage dragInventorySlotMessage)
+		{
+			if (MouseWithinCharacterDropRange())
+			{
+				LOGGER.Debug("Drag slot {0} winthin range.", dragInventorySlotMessage.Slot);
+			}
+		}
+		else
+		{
 			WriteMessage(clientEvent);
 		}
 	}
@@ -126,6 +142,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private void HandleMouseInput(InputEventMouse eventMouse)
 	{
+		if (eventMouse is InputEventMouseButton { ButtonIndex: MouseButton.Left } mouseButton &&
+		    mouseButton.IsReleased())
+		{
+			LOGGER.Debug("Released button.");
+		}
 		HandleCharacterInput((ch) =>
 		{
 			var mousePos = ch.WrappedPlayer().GetLocalMousePosition();
@@ -274,7 +295,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		msgDrivenPlayer.Player.OnPlayerShoot += OnPlayerShoot;
 		_entities.TryAdd(msgDrivenPlayer.Id, msgDrivenPlayer);
 		AddChild(msgDrivenPlayer.Player);
-		LOGGER.Debug("Added anoter player.");
 	}
 
 	public void Visit(IPredictableResponse response)
@@ -322,6 +342,21 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			_entities.Remove(removeEntityMessage.Id);
 			LOGGER.Debug("Removed creature {0}.", removeEntityMessage.Id);
 		}
+	}
+
+	private bool MouseWithinCharacterDropRange()
+	{
+		if (_character == null)
+		{
+			return false;
+		}
+
+		var start = _character.Coordinate.Move(-2, -3).ToPosition();
+		var end = _character.Coordinate.Move(2, 3).ToPosition();
+		var globalMousePosition = GetGlobalMousePosition();
+		LOGGER.Debug("Start {0}, end {1}, current {2}.", start, end, globalMousePosition);
+		return start.X <= globalMousePosition.X && end.X >= globalMousePosition.X && 
+		       start.Y <= globalMousePosition.Y && end.Y >= globalMousePosition.Y;
 	}
 
 

@@ -43,13 +43,22 @@ public partial class InventoryView : NinePatchRect
         }
         else if (type == SlotEvent.Type.MOUSE_LEFT_RELEASE)
         {
-            SwapItem(slot);
+            OnMouseLeftRelease(slot);
         }
         else if (type == SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
         {
-            LOGGER.Debug("Double clicked.");
-            _inventory.OnDoubleClick(slot.Number);
+            _inventory.OnUIDoubleClick(slot.Number);
         }
+    }
+
+    private string Format(ICharacterItem item)
+    {
+        if (item is CharacterStackItem stackItem)
+        {
+            return item.Name + ":" + stackItem.Number;
+        }
+
+        return item.Name;
     }
 
     private void OnMouseEntered(InventorySlotView slot)
@@ -58,7 +67,7 @@ public partial class InventoryView : NinePatchRect
         var item = _inventory.Find(slot.Number);
         if (item != null && _textLabel != null)
         {
-            _textLabel.Text = item.Name;
+            _textLabel.Text = Format(item);
         }
     }
 
@@ -71,9 +80,14 @@ public partial class InventoryView : NinePatchRect
         }
     }
 
-    private void SwapItem(InventorySlotView picked)
+    private void OnMouseLeftRelease(InventorySlotView picked)
     {
-        if (_currentFocused == null || picked.Number == _currentFocused.Number)
+        if (_currentFocused == null)
+        {
+            _inventory.OnUIDragItem(picked.Number);
+            return;
+        }
+        if (picked.Number == _currentFocused.Number)
         {
             return;
         }

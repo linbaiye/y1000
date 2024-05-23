@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://c57ou51buf7xb"]
+
+[ext_resource type="Script" path="res://Source/Animation/BodySprite.cs" id="1_4876e"]
+[ext_resource type="Shader" path="res://MaleShadow.gdshader" id="1_c3rp6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x2j3f"]
+shader = ExtResource("1_c3rp6")
+shader_parameter/deform = Vector2(0.5, 1)
+shader_parameter/offset = Vector2(0, 4)
+shader_parameter/modulate = Color(0, 0, 0, 0.65098)
+
+[sub_resource type="SystemFont" id="SystemFont_qmyq1"]
+
+[node name="Body" type="Sprite2D"]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_x2j3f")
+centered = false
+script = ExtResource("1_4876e")
+
+[node name="Area" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+offset_left = 10.0
+offset_top = -24.0
+offset_right = 50.0
+offset_bottom = -1.0
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_qmyq1")
