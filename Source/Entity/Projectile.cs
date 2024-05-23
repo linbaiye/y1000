@@ -19,14 +19,14 @@ public partial class Projectile : Sprite2D
     
     private void Init(Player.IPlayer player, ICreature target)
     {
-        var tpos = target.BodyPosition;
+        var tpos = target.OffsetBodyPosition;
         var distance = target.Coordinate.Distance(player.Coordinate);
         _lengthSeconds = distance * 0.03f;
-        _vect = tpos - player.BodyPosition;
+        _vect = tpos - player.OffsetBodyPosition;
         //_vect = ((tpos +  (size / 2)) - player.Coordinate.ToPosition()) / _lengthSeconds;
         //vect = (target.Coordinate - player.Coordinate).ToPosition() + (VectorUtil.TileSize / 2);
         //Position = player.BodyPosition;
-        Position = player.BodyPosition;
+        Position = player.OffsetBodyPosition;
         Rotation = _vect.Angle();
         _vect /= _lengthSeconds;
         var arrowTexture = ArrowAnimation.Instance.OffsetTexture(Direction.RIGHT);

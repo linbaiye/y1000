@@ -53,6 +53,10 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void Visit(PlayerChangeWeaponMessage message)
 	{
 		ChangeWeapon(message.Weapon);
+		if (message.State != _state.State)
+		{
+			ChangeState(IPlayerState.Cooldown());
+		}
 	}
 
 	public override void _Ready()

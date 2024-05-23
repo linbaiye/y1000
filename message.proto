@@ -56,6 +56,7 @@ message ChangeStatePacket {
 message ChangeWeaponPacket {
   int64 id = 1;
   string name = 2;
+  int32 state = 3;
 }
 
 
@@ -67,6 +68,7 @@ message CharacterChangeWeaponPacket {
   optional string attackKungFuName = 6;
   optional int32 attackKungFuLevel = 7;
   optional int32 attackKungFuType = 8;
+  int32 state = 9;
 }
 
 message CharacterKungFuPacket {

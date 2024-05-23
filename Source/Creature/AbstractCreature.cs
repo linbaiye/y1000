@@ -1,13 +1,8 @@
 using System;
 using Godot;
-using NLog;
-using y1000.code;
-using y1000.code.networking.message;
-using y1000.code.player;
 using y1000.Source.Animation;
 using y1000.Source.Map;
 using y1000.Source.Networking.Server;
-using y1000.Source.Player;
 using y1000.Source.Util;
 
 namespace y1000.Source.Creature;
@@ -35,6 +30,8 @@ public abstract partial class AbstractCreature : Node2D, ICreature
     public Vector2I Coordinate => Position.ToCoordinate();
 
     public abstract OffsetTexture BodyOffsetTexture { get; }
+    
+    public Vector2 OffsetBodyPosition => Position + BodyOffsetTexture.Offset;
     
     public Vector2 BodyPosition => Position;
 

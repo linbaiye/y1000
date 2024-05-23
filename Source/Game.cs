@@ -309,7 +309,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		var monster = Monster.Create(creatureInterpolation, MapLayer);
 		monster.MouseClicked += OnCreatureClicked;
 		_entities.TryAdd(monster.Id, monster);
+		LOGGER.Debug("Received creature message {0}.", monster);
 		AddChild(monster);
+		LOGGER.Debug("Added creature {0}.", monster);
 	}
 
 	public void Visit(RemoveEntityMessage removeEntityMessage)

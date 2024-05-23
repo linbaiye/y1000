@@ -1,5 +1,6 @@
 ﻿using Source.Networking.Protobuf;
 using y1000.Source.Character;
+using y1000.Source.Creature;
 using y1000.Source.Item;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.Networking.Server;
@@ -8,14 +9,17 @@ namespace y1000.Source.Networking;
 
 public class CharacterChangeWeaponMessage : IServerMessage, ICharacterMessage
 {
-    public CharacterChangeWeaponMessage(CharacterWeapon characterWeapon, int affectedSlotId, ICharacterItem? newItem, IAttackKungFu? attackKungFu)
+    public CharacterChangeWeaponMessage(CharacterWeapon characterWeapon, int affectedSlotId, ICharacterItem? newItem, IAttackKungFu? attackKungFu, CreatureState state)
     {
         Weapon = characterWeapon;
         AffectedSlotId = affectedSlotId;
         NewItem = newItem;
         AttackKungFu = attackKungFu;
+        State = state;
     }
 
+    public CreatureState State { get; }
+    
     public CharacterWeapon Weapon { get; }
     
     public int AffectedSlotId { get; }

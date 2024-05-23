@@ -208,9 +208,9 @@ namespace y1000.Source.Character
  
 
         public OffsetTexture BodyOffsetTexture => WrappedPlayer().BodyOffsetTexture;
+        public Vector2 OffsetBodyPosition => WrappedPlayer().OffsetBodyPosition;
+        public Vector2 BodyPosition => WrappedPlayer().Position;
 
-        public Vector2 BodyPosition => WrappedPlayer().BodyPosition;
-        
         public void Visit(SwapInventorySlotMessage message)
         {
 	        Inventory.Swap(message.Slot1, message.Slot2);
@@ -218,8 +218,11 @@ namespace y1000.Source.Character
 
         public void Visit(CharacterChangeWeaponMessage message)
         {
-	        LOGGER.Debug("Changed to weapon {0}.", message.Weapon.Name);
 	        WrappedPlayer().ChangeWeapon(message.Weapon);
+	        if (message.State != _state.WrappedState.State)
+	        {
+		        ChangeState(CharacterCooldownState.Cooldown());
+	        }
 	        if (message.AttackKungFu != null)
 		        AttackKungFu = message.AttackKungFu;
 	        Inventory.PutOrRemove(message.AffectedSlotId, message.NewItem);

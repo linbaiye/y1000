@@ -23,6 +23,5 @@ namespace y1000.Source.Character.State
         void OnWrappedPlayerAnimationFinished(CharacterImpl character) {}
 
         IPlayerState WrappedState { get; }
-
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://cdhrxlx64ks6p"]
+[gd_scene load_steps=109 format=3 uid="uid://cdhrxlx64ks6p"]
 
 [ext_resource type="Texture2D" uid="uid://6e7agsbkde4r" path="res://sprite/char/N00/000000.png" id="1_aa18q"]
 [ext_resource type="Texture2D" uid="uid://cf328w2nq1syi" path="res://sprite/char/N00/000001.png" id="2_23pth"]
@@ -103,6 +103,7 @@
 [ext_resource type="Texture2D" uid="uid://cwf20qhswsg8v" path="res://sprite/Effect/Arrow/000000.png" id="61_jko8c"]
 [ext_resource type="Texture2D" uid="uid://2xamqcejya54" path="res://sprite/char/N02/000012.png" id="82_r8g1l"]
 [ext_resource type="Texture2D" uid="uid://j7ersmefosj6" path="res://sprite/weapon/j10/000038.png" id="101_na8bl"]
+[ext_resource type="Texture2D" uid="uid://8ac4s1jx8qdt" path="res://sprite/monster/buffalo/000046.png" id="104_m15ct"]
 
 [sub_resource type="Animation" id="Animation_56fvw"]
 length = 0.5
@@ -558,6 +559,7 @@ centered = false
 offset = Vector2(-9, 4)
 
 [node name="WalkLeft" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(50, 50)
 texture = ExtResource("30_vxqi2")
 centered = false
@@ -573,3 +575,15 @@ visible = false
 texture = ExtResource("44_utf88")
 centered = false
 offset = Vector2(-28, -2)
+
+[node name="CowRect" type="Sprite2D" parent="."]
+texture = ExtResource("104_m15ct")
+centered = false
+
+[node name="Panel" type="Panel" parent="CowRect"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

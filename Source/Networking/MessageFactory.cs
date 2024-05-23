@@ -2,6 +2,7 @@
 using Source.Networking.Protobuf;
 using y1000.code.networking.message;
 using y1000.Source.Character.Event;
+using y1000.Source.Creature;
 using y1000.Source.Creature.Event;
 using y1000.Source.Item;
 using y1000.Source.KungFu.Attack;
@@ -51,12 +52,12 @@ public class MessageFactory
         {
             attackKungFu = IAttackKungFu.ByType((AttackKungFuType)packet.AttackKungFuType, packet.AttackKungFuName, packet.AttackKungFuLevel);
         }
-        return new CharacterChangeWeaponMessage(weapon, packet.AffectedSlot, newItem, attackKungFu);
+        return new CharacterChangeWeaponMessage(weapon, packet.AffectedSlot, newItem, attackKungFu, (CreatureState)packet.State);
     }
 
     private PlayerChangeWeaponMessage Parse(ChangeWeaponPacket packet)
     {
-        return new PlayerChangeWeaponMessage(packet.Id, _itemFactory.CreatePlayerWeapon(packet.Name));
+        return new PlayerChangeWeaponMessage(packet.Id, _itemFactory.CreatePlayerWeapon(packet.Name), (CreatureState)packet.State);
     }
 
     public IServerMessage Create(Packet packet)

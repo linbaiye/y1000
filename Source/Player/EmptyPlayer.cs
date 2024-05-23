@@ -20,7 +20,7 @@ public class EmptyPlayer : IPlayer
     public Direction Direction { get; }
     
     public OffsetTexture BodyOffsetTexture { get; }
-    
+    public Vector2 OffsetBodyPosition { get; }
     public Vector2 BodyPosition { get; }
 
     public Vector2I Coordinate { get; }
