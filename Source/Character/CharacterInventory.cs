@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using NLog;
-using y1000.Source.Input;
+using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Networking;
 
@@ -10,23 +8,17 @@ namespace y1000.Source.Character;
 
 public class CharacterInventory
 {
-    
-    public const int MaxSize = 30;
+    private const int MaxSize = 30;
 
-    public static readonly CharacterInventory Empty = new(i => { });
+    public static readonly CharacterInventory Empty = new();
     
     
     private readonly IDictionary<int, ICharacterItem> _items = new Dictionary<int, ICharacterItem>(MaxSize);
 
     public event EventHandler<EventArgs>? InventoryChanged;
 
-    private readonly Action<IClientEvent> _eventSender;
 
-    public CharacterInventory(Action<IClientEvent> eventSender)
-    {
-        _eventSender = eventSender;
-    }
-
+    private EventMediator? _eventMediator;
 
     public bool IsFull => _items.Count >= MaxSize;
 
@@ -85,19 +77,23 @@ public class CharacterInventory
     {
         if (_items.ContainsKey(slot))
         {
-            _eventSender.Invoke(new DoubleClickInventorySlotMessage(slot));
+            _eventMediator?.NotifyServer(new DoubleClickInventorySlotMessage(slot));
         }
     }
 
     public void OnUIDragItem(int slot)
     {
-        if (_items.ContainsKey(slot))
+        if (_items.TryGetValue(slot, out var item))
         {
-            _eventSender.Invoke(new DragInventorySlotMessage(slot));
+            _eventMediator?.NotifyUiEvent(new DragInventorySlotEvent(slot, item));
         }
     }
-    
 
+    public void SetEventMediator(EventMediator eventMediator)
+    {
+        _eventMediator = eventMediator;
+    }
+    
     public void Foreach(Action<int, ICharacterItem> consumer)
     {
         foreach (var keyValuePair in _items)
@@ -105,7 +101,6 @@ public class CharacterInventory
             consumer.Invoke(keyValuePair.Key, keyValuePair.Value);
         }
     }
-
 
     public void Swap(int slot1, int slot2)
     {
@@ -131,7 +126,7 @@ public class CharacterInventory
     {
         if (_items.ContainsKey(pickedSlot))
         {
-            _eventSender.Invoke(new SwapInventorySlotMessage(pickedSlot, slot2));
+            _eventMediator?.NotifyServer(new SwapInventorySlotMessage(pickedSlot, slot2));
         }
     }
 }

@@ -24,7 +24,6 @@ namespace y1000.Source.Animation
 
 		public void SetName(string name)
 		{
-			Logger.Debug("Set name to {0}", name);
 			_label.Text = name;
 		}
 

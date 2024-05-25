@@ -17,6 +17,7 @@ using y1000.Source.Control;
 using y1000.Source.Creature;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Entity;
+using y1000.Source.Event;
 using y1000.Source.Input;
 using y1000.Source.Item;
 using y1000.Source.Map;
@@ -40,8 +41,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private readonly PredictionManager _predictionManager = new();
 
-	private ConnectionState _connectionState = ConnectionState.DISCONNECTED;
-
 	private CharacterImpl? _character;
 
 	private volatile IChannel? _channel;
@@ -56,51 +55,29 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private MessageFactory _messageFactory;
 
-	private enum ConnectionState
-	{
-		DISCONNECTED,
-		CONNECTING,
-		CONNECTED,
-	}
+	private readonly EventMediator _eventMediator = new();
 
 	public override void _Ready()
 	{
 		_messageFactory = new MessageFactory(_itemFactory);
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
+		_uiController.InitEventMediator(_eventMediator);
+		_eventMediator.SetComponent(WriteMessage);
+		_eventMediator.SetComponent(OnDragItemEvent);
 	}
 
 	private void OnCharacterEvent(object? sender, EventArgs eventArgs)
 	{
-		if (sender is not CharacterImpl)
+		if (sender is not CharacterImpl ||
+		    eventArgs is not CharacterPredictionEventArgs predictionEventArgs)
 		{
 			return;
 		}
-		if (eventArgs is CharacterPredictionEventArgs predictionEventArgs)
-		{
-			_predictionManager.Save(predictionEventArgs.Prediction);
-			WriteMessage(predictionEventArgs.Event);
-		} 
-		else if (eventArgs is IClientEvent clientEvent)
-		{
-			HandleClientEvent(clientEvent);
-		}
+		_predictionManager.Save(predictionEventArgs.Prediction);
+		WriteMessage(predictionEventArgs.Event);
 	}
 
-	private void HandleClientEvent(IClientEvent clientEvent)
-	{
-		if (clientEvent is DragInventorySlotMessage dragInventorySlotMessage)
-		{
-			if (MouseWithinCharacterDropRange())
-			{
-				LOGGER.Debug("Drag slot {0} winthin range.", dragInventorySlotMessage.Slot);
-			}
-		}
-		else
-		{
-			WriteMessage(clientEvent);
-		}
-	}
 
 	private void ShowCharacter(JoinedRealmMessage joinedRealmMessage)
 	{
@@ -142,11 +119,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private void HandleMouseInput(InputEventMouse eventMouse)
 	{
-		if (eventMouse is InputEventMouseButton { ButtonIndex: MouseButton.Left } mouseButton &&
-		    mouseButton.IsReleased())
-		{
-			LOGGER.Debug("Released button.");
-		}
 		HandleCharacterInput((ch) =>
 		{
 			var mousePos = ch.WrappedPlayer().GetLocalMousePosition();
@@ -171,28 +143,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	
 	private void HandleKeyInput(InputEventKey eventKey)
 	{
-		IEntity? entity = null;
 		if (_character == null)
 		{
 			return;
 		}
-		foreach (var valuePair in _entities)
-		{
-			if (valuePair.Key != _character.Id)
-			{
-				entity = valuePair.Value;
-				break;
-			}
-		}
-		if (entity == null)
-		{
-			return;
-		}
-		if (eventKey.Pressed && eventKey.Keycode == Key.A)
-		{
-			var arrow = Projectile.Arrow(_character, (ICreature)entity);
-			AddChild(arrow);
-		}
+
+		//_uiController?.DisplayMessage(eventKey.Keycode.ToString());
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -305,6 +261,14 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
+	private void OnDragItemEvent(DragInventorySlotEvent slotEvent)
+	{
+		if (_character != null)
+		{
+			_eventMediator.NotifyDragItemEvent(slotEvent, GetGlobalMousePosition(), _character.Coordinate);
+		}
+	}
+
 	public void Visit(ICharacterMessage characterMessage)
 	{
 		_character?.Handle(characterMessage);
@@ -350,11 +314,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			return false;
 		}
-
 		var start = _character.Coordinate.Move(-2, -3).ToPosition();
 		var end = _character.Coordinate.Move(2, 3).ToPosition();
 		var globalMousePosition = GetGlobalMousePosition();
-		LOGGER.Debug("Start {0}, end {1}, current {2}.", start, end, globalMousePosition);
 		return start.X <= globalMousePosition.X && end.X >= globalMousePosition.X && 
 		       start.Y <= globalMousePosition.Y && end.Y >= globalMousePosition.Y;
 	}
@@ -364,10 +326,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, _itemFactory);
 		_character.WhenCharacterUpdated += OnCharacterEvent;
+		_character.Inventory.SetEventMediator(_eventMediator);
 		_uiController?.BindCharacter(_character);
 		MapLayer.BindCharacter(_character);
 		_character.WrappedPlayer().OnPlayerShoot += OnPlayerShoot;
 		_entities.TryAdd(_character.Id, _character);
 		AddChild(_character);
 	}
+	
 }

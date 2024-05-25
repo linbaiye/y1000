@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://b44mvj7uklgy1"]
+
+[ext_resource type="Texture2D" uid="uid://cfx457p5xg6y4" path="res://assets/ui/input.png" id="1_k7t35"]
+[ext_resource type="Script" path="res://Source/Control/DropItemUI.cs" id="2_8cjci"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w2lcy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p8kr6"]
+
+[node name="DropItemUI" type="NinePatchRect"]
+offset_left = 1.0
+offset_top = 455.0
+offset_right = 225.0
+offset_bottom = 606.0
+texture = ExtResource("1_k7t35")
+script = ExtResource("2_8cjci")
+
+[node name="ItemName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 30.0
+offset_right = 185.0
+offset_bottom = 53.0
+
+[node name="ConfirmButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 112.0
+offset_right = 97.0
+offset_bottom = 138.0
+
+[node name="CancelButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 112.0
+offset_right = 200.0
+offset_bottom = 138.0
+
+[node name="Input" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 62.0
+offset_right = 188.0
+offset_bottom = 85.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w2lcy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p8kr6")
+max_length = 9

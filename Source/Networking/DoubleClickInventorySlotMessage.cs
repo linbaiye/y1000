@@ -1,18 +1,15 @@
-﻿using System;
-using Source.Networking.Protobuf;
+﻿using Source.Networking.Protobuf;
+using y1000.Source.Character.Event;
 using y1000.Source.Input;
 
 namespace y1000.Source.Networking;
 
-public class DoubleClickInventorySlotMessage :  EventArgs,  IClientEvent
+public class DoubleClickInventorySlotMessage :  AbstractInventoryEvent,  IClientEvent
 {
-    public DoubleClickInventorySlotMessage(int slot)
+    public DoubleClickInventorySlotMessage(int slot) : base(slot)
     {
-        Slot = slot;
     }
 
-    private int Slot { get; }
-    
     public ClientPacket ToPacket()
     {
         return new ClientPacket()

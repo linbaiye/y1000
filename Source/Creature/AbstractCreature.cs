@@ -22,7 +22,6 @@ public abstract partial class AbstractCreature : Node2D, ICreature
         _bodySprite = GetNode<BodySprite>("Body");
         _bodySprite.Area.GuiInput += MyEvent;
         _bodySprite.SetName(EntityName);
-        Log.Debug("Ready for {0}.", EntityName);
     }
 
     public string EntityName { get; private set; } = "";

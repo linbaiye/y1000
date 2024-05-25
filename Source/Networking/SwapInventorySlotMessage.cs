@@ -1,20 +1,20 @@
 using System;
 using Source.Networking.Protobuf;
 using y1000.Source.Character;
+using y1000.Source.Character.Event;
 using y1000.Source.Input;
 using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Networking;
 
-public class SwapInventorySlotMessage : EventArgs, IServerMessage, IClientEvent, ICharacterMessage
+public class SwapInventorySlotMessage : AbstractInventoryEvent , IServerMessage, IClientEvent, ICharacterMessage
 {
-    public SwapInventorySlotMessage(int slot1, int slot2)
+    public SwapInventorySlotMessage(int slot1, int slot2) : base(slot1)
     {
-        Slot1 = slot1;
         Slot2 = slot2;
     }
 
-    public int Slot1 { get; }
+    public int Slot1 => Slot;
     
     public int Slot2 { get; }
     

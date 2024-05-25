@@ -37,14 +37,6 @@ namespace y1000.Source.Character
 			_state = state;
 		}
 
-		private void OnInventoryEvent(IClientEvent clientEvent)
-		{
-			if (clientEvent is EventArgs eventArgs)
-			{
-				WhenCharacterUpdated?.Invoke(this, eventArgs);
-			}
-		}
-
 		public bool IsMale => WrappedPlayer().IsMale;
 		
 		public OffsetTexture? HandTexture => WrappedPlayer().HandTexture;
@@ -189,12 +181,7 @@ namespace y1000.Source.Character
 	        }
         }
 
-        public CharacterImpl()
-        {
-	        Inventory = new CharacterInventory(OnInventoryEvent);
-        }
-
-        public CharacterInventory Inventory { get; }
+        public CharacterInventory Inventory { get; } = new();
 
         private static void AddItems(CharacterImpl characterImpl, JoinedRealmMessage message, ItemFactory itemFactory)
         {
@@ -226,7 +213,12 @@ namespace y1000.Source.Character
 		        AttackKungFu = message.AttackKungFu;
 	        Inventory.PutOrRemove(message.AffectedSlotId, message.NewItem);
         }
-        
+
+        public void Visit(DropItemMessage message)
+        {
+	        
+        }
+
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,
 	        IMap map,  ItemFactory itemFactory)
         {
