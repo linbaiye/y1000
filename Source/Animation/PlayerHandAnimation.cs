@@ -1,11 +1,13 @@
-﻿using y1000.Source.Creature;
+﻿using Godot;
+using y1000.Source.Creature;
+using y1000.Source.Sprite;
 
 namespace y1000.Source.Animation;
 
 public class PlayerHandAnimation: AbstractPlayerAnimation<PlayerHandAnimation>
 {
 
-    private PlayerHandAnimation ConfigureNoneAttack(SpriteReader nonattack)
+    private PlayerHandAnimation ConfigureNoneAttack(AtzSprite nonattack)
     {
         return ConfigureState(CreatureState.FLY, AtdReader, nonattack)
             .ConfigureState(CreatureState.WALK, AtdReader, nonattack)
@@ -19,8 +21,9 @@ public class PlayerHandAnimation: AbstractPlayerAnimation<PlayerHandAnimation>
 
     private static PlayerHandAnimation Load(string name, string attackName, CreatureState state1, CreatureState? state2 = null)
     {
-        SpriteReader nonattack = SpriteReader.LoadOffsetWeaponSprites(name);
-        SpriteReader attack = SpriteReader.LoadOffsetWeaponSprites(attackName);
+        AtzSprite nonattack = FilesystemSpriteRepository.Instance.LoadByName(name, new Vector2(16, -12));
+        //AtzSprite attack = AtzSprite.LoadOffsetWeaponSprites(attackName);
+        AtzSprite attack = FilesystemSpriteRepository.Instance.LoadByName(attackName, new Vector2(16, -12));
         var playerAnimation = new PlayerHandAnimation();
         playerAnimation.ConfigureNoneAttack(nonattack)
                 .ConfigureState(state1, AtdReader, attack);

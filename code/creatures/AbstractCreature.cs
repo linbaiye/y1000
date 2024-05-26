@@ -12,6 +12,7 @@ using y1000.code.util;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Entity;
+using y1000.Source.Networking.Server;
 using y1000.Source.Util;
 
 namespace y1000.code.creatures

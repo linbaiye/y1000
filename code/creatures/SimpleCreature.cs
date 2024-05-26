@@ -14,7 +14,7 @@ namespace y1000.code.creatures
 {
     public partial class SimpleCreature : AbstractCreature
     {
-        private SpriteReader? spriteContainer;
+        private AtzSprite? spriteContainer;
 
         private Point initCoordinate = Point.Empty;
 
@@ -22,11 +22,11 @@ namespace y1000.code.creatures
 
         private Direction initDirection;
 
-        private void Initiliaze(Point i, SpriteReader spriteReader, long id, Direction direction)
+        private void Initiliaze(Point i, AtzSprite atzSprite, long id, Direction direction)
         {
             initCoordinate = i;
             this.id = id;
-            this.spriteContainer = spriteReader;
+            this.spriteContainer = atzSprite;
             initDirection = direction;
         }
 
@@ -48,8 +48,8 @@ namespace y1000.code.creatures
         {
             PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/Monster.tscn");
             SimpleCreature buffalo = scene.Instantiate<SimpleCreature>();
-            SpriteReader spriteReader = SpriteReader.LoadOffsetMonsterSprites(MonsterNames.BUFFALO);
-            buffalo.Initiliaze(coordinate, spriteReader, id, direction);
+            AtzSprite atzSprite = AtzSprite.LoadOffsetMonsterSprites(MonsterNames.BUFFALO);
+            buffalo.Initiliaze(coordinate, atzSprite, id, direction);
             return buffalo;
         }
 
@@ -58,7 +58,7 @@ namespace y1000.code.creatures
             return Load(coordinate, id, Direction.DOWN);
         }
 
-        public SpriteReader SpriteReader
+        public AtzSprite AtzSprite
         {
             get
             {

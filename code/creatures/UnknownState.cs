@@ -23,7 +23,7 @@ namespace y1000.code.creatures
         public override CreatureState State => throw new NotImplementedException();
 
 
-        protected override SpriteReader SpriteReader => throw new NotImplementedException();
+        protected override AtzSprite AtzSprite => throw new NotImplementedException();
 
         protected override int SpriteOffset => throw new NotImplementedException();
     }

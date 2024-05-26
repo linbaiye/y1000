@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckal3yuk0xi6n"]
+
+[ext_resource type="Script" path="res://Source/Entity/GroundedItem.cs" id="1_x1fr2"]
+[ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_hioe5"]
+
+[node name="Item" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_x1fr2")
+
+[node name="Body" parent="." instance=ExtResource("2_hioe5")]

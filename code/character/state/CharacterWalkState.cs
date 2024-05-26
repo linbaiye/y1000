@@ -49,27 +49,27 @@ namespace y1000.code.character.state
 
         public override OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
-            return SpriteReader.LoadSprites(armor.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.LoadSprites(armor.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
         public override OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
         {
-            return SpriteReader.LoadSprites(hat.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.LoadSprites(hat.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
         public override OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
         {
-            return SpriteReader.LoadSprites(trousers.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.LoadSprites(trousers.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
 
         public override OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)
         {
-            return SpriteReader.LoadSprites(weapon.SpriteBasePath + "0", weapon.Offset).Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.LoadSprites(weapon.SpriteBasePath + "0", weapon.Offset).Get(SpriteOffset + animationSpriteNumber);
         }
 
 
-        protected override SpriteReader SpriteReader => ((Player)Creature).IsMale() ? SpriteReader.LoadOffsetMalePlayerSprites("N02") : SpriteReader.EmptyReader;
+        protected override AtzSprite AtzSprite => ((Player)Creature).IsMale() ? AtzSprite.LoadOffsetMalePlayerSprites("N02") : AtzSprite.Empty;
 
 
 

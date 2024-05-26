@@ -5,15 +5,13 @@ public class CharacterStackItem : ICharacterItem
     public CharacterStackItem(int iconId, string name, int number)
     {
         IconId = iconId;
-        Name = name;
+        ItemName = name;
         Number = number;
     }
 
     public int IconId { get; }
     
-    public string Name { get; }
-    
-    public int Number { get; }
+    public int Number { get; set; }
 
-    public ItemType Type => ItemType.STACK;
+    public string ItemName { get; }
 }

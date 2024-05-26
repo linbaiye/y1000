@@ -46,17 +46,17 @@ namespace y1000.code.player.state
         public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
             string path = "armor/" + (armor.IsMale ? "male/": "female/") + "chest/" + GetChestSpritePath(armor);
-            return SpriteReader.LoadSprites(path).Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.LoadSprites(path).Get(SpriteOffset + animationSpriteNumber);
         }
 
         public OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
         {
-            return SpriteReader.LoadSprites(GetHatSpritePath(hat)).Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.LoadSprites(GetHatSpritePath(hat)).Get(SpriteOffset + animationSpriteNumber);
         }
 
         public OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
         {
-            return SpriteReader.LoadSprites(GetTrousersPath(trousers)).Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.LoadSprites(GetTrousersPath(trousers)).Get(SpriteOffset + animationSpriteNumber);
         }
 
 

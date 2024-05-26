@@ -50,7 +50,8 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	public void Visit(PlayerChangeWeaponMessage message)
 	{
-		ChangeWeapon(message.Weapon);
+		var weapon = EquipmentFactory.Instance.CreatePlayerWeapon(message.WeaponName, IsMale);
+		ChangeWeapon(weapon);
 		if (message.State != _state.State)
 		{
 			ChangeState(IPlayerState.Cooldown());
@@ -140,7 +141,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		return $"{base.ToString()}, {nameof(Id)}: {Id}, {nameof(Direction)}: {Direction}, {nameof(Coordinate)}: {Coordinate}";
 	}
 
-	public static PlayerImpl FromInterpolation(PlayerInterpolation playerInterpolation, IMap map, ItemFactory itemFactory)
+	public static PlayerImpl FromInterpolation(PlayerInterpolation playerInterpolation, IMap map)
 	{
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/player.tscn");
 		var player = scene.Instantiate<PlayerImpl>();
@@ -154,7 +155,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		}
 		if (playerInterpolation.WeaponName != null)
 		{
-			player.ChangeWeapon(itemFactory.CreatePlayerWeapon(playerInterpolation.WeaponName));
+			player.ChangeWeapon(EquipmentFactory.Instance.CreatePlayerWeapon(playerInterpolation.WeaponName, playerInterpolation.Male));
 		}
 		return player;
 	}

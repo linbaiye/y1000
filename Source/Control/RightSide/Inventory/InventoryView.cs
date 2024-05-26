@@ -8,8 +8,8 @@ namespace y1000.Source.Control.RightSide.Inventory;
 
 public partial class InventoryView : NinePatchRect
 {
-    
-    private static readonly ItemTextureReader TEXTURE_READER = ItemTextureReader.LoadItems();
+
+    private static readonly ItemTextureReader TEXTURE_READER = ItemTextureReader.Instance;
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
     private InventorySlotView? _currentFocused;
@@ -55,10 +55,10 @@ public partial class InventoryView : NinePatchRect
     {
         if (item is CharacterStackItem stackItem)
         {
-            return item.Name + ":" + stackItem.Number;
+            return item.ItemName + ":" + stackItem.Number;
         }
 
-        return item.Name;
+        return item.ItemName;
     }
 
     private void OnMouseEntered(InventorySlotView slot)

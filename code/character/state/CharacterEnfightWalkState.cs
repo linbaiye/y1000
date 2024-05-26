@@ -40,7 +40,7 @@ namespace y1000.code.character.state
 
         public override CreatureState State => CreatureState.ENFIGHT_WALK;
 
-        protected override SpriteReader SpriteReader => ((OldCharacter)Creature).IsMale() ? SpriteReader.LoadOffsetMalePlayerSprites("N02") : SpriteReader.EmptyReader;
+        protected override AtzSprite AtzSprite => ((OldCharacter)Creature).IsMale() ? AtzSprite.LoadOffsetMalePlayerSprites("N02") : AtzSprite.Empty;
 
         protected override AbstractCreatureState NextState()
         {
@@ -49,17 +49,17 @@ namespace y1000.code.character.state
 
         public override OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
-            return SpriteReader.LoadSprites(armor.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
+            return AtzSprite.LoadSprites(armor.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
         }
 
         public override OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
         {
-            return SpriteReader.LoadSprites(hat.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
+            return AtzSprite.LoadSprites(hat.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
         }
 
         public override OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
         {
-            return SpriteReader.LoadSprites(trousers.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
+            return AtzSprite.LoadSprites(trousers.SpriteBasePath + "0").Get(SPRITE_OFFSET.GetValueOrDefault(Direction, -1)+ animationSpriteNumber);
         }
 
         public override OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)

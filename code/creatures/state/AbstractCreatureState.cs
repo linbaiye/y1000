@@ -73,11 +73,11 @@ namespace y1000.code.creatures.state
 
         protected abstract int SpriteOffset { get; }
 
-        protected abstract SpriteReader SpriteReader { get; }
+        protected abstract AtzSprite AtzSprite { get; }
 
         public virtual OffsetTexture OffsetTexture(int animationSpriteNumber)
         {
-            return SpriteReader.Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.Get(SpriteOffset + animationSpriteNumber);
         }
     }
 }

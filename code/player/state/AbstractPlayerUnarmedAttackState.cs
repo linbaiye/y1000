@@ -19,7 +19,7 @@ namespace y1000.code.player.state
         {
         }
 
-        protected override SpriteReader SpriteReader => ((IPlayer)Creature).IsMale() ? SpriteReader.LoadOffsetMalePlayerSprites("N01") : SpriteReader.EmptyReader;
+        protected override AtzSprite AtzSprite => ((IPlayer)Creature).IsMale() ? AtzSprite.LoadOffsetMalePlayerSprites("N01") : AtzSprite.Empty;
 
         protected override string GetChestSpritePath(ChestArmor chestArmor)
         {

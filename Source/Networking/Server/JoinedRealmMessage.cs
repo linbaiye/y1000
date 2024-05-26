@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Godot;
 using Source.Networking.Protobuf;
-using y1000.Source.Item;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.KungFu.Foot;
 
@@ -11,15 +10,13 @@ namespace y1000.Source.Networking.Server
     {
         public class InventoryItemMessage
         {
-            public InventoryItemMessage(string name, ItemType type, int slotId, int number)
+            public InventoryItemMessage(string name, int slotId, int number)
             {
                 Name = name;
-                Type = type;
                 SlotId = slotId;
                 Number = number;
             }
             public string Name { get; }
-            public ItemType Type { get; }
             public int SlotId { get; }
             
             public int Number { get; }
@@ -33,7 +30,7 @@ namespace y1000.Source.Networking.Server
         
         public List<InventoryItemMessage> Items { get; }
         
-        public string? WeaponName { get; set; }
+        public string? WeaponName { get; private set; }
 
         public Vector2I Coordinate { get; init; }
         
@@ -46,6 +43,10 @@ namespace y1000.Source.Networking.Server
         public IAttackKungFu AttackKungFu { get; private init; }
         
         public string Name { get; }
+        
+        public string? ChestName { get; private set; }
+        
+        public string? HatName { get; private set; }
 
 
         private static List<InventoryItemMessage> ItemMessages(LoginPacket loginPacket)
@@ -53,7 +54,7 @@ namespace y1000.Source.Networking.Server
             List<InventoryItemMessage> itemMessages = new List<InventoryItemMessage>();
             foreach (var inventoryItem in loginPacket.InventoryItems)
             {
-                itemMessages.Add(new InventoryItemMessage(inventoryItem.Name, (ItemType)inventoryItem.ItemType, inventoryItem.SlotId, inventoryItem.Number));
+                itemMessages.Add(new InventoryItemMessage(inventoryItem.Name,  inventoryItem.SlotId, inventoryItem.Number));
             }
             return itemMessages;
         }
@@ -69,8 +70,10 @@ namespace y1000.Source.Networking.Server
             {
                 Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
                 Id = loginPacket.Id,
-                Male = true,
+                Male = loginPacket.Male,
                 FootKungFu = footKungFu,
+                HatName = loginPacket.HasHatName? loginPacket.HatName : null,
+                ChestName= loginPacket.HasChestName? loginPacket.ChestName: null,
             };
             if (loginPacket.HasWeaponName)
             {

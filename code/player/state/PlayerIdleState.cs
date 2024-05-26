@@ -41,18 +41,18 @@ namespace y1000.code.player.state
         {
         }
 
-        protected override SpriteReader SpriteReader => ((Player)Creature).IsMale() ? SpriteReader.LoadOffsetMalePlayerSprites("N02"): SpriteReader.EmptyReader;
+        protected override AtzSprite AtzSprite => ((Player)Creature).IsMale() ? AtzSprite.LoadOffsetMalePlayerSprites("N02"): AtzSprite.Empty;
         
 
-        private OffsetTexture GetOffsetTexture(SpriteReader spriteReader, int animationSpriteNumber)
+        private OffsetTexture GetOffsetTexture(AtzSprite atzSprite, int animationSpriteNumber)
         {
-            return spriteReader.Get(BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
+            return atzSprite.Get(BODY_SPRITE_OFFSET.GetValueOrDefault(Direction, -1) + animationSpriteNumber);
         }
 
         private OffsetTexture GetOffsetTexture(int animationSpriteNumber, IEquipment equipment)
         {
             var path = equipment.SpriteBasePath +  "0";
-            return GetOffsetTexture(SpriteReader.LoadSprites(path), animationSpriteNumber);
+            return GetOffsetTexture(AtzSprite.LoadSprites(path), animationSpriteNumber);
         }
 
         public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
@@ -94,7 +94,7 @@ namespace y1000.code.player.state
 
         public OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)
         {
-            SpriteReader reader = SpriteReader.LoadSprites(weapon.SpriteBasePath + "0" , weapon.Offset);
+            AtzSprite reader = AtzSprite.LoadSprites(weapon.SpriteBasePath + "0" , weapon.Offset);
             return GetOffsetTexture(reader, animationSpriteNumber);
         }
 

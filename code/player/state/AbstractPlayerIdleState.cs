@@ -30,6 +30,6 @@ namespace y1000.code.player.state
             this.player = player;
         }
 
-        protected override SpriteReader SpriteReader => player.IsMale() ?  SpriteReader.LoadOffsetMalePlayerSprites("N02"): SpriteReader.EmptyReader;
+        protected override AtzSprite AtzSprite => player.IsMale() ?  AtzSprite.LoadOffsetMalePlayerSprites("N02"): AtzSprite.Empty;
     }
 }

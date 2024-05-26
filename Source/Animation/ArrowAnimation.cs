@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using y1000.Source.Creature;
+using y1000.Source.Sprite;
 
 namespace y1000.Source.Animation;
 
@@ -19,12 +20,12 @@ public sealed class ArrowAnimation
         { Direction.UP_LEFT, 70 },
     };
 
-    private ArrowAnimation(SpriteReader reader)
+    private ArrowAnimation(AtzSprite reader)
     {
         Reader = reader;
     }
     
-    private SpriteReader Reader { get; }
+    private AtzSprite Reader { get; }
     
     public OffsetTexture OffsetTexture(Direction direction)
     {
@@ -33,6 +34,6 @@ public sealed class ArrowAnimation
 
     private static ArrowAnimation Load()
     {
-        return new (SpriteReader.LoadEffect("Arrow"));
+        return new (AtzSprite.LoadEffect("Arrow"));
     }
 }

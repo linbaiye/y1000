@@ -26,6 +26,10 @@ message ClickPacket {
   int64 id = 1;
 }
 
+message ClickItemPacket {
+  int64 id = 1;
+}
+
 message PlayerLoginPacket {
   string token = 1;
 }

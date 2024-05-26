@@ -4,6 +4,4 @@ public interface ICharacterItem : IItem
 {
     int IconId { get; }
     
-    public string Name { get; }
-    
 }

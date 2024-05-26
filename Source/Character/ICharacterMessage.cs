@@ -1,6 +1,9 @@
-﻿namespace y1000.Source.Character;
+﻿using y1000.Source.Networking;
 
-public interface ICharacterMessage
+namespace y1000.Source.Character;
+
+public interface ICharacterMessage : IServerMessage
 {
     void Accept(ICharacterMessageVisitor visitor);
+
 }

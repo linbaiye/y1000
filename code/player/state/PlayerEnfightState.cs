@@ -43,7 +43,7 @@ namespace y1000.code.player.state
             player.AnimationPlayer.SpeedScale = speed;
         }
 
-        protected override SpriteReader SpriteReader => ((Player)Creature).IsMale() ? SpriteReader.LoadOffsetMalePlayerSprites("N02") : SpriteReader.EmptyReader;
+        protected override AtzSprite AtzSprite => ((Player)Creature).IsMale() ? AtzSprite.LoadOffsetMalePlayerSprites("N02") : AtzSprite.Empty;
 
         public override void OnAnimationFinised()
         {
@@ -57,17 +57,17 @@ namespace y1000.code.player.state
 
         public OffsetTexture ChestTexture(int animationSpriteNumber, ChestArmor armor)
         {
-            return SpriteReader.LoadSprites(armor.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.LoadSprites(armor.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
         public OffsetTexture HatTexture(int animationSpriteNumber, Hat hat)
         {
-            return SpriteReader.LoadSprites(hat.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.LoadSprites(hat.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
         public OffsetTexture TrousersTexture(int animationSpriteNumber, Trousers trousers)
         {
-            return SpriteReader.LoadSprites(trousers.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
+            return AtzSprite.LoadSprites(trousers.SpriteBasePath + "0").Get(SpriteOffset + animationSpriteNumber);
         }
 
         private void OnHurtDone()

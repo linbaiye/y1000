@@ -32,7 +32,7 @@ public partial class UIController : CanvasLayer
         _dropItemUi.BindEventMediator(eventMediator);
     }
 
-    private void DisplayMessage(string message)
+    public void DisplayMessage(string message)
     {
         _bottomControl.DisplayMessage(new TextEvent(message));
     }

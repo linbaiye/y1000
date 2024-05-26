@@ -8,9 +8,9 @@ public enum AttackKungFuType
 
     BLADE = 2,
 
-    SPEAR = 3,
-
-    AXE = 4, 
+    AXE = 3, 
+    
+    SPEAR = 4,
     
     BOW = 5,
 }

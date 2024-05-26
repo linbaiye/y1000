@@ -2,7 +2,7 @@ using y1000.Source.KungFu.Attack;
 
 namespace y1000.Source.Item;
 
-public class PlayerWeapon : IItem
+public class PlayerWeapon 
 {
     public PlayerWeapon(string nonAttackAnimation, string attackAnimation, AttackKungFuType attackKungFuType)
     {
@@ -16,6 +16,5 @@ public class PlayerWeapon : IItem
     public string AttackAnimation { get; }
     
     public AttackKungFuType AttackKungFuType { get; }
-
-    public ItemType Type => ItemType.WEAPON;
+    
 }

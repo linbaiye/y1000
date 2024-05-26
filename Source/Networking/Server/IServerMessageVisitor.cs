@@ -90,4 +90,14 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)message);
     }
+
+    void Visit(ShowItemMessage message)
+    {
+        
+    }
+
+    void Visit(TextMessage message)
+    {
+        
+    }
 }

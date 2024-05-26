@@ -1,4 +1,5 @@
 ﻿using System;
+using Godot;
 using Source.Networking.Protobuf;
 using y1000.code.networking.message;
 using y1000.Source.Character.Event;
@@ -7,6 +8,7 @@ using y1000.Source.Creature.Event;
 using y1000.Source.Item;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.Networking.Server;
+using TextMessage = y1000.Source.Networking.Server.TextMessage;
 
 namespace y1000.Source.Networking;
 
@@ -41,23 +43,47 @@ public class MessageFactory
 
     private CharacterChangeWeaponMessage Parse(CharacterChangeWeaponPacket packet)
     {
-        var weapon = (CharacterWeapon)_itemFactory.CreateCharacterWeapon(packet.Name, ItemType.WEAPON);
         ICharacterItem? newItem = null;
         if (packet.HasSlotNewItemName)
         {
-            newItem = _itemFactory.CreateCharacterWeapon(packet.SlotNewItemName, (ItemType)packet.SlotNewItemType);
+            newItem = _itemFactory.CreateCharacterItem(packet.SlotNewItemName);
         }
         IAttackKungFu? attackKungFu = null;
         if (packet.HasAttackKungFuName)
         {
             attackKungFu = IAttackKungFu.ByType((AttackKungFuType)packet.AttackKungFuType, packet.AttackKungFuName, packet.AttackKungFuLevel);
         }
-        return new CharacterChangeWeaponMessage(weapon, packet.AffectedSlot, newItem, attackKungFu, (CreatureState)packet.State);
+        return new CharacterChangeWeaponMessage(packet.Name, packet.AffectedSlot, newItem, attackKungFu, (CreatureState)packet.State);
     }
 
     private PlayerChangeWeaponMessage Parse(ChangeWeaponPacket packet)
     {
-        return new PlayerChangeWeaponMessage(packet.Id, _itemFactory.CreatePlayerWeapon(packet.Name), (CreatureState)packet.State);
+        return new PlayerChangeWeaponMessage(packet.Id, packet.Name, (CreatureState)packet.State);
+    }
+
+    private ShowItemMessage Parse(ShowItemPacket packet)
+    {
+        return new ShowItemMessage(packet.Id, packet.Name, packet.HasNumber ? packet.Number : 0,
+            new Vector2I(packet.CoordinateX, packet.CoordinateY),
+            new Vector2(packet.X, packet.Y));
+    }
+
+    private TextMessage Parse(TextMessagePacket packet)
+    {
+        return new TextMessage(packet.Text);
+    }
+    
+
+    private DropItemMessage Parse(DropItemConfirmPacket packet)
+    {
+        return new DropItemMessage(packet.Slot, packet.NumberLeft);
+    }
+    
+    private UpdateInventorySlotMessage ParseUpdateSlot(InventoryItemPacket packet)
+    {
+        var number = packet.HasNumber ? packet.Number : 0;
+        var item = _itemFactory.CreateCharacterItem(packet.Name, number);
+        return new UpdateInventorySlotMessage(packet.SlotId, item);
     }
 
     public IServerMessage Create(Packet packet)
@@ -83,6 +109,10 @@ public class MessageFactory
                 packet.SwapInventorySlotPacket),
             Packet.TypedPacketOneofCase.CharacterChangeWeaponPacket => Parse(packet.CharacterChangeWeaponPacket),
             Packet.TypedPacketOneofCase.ChangeWeaponPacket => Parse(packet.ChangeWeaponPacket),
+            Packet.TypedPacketOneofCase.ShowItem => Parse(packet.ShowItem),
+            Packet.TypedPacketOneofCase.DropItem => Parse(packet.DropItem),
+            Packet.TypedPacketOneofCase.UpdateSlot => ParseUpdateSlot(packet.UpdateSlot),
+            Packet.TypedPacketOneofCase.Text => Parse(packet.Text),
             _ => throw new NotSupportedException()
         };
     }

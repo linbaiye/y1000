@@ -39,6 +39,23 @@ public class CharacterInventory
         return false;
     }
 
+    public void DropItem(int slot, int numberLeft)
+    {
+        if (numberLeft == 0)
+        {
+            _items.Remove(slot);
+        }
+
+        if (_items.TryGetValue(slot, out var itm))
+        {
+            if (itm is CharacterStackItem stackItem)
+            {
+                stackItem.Number = numberLeft;
+            }
+        }
+        Notify();
+    }
+
     public ICharacterItem? Find(int slot)
     {
         return _items.TryGetValue(slot, out var item) ? item : null;
@@ -51,6 +68,13 @@ public class CharacterInventory
         {
             _items.TryAdd(slot, item);
         }
+        Notify();
+    }
+
+    public void Update(int slot, ICharacterItem item)
+    {
+        _items.Remove(slot);
+        _items.TryAdd(slot, item);
         Notify();
     }
 

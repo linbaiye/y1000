@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Source/Control/UIController.cs" id="3_akyoc"]
 [ext_resource type="PackedScene" uid="uid://7ghuvlfmi4pd" path="res://Scenes/RightSideUI.tscn" id="4_fqpt3"]
 [ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://bottom_ui.tscn" id="5_3t2rd"]
-[ext_resource type="PackedScene" uid="uid://b44mvj7uklgy1" path="res://Scenes/DropItemUI.tscn" id="6_wxera"]
+[ext_resource type="PackedScene" uid="uid://bqv6d0i2cli8e" path="res://Scenes/DropItemUI.tscn" id="6_wxera"]
 
 [node name="Game" type="Node2D"]
 z_as_relative = false

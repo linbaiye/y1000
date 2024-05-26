@@ -15,7 +15,7 @@ namespace y1000.code.creatures.state
         {
         }
 
-        protected override SpriteReader SpriteReader => ((SimpleCreature)Creature).SpriteReader;
+        protected override AtzSprite AtzSprite => ((SimpleCreature)Creature).AtzSprite;
 
         protected override int SpriteOffset => throw new NotImplementedException();
     }

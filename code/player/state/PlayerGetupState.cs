@@ -61,12 +61,12 @@ namespace y1000.code.player.state
 
         public override OffsetTexture OffsetTexture(int animationSpriteNumber)
         {
-            return SpriteReader.Get(ComputeAnimationSpriteNumber(animationSpriteNumber)) ;
+            return AtzSprite.Get(ComputeAnimationSpriteNumber(animationSpriteNumber)) ;
         }
 
         protected override OffsetTexture GetTexture(int animationSpriteNumber, IEquipment equipment)
         {
-            return SpriteReader.LoadSprites(equipment.SpriteBasePath + "0").Get(ComputeAnimationSpriteNumber(animationSpriteNumber));
+            return AtzSprite.LoadSprites(equipment.SpriteBasePath + "0").Get(ComputeAnimationSpriteNumber(animationSpriteNumber));
         }
     }
 }

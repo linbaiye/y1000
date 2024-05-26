@@ -5,10 +5,11 @@ namespace y1000.Source.Animation
     // A texture with offset.
     public class OffsetTexture
     {
-        public OffsetTexture(Texture2D texture2D, Vector2 position)
+        public OffsetTexture(Texture2D texture2D, Vector2 offset, Vector2? originSize = null)
         {
             Texture = texture2D;
-            Offset = position;
+            Offset = offset;
+            OriginalSize = originSize ?? texture2D.GetSize();
         }
 
         public Texture2D Texture { get; }
@@ -21,10 +22,7 @@ namespace y1000.Source.Animation
             return this;
         }
         
-        public OffsetTexture Add(int x, int y)
-        {
-            Offset += new Vector2(x, y);
-            return this;
-        }
+        public Vector2 OriginalSize { get; private set; }
+        
     }
 }

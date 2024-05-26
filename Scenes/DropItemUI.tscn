@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b44mvj7uklgy1"]
+[gd_scene load_steps=7 format=3 uid="uid://bqv6d0i2cli8e"]
 
 [ext_resource type="Texture2D" uid="uid://cfx457p5xg6y4" path="res://assets/ui/input.png" id="1_k7t35"]
 [ext_resource type="Script" path="res://Source/Control/DropItemUI.cs" id="2_8cjci"]
+[ext_resource type="Texture2D" uid="uid://637xatose3tu" path="res://assets/ui/input_confirm_down.png" id="3_rm3bi"]
+[ext_resource type="Texture2D" uid="uid://cgpjvsiqfgifo" path="res://assets/ui/input_cancel_down.png" id="4_jxjs7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w2lcy"]
 
@@ -24,17 +26,19 @@ offset_bottom = 53.0
 
 [node name="ConfirmButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 21.0
-offset_top = 112.0
-offset_right = 97.0
-offset_bottom = 138.0
+offset_left = 19.0
+offset_top = 109.0
+offset_right = 99.0
+offset_bottom = 139.0
+texture_pressed = ExtResource("3_rm3bi")
 
 [node name="CancelButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 124.0
-offset_top = 112.0
-offset_right = 200.0
+offset_left = 123.0
+offset_top = 110.0
+offset_right = 203.0
 offset_bottom = 138.0
+texture_pressed = ExtResource("4_jxjs7")
 
 [node name="Input" type="LineEdit" parent="."]
 layout_mode = 0

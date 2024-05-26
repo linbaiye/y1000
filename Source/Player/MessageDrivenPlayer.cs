@@ -72,9 +72,9 @@ public class MessageDrivenPlayer : IEntity
     }
 
     public static MessageDrivenPlayer FromInterpolation(PlayerInterpolation playerInterpolation,
-        IMap map, ItemFactory _itemFactory)
+        IMap map)
     {
-        var player = PlayerImpl.FromInterpolation(playerInterpolation, map, _itemFactory);
+        var player = PlayerImpl.FromInterpolation(playerInterpolation, map);
         return new MessageDrivenPlayer(player);
     }
 }

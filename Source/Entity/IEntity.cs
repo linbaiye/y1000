@@ -13,11 +13,9 @@ namespace y1000.Source.Entity
 
         Vector2I Coordinate { get; }
 
-        
-        void Delete() { }
-
         void Handle(IEntityMessage message)
         {
+            
         }
     }
 }

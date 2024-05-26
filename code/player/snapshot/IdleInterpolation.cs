@@ -59,7 +59,7 @@ namespace y1000.code.player.snapshot
 			{ Direction.UP_LEFT, 69},
         };
 
-        private static readonly SpriteReader MALE_SPRITES = SpriteReader.LoadOffsetMalePlayerSprites("N02");
+        private static readonly AtzSprite MALE_SPRITES = AtzSprite.LoadOffsetMalePlayerSprites("N02");
 
         private static readonly List<TimeMillisSprite> MILLIS_SPRITE_RANGE = new List<TimeMillisSprite>() 
         {

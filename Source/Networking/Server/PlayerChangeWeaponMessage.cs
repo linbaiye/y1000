@@ -10,13 +10,14 @@ public class PlayerChangeWeaponMessage : AbstractEntityMessage
         visitor.Visit(this);
     }
 
-    public PlayerChangeWeaponMessage(long id, PlayerWeapon weapon, CreatureState state) : base(id)
+    public PlayerChangeWeaponMessage(long id, string weaponName, CreatureState state) : base(id)
     {
-        Weapon = weapon;
         State = state;
+        WeaponName = weaponName;
     }
     
     public CreatureState State { get; }
     
-    public PlayerWeapon Weapon { get; }
+    public string WeaponName { get; }
+    
 }

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Source/Control/Bottom/BottomControl.cs" id="1_nx2kl"]
 [ext_resource type="Texture2D" uid="uid://trpj271r0icl" path="res://assets/ui/hud_bottom3.png" id="2_g24yt"]
-[ext_resource type="Texture2D" uid="uid://cpu58fc33m0o1" path="res://sprite/char/N02/000057.png" id="3_24mka"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/TextArea.cs" id="3_56n7n"]
+[ext_resource type="Script" path="res://Source/Control/Bottom/Avatar.cs" id="4_mdb7g"]
 
 [node name="BottomUI" type="Control"]
 layout_direction = 1
@@ -46,6 +46,24 @@ offset_top = 167.0
 offset_right = 120.0
 offset_bottom = 190.0
 
-[node name="000057" type="Sprite2D" parent="."]
-position = Vector2(809, 133)
-texture = ExtResource("3_24mka")
+[node name="Avatar" type="NinePatchRect" parent="Container"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 762.0
+offset_top = 76.0
+offset_right = 844.0
+offset_bottom = 190.0
+draw_center = false
+script = ExtResource("4_mdb7g")
+
+[node name="Body" type="TextureRect" parent="Container/Avatar"]
+layout_mode = 2
+offset_right = 44.0
+offset_bottom = 70.0
+mouse_filter = 0
+
+[node name="Hand" type="TextureRect" parent="Container/Avatar"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 21.0
+mouse_filter = 0

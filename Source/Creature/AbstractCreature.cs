@@ -1,46 +1,26 @@
 using System;
 using Godot;
 using NLog;
-using y1000.Source.Animation;
+using y1000.Source.Entity;
 using y1000.Source.Map;
 using y1000.Source.Networking.Server;
 using y1000.Source.Util;
 
 namespace y1000.Source.Creature;
 
-public abstract partial class AbstractCreature : Node2D, ICreature 
+public abstract partial class AbstractCreature : AbstractEntity, ICreature
 {
     public event EventHandler<CreatureMouseClickEventArgs>? MouseClicked;
     
 	public event EventHandler<CreatureAnimationDoneEventArgs>? StateAnimationEventHandler;
 
-    private BodySprite? _bodySprite;
     private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
-    
-    public override void _Ready()
-    {
-        _bodySprite = GetNode<BodySprite>("Body");
-        _bodySprite.Area.GuiInput += MyEvent;
-        _bodySprite.SetName(EntityName);
-    }
-
-    public string EntityName { get; private set; } = "";
-
-    public long Id { get; private set; }
 
     public IMap Map { get; private set; } = IMap.Empty;
     
     public Direction Direction { get; set; }
 
-    public Vector2I Coordinate => Position.ToCoordinate();
-
-    public abstract OffsetTexture BodyOffsetTexture { get; }
-    
-    public Vector2 OffsetBodyPosition => Position + BodyOffsetTexture.Offset;
-    
-    public Vector2 BodyPosition => Coordinate.ToPosition();
-
-    private void MyEvent(InputEvent @event)
+    protected override void MyEvent(InputEvent @event)
     {
         if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left } mouse && mouse.IsPressed())
         {
@@ -53,7 +33,7 @@ public abstract partial class AbstractCreature : Node2D, ICreature
         StateAnimationEventHandler?.Invoke(this, args);
     }
 
-    public void Delete()
+    protected void Delete()
     {
         Map.Free(this);
         QueueFree();
@@ -61,12 +41,9 @@ public abstract partial class AbstractCreature : Node2D, ICreature
     
     protected void Init(long id, Direction direction, Vector2I coordinate, IMap map, string name)
     {
+        Init(id, coordinate, name);
         Direction = direction;
-        Id = id;
-        Position = coordinate.ToPosition();
         Map = map;
-        EntityName = name;
-        _bodySprite?.SetName(name);
         map.Occupy(this);
     }
 

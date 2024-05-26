@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,7 +24,7 @@ using y1000.Source.Networking;
 using y1000.Source.Networking.Connection;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
-using y1000.Source.Util;
+using y1000.Source.Sprite;
 
 namespace y1000.Source;
 
@@ -35,7 +34,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private readonly ConcurrentQueue<object> _unprocessedMessages = new();
 
-	private readonly Dictionary<long, IEntity> _entities = new();
+	private readonly EntityManager _entityManager;
 	
 	private readonly InputSampler _inputSampler = new();
 
@@ -49,22 +48,39 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private UIController? _uiController;
 
-	private readonly CreatureFactory _creatureFactory = new ();
+	private readonly ItemFactory _itemFactory;
 
-	private readonly ItemFactory _itemFactory = ItemFactory.Instance;
+	private readonly MessageFactory _messageFactory;
 
-	private MessageFactory _messageFactory;
+	private readonly EntityFactory _entityFactory;
 
-	private readonly EventMediator _eventMediator = new();
+	private readonly EventMediator _eventMediator;
+
+	private readonly ISpriteRepository _spriteRepository;
+
+	public Game()
+	{
+		_eventMediator = InitializeEventMediator();
+		_itemFactory = ItemFactory.Instance;
+		_messageFactory = new MessageFactory(_itemFactory);
+		_entityFactory = new EntityFactory(_eventMediator);
+		_entityManager = EntityManager.Instance;
+		_spriteRepository = FilesystemSpriteRepository.Instance;
+	}
+
+	private EventMediator InitializeEventMediator()
+	{
+		var eventMediator = new EventMediator();
+		eventMediator.SetComponent(WriteMessage);
+		eventMediator.SetComponent(OnDragItemEvent);
+		return eventMediator;
+	}
 
 	public override void _Ready()
 	{
-		_messageFactory = new MessageFactory(_itemFactory);
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
 		_uiController.InitEventMediator(_eventMediator);
-		_eventMediator.SetComponent(WriteMessage);
-		_eventMediator.SetComponent(OnDragItemEvent);
 	}
 
 	private void OnCharacterEvent(object? sender, EventArgs eventArgs)
@@ -234,10 +250,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			return;
 		}
-		if (!_entities.TryGetValue(args.TargetId, out var entity))
-		{
-			return;
-		}
+		var entity = _entityManager.Get(args.TargetId);
 		if (entity is not ICreature creature)
 		{
 			return;
@@ -247,9 +260,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(PlayerInterpolation playerInterpolation)
 	{
-		var msgDrivenPlayer = MessageDrivenPlayer.FromInterpolation(playerInterpolation, MapLayer, _itemFactory);
+		var msgDrivenPlayer = MessageDrivenPlayer.FromInterpolation(playerInterpolation, MapLayer);
 		msgDrivenPlayer.Player.OnPlayerShoot += OnPlayerShoot;
-		_entities.TryAdd(msgDrivenPlayer.Id, msgDrivenPlayer);
+		msgDrivenPlayer.Player.MouseClicked += OnCreatureClicked;
+		_entityManager.Add(msgDrivenPlayer);
 		AddChild(msgDrivenPlayer.Player);
 	}
 
@@ -282,17 +296,20 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(IEntityMessage message)
 	{
-		if (_entities.TryGetValue(message.Id, out var entity))
-		{
-			entity.Handle(message);
-		}
+		_entityManager.Get(message.Id)?.Handle(message);
 	}
+
+	public void Visit(TextMessage message)
+	{
+		_uiController?.DisplayMessage(message.Text);
+	}
+		
 
 	public void Visit(CreatureInterpolation creatureInterpolation)
 	{
 		var monster = Monster.Create(creatureInterpolation, MapLayer);
 		monster.MouseClicked += OnCreatureClicked;
-		_entities.TryAdd(monster.Id, monster);
+		_entityManager.Add(monster);
 		LOGGER.Debug("Received creature message {0}.", monster);
 		AddChild(monster);
 		LOGGER.Debug("Added creature {0}.", monster);
@@ -300,25 +317,17 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(RemoveEntityMessage removeEntityMessage)
 	{
-		if (_entities.TryGetValue(removeEntityMessage.Id, out var entity))
-		{
-			entity.Handle(removeEntityMessage);
-			_entities.Remove(removeEntityMessage.Id);
-			LOGGER.Debug("Removed creature {0}.", removeEntityMessage.Id);
-		}
+		var remove = _entityManager.Remove(removeEntityMessage.Id);
+		remove?.Handle(removeEntityMessage);
+		LOGGER.Debug("Removed creature {0}.", removeEntityMessage.Id);
 	}
 
-	private bool MouseWithinCharacterDropRange()
+	public void Visit(ShowItemMessage message)
 	{
-		if (_character == null)
-		{
-			return false;
-		}
-		var start = _character.Coordinate.Move(-2, -3).ToPosition();
-		var end = _character.Coordinate.Move(2, 3).ToPosition();
-		var globalMousePosition = GetGlobalMousePosition();
-		return start.X <= globalMousePosition.X && end.X >= globalMousePosition.X && 
-		       start.Y <= globalMousePosition.Y && end.Y >= globalMousePosition.Y;
+		var groundedItem = _entityFactory.CreateGroundedItem(message);
+		_entityManager.Add(groundedItem);
+		LOGGER.Debug("Add item {2} at position {0}, {1}.", groundedItem.OffsetBodyPosition, groundedItem.Coordinate, groundedItem.Id);
+		AddChild(groundedItem);
 	}
 
 
@@ -326,12 +335,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, _itemFactory);
 		_character.WhenCharacterUpdated += OnCharacterEvent;
+		_character.WrappedPlayer().MouseClicked += OnCreatureClicked;
 		_character.Inventory.SetEventMediator(_eventMediator);
 		_uiController?.BindCharacter(_character);
 		MapLayer.BindCharacter(_character);
 		_character.WrappedPlayer().OnPlayerShoot += OnPlayerShoot;
-		_entities.TryAdd(_character.Id, _character);
+		_entityManager.Add(_character);
 		AddChild(_character);
 	}
-	
 }

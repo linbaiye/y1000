@@ -20,6 +20,6 @@ namespace y1000.code.player.state
 
         protected override int SpriteOffset => throw new NotImplementedException();
 
-        protected override SpriteReader SpriteReader => throw new NotImplementedException();
+        protected override AtzSprite AtzSprite => throw new NotImplementedException();
     }
 }

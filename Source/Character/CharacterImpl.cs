@@ -42,6 +42,9 @@ namespace y1000.Source.Character
 		public OffsetTexture? HandTexture => WrappedPlayer().HandTexture;
 
 		public string EntityName => WrappedPlayer().EntityName;
+
+		public CharacterWeapon? Weapon => (CharacterWeapon?) WrappedPlayer().Weapon;
+
 		
 		public long Id => WrappedPlayer().Id;
 
@@ -180,6 +183,7 @@ namespace y1000.Source.Character
 		        DispatchInput(input);
 	        }
         }
+        
 
         public CharacterInventory Inventory { get; } = new();
 
@@ -192,10 +196,9 @@ namespace y1000.Source.Character
 	        }
         }
 
-
         public OffsetTexture BodyOffsetTexture => WrappedPlayer().BodyOffsetTexture;
+        
         public Vector2 OffsetBodyPosition => WrappedPlayer().OffsetBodyPosition;
-        public Vector2 BodyPosition => WrappedPlayer().Position;
 
         public void Visit(SwapInventorySlotMessage message)
         {
@@ -204,7 +207,8 @@ namespace y1000.Source.Character
 
         public void Visit(CharacterChangeWeaponMessage message)
         {
-	        WrappedPlayer().ChangeWeapon(message.Weapon);
+	        var weapon = EquipmentFactory.Instance.CreateCharacterWeapon(message.WeaponName, IsMale);
+	        WrappedPlayer().ChangeWeapon(weapon);
 	        if (message.State != _state.WrappedState.State)
 	        {
 		        ChangeState(CharacterCooldownState.Cooldown());
@@ -212,11 +216,17 @@ namespace y1000.Source.Character
 	        if (message.AttackKungFu != null)
 		        AttackKungFu = message.AttackKungFu;
 	        Inventory.PutOrRemove(message.AffectedSlotId, message.NewItem);
+			WhenCharacterUpdated?.Invoke(this, new WeaponChangedEvent(weapon));
         }
 
         public void Visit(DropItemMessage message)
         {
-	        
+	        Inventory.DropItem(message.Slot, message.NumberLeft);
+        }
+
+        public void Visit(UpdateInventorySlotMessage message)
+        {
+	        Inventory.Update(message.SlotId, message.Item);
         }
 
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,
@@ -229,7 +239,7 @@ namespace y1000.Source.Character
 	        player.Init(message.Male, state, Direction.DOWN, message.Coordinate, message.Id, map, message.Name);
 	        if (message.WeaponName != null)
 	        {
-		        var weapon = ItemFactory.Instance.CreatePlayerWeapon(message.WeaponName);
+		        var weapon = EquipmentFactory.Instance.CreateCharacterWeapon(message.WeaponName, message.Male);
 		        player.ChangeWeapon(weapon);
 	        }
 	        player.StateAnimationEventHandler += character.OnPlayerAnimationFinished;

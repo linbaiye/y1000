@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using NLog;
 using y1000.Source.Creature;
+using y1000.Source.Sprite;
 
 namespace y1000.Source.Animation;
 
@@ -60,7 +61,7 @@ public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : Abs
             return Get(direction, MillisToFrameNumber(millis));
         }
         
-        public void Add(AtdStruct atdStruct, SpriteReader reader)
+        public void Add(AtdStruct atdStruct, AtzSprite reader)
         {
             if (!DIRECTION_MAP.TryGetValue(atdStruct.Direction, out var dir))
             {
@@ -85,7 +86,7 @@ public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : Abs
     
     private readonly IDictionary<CreatureState, StateAnimation> _animations = new Dictionary<CreatureState, StateAnimation>();
     
-    protected TA ConfigureState(CreatureState state, AtdReader atdReader, SpriteReader spriteReader)
+    protected TA ConfigureState(CreatureState state, AtdReader atdReader, AtzSprite atzSprite)
     {
         if (_animations.ContainsKey(state))
         {
@@ -96,7 +97,7 @@ public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : Abs
         var atdStructs = atdReader.Find(state);
         foreach (var @struct in atdStructs)
         {
-            stateAnimation.Add(@struct, spriteReader);
+            stateAnimation.Add(@struct, atzSprite);
         }
         _animations.TryAdd(state, stateAnimation);
         return (TA)this;

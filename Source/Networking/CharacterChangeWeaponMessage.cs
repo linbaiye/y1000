@@ -9,18 +9,18 @@ namespace y1000.Source.Networking;
 
 public class CharacterChangeWeaponMessage : IServerMessage, ICharacterMessage
 {
-    public CharacterChangeWeaponMessage(CharacterWeapon characterWeapon, int affectedSlotId, ICharacterItem? newItem, IAttackKungFu? attackKungFu, CreatureState state)
+    public CharacterChangeWeaponMessage(string name, int affectedSlotId, ICharacterItem? newItem, IAttackKungFu? attackKungFu, CreatureState state)
     {
-        Weapon = characterWeapon;
         AffectedSlotId = affectedSlotId;
         NewItem = newItem;
         AttackKungFu = attackKungFu;
         State = state;
+        WeaponName = name;
     }
 
     public CreatureState State { get; }
     
-    public CharacterWeapon Weapon { get; }
+    public string WeaponName { get; }
     
     public int AffectedSlotId { get; }
     

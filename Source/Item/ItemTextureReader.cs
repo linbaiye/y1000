@@ -8,22 +8,20 @@ public class ItemTextureReader
 {
     private readonly Dictionary<string, Texture2D> _textures;
 
+    public static readonly ItemTextureReader Instance = LoadItems();
+
     private ItemTextureReader(Dictionary<string, Texture2D> textures)
     {
         _textures = textures;
     }
 
-    public Texture2D? Get(string name)
-    {
-        return _textures.GetValueOrDefault(name);
-    }
     
-    public Texture2D? Get(int name)
+    public Texture2D? Get(int iconId)
     {
-        return _textures.GetValueOrDefault("000" + name.ToString("000") + ".png");
+        return _textures.GetValueOrDefault("000" + iconId.ToString("000") + ".png");
     }
 
-    public static ItemTextureReader LoadItems()
+    private static ItemTextureReader LoadItems()
     {
         var dirpath = "res://sprite/item";
         var dirAccess = DirAccess.Open(dirpath);

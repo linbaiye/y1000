@@ -9,4 +9,6 @@ public interface ICharacterMessageVisitor
     void Visit(CharacterChangeWeaponMessage message);
 
     void Visit(DropItemMessage message);
+
+    void Visit(UpdateInventorySlotMessage message);
 }

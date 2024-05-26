@@ -11,7 +11,7 @@ namespace y1000.code.monsters.buffalo;
 public partial class Buffalo : AbstractCreature
 {
 
-	private SpriteReader? spriteContainer;
+	private AtzSprite? spriteContainer;
 
 	private Point initCoordinate = Point.Empty;
 
@@ -19,11 +19,11 @@ public partial class Buffalo : AbstractCreature
 
 	private Direction initDirection;
 
-	private void Initiliaze(Point i, SpriteReader spriteReader, long id, Direction direction)
+	private void Initiliaze(Point i, AtzSprite atzSprite, long id, Direction direction)
 	{
 		initCoordinate = i;
 		this.id = id;
-		this.spriteContainer = spriteReader;
+		spriteContainer = atzSprite;
 		initDirection = direction;
 	}
 
@@ -45,8 +45,8 @@ public partial class Buffalo : AbstractCreature
 	{
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/Monster.tscn");
 		Buffalo buffalo = scene.Instantiate<Buffalo>();
-		SpriteReader spriteReader = SpriteReader.LoadOffsetMonsterSprites(MonsterNames.BUFFALO);
-		buffalo.Initiliaze(coordinate, spriteReader, id, direction);
+		AtzSprite atzSprite = AtzSprite.LoadOffsetMonsterSprites(MonsterNames.BUFFALO);
+		buffalo.Initiliaze(coordinate, atzSprite, id, direction);
 		return buffalo;
 	}
 	public static Buffalo Load(Point coordinate, long id)
