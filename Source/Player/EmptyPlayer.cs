@@ -17,6 +17,7 @@ public class EmptyPlayer : IPlayer
 
     public bool IsMale { get; }
     public OffsetTexture HandTexture { get; }
+    public OffsetTexture? ChestTexture { get; }
     public Direction Direction { get; }
     
     public OffsetTexture BodyOffsetTexture { get; }

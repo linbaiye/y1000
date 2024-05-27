@@ -5,10 +5,8 @@ using y1000.Source.Sprite;
 
 namespace y1000.Source.Animation;
 
-public class PlayerBodyAnimation : AbstractPlayerAnimation<PlayerBodyAnimation>
+public class PlayerBodyAnimation : AbstractPlayerBodyAnimation<PlayerBodyAnimation>
 {
-
-    private static readonly ISpriteRepository REPOSITORY = FilesystemSpriteRepository.Instance;
     private static readonly Vector2 DEFAULT_OFFSET = new(16, -12);
 
     private static readonly ISet<CreatureState> PLAYER_STATES = new HashSet<CreatureState>()
@@ -67,26 +65,13 @@ public class PlayerBodyAnimation : AbstractPlayerAnimation<PlayerBodyAnimation>
 
     private static PlayerBodyAnimation Config(string prefix)
     {
-        AtzSprite N00 = REPOSITORY.LoadByName(prefix + "00", DEFAULT_OFFSET);
-        AtzSprite N01 = REPOSITORY.LoadByName(prefix + "01", DEFAULT_OFFSET);
-        AtzSprite N04 = REPOSITORY.LoadByName(prefix + "04", DEFAULT_OFFSET);
-        AtzSprite N02 = REPOSITORY.LoadByName(prefix + "02", DEFAULT_OFFSET);
         var playerAnimation = new PlayerBodyAnimation();
-        return playerAnimation.ConfigureState(CreatureState.IDLE, AtdReader, N00)
-                .ConfigureState(CreatureState.FLY, AtdReader, N00)
-                .ConfigureState(CreatureState.WALK, AtdReader, N00)
-                .ConfigureState(CreatureState.RUN, AtdReader, N00)
-                .ConfigureState(CreatureState.ENFIGHT_WALK, AtdReader, N00)
-                .ConfigureState(CreatureState.HURT, AtdReader, N00)
-                .ConfigureState(CreatureState.COOLDOWN, AtdReader, N00)
-                .ConfigureState(CreatureState.KICK, AtdReader, N01)
-                .ConfigureState(CreatureState.FIST, AtdReader, N01)
-                .ConfigureState(CreatureState.BOW, AtdReader, N04)
-                .ConfigureState(CreatureState.SWORD, AtdReader, N02)
-                .ConfigureState(CreatureState.SWORD2H, AtdReader, N02)
-                .ConfigureState(CreatureState.BLADE, AtdReader, N02)
-                .ConfigureState(CreatureState.BLADE2H, AtdReader, N02)
-            ;
+        AtzSprite N00 = SpriteRepository.LoadByName(prefix + "00", DEFAULT_OFFSET);
+        AtzSprite N01 = SpriteRepository.LoadByName(prefix + "01", DEFAULT_OFFSET);
+        AtzSprite N04 = SpriteRepository.LoadByName(prefix + "04", DEFAULT_OFFSET);
+        AtzSprite N02 = SpriteRepository.LoadByName(prefix + "02", DEFAULT_OFFSET);
+        AtzSprite N03 = SpriteRepository.LoadByName(prefix + "03", DEFAULT_OFFSET);
+        return Config(playerAnimation, N00, N01, N02, N03, N04);
     }
 
     private static PlayerBodyAnimation ForFemale()

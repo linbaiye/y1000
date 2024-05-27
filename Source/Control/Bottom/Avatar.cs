@@ -11,6 +11,7 @@ public partial class Avatar : NinePatchRect
 {
 	private readonly ISpriteRepository _spriteRepository;
 	private TextureRect _body;
+	private Vector2 _bodyOffset;
 	private TextureRect _hand;
 	private static readonly TextureRect MAKE_COMPILER_HAPPY = new();
 	
@@ -35,7 +36,8 @@ public partial class Avatar : NinePatchRect
 		var atzSprite = _spriteRepository.LoadByName(male ? "N00" : "A00");
 		var offsetTexture = atzSprite.Get(AvatarIndex);
 		_body.Texture = offsetTexture.Texture;
-		_body.Position = offsetTexture.Offset;
+		_body.Position = new Vector2((Size.X - offsetTexture.OriginalSize.X) / 2, (Size.Y - offsetTexture.OriginalSize.Y) / 2);
+		_bodyOffset = _body.Position - offsetTexture.Offset;
 	}
 
 	public void DrawCharacter(CharacterImpl character)
@@ -52,7 +54,8 @@ public partial class Avatar : NinePatchRect
 		}
 		var sprite = _spriteRepository.LoadByName(weapon.NonAttackAnimation);
 		var offsetTexture = sprite.Get(AvatarIndex);
-		_hand.Position = offsetTexture.Offset;
+		_hand.Position = _bodyOffset + offsetTexture.Offset;
+		//_hand.Position = offsetTexture.Offset;
 		_hand.Texture = offsetTexture.Texture;
 	}
 }

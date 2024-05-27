@@ -8,6 +8,5 @@ public interface IPlayer : ICreature
     bool IsMale { get; }
 
     void ResetState() { }
-    
-    OffsetTexture? HandTexture { get; }
+
 }

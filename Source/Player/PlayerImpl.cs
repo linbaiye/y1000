@@ -4,22 +4,22 @@ using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Item;
-using y1000.Source.KungFu.Attack;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Player;
 
-public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisitor
+public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisitor, IPlayerAnimation
 {
 	private IPlayerState _state = IPlayerState.Empty;
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
+	private PlayerWeaponAnimation? _handAnimation;
 
-	private PlayerHandAnimation? _handAnimation;
-	
+	private PlayerArmorAnimation? _chestAnimation;
+
 	public event EventHandler<PlayerRangedAttackEventArgs>? OnPlayerShoot;
 	
 	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id, IMap map, string name)
@@ -29,23 +29,21 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		_state = state;
 	}
 	
+	
 	public PlayerWeapon? Weapon { get; private set; }
-
+	
+	public PlayerChest? Chest { get; private set; }
+	
 	public void ChangeWeapon(PlayerWeapon weapon)
 	{
-		if (weapon.AttackKungFuType == AttackKungFuType.SWORD)
-		{
-			_handAnimation = PlayerHandAnimation.LoadSword(weapon.NonAttackAnimation, weapon.AttackAnimation);
-		}
-		else if (weapon.AttackKungFuType == AttackKungFuType.BOW)
-		{
-			_handAnimation = PlayerHandAnimation.LoadBow(weapon.NonAttackAnimation, weapon.AttackAnimation);
-		}
-		else if (weapon.AttackKungFuType == AttackKungFuType.BLADE)
-		{
-			_handAnimation = PlayerHandAnimation.LoadBlade(weapon.NonAttackAnimation, weapon.AttackAnimation);
-		}
+		_handAnimation = PlayerWeaponAnimation.LoadFor(weapon);
 		Weapon = weapon;
+	}
+
+	public void ChangeChest(PlayerChest chest)
+	{
+		_chestAnimation = PlayerArmorAnimation.Create(chest);
+		Chest = chest;
 	}
 
 	public void Visit(PlayerChangeWeaponMessage message)
@@ -123,6 +121,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	}
 
 	public OffsetTexture? HandTexture => _handAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? ChestTexture => _chestAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 
 	public void Visit(PlayerAttackMessage message)
 	{
@@ -156,6 +155,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		if (playerInterpolation.WeaponName != null)
 		{
 			player.ChangeWeapon(EquipmentFactory.Instance.CreatePlayerWeapon(playerInterpolation.WeaponName, playerInterpolation.Male));
+		}
+
+		if (playerInterpolation.ChestName != null)
+		{
+			player.ChangeChest(EquipmentFactory.Instance.CreatePlayerChest(playerInterpolation.ChestName, playerInterpolation.Male));
 		}
 		return player;
 	}

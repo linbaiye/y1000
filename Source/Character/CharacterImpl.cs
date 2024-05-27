@@ -39,12 +39,9 @@ namespace y1000.Source.Character
 
 		public bool IsMale => WrappedPlayer().IsMale;
 		
-		public OffsetTexture? HandTexture => WrappedPlayer().HandTexture;
-
 		public string EntityName => WrappedPlayer().EntityName;
 
 		public CharacterWeapon? Weapon => (CharacterWeapon?) WrappedPlayer().Weapon;
-
 		
 		public long Id => WrappedPlayer().Id;
 
@@ -241,6 +238,12 @@ namespace y1000.Source.Character
 	        {
 		        var weapon = EquipmentFactory.Instance.CreateCharacterWeapon(message.WeaponName, message.Male);
 		        player.ChangeWeapon(weapon);
+	        }
+
+	        if (message.ChestName != null)
+	        {
+		        var chest = EquipmentFactory.Instance.CreatePlayerChest(message.ChestName, message.Male);
+		        player.ChangeChest(chest);
 	        }
 	        player.StateAnimationEventHandler += character.OnPlayerAnimationFinished;
 	        character.FootMagic = message.FootKungFu;

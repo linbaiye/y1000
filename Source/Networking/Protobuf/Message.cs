@@ -132,12 +132,12 @@ namespace Source.Networking.Protobuf {
             "CgtUeXBlZFBhY2tldCJ/ChtDcmVhdHVyZUludGVycG9sYXRpb25QYWNrZXQS",
             "RgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlBy",
             "b3RvYnVmLkludGVycG9sYXRpb25QYWNrZXQSCgoCaWQYAiABKAMSDAoEbmFt",
-            "ZRgDIAEoCSKzAQoZUGxheWVySW50ZXJwb2xhdGlvblBhY2tldBJGCg1pbnRl",
+            "ZRgDIAEoCSLZAQoZUGxheWVySW50ZXJwb2xhdGlvblBhY2tldBJGCg1pbnRl",
             "cnBvbGF0aW9uGAEgASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
             "SW50ZXJwb2xhdGlvblBhY2tldBIKCgJpZBgCIAEoAxIMCgRtYWxlGAMgASgI",
-            "EgwKBG5hbWUYBCABKAkSFwoKd2VhcG9uTmFtZRgFIAEoCUgAiAEBQg0KC193",
-            "ZWFwb25OYW1lIiAKElJlbW92ZUVudGl0eVBhY2tldBIKCgJpZBgBIAEoA2IG",
-            "cHJvdG8z"));
+            "EgwKBG5hbWUYBCABKAkSFwoKd2VhcG9uTmFtZRgFIAEoCUgAiAEBEhYKCWNo",
+            "ZXN0TmFtZRgGIAEoCUgBiAEBQg0KC193ZWFwb25OYW1lQgwKCl9jaGVzdE5h",
+            "bWUiIAoSUmVtb3ZlRW50aXR5UGFja2V0EgoKAmlkGAEgASgDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -169,7 +169,7 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.LoginPacket), global::Source.Networking.Protobuf.LoginPacket.Parser, new[]{ "X", "Y", "Id", "WeaponName", "AttackKungFuLevel", "AttackKungFuName", "FootKungFuLevel", "FootKungFuName", "InventoryItems", "AttackKungFuType", "Name", "Male", "HatName", "ChestName" }, new[]{ "WeaponName", "FootKungFuLevel", "FootKungFuName", "HatName", "ChestName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.Packet), global::Source.Networking.Protobuf.Packet.Parser, new[]{ "PositionPacket", "CreatureInterpolation", "LoginPacket", "Interpolations", "ResponsePacket", "PlayerInterpolation", "RemoveEntity", "AttackEventResponsePacket", "AttackEventPacket", "HurtEventPacket", "ChangeStatePacket", "SwapInventorySlotPacket", "CharacterChangeWeaponPacket", "ChangeWeaponPacket", "DropItem", "ShowItem", "UpdateSlot", "Text" }, new[]{ "TypedPacket" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureInterpolationPacket), global::Source.Networking.Protobuf.CreatureInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Name" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Male", "Name", "WeaponName" }, new[]{ "WeaponName" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Male", "Name", "WeaponName", "ChestName" }, new[]{ "WeaponName", "ChestName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.RemoveEntityPacket), global::Source.Networking.Protobuf.RemoveEntityPacket.Parser, new[]{ "Id" }, null, null, null, null)
           }));
     }
@@ -9689,6 +9689,7 @@ namespace Source.Networking.Protobuf {
       male_ = other.male_;
       name_ = other.name_;
       weaponName_ = other.weaponName_;
+      chestName_ = other.chestName_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -9772,6 +9773,32 @@ namespace Source.Networking.Protobuf {
       weaponName_ = null;
     }
 
+    /// <summary>Field number for the "chestName" field.</summary>
+    public const int ChestNameFieldNumber = 6;
+    private readonly static string ChestNameDefaultValue = "";
+
+    private string chestName_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ChestName {
+      get { return chestName_ ?? ChestNameDefaultValue; }
+      set {
+        chestName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "chestName" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasChestName {
+      get { return chestName_ != null; }
+    }
+    /// <summary>Clears the value of the "chestName" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearChestName() {
+      chestName_ = null;
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -9792,6 +9819,7 @@ namespace Source.Networking.Protobuf {
       if (Male != other.Male) return false;
       if (Name != other.Name) return false;
       if (WeaponName != other.WeaponName) return false;
+      if (ChestName != other.ChestName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -9804,6 +9832,7 @@ namespace Source.Networking.Protobuf {
       if (Male != false) hash ^= Male.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (HasWeaponName) hash ^= WeaponName.GetHashCode();
+      if (HasChestName) hash ^= ChestName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -9842,6 +9871,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(42);
         output.WriteString(WeaponName);
       }
+      if (HasChestName) {
+        output.WriteRawTag(50);
+        output.WriteString(ChestName);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -9872,6 +9905,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(42);
         output.WriteString(WeaponName);
       }
+      if (HasChestName) {
+        output.WriteRawTag(50);
+        output.WriteString(ChestName);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -9896,6 +9933,9 @@ namespace Source.Networking.Protobuf {
       }
       if (HasWeaponName) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(WeaponName);
+      }
+      if (HasChestName) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ChestName);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -9926,6 +9966,9 @@ namespace Source.Networking.Protobuf {
       }
       if (other.HasWeaponName) {
         WeaponName = other.WeaponName;
+      }
+      if (other.HasChestName) {
+        ChestName = other.ChestName;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -9965,6 +10008,10 @@ namespace Source.Networking.Protobuf {
             WeaponName = input.ReadString();
             break;
           }
+          case 50: {
+            ChestName = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -10001,6 +10048,10 @@ namespace Source.Networking.Protobuf {
           }
           case 42: {
             WeaponName = input.ReadString();
+            break;
+          }
+          case 50: {
+            ChestName = input.ReadString();
             break;
           }
         }

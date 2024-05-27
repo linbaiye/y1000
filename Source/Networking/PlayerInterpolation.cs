@@ -26,6 +26,8 @@ public class PlayerInterpolation : IServerMessage
     public string Name { get; }
     
     public string? WeaponName { get; private set; }
+    
+    public string? ChestName { get; private set; }
 
     public override string ToString()
     {
@@ -40,6 +42,10 @@ public class PlayerInterpolation : IServerMessage
             i.WeaponName = packet.WeaponName;
         }
 
+        if (packet.HasChestName)
+        {
+            i.ChestName = packet.ChestName;
+        }
         return i;
     }
 

@@ -51,7 +51,7 @@ public class ItemDb
         return Parse(itemName, "Shape", int.Parse);
     }
 
-    public string GetAttackAnimationName(string equip, bool male)
+    public string GetAttackSpriteIndex(string equip, bool male)
     {
         return ParseEquipmentAnimation(equip, male, () => Parse(equip, "HitMotion", s=> s));
     }
@@ -68,11 +68,11 @@ public class ItemDb
         {
             return type == EquipmentType.WEAPON ? 
                 "w" + Parse(equip, "WearShape", s => s) + postfix.Invoke()
-                : "n" + (int)type;
+                : ('n' + (int)type) + Parse(equip, "WearShape", s => s);
         }
         return type == EquipmentType.WEAPON ? 
             "j" + Parse(equip, "WearShape", s => s) + postfix.Invoke()
-            : "a" + (int)type;
+            : char.Parse('a' + (int)type) + Parse(equip, "WearShape", s => s);
     }
 
     private EquipmentType ParseEquipmentType(string item)
@@ -80,9 +80,14 @@ public class ItemDb
         return Parse(item, "WearPos", s => (EquipmentType)int.Parse(s));
     }
 
-    public string GetAnimationName(string equip, bool male)
+    public string GetWeaponSpriteIndex(string equip, bool male)
     {
         return ParseEquipmentAnimation(equip, male, () => "0");
+    }
+    
+    public string GetSpriteIndex(string equip, bool male)
+    {
+        return ParseEquipmentAnimation(equip, male, () => "");
     }
 
     private static ItemDb Load()

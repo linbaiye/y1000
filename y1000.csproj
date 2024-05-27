@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.1.2">
+<Project Sdk="Godot.NET.Sdk/4.1.1">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -60,7 +60,6 @@
     <Compile Remove="Source\Creature\MessageDrivenCreature.cs" />
     <Compile Remove="Source\Entity\Item\**" />
     <EmbeddedResource Remove="Source\Entity\Item\**" />
-    <Compile Remove="Source\Player\HandSprite.cs" />
     <Compile Remove="Source\Item\Weapon\**" />
     <EmbeddedResource Remove="Source\Item\Weapon\**" />
     <Compile Remove="Source\Item\WeaponType.cs" />

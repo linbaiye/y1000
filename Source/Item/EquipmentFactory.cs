@@ -2,7 +2,7 @@
 
 public class EquipmentFactory
 {
-    public static readonly EquipmentFactory Instance = new EquipmentFactory();
+    public static readonly EquipmentFactory Instance = new();
 
     private readonly ItemDb itemDb;
 
@@ -13,8 +13,8 @@ public class EquipmentFactory
 
     public PlayerWeapon CreatePlayerWeapon(string name, bool male)
     {
-        var animationName = itemDb.GetAnimationName(name, male);
-        var attackAni = itemDb.GetAttackAnimationName(name, male);
+        var animationName = itemDb.GetWeaponSpriteIndex(name, male);
+        var attackAni = itemDb.GetAttackSpriteIndex(name, male);
         var kungfuType = itemDb.GetAttackKungFuType(name);
         return new PlayerWeapon(animationName, attackAni, kungfuType);
     }
@@ -22,9 +22,15 @@ public class EquipmentFactory
     
     public CharacterWeapon CreateCharacterWeapon(string name, bool male)
     {
-        var animationName = itemDb.GetAnimationName(name, male);
-        var attackAni = itemDb.GetAttackAnimationName(name, male);
+        var animationName = itemDb.GetWeaponSpriteIndex(name, male);
+        var attackAni = itemDb.GetAttackSpriteIndex(name, male);
         var kungfuType = itemDb.GetAttackKungFuType(name);
         return new CharacterWeapon(name, animationName, attackAni, kungfuType);
+    }
+
+    public PlayerChest CreatePlayerChest(string name, bool male)
+    {
+        var index = itemDb.GetSpriteIndex(name, male);
+        return new PlayerChest(index + "0", index + "1", index + "2", index + "3", index + "4", name);
     }
 }
