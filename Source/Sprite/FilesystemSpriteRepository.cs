@@ -11,8 +11,8 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
     public static readonly FilesystemSpriteRepository Instance = new();
 
     private static readonly ILogger LOG = LogManager.GetCurrentClassLogger();
-    private static readonly string DIR_PATH = "/Users/ab000785/Downloads/sprite/";
-    //private static readonly string DIR_PATH = "D:/work/sprite/";
+    //private static readonly string DIR_PATH = "/Users/ab000785/Downloads/sprite/";
+    private static readonly string DIR_PATH = "D:/work/sprite/";
     private FilesystemSpriteRepository()
     {
     }
@@ -27,7 +27,6 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
         var spriteDirPath = DIR_PATH + name.ToLower() + "/";
         var offsets = File.ReadLines(spriteDirPath + "offset.txt");
         var vectors = ParseVectors(offsets);
-        //var strings = Directory.GetFiles(spriteDirPath);
         var sizefile = File.ReadLines(spriteDirPath + "size.txt");
         var sizes = ParseVectors(sizefile);
         List<Texture2D> texture2Ds = new List<Texture2D>();
@@ -48,6 +47,7 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
         {
             LOG.Error("Invalid dir {0}.", name);
         }
+        LOG.Debug("Loaded {0}, {1} pictures in total.", name, texture2Ds.Count);
         return new AtzSprite(texture2Ds.ToArray(), vectors, sizes);
     }
 

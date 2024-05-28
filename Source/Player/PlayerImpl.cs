@@ -19,20 +19,52 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	private PlayerWeaponAnimation? _handAnimation;
 
 	private PlayerArmorAnimation? _chestAnimation;
+	
+	private PlayerArmorAnimation? _hairAnimation;
+	
+	private PlayerArmorAnimation? _hatAnimation;
+	
+	private PlayerArmorAnimation? _wristAnimation;
+	
+	private PlayerArmorAnimation? _bootAnimation;
 
 	public event EventHandler<PlayerRangedAttackEventArgs>? OnPlayerShoot;
-	
-	public void Init(bool male, IPlayerState state, Direction direction,  Vector2I coordinate, long id, IMap map, string name)
+
+	private void InitEquipment<T>(string? name, Func<string, T> creator, Action<T> equip)
 	{
-		base.Init(id, direction, coordinate, map, name);
-		IsMale = male;
+		if (name != null)
+		{
+			var equipment = creator.Invoke(name);
+			equip.Invoke(equipment);
+		}
+	}
+	
+	public void Init(IPlayerState state, Direction direction,  Vector2I coordinate, IMap map, PlayerInfo info)
+	{
+		base.Init(info.Id, direction, coordinate, map, info.Name);
+		IsMale = info.Male;
 		_state = state;
+		var equipmentFactory = EquipmentFactory.Instance;
+		InitEquipment(info.WeaponName, n => equipmentFactory.CreatePlayerWeapon(n, IsMale), ChangeWeapon);
+		InitEquipment(info.ChestName, n => equipmentFactory.CreatePlayerChest(n, IsMale), ChangeChest);
+		InitEquipment(info.HairName, n => equipmentFactory.CreatePlayerHair(n, IsMale), ChangeHair);
+		InitEquipment(info.HatName, n => equipmentFactory.CreatePlayerHat(n, IsMale), ChangeHat);
+		InitEquipment(info.WristName, n => equipmentFactory.CreateWrist(n, IsMale, false), ChangeWrist);
+		InitEquipment(info.BootName, n => equipmentFactory.CreateBoot(n, IsMale), ChangeBoot);
 	}
 	
 	
 	public PlayerWeapon? Weapon { get; private set; }
 	
 	public PlayerChest? Chest { get; private set; }
+	
+	public PlayerHair? Hair { get; private set; }
+	
+	public PlayerHat? Hat { get; private set; }
+	
+	public Wrist? Wrist { get; private set; }
+	
+	public Boot? Boot { get; private set; }
 	
 	public void ChangeWeapon(PlayerWeapon weapon)
 	{
@@ -44,6 +76,30 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	{
 		_chestAnimation = PlayerArmorAnimation.Create(chest);
 		Chest = chest;
+	}
+
+	public void ChangeHat(PlayerHat hat)
+	{
+		_hatAnimation = PlayerArmorAnimation.Create(hat);
+		Hat = hat;
+	}
+
+	public void ChangeWrist(Wrist wrist)
+	{
+		_wristAnimation = PlayerArmorAnimation.Create(wrist);
+		Wrist = wrist;
+	}
+	
+	public void ChangeHair(PlayerHair hair)
+	{
+		_hairAnimation = PlayerArmorAnimation.Create(hair);
+		Hair = hair;
+	}
+	
+	public void ChangeBoot(Boot boot)
+	{
+		_bootAnimation = PlayerArmorAnimation.Create(boot);
+		Boot = boot;
 	}
 
 	public void Visit(PlayerChangeWeaponMessage message)
@@ -67,7 +123,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	public bool IsMale { get; private set; }
 	
-	public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
 	
 	public void ChangeState(IPlayerState newState)
 	{
@@ -119,9 +174,14 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	{
 		_state.Reset();
 	}
-
+	
+	public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
 	public OffsetTexture? HandTexture => _handAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? ChestTexture => _chestAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? HairTexture => _hairAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? HatTexture => _hatAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? WristTexture => _wristAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? BootTexture => _bootAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 
 	public void Visit(PlayerAttackMessage message)
 	{
@@ -146,20 +206,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		var player = scene.Instantiate<PlayerImpl>();
 		var interpolation = playerInterpolation.Interpolation;
 		var state = IPlayerState.CreateFrom(playerInterpolation);
-		player.Init(playerInterpolation.Male, state, 
-			interpolation.Direction, interpolation.Coordinate, playerInterpolation.Id, map, playerInterpolation.Name);
+		player.Init(state,
+			interpolation.Direction, interpolation.Coordinate, map, playerInterpolation.PlayerInfo);
 		if (state is PlayerMoveState moveState)
 		{
 			moveState.Init(player);
-		}
-		if (playerInterpolation.WeaponName != null)
-		{
-			player.ChangeWeapon(EquipmentFactory.Instance.CreatePlayerWeapon(playerInterpolation.WeaponName, playerInterpolation.Male));
-		}
-
-		if (playerInterpolation.ChestName != null)
-		{
-			player.ChangeChest(EquipmentFactory.Instance.CreatePlayerChest(playerInterpolation.ChestName, playerInterpolation.Male));
 		}
 		return player;
 	}

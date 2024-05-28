@@ -76,7 +76,8 @@ public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : Abs
             for (int i = 0; i < atdStruct.Frame; i++) {
                 var descriptor = atdStruct.FrameDescriptors[i];
                 var descriptorNumber = descriptor.Number;
-                var offsetTexture = reader.Get(descriptorNumber % 500);
+                var number = descriptorNumber % 500;
+                var offsetTexture = reader.Get(number);
                 textures[i] = offsetTexture;
             }
             DirectionFrames.TryAdd(dir, textures);

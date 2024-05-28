@@ -41,7 +41,12 @@ namespace y1000.Source.Character
 		
 		public string EntityName => WrappedPlayer().EntityName;
 
-		public CharacterWeapon? Weapon => (CharacterWeapon?) WrappedPlayer().Weapon;
+		public PlayerWeapon ? Weapon => WrappedPlayer().Weapon;
+		public PlayerChest? Chest =>  WrappedPlayer().Chest;
+		public PlayerHair? Hair =>  WrappedPlayer().Hair;
+		public PlayerHat? Hat =>  WrappedPlayer().Hat;
+		public Wrist? Wrist =>  WrappedPlayer().Wrist;
+		public Boot? Boot =>  WrappedPlayer().Boot;
 		
 		public long Id => WrappedPlayer().Id;
 
@@ -204,7 +209,7 @@ namespace y1000.Source.Character
 
         public void Visit(CharacterChangeWeaponMessage message)
         {
-	        var weapon = EquipmentFactory.Instance.CreateCharacterWeapon(message.WeaponName, IsMale);
+	        var weapon = EquipmentFactory.Instance.CreatePlayerWeapon(message.WeaponName, IsMale);
 	        WrappedPlayer().ChangeWeapon(weapon);
 	        if (message.State != _state.WrappedState.State)
 	        {
@@ -233,18 +238,7 @@ namespace y1000.Source.Character
 	        var character = scene.Instantiate<CharacterImpl>();
 	        var state = IPlayerState.Idle();
 	        var player = character.WrappedPlayer();
-	        player.Init(message.Male, state, Direction.DOWN, message.Coordinate, message.Id, map, message.Name);
-	        if (message.WeaponName != null)
-	        {
-		        var weapon = EquipmentFactory.Instance.CreateCharacterWeapon(message.WeaponName, message.Male);
-		        player.ChangeWeapon(weapon);
-	        }
-
-	        if (message.ChestName != null)
-	        {
-		        var chest = EquipmentFactory.Instance.CreatePlayerChest(message.ChestName, message.Male);
-		        player.ChangeChest(chest);
-	        }
+	        player.Init(state, Direction.DOWN, message.Coordinate, map, message.MyInfo);
 	        player.StateAnimationEventHandler += character.OnPlayerAnimationFinished;
 	        character.FootMagic = message.FootKungFu;
 	        character.AttackKungFu = message.AttackKungFu;

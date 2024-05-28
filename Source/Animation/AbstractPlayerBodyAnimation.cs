@@ -7,27 +7,29 @@ public abstract class AbstractPlayerBodyAnimation<TA> : AbstractPlayerAnimation<
 {
     protected static readonly ISpriteRepository SpriteRepository = FilesystemSpriteRepository.Instance;
     
-    protected static TA Config(TA animation, AtzSprite N00, AtzSprite N01, AtzSprite N02, AtzSprite N03, AtzSprite N04)
+    protected static TA Config(TA animation, AtzSprite normal, AtzSprite fistKick, AtzSprite swordBladeThrow, AtzSprite axeSpear, AtzSprite bow)
     {
-        return animation.ConfigureState(CreatureState.IDLE, AtdReader, N00)
-            .ConfigureState(CreatureState.FLY, AtdReader, N00)
-            .ConfigureState(CreatureState.WALK, AtdReader, N00)
-            .ConfigureState(CreatureState.RUN, AtdReader, N00)
-            .ConfigureState(CreatureState.ENFIGHT_WALK, AtdReader, N00)
-            .ConfigureState(CreatureState.HURT, AtdReader, N00)
-            .ConfigureState(CreatureState.COOLDOWN, AtdReader, N00)
-            .ConfigureState(CreatureState.SIT, AtdReader, N00)
-            .ConfigureState(CreatureState.STANDUP, AtdReader, N00)
-            .ConfigureState(CreatureState.DIE, AtdReader, N00)
-            .ConfigureState(CreatureState.KICK, AtdReader, N01)
-            .ConfigureState(CreatureState.FIST, AtdReader, N01)
-            .ConfigureState(CreatureState.BOW, AtdReader, N04)
-            .ConfigureState(CreatureState.SWORD, AtdReader, N02)
-            .ConfigureState(CreatureState.SWORD2H, AtdReader, N02)
-            .ConfigureState(CreatureState.BLADE, AtdReader, N02)
-            .ConfigureState(CreatureState.BLADE2H, AtdReader, N02)
-            .ConfigureState(CreatureState.AXE, AtdReader, N03)
-            .ConfigureState(CreatureState.SPEAR, AtdReader, N03)
-            .ConfigureState(CreatureState.THROW, AtdReader, N03);
+        return animation
+                .ConfigureState(CreatureState.SWORD, AtdReader, swordBladeThrow)
+                .ConfigureState(CreatureState.SWORD2H, AtdReader, swordBladeThrow)
+                .ConfigureState(CreatureState.BLADE, AtdReader, swordBladeThrow)
+                .ConfigureState(CreatureState.BLADE2H, AtdReader, swordBladeThrow)
+                .ConfigureState(CreatureState.IDLE, AtdReader, normal)
+                .ConfigureState(CreatureState.AXE, AtdReader, axeSpear)
+                .ConfigureState(CreatureState.FLY, AtdReader, normal)
+                .ConfigureState(CreatureState.WALK, AtdReader, normal)
+                .ConfigureState(CreatureState.RUN, AtdReader, normal)
+                .ConfigureState(CreatureState.ENFIGHT_WALK, AtdReader, normal)
+                .ConfigureState(CreatureState.HURT, AtdReader, normal)
+                .ConfigureState(CreatureState.COOLDOWN, AtdReader, normal)
+                .ConfigureState(CreatureState.SIT, AtdReader, normal)
+                .ConfigureState(CreatureState.STANDUP, AtdReader, normal)
+                .ConfigureState(CreatureState.DIE, AtdReader, normal)
+                .ConfigureState(CreatureState.KICK, AtdReader, fistKick)
+                .ConfigureState(CreatureState.FIST, AtdReader, fistKick)
+                .ConfigureState(CreatureState.BOW, AtdReader, bow)
+                .ConfigureState(CreatureState.SPEAR, AtdReader, axeSpear)
+                .ConfigureState(CreatureState.THROW, AtdReader, swordBladeThrow)
+            ;
     }
 }

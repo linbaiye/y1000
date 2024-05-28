@@ -7,4 +7,12 @@ public interface IPlayerAnimation
     OffsetTexture? HandTexture { get; }
     
     OffsetTexture? ChestTexture { get; }
+    
+    OffsetTexture? HairTexture { get; }
+    
+    OffsetTexture? HatTexture { get; }
+    
+    OffsetTexture? WristTexture { get; }
+    
+    OffsetTexture? BootTexture { get; }
 }

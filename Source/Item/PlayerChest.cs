@@ -1,27 +1,8 @@
 namespace y1000.Source.Item;
 
-public class PlayerChest
+public class PlayerChest : AbstractArmor
 {
-    public PlayerChest(string first, string second, string third, string fourth, string name, string fifth)
+    public PlayerChest(string firstAtzName, string secondAtzName, string thirdAtzName, string fourthAtzName, string fifthAtzName, string name) : base(firstAtzName, secondAtzName, thirdAtzName, fourthAtzName, fifthAtzName, name)
     {
-        First = first;
-        Second = second;
-        Third = third;
-        Fourth = fourth;
-        Name = name;
-        Fifth = fifth;
     }
-    
-    public string First { get; }
-    
-    public string Second { get; }
-    
-    public string Third { get; }
-    
-    public string Fourth { get; }
-    
-    public string Fifth { get; }
-    
-    public string Name { get; }
-    
 }

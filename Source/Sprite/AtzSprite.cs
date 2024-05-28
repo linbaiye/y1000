@@ -11,6 +11,8 @@ namespace y1000.Source.Sprite
 
         private readonly OffsetTexture[] _offsetTextures;
 
+
+
         public AtzSprite(Texture2D[] textures, Vector2[] offsets, Vector2[]? sizes = null)
         {
             _offsetTextures = new OffsetTexture[textures.Length];
@@ -23,8 +25,8 @@ namespace y1000.Source.Sprite
 
         public OffsetTexture Get(int nr)
         {
-            if (nr < 0 || nr > _offsetTextures.Length) {
-                throw new FileNotFoundException();
+            if (nr < 0 || nr >= _offsetTextures.Length) {
+                throw new ArgumentOutOfRangeException("Total " + _offsetTextures.Length + ", current " + nr);
             }
             return _offsetTextures[nr];
         }

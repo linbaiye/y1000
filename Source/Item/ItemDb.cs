@@ -55,24 +55,29 @@ public class ItemDb
     {
         return ParseEquipmentAnimation(equip, male, () => Parse(equip, "HitMotion", s=> s));
     }
-
-    private string ParseEquipmentAnimation(string equip, bool male, Func<string> postfix)
+    
+    private string ParseEquipmentAnimation(string equip, EquipmentType type, bool male, Func<string> postfix)
     {
         var kind = Parse(equip, "Kind", s => s);
-        if (!kind.Equals("6"))
+        if (!kind.Equals("6") && !kind.Equals("24"))
         {
             throw new NotImplementedException(equip + " is not equipment.");
         }
-        var type = ParseEquipmentType(equip);
         if (male)
         {
             return type == EquipmentType.WEAPON ? 
                 "w" + Parse(equip, "WearShape", s => s) + postfix.Invoke()
-                : ('n' + (int)type) + Parse(equip, "WearShape", s => s);
+                : Convert.ToChar('n' + (int)type) + Parse(equip, "WearShape", s => s);
         }
         return type == EquipmentType.WEAPON ? 
             "j" + Parse(equip, "WearShape", s => s) + postfix.Invoke()
-            : char.Parse('a' + (int)type) + Parse(equip, "WearShape", s => s);
+            : Convert.ToChar('a' + (int)type) + Parse(equip, "WearShape", s => s);
+    }
+
+    private string ParseEquipmentAnimation(string equip, bool male, Func<string> postfix)
+    {
+        var type = ParseEquipmentType(equip);
+        return ParseEquipmentAnimation(equip, type, male, postfix);
     }
 
     private EquipmentType ParseEquipmentType(string item)
@@ -89,6 +94,11 @@ public class ItemDb
     {
         return ParseEquipmentAnimation(equip, male, () => "");
     }
+    
+    public string GetSpriteIndex(string equip, bool male, EquipmentType type)
+    {
+        return ParseEquipmentAnimation(equip, type, male, () => "");
+    }
 
     private static ItemDb Load()
     {
@@ -99,6 +109,8 @@ public class ItemDb
         {
             throw new NotImplementedException("Item.sdb does not have header.");
         }
+
+        char ch = 'a';
         var headers = line.Split(",");
         Dictionary<string, int> header = new Dictionary<string, int>();
         for (int i = 0; i < headers.Length; i++)

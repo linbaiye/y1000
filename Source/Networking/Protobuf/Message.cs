@@ -87,57 +87,60 @@ namespace Source.Networking.Protobuf {
             "GAEgAygLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSW50ZXJwb2xh",
             "dGlvblBhY2tldCJTChNJbnZlbnRvcnlJdGVtUGFja2V0EgwKBG5hbWUYASAB",
             "KAkSDgoGc2xvdElkGAIgASgFEhMKBm51bWJlchgDIAEoBUgAiAEBQgkKB19u",
-            "dW1iZXIiIQoRVGV4dE1lc3NhZ2VQYWNrZXQSDAoEdGV4dBgBIAEoCSK1AwoL",
-            "TG9naW5QYWNrZXQSCQoBeBgBIAEoBRIJCgF5GAIgASgFEgoKAmlkGAMgASgD",
-            "EhcKCndlYXBvbk5hbWUYBCABKAlIAIgBARIZChFhdHRhY2tLdW5nRnVMZXZl",
-            "bBgFIAEoBRIYChBhdHRhY2tLdW5nRnVOYW1lGAYgASgJEhwKD2Zvb3RLdW5n",
-            "RnVMZXZlbBgHIAEoBUgBiAEBEhsKDmZvb3RLdW5nRnVOYW1lGAggASgJSAKI",
-            "AQESRwoOaW52ZW50b3J5SXRlbXMYCSADKAsyLy5Tb3VyY2UuTmV0d29ya2lu",
-            "Zy5Qcm90b2J1Zi5JbnZlbnRvcnlJdGVtUGFja2V0EhgKEGF0dGFja0t1bmdG",
-            "dVR5cGUYCiABKAUSDAoEbmFtZRgLIAEoCRIMCgRtYWxlGAwgASgIEhQKB2hh",
-            "dE5hbWUYDSABKAlIA4gBARIWCgljaGVzdE5hbWUYDiABKAlIBIgBAUINCgtf",
-            "d2VhcG9uTmFtZUISChBfZm9vdEt1bmdGdUxldmVsQhEKD19mb290S3VuZ0Z1",
-            "TmFtZUIKCghfaGF0TmFtZUIMCgpfY2hlc3ROYW1lIowLCgZQYWNrZXQSRAoO",
-            "cG9zaXRpb25QYWNrZXQYASABKAsyKi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
-            "b2J1Zi5Qb3NpdGlvblBhY2tldEgAElgKFWNyZWF0dXJlSW50ZXJwb2xhdGlv",
-            "bhgCIAEoCzI3LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNyZWF0dXJl",
-            "SW50ZXJwb2xhdGlvblBhY2tldEgAEj4KC2xvZ2luUGFja2V0GAQgASgLMicu",
-            "U291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuTG9naW5QYWNrZXRIABJKCg5p",
-            "bnRlcnBvbGF0aW9ucxgFIAEoCzIwLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
-            "YnVmLkludGVycG9sYXRpb25zUGFja2V0SAASSQoOcmVzcG9uc2VQYWNrZXQY",
-            "BiABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnB1dFJlc3Bv",
-            "bnNlUGFja2V0SAASVAoTcGxheWVySW50ZXJwb2xhdGlvbhgHIAEoCzI1LlNv",
-            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllckludGVycG9sYXRpb25Q",
-            "YWNrZXRIABJGCgxyZW1vdmVFbnRpdHkYCCABKAsyLi5Tb3VyY2UuTmV0d29y",
-            "a2luZy5Qcm90b2J1Zi5SZW1vdmVFbnRpdHlQYWNrZXRIABJbChlhdHRhY2tF",
-            "dmVudFJlc3BvbnNlUGFja2V0GAkgASgLMjYuU291cmNlLk5ldHdvcmtpbmcu",
-            "UHJvdG9idWYuQ2xpZW50QXR0YWNrUmVzcG9uc2VQYWNrZXRIABJSChFhdHRh",
-            "Y2tFdmVudFBhY2tldBgKIAEoCzI1LlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
-            "YnVmLkNyZWF0dXJlQXR0YWNrRXZlbnRQYWNrZXRIABJOCg9odXJ0RXZlbnRQ",
-            "YWNrZXQYCyABKAsyMy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DcmVh",
-            "dHVyZUh1cnRFdmVudFBhY2tldEgAEkoKEWNoYW5nZVN0YXRlUGFja2V0GAwg",
-            "ASgLMi0uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2hhbmdlU3RhdGVQ",
-            "YWNrZXRIABJWChdzd2FwSW52ZW50b3J5U2xvdFBhY2tldBgNIAEoCzIzLlNv",
-            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlN3YXBJbnZlbnRvcnlTbG90UGFj",
-            "a2V0SAASXgobY2hhcmFjdGVyQ2hhbmdlV2VhcG9uUGFja2V0GA4gASgLMjcu",
-            "U291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2hhcmFjdGVyQ2hhbmdlV2Vh",
-            "cG9uUGFja2V0SAASTAoSY2hhbmdlV2VhcG9uUGFja2V0GA8gASgLMi4uU291",
-            "cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2hhbmdlV2VhcG9uUGFja2V0SAAS",
-            "RQoIZHJvcEl0ZW0YECABKAsyMS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
-            "Zi5Ecm9wSXRlbUNvbmZpcm1QYWNrZXRIABI+CghzaG93SXRlbRgRIAEoCzIq",
-            "LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlNob3dJdGVtUGFja2V0SAAS",
-            "RQoKdXBkYXRlU2xvdBgSIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
-            "YnVmLkludmVudG9yeUl0ZW1QYWNrZXRIABI9CgR0ZXh0GBMgASgLMi0uU291",
-            "cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuVGV4dE1lc3NhZ2VQYWNrZXRIAEIN",
-            "CgtUeXBlZFBhY2tldCJ/ChtDcmVhdHVyZUludGVycG9sYXRpb25QYWNrZXQS",
-            "RgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlBy",
-            "b3RvYnVmLkludGVycG9sYXRpb25QYWNrZXQSCgoCaWQYAiABKAMSDAoEbmFt",
-            "ZRgDIAEoCSLZAQoZUGxheWVySW50ZXJwb2xhdGlvblBhY2tldBJGCg1pbnRl",
-            "cnBvbGF0aW9uGAEgASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
-            "SW50ZXJwb2xhdGlvblBhY2tldBIKCgJpZBgCIAEoAxIMCgRtYWxlGAMgASgI",
-            "EgwKBG5hbWUYBCABKAkSFwoKd2VhcG9uTmFtZRgFIAEoCUgAiAEBEhYKCWNo",
-            "ZXN0TmFtZRgGIAEoCUgBiAEBQg0KC193ZWFwb25OYW1lQgwKCl9jaGVzdE5h",
-            "bWUiIAoSUmVtb3ZlRW50aXR5UGFja2V0EgoKAmlkGAEgASgDYgZwcm90bzM="));
+            "dW1iZXIiIQoRVGV4dE1lc3NhZ2VQYWNrZXQSDAoEdGV4dBgBIAEoCSLZAgoL",
+            "TG9naW5QYWNrZXQSCQoBeBgBIAEoBRIJCgF5GAIgASgFEjoKBGluZm8YAyAB",
+            "KAsyLC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJJbmZvUGFj",
+            "a2V0EhkKEWF0dGFja0t1bmdGdUxldmVsGAUgASgFEhgKEGF0dGFja0t1bmdG",
+            "dU5hbWUYBiABKAkSHAoPZm9vdEt1bmdGdUxldmVsGAcgASgFSACIAQESGwoO",
+            "Zm9vdEt1bmdGdU5hbWUYCCABKAlIAYgBARJHCg5pbnZlbnRvcnlJdGVtcxgJ",
+            "IAMoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludmVudG9yeUl0",
+            "ZW1QYWNrZXQSGAoQYXR0YWNrS3VuZ0Z1VHlwZRgKIAEoBUISChBfZm9vdEt1",
+            "bmdGdUxldmVsQhEKD19mb290S3VuZ0Z1TmFtZSKMCwoGUGFja2V0EkQKDnBv",
+            "c2l0aW9uUGFja2V0GAEgASgLMiouU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
+            "dWYuUG9zaXRpb25QYWNrZXRIABJYChVjcmVhdHVyZUludGVycG9sYXRpb24Y",
+            "AiABKAsyNy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DcmVhdHVyZUlu",
+            "dGVycG9sYXRpb25QYWNrZXRIABI+Cgtsb2dpblBhY2tldBgEIAEoCzInLlNv",
+            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkxvZ2luUGFja2V0SAASSgoOaW50",
+            "ZXJwb2xhdGlvbnMYBSABKAsyMC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
+            "Zi5JbnRlcnBvbGF0aW9uc1BhY2tldEgAEkkKDnJlc3BvbnNlUGFja2V0GAYg",
+            "ASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSW5wdXRSZXNwb25z",
+            "ZVBhY2tldEgAElQKE3BsYXllckludGVycG9sYXRpb24YByABKAsyNS5Tb3Vy",
+            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJJbnRlcnBvbGF0aW9uUGFj",
+            "a2V0SAASRgoMcmVtb3ZlRW50aXR5GAggASgLMi4uU291cmNlLk5ldHdvcmtp",
+            "bmcuUHJvdG9idWYuUmVtb3ZlRW50aXR5UGFja2V0SAASWwoZYXR0YWNrRXZl",
+            "bnRSZXNwb25zZVBhY2tldBgJIAEoCzI2LlNvdXJjZS5OZXR3b3JraW5nLlBy",
+            "b3RvYnVmLkNsaWVudEF0dGFja1Jlc3BvbnNlUGFja2V0SAASUgoRYXR0YWNr",
+            "RXZlbnRQYWNrZXQYCiABKAsyNS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
+            "Zi5DcmVhdHVyZUF0dGFja0V2ZW50UGFja2V0SAASTgoPaHVydEV2ZW50UGFj",
+            "a2V0GAsgASgLMjMuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ3JlYXR1",
+            "cmVIdXJ0RXZlbnRQYWNrZXRIABJKChFjaGFuZ2VTdGF0ZVBhY2tldBgMIAEo",
+            "CzItLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNoYW5nZVN0YXRlUGFj",
+            "a2V0SAASVgoXc3dhcEludmVudG9yeVNsb3RQYWNrZXQYDSABKAsyMy5Tb3Vy",
+            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Td2FwSW52ZW50b3J5U2xvdFBhY2tl",
+            "dEgAEl4KG2NoYXJhY3RlckNoYW5nZVdlYXBvblBhY2tldBgOIAEoCzI3LlNv",
+            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNoYXJhY3RlckNoYW5nZVdlYXBv",
+            "blBhY2tldEgAEkwKEmNoYW5nZVdlYXBvblBhY2tldBgPIAEoCzIuLlNvdXJj",
+            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLkNoYW5nZVdlYXBvblBhY2tldEgAEkUK",
+            "CGRyb3BJdGVtGBAgASgLMjEuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
+            "RHJvcEl0ZW1Db25maXJtUGFja2V0SAASPgoIc2hvd0l0ZW0YESABKAsyKi5T",
+            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5TaG93SXRlbVBhY2tldEgAEkUK",
+            "CnVwZGF0ZVNsb3QYEiABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
+            "Zi5JbnZlbnRvcnlJdGVtUGFja2V0SAASPQoEdGV4dBgTIAEoCzItLlNvdXJj",
+            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLlRleHRNZXNzYWdlUGFja2V0SABCDQoL",
+            "VHlwZWRQYWNrZXQifwobQ3JlYXR1cmVJbnRlcnBvbGF0aW9uUGFja2V0EkYK",
+            "DWludGVycG9sYXRpb24YASABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
+            "b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EgoKAmlkGAIgASgDEgwKBG5hbWUY",
+            "AyABKAkimAIKEFBsYXllckluZm9QYWNrZXQSCgoCaWQYAiABKAMSDAoEbWFs",
+            "ZRgDIAEoCBIMCgRuYW1lGAQgASgJEhcKCndlYXBvbk5hbWUYBSABKAlIAIgB",
+            "ARIWCgljaGVzdE5hbWUYBiABKAlIAYgBARIVCghoYWlyTmFtZRgHIAEoCUgC",
+            "iAEBEhQKB2hhdE5hbWUYCCABKAlIA4gBARIWCgl3cmlzdE5hbWUYCSABKAlI",
+            "BIgBARIVCghib290TmFtZRgKIAEoCUgFiAEBQg0KC193ZWFwb25OYW1lQgwK",
+            "Cl9jaGVzdE5hbWVCCwoJX2hhaXJOYW1lQgoKCF9oYXROYW1lQgwKCl93cmlz",
+            "dE5hbWVCCwoJX2Jvb3ROYW1lIp8BChlQbGF5ZXJJbnRlcnBvbGF0aW9uUGFj",
+            "a2V0EkYKDWludGVycG9sYXRpb24YASABKAsyLy5Tb3VyY2UuTmV0d29ya2lu",
+            "Zy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EjoKBGluZm8YAiABKAsy",
+            "LC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJJbmZvUGFja2V0",
+            "IiAKElJlbW92ZUVudGl0eVBhY2tldBIKCgJpZBgBIAEoA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -166,10 +169,11 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationsPacket), global::Source.Networking.Protobuf.InterpolationsPacket.Parser, new[]{ "Interpolations" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InventoryItemPacket), global::Source.Networking.Protobuf.InventoryItemPacket.Parser, new[]{ "Name", "SlotId", "Number" }, new[]{ "Number" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.TextMessagePacket), global::Source.Networking.Protobuf.TextMessagePacket.Parser, new[]{ "Text" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.LoginPacket), global::Source.Networking.Protobuf.LoginPacket.Parser, new[]{ "X", "Y", "Id", "WeaponName", "AttackKungFuLevel", "AttackKungFuName", "FootKungFuLevel", "FootKungFuName", "InventoryItems", "AttackKungFuType", "Name", "Male", "HatName", "ChestName" }, new[]{ "WeaponName", "FootKungFuLevel", "FootKungFuName", "HatName", "ChestName" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.LoginPacket), global::Source.Networking.Protobuf.LoginPacket.Parser, new[]{ "X", "Y", "Info", "AttackKungFuLevel", "AttackKungFuName", "FootKungFuLevel", "FootKungFuName", "InventoryItems", "AttackKungFuType" }, new[]{ "FootKungFuLevel", "FootKungFuName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.Packet), global::Source.Networking.Protobuf.Packet.Parser, new[]{ "PositionPacket", "CreatureInterpolation", "LoginPacket", "Interpolations", "ResponsePacket", "PlayerInterpolation", "RemoveEntity", "AttackEventResponsePacket", "AttackEventPacket", "HurtEventPacket", "ChangeStatePacket", "SwapInventorySlotPacket", "CharacterChangeWeaponPacket", "ChangeWeaponPacket", "DropItem", "ShowItem", "UpdateSlot", "Text" }, new[]{ "TypedPacket" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureInterpolationPacket), global::Source.Networking.Protobuf.CreatureInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Name" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Male", "Name", "WeaponName", "ChestName" }, new[]{ "WeaponName", "ChestName" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInfoPacket), global::Source.Networking.Protobuf.PlayerInfoPacket.Parser, new[]{ "Id", "Male", "Name", "WeaponName", "ChestName", "HairName", "HatName", "WristName", "BootName" }, new[]{ "WeaponName", "ChestName", "HairName", "HatName", "WristName", "BootName" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Info" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.RemoveEntityPacket), global::Source.Networking.Protobuf.RemoveEntityPacket.Parser, new[]{ "Id" }, null, null, null, null)
           }));
     }
@@ -7548,18 +7552,13 @@ namespace Source.Networking.Protobuf {
       _hasBits0 = other._hasBits0;
       x_ = other.x_;
       y_ = other.y_;
-      id_ = other.id_;
-      weaponName_ = other.weaponName_;
+      info_ = other.info_ != null ? other.info_.Clone() : null;
       attackKungFuLevel_ = other.attackKungFuLevel_;
       attackKungFuName_ = other.attackKungFuName_;
       footKungFuLevel_ = other.footKungFuLevel_;
       footKungFuName_ = other.footKungFuName_;
       inventoryItems_ = other.inventoryItems_.Clone();
       attackKungFuType_ = other.attackKungFuType_;
-      name_ = other.name_;
-      male_ = other.male_;
-      hatName_ = other.hatName_;
-      chestName_ = other.chestName_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -7593,42 +7592,16 @@ namespace Source.Networking.Protobuf {
       }
     }
 
-    /// <summary>Field number for the "id" field.</summary>
-    public const int IdFieldNumber = 3;
-    private long id_;
+    /// <summary>Field number for the "info" field.</summary>
+    public const int InfoFieldNumber = 3;
+    private global::Source.Networking.Protobuf.PlayerInfoPacket info_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long Id {
-      get { return id_; }
+    public global::Source.Networking.Protobuf.PlayerInfoPacket Info {
+      get { return info_; }
       set {
-        id_ = value;
+        info_ = value;
       }
-    }
-
-    /// <summary>Field number for the "weaponName" field.</summary>
-    public const int WeaponNameFieldNumber = 4;
-    private readonly static string WeaponNameDefaultValue = "";
-
-    private string weaponName_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string WeaponName {
-      get { return weaponName_ ?? WeaponNameDefaultValue; }
-      set {
-        weaponName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-    /// <summary>Gets whether the "weaponName" field is set</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool HasWeaponName {
-      get { return weaponName_ != null; }
-    }
-    /// <summary>Clears the value of the "weaponName" field</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void ClearWeaponName() {
-      weaponName_ = null;
     }
 
     /// <summary>Field number for the "attackKungFuLevel" field.</summary>
@@ -7731,82 +7704,6 @@ namespace Source.Networking.Protobuf {
       }
     }
 
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 11;
-    private string name_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Name {
-      get { return name_; }
-      set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "male" field.</summary>
-    public const int MaleFieldNumber = 12;
-    private bool male_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Male {
-      get { return male_; }
-      set {
-        male_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "hatName" field.</summary>
-    public const int HatNameFieldNumber = 13;
-    private readonly static string HatNameDefaultValue = "";
-
-    private string hatName_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string HatName {
-      get { return hatName_ ?? HatNameDefaultValue; }
-      set {
-        hatName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-    /// <summary>Gets whether the "hatName" field is set</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool HasHatName {
-      get { return hatName_ != null; }
-    }
-    /// <summary>Clears the value of the "hatName" field</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void ClearHatName() {
-      hatName_ = null;
-    }
-
-    /// <summary>Field number for the "chestName" field.</summary>
-    public const int ChestNameFieldNumber = 14;
-    private readonly static string ChestNameDefaultValue = "";
-
-    private string chestName_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string ChestName {
-      get { return chestName_ ?? ChestNameDefaultValue; }
-      set {
-        chestName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-    /// <summary>Gets whether the "chestName" field is set</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool HasChestName {
-      get { return chestName_ != null; }
-    }
-    /// <summary>Clears the value of the "chestName" field</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void ClearChestName() {
-      chestName_ = null;
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -7824,18 +7721,13 @@ namespace Source.Networking.Protobuf {
       }
       if (X != other.X) return false;
       if (Y != other.Y) return false;
-      if (Id != other.Id) return false;
-      if (WeaponName != other.WeaponName) return false;
+      if (!object.Equals(Info, other.Info)) return false;
       if (AttackKungFuLevel != other.AttackKungFuLevel) return false;
       if (AttackKungFuName != other.AttackKungFuName) return false;
       if (FootKungFuLevel != other.FootKungFuLevel) return false;
       if (FootKungFuName != other.FootKungFuName) return false;
       if(!inventoryItems_.Equals(other.inventoryItems_)) return false;
       if (AttackKungFuType != other.AttackKungFuType) return false;
-      if (Name != other.Name) return false;
-      if (Male != other.Male) return false;
-      if (HatName != other.HatName) return false;
-      if (ChestName != other.ChestName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -7845,18 +7737,13 @@ namespace Source.Networking.Protobuf {
       int hash = 1;
       if (X != 0) hash ^= X.GetHashCode();
       if (Y != 0) hash ^= Y.GetHashCode();
-      if (Id != 0L) hash ^= Id.GetHashCode();
-      if (HasWeaponName) hash ^= WeaponName.GetHashCode();
+      if (info_ != null) hash ^= Info.GetHashCode();
       if (AttackKungFuLevel != 0) hash ^= AttackKungFuLevel.GetHashCode();
       if (AttackKungFuName.Length != 0) hash ^= AttackKungFuName.GetHashCode();
       if (HasFootKungFuLevel) hash ^= FootKungFuLevel.GetHashCode();
       if (HasFootKungFuName) hash ^= FootKungFuName.GetHashCode();
       hash ^= inventoryItems_.GetHashCode();
       if (AttackKungFuType != 0) hash ^= AttackKungFuType.GetHashCode();
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (Male != false) hash ^= Male.GetHashCode();
-      if (HasHatName) hash ^= HatName.GetHashCode();
-      if (HasChestName) hash ^= ChestName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -7883,13 +7770,9 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(16);
         output.WriteInt32(Y);
       }
-      if (Id != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(Id);
-      }
-      if (HasWeaponName) {
-        output.WriteRawTag(34);
-        output.WriteString(WeaponName);
+      if (info_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Info);
       }
       if (AttackKungFuLevel != 0) {
         output.WriteRawTag(40);
@@ -7912,22 +7795,6 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(80);
         output.WriteInt32(AttackKungFuType);
       }
-      if (Name.Length != 0) {
-        output.WriteRawTag(90);
-        output.WriteString(Name);
-      }
-      if (Male != false) {
-        output.WriteRawTag(96);
-        output.WriteBool(Male);
-      }
-      if (HasHatName) {
-        output.WriteRawTag(106);
-        output.WriteString(HatName);
-      }
-      if (HasChestName) {
-        output.WriteRawTag(114);
-        output.WriteString(ChestName);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -7946,13 +7813,9 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(16);
         output.WriteInt32(Y);
       }
-      if (Id != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(Id);
-      }
-      if (HasWeaponName) {
-        output.WriteRawTag(34);
-        output.WriteString(WeaponName);
+      if (info_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Info);
       }
       if (AttackKungFuLevel != 0) {
         output.WriteRawTag(40);
@@ -7975,22 +7838,6 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(80);
         output.WriteInt32(AttackKungFuType);
       }
-      if (Name.Length != 0) {
-        output.WriteRawTag(90);
-        output.WriteString(Name);
-      }
-      if (Male != false) {
-        output.WriteRawTag(96);
-        output.WriteBool(Male);
-      }
-      if (HasHatName) {
-        output.WriteRawTag(106);
-        output.WriteString(HatName);
-      }
-      if (HasChestName) {
-        output.WriteRawTag(114);
-        output.WriteString(ChestName);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -8007,11 +7854,8 @@ namespace Source.Networking.Protobuf {
       if (Y != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
       }
-      if (Id != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
-      }
-      if (HasWeaponName) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(WeaponName);
+      if (info_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Info);
       }
       if (AttackKungFuLevel != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(AttackKungFuLevel);
@@ -8028,18 +7872,6 @@ namespace Source.Networking.Protobuf {
       size += inventoryItems_.CalculateSize(_repeated_inventoryItems_codec);
       if (AttackKungFuType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(AttackKungFuType);
-      }
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      if (Male != false) {
-        size += 1 + 1;
-      }
-      if (HasHatName) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(HatName);
-      }
-      if (HasChestName) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ChestName);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -8059,11 +7891,11 @@ namespace Source.Networking.Protobuf {
       if (other.Y != 0) {
         Y = other.Y;
       }
-      if (other.Id != 0L) {
-        Id = other.Id;
-      }
-      if (other.HasWeaponName) {
-        WeaponName = other.WeaponName;
+      if (other.info_ != null) {
+        if (info_ == null) {
+          Info = new global::Source.Networking.Protobuf.PlayerInfoPacket();
+        }
+        Info.MergeFrom(other.Info);
       }
       if (other.AttackKungFuLevel != 0) {
         AttackKungFuLevel = other.AttackKungFuLevel;
@@ -8080,18 +7912,6 @@ namespace Source.Networking.Protobuf {
       inventoryItems_.Add(other.inventoryItems_);
       if (other.AttackKungFuType != 0) {
         AttackKungFuType = other.AttackKungFuType;
-      }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
-      }
-      if (other.Male != false) {
-        Male = other.Male;
-      }
-      if (other.HasHatName) {
-        HatName = other.HatName;
-      }
-      if (other.HasChestName) {
-        ChestName = other.ChestName;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -8116,12 +7936,11 @@ namespace Source.Networking.Protobuf {
             Y = input.ReadInt32();
             break;
           }
-          case 24: {
-            Id = input.ReadInt64();
-            break;
-          }
-          case 34: {
-            WeaponName = input.ReadString();
+          case 26: {
+            if (info_ == null) {
+              Info = new global::Source.Networking.Protobuf.PlayerInfoPacket();
+            }
+            input.ReadMessage(Info);
             break;
           }
           case 40: {
@@ -8148,22 +7967,6 @@ namespace Source.Networking.Protobuf {
             AttackKungFuType = input.ReadInt32();
             break;
           }
-          case 90: {
-            Name = input.ReadString();
-            break;
-          }
-          case 96: {
-            Male = input.ReadBool();
-            break;
-          }
-          case 106: {
-            HatName = input.ReadString();
-            break;
-          }
-          case 114: {
-            ChestName = input.ReadString();
-            break;
-          }
         }
       }
     #endif
@@ -8187,12 +7990,11 @@ namespace Source.Networking.Protobuf {
             Y = input.ReadInt32();
             break;
           }
-          case 24: {
-            Id = input.ReadInt64();
-            break;
-          }
-          case 34: {
-            WeaponName = input.ReadString();
+          case 26: {
+            if (info_ == null) {
+              Info = new global::Source.Networking.Protobuf.PlayerInfoPacket();
+            }
+            input.ReadMessage(Info);
             break;
           }
           case 40: {
@@ -8217,22 +8019,6 @@ namespace Source.Networking.Protobuf {
           }
           case 80: {
             AttackKungFuType = input.ReadInt32();
-            break;
-          }
-          case 90: {
-            Name = input.ReadString();
-            break;
-          }
-          case 96: {
-            Male = input.ReadBool();
-            break;
-          }
-          case 106: {
-            HatName = input.ReadString();
-            break;
-          }
-          case 114: {
-            ChestName = input.ReadString();
             break;
           }
         }
@@ -9650,16 +9436,16 @@ namespace Source.Networking.Protobuf {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class PlayerInterpolationPacket : pb::IMessage<PlayerInterpolationPacket>
+  public sealed partial class PlayerInfoPacket : pb::IMessage<PlayerInfoPacket>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<PlayerInterpolationPacket> _parser = new pb::MessageParser<PlayerInterpolationPacket>(() => new PlayerInterpolationPacket());
+    private static readonly pb::MessageParser<PlayerInfoPacket> _parser = new pb::MessageParser<PlayerInfoPacket>(() => new PlayerInfoPacket());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<PlayerInterpolationPacket> Parser { get { return _parser; } }
+    public static pb::MessageParser<PlayerInfoPacket> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -9675,7 +9461,7 @@ namespace Source.Networking.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public PlayerInterpolationPacket() {
+    public PlayerInfoPacket() {
       OnConstruction();
     }
 
@@ -9683,32 +9469,23 @@ namespace Source.Networking.Protobuf {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public PlayerInterpolationPacket(PlayerInterpolationPacket other) : this() {
-      interpolation_ = other.interpolation_ != null ? other.interpolation_.Clone() : null;
+    public PlayerInfoPacket(PlayerInfoPacket other) : this() {
       id_ = other.id_;
       male_ = other.male_;
       name_ = other.name_;
       weaponName_ = other.weaponName_;
       chestName_ = other.chestName_;
+      hairName_ = other.hairName_;
+      hatName_ = other.hatName_;
+      wristName_ = other.wristName_;
+      bootName_ = other.bootName_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public PlayerInterpolationPacket Clone() {
-      return new PlayerInterpolationPacket(this);
-    }
-
-    /// <summary>Field number for the "interpolation" field.</summary>
-    public const int InterpolationFieldNumber = 1;
-    private global::Source.Networking.Protobuf.InterpolationPacket interpolation_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Source.Networking.Protobuf.InterpolationPacket Interpolation {
-      get { return interpolation_; }
-      set {
-        interpolation_ = value;
-      }
+    public PlayerInfoPacket Clone() {
+      return new PlayerInfoPacket(this);
     }
 
     /// <summary>Field number for the "id" field.</summary>
@@ -9799,6 +9576,505 @@ namespace Source.Networking.Protobuf {
       chestName_ = null;
     }
 
+    /// <summary>Field number for the "hairName" field.</summary>
+    public const int HairNameFieldNumber = 7;
+    private readonly static string HairNameDefaultValue = "";
+
+    private string hairName_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string HairName {
+      get { return hairName_ ?? HairNameDefaultValue; }
+      set {
+        hairName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "hairName" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasHairName {
+      get { return hairName_ != null; }
+    }
+    /// <summary>Clears the value of the "hairName" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearHairName() {
+      hairName_ = null;
+    }
+
+    /// <summary>Field number for the "hatName" field.</summary>
+    public const int HatNameFieldNumber = 8;
+    private readonly static string HatNameDefaultValue = "";
+
+    private string hatName_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string HatName {
+      get { return hatName_ ?? HatNameDefaultValue; }
+      set {
+        hatName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "hatName" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasHatName {
+      get { return hatName_ != null; }
+    }
+    /// <summary>Clears the value of the "hatName" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearHatName() {
+      hatName_ = null;
+    }
+
+    /// <summary>Field number for the "wristName" field.</summary>
+    public const int WristNameFieldNumber = 9;
+    private readonly static string WristNameDefaultValue = "";
+
+    private string wristName_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string WristName {
+      get { return wristName_ ?? WristNameDefaultValue; }
+      set {
+        wristName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "wristName" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasWristName {
+      get { return wristName_ != null; }
+    }
+    /// <summary>Clears the value of the "wristName" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearWristName() {
+      wristName_ = null;
+    }
+
+    /// <summary>Field number for the "bootName" field.</summary>
+    public const int BootNameFieldNumber = 10;
+    private readonly static string BootNameDefaultValue = "";
+
+    private string bootName_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string BootName {
+      get { return bootName_ ?? BootNameDefaultValue; }
+      set {
+        bootName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "bootName" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasBootName {
+      get { return bootName_ != null; }
+    }
+    /// <summary>Clears the value of the "bootName" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearBootName() {
+      bootName_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as PlayerInfoPacket);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(PlayerInfoPacket other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (Male != other.Male) return false;
+      if (Name != other.Name) return false;
+      if (WeaponName != other.WeaponName) return false;
+      if (ChestName != other.ChestName) return false;
+      if (HairName != other.HairName) return false;
+      if (HatName != other.HatName) return false;
+      if (WristName != other.WristName) return false;
+      if (BootName != other.BootName) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0L) hash ^= Id.GetHashCode();
+      if (Male != false) hash ^= Male.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (HasWeaponName) hash ^= WeaponName.GetHashCode();
+      if (HasChestName) hash ^= ChestName.GetHashCode();
+      if (HasHairName) hash ^= HairName.GetHashCode();
+      if (HasHatName) hash ^= HatName.GetHashCode();
+      if (HasWristName) hash ^= WristName.GetHashCode();
+      if (HasBootName) hash ^= BootName.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(Id);
+      }
+      if (Male != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(Male);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Name);
+      }
+      if (HasWeaponName) {
+        output.WriteRawTag(42);
+        output.WriteString(WeaponName);
+      }
+      if (HasChestName) {
+        output.WriteRawTag(50);
+        output.WriteString(ChestName);
+      }
+      if (HasHairName) {
+        output.WriteRawTag(58);
+        output.WriteString(HairName);
+      }
+      if (HasHatName) {
+        output.WriteRawTag(66);
+        output.WriteString(HatName);
+      }
+      if (HasWristName) {
+        output.WriteRawTag(74);
+        output.WriteString(WristName);
+      }
+      if (HasBootName) {
+        output.WriteRawTag(82);
+        output.WriteString(BootName);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(Id);
+      }
+      if (Male != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(Male);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Name);
+      }
+      if (HasWeaponName) {
+        output.WriteRawTag(42);
+        output.WriteString(WeaponName);
+      }
+      if (HasChestName) {
+        output.WriteRawTag(50);
+        output.WriteString(ChestName);
+      }
+      if (HasHairName) {
+        output.WriteRawTag(58);
+        output.WriteString(HairName);
+      }
+      if (HasHatName) {
+        output.WriteRawTag(66);
+        output.WriteString(HatName);
+      }
+      if (HasWristName) {
+        output.WriteRawTag(74);
+        output.WriteString(WristName);
+      }
+      if (HasBootName) {
+        output.WriteRawTag(82);
+        output.WriteString(BootName);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (Male != false) {
+        size += 1 + 1;
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (HasWeaponName) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(WeaponName);
+      }
+      if (HasChestName) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ChestName);
+      }
+      if (HasHairName) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(HairName);
+      }
+      if (HasHatName) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(HatName);
+      }
+      if (HasWristName) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(WristName);
+      }
+      if (HasBootName) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(BootName);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(PlayerInfoPacket other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0L) {
+        Id = other.Id;
+      }
+      if (other.Male != false) {
+        Male = other.Male;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.HasWeaponName) {
+        WeaponName = other.WeaponName;
+      }
+      if (other.HasChestName) {
+        ChestName = other.ChestName;
+      }
+      if (other.HasHairName) {
+        HairName = other.HairName;
+      }
+      if (other.HasHatName) {
+        HatName = other.HatName;
+      }
+      if (other.HasWristName) {
+        WristName = other.WristName;
+      }
+      if (other.HasBootName) {
+        BootName = other.BootName;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 16: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            Male = input.ReadBool();
+            break;
+          }
+          case 34: {
+            Name = input.ReadString();
+            break;
+          }
+          case 42: {
+            WeaponName = input.ReadString();
+            break;
+          }
+          case 50: {
+            ChestName = input.ReadString();
+            break;
+          }
+          case 58: {
+            HairName = input.ReadString();
+            break;
+          }
+          case 66: {
+            HatName = input.ReadString();
+            break;
+          }
+          case 74: {
+            WristName = input.ReadString();
+            break;
+          }
+          case 82: {
+            BootName = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 16: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            Male = input.ReadBool();
+            break;
+          }
+          case 34: {
+            Name = input.ReadString();
+            break;
+          }
+          case 42: {
+            WeaponName = input.ReadString();
+            break;
+          }
+          case 50: {
+            ChestName = input.ReadString();
+            break;
+          }
+          case 58: {
+            HairName = input.ReadString();
+            break;
+          }
+          case 66: {
+            HatName = input.ReadString();
+            break;
+          }
+          case 74: {
+            WristName = input.ReadString();
+            break;
+          }
+          case 82: {
+            BootName = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class PlayerInterpolationPacket : pb::IMessage<PlayerInterpolationPacket>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<PlayerInterpolationPacket> _parser = new pb::MessageParser<PlayerInterpolationPacket>(() => new PlayerInterpolationPacket());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<PlayerInterpolationPacket> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[29]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public PlayerInterpolationPacket() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public PlayerInterpolationPacket(PlayerInterpolationPacket other) : this() {
+      interpolation_ = other.interpolation_ != null ? other.interpolation_.Clone() : null;
+      info_ = other.info_ != null ? other.info_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public PlayerInterpolationPacket Clone() {
+      return new PlayerInterpolationPacket(this);
+    }
+
+    /// <summary>Field number for the "interpolation" field.</summary>
+    public const int InterpolationFieldNumber = 1;
+    private global::Source.Networking.Protobuf.InterpolationPacket interpolation_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Source.Networking.Protobuf.InterpolationPacket Interpolation {
+      get { return interpolation_; }
+      set {
+        interpolation_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "info" field.</summary>
+    public const int InfoFieldNumber = 2;
+    private global::Source.Networking.Protobuf.PlayerInfoPacket info_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Source.Networking.Protobuf.PlayerInfoPacket Info {
+      get { return info_; }
+      set {
+        info_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -9815,11 +10091,7 @@ namespace Source.Networking.Protobuf {
         return true;
       }
       if (!object.Equals(Interpolation, other.Interpolation)) return false;
-      if (Id != other.Id) return false;
-      if (Male != other.Male) return false;
-      if (Name != other.Name) return false;
-      if (WeaponName != other.WeaponName) return false;
-      if (ChestName != other.ChestName) return false;
+      if (!object.Equals(Info, other.Info)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -9828,11 +10100,7 @@ namespace Source.Networking.Protobuf {
     public override int GetHashCode() {
       int hash = 1;
       if (interpolation_ != null) hash ^= Interpolation.GetHashCode();
-      if (Id != 0L) hash ^= Id.GetHashCode();
-      if (Male != false) hash ^= Male.GetHashCode();
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (HasWeaponName) hash ^= WeaponName.GetHashCode();
-      if (HasChestName) hash ^= ChestName.GetHashCode();
+      if (info_ != null) hash ^= Info.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -9855,25 +10123,9 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(10);
         output.WriteMessage(Interpolation);
       }
-      if (Id != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(Id);
-      }
-      if (Male != false) {
-        output.WriteRawTag(24);
-        output.WriteBool(Male);
-      }
-      if (Name.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(Name);
-      }
-      if (HasWeaponName) {
-        output.WriteRawTag(42);
-        output.WriteString(WeaponName);
-      }
-      if (HasChestName) {
-        output.WriteRawTag(50);
-        output.WriteString(ChestName);
+      if (info_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Info);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -9889,25 +10141,9 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(10);
         output.WriteMessage(Interpolation);
       }
-      if (Id != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(Id);
-      }
-      if (Male != false) {
-        output.WriteRawTag(24);
-        output.WriteBool(Male);
-      }
-      if (Name.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(Name);
-      }
-      if (HasWeaponName) {
-        output.WriteRawTag(42);
-        output.WriteString(WeaponName);
-      }
-      if (HasChestName) {
-        output.WriteRawTag(50);
-        output.WriteString(ChestName);
+      if (info_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Info);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -9922,20 +10158,8 @@ namespace Source.Networking.Protobuf {
       if (interpolation_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Interpolation);
       }
-      if (Id != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
-      }
-      if (Male != false) {
-        size += 1 + 1;
-      }
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      if (HasWeaponName) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(WeaponName);
-      }
-      if (HasChestName) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ChestName);
+      if (info_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Info);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -9955,20 +10179,11 @@ namespace Source.Networking.Protobuf {
         }
         Interpolation.MergeFrom(other.Interpolation);
       }
-      if (other.Id != 0L) {
-        Id = other.Id;
-      }
-      if (other.Male != false) {
-        Male = other.Male;
-      }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
-      }
-      if (other.HasWeaponName) {
-        WeaponName = other.WeaponName;
-      }
-      if (other.HasChestName) {
-        ChestName = other.ChestName;
+      if (other.info_ != null) {
+        if (info_ == null) {
+          Info = new global::Source.Networking.Protobuf.PlayerInfoPacket();
+        }
+        Info.MergeFrom(other.Info);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -9992,24 +10207,11 @@ namespace Source.Networking.Protobuf {
             input.ReadMessage(Interpolation);
             break;
           }
-          case 16: {
-            Id = input.ReadInt64();
-            break;
-          }
-          case 24: {
-            Male = input.ReadBool();
-            break;
-          }
-          case 34: {
-            Name = input.ReadString();
-            break;
-          }
-          case 42: {
-            WeaponName = input.ReadString();
-            break;
-          }
-          case 50: {
-            ChestName = input.ReadString();
+          case 18: {
+            if (info_ == null) {
+              Info = new global::Source.Networking.Protobuf.PlayerInfoPacket();
+            }
+            input.ReadMessage(Info);
             break;
           }
         }
@@ -10034,24 +10236,11 @@ namespace Source.Networking.Protobuf {
             input.ReadMessage(Interpolation);
             break;
           }
-          case 16: {
-            Id = input.ReadInt64();
-            break;
-          }
-          case 24: {
-            Male = input.ReadBool();
-            break;
-          }
-          case 34: {
-            Name = input.ReadString();
-            break;
-          }
-          case 42: {
-            WeaponName = input.ReadString();
-            break;
-          }
-          case 50: {
-            ChestName = input.ReadString();
+          case 18: {
+            if (info_ == null) {
+              Info = new global::Source.Networking.Protobuf.PlayerInfoPacket();
+            }
+            input.ReadMessage(Info);
             break;
           }
         }
@@ -10076,7 +10265,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[29]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[30]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

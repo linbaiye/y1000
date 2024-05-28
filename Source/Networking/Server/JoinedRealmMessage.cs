@@ -21,34 +21,23 @@ namespace y1000.Source.Networking.Server
             
             public int Number { get; }
         }
-        private JoinedRealmMessage(IAttackKungFu attackKungFu, List<InventoryItemMessage> items, string name)
+        private JoinedRealmMessage(IAttackKungFu attackKungFu, List<InventoryItemMessage> items, PlayerInfo myInfo)
         {
             AttackKungFu = attackKungFu;
             Items = items;
-            Name = name;
+            MyInfo = myInfo;
         }
         
         public List<InventoryItemMessage> Items { get; }
         
-        public string? WeaponName { get; private set; }
-
-        public Vector2I Coordinate { get; init; }
-        
-        public long Id { get; private init; }
-        
-        public bool Male { get; private init; }
+        public Vector2I Coordinate { get; private set; }
         
         public IFootKungFu? FootKungFu { get; private init; }
         
         public IAttackKungFu AttackKungFu { get; private init; }
         
-        public string Name { get; }
+        public PlayerInfo MyInfo { get; }
         
-        public string? ChestName { get; private set; }
-        
-        public string? HatName { get; private set; }
-
-
         private static List<InventoryItemMessage> ItemMessages(LoginPacket loginPacket)
         {
             List<InventoryItemMessage> itemMessages = new List<InventoryItemMessage>();
@@ -66,26 +55,12 @@ namespace y1000.Source.Networking.Server
             var footKungFu = loginPacket.HasFootKungFuName
                 ? IFootKungFu.ByName(loginPacket.FootKungFuName, loginPacket.FootKungFuLevel)
                 : null;
-            var message = new JoinedRealmMessage(attackKungFu, itemMessages, loginPacket.Name)
+            var message = new JoinedRealmMessage(attackKungFu, itemMessages, PlayerInfo.FromPacket(loginPacket.Info))
             {
                 Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
-                Id = loginPacket.Id,
-                Male = loginPacket.Male,
                 FootKungFu = footKungFu,
-                HatName = loginPacket.HasHatName? loginPacket.HatName : null,
-                ChestName= loginPacket.HasChestName? loginPacket.ChestName: null,
             };
-            if (loginPacket.HasWeaponName)
-            {
-                message.WeaponName = loginPacket.WeaponName;
-            }
             return message;
-        }
-
-        public override string ToString()
-        {
-            return
-                $"{nameof(Coordinate)}: {Coordinate}, {nameof(Id)}: {Id}, {nameof(Male)}: {Male}, {nameof(FootKungFu)}: {FootKungFu}, {nameof(AttackKungFu)}: {AttackKungFu}";
         }
 
         public void Accept(IServerMessageVisitor visitor)

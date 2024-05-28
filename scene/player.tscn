@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://duo0butuerf3j"]
+[gd_scene load_steps=9 format=3 uid="uid://duo0butuerf3j"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerImpl.cs" id="1_68hen"]
-[ext_resource type="PackedScene" path="res://Scenes/Body.tscn" id="2_1av6c"]
+[ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_1av6c"]
 [ext_resource type="Script" path="res://Source/Player/ChestSprite.cs" id="3_6xxhi"]
+[ext_resource type="Script" path="res://Source/Player/HairSprite.cs" id="3_50fj6"]
 [ext_resource type="Script" path="res://Source/Player/Hand.cs" id="3_b4kwg"]
+[ext_resource type="Script" path="res://Source/Player/HatSprite.cs" id="6_vu6ta"]
+[ext_resource type="Script" path="res://Source/Player/WristSprite.cs" id="7_hcmfo"]
+[ext_resource type="Script" path="res://Source/Player/BootSprite.cs" id="8_1757e"]
 
 [node name="player" type="Node2D"]
 z_index = 2
@@ -14,10 +18,32 @@ script = ExtResource("1_68hen")
 
 [node name="Body" parent="." instance=ExtResource("2_1av6c")]
 
+[node name="Boot" type="Sprite2D" parent="."]
+y_sort_enabled = true
+centered = false
+script = ExtResource("8_1757e")
+
+[node name="Wrist" type="Sprite2D" parent="."]
+y_sort_enabled = true
+centered = false
+script = ExtResource("7_hcmfo")
+
 [node name="Chest" type="Sprite2D" parent="."]
+y_sort_enabled = true
+centered = false
 script = ExtResource("3_6xxhi")
 
 [node name="Hand" type="Sprite2D" parent="."]
 y_sort_enabled = true
 centered = false
 script = ExtResource("3_b4kwg")
+
+[node name="Hair" type="Sprite2D" parent="."]
+y_sort_enabled = true
+centered = false
+script = ExtResource("3_50fj6")
+
+[node name="Hat" type="Sprite2D" parent="."]
+y_sort_enabled = true
+centered = false
+script = ExtResource("6_vu6ta")

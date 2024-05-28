@@ -16,21 +16,38 @@ public class EquipmentFactory
         var animationName = itemDb.GetWeaponSpriteIndex(name, male);
         var attackAni = itemDb.GetAttackSpriteIndex(name, male);
         var kungfuType = itemDb.GetAttackKungFuType(name);
-        return new PlayerWeapon(animationName, attackAni, kungfuType);
+        return new PlayerWeapon(name, animationName, attackAni, kungfuType);
     }
     
-    
-    public CharacterWeapon CreateCharacterWeapon(string name, bool male)
-    {
-        var animationName = itemDb.GetWeaponSpriteIndex(name, male);
-        var attackAni = itemDb.GetAttackSpriteIndex(name, male);
-        var kungfuType = itemDb.GetAttackKungFuType(name);
-        return new CharacterWeapon(name, animationName, attackAni, kungfuType);
-    }
 
     public PlayerChest CreatePlayerChest(string name, bool male)
     {
         var index = itemDb.GetSpriteIndex(name, male);
         return new PlayerChest(index + "0", index + "1", index + "2", index + "3", index + "4", name);
+    }
+
+    public PlayerHair CreatePlayerHair(string name, bool male)
+    {
+        var index = itemDb.GetSpriteIndex(name, male);
+        return new PlayerHair(index + "0", index + "1", index + "2", index + "3", index + "4", name);
+    }
+    
+    public PlayerHat CreatePlayerHat(string name, bool male)
+    {
+        var index = itemDb.GetSpriteIndex(name, male);
+        return new PlayerHat(index + "0", index + "1", index + "2", index + "3", index + "4", name);
+    }
+    
+    public Boot CreateBoot(string name, bool male)
+    {
+        var index = itemDb.GetSpriteIndex(name, male);
+        return new Boot(index + "0", index + "1", index + "2", index + "3", index + "4", name);
+    }
+
+
+    public Wrist CreateWrist(string name, bool male, bool chested)
+    {
+        var index = itemDb.GetSpriteIndex(name, male, chested ? EquipmentType.WRIST_CHESTED : EquipmentType.WRIST_NOCHEST);
+        return new Wrist(index + "0", index + "1", index + "2", index + "3", index + "4", name);
     }
 }

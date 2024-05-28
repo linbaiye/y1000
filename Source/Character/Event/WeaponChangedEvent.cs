@@ -5,11 +5,11 @@ namespace y1000.Source.Character.Event;
 
 public class WeaponChangedEvent : EventArgs
 {
-    public WeaponChangedEvent(CharacterWeapon? weapon)
+    public WeaponChangedEvent(PlayerWeapon? weapon)
     {
         Weapon = weapon;
     }
 
-    public CharacterWeapon? Weapon { get; }
+    public PlayerWeapon? Weapon { get; }
     
 }

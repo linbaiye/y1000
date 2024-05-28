@@ -57,13 +57,37 @@ draw_center = false
 script = ExtResource("4_mdb7g")
 
 [node name="Body" type="TextureRect" parent="Container/Avatar"]
+y_sort_enabled = true
 layout_mode = 2
-offset_right = 44.0
-offset_bottom = 70.0
+mouse_filter = 0
+
+[node name="Boot" type="TextureRect" parent="Container/Avatar"]
+y_sort_enabled = true
+layout_mode = 0
+mouse_filter = 0
+
+[node name="Wrist" type="TextureRect" parent="Container/Avatar"]
+y_sort_enabled = true
+layout_mode = 0
+mouse_filter = 0
+
+[node name="Chest" type="TextureRect" parent="Container/Avatar"]
+y_sort_enabled = true
+layout_mode = 0
 mouse_filter = 0
 
 [node name="Hand" type="TextureRect" parent="Container/Avatar"]
+y_sort_enabled = true
 layout_mode = 2
-offset_right = 40.0
-offset_bottom = 21.0
+mouse_filter = 0
+stretch_mode = 2
+
+[node name="Hair" type="TextureRect" parent="Container/Avatar"]
+y_sort_enabled = true
+layout_mode = 0
+mouse_filter = 0
+
+[node name="Hat" type="TextureRect" parent="Container/Avatar"]
+y_sort_enabled = true
+layout_mode = 0
 mouse_filter = 0
