@@ -2,25 +2,14 @@ using System;
 using Godot;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
+using y1000.Source.Event;
+using y1000.Source.Item;
 
 namespace y1000.Source.Control.Bottom;
 
 public partial class BottomControl : Godot.Control
 {
-	private void WhenCoordinateUpdated(object? sender, EventArgs args)
-	{
-		if (sender is not CharacterImpl)
-		{
-			return;
-		}
-		switch (args)
-		{
-			case CharacterMoveEventArgs move: UpdateCoordinate(move.Coordinate);
-				break;
-			case WeaponChangedEvent weaponChangedEvent : _avatar?.DrawWeapon(weaponChangedEvent.Weapon);
-				break;
-		}
-	}
+
 
 	private TextArea? _textArea;
 
@@ -50,16 +39,31 @@ public partial class BottomControl : Godot.Control
 	{
 		_textArea?.Display(new TextEvent(message));
 	}
+	
+	private void WhenCharacterUpdated(object? sender, EventArgs args)
+	{
+		if (sender is not CharacterImpl character)
+		{
+			return;
+		}
+		switch (args)
+		{
+			case CharacterMoveEventArgs move: UpdateCoordinate(move.Coordinate);
+				break;
+			case WeaponChangedEvent weaponChangedEvent : _avatar?.DrawWeapon(weaponChangedEvent.Weapon);
+				break;
+			case EquipmentChangedEvent changedEvent : _avatar?.OnCharacterEquipmentChanged(character, changedEvent.EquipmentType);
+				break;
+		}
+	}
 
 	public void BindCharacter(CharacterImpl character)
 	{
-		character.WhenCharacterUpdated += WhenCoordinateUpdated;
+		character.WhenCharacterUpdated += WhenCharacterUpdated;
 		_avatar?.BindCharacter(character);
 		UpdateCoordinate(character.Coordinate);
 	}
 
-
 	public TextureButton InventoryButton => GetNode<TextureButton>("Container/InventoryButton");
-
 
 }

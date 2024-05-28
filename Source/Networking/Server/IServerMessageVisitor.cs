@@ -100,4 +100,9 @@ public interface IServerMessageVisitor
     {
         
     }
+
+    void Visit(PlayerUnequipMessage unequipMessage)
+    {
+        Visit((IEntityMessage)unequipMessage);
+    }
 }

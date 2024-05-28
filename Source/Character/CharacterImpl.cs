@@ -157,6 +157,17 @@ namespace y1000.Source.Character
 	        SetPositionAndState(message.Coordinate, message.Direction, CharacterHurtState.Hurt(message.AfterHurtState));
         }
 
+        public void Visit(PlayerUnequipMessage message)
+        {
+	        WrappedPlayer().Visit(message);
+	        if (message.NewState != _state.WrappedState.State)
+	        {
+		        ChangeState(CharacterCooldownState.Cooldown());
+		        AttackKungFu = new QuanFa(message.QuanfaLevel, "无名拳法");
+	        }
+	        WhenCharacterUpdated?.Invoke(this, new EquipmentChangedEvent(message.Unequipped));
+        }
+
         public void Handle(ICharacterMessage message)
         {
 	        message.Accept(this);

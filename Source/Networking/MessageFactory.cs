@@ -86,6 +86,13 @@ public class MessageFactory
         return new UpdateInventorySlotMessage(packet.SlotId, item);
     }
 
+    private PlayerUnequipMessage Parse(PlayerUnequipPacket packet)
+    {
+        CreatureState? st = packet.HasChangedToState ? (CreatureState) packet.ChangedToState : null;
+        var level = packet.HasChangedToState ? packet.BasicQuanfaLevel : 0;
+        return new PlayerUnequipMessage(packet.Id, (EquipmentType)packet.EquipmentType, level, st);
+    }
+
     public IServerMessage Create(Packet packet)
     {
         return packet.TypedPacketCase switch
@@ -113,6 +120,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.DropItem => Parse(packet.DropItem),
             Packet.TypedPacketOneofCase.UpdateSlot => ParseUpdateSlot(packet.UpdateSlot),
             Packet.TypedPacketOneofCase.Text => Parse(packet.Text),
+            Packet.TypedPacketOneofCase.Unequip => Parse(packet.Unequip),
             _ => throw new NotSupportedException()
         };
     }

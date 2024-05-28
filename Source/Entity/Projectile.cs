@@ -32,7 +32,6 @@ public partial class Projectile : Sprite2D
         var arrowTexture = ArrowAnimation.Instance.OffsetTexture(Direction.RIGHT);
         var offsetTexture = ArrowAnimation.Instance.OffsetTexture(player.Direction);
         //Rotation = tpos.AngleTo(Position);
-        LOG.Debug("Rotation {0}.", Rotation);
         if (Rotation == 0)
         {
             LOG.Debug("Target Id {0}, player Id {1}.", target.Id, player.Id);
@@ -41,7 +40,7 @@ public partial class Projectile : Sprite2D
         //var transform = Transform;
         //var newTrans = new Transform2D(angle, transform.Origin);
         //Transform = newTrans;
-        Offset = offsetTexture.Offset + new Vector2(16, 12);
+        Offset = offsetTexture.Offset + new Vector2(16, -12);
         Texture = arrowTexture.Texture;
     }
 

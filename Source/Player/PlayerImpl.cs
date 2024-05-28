@@ -76,52 +76,80 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	
 	public Clothing? Clothing { get; private set; }
 	
-	public void ChangeWeapon(PlayerWeapon weapon)
+	public void ChangeWeapon(PlayerWeapon? weapon)
 	{
-		_handAnimation = PlayerWeaponAnimation.LoadFor(weapon);
+		_handAnimation = weapon != null ? PlayerWeaponAnimation.LoadFor(weapon) : null;
 		Weapon = weapon;
+		GetNode<Sprite2D>("Hand").Visible = weapon != null;
 	}
 
-	public void ChangeChest(PlayerChest chest)
+	public void ChangeChest(PlayerChest? chest)
 	{
-		_chestAnimation = PlayerArmorAnimation.Create(chest);
+		_chestAnimation = chest != null ? PlayerArmorAnimation.Create(chest) : null;
 		Chest = chest;
+		GetNode<Sprite2D>("Chest").Visible = chest != null;
 	}
 
-	public void ChangeHat(PlayerHat hat)
+	public void ChangeHat(PlayerHat? hat)
 	{
-		_hatAnimation = PlayerArmorAnimation.Create(hat);
+		_hatAnimation = hat != null ? PlayerArmorAnimation.Create(hat) : null;
 		Hat = hat;
+		GetNode<Sprite2D>("Hat").Visible = hat != null;
 	}
 
-	public void ChangeWrist(Wrist wrist)
+	public void ChangeWrist(Wrist? wrist)
 	{
-		_wristAnimation = PlayerArmorAnimation.Create(wrist);
+		_wristAnimation = wrist != null ? PlayerArmorAnimation.Create(wrist) : null;
 		Wrist = wrist;
+		GetNode<Sprite2D>("Wrist").Visible = wrist != null;
 	}
 	
-	public void ChangeHair(PlayerHair hair)
+	public void ChangeHair(PlayerHair? hair)
 	{
-		_hairAnimation = PlayerArmorAnimation.Create(hair);
+		_hairAnimation = hair != null ? PlayerArmorAnimation.Create(hair) : null;
 		Hair = hair;
+		GetNode<Sprite2D>("Hair").Visible = hair != null;
 	}
 	
-	public void ChangeBoot(Boot boot)
+	public void ChangeBoot(Boot? boot)
 	{
-		_bootAnimation = PlayerArmorAnimation.Create(boot);
+		_bootAnimation = boot != null ? PlayerArmorAnimation.Create(boot) : null;
 		Boot = boot;
+		GetNode<Sprite2D>("Boot").Visible = boot != null;
 	}
 	
-	public void ChangeClothing(Clothing clothing)
+	public void ChangeClothing(Clothing? clothing)
 	{
-		_clothingAnimation = PlayerArmorAnimation.Create(clothing);
+		_clothingAnimation = clothing != null ? PlayerArmorAnimation.Create(clothing) : null;
 		Clothing = clothing;
+		GetNode<Sprite2D>("Clothing").Visible = clothing != null;
 	}
 	
-	public void ChangeTrouser(Trouser trouser)
+	public void ChangeTrouser(Trouser? trouser)
 	{
-		_trouserAnimation = PlayerArmorAnimation.Create(trouser);
+		_trouserAnimation = trouser != null ? PlayerArmorAnimation.Create(trouser) : null;
 		Trouser = trouser;
+		GetNode<Sprite2D>("Trouser").Visible = trouser != null;
+	}
+
+	public void Visit(PlayerUnequipMessage message)
+	{
+		if (message.NewState != _state.State)
+		{
+			ChangeState(IPlayerState.Cooldown());
+		}
+		switch (message.Unequipped)
+		{
+			case EquipmentType.TROUSER: ChangeTrouser(null); break;
+			case EquipmentType.HAT: ChangeHat(null); break;
+			case EquipmentType.CLOTHING: ChangeClothing(null); break;
+			case EquipmentType.HAIR: ChangeHair(null); break;
+			case EquipmentType.BOOT: ChangeBoot(null); break;
+			case EquipmentType.WEAPON: ChangeWeapon(null); break;
+			case EquipmentType.CHEST : ChangeChest(null); break;
+			case EquipmentType.WRIST: 
+			case EquipmentType.WRIST_CHESTED: ChangeWrist(null); break;
+		}
 	}
 
 	public void Visit(PlayerChangeWeaponMessage message)
