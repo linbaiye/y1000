@@ -27,6 +27,10 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	private PlayerArmorAnimation? _wristAnimation;
 	
 	private PlayerArmorAnimation? _bootAnimation;
+	
+	private PlayerArmorAnimation? _trouserAnimation;
+	
+	private PlayerArmorAnimation? _clothingAnimation;
 
 	public event EventHandler<PlayerRangedAttackEventArgs>? OnPlayerShoot;
 
@@ -51,6 +55,8 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		InitEquipment(info.HatName, n => equipmentFactory.CreatePlayerHat(n, IsMale), ChangeHat);
 		InitEquipment(info.WristName, n => equipmentFactory.CreateWrist(n, IsMale, false), ChangeWrist);
 		InitEquipment(info.BootName, n => equipmentFactory.CreateBoot(n, IsMale), ChangeBoot);
+		InitEquipment(info.TrouserName, n => equipmentFactory.CreateTrouser(n, IsMale), ChangeTrouser);
+		InitEquipment(info.ClothingName, n => equipmentFactory.CreateClothing(n, IsMale), ChangeClothing);
 	}
 	
 	
@@ -65,6 +71,10 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public Wrist? Wrist { get; private set; }
 	
 	public Boot? Boot { get; private set; }
+	
+	public Trouser? Trouser { get; private set; }
+	
+	public Clothing? Clothing { get; private set; }
 	
 	public void ChangeWeapon(PlayerWeapon weapon)
 	{
@@ -100,6 +110,18 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	{
 		_bootAnimation = PlayerArmorAnimation.Create(boot);
 		Boot = boot;
+	}
+	
+	public void ChangeClothing(Clothing clothing)
+	{
+		_clothingAnimation = PlayerArmorAnimation.Create(clothing);
+		Clothing = clothing;
+	}
+	
+	public void ChangeTrouser(Trouser trouser)
+	{
+		_trouserAnimation = PlayerArmorAnimation.Create(trouser);
+		Trouser = trouser;
 	}
 
 	public void Visit(PlayerChangeWeaponMessage message)
@@ -182,6 +204,8 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public OffsetTexture? HatTexture => _hatAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? WristTexture => _wristAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? BootTexture => _bootAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? ClothingTexture => _clothingAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? TrouserTexture => _trouserAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 
 	public void Visit(PlayerAttackMessage message)
 	{

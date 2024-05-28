@@ -65,5 +65,6 @@
     <Compile Remove="Source\Item\WeaponType.cs" />
     <Compile Remove="Source\Character\Inventory\**" />
     <EmbeddedResource Remove="Source\Character\Inventory\**" />
+    <Compile Remove="Source\Character\Event\CharacterEventArgs.cs" />
   </ItemGroup>
 </Project>

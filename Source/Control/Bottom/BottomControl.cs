@@ -54,7 +54,7 @@ public partial class BottomControl : Godot.Control
 	public void BindCharacter(CharacterImpl character)
 	{
 		character.WhenCharacterUpdated += WhenCoordinateUpdated;
-		_avatar?.DrawCharacter(character);
+		_avatar?.BindCharacter(character);
 		UpdateCoordinate(character.Coordinate);
 	}
 

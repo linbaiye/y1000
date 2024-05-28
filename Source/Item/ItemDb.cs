@@ -24,12 +24,12 @@ public class ItemDb
     {
         if (!_items.TryGetValue(itemName, out var item))
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(itemName + " does not exist.");
         }
 
         if (!_header.TryGetValue(key, out var index))
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(key + " does not exist for item " + itemName);
         }
 
         return creator.Invoke(item[index]);

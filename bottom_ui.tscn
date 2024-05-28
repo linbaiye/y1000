@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8pmfxkqej1vd"]
+[gd_scene load_steps=6 format=3 uid="uid://c8pmfxkqej1vd"]
 
 [ext_resource type="Script" path="res://Source/Control/Bottom/BottomControl.cs" id="1_nx2kl"]
 [ext_resource type="Texture2D" uid="uid://trpj271r0icl" path="res://assets/ui/hud_bottom3.png" id="2_g24yt"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/TextArea.cs" id="3_56n7n"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/Avatar.cs" id="4_mdb7g"]
+[ext_resource type="Script" path="res://Source/Control/Bottom/AvatarPart.cs" id="5_1icl3"]
 
 [node name="BottomUI" type="Control"]
 layout_direction = 1
@@ -61,33 +62,51 @@ y_sort_enabled = true
 layout_mode = 2
 mouse_filter = 0
 
+[node name="Trouser" type="TextureRect" parent="Container/Avatar"]
+y_sort_enabled = true
+layout_mode = 0
+mouse_filter = 0
+script = ExtResource("5_1icl3")
+
 [node name="Boot" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
+script = ExtResource("5_1icl3")
 
 [node name="Wrist" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
+script = ExtResource("5_1icl3")
+
+[node name="Clothing" type="TextureRect" parent="Container/Avatar"]
+y_sort_enabled = true
+layout_mode = 0
+mouse_filter = 0
+script = ExtResource("5_1icl3")
 
 [node name="Chest" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
+script = ExtResource("5_1icl3")
 
 [node name="Hand" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 2
 mouse_filter = 0
 stretch_mode = 2
+script = ExtResource("5_1icl3")
 
 [node name="Hair" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
+script = ExtResource("5_1icl3")
 
 [node name="Hat" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
+script = ExtResource("5_1icl3")

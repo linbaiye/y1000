@@ -6,6 +6,7 @@ using y1000.Source.Character.Event;
 using y1000.Source.Character.State;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Creature;
+using y1000.Source.Event;
 using y1000.Source.Input;
 using y1000.Source.Item;
 using y1000.Source.KungFu.Attack;
@@ -31,6 +32,8 @@ namespace y1000.Source.Character
 
 		public event EventHandler<EventArgs>? WhenCharacterUpdated;
 
+		private EventMediator? EventMediator { get; set; }
+
 		public void ChangeState(ICharacterState state)
 		{
 			WrappedPlayer().ChangeState(state.WrappedState);
@@ -47,6 +50,8 @@ namespace y1000.Source.Character
 		public PlayerHat? Hat =>  WrappedPlayer().Hat;
 		public Wrist? Wrist =>  WrappedPlayer().Wrist;
 		public Boot? Boot =>  WrappedPlayer().Boot;
+		public Clothing? Clothing =>  WrappedPlayer().Clothing;
+		public Trouser ? Trouser =>  WrappedPlayer().Trouser;
 		
 		public long Id => WrappedPlayer().Id;
 
@@ -185,6 +190,38 @@ namespace y1000.Source.Character
 		        DispatchInput(input);
 	        }
         }
+
+
+        private bool IsEquiped(EquipmentType type)
+        {
+	        return type switch
+	        {
+		        EquipmentType.CHEST => Chest != null,
+		        EquipmentType.HAT => Hat != null,
+		        EquipmentType.WEAPON => Weapon != null,
+		        EquipmentType.CLOTHING => Clothing != null,
+		        EquipmentType.BOOT => Boot != null,
+		        EquipmentType.TROUSER => Trouser != null,
+		        EquipmentType.WRIST => Wrist != null,
+		        EquipmentType.WRIST_CHESTED => Wrist != null,
+		        EquipmentType.HAIR => Hair != null,
+		        _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+	        };
+        }
+
+        public void OnAvatarDoubleClick(EquipmentType type)
+        {
+	        if (!IsEquiped(type))
+	        {
+		        return;
+	        }
+	        if (Inventory.IsFull)
+	        {
+		        EventMediator?.NotifyMessage("物品栏已满");
+		        return;
+	        }
+	        EventMediator?.NotifyServer(new ClientUnequipEvent(type));
+        }
         
 
         public CharacterInventory Inventory { get; } = new();
@@ -206,7 +243,7 @@ namespace y1000.Source.Character
         {
 	        Inventory.Swap(message.Slot1, message.Slot2);
         }
-
+        
         public void Visit(CharacterChangeWeaponMessage message)
         {
 	        var weapon = EquipmentFactory.Instance.CreatePlayerWeapon(message.WeaponName, IsMale);
@@ -232,7 +269,7 @@ namespace y1000.Source.Character
         }
 
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,
-	        IMap map,  ItemFactory itemFactory)
+	        IMap map,  ItemFactory itemFactory, EventMediator eventMediator)
         {
 	        PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
 	        var character = scene.Instantiate<CharacterImpl>();
@@ -242,6 +279,8 @@ namespace y1000.Source.Character
 	        player.StateAnimationEventHandler += character.OnPlayerAnimationFinished;
 	        character.FootMagic = message.FootKungFu;
 	        character.AttackKungFu = message.AttackKungFu;
+	        character.Inventory.SetEventMediator(eventMediator);
+	        character.EventMediator = eventMediator;
 	        character.ChangeState(CharacterIdleState.Wrap(state));
 	        AddItems(character, message, itemFactory);
 	        return character;

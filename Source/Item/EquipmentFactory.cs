@@ -47,7 +47,19 @@ public class EquipmentFactory
 
     public Wrist CreateWrist(string name, bool male, bool chested)
     {
-        var index = itemDb.GetSpriteIndex(name, male, chested ? EquipmentType.WRIST_CHESTED : EquipmentType.WRIST_NOCHEST);
+        var index = itemDb.GetSpriteIndex(name, male, chested ? EquipmentType.WRIST_CHESTED : EquipmentType.WRIST);
         return new Wrist(index + "0", index + "1", index + "2", index + "3", index + "4", name);
+    }
+    
+    public Clothing CreateClothing(string name, bool male)
+    {
+        var index = itemDb.GetSpriteIndex(name, male);
+        return new Clothing(index + "0", index + "1", index + "2", index + "3", index + "4", name);
+    }
+    
+    public Trouser CreateTrouser(string name, bool male)
+    {
+        var index = itemDb.GetSpriteIndex(name, male);
+        return new Trouser(index + "0", index + "1", index + "2", index + "3", index + "4", name);
     }
 }

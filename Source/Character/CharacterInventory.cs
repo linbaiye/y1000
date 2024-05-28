@@ -21,23 +21,7 @@ public class CharacterInventory
     private EventMediator? _eventMediator;
 
     public bool IsFull => _items.Count >= MaxSize;
-
-    public bool AddItem(ICharacterItem item)
-    {
-        if (IsFull)
-        {
-            return false;
-        }
-        for (var i = 1; i <= MaxSize; i++)
-        {
-            if (_items.TryAdd(i, item))
-            {
-                InventoryChanged?.Invoke(this, EventArgs.Empty);
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     public void DropItem(int slot, int numberLeft)
     {

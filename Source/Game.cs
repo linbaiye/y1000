@@ -94,19 +94,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		WriteMessage(predictionEventArgs.Event);
 	}
 
-
-	private void ShowCharacter(JoinedRealmMessage joinedRealmMessage)
-	{
-		// character = GetNode<y1000.code.character.OldCharacter>("Character");
-		// character.Coordinate = new Point(loginMessage.Coordinate.X, loginMessage.Coordinate.Y);
-		// character.ChestArmor = new ChestArmor(true, "男子黄金铠甲", "T5");
-		// character.Hat = new Hat(0L, "v16", "男子雨中客雨帽", true);
-		// character.Trousers = new Trousers(0L, "R1", "男子长裤", true);
-		// character.Weapon = new Sword(0, "W68", "耀阳宝剑");
-		// character.Visible = true;
-	}
-
-
 	private async void SetupNetwork()
 	{
 		_bootstrap.Group(new MultithreadEventLoopGroup()).Handler(
@@ -333,13 +320,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(JoinedRealmMessage joinedRealmMessage)
 	{
-		_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, _itemFactory);
+		_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, _itemFactory, _eventMediator);
 		_character.WhenCharacterUpdated += OnCharacterEvent;
 		_character.WrappedPlayer().MouseClicked += OnCreatureClicked;
-		_character.Inventory.SetEventMediator(_eventMediator);
+		_character.WrappedPlayer().OnPlayerShoot += OnPlayerShoot;
 		_uiController?.BindCharacter(_character);
 		MapLayer.BindCharacter(_character);
-		_character.WrappedPlayer().OnPlayerShoot += OnPlayerShoot;
 		_entityManager.Add(_character);
 		AddChild(_character);
 	}

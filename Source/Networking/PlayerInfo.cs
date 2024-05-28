@@ -21,6 +21,10 @@ public class PlayerInfo
     public string? WristName { get; private set; }
     
     public string? BootName { get; private set; }
+    
+    public string? ClothingName { get; private set; }
+    
+    public string? TrouserName { get; private set; }
 
     public static PlayerInfo FromPacket(PlayerInfoPacket packet)
     {
@@ -35,6 +39,8 @@ public class PlayerInfo
             HatName = packet.HasHatName ? packet.HatName : null,
             WristName = packet.HasWristName ? packet.WristName: null,
             BootName = packet.HasBootName? packet.BootName: null,
+            ClothingName= packet.HasClothingName? packet.ClothingName: null,
+            TrouserName= packet.HasTrouserName? packet.TrouserName: null,
         };
     }
     

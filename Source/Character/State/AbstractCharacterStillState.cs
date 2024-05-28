@@ -60,6 +60,10 @@ public abstract class AbstractCharacterStillState : ICharacterState
 
     public void Attack(CharacterImpl character, AttackInput input)
     {
+        if (input.Entity.Id.Equals(character.Id))
+        {
+            return;
+        }
         var state = character.AttackKungFu.RandomAttackState();
         character.Direction = character.Coordinate.GetDirection(input.Entity.Coordinate);
         character.EmitPredictionEvent(new AttackPrediction(input), new CharacterAttackEvent(input, state, character.Direction));

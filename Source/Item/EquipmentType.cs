@@ -6,13 +6,13 @@ public enum EquipmentType
     
     WRIST_CHESTED = 1,
     
-    CLOTH = 2,
+    CLOTHING = 2,
     
-    SHOE = 3,
+    BOOT = 3,
     
     TROUSER = 4,
     
-    WRIST_NOCHEST = 5,
+    WRIST = 5,
     
     CHEST = 6,
     

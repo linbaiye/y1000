@@ -1,8 +1,7 @@
+using System;
 using Godot;
 using NLog;
-using y1000.Source.Animation;
 using y1000.Source.Character;
-using y1000.Source.Creature;
 using y1000.Source.Item;
 using y1000.Source.Sprite;
 
@@ -10,7 +9,7 @@ namespace y1000.Source.Control.Bottom;
 
 public partial class Avatar : NinePatchRect
 {
-	private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
+	private static readonly ILogger LOG = LogManager.GetCurrentClassLogger();
 	private readonly ISpriteRepository _spriteRepository;
 	private TextureRect _body;
 	private Vector2 _bodyOffset;
@@ -20,7 +19,11 @@ public partial class Avatar : NinePatchRect
 	private TextureRect _hat;
 	private TextureRect _wrist;
 	private TextureRect _boot;
+	private TextureRect _clothing;
+	private TextureRect _trouser;
 	private static readonly TextureRect MAKE_COMPILER_HAPPY = new();
+
+	private Action<EquipmentType>? _doubleClickHandler;
 	
 	private const int AvatarIndex = 57;
 
@@ -34,6 +37,8 @@ public partial class Avatar : NinePatchRect
 		_hair = MAKE_COMPILER_HAPPY;
 		_wrist = MAKE_COMPILER_HAPPY;
 		_boot = MAKE_COMPILER_HAPPY;
+		_clothing = MAKE_COMPILER_HAPPY;
+		_trouser = MAKE_COMPILER_HAPPY;
 	}
 
 	public override void _Ready()
@@ -45,14 +50,10 @@ public partial class Avatar : NinePatchRect
 		_hat = GetNode<TextureRect>("Hat");
 		_boot = GetNode<TextureRect>("Boot");
 		_wrist = GetNode<TextureRect>("Wrist");
-		_chest.GuiInput += OnEvent;
+		_clothing = GetNode<TextureRect>("Clothing");
+		_trouser = GetNode<TextureRect>("Trouser");
 	}
 
-	public void OnEvent(InputEvent inputEvent)
-	{
-		Logger.Debug("On event {0}.", inputEvent);
-	}
-	
 
 	private void DrawBody(bool male)
 	{
@@ -63,7 +64,7 @@ public partial class Avatar : NinePatchRect
 		_bodyOffset = _body.Position - offsetTexture.Offset;
 	}
 
-	public void DrawCharacter(CharacterImpl character)
+	public void BindCharacter(CharacterImpl character)
 	{
 		DrawBody(character.IsMale);
 		DrawWeapon(character.Weapon);
@@ -72,6 +73,9 @@ public partial class Avatar : NinePatchRect
 		DrawHat(character.Hat);
 		DrawBoot(character.Boot);
 		DrawWrist(character.Wrist);
+		DrawClothing(character.Clothing);
+		DrawTrouser(character.Trouser);
+		_doubleClickHandler = character.OnAvatarDoubleClick;
 	}
 
 	public void DrawWeapon(PlayerWeapon ? weapon)
@@ -107,6 +111,16 @@ public partial class Avatar : NinePatchRect
 	{
 		DrawArmor(boot, _boot);
 	}
+	
+	public void DrawTrouser(Trouser? trouser)
+	{
+		DrawArmor(trouser, _trouser);
+	}
+	
+	public void DrawClothing(Clothing? clothing)
+	{
+		DrawArmor(clothing, _clothing);
+	}
 
 	private void DrawArmor(string name, TextureRect rect)
 	{
@@ -115,6 +129,30 @@ public partial class Avatar : NinePatchRect
 		rect.Size = new Vector2(0, 0);
 		rect.Position = _bodyOffset + offsetTexture.Offset;
 		rect.Texture = offsetTexture.Texture;
+	}
+
+	public void OnPartClicked(AvatarPart part, string name)
+	{
+		switch (name)
+		{
+			case "Chest":  _doubleClickHandler?.Invoke(EquipmentType.CHEST);
+				break;
+			case "Hat":  _doubleClickHandler?.Invoke(EquipmentType.HAT);
+				break;
+			case "Boot":  _doubleClickHandler?.Invoke(EquipmentType.BOOT);
+				break;
+			case "Hair":  _doubleClickHandler?.Invoke(EquipmentType.HAIR);
+				break;
+			case "Wrist":  _doubleClickHandler?.Invoke(EquipmentType.WRIST);
+				break;
+			case "Hand":  _doubleClickHandler?.Invoke(EquipmentType.WEAPON);
+				break;
+			case "Trouser":  _doubleClickHandler?.Invoke(EquipmentType.TROUSER);
+				break;
+			case "Clothing":  _doubleClickHandler?.Invoke(EquipmentType.CLOTHING);
+				break;
+		}
+		LOG.Debug("Name {0} was clicked", name);
 	}
 
 	private void DrawArmor(AbstractArmor? armor, TextureRect rect)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 using y1000.Source.Control;
 using y1000.Source.Control.Bottom;
@@ -18,7 +19,6 @@ public class EventMediator
     private Action<IClientEvent>? _clientEventSender;
 
     private Action<DragInventorySlotEvent>? _dragItemHandler;
-
     public void SetComponent(Action<IClientEvent> sender)
     {
         _clientEventSender = sender;
@@ -32,6 +32,11 @@ public class EventMediator
     public void SetComponent(BottomControl control)
     {
         _bottomControl = control;
+    }
+
+    public void RegisterEventHandler()
+    {
+        
     }
 
     public void SetComponent(DropItemUI dropItemUi)
