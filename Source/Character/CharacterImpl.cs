@@ -282,7 +282,8 @@ namespace y1000.Source.Character
 
         public void Visit(PlayerEquipMessage message)
         {
-	        WrappedPlayer().Visit(message);
+	        var equipment = WrappedPlayer().Equip(message);
+	        WhenCharacterUpdated?.Invoke(this ,new EquipmentChangedEvent(equipment.EquipmentType));
         }
 
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,

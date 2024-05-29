@@ -3,7 +3,6 @@ using Godot;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Event;
-using y1000.Source.Item;
 
 namespace y1000.Source.Control.Bottom;
 
@@ -64,6 +63,6 @@ public partial class BottomControl : Godot.Control
 		UpdateCoordinate(character.Coordinate);
 	}
 
-	public TextureButton InventoryButton => GetNode<TextureButton>("Container/InventoryButton");
+	public Button InventoryButton => GetNode<Button>("Container/InventoryButton");
 
 }

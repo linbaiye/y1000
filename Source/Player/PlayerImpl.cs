@@ -95,6 +95,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		_hatAnimation = hat != null ? PlayerArmorAnimation.Create(hat) : null;
 		Hat = hat;
 		GetNode<Sprite2D>("Hat").Visible = hat != null;
+		LOGGER.Debug("Set hat visible {0}.", hat != null);
 	}
 
 	public void ChangeWrist(Wrist? wrist)
@@ -152,8 +153,8 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 				break;
 		}
 	}
-	
-	public void Visit(PlayerEquipMessage message)
+
+	public IEquipment Equip(PlayerEquipMessage message)
 	{
 		var equipment = EquipmentFactory.Instance.Create(message.EquipmentName, IsMale);
 		switch (equipment)
@@ -175,6 +176,12 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			case PlayerWeapon weapon : ChangeWeapon(weapon);
 				break;
 		}
+		return equipment;
+	}
+	
+	public void Visit(PlayerEquipMessage message)
+	{
+		Equip(message);
 	}
 
 	public void Visit(PlayerChangeWeaponMessage message)
@@ -287,8 +294,9 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			interpolation.Direction, interpolation.Coordinate, map, playerInterpolation.PlayerInfo);
 		if (state is PlayerMoveState moveState)
 		{
-			moveState.Init(player);
+			moveState.DriftPosition(player);
 		}
+		LOGGER.Debug("Created player {0} at {1}, visible {2}.", player.Id, player.Position, player.Visible);
 		return player;
 	}
 }

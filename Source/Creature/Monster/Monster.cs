@@ -120,7 +120,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 			interpolation.Direction, state, interpolation.Coordinate, map, name, monsterAnimation);
 		if (state is AbstractCreatureMoveState<Monster> moveState)
 		{
-			moveState.Init(monster);
+			moveState.DriftPosition(monster);
 		}
 		return monster;
 	}

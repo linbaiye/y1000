@@ -11,8 +11,10 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
     public static readonly FilesystemSpriteRepository Instance = new();
 
     private static readonly ILogger LOG = LogManager.GetCurrentClassLogger();
-    private static readonly string DIR_PATH = "/Users/ab000785/Downloads/sprite/";
-    //private static readonly string DIR_PATH = "D:/work/sprite/";
+    //private static readonly string DIR_PATH = "/Users/ab000785/Downloads/sprite/";
+    private static readonly string DIR_PATH = "D:/work/sprite/";
+    private const bool CacheEnabled = true;
+    private static readonly IDictionary<string, AtzSprite> Cache = new Dictionary<string, AtzSprite>();
     private FilesystemSpriteRepository()
     {
     }
@@ -24,6 +26,10 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
 
     public override AtzSprite LoadByName(string name, Vector2? offset = null)
     {
+        if (Cache.TryGetValue(name, out var sprite))
+        {
+            return sprite;
+        }
         var spriteDirPath = DIR_PATH + name.ToLower() + "/";
         var offsets = File.ReadLines(spriteDirPath + "offset.txt");
         var vectors = ParseVectors(offsets);
@@ -48,7 +54,12 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
             LOG.Error("Invalid dir {0}.", name);
         }
         LOG.Debug("Loaded {0}, {1} pictures in total.", name, texture2Ds.Count);
-        return new AtzSprite(texture2Ds.ToArray(), vectors, sizes);
+        AtzSprite atzSprite = new AtzSprite(texture2Ds.ToArray(), vectors, sizes);
+        if (CacheEnabled)
+        {
+            Cache.TryAdd(name,atzSprite);
+        }
+        return atzSprite;
     }
 
     public override AtzSprite LoadByPath(string path, Vector2? offset = null)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://7ghuvlfmi4pd"]
+[gd_scene load_steps=7 format=3 uid="uid://7ghuvlfmi4pd"]
 
 [ext_resource type="Script" path="res://Source/Control/RightSide/RightControl.cs" id="1_j2rwp"]
 [ext_resource type="Texture2D" uid="uid://b50oaa3iiic8f" path="res://assets/ui/inventory.png" id="1_ka7tb"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/InventoryView.cs" id="2_px3kf"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_qq6s2"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/CloseButton.cs" id="4_4n8tp"]
+[ext_resource type="Texture2D" uid="uid://d3ks8ifdrhwa1" path="res://assets/ui/kungfu.png" id="6_w6c7c"]
 
 [node name="RightSideUI" type="Control"]
 layout_mode = 3
@@ -138,3 +139,32 @@ offset_left = 15.0
 offset_top = 322.0
 offset_right = 236.0
 offset_bottom = 354.0
+
+[node name="KungFuBook" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(252, 384)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 0
+texture = ExtResource("6_w6c7c")
+
+[node name="KungFuSlots" type="GridContainer" parent="KungFuBook"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 77.0
+offset_right = 237.0
+offset_bottom = 353.0
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 7
+columns = 5
+
+[node name="Slot1" parent="KungFuBook/KungFuSlots" instance=ExtResource("2_qq6s2")]
+layout_mode = 2
+
+[node name="CloseButton" type="TextureButton" parent="KungFuBook"]
+layout_mode = 0
+offset_left = 221.0
+offset_top = 2.0
+offset_right = 249.0
+offset_bottom = 32.0
+script = ExtResource("4_4n8tp")

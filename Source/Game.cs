@@ -252,6 +252,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		msgDrivenPlayer.Player.MouseClicked += OnCreatureClicked;
 		_entityManager.Add(msgDrivenPlayer);
 		AddChild(msgDrivenPlayer.Player);
+		LOGGER.Debug("Added player {0}.", msgDrivenPlayer.Id);
 	}
 
 	public void Visit(IPredictableResponse response)
@@ -306,6 +307,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		var remove = _entityManager.Remove(removeEntityMessage.Id);
 		remove?.Handle(removeEntityMessage);
+		if (remove is Node2D node2D)
+		{
+			RemoveChild(node2D);
+		}
 		LOGGER.Debug("Removed creature {0}.", removeEntityMessage.Id);
 	}
 

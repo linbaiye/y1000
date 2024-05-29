@@ -3,7 +3,7 @@ using y1000.Source.Creature;
 
 namespace y1000.Source.KungFu.Attack;
 
-public interface IAttackKungFu : ILevelKungFu
+public interface IAttackKungFu 
 {
     public CreatureState RandomAttackState();
     

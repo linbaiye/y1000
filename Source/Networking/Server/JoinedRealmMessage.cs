@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using Source.Networking.Protobuf;
+using y1000.Source.KungFu;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.KungFu.Foot;
 
@@ -30,6 +31,10 @@ namespace y1000.Source.Networking.Server
         
         public List<InventoryItemMessage> Items { get; }
         
+        public IDictionary<int, IKungFu>? UnnamedKungFu { get; private set; }
+        
+        public KungFuBook KungFuBook { get; private set; }
+        
         public Vector2I Coordinate { get; private set; }
         
         public IFootKungFu? FootKungFu { get; private init; }
@@ -48,6 +53,22 @@ namespace y1000.Source.Networking.Server
             return itemMessages;
         }
 
+        private static IDictionary<int, IKungFu> ParseUnnamedKungFu(LoginPacket packet)
+        {
+            IDictionary<int, IKungFu> result = new Dictionary<int, IKungFu>();
+            foreach (var kungFuPacket in packet.UnnamedKungFuList)
+            {
+                result.TryAdd(kungFuPacket.Slot, new ViewKungFu(kungFuPacket.Name, kungFuPacket.Level));
+            }
+
+            return result;
+        }
+
+        private static KungFuBook CreateKungFuBook(LoginPacket packet)
+        {
+            new KungFuBook();
+        }
+
         public static JoinedRealmMessage FromPacket(LoginPacket loginPacket)
         {
             List<InventoryItemMessage> itemMessages = ItemMessages(loginPacket);
@@ -59,6 +80,7 @@ namespace y1000.Source.Networking.Server
             {
                 Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
                 FootKungFu = footKungFu,
+                UnnamedKungFu = ParseUnnamedKungFu(loginPacket),
             };
             return message;
         }

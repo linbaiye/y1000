@@ -1,7 +1,7 @@
 
 namespace y1000.Source.KungFu;
 
-public abstract class AbstractLevelKungFu : ILevelKungFu
+public abstract class AbstractLevelKungFu : IKungFu
 {
     protected AbstractLevelKungFu(int level, string name)
     {

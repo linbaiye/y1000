@@ -22,9 +22,9 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
     
     protected abstract ILogger Logger { get; }
 
-    public void Init(TC creature)
+    public void DriftPosition(TC creature)
     {
-        creature.Position = _velocity * ((float)ElapsedMillis / TotalMillis);
+        creature.Position = (_velocity * ((float)ElapsedMillis / TotalMillis)) + creature.Coordinate.ToPosition();
     }
 
     protected void Move(TC creature, int delta)

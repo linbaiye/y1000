@@ -78,7 +78,7 @@ public class EquipmentFactory
             EquipmentType.CLOTHING => CreateClothing(name, male),
             EquipmentType.BOOT => CreateBoot(name, male),
             EquipmentType.TROUSER => CreateTrouser(name, male),
-            EquipmentType.WRIST_CHESTED => CreateWrist(name, male, true),
+            EquipmentType.WRIST_CHESTED => CreateWrist(name, male, false),
             EquipmentType.WRIST => CreateWrist(name, male, false),
             EquipmentType.CHEST => CreatePlayerChest(name, male),
             EquipmentType.HAIR => CreatePlayerHair(name, male),
