@@ -160,8 +160,9 @@ namespace y1000.Source.Character
         public void Visit(PlayerUnequipMessage message)
         {
 	        WrappedPlayer().Visit(message);
-	        if (message.NewState != _state.WrappedState.State)
+	        if (message.NewState != _state.WrappedState.State && message.NewState != null)
 	        {
+		        LOGGER.Debug("Changed state to cooldown.");
 		        ChangeState(CharacterCooldownState.Cooldown());
 		        AttackKungFu = new QuanFa(message.QuanfaLevel, "无名拳法");
 	        }
@@ -277,6 +278,11 @@ namespace y1000.Source.Character
         public void Visit(UpdateInventorySlotMessage message)
         {
 	        Inventory.Update(message.SlotId, message.Item);
+        }
+
+        public void Visit(PlayerEquipMessage message)
+        {
+	        WrappedPlayer().Visit(message);
         }
 
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,

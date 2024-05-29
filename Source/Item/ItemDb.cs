@@ -55,11 +55,16 @@ public class ItemDb
     {
         return ParseEquipmentAnimation(equip, male, () => Parse(equip, "HitMotion", s=> s));
     }
+
+    public bool IsEquipment(string name)
+    {
+        var kind = Parse(name, "Kind", s => s);
+        return kind.Equals("6") || kind.Equals("24");
+    }
     
     private string ParseEquipmentAnimation(string equip, EquipmentType type, bool male, Func<string> postfix)
     {
-        var kind = Parse(equip, "Kind", s => s);
-        if (!kind.Equals("6") && !kind.Equals("24"))
+        if (!IsEquipment(equip))
         {
             throw new NotImplementedException(equip + " is not equipment.");
         }
@@ -80,7 +85,7 @@ public class ItemDb
         return ParseEquipmentAnimation(equip, type, male, postfix);
     }
 
-    private EquipmentType ParseEquipmentType(string item)
+    public EquipmentType ParseEquipmentType(string item)
     {
         return Parse(item, "WearPos", s => (EquipmentType)int.Parse(s));
     }
@@ -99,6 +104,14 @@ public class ItemDb
     {
         return ParseEquipmentAnimation(equip, type, male, () => "");
     }
+
+    public bool IsWeapon(string name)
+    {
+        return IsEquipment(name) && ParseEquipmentType(name) == EquipmentType.WEAPON;
+    }
+    
+    
+    
 
     private static ItemDb Load()
     {

@@ -55,10 +55,13 @@ public class CharacterInventory
         Notify();
     }
 
-    public void Update(int slot, ICharacterItem item)
+    public void Update(int slot, ICharacterItem? item)
     {
         _items.Remove(slot);
-        _items.TryAdd(slot, item);
+        if (item != null)
+        {
+            _items.TryAdd(slot, item);
+        }
         Notify();
     }
 

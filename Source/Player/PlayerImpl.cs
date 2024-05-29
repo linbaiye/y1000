@@ -134,7 +134,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	public void Visit(PlayerUnequipMessage message)
 	{
-		if (message.NewState != _state.State)
+		if (message.NewState != _state.State && message.NewState != null)
 		{
 			ChangeState(IPlayerState.Cooldown());
 		}
@@ -145,10 +145,35 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			case EquipmentType.CLOTHING: ChangeClothing(null); break;
 			case EquipmentType.HAIR: ChangeHair(null); break;
 			case EquipmentType.BOOT: ChangeBoot(null); break;
-			case EquipmentType.WEAPON: ChangeWeapon(null); break;
 			case EquipmentType.CHEST : ChangeChest(null); break;
 			case EquipmentType.WRIST: 
 			case EquipmentType.WRIST_CHESTED: ChangeWrist(null); break;
+			case EquipmentType.WEAPON: ChangeWeapon(null);
+				break;
+		}
+	}
+	
+	public void Visit(PlayerEquipMessage message)
+	{
+		var equipment = EquipmentFactory.Instance.Create(message.EquipmentName, IsMale);
+		switch (equipment)
+		{
+			case Trouser trouser: ChangeTrouser(trouser);
+				break;
+			case PlayerHat hat: ChangeHat(hat);
+				break;
+			case Clothing clothing: ChangeClothing(clothing);
+				break;
+			case PlayerHair hair: ChangeHair(hair);
+				break;
+			case Boot boot: ChangeBoot(boot);
+				break;
+			case PlayerChest chest: ChangeChest(chest);
+				break;
+			case Wrist wrist: ChangeWrist(wrist);
+				break;
+			case PlayerWeapon weapon : ChangeWeapon(weapon);
+				break;
 		}
 	}
 

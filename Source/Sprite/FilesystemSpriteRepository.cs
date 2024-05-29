@@ -11,8 +11,8 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
     public static readonly FilesystemSpriteRepository Instance = new();
 
     private static readonly ILogger LOG = LogManager.GetCurrentClassLogger();
-    //private static readonly string DIR_PATH = "/Users/ab000785/Downloads/sprite/";
-    private static readonly string DIR_PATH = "D:/work/sprite/";
+    private static readonly string DIR_PATH = "/Users/ab000785/Downloads/sprite/";
+    //private static readonly string DIR_PATH = "D:/work/sprite/";
     private FilesystemSpriteRepository()
     {
     }

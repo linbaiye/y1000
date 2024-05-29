@@ -81,8 +81,11 @@ public class MessageFactory
     
     private UpdateInventorySlotMessage ParseUpdateSlot(InventoryItemPacket packet)
     {
-        var number = packet.HasNumber ? packet.Number : 0;
-        var item = _itemFactory.CreateCharacterItem(packet.Name, number);
+        ICharacterItem? item = null;
+        if (!string.IsNullOrEmpty(packet.Name)) {
+            var number = packet.HasNumber ? packet.Number : 0;
+            item = _itemFactory.CreateCharacterItem(packet.Name, number);
+        }
         return new UpdateInventorySlotMessage(packet.SlotId, item);
     }
 
@@ -91,6 +94,11 @@ public class MessageFactory
         CreatureState? st = packet.HasChangedToState ? (CreatureState) packet.ChangedToState : null;
         var level = packet.HasChangedToState ? packet.BasicQuanfaLevel : 0;
         return new PlayerUnequipMessage(packet.Id, (EquipmentType)packet.EquipmentType, level, st);
+    }
+    
+    private PlayerEquipMessage Parse(PlayerEquipPacket packet)
+    {
+        return new PlayerEquipMessage(packet.Id, packet.EquipmentName);
     }
 
     public IServerMessage Create(Packet packet)
@@ -121,6 +129,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.UpdateSlot => ParseUpdateSlot(packet.UpdateSlot),
             Packet.TypedPacketOneofCase.Text => Parse(packet.Text),
             Packet.TypedPacketOneofCase.Unequip => Parse(packet.Unequip),
+            Packet.TypedPacketOneofCase.Equip => Parse(packet.Equip),
             _ => throw new NotSupportedException()
         };
     }

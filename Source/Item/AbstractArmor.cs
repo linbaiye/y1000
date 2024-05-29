@@ -1,6 +1,6 @@
 ﻿namespace y1000.Source.Item;
 
-public abstract class AbstractArmor
+public abstract class AbstractArmor : IEquipment
 {
     protected AbstractArmor(string firstAtzName, string secondAtzName, string thirdAtzName, string fourthAtzName, string fifthAtzName, string name)
     {
@@ -23,5 +23,6 @@ public abstract class AbstractArmor
     public string FifthAtzName { get; }
     
     public string Name { get; }
-    
+
+    public abstract EquipmentType EquipmentType { get; }
 }

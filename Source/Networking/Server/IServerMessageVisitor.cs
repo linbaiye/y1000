@@ -105,4 +105,9 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)unequipMessage);
     }
+    
+    void Visit(PlayerEquipMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
 }
