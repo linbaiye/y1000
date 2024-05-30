@@ -7,12 +7,12 @@ namespace y1000.Source.Control.Bottom;
 
 public partial class TextArea : RichTextLabel
 {
-    private const int MaxSize = 4;
+    private const int MaxSize = 5;
     private readonly Queue<TextEvent> _messages = new(MaxSize);
     private static readonly ILogger LOG = LogManager.GetCurrentClassLogger();
     public void Display(TextEvent textEvent)
     {
-        if (_messages.Count >= 4)
+        if (_messages.Count >= MaxSize)
         {
             _messages.Dequeue();
         }

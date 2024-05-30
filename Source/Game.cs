@@ -250,9 +250,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		var msgDrivenPlayer = MessageDrivenPlayer.FromInterpolation(playerInterpolation, MapLayer);
 		msgDrivenPlayer.Player.OnPlayerShoot += OnPlayerShoot;
 		msgDrivenPlayer.Player.MouseClicked += OnCreatureClicked;
-		_entityManager.Add(msgDrivenPlayer);
-		AddChild(msgDrivenPlayer.Player);
-		LOGGER.Debug("Added player {0}.", msgDrivenPlayer.Id);
+		if (_entityManager.Add(msgDrivenPlayer))
+		{
+			AddChild(msgDrivenPlayer.Player);
+			LOGGER.Debug("Added player {0}.", msgDrivenPlayer.Id);
+		}
 	}
 
 	public void Visit(IPredictableResponse response)
@@ -297,10 +299,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		var monster = Monster.Create(creatureInterpolation, MapLayer);
 		monster.MouseClicked += OnCreatureClicked;
-		_entityManager.Add(monster);
-		LOGGER.Debug("Received creature message {0}.", monster);
-		AddChild(monster);
-		LOGGER.Debug("Added creature {0}.", monster);
+		if (_entityManager.Add(monster))
+		{
+			AddChild(monster);
+			LOGGER.Debug("Added creature {0}.", monster.Id);
+		}
 	}
 
 	public void Visit(RemoveEntityMessage removeEntityMessage)

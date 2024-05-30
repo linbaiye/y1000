@@ -31,5 +31,6 @@ public partial class RightControl : Godot.Control
     public void BindCharacter(CharacterImpl character)
     {
         _inventory?.BindInventory(character.Inventory);
+        _kungFuBookView?.BindKungFuBook(character.KungFuBook);
     }
 }

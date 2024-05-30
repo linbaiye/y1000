@@ -65,6 +65,13 @@ public partial class InventorySlotView : Panel
 		GetNode<TextureRect>("CenterContainer/TextureRect").Texture = texture2D;
 	}
 
+	public void PutTextureAndTooltip(Texture2D texture2D, string tip)
+	{
+		var textureRect = GetNode<TextureRect>("CenterContainer/TextureRect");
+		textureRect.Texture = texture2D;
+		TooltipText = tip;
+	}
+
 	public void ClearTexture()
 	{
 		GetNode<TextureRect>("CenterContainer/TextureRect").Texture = null;

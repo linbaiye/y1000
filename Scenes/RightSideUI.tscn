@@ -1,11 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://7ghuvlfmi4pd"]
+[gd_scene load_steps=10 format=3 uid="uid://7ghuvlfmi4pd"]
 
 [ext_resource type="Script" path="res://Source/Control/RightSide/RightControl.cs" id="1_j2rwp"]
 [ext_resource type="Texture2D" uid="uid://b50oaa3iiic8f" path="res://assets/ui/inventory.png" id="1_ka7tb"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/InventoryView.cs" id="2_px3kf"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_qq6s2"]
-[ext_resource type="Script" path="res://Source/Control/RightSide/Book/KungFuBookView.cs" id="6_fk7uh"]
 [ext_resource type="Texture2D" uid="uid://d3ks8ifdrhwa1" path="res://assets/ui/kungfu.png" id="6_w6c7c"]
+[ext_resource type="Script" path="res://Source/Control/RightSide/Book/KungFuBookView.cs" id="7_p6auv"]
+[ext_resource type="FontFile" path="res://fonts/SweiSpringSugarCJKtc-ExtraLight.ttf" id="7_xq3le"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3r3ul"]
+
+[sub_resource type="Theme" id="Theme_s57j8"]
+default_font = ExtResource("7_xq3le")
+default_font_size = 13
+Panel/styles/panel = SubResource("StyleBoxEmpty_3r3ul")
 
 [node name="RightSideUI" type="Control"]
 layout_mode = 3
@@ -17,7 +25,6 @@ grow_vertical = 2
 script = ExtResource("1_j2rwp")
 
 [node name="Inventory" type="NinePatchRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(252, 384)
 layout_mode = 0
 offset_right = 40.0
@@ -147,20 +154,167 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 0
 texture = ExtResource("6_w6c7c")
-script = ExtResource("6_fk7uh")
+script = ExtResource("7_p6auv")
 
 [node name="Slots" type="GridContainer" parent="KungFuBook"]
 layout_mode = 0
-offset_left = 17.0
-offset_top = 77.0
-offset_right = 237.0
-offset_bottom = 353.0
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 7
+offset_left = 23.0
+offset_top = 85.0
+offset_right = 230.0
+offset_bottom = 346.0
+theme_override_constants/h_separation = 19
+theme_override_constants/v_separation = 21
 columns = 5
 
 [node name="Slot1" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot2" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot3" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot4" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot5" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot6" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot7" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot8" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot9" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot10" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot11" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot12" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot13" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot14" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot15" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot16" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot17" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot18" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot19" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot20" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot21" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot22" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot23" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot24" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot25" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot26" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot27" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot28" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot29" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
+
+[node name="Slot30" parent="KungFuBook/Slots" instance=ExtResource("2_qq6s2")]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme = SubResource("Theme_s57j8")
 
 [node name="CloseButton" type="TextureButton" parent="KungFuBook"]
 layout_mode = 0

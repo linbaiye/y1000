@@ -304,6 +304,7 @@ namespace y1000.Source.Character
 	        character.Inventory.SetEventMediator(eventMediator);
 	        character.EventMediator = eventMediator;
 	        character.ChangeState(CharacterIdleState.Wrap(state));
+	        character.KungFuBook = message.KungFuBook;
 	        AddItems(character, message, itemFactory);
 	        return character;
         }

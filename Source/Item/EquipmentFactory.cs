@@ -1,4 +1,5 @@
 ﻿using System;
+using y1000.Source.Util;
 
 namespace y1000.Source.Item;
 
@@ -6,11 +7,11 @@ public class EquipmentFactory
 {
     public static readonly EquipmentFactory Instance = new();
 
-    private readonly ItemDb itemDb;
+    private readonly ItemSdbReader itemDb;
 
     private EquipmentFactory()
     {
-        itemDb = ItemDb.Instance;
+        itemDb = ItemSdbReader.ItemSdb;
     }
 
     public PlayerWeapon CreatePlayerWeapon(string name, bool male)

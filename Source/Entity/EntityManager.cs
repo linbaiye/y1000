@@ -27,26 +27,10 @@ public class EntityManager
         return null;
     }
 
-    public void Add(Monster monster)
-    {
-        _entities.TryAdd(monster.Id, monster);
-    }
 
-    public void Add(GroundedItem item)
+    public bool Add(IEntity entity)
     {
-        _entities.Add(item.Id, item);
-    }
-
-    public void Add(IEntity entity)
-    {
-        if (entity is GroundedItem item)
-        {
-            Add(item);
-        }
-        else
-        {
-            _entities.TryAdd(entity.Id, entity);
-        }
+        return _entities.TryAdd(entity.Id, entity);
     }
 
     public IEntity? Get(long id)

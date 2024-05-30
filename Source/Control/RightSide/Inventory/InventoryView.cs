@@ -3,13 +3,14 @@ using Godot;
 using NLog;
 using y1000.Source.Character;
 using y1000.Source.Item;
+using y1000.Source.Sprite;
 
 namespace y1000.Source.Control.RightSide.Inventory;
 
 public partial class InventoryView : AbstractInventoryView
 {
 
-    private static readonly ItemTextureReader TEXTURE_READER = ItemTextureReader.Instance;
+    private static readonly IconReader TEXTURE_READER = IconReader.ItemIconReader;
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
     private InventorySlotView? _currentFocused;

@@ -28,6 +28,11 @@ public abstract partial class AbstractInventoryView : NinePatchRect
             }
         }
     }
+
+    protected InventorySlotView GetSlot(int nr)
+    {
+        return GetNode<InventorySlotView>("Slots/Slot" + nr);
+    }
     
     public void ButtonClicked()
     {
