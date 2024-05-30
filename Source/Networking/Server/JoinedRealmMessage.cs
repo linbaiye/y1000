@@ -27,11 +27,10 @@ namespace y1000.Source.Networking.Server
             AttackKungFu = attackKungFu;
             Items = items;
             MyInfo = myInfo;
+            KungFuBook = KungFuBook.Empty;
         }
         
         public List<InventoryItemMessage> Items { get; }
-        
-        public IDictionary<int, IKungFu>? UnnamedKungFu { get; private set; }
         
         public KungFuBook KungFuBook { get; private set; }
         
@@ -66,13 +65,14 @@ namespace y1000.Source.Networking.Server
 
         private static KungFuBook CreateKungFuBook(LoginPacket packet)
         {
-            new KungFuBook();
+            return new KungFuBook(ParseUnnamedKungFu(packet));
         }
 
         public static JoinedRealmMessage FromPacket(LoginPacket loginPacket)
         {
             List<InventoryItemMessage> itemMessages = ItemMessages(loginPacket);
-            var attackKungFu = IAttackKungFu.ByType((AttackKungFuType)loginPacket.AttackKungFuType, loginPacket.AttackKungFuName, loginPacket.AttackKungFuLevel);
+            var attackKungFu = IAttackKungFu.ByType((AttackKungFuType)loginPacket.AttackKungFuType, loginPacket.AttackKungFuName, 
+                loginPacket.AttackKungFuLevel);
             var footKungFu = loginPacket.HasFootKungFuName
                 ? IFootKungFu.ByName(loginPacket.FootKungFuName, loginPacket.FootKungFuLevel)
                 : null;
@@ -80,7 +80,7 @@ namespace y1000.Source.Networking.Server
             {
                 Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
                 FootKungFu = footKungFu,
-                UnnamedKungFu = ParseUnnamedKungFu(loginPacket),
+                KungFuBook = CreateKungFuBook(loginPacket),
             };
             return message;
         }

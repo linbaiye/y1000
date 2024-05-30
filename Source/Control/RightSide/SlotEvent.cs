@@ -1,7 +1,6 @@
 ﻿using System;
-using Godot;
 
-namespace y1000.Source.Control.RightSide.Inventory;
+namespace y1000.Source.Control.RightSide;
 
 public class SlotEvent : EventArgs
 {

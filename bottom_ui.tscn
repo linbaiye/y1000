@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Source/Control/Bottom/TextArea.cs" id="3_56n7n"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/Avatar.cs" id="4_mdb7g"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/AvatarPart.cs" id="5_rq0is"]
-[ext_resource type="FontFile" path="res://fonts/SweiSpringSugarCJKtc-ExtraLight.ttf" id="6_k2h1g"]
+[ext_resource type="FontFile" uid="uid://dncxdf0s1udqa" path="res://fonts/SweiSpringSugarCJKtc-ExtraLight.ttf" id="6_k2h1g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kljs2"]
 

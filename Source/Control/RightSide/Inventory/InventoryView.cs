@@ -6,7 +6,7 @@ using y1000.Source.Item;
 
 namespace y1000.Source.Control.RightSide.Inventory;
 
-public partial class InventoryView : NinePatchRect
+public partial class InventoryView : AbstractInventoryView
 {
 
     private static readonly ItemTextureReader TEXTURE_READER = ItemTextureReader.Instance;
@@ -20,8 +20,7 @@ public partial class InventoryView : NinePatchRect
     
     public override void _Ready()
     {
-        Visible = false;
-        GetNode<TextureButton>("CloseButton").Pressed += OnClosed;
+        base._Ready();
         ForeachSlot(view => view.OnInputEvent += OnSlotEvent);
         _textLabel = GetNode<Label>("TextLabel");
     }
@@ -109,36 +108,12 @@ public partial class InventoryView : NinePatchRect
             inventory.Foreach(SetIconToSlot);
         }
     }
-
-    private void ForeachSlot(Action<InventorySlotView> action)
-    {
-        var container = GetNode<Godot.GridContainer>("InventorySlots");
-        foreach (var child in container.GetChildren())
-        {
-            if (child is InventorySlotView slot)
-            {
-                action.Invoke(slot);
-            }
-        }
-    }
-
     private void SetIconToSlot(int slot, ICharacterItem item)
     {
         var texture = TEXTURE_READER.Get(item.IconId);
         if (texture != null)
         {
-            GetNode<InventorySlotView>("InventorySlots/Slot" + slot).PutItem(texture);
+            GetNode<InventorySlotView>("Slots/Slot" + slot).PutItem(texture);
         }
-    }
-
-
-    public void ButtonClicked()
-    {
-        Visible = !Visible;
-    }
-
-    private void OnClosed()
-    {
-        Visible = false;
     }
 }

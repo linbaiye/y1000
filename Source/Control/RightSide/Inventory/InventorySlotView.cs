@@ -5,6 +5,7 @@ using NLog;
 
 namespace y1000.Source.Control.RightSide.Inventory;
 
+
 public partial class InventorySlotView : Panel
 {
 	private int _number;

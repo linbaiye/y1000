@@ -9,6 +9,7 @@ using y1000.Source.Creature;
 using y1000.Source.Event;
 using y1000.Source.Input;
 using y1000.Source.Item;
+using y1000.Source.KungFu;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.KungFu.Foot;
 using y1000.Source.Map;
@@ -29,7 +30,8 @@ namespace y1000.Source.Character
 		public IFootKungFu? FootMagic { get; private set; }
 
 		public IAttackKungFu AttackKungFu { get; private set; } = IAttackKungFu.Empty;
-
+		
+		
 		public event EventHandler<EventArgs>? WhenCharacterUpdated;
 
 		private EventMediator? EventMediator { get; set; }
@@ -52,6 +54,8 @@ namespace y1000.Source.Character
 		public Boot? Boot =>  WrappedPlayer().Boot;
 		public Clothing? Clothing =>  WrappedPlayer().Clothing;
 		public Trouser ? Trouser =>  WrappedPlayer().Trouser;
+
+		public KungFuBook KungFuBook { get; set; } = KungFuBook.Empty;
 		
 		public long Id => WrappedPlayer().Id;
 

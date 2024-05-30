@@ -1,4 +1,5 @@
 ﻿using y1000.Source.Character;
+using y1000.Source.Control.RightSide.Book;
 using y1000.Source.Control.RightSide.Inventory;
 
 namespace y1000.Source.Control.RightSide;
@@ -6,21 +7,26 @@ namespace y1000.Source.Control.RightSide;
 public partial class RightControl : Godot.Control
 {
     private InventoryView? _inventory;
+    private KungFuBookView? _kungFuBookView;
     
     public override void _Ready()
     {
         _inventory = GetNode<InventoryView>("Inventory");
-        BindButtons();
+        _kungFuBookView = GetNode<KungFuBookView>("KungFuBook");
     }
 
     public void OnInventoryButtonClicked()
     {
+        _kungFuBookView?.OnClosed();
         _inventory?.ButtonClicked();
     }
-
-    private void BindButtons()
+    
+    public void OnKungFuButtonClicked()
     {
+        _inventory?.OnClosed();
+        _kungFuBookView?.ButtonClicked();
     }
+
     
     public void BindCharacter(CharacterImpl character)
     {

@@ -40,6 +40,7 @@ public partial class UIController : CanvasLayer
     private void BindButtons()
     {
         _bottomControl.InventoryButton.Pressed += _rightControl.OnInventoryButtonClicked;
+        _bottomControl.KungFuButton.Pressed += _rightControl.OnKungFuButtonClicked;
     }
     
     public void BindCharacter(CharacterImpl character)
