@@ -12,20 +12,20 @@ public class EntityFactory
 
     private readonly ItemSdbReader _itemDb;
     
-    private readonly IconReader iconReader;
+    private readonly IconReader _iconReader;
 
     private readonly EventMediator _eventMediator;
     public EntityFactory(EventMediator eventMediator)
     {
         _itemDb = ItemSdbReader.ItemSdb;
-        iconReader = IconReader.ItemIconReader;
+        _iconReader = IconReader.ItemIconReader;
         _eventMediator = eventMediator;
     }
 
     public GroundedItem CreateGroundedItem(ShowItemMessage message)
     {
         var iconId = _itemDb.GetIconId(message.Name);
-        var texture2D = iconReader.Get(iconId);
+        var texture2D = _iconReader.Get(iconId);
         if (texture2D == null)
         {
             throw new NotImplementedException(message.Name + " does not have icon.");

@@ -31,7 +31,6 @@ namespace y1000.Source.Character
 
 		public IAttackKungFu AttackKungFu { get; private set; } = IAttackKungFu.Empty;
 		
-		
 		public event EventHandler<EventArgs>? WhenCharacterUpdated;
 
 		private EventMediator? EventMediator { get; set; }
@@ -43,9 +42,7 @@ namespace y1000.Source.Character
 		}
 
 		public bool IsMale => WrappedPlayer().IsMale;
-		
 		public string EntityName => WrappedPlayer().EntityName;
-
 		public PlayerWeapon ? Weapon => WrappedPlayer().Weapon;
 		public PlayerChest? Chest =>  WrappedPlayer().Chest;
 		public PlayerHair? Hair =>  WrappedPlayer().Hair;
@@ -54,7 +51,6 @@ namespace y1000.Source.Character
 		public Boot? Boot =>  WrappedPlayer().Boot;
 		public Clothing? Clothing =>  WrappedPlayer().Clothing;
 		public Trouser ? Trouser =>  WrappedPlayer().Trouser;
-
 		public KungFuBook KungFuBook { get; set; } = KungFuBook.Empty;
 		
 		public long Id => WrappedPlayer().Id;
@@ -70,6 +66,12 @@ namespace y1000.Source.Character
 				}
 			}
 		}
+		
+		public string? ProtectionKungFu { get; set; }
+		
+		public string? AssistantKungFu { get; set; }
+		
+		public BreathKungFu? BreathKungFu { get; set; }
 
 		public PlayerImpl WrappedPlayer()
 		{
@@ -208,7 +210,7 @@ namespace y1000.Source.Character
         }
 
 
-        private bool IsEquiped(EquipmentType type)
+        private bool IsEquipped(EquipmentType type)
         {
 	        return type switch
 	        {
@@ -227,7 +229,7 @@ namespace y1000.Source.Character
 
         public void OnAvatarDoubleClick(EquipmentType type)
         {
-	        if (!IsEquiped(type))
+	        if (!IsEquipped(type))
 	        {
 		        return;
 	        }
@@ -290,6 +292,66 @@ namespace y1000.Source.Character
 	        WhenCharacterUpdated?.Invoke(this ,new EquipmentChangedEvent(equipment.EquipmentType));
         }
 
+        private void ToggleProtectionKungFu(PlayerToggleKungFuMessage message)
+        {
+	        ProtectionKungFu = message.Level > 0 ? message.Name : null;
+	        if (message.Level > 0)
+	        {
+		        BreathKungFu = null;
+	        }
+        }
+
+        private void ToggleBreathKungFu(PlayerToggleKungFuMessage message)
+        {
+	        BreathKungFu = message.Level > 0 ? new BreathKungFu(message.Name, message.Level) : null;
+	        if (message.Level > 0)
+	        {
+		        ProtectionKungFu = null;
+	        }
+        }
+
+        private void ToggleFootKungFu(PlayerToggleKungFuMessage message)
+        {
+	        
+        }
+        
+        public void Visit(PlayerToggleKungFuMessage message)
+        {
+	        switch (message.Type)
+	        {
+		        case KungFuType.FOOT:
+			        FootMagic = message.Level > 0? new Bufa(message.Level, message.Name) : null;
+			        break;
+		        case KungFuType.PROTECTION:
+			        ToggleProtectionKungFu(message);
+			        break;
+		        case KungFuType.ASSISTANT:
+			        AssistantKungFu = message.Level > 0 ? message.Name : null;
+			        break;
+		        case KungFuType.BREATHING:
+			        ToggleBreathKungFu(message);
+			        break;
+		        case KungFuType.AXE:
+			        AttackKungFu = new AxeKungFu(message.Level, message.Name);
+			        break;
+		        case KungFuType.BLADE:
+			        AttackKungFu = new BladeKungFu(message.Level, message.Name);
+			        break;
+		        case KungFuType.SWORD:
+			        AttackKungFu = new SwordKungFu(message.Level, message.Name);
+			        break;
+		        case KungFuType.SPEAR:
+			        AttackKungFu = new SpearKungFu(message.Level, message.Name);
+			        break;
+		        case KungFuType.BOW:
+			        AttackKungFu = new BowKungFu(message.Level, message.Name);
+			        break;
+		        case KungFuType.QUANFA:
+			        AttackKungFu = new QuanFa(message.Level, message.Name);
+			        break;
+	        }
+        }
+
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,
 	        IMap map,  ItemFactory itemFactory, EventMediator eventMediator)
         {
@@ -305,6 +367,9 @@ namespace y1000.Source.Character
 	        character.EventMediator = eventMediator;
 	        character.ChangeState(CharacterIdleState.Wrap(state));
 	        character.KungFuBook = message.KungFuBook;
+	        character.KungFuBook.EventMediator = eventMediator;
+	        character.ProtectionKungFu = message.ProtectionKungFu;
+	        character.AssistantKungFu = message.AssistantKungFu;
 	        AddItems(character, message, itemFactory);
 	        return character;
         }

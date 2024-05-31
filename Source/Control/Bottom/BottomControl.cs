@@ -9,15 +9,17 @@ namespace y1000.Source.Control.Bottom;
 public partial class BottomControl : Godot.Control
 {
 
-
 	private TextArea? _textArea;
 
 	private Avatar? _avatar;
+
+	private UsedKungFuView? _kungFuView;
 
 	public override void _Ready()
 	{
 		_textArea = GetNode<TextArea>("Container/TextArea");
 		_avatar = GetNode<Avatar>("Container/Avatar");
+		_kungFuView = GetNode<UsedKungFuView>("Container/UsedKungFuView");
 	}
 
 	private void UpdateCoordinate(Vector2I coordinate)
@@ -61,6 +63,7 @@ public partial class BottomControl : Godot.Control
 		character.WhenCharacterUpdated += WhenCharacterUpdated;
 		_avatar?.BindCharacter(character);
 		UpdateCoordinate(character.Coordinate);
+		_kungFuView?.BindCharacter(character);
 	}
 
 	public Button InventoryButton => GetNode<Button>("Container/InventoryButton");

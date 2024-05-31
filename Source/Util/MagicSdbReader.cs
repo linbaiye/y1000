@@ -1,9 +1,16 @@
-﻿namespace y1000.Source.Util;
+﻿using y1000.Source.KungFu;
+
+namespace y1000.Source.Util;
 
 public class MagicSdbReader : AbstractSdbReader
 {
     public static readonly MagicSdbReader Instance = Load();
 
+
+    public KungFuType GetType(string name)
+    {
+        return Parse(name, "MagicType", str => (KungFuType)int.Parse(str));
+    }
 
     private static MagicSdbReader Load()
     {

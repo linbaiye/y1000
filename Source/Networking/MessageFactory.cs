@@ -6,8 +6,10 @@ using y1000.Source.Character.Event;
 using y1000.Source.Creature;
 using y1000.Source.Creature.Event;
 using y1000.Source.Item;
+using y1000.Source.KungFu;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.Networking.Server;
+using y1000.Source.Util;
 using TextMessage = y1000.Source.Networking.Server.TextMessage;
 
 namespace y1000.Source.Networking;
@@ -16,9 +18,12 @@ public class MessageFactory
 {
     private readonly ItemFactory _itemFactory;
 
+    private readonly MagicSdbReader _magicSdbReader;
+
     public MessageFactory(ItemFactory factory)
     {
         _itemFactory = factory;
+        _magicSdbReader = MagicSdbReader.Instance;
     }
     
     private AbstractPositionMessage DecodePositionMessage(PositionPacket positionPacket)
@@ -101,6 +106,14 @@ public class MessageFactory
         return new PlayerEquipMessage(packet.Id, packet.EquipmentName);
     }
 
+
+    private PlayerToggleKungFuMessage Parse(ToggleKungFuPacket packet)
+    {
+        int level = packet.HasLevel ? packet.Level : 0;
+        KungFuType type = _magicSdbReader.GetType(packet.Name);
+        return new PlayerToggleKungFuMessage(packet.Id, packet.Name, level, type);
+    }
+
     public IServerMessage Create(Packet packet)
     {
         return packet.TypedPacketCase switch
@@ -130,6 +143,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.Text => Parse(packet.Text),
             Packet.TypedPacketOneofCase.Unequip => Parse(packet.Unequip),
             Packet.TypedPacketOneofCase.Equip => Parse(packet.Equip),
+            Packet.TypedPacketOneofCase.ToggleKungFu => Parse(packet.ToggleKungFu),
             _ => throw new NotSupportedException()
         };
     }

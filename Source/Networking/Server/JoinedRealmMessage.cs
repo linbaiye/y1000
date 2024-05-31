@@ -40,6 +40,12 @@ namespace y1000.Source.Networking.Server
         
         public IAttackKungFu AttackKungFu { get; private init; }
         
+        public string? ProtectionKungFu { get; private init; }
+        
+        public string? AssistantKungFu { get; private init; }
+        
+        public BreathKungFu? BreathKungFu { get; private init; }
+        
         public PlayerInfo MyInfo { get; }
         
         private static List<InventoryItemMessage> ItemMessages(LoginPacket loginPacket)
@@ -81,6 +87,9 @@ namespace y1000.Source.Networking.Server
                 Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
                 FootKungFu = footKungFu,
                 KungFuBook = CreateKungFuBook(loginPacket),
+                AssistantKungFu = loginPacket.HasAssistantKungFu ? loginPacket.AssistantKungFu : null,
+                ProtectionKungFu= loginPacket.HasProtectionKungFu ? loginPacket.ProtectionKungFu: null,
+                BreathKungFu = loginPacket.HasBreathKungFu? new BreathKungFu(loginPacket.BreathKungFu, loginPacket.BreathKungFuLevel) : null,
             };
             return message;
         }

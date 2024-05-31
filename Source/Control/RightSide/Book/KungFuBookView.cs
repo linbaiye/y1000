@@ -28,9 +28,17 @@ public partial class KungFuBookView : AbstractInventoryView
 
     private void OnSlotEvent(object? sender, SlotEvent inputEvent)
     {
-        
+        if (sender is not InventorySlotView slotView)
+        {
+            return;
+        }
+        switch (inputEvent.EventType)
+        {
+            case SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK:
+                _kungFuBook.OnUnnamedTabDoubleClick(slotView.Number);
+                break;
+        }
     }
-
 
     private string KungFuLevel(int level)
     {

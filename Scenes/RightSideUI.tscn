@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_qq6s2"]
 [ext_resource type="Texture2D" uid="uid://d3ks8ifdrhwa1" path="res://assets/ui/kungfu.png" id="6_w6c7c"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Book/KungFuBookView.cs" id="7_p6auv"]
-[ext_resource type="FontFile" path="res://fonts/SweiSpringSugarCJKtc-ExtraLight.ttf" id="7_xq3le"]
+[ext_resource type="FontFile" uid="uid://dncxdf0s1udqa" path="res://fonts/SweiSpringSugarCJKtc-ExtraLight.ttf" id="7_xq3le"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3r3ul"]
 

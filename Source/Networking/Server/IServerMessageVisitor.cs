@@ -110,4 +110,9 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)message);
     }
+
+    void Visit(PlayerToggleKungFuMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
 }

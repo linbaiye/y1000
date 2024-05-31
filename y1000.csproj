@@ -66,5 +66,6 @@
     <Compile Remove="Source\Character\Inventory\**" />
     <EmbeddedResource Remove="Source\Character\Inventory\**" />
     <Compile Remove="Source\Character\Event\CharacterEventArgs.cs" />
+    <Compile Remove="Source\Event\PressKungFuSlotEvent.cs" />
   </ItemGroup>
 </Project>
