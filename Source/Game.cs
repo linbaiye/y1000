@@ -65,7 +65,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_messageFactory = new MessageFactory(_itemFactory);
 		_entityFactory = new EntityFactory(_eventMediator);
 		_entityManager = EntityManager.Instance;
+		GD.Print("Creating sprite repo.");
 		_spriteRepository = FilesystemSpriteRepository.Instance;
+		GD.Print("Done init.");
 	}
 
 	private EventMediator InitializeEventMediator()
@@ -120,50 +122,25 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	private MapLayer MapLayer => GetNode<MapLayer>("MapLayer");
 
 
-	private void HandleMouseInput(InputEventMouse eventMouse)
-	{
-		HandleCharacterInput((ch) =>
-		{
-			var mousePos = ch.WrappedPlayer().GetLocalMousePosition();
-			return _inputSampler.SampleMoveInput(eventMouse, mousePos);
-		});
-	}
-
-	private void HandleCharacterInput(Func<CharacterImpl, IPredictableInput?> sampleFunction)
+	
+	private void HandleInput(InputEvent @event)
 	{
 		if (_character == null)
 		{
 			return;
 		}
-		var input = sampleFunction.Invoke(_character);
-		if (input == null)
+		var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
+		var predictableInput = _inputSampler.SampleInput(@event, mousePos);
+		if (predictableInput != null)
 		{
-			return;
+			_character.HandleInput(predictableInput);
 		}
-		_character.HandleInput(input);
 	}
 	
-	
-	private void HandleKeyInput(InputEventKey eventKey)
-	{
-		if (_character == null)
-		{
-			return;
-		}
-
-		//_uiController?.DisplayMessage(eventKey.Keycode.ToString());
-	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event is InputEventMouse eventMouse)
-		{
-			HandleMouseInput(eventMouse);
-		}
-		else if (@event is InputEventKey eventKey)
-		{
-			HandleKeyInput(eventKey);
-		}
+		HandleInput(@event);
 	}
 
 

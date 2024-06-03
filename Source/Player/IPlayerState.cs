@@ -16,6 +16,8 @@ public interface IPlayerState : ICreatureState<PlayerImpl>
     
     int ElapsedMillis { get; }
     
+    int TotalMillis { get; }
+    
     public static IPlayerState Attack(CreatureState state)
     {
         return new PlayerStillState(state);
@@ -79,7 +81,7 @@ public interface IPlayerState : ICreatureState<PlayerImpl>
         return NonHurtState(playerInterpolation.Interpolation.State, playerInterpolation.Interpolation.Direction,
             playerInterpolation.Interpolation.ElapsedMillis);
     }
-
+    
     public static IPlayerState Idle()
     {
         return new PlayerStillState(CreatureState.IDLE);

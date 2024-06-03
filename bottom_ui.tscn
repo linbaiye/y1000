@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Source/Control/Bottom/AvatarPart.cs" id="5_rq0is"]
 [ext_resource type="FontFile" uid="uid://dncxdf0s1udqa" path="res://fonts/SweiSpringSugarCJKtc-ExtraLight.ttf" id="6_k2h1g"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_v430x"]
-[ext_resource type="Script" path="res://Source/Control/Bottom/UsedKungFuView.cs" id="8_j7kmn"]
+[ext_resource type="Script" path="res://Source/Control/Bottom/UsedKungFuView.cs" id="8_hxdqm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kljs2"]
 
@@ -77,8 +77,8 @@ offset_left = 54.0
 offset_top = 167.0
 offset_right = 120.0
 offset_bottom = 188.0
-theme_override_fonts/font = ExtResource("7_v430x")
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("6_k2h1g")
+theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -159,18 +159,19 @@ horizontal_alignment = 1
 
 [node name="UsedKungFuView" type="VBoxContainer" parent="Container"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 82.0
+offset_left = 19.0
+offset_top = 83.0
 offset_right = 127.0
-offset_bottom = 160.0
+offset_bottom = 159.0
 theme_override_constants/separation = 1
-script = ExtResource("8_j7kmn")
+script = ExtResource("8_hxdqm")
 
 [node name="Label1" type="Label" parent="Container/UsedKungFuView"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 12
+text = "无名步法"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -179,6 +180,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 12
+text = "无名强身"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -187,6 +189,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 12
+text = "灵动八方"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -195,5 +198,6 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 12
+text = "不羁浪人槌法"
 horizontal_alignment = 1
 vertical_alignment = 1

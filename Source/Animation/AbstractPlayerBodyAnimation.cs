@@ -23,6 +23,7 @@ public abstract class AbstractPlayerBodyAnimation<TA> : AbstractPlayerAnimation<
                 .ConfigureState(CreatureState.HURT, AtdReader, normal)
                 .ConfigureState(CreatureState.COOLDOWN, AtdReader, normal)
                 .ConfigureState(CreatureState.SIT, AtdReader, normal)
+                .ConfigureState(CreatureState.HELLO, AtdReader, normal)
                 .ConfigureState(CreatureState.STANDUP, AtdReader, normal)
                 .ConfigureState(CreatureState.DIE, AtdReader, normal)
                 .ConfigureState(CreatureState.KICK, AtdReader, fistKick)

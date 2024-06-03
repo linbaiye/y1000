@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using NLog;
+using y1000.code.player.state;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Item;
@@ -31,8 +32,10 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	private PlayerArmorAnimation? _trouserAnimation;
 	
 	private PlayerArmorAnimation? _clothingAnimation;
-
+	
 	public event EventHandler<PlayerRangedAttackEventArgs>? OnPlayerShoot;
+
+	private KungFuTip? _kungFuTip;
 
 	private void InitEquipment<T>(string? name, Func<string, T> creator, Action<T> equip)
 	{
@@ -194,6 +197,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		}
 	}
 
+	public void Visit(PlayerStandUpMessage message)
+	{
+		ChangeState(IPlayerState.NonHurtState(CreatureState.STANDUP));
+	}
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -201,6 +209,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		{
 			_state = IPlayerState.Idle();
 		}
+		_kungFuTip = GetNode<KungFuTip>("KungFuTip");
 	}
 
 	public bool IsMale { get; private set; }
@@ -209,6 +218,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void ChangeState(IPlayerState newState)
 	{
 		_state = newState;
+	}
+
+	public void Visit(PlayerToggleKungFuMessage message)
+	{
+		_kungFuTip?.Display(message.Name);
 	}
 
 	public void EmitRangedAttackEvent(long id)
@@ -250,6 +264,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void Visit(RemoveEntityMessage message)
 	{
 		Delete();
+	}
+
+	public void Visit(PlayerSitDownMessage message)
+	{
+		ChangeState(IPlayerState.NonHurtState(CreatureState.SIT));
 	}
 
 	public void ResetState()

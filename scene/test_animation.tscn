@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://cdhrxlx64ks6p"]
+[gd_scene load_steps=110 format=3 uid="uid://cdhrxlx64ks6p"]
 
 [ext_resource type="Texture2D" uid="uid://6e7agsbkde4r" path="res://sprite/char/N00/000000.png" id="1_aa18q"]
 [ext_resource type="Texture2D" uid="uid://cf328w2nq1syi" path="res://sprite/char/N00/000001.png" id="2_23pth"]
@@ -474,6 +474,12 @@ shader_parameter/deform = Vector2(1, 1.5)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/modulate = Color(0, 0, 0, 0.545098)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wu7ov"]
+shader = ExtResource("54_3lv3l")
+shader_parameter/deform = Vector2(0.6, 0.4)
+shader_parameter/offset = Vector2(0, 1)
+shader_parameter/modulate = null
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 
 [node name="BladeSwordNormal" type="Sprite2D" parent="."]
@@ -493,21 +499,21 @@ centered = false
 
 [node name="Sword2HSwing" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("23_s8cye")
+texture = ExtResource("19_d16a0")
 centered = false
-offset = Vector2(-10, -25)
+offset = Vector2(-10, -28)
 
 [node name="Sword2H" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("7_x3p1i")
+texture = ExtResource("3_l13wc")
 centered = false
-offset = Vector2(1, -28)
+offset = Vector2(15, -28)
 
 [node name="Sword" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("35_em1j3")
+texture = ExtResource("31_ss62q")
 centered = false
-offset = Vector2(-16, 9)
+offset = Vector2(8, -10)
 
 [node name="Kick" type="Sprite2D" parent="."]
 visible = false
@@ -527,17 +533,17 @@ centered = false
 [node name="EnfightWalk" type="Sprite2D" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_h71lt")
-texture = ExtResource("14_y334r")
+texture = ExtResource("10_j4d7q")
 centered = false
 
 [node name="Cooldown" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("47_m06r2")
+texture = ExtResource("7_n02rn")
 centered = false
 
 [node name="Bow" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("20_hdmup")
+texture = ExtResource("16_qkhqr")
 centered = false
 
 [node name="Arrow" type="Sprite2D" parent="."]
@@ -547,28 +553,34 @@ texture = ExtResource("61_jko8c")
 centered = false
 
 [node name="WalkRight" type="Sprite2D" parent="."]
-visible = false
+material = SubResource("ShaderMaterial_wu7ov")
 position = Vector2(50, 40)
-texture = ExtResource("17_iw2ck")
+texture = ExtResource("82_r8g1l")
 centered = false
-offset = Vector2(-16, -29)
+offset = Vector2(-20, -28)
 
 [node name="WalkSword" type="Sprite2D" parent="WalkRight"]
-texture = ExtResource("23_abpne")
+texture = ExtResource("19_qygve")
 centered = false
-offset = Vector2(-9, 4)
+offset = Vector2(-1, -1)
+
+[node name="Label" type="Label" parent="WalkRight"]
+offset_left = -18.0
+offset_top = -49.0
+offset_right = 25.0
+offset_bottom = -26.0
 
 [node name="WalkLeft" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(50, 50)
-texture = ExtResource("30_vxqi2")
+texture = ExtResource("25_wgwr7")
 centered = false
-offset = Vector2(-7, -31)
+offset = Vector2(-11, -29)
 
 [node name="Sword2" type="Sprite2D" parent="WalkLeft"]
-texture = ExtResource("45_ltfve")
+texture = ExtResource("41_jxq3x")
 centered = false
-offset = Vector2(-32, -11)
+offset = Vector2(-31, -8)
 
 [node name="SwordAddedOffset" type="Sprite2D" parent="WalkLeft"]
 visible = false
@@ -577,6 +589,7 @@ centered = false
 offset = Vector2(-28, -2)
 
 [node name="CowRect" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("104_m15ct")
 centered = false
 

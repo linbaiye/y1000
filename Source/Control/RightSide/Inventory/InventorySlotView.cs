@@ -13,6 +13,8 @@ public partial class InventorySlotView : Panel
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 	public event EventHandler<SlotEvent>? OnInputEvent;
 
+	private bool _mouseHovered;
+
 	public override void _GuiInput(InputEvent @event)
 	{
 		if (@event is InputEventMouseButton eventMouseButton)
@@ -20,6 +22,17 @@ public partial class InventorySlotView : Panel
 			HandleMouseEvent(eventMouseButton);
 		}
 	}
+
+	public override void _ShortcutInput(InputEvent @event)
+	{
+		if (@event is InputEventKey eventKey && _mouseHovered)
+		{
+			if (eventKey.IsPressed())
+				LOGGER.Debug("Key input {0}.", eventKey.Keycode);
+			AcceptEvent();
+		}
+	}
+
 
 	private void HandleMouseEvent(InputEventMouseButton eventMouse)
 	{
@@ -44,11 +57,24 @@ public partial class InventorySlotView : Panel
 		}
 	}
 
+	private void OnMouseEntered()
+	{
+		_mouseHovered = true;
+		OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_ENTERED));
+	}
+	
+	private void OnMouseExited()
+	{
+		_mouseHovered = false;
+		OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_GONE));
+	}
+
+
 	public override void _Ready()
 	{
 		ParseNumber();
-		MouseEntered += () => OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_ENTERED));
-		MouseExited += () => OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_GONE));
+		MouseEntered += OnMouseEntered;
+		MouseExited += OnMouseExited;
 	}
 
 

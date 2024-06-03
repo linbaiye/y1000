@@ -23,8 +23,8 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	
 	private void Init(long id, Direction direction, ICreatureState<Monster> state, Vector2I coordinate, IMap map, string name, MonsterAnimation animation)
 	{
-		_state = state;
 		base.Init(id, direction, coordinate, map, name);
+		_state = state;
 		_animation = animation;
 	}
 

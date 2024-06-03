@@ -34,12 +34,17 @@ namespace y1000.Source.Input
                 InputFactory.CreateRightMousePressedMotion(mouseOffset.GetDirection());
         }
 
-        private IPredictableInput SampleKeyEvent(InputEventKey eventKey)
+        private IPredictableInput? SampleKeyEvent(InputEventKey eventKey)
         {
-            return InputFactory.KeyInput(eventKey.Keycode);
+            if (eventKey.Keycode >= Key.F1 && eventKey.Keycode <= Key.F12 && eventKey.IsPressed())
+            {
+                return InputFactory.KeyInput(eventKey.Keycode);
+            }
+
+            return null;
         }
         
-        public IPredictableInput? SampleMoveInput(InputEvent inputEvent, Vector2 mouseOffset)
+        public IPredictableInput? SampleInput(InputEvent inputEvent, Vector2 mouseOffset)
         {
             return inputEvent switch
             {

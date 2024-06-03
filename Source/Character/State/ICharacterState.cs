@@ -1,4 +1,5 @@
 
+using System;
 using y1000.Source.Creature;
 using y1000.Source.Input;
 using y1000.Source.Player;
@@ -18,10 +19,37 @@ namespace y1000.Source.Character.State
             return false;
         }
 
-        void Attack(CharacterImpl character, AttackInput @event) { }
+        bool CanSitDown()
+        {
+            return false;
+        }
+
+        bool CanStandUp()
+        {
+            return false;
+        }
+
+        bool CanAttack()
+        {
+            return false;
+        }
 
         void OnWrappedPlayerAnimationFinished(CharacterImpl character) {}
 
         IPlayerState WrappedState { get; }
+
+        public static ICharacterState Create(CreatureState state)
+        {
+            switch (state)
+            {
+                case CreatureState.SIT:
+                    return CharacterSitDownState.SitDown();
+                case CreatureState.IDLE:
+                    return CharacterIdleState.Idle();
+                case CreatureState.COOLDOWN:
+                    return CharacterCooldownState.Cooldown();
+            }
+            throw new NotImplementedException();
+        }
     }
 }

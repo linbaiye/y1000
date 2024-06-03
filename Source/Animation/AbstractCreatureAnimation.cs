@@ -52,6 +52,10 @@ public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : Abs
 
         private int MillisToFrameNumber(int millis)
         {
+            if (millis == TotalMillis)
+            {
+                return (TotalMillis / MillisPerFrame) - 1;
+            }
             millis %= TotalMillis;
             return millis / MillisPerFrame;
         }

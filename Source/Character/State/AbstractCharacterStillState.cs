@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Input;
@@ -40,10 +39,11 @@ public abstract class AbstractCharacterStillState : ICharacterState
         }
         else
         {
+            Logger.Debug("Moving to coordinate {0}.", character.Coordinate.Move(rightClick.Direction));
             character.EmitPredictionEvent(new MovePrediction(rightClick, character.Coordinate, rightClick.Direction),
                 new PredictMovementEvent(rightClick, character.Coordinate));
-            var characterState = MoveState(character, rightClick);
-            Logger.Debug("Change to move state {0} from {1}, trigger id {2}..", characterState.WrappedState.State, WrappedState.State, rightClick.Sequence);
+            var characterState = character.FootMagic != null ? CharacterMoveState.Move(character.FootMagic, rightClick) :
+                MoveState(character, rightClick);
             character.ChangeState(characterState);
         }
     }
@@ -53,22 +53,20 @@ public abstract class AbstractCharacterStillState : ICharacterState
         return true;
     }
 
+    public bool CanSitDown()
+    {
+        return true;
+    }
+
     public void OnMousePressedMotion(CharacterImpl character, RightMousePressedMotion mousePressedMotion)
     {
         HandleRightClick(character, mousePressedMotion);
     }
 
-    public void Attack(CharacterImpl character, AttackInput input)
+
+    public bool CanAttack()
     {
-        if (input.Entity.Id.Equals(character.Id))
-        {
-            return;
-        }
-        var state = character.AttackKungFu.RandomAttackState();
-        character.Direction = character.Coordinate.GetDirection(input.Entity.Coordinate);
-        character.EmitPredictionEvent(new AttackPrediction(input), new CharacterAttackEvent(input, state, character.Direction));
-        var characterAttackState = CharacterAttackState.Attack(state);
-        character.ChangeState(characterAttackState);
+        return true;
     }
     
     public void OnWrappedPlayerAnimationFinished(CharacterImpl character)

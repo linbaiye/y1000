@@ -1,20 +1,26 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using y1000.code.networking.message;
-using y1000.Source.Character.Event;
+﻿using y1000.Source.Character.Event;
 using y1000.Source.Input;
-using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Character.State.Prediction;
 
 public class AttackPrediction : AbstractPrediction
 {
-    public AttackPrediction(IPredictableInput input) : base(input, false)
+
+    private readonly CharacterImpl _character;
+    
+    public AttackPrediction(IPredictableInput input, CharacterImpl character) : base(input, false)
     {
+        _character = character;
     }
 
     public override bool Predicted(IPredictableResponse response)
     {
-        return response is CharacterAttackEventResponse { Accepted: true };
+        var ret = response is CharacterAttackEventResponse { Accepted: true };
+        if (ret)
+        {
+            _character.AttackConfirmed();
+        }
+        return ret;
     }
 }

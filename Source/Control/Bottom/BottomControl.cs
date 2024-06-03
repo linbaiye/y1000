@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using NLog;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Event;
@@ -55,6 +56,8 @@ public partial class BottomControl : Godot.Control
 				break;
 			case EquipmentChangedEvent changedEvent : _avatar?.OnCharacterEquipmentChanged(character, changedEvent.EquipmentType);
 				break;
+			case KungFuChangedEvent : _kungFuView?.DiplayUsedKungFu(character);
+				break;
 		}
 	}
 
@@ -63,7 +66,7 @@ public partial class BottomControl : Godot.Control
 		character.WhenCharacterUpdated += WhenCharacterUpdated;
 		_avatar?.BindCharacter(character);
 		UpdateCoordinate(character.Coordinate);
-		_kungFuView?.BindCharacter(character);
+		_kungFuView?.DiplayUsedKungFu(character);
 	}
 
 	public Button InventoryButton => GetNode<Button>("Container/InventoryButton");

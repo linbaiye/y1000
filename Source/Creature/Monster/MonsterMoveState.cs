@@ -1,5 +1,4 @@
 using NLog;
-using y1000.code;
 using y1000.Source.Animation;
 using y1000.Source.Creature.State;
 

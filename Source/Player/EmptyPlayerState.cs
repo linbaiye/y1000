@@ -22,4 +22,5 @@ public class EmptyPlayerState : IPlayerState
 
     public CreatureState State => throw new NotImplementedException();
     public int ElapsedMillis { get; }
+    public int TotalMillis { get; }
 }

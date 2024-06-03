@@ -12,7 +12,7 @@ public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : 
     
     public int ElapsedMillis { get; set; }
     
-    protected int TotalMillis { get; }
+    public int TotalMillis { get; }
 
     protected bool Elapse(int delta)
     {

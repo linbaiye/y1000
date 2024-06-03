@@ -51,7 +51,7 @@ namespace y1000.Source.Character
 		public Boot? Boot =>  WrappedPlayer().Boot;
 		public Clothing? Clothing =>  WrappedPlayer().Clothing;
 		public Trouser ? Trouser =>  WrappedPlayer().Trouser;
-		public KungFuBook KungFuBook { get; set; } = KungFuBook.Empty;
+		public KungFuBook KungFuBook { get; private set; } = KungFuBook.Empty;
 		
 		public long Id => WrappedPlayer().Id;
 
@@ -99,6 +99,11 @@ namespace y1000.Source.Character
 		public void EmitPredictionEvent(IPrediction prediction, IClientEvent movementEvent)
 		{
 			WhenCharacterUpdated?.Invoke(this, new CharacterPredictionEventArgs(prediction, movementEvent));
+		}
+
+		private void NotifyServer(IClientEvent clientEvent)
+		{
+			EventMediator?.NotifyServer(clientEvent);
 		}
 
 		public void EmitMoveEvent()
@@ -174,11 +179,53 @@ namespace y1000.Source.Character
 	        }
 	        WhenCharacterUpdated?.Invoke(this, new EquipmentChangedEvent(message.Unequipped));
         }
+        
+        
 
         public void Handle(ICharacterMessage message)
         {
 	        message.Accept(this);
         }
+
+
+        private void Attack(AttackInput input)
+        {
+	        if (input.Entity.Id.Equals(Id) || !_state.CanAttack())
+	        {
+		        return;
+	        }
+	        var state = AttackKungFu.RandomAttackState();
+	        Direction = Coordinate.GetDirection(input.Entity.Coordinate);
+	        EmitPredictionEvent(new AttackPrediction(input, this), new CharacterAttackEvent(input, state, Direction));
+	        var characterAttackState = CharacterAttackState.Attack(state);
+	        ChangeState(characterAttackState);
+        }
+
+        public void AttackConfirmed()
+        {
+	        FootMagic = null;
+	        WhenCharacterUpdated?.Invoke(this, KungFuChangedEvent.Instance);
+        }
+
+        private void HandleKeyInput(Key key)
+        {
+	        if (key == Key.F3 && _state.CanSitDown())
+	        {
+		        FootMagic = null;
+		        ChangeState(CharacterSitDownState.SitDown());
+		        NotifyServer(new ClientSitDownEvent(Coordinate));
+		        WhenCharacterUpdated?.Invoke(this, KungFuChangedEvent.Instance);
+	        }
+	        else if (key == Key.F2 && _state.CanStandUp())
+	        {
+		        ChangeState(CharacterStandUpState.StandUp());
+		        NotifyServer(new ClientStandEvent());
+	        } else if (key == Key.F11)
+	        {
+		        NotifyServer(new ToggleKungFuEvent(1, 8));
+	        }
+        }
+
 
         private void DispatchInput(IPredictableInput input)
         {
@@ -194,16 +241,18 @@ namespace y1000.Source.Character
 			        _state.OnMousePressedMotion(this, (RightMousePressedMotion)input);
 			        break;
 		        case InputType.ATTACK:
-			        _state.Attack(this, (AttackInput)input);
+			        Attack((AttackInput)input);
 			        break;
-		        default:
-			        throw new ArgumentOutOfRangeException();
 	        }
         }
 
         public void HandleInput(IPredictableInput input)
         {
-	        if (_state.CanHandle(input))
+	        if (input is KeyboardPredictableInput keyboardInput)
+	        {
+		        HandleKeyInput(keyboardInput.Key);
+	        }
+	        else if (_state.CanHandle(input))
 	        {
 		        DispatchInput(input);
 	        }
@@ -285,6 +334,7 @@ namespace y1000.Source.Character
         {
 	        Inventory.Update(message.SlotId, message.Item);
         }
+        
 
         public void Visit(PlayerEquipMessage message)
         {
@@ -312,15 +362,17 @@ namespace y1000.Source.Character
 
         private void ToggleFootKungFu(PlayerToggleKungFuMessage message)
         {
-	        
+	        FootMagic = message.Level > 0? new Bufa(message.Level, message.Name) : null;
+	        WhenCharacterUpdated?.Invoke(this ,KungFuChangedEvent.Instance);
         }
         
         public void Visit(PlayerToggleKungFuMessage message)
         {
+	        WrappedPlayer().Visit(message);
 	        switch (message.Type)
 	        {
 		        case KungFuType.FOOT:
-			        FootMagic = message.Level > 0? new Bufa(message.Level, message.Name) : null;
+			        ToggleFootKungFu(message);
 			        break;
 		        case KungFuType.PROTECTION:
 			        ToggleProtectionKungFu(message);
@@ -351,6 +403,12 @@ namespace y1000.Source.Character
 			        break;
 	        }
         }
+
+        public void Visit(PlayerStandUpMessage message)
+        {
+	        ChangeState(CharacterStandUpState.StandUp());
+        }
+
 
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,
 	        IMap map,  ItemFactory itemFactory, EventMediator eventMediator)

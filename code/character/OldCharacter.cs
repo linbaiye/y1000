@@ -107,7 +107,7 @@ namespace y1000.code.character
 
         public void HandleInput(InputEvent @event)
         {
-            var input = inputSampler.SampleMoveInput(@event, GetLocalMousePosition());
+            var input = inputSampler.SampleInput(@event, GetLocalMousePosition());
             if (input == null)
             {
                 return;

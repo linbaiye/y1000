@@ -34,6 +34,10 @@ project/assembly_name="y1000"
 
 enabled=PackedStringArray()
 
+[gui]
+
+theme/custom_font="res://fonts/SweiSpringSugarCJKtc-Regular.ttf"
+
 [input]
 
 mouse_right={

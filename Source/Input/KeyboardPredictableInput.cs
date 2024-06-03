@@ -6,12 +6,12 @@ namespace y1000.Source.Input;
 
 public class KeyboardPredictableInput : AbstractPredictableInput
 {
-    private readonly Key _key;
-    
     public KeyboardPredictableInput(long s, Key key) : base(s)
     {
-        _key = key;
+        Key = key;
     }
+
+    public Key Key { get; }
 
     public override InputType Type => InputType.KEY_PRESSED;
 

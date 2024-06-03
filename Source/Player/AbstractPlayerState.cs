@@ -1,3 +1,4 @@
+using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Creature.State;
@@ -22,6 +23,7 @@ public abstract class AbstractPlayerState : AbstractCreatureState<PlayerImpl>, I
         }
         if (ElapsedMillis >= TotalMillis)
         {
+            ElapsedMillis = TotalMillis;
             player.NotifyAnimationFinished(new CreatureAnimationDoneEventArgs(this));
         }
     }

@@ -17,8 +17,6 @@ public class CharacterAttackEvent : IClientEvent
         _direction = d;
     }
 
-    public CreatureState State => _state;
-
     public ClientPacket ToPacket()
     {
         return new ClientPacket()

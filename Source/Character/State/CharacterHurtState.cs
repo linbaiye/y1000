@@ -13,7 +13,7 @@ public sealed class CharacterHurtState : ICharacterState
     public void OnWrappedPlayerAnimationFinished(CharacterImpl character)
     {
         var st = ((PlayerHurtState)WrappedState).AfterHurt;
-        character.ChangeState(st == CreatureState.COOLDOWN ? CharacterCooldownState.Cooldown() : CharacterIdleState.Idle());
+        character.ChangeState(ICharacterState.Create(st));
     }
 
     public IPlayerState WrappedState { get; }

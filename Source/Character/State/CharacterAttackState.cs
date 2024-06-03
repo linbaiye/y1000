@@ -24,6 +24,11 @@ public class CharacterAttackState : ICharacterState
         return new CharacterAttackState(playerState);
     }
 
+    public bool CanSitDown()
+    {
+        return true;
+    }
+
     public static CharacterAttackState Attack(CreatureState state)
     {
         return new CharacterAttackState(IPlayerState.Attack(state));

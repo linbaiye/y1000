@@ -19,6 +19,9 @@ public class PlayerWeaponAnimation: AbstractPlayerAnimation<PlayerWeaponAnimatio
             .ConfigureState(CreatureState.HURT, AtdReader, nonattack)
             .ConfigureState(CreatureState.COOLDOWN, AtdReader, nonattack)
             .ConfigureState(CreatureState.IDLE, AtdReader, nonattack)
+            .ConfigureState(CreatureState.SIT, AtdReader, nonattack)
+            .ConfigureState(CreatureState.STANDUP, AtdReader, nonattack)
+            .ConfigureState(CreatureState.DIE, AtdReader, nonattack)
             ;
     }
 

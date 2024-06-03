@@ -1,4 +1,5 @@
 using Godot;
+using NLog;
 using Source.Networking.Protobuf;
 using y1000.code;
 using y1000.code.networking.message;

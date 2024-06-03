@@ -115,4 +115,14 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)message);
     }
+
+    void Visit(PlayerSitDownMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
+
+    void Visit(PlayerStandUpMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
 }

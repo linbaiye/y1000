@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://duo0butuerf3j"]
+[gd_scene load_steps=14 format=3 uid="uid://duo0butuerf3j"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerImpl.cs" id="1_68hen"]
-[ext_resource type="PackedScene" path="res://Scenes/Body.tscn" id="2_1av6c"]
+[ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_1av6c"]
 [ext_resource type="Script" path="res://Source/Player/ChestSprite.cs" id="3_6xxhi"]
 [ext_resource type="Script" path="res://Source/Player/HairSprite.cs" id="3_50fj6"]
 [ext_resource type="Script" path="res://Source/Player/Hand.cs" id="3_b4kwg"]
@@ -10,6 +10,11 @@
 [ext_resource type="Script" path="res://Source/Player/HatSprite.cs" id="6_vu6ta"]
 [ext_resource type="Script" path="res://Source/Player/WristSprite.cs" id="7_hcmfo"]
 [ext_resource type="Script" path="res://Source/Player/BootSprite.cs" id="8_1757e"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="11_0mhdp"]
+[ext_resource type="Script" path="res://Source/Player/KungFuTip.cs" id="12_r6g6t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51gj6"]
+bg_color = Color(0, 0, 0, 0.415686)
 
 [node name="player" type="Node2D"]
 z_index = 2
@@ -67,3 +72,19 @@ visible = false
 y_sort_enabled = true
 centered = false
 script = ExtResource("6_vu6ta")
+
+[node name="KungFuTip" type="Label" parent="."]
+visible = false
+z_index = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = -60.0
+offset_right = 55.0
+offset_bottom = -44.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("11_0mhdp")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_51gj6")
+horizontal_alignment = 1
+script = ExtResource("12_r6g6t")

@@ -5,8 +5,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x2j3f"]
 shader = ExtResource("1_c3rp6")
-shader_parameter/deform = Vector2(0.5, 1)
-shader_parameter/offset = Vector2(0, 4)
+shader_parameter/deform = Vector2(0.6, 0.4)
+shader_parameter/offset = Vector2(0, 1)
 shader_parameter/modulate = Color(0, 0, 0, 0.65098)
 
 [sub_resource type="SystemFont" id="SystemFont_qmyq1"]
@@ -27,9 +27,9 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="."]
 z_index = 1
-offset_left = 10.0
+offset_left = 6.0
 offset_top = -24.0
-offset_right = 50.0
+offset_right = 7.0
 offset_bottom = -1.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)

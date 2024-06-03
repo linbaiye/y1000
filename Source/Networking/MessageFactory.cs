@@ -144,6 +144,8 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.Unequip => Parse(packet.Unequip),
             Packet.TypedPacketOneofCase.Equip => Parse(packet.Equip),
             Packet.TypedPacketOneofCase.ToggleKungFu => Parse(packet.ToggleKungFu),
+            Packet.TypedPacketOneofCase.SitDown => new PlayerSitDownMessage(packet.SitDown.Id),
+            Packet.TypedPacketOneofCase.StandUp => new PlayerStandUpMessage(packet.StandUp.Id),
             _ => throw new NotSupportedException()
         };
     }
