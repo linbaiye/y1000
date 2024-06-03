@@ -189,6 +189,7 @@ namespace y1000.Source.Character
 
         public void Handle(ICharacterMessage message)
         {
+	        LOGGER.Debug("Received message {0}.", message);
 	        message.Accept(this);
         }
 
@@ -320,15 +321,15 @@ namespace y1000.Source.Character
         {
 	        var weapon = EquipmentFactory.Instance.CreatePlayerWeapon(message.WeaponName, IsMale);
 	        WrappedPlayer().ChangeWeapon(weapon);
-	        if (message.State != _state.WrappedState.State)
-	        {
-		        ChangeState(CharacterCooldownState.Cooldown());
-	        }
 	        if (message.AttackKungFu != null)
+	        {
 		        AttackKungFu = message.AttackKungFu;
+		        WhenCharacterUpdated?.Invoke(this, KungFuChangedEvent.Instance);
+	        }
 	        Inventory.PutOrRemove(message.AffectedSlotId, message.NewItem);
 			WhenCharacterUpdated?.Invoke(this, new WeaponChangedEvent(weapon));
         }
+
 
         public void Visit(DropItemMessage message)
         {

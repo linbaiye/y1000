@@ -40,6 +40,11 @@ public class PlayerWeaponAnimation: AbstractPlayerAnimation<PlayerWeaponAnimatio
 
         return playerAnimation;
     }
+
+    public bool Compitable(PlayerWeapon weapon)
+    {
+        return false;
+    }
     
     
     public static PlayerWeaponAnimation LoadSword(string name, string attackName)
@@ -56,6 +61,7 @@ public class PlayerWeaponAnimation: AbstractPlayerAnimation<PlayerWeaponAnimatio
     {
         return Load(name, attackName, CreatureState.BLADE, CreatureState.BLADE2H);
     }
+    
 
     public static PlayerWeaponAnimation LoadFor(PlayerWeapon weapon)
     {
@@ -66,6 +72,7 @@ public class PlayerWeaponAnimation: AbstractPlayerAnimation<PlayerWeaponAnimatio
             AttackKungFuType.BOW => LoadBow(weapon.NonAttackAnimation, weapon.AttackAnimation),
             AttackKungFuType.AXE => Load(weapon.NonAttackAnimation, weapon.AttackAnimation, CreatureState.AXE),
             AttackKungFuType.SPEAR => Load(weapon.NonAttackAnimation, weapon.AttackAnimation, CreatureState.SPEAR),
+            AttackKungFuType.QUANFA => Load(weapon.NonAttackAnimation, weapon.AttackAnimation, CreatureState.FIST, CreatureState.KICK),
             _ => throw new NotImplementedException()
         };
     }

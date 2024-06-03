@@ -1,5 +1,4 @@
 ﻿using y1000.Source.Creature;
-using y1000.Source.Item;
 
 namespace y1000.Source.Networking.Server;
 
@@ -19,5 +18,10 @@ public class PlayerChangeWeaponMessage : AbstractEntityMessage
     public CreatureState State { get; }
     
     public string WeaponName { get; }
-    
+
+
+    public override string ToString()
+    {
+        return $"{nameof(State)}: {State}, {nameof(WeaponName)}: {WeaponName}";
+    }
 }

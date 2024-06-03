@@ -58,7 +58,7 @@ public class MessageFactory
         {
             attackKungFu = IAttackKungFu.ByType((AttackKungFuType)packet.AttackKungFuType, packet.AttackKungFuName, packet.AttackKungFuLevel);
         }
-        return new CharacterChangeWeaponMessage(packet.Name, packet.AffectedSlot, newItem, attackKungFu, (CreatureState)packet.State);
+        return new CharacterChangeWeaponMessage(packet.Name, packet.AffectedSlot, newItem, attackKungFu);
     }
 
     private PlayerChangeWeaponMessage Parse(ChangeWeaponPacket packet)

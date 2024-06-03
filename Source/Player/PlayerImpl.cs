@@ -81,6 +81,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	
 	public void ChangeWeapon(PlayerWeapon? weapon)
 	{
+		// We need to check if the animation is compatible with the weapon even though server will tell to cool down, caused by delay?
 		_handAnimation = weapon != null ? PlayerWeaponAnimation.LoadFor(weapon) : null;
 		Weapon = weapon;
 		GetNode<Sprite2D>("Hand").Visible = weapon != null;
@@ -191,10 +192,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	{
 		var weapon = EquipmentFactory.Instance.CreatePlayerWeapon(message.WeaponName, IsMale);
 		ChangeWeapon(weapon);
-		if (message.State != _state.State)
-		{
-			ChangeState(IPlayerState.Cooldown());
-		}
 	}
 
 	public void Visit(PlayerStandUpMessage message)
@@ -232,7 +229,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	public void Visit(MoveMessage message)
 	{
-		LOGGER.Debug("Received message {0}.", message);
 		var playerState = IPlayerState.NonHurtState(message.State, message.Direction);
 		ChangeState(playerState);
 	}
