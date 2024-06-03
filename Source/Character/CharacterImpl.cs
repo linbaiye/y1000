@@ -158,6 +158,11 @@ namespace y1000.Source.Character
 	        message.Accept(this);
         }
 
+        public void Visit(PlayerCooldownMessage message)
+        {
+	        ChangeState(CharacterCooldownState.Cooldown());
+        }
+
         public void Visit(PlayerAttackMessage message)
         {
 	        SetPositionAndState(message.Coordinate, message.Direction, CharacterAttackState.FromMessage(message));

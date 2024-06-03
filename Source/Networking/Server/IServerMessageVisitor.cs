@@ -125,4 +125,9 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)message);
     }
+
+    void Visit(PlayerCooldownMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
 }

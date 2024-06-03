@@ -276,6 +276,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		_state.Reset();
 	}
 	
+	public void Visit(PlayerCooldownMessage message)
+	{
+		ChangeState(IPlayerState.NonHurtState(CreatureState.COOLDOWN));
+	}
+	
 	public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
 	public OffsetTexture? HandTexture => _handAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? ChestTexture => _chestAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
