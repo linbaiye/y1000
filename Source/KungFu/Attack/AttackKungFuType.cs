@@ -13,4 +13,6 @@ public enum AttackKungFuType
     SPEAR = 4,
     
     BOW = 5,
+    
+    THROW = 6,
 }

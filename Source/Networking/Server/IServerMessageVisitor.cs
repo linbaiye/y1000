@@ -86,10 +86,6 @@ public interface IServerMessageVisitor
     {
     }
 
-    void Visit(PlayerChangeWeaponMessage message)
-    {
-        Visit((IEntityMessage)message);
-    }
 
     void Visit(ShowItemMessage message)
     {

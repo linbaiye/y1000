@@ -175,16 +175,13 @@ namespace y1000.Source.Character
 
         public void Visit(PlayerUnequipMessage message)
         {
-	        WrappedPlayer().Visit(message);
-	        if (message.NewState != _state.WrappedState.State && message.NewState != null)
+	        WrappedPlayer().Unequip(message);
+	        if (!WrappedPlayer().IsHandAnimationCompatible)
 	        {
-		        LOGGER.Debug("Changed state to cooldown.");
 		        ChangeState(CharacterCooldownState.Cooldown());
-		        AttackKungFu = new QuanFa(message.QuanfaLevel, "无名拳法");
 	        }
 	        WhenCharacterUpdated?.Invoke(this, new EquipmentChangedEvent(message.Unequipped));
         }
-        
         
 
         public void Handle(ICharacterMessage message)
@@ -232,7 +229,11 @@ namespace y1000.Source.Character
 	        }
         }
 
-
+        public void Visit(PlayerSitDownMessage message)
+        {
+	        ChangeState(CharacterSitDownState.SitDown());
+        }
+        
         private void DispatchInput(IPredictableInput input)
         {
 	        switch (input.Type)
@@ -317,19 +318,6 @@ namespace y1000.Source.Character
 	        Inventory.Swap(message.Slot1, message.Slot2);
         }
         
-        public void Visit(CharacterChangeWeaponMessage message)
-        {
-	        var weapon = EquipmentFactory.Instance.CreatePlayerWeapon(message.WeaponName, IsMale);
-	        WrappedPlayer().ChangeWeapon(weapon);
-	        if (message.AttackKungFu != null)
-	        {
-		        AttackKungFu = message.AttackKungFu;
-		        WhenCharacterUpdated?.Invoke(this, KungFuChangedEvent.Instance);
-	        }
-	        Inventory.PutOrRemove(message.AffectedSlotId, message.NewItem);
-			WhenCharacterUpdated?.Invoke(this, new WeaponChangedEvent(weapon));
-        }
-
 
         public void Visit(DropItemMessage message)
         {
@@ -345,6 +333,10 @@ namespace y1000.Source.Character
         public void Visit(PlayerEquipMessage message)
         {
 	        var equipment = WrappedPlayer().Equip(message);
+	        if (!WrappedPlayer().IsHandAnimationCompatible)
+	        {
+		        ChangeState(CharacterCooldownState.Cooldown());
+	        }
 	        WhenCharacterUpdated?.Invoke(this ,new EquipmentChangedEvent(equipment.EquipmentType));
         }
 
@@ -369,7 +361,6 @@ namespace y1000.Source.Character
         private void ToggleFootKungFu(PlayerToggleKungFuMessage message)
         {
 	        FootMagic = message.Level > 0? new Bufa(message.Level, message.Name) : null;
-	        WhenCharacterUpdated?.Invoke(this ,KungFuChangedEvent.Instance);
         }
         
         public void Visit(PlayerToggleKungFuMessage message)
@@ -407,7 +398,12 @@ namespace y1000.Source.Character
 		        case KungFuType.QUANFA:
 			        AttackKungFu = new QuanFa(message.Level, message.Name);
 			        break;
+		        case KungFuType.THROW:
+			        break;
+		        default:
+			        throw new ArgumentOutOfRangeException();
 	        }
+	        WhenCharacterUpdated?.Invoke(this ,KungFuChangedEvent.Instance);
         }
 
         public void Visit(PlayerStandUpMessage message)

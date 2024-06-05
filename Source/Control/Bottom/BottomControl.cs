@@ -56,7 +56,7 @@ public partial class BottomControl : Godot.Control
 				break;
 			case EquipmentChangedEvent changedEvent : _avatar?.OnCharacterEquipmentChanged(character, changedEvent.EquipmentType);
 				break;
-			case KungFuChangedEvent : _kungFuView?.DiplayUsedKungFu(character);
+			case KungFuChangedEvent : _kungFuView?.DisplayUsedKungFu(character);
 				break;
 		}
 	}
@@ -66,7 +66,7 @@ public partial class BottomControl : Godot.Control
 		character.WhenCharacterUpdated += WhenCharacterUpdated;
 		_avatar?.BindCharacter(character);
 		UpdateCoordinate(character.Coordinate);
-		_kungFuView?.DiplayUsedKungFu(character);
+		_kungFuView?.DisplayUsedKungFu(character);
 	}
 
 	public Button InventoryButton => GetNode<Button>("Container/InventoryButton");

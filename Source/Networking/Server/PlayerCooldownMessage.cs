@@ -1,4 +1,7 @@
+using NLog;
+
 namespace y1000.Source.Networking.Server;
+
 
 public class PlayerCooldownMessage : AbstractEntityMessage
 {

@@ -9,6 +9,14 @@ namespace y1000.Source.Animation;
 
 public class PlayerWeaponAnimation: AbstractPlayerAnimation<PlayerWeaponAnimation>
 {
+    public PlayerWeaponAnimation(CreatureState state1, CreatureState? state2)
+    {
+        State1 = state1;
+        State2 = state2;
+    }
+
+    private CreatureState State1 { get; }
+    private CreatureState? State2 { get; }
 
     private PlayerWeaponAnimation ConfigureNoneAttack(AtzSprite nonattack)
     {
@@ -30,7 +38,7 @@ public class PlayerWeaponAnimation: AbstractPlayerAnimation<PlayerWeaponAnimatio
         AtzSprite nonattack = FilesystemSpriteRepository.Instance.LoadByName(name, new Vector2(16, -12));
         //AtzSprite attack = AtzSprite.LoadOffsetWeaponSprites(attackName);
         AtzSprite attack = FilesystemSpriteRepository.Instance.LoadByName(attackName, new Vector2(16, -12));
-        var playerAnimation = new PlayerWeaponAnimation();
+        var playerAnimation = new PlayerWeaponAnimation(state1, state2);
         playerAnimation.ConfigureNoneAttack(nonattack)
                 .ConfigureState(state1, AtdReader, attack);
         if (state2 != null)
@@ -41,9 +49,24 @@ public class PlayerWeaponAnimation: AbstractPlayerAnimation<PlayerWeaponAnimatio
         return playerAnimation;
     }
 
-    public bool Compitable(PlayerWeapon weapon)
+    public bool Compatible(CreatureState state)
     {
-        return false;
+        switch (state)
+        {
+                case CreatureState.FIST:
+                case CreatureState.KICK:
+                case CreatureState.AXE:
+                case CreatureState.SPEAR:
+                case CreatureState.BLADE:
+                case CreatureState.BLADE2H:
+                case CreatureState.SWORD:
+                case CreatureState.SWORD2H:
+                case CreatureState.BOW:
+                case CreatureState.THROW:
+                    return State1 == state || State2 == state;
+                default:
+                    return true;
+        }
     }
     
     

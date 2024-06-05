@@ -1,7 +1,6 @@
 using System;
 using Godot;
 using NLog;
-using y1000.code.player.state;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Item;
@@ -81,12 +80,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	
 	public void ChangeWeapon(PlayerWeapon? weapon)
 	{
-		// We need to check if the animation is compatible with the weapon even though server will tell to cool down, caused by delay?
 		_handAnimation = weapon != null ? PlayerWeaponAnimation.LoadFor(weapon) : null;
 		Weapon = weapon;
 		GetNode<Sprite2D>("Hand").Visible = weapon != null;
 	}
-
+	
 	public void ChangeChest(PlayerChest? chest)
 	{
 		_chestAnimation = chest != null ? PlayerArmorAnimation.Create(chest) : null;
@@ -137,12 +135,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		GetNode<Sprite2D>("Trouser").Visible = trouser != null;
 	}
 
-	public void Visit(PlayerUnequipMessage message)
+	public bool IsHandAnimationCompatible => _handAnimation == null || _handAnimation.Compatible(_state.State);
+
+
+	public void Unequip(PlayerUnequipMessage message)
 	{
-		if (message.NewState != _state.State && message.NewState != null)
-		{
-			ChangeState(IPlayerState.Cooldown());
-		}
 		switch (message.Unequipped)
 		{
 			case EquipmentType.TROUSER: ChangeTrouser(null); break;
@@ -155,6 +152,15 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			case EquipmentType.WRIST_CHESTED: ChangeWrist(null); break;
 			case EquipmentType.WEAPON: ChangeWeapon(null);
 				break;
+		}
+	}
+
+	public void Visit(PlayerUnequipMessage message)
+	{
+		Unequip(message);
+		if (!IsHandAnimationCompatible)
+		{
+			ChangeState(IPlayerState.Cooldown());
 		}
 	}
 
@@ -180,19 +186,19 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			case PlayerWeapon weapon : ChangeWeapon(weapon);
 				break;
 		}
+
 		return equipment;
 	}
 	
 	public void Visit(PlayerEquipMessage message)
 	{
 		Equip(message);
+		if (!IsHandAnimationCompatible)
+		{
+			ChangeState(IPlayerState.Cooldown());
+		}
 	}
 
-	public void Visit(PlayerChangeWeaponMessage message)
-	{
-		var weapon = EquipmentFactory.Instance.CreatePlayerWeapon(message.WeaponName, IsMale);
-		ChangeWeapon(weapon);
-	}
 
 	public void Visit(PlayerStandUpMessage message)
 	{
@@ -219,7 +225,8 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	public void Visit(PlayerToggleKungFuMessage message)
 	{
-		_kungFuTip?.Display(message.Name);
+		if (!message.Quietly)
+			_kungFuTip?.Display(message.Name);
 	}
 
 	public void EmitRangedAttackEvent(long id)
