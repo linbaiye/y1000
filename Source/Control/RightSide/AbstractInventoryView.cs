@@ -34,9 +34,4 @@ public abstract partial class AbstractInventoryView : NinePatchRect
         return GetNode<InventorySlotView>("Slots/Slot" + nr);
     }
     
-    public void ButtonClicked()
-    {
-        Visible = !Visible;
-    }
-    
 }

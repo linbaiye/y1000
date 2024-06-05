@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Google.Protobuf.Collections;
 using Source.Networking.Protobuf;
 using y1000.Source.KungFu;
 using y1000.Source.KungFu.Attack;
@@ -60,18 +61,28 @@ namespace y1000.Source.Networking.Server
 
         private static IDictionary<int, IKungFu> ParseUnnamedKungFu(LoginPacket packet)
         {
+            return ParseKungFu(packet.UnnamedKungFuList);
+        }
+
+        private static IDictionary<int, IKungFu> ParseKungFu(RepeatedField<KungFuPacket> kungFuPackets)
+        {
+            
             IDictionary<int, IKungFu> result = new Dictionary<int, IKungFu>();
-            foreach (var kungFuPacket in packet.UnnamedKungFuList)
+            foreach (var kungFuPacket in kungFuPackets)
             {
                 result.TryAdd(kungFuPacket.Slot, new ViewKungFu(kungFuPacket.Name, kungFuPacket.Level));
             }
-
             return result;
+        }
+        
+        private static IDictionary<int, IKungFu> ParseBasicKungFu(LoginPacket packet)
+        {
+            return ParseKungFu(packet.BasicKungFuList);
         }
 
         private static KungFuBook CreateKungFuBook(LoginPacket packet)
         {
-            return new KungFuBook(ParseUnnamedKungFu(packet));
+            return new KungFuBook(ParseUnnamedKungFu(packet), ParseBasicKungFu(packet));
         }
 
         public static JoinedRealmMessage FromPacket(LoginPacket loginPacket)

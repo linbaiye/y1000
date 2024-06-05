@@ -102,4 +102,9 @@ public partial class InventorySlotView : Panel
 	{
 		GetNode<TextureRect>("CenterContainer/TextureRect").Texture = null;
 	}
+	
+    public void ButtonClicked()
+    {
+        Visible = !Visible;
+    }
 }

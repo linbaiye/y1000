@@ -18,12 +18,24 @@ public partial class KungFuBookView : AbstractInventoryView
     
     private readonly MagicSdbReader _magicSdbReader = MagicSdbReader.Instance;
 
-    private int _currentTab = 1;
+    private BookPage? _currentPage;
+
     
     public override void _Ready()
     {
         base._Ready();
         ForeachSlot(view => view.OnInputEvent += OnSlotEvent);
+        var page1 = GetNode<BookPage>("Page1");
+        var page2 = GetNode<BookPage>("Page2");
+        _currentPage = page1;
+        page1.SetCallback(OnPageClicked);
+        page2.SetCallback(OnPageClicked);
+    }
+
+    private void OnPageClicked(BookPage bookPage)
+    {
+        _currentPage = bookPage;
+        RefreshPage();
     }
 
     private void OnSlotEvent(object? sender, SlotEvent inputEvent)
@@ -56,10 +68,29 @@ public partial class KungFuBookView : AbstractInventoryView
         }
     }
 
+    private void RefreshPage()
+    {
+        ForeachSlot(slot=>slot.ClearTexture());
+        if (_currentPage?.Number == 1)
+        {
+            _kungFuBook.ForeachUnnamed(SetSlotView);
+        }
+        else if (_currentPage?.Number == 2)
+        {
+            _kungFuBook.ForeachBasic(SetSlotView);
+        }
+    }
+
     public void BindKungFuBook(KungFuBook book)
     {
         _kungFuBook = book;
-        _kungFuBook.ForeachUnnamed(SetSlotView);
-        //ForeachSlot(SetSlowView);
+        RefreshPage();
+    }
+    
+    public void ButtonClicked()
+    {
+        Visible = !Visible;
+        if (Visible)
+            _currentPage?.GrabFocus();
     }
 }

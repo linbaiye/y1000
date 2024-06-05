@@ -117,4 +117,8 @@ public partial class InventoryView : AbstractInventoryView
             GetNode<InventorySlotView>("Slots/Slot" + slot).PutItem(texture);
         }
     }
+    public void ButtonClicked()
+    {
+        Visible = !Visible;
+    }
 }
