@@ -19,4 +19,6 @@ public interface IPlayerAnimation
     OffsetTexture? ClothingTexture { get; }
     
     OffsetTexture? TrouserTexture { get; }
+    
+    OffsetTexture? AttackEffect { get; }
 }

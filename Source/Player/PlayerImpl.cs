@@ -32,6 +32,8 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	
 	private PlayerArmorAnimation? _clothingAnimation;
 	
+	private WeaponEffectAnimation? _effectAnimation;
+	
 	public event EventHandler<PlayerRangedAttackEventArgs>? OnPlayerShoot;
 
 	private KungFuTip? _kungFuTip;
@@ -81,6 +83,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void ChangeWeapon(PlayerWeapon? weapon)
 	{
 		_handAnimation = weapon != null ? PlayerWeaponAnimation.LoadFor(weapon) : null;
+		//_effectAnimation = weapon != null ? WeaponEffectAnimation.LoadFor(weapon) : null;
 		Weapon = weapon;
 		GetNode<Sprite2D>("Hand").Visible = weapon != null;
 	}
@@ -293,6 +296,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public OffsetTexture? BootTexture => _bootAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? ClothingTexture => _clothingAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? TrouserTexture => _trouserAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? AttackEffect => _effectAnimation?.GetIfAttacking(_state.State, Direction, _state.ElapsedMillis);
 
 	public void Visit(PlayerAttackMessage message)
 	{

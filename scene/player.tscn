@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://duo0butuerf3j"]
+[gd_scene load_steps=15 format=3 uid="uid://duo0butuerf3j"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerImpl.cs" id="1_68hen"]
 [ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_1av6c"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Source/Player/WristSprite.cs" id="7_hcmfo"]
 [ext_resource type="Script" path="res://Source/Player/BootSprite.cs" id="8_1757e"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="11_0mhdp"]
+[ext_resource type="Script" path="res://Source/Player/AttackEffectSprite.cs" id="11_vx863"]
 [ext_resource type="Script" path="res://Source/Player/KungFuTip.cs" id="12_r6g6t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51gj6"]
@@ -72,6 +73,11 @@ visible = false
 y_sort_enabled = true
 centered = false
 script = ExtResource("6_vu6ta")
+
+[node name="AttackEffect" type="Sprite2D" parent="."]
+y_sort_enabled = true
+centered = false
+script = ExtResource("11_vx863")
 
 [node name="KungFuTip" type="Label" parent="."]
 visible = false

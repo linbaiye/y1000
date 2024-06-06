@@ -12,6 +12,11 @@ public class MagicSdbReader : AbstractSdbReader
         return Parse(name, "MagicType", str => (KungFuType)int.Parse(str));
     }
 
+    public string GetEffect(string name)
+    {
+        return Parse(name, "EffectColor", str => str);
+    }
+
     private static MagicSdbReader Load()
     {
         var magicSdbReader = new MagicSdbReader();
