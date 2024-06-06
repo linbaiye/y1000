@@ -37,11 +37,11 @@ public class KungFuBook
         }
     }
 
-    public void OnUnnamedTabDoubleClick(int nr)
+    public void OnKungFuUsed(int page, int nr)
     {
         if (_unnamed.ContainsKey(nr))
         {
-            EventMediator?.NotifyServer(new ToggleKungFuEvent(1, nr));
+            EventMediator?.NotifyServer(new ToggleKungFuEvent(page, nr));
         }
     }
 }

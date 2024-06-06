@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Collections.Generic;
+using Godot;
 using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
@@ -16,31 +17,29 @@ public partial class Projectile : Sprite2D
 
     private float _elapsed = 0;
     private float _speed;
+
+    private static readonly Dictionary<Direction, Vector2> INITIAL_POSITION = new()
+    {
+        { Direction.UP , new Vector2(6, -36) },
+        { Direction.RIGHT, new Vector2(29, -19) },
+        { Direction.UP_RIGHT, new Vector2(24, -30) },
+        { Direction.DOWN_RIGHT, new Vector2(19, -10) },
+        { Direction.DOWN, new Vector2(25, 0) },
+        { Direction.DOWN_LEFT, new Vector2(6, -9) },
+        { Direction.LEFT, new Vector2(1, -21) },
+        { Direction.UP_LEFT, new Vector2(12, -32) },
+    };
     
     private void Init(Player.IPlayer player, ICreature target)
     {
-        var tpos = target.OffsetBodyPosition;
+        Position = player.Coordinate.ToPosition() + INITIAL_POSITION.GetValueOrDefault(player.Direction);
         var distance = target.Coordinate.Distance(player.Coordinate);
+        Vector2 centerPoint = target.OffsetBodyPosition + target.BodyOffsetTexture.OriginalSize / 2;
         _lengthSeconds = distance * 0.03f;
-        _vect = tpos - player.OffsetBodyPosition;
-        //_vect = ((tpos +  (size / 2)) - player.Coordinate.ToPosition()) / _lengthSeconds;
-        //vect = (target.Coordinate - player.Coordinate).ToPosition() + (VectorUtil.TileSize / 2);
-        //Position = player.BodyPosition;
-        Position = player.OffsetBodyPosition;
-        Rotation = _vect.Angle();
+        _vect = centerPoint - Position;
+        Rotation = _vect.Normalized().Angle();
         _vect /= _lengthSeconds;
         var arrowTexture = ArrowAnimation.Instance.OffsetTexture(Direction.RIGHT);
-        var offsetTexture = ArrowAnimation.Instance.OffsetTexture(player.Direction);
-        //Rotation = tpos.AngleTo(Position);
-        if (Rotation == 0)
-        {
-            LOG.Debug("Target Id {0}, player Id {1}.", target.Id, player.Id);
-        }
-        //Rotation = angle;
-        //var transform = Transform;
-        //var newTrans = new Transform2D(angle, transform.Origin);
-        //Transform = newTrans;
-        Offset = offsetTexture.Offset + new Vector2(16, -12);
         Texture = arrowTexture.Texture;
     }
 
@@ -50,7 +49,6 @@ public partial class Projectile : Sprite2D
         Position += (_vect * (float)delta);
         if (_elapsed >= _lengthSeconds)
         {
-            LOG.Debug("Enough time, delete now.");
             QueueFree();
         }
     }

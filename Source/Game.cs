@@ -210,11 +210,13 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private void OnPlayerShoot(object? sender, PlayerRangedAttackEventArgs args)
 	{
+		LOGGER.Debug("Player shoot.");
 		if (sender is not IPlayer player)
 		{
 			return;
 		}
 		var entity = _entityManager.Get(args.TargetId);
+		LOGGER.Debug("Shoot target {0}.", args.TargetId);
 		if (entity is not ICreature creature)
 		{
 			return;

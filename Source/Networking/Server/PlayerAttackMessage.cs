@@ -23,6 +23,6 @@ public sealed class PlayerAttackMessage : AbstractCreatureAttackMessage
 
     public override string ToString()
     {
-        return "Id: " + Id + ", TargetId: " + TargetId;
+        return "Attack [Id: " + Id + ", TargetId: " + TargetId + ", State: " + State + "]";
     }
 }

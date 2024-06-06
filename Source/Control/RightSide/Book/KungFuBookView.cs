@@ -44,13 +44,16 @@ public partial class KungFuBookView : AbstractInventoryView
         {
             return;
         }
-        switch (inputEvent.EventType)
+
+        if (inputEvent.EventType == SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
         {
-            case SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK:
-                _kungFuBook.OnUnnamedTabDoubleClick(slotView.Number);
-                break;
+            if (_currentPage != null)
+            {
+                _kungFuBook.OnKungFuUsed(_currentPage.Number, slotView.Number);
+            }
         }
     }
+    
 
     private string KungFuLevel(int level)
     {

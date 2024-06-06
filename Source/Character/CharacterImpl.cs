@@ -365,6 +365,7 @@ namespace y1000.Source.Character
         
         public void Visit(PlayerToggleKungFuMessage message)
         {
+	        LOGGER.Debug("Toggle kungfu {0}.", message);
 	        WrappedPlayer().Visit(message);
 	        switch (message.Type)
 	        {

@@ -21,4 +21,10 @@ public class PlayerToggleKungFuMessage : AbstractEntityMessage
     public KungFuType Type { get; }
     public string Name { get; }
     public int Level { get; }
+
+
+    public override string ToString()
+    {
+        return $"{nameof(Name)}: {Name}, {nameof(Level)}: {Level}";
+    }
 }

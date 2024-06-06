@@ -16,6 +16,6 @@ public abstract class AbstractAttackKungFu : AbstractLevelKungFu, IAttackKungFu
     
     public CreatureState RandomAttackState()
     {
-        return Level < 50 || RANDOM.Next() % 2 == 1 ? Below50 : Above50;
+        return Level < 5000 || RANDOM.Next() % 2 == 1 ? Below50 : Above50;
     }
 }
