@@ -75,6 +75,7 @@ centered = false
 script = ExtResource("6_vu6ta")
 
 [node name="AttackEffect" type="Sprite2D" parent="."]
+visible = false
 y_sort_enabled = true
 centered = false
 script = ExtResource("11_vx863")
