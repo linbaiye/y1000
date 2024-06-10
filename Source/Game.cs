@@ -83,6 +83,13 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
 		_uiController.InitEventMediator(_eventMediator);
+		GetNode<AudioStreamPlayer>("BgmPlayer").Finished += PlayBackgroundMusic;
+		PlayBackgroundMusic();
+	}
+
+	private void PlayBackgroundMusic()
+	{
+		GetNode<AudioStreamPlayer>("BgmPlayer").Play();
 	}
 
 	private void OnCharacterEvent(object? sender, EventArgs eventArgs)

@@ -166,6 +166,7 @@ namespace y1000.Source.Character
         public void Visit(PlayerAttackMessage message)
         {
 	        SetPositionAndState(message.Coordinate, message.Direction, CharacterAttackState.FromMessage(message));
+	        WrappedPlayer().PlaySound();
         }
 
         public void Visit(HurtMessage message)

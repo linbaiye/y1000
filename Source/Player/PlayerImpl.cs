@@ -2,6 +2,7 @@ using System;
 using Godot;
 using NLog;
 using y1000.Source.Animation;
+using y1000.Source.Audio;
 using y1000.Source.Creature;
 using y1000.Source.Item;
 using y1000.Source.Map;
@@ -83,7 +84,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void ChangeWeapon(PlayerWeapon? weapon)
 	{
 		_handAnimation = weapon != null ? PlayerWeaponAnimation.LoadFor(weapon) : null;
-		//_effectAnimation = weapon != null ? WeaponEffectAnimation.LoadFor(weapon) : null;
+		_effectAnimation = weapon != null ? WeaponEffectAnimation.LoadFor(weapon) : null;
 		Weapon = weapon;
 		GetNode<Sprite2D>("Hand").Visible = weapon != null;
 	}
@@ -302,6 +303,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	{
 		SetPosition(message.Coordinate, message.Direction);
 		_state = IPlayerState.Attack(message);
+	}
+
+	public void PlaySound()
+	{
+		GetNode<CreatureAudio>("Audio").PlaySoundEffect();
 	}
 
 	public void Visit(HurtMessage hurtMessage)

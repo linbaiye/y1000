@@ -9,6 +9,7 @@ public partial class AttackEffectSprite  : Sprite2D
     public override void _Process(double delta)
     {
         OffsetTexture? offsetTexture = GetParent<IPlayerAnimation>().AttackEffect;
+        
         if (offsetTexture == null)
         {
             Texture = null;
