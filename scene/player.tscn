@@ -17,7 +17,6 @@
 [ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="15_3adja"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p7g52"]
-blend_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51gj6"]
 bg_color = Color(0, 0, 0, 0.415686)

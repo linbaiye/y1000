@@ -24,6 +24,11 @@ public class ItemSdbReader : AbstractSdbReader
     }
 
 
+    public int GetIconId(string itemName)
+    {
+        return Parse(itemName, "Shape", int.Parse);
+    }
+    
     public string GetAttackSpriteIndex(string equip, bool male)
     {
         return ParseEquipmentAnimation(equip, male, () => Parse(equip, "HitMotion", s=> s));

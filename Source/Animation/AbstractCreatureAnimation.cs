@@ -65,9 +65,9 @@ public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : Abs
             return Get(direction, MillisToFrameNumber(millis));
         }
         
-        public void Add(AtdStruct atdStruct, AtzSprite reader)
+        public void Add(AtdAction atdAction, AtzSprite reader)
         {
-            if (!DIRECTION_MAP.TryGetValue(atdStruct.Direction, out var dir))
+            if (!DIRECTION_MAP.TryGetValue(atdAction.Direction, out var dir))
             {
                 throw new NotImplementedException("No direction mapping.");
             }
@@ -76,9 +76,9 @@ public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : Abs
             {
                 return;
             }
-            OffsetTexture[] textures = new OffsetTexture[atdStruct.Frame];
-            for (int i = 0; i < atdStruct.Frame; i++) {
-                var descriptor = atdStruct.FrameDescriptors[i];
+            OffsetTexture[] textures = new OffsetTexture[atdAction.Frame];
+            for (int i = 0; i < atdAction.Frame; i++) {
+                var descriptor = atdAction.FrameDescriptors[i];
                 var descriptorNumber = descriptor.Number;
                 var number = descriptorNumber % 500;
                 var offsetTexture = reader.Get(number);
@@ -91,15 +91,15 @@ public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : Abs
     
     private readonly IDictionary<CreatureState, StateAnimation> _animations = new Dictionary<CreatureState, StateAnimation>();
     
-    protected TA ConfigureState(CreatureState state, AtdReader atdReader, AtzSprite atzSprite)
+    public TA ConfigureState(CreatureState state, AtdStructure atdStructure, AtzSprite atzSprite)
     {
         if (_animations.ContainsKey(state))
         {
             return (TA)this;
         }
-        var atdStruct = atdReader.FindFirst(state);
+        var atdStruct = atdStructure.FindFirst(state);
         var stateAnimation = new StateAnimation(atdStruct.Frame, atdStruct.FrameTime * FrameTimeInMillis);
-        var atdStructs = atdReader.Find(state);
+        var atdStructs = atdStructure.Find(state);
         foreach (var @struct in atdStructs)
         {
             stateAnimation.Add(@struct, atzSprite);

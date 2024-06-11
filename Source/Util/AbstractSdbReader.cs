@@ -10,24 +10,24 @@ public abstract class AbstractSdbReader
 
     private readonly Dictionary<string, string[]> _items = new();
 
-    protected T Parse<T>(string itemName, string key, Func<string, T> creator)
+    protected T Parse<T>(string name, string key, Func<string, T> creator)
     {
-        if (!_items.TryGetValue(itemName, out var item))
+        if (!_items.TryGetValue(name, out var item))
         {
-            throw new NotImplementedException(itemName + " does not exist.");
+            throw new NotImplementedException(name + " does not exist.");
         }
 
         if (!_header.TryGetValue(key, out var index))
         {
-            throw new NotImplementedException(key + " does not exist for item " + itemName);
+            throw new NotImplementedException(key + " does not exist for item " + name);
         }
 
         return creator.Invoke(item[index]);
     }
-    
-    public int GetIconId(string itemName)
+
+    protected string GetString(string name, string key)
     {
-        return Parse(itemName, "Shape", int.Parse);
+        return Parse(name, key, s => s);
     }
     
     protected void Read(string filepath)

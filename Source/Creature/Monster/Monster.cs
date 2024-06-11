@@ -113,7 +113,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		var monster = scene.Instantiate<Monster>();
 		var interpolation = creatureInterpolation.Interpolation;
 		var name = creatureInterpolation.Name;
-		var monsterAnimation = MonsterAnimation.LoadFor(name);
+		var monsterAnimation = MonsterAnimationFactory.Instance.Load(name);
 		var state = CreateState(interpolation.State,
 				interpolation.ElapsedMillis, interpolation.Direction, monsterAnimation);
 		monster.Init(creatureInterpolation.Id, 

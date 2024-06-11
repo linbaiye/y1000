@@ -24,7 +24,7 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
         return (from line in lines where line.Contains(',') select ParseLine(line)).ToArray();
     }
 
-    public override AtzSprite LoadByName(string name, Vector2? offset = null)
+    public override AtzSprite LoadByNameAndOffset(string name, Vector2? offset = null)
     {
         if (Cache.TryGetValue(name, out var sprite))
         {

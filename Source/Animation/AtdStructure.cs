@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Godot;
 using NLog;
-using y1000.code;
 using y1000.Source.Creature;
 
 namespace y1000.Source.Animation;
 
-public class AtdReader
+public class AtdStructure
 {
-    private readonly IDictionary<string, List<AtdStruct>> _structs;
+    private readonly IDictionary<string, List<AtdAction>> _structs;
 
     private readonly IDictionary<CreatureState, string> _actionMap;
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
-    private AtdReader(IDictionary<string, List<AtdStruct>> structs, IDictionary<CreatureState, string> actionmap)
+    public AtdStructure(IDictionary<string, List<AtdAction>> structs, IDictionary<CreatureState, string> actionmap)
     {
         _structs = structs;
         _actionMap = actionmap;
@@ -85,7 +83,7 @@ public class AtdReader
         return System.Text.Encoding.UTF8.GetString(bytes, 1, len);
     }
 
-    public List<AtdStruct> Find(CreatureState state)
+    public List<AtdAction> Find(CreatureState state)
     {
         if (!_actionMap.TryGetValue(state, out var stateStr))
         {
@@ -98,7 +96,7 @@ public class AtdReader
         return list;
     }
 
-    public AtdStruct FindFirst(CreatureState state)
+    public AtdAction FindFirst(CreatureState state)
     {
         return Find(state)[0];
     }
@@ -121,9 +119,9 @@ public class AtdReader
         return result;
     }
 
-    private static List<AtdStruct> Convert(List<string> list)
+    private static List<AtdAction> Convert(List<string> list)
     {
-        List<AtdStruct> result = new List<AtdStruct>();
+        List<AtdAction> result = new List<AtdAction>();
         foreach (var str in list)
         {
             var strings = str.Split(",");
@@ -131,7 +129,7 @@ public class AtdReader
             {
                 continue;
             }
-            result.Add(new AtdStruct(strings[1], strings[2], strings[3].ToInt(), strings[4].ToInt(), ToArray(strings)));
+            result.Add(new AtdAction(strings[1], strings[2], strings[3].ToInt(), strings[4].ToInt(), ToArray(strings)));
         }
         return result;
     }
@@ -157,7 +155,7 @@ public class AtdReader
         return list;
     }
 
-    private static AtdReader Load(string path, IDictionary<CreatureState, string> actionMap)
+    private static AtdStructure Load(string path, IDictionary<CreatureState, string> actionMap)
     {
         FileAccess fileAccess = FileAccess.Open( path, FileAccess.ModeFlags.Read);
         if (fileAccess == null)
@@ -166,22 +164,12 @@ public class AtdReader
         }
         var readStrings = ReadStrings(fileAccess);
         var atdStructs = Convert(readStrings);
-        IDictionary<string, List<AtdStruct>> dictionary = new Dictionary<string, List<AtdStruct>>();
+        IDictionary<string, List<AtdAction>> dictionary = new Dictionary<string, List<AtdAction>>();
         foreach (var atdStruct in atdStructs)
         {
-            /*if (atdStruct.Action.Contains("MOVE"))
-            {
-                Logger.Debug("Struct {0}.", atdStruct);
-                foreach (var atdStructFrameDescriptor in atdStruct.FrameDescriptors)
-                {
-                    Logger.Debug("Offset {0}", atdStructFrameDescriptor);
-                }
-                Logger.Debug("----------------------------------------------------------");
-            }*/
-
             if (!dictionary.ContainsKey(atdStruct.Action))
             {
-                dictionary.Add(atdStruct.Action, new List<AtdStruct>());
+                dictionary.Add(atdStruct.Action, new List<AtdAction>());
             }
 
             if (dictionary.TryGetValue(atdStruct.Action, out var list))
@@ -190,15 +178,15 @@ public class AtdReader
             }
         }
         fileAccess.Dispose();
-        return new AtdReader(dictionary, actionMap);
+        return new AtdStructure(dictionary, actionMap);
     }
 
-    public static AtdReader LoadMonster(string monster, string atdName)
+    public static AtdStructure LoadMonster(string monster, string atdName)
     {
         return Load("res://sprite/monster/" + monster + "/" + atdName, MONSTER_ACTION_MAP);
     }
     
-    public static AtdReader LoadPlayer(string atdName)
+    public static AtdStructure LoadPlayer(string atdName)
     {
         return Load( "res://sprite/char/" + atdName, PLAYER_ACTION_MAP);
     }

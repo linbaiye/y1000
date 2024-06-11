@@ -17,6 +17,11 @@ public class MagicSdbReader : AbstractSdbReader
         return Parse(name, "EffectColor", str => str);
     }
 
+    public int GetIconId(string itemName)
+    {
+        return Parse(itemName, "Shape", int.Parse);
+    }
+
     private static MagicSdbReader Load()
     {
         var magicSdbReader = new MagicSdbReader();

@@ -20,30 +20,30 @@ public class PlayerWeaponAnimation: AbstractPlayerAnimation<PlayerWeaponAnimatio
 
     private PlayerWeaponAnimation ConfigureNoneAttack(AtzSprite nonattack)
     {
-        return ConfigureState(CreatureState.FLY, AtdReader, nonattack)
-            .ConfigureState(CreatureState.WALK, AtdReader, nonattack)
-            .ConfigureState(CreatureState.RUN, AtdReader, nonattack)
-            .ConfigureState(CreatureState.ENFIGHT_WALK, AtdReader, nonattack)
-            .ConfigureState(CreatureState.HURT, AtdReader, nonattack)
-            .ConfigureState(CreatureState.COOLDOWN, AtdReader, nonattack)
-            .ConfigureState(CreatureState.IDLE, AtdReader, nonattack)
-            .ConfigureState(CreatureState.SIT, AtdReader, nonattack)
-            .ConfigureState(CreatureState.STANDUP, AtdReader, nonattack)
-            .ConfigureState(CreatureState.DIE, AtdReader, nonattack)
+        return ConfigureState(CreatureState.FLY, AtdStructure, nonattack)
+            .ConfigureState(CreatureState.WALK, AtdStructure, nonattack)
+            .ConfigureState(CreatureState.RUN, AtdStructure, nonattack)
+            .ConfigureState(CreatureState.ENFIGHT_WALK, AtdStructure, nonattack)
+            .ConfigureState(CreatureState.HURT, AtdStructure, nonattack)
+            .ConfigureState(CreatureState.COOLDOWN, AtdStructure, nonattack)
+            .ConfigureState(CreatureState.IDLE, AtdStructure, nonattack)
+            .ConfigureState(CreatureState.SIT, AtdStructure, nonattack)
+            .ConfigureState(CreatureState.STANDUP, AtdStructure, nonattack)
+            .ConfigureState(CreatureState.DIE, AtdStructure, nonattack)
             ;
     }
 
     private static PlayerWeaponAnimation Load(string name, string attackName, CreatureState state1, CreatureState? state2 = null)
     {
-        AtzSprite nonattack = FilesystemSpriteRepository.Instance.LoadByName(name, new Vector2(16, -12));
+        AtzSprite nonattack = FilesystemSpriteRepository.Instance.LoadByNameAndOffset(name, new Vector2(16, -12));
         //AtzSprite attack = AtzSprite.LoadOffsetWeaponSprites(attackName);
-        AtzSprite attack = FilesystemSpriteRepository.Instance.LoadByName(attackName, new Vector2(16, -12));
+        AtzSprite attack = FilesystemSpriteRepository.Instance.LoadByNameAndOffset(attackName, new Vector2(16, -12));
         var playerAnimation = new PlayerWeaponAnimation(state1, state2);
         playerAnimation.ConfigureNoneAttack(nonattack)
-                .ConfigureState(state1, AtdReader, attack);
+                .ConfigureState(state1, AtdStructure, attack);
         if (state2 != null)
         {
-            playerAnimation.ConfigureState(state2.Value, AtdReader, attack);
+            playerAnimation.ConfigureState(state2.Value, AtdStructure, attack);
         }
 
         return playerAnimation;

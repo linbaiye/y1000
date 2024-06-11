@@ -2,5 +2,5 @@
 
 public abstract class AbstractPlayerAnimation<TA> : AbstractCreatureAnimation<TA> where TA : AbstractCreatureAnimation<TA>
 {
-    protected static readonly AtdReader AtdReader = AtdReader.LoadPlayer("0.atd");
+    protected static readonly AtdStructure AtdStructure = AtdStructure.LoadPlayer("0.atd");
 }
