@@ -18,6 +18,8 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
         ElapsedMillis = 0;
     }
     
+    public Vector2I? ToCoordinate { get; private set; }
+    
     protected Direction Towards { get; }
     
     protected abstract ILogger Logger { get; }
@@ -36,6 +38,7 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
         }
         if (ElapsedMillis == 0)
         {
+            ToCoordinate = creature.Coordinate.Move(Towards);
             creature.Map.Free(creature);
         }
         if (!_directionChanged)

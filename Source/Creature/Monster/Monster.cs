@@ -7,6 +7,7 @@ using y1000.Source.Entity;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
+using y1000.Source.Util;
 
 namespace y1000.Source.Creature.Monster;
 
@@ -49,15 +50,29 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		}
 	}
 
+	private void ChangeState(ICreatureState<Monster> newState)
+	{
+		if (_state is MonsterMoveState moveState && moveState.ToCoordinate.HasValue)
+		{
+			if (!Position.ToCoordinate().Equals(moveState.ToCoordinate))
+			{
+				LOGGER.Debug("Shift to coordinate {0}.", moveState.ToCoordinate);
+				Position = moveState.ToCoordinate.Value.ToPosition();
+				Map.Occupy(this);
+			}
+		}
+		_state = newState;
+	}
+
 	public void AnimationDone(CreatureState state = CreatureState.FROZEN)
 	{
 		if (state == CreatureState.IDLE)
 		{
-			_state = MonsterStillState.Frozen(MonsterAnimation);
+			ChangeState(MonsterStillState.Frozen(MonsterAnimation));
 		}
 		else
 		{
-			_state = MonsterStillState.Idle(MonsterAnimation);
+			ChangeState(MonsterStillState.Idle(MonsterAnimation));
 		}
 	}
 
@@ -68,31 +83,32 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
 	public void Visit(MoveMessage moveMessage)
 	{
-		_state = MonsterMoveState.Move(MonsterAnimation, moveMessage.Direction);
+        LOGGER.Debug("Monster {2} leaving coordinate {0} for {1}.", Coordinate, Coordinate.Move(moveMessage.Direction), moveMessage.Id);
+		ChangeState(MonsterMoveState.Move(MonsterAnimation, moveMessage.Direction));
 	}
 
 	public void Visit(HurtMessage hurtMessage)
 	{
+		ChangeState(MonsterStillState.Hurt(MonsterAnimation));
 		SetPosition(hurtMessage.Coordinate, hurtMessage.Direction);
-		_state = MonsterStillState.Hurt(MonsterAnimation);
 	}
 	
 
 	public void Visit(SetPositionMessage message)
 	{
+		ChangeState(MonsterStillState.Idle(MonsterAnimation));
 		SetPosition(message);
-		_state = MonsterStillState.Idle(MonsterAnimation);
 	}
 
 	public void Visit(ChangeStateMessage message)
 	{
-		_state = CreateState(message.NewState, 0, Direction, MonsterAnimation);
+		ChangeState(CreateState(message.NewState, 0, Direction, MonsterAnimation));
 	}
 
 	public void Visit(CreatureAttackMessage attackMessage)
 	{
+		ChangeState(MonsterStillState.Attack(MonsterAnimation));
 		SetPosition(attackMessage.Coordinate, attackMessage.Direction);
-		_state = MonsterStillState.Attack(MonsterAnimation);
 	}
 
 	public void Visit(RemoveEntityMessage removeEntityMessage)

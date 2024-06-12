@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using Godot;
+using Google.ProtocolBuffers.Serialization;
 using NLog;
 using y1000.code;
 using y1000.Source.Character.Event;
@@ -30,8 +32,6 @@ public partial class MapLayer : TileMap, IMap
 
 	private readonly IDictionary<int, ObjectInfo> _objectInfos = new Dictionary<int, ObjectInfo>();
 
-	private readonly IDictionary<Vector2I, long> _coordinate2Creature = new Dictionary<Vector2I, long>();
-	
 	private readonly IDictionary<long, Vector2I> _creature2Coordinate = new Dictionary<long, Vector2I>();
 
 	public override void _Ready()
@@ -208,25 +208,22 @@ public partial class MapLayer : TileMap, IMap
 
 	public bool Movable(Vector2I coordinate)
 	{
-		return !_coordinate2Creature.ContainsKey(coordinate) && _gameMap!= null && _gameMap.CanMove(coordinate);
+		if (_gameMap != null && !_gameMap.CanMove(coordinate))
+		{
+			return false;
+		}
+		return !_creature2Coordinate.Values.Contains(coordinate);
 	}
 	
 	
 	public void Occupy(ICreature creature)
 	{
-		LOGGER.Debug("Occupy coordinate {0} by {1}.", creature.Coordinate, creature.Id);
 		Free(creature);
-		_coordinate2Creature.TryAdd(creature.Coordinate, creature.Id);
 		_creature2Coordinate.TryAdd(creature.Id, creature.Coordinate);
 	}
 
 	public void Free(ICreature creature)
 	{
-		if (_creature2Coordinate.TryGetValue(creature.Id, out var coor))
-		{
-			_coordinate2Creature.Remove(coor);
-			_creature2Coordinate.Remove(creature.Id);
-	//		LOGGER.Debug("Free coordinate {0}, creature {1}.", creature.Coordinate, creature.Id);
-		}
+		_creature2Coordinate.Remove(creature.Id);
 	}
 }

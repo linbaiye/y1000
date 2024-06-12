@@ -115,7 +115,7 @@ namespace y1000.Source.Character
 		{
 			var nextCoordinate = Coordinate.Move(direction);
 			var ret = WrappedPlayer().Map.Movable(nextCoordinate);
-			LOGGER.Debug("Coordinate {0} {1} movable .", nextCoordinate, ret ? "is" : "is not");
+			LOGGER.Debug("Coordinate {0} {1} movable, current {2}", nextCoordinate, ret ? "is" : "is not", Coordinate);
 			return ret;
 		}
 		
@@ -140,8 +140,8 @@ namespace y1000.Source.Character
 
         private void SetPositionAndState(Vector2I coordinate, Direction direction, ICharacterState state)
         {
-	        WrappedPlayer().SetPosition(coordinate, direction);
 	        ChangeState(state);
+	        WrappedPlayer().SetPosition(coordinate, direction);
 	        EmitMoveEvent();
         }
 
@@ -169,7 +169,7 @@ namespace y1000.Source.Character
         public void Visit(PlayerAttackMessage message)
         {
 	        SetPositionAndState(message.Coordinate, message.Direction, CharacterAttackState.FromMessage(message));
-	        WrappedPlayer().PlaySound();
+	        //WrappedPlayer().PlaySound();
         }
 
         public void Visit(HurtMessage message)
