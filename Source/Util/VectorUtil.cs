@@ -39,11 +39,18 @@ namespace y1000.Source.Util
 
         public static Vector2I Move(this Vector2I src, Direction direction)
         {
-            if (VELOCITY_MAP.TryGetValue(direction, out Vector2 vector2))
+            return direction switch
             {
-                return src + vector2.ToCoordinate();
-            }
-            return src;
+                Direction.UP => new Vector2I(src.X, src.Y - 1),
+                Direction.DOWN => new Vector2I(src.X, src.Y + 1),
+                Direction.LEFT => new Vector2I(src.X - 1, src.Y),
+                Direction.RIGHT => new Vector2I(src.X + 1, src.Y),
+                Direction.UP_RIGHT => new Vector2I(src.X + 1, src.Y - 1),
+                Direction.DOWN_RIGHT => new Vector2I(src.X + 1, src.Y + 1),
+                Direction.DOWN_LEFT => new Vector2I(src.X - 1, src.Y + 1),
+                Direction.UP_LEFT => new Vector2I(src.X - 1, src.Y - 1),
+                _ => src
+            };
         }
 
         public static int Distance(this Vector2I src, Vector2I dst)

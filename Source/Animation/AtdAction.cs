@@ -22,6 +22,8 @@ public class AtdAction
     public int FrameTime { get; }
     public List<AtdFrameDescriptor> FrameDescriptors { get; }
 
+    public int ActionTime => FrameTime * Frame;
+
     public override string ToString()
     {
         return

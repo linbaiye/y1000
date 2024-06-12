@@ -24,7 +24,7 @@ public class MonsterAnimationFactory
         var atdName = _monsterSdb.GetAtdName(name);
         var spriteName = "z" + _monsterSdb.GetSpriteName( name);
         var sprite = _spriteRepository.LoadByName(spriteName);
-        var atdStructure = _atdRepository.LoadMonster(atdName);
+        var atdStructure = _atdRepository.LoadByName(atdName);
         return new MonsterAnimation()
             .ConfigureState(CreatureState.IDLE, atdStructure, sprite)
             .ConfigureState(CreatureState.WALK, atdStructure, sprite)

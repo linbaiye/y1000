@@ -34,6 +34,10 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
         {
             return;
         }
+        if (ElapsedMillis == 0)
+        {
+            creature.Map.Free(creature);
+        }
         if (!_directionChanged)
         {
             creature.Direction = Towards;

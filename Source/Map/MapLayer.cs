@@ -214,7 +214,7 @@ public partial class MapLayer : TileMap, IMap
 	
 	public void Occupy(ICreature creature)
 	{
-	//	LOGGER.Debug("Occupy coordinate {0} by {1}.", creature.Coordinate, creature.Id);
+		LOGGER.Debug("Occupy coordinate {0} by {1}.", creature.Coordinate, creature.Id);
 		Free(creature);
 		_coordinate2Creature.TryAdd(creature.Coordinate, creature.Id);
 		_creature2Coordinate.TryAdd(creature.Id, creature.Coordinate);

@@ -31,8 +31,8 @@ public abstract class AbstractCharacterStillState : ICharacterState
         {
             if (character.Direction != rightClick.Direction)
             {
-                character.EmitPredictionEvent(new SetPositionPrediction(rightClick, character.Coordinate, rightClick.Direction), 
-                    new PredictMovementEvent(rightClick, character.Coordinate));
+                 character.EmitPredictionEvent(new SetPositionPrediction(rightClick, character.Coordinate, rightClick.Direction), 
+                     new PredictMovementEvent(rightClick, character.Coordinate));
                 character.Direction = rightClick.Direction;
                 WrappedState.Reset();
             }

@@ -96,6 +96,11 @@ public class AtdStructure
         return list;
     }
 
+    public bool HasState(CreatureState state)
+    {
+        return _actionMap.TryGetValue(state, out var stateString) && _structs.ContainsKey(stateString);
+    }
+
     public AtdAction FindFirst(CreatureState state)
     {
         return Find(state)[0];

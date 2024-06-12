@@ -2,6 +2,8 @@
 
 public interface IAtdRepository
 {
-    AtdStructure LoadMonster(string fileName);
-    
+    AtdStructure LoadByName(string fileName);
+
+    bool HasFile(string fileName);
+
 }

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Godot;
+using NLog;
 using y1000.Source.Creature;
+using FileAccess = Godot.FileAccess;
 
 namespace y1000.Source.Animation;
 
@@ -11,9 +14,11 @@ public class FilesystemAtdRepository : IAtdRepository
 {
     public static readonly FilesystemAtdRepository Instance = new();
     
-    private static readonly string DIR_PATH = "D:/work/atd/";
+    //private static readonly string DIR_PATH = "D:/work/atd/";
+    private static readonly string DIR_PATH = "res://assets/atd/";
     
     private static readonly IDictionary<string, AtdStructure> CACHE = new Dictionary<string, AtdStructure>();
+    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
     
     private static readonly IDictionary<CreatureState, string> MONSTER_ACTION_MAP = new Dictionary<CreatureState, string>()
     {
@@ -26,7 +31,7 @@ public class FilesystemAtdRepository : IAtdRepository
     };
 
     
-    private static List<AtdFrameDescriptor> ToArray(string[] strings)
+    private static List<AtdFrameDescriptor> ToFrameArray(string[] strings)
     {
         List<AtdFrameDescriptor> result = new List<AtdFrameDescriptor>();
         for (int i = 'A', index = 5; i <= 'P' && index + 2 < strings.Length; i++, index += 3)
@@ -63,13 +68,39 @@ public class FilesystemAtdRepository : IAtdRepository
     }
     
 
-    private static List<string> ConvertToStrings(byte[] allBytes)
+    
+    private List<AtdAction> ConvertToActions(List<string> list)
+    {
+        List<AtdAction> result = new List<AtdAction>();
+
+        foreach (var str in list)
+        {
+            var strings = Regex.Replace(str, @"\s+", "").Split(",");
+            if (string.IsNullOrEmpty(strings[0]) || "Name".Equals(strings[0]))
+            {
+                continue;
+            }
+            string action = strings[1];
+            string direction = strings[2];
+            int frame = strings[3].ToInt();
+            int frameTime = action.Equals("TURN") ? strings[4].ToInt() * 10 : strings[4].ToInt();
+            result.Add(new AtdAction(action, direction, frame, frameTime, ToFrameArray(strings)));
+        }
+        return result;
+    }
+    
+            
+    private static List<string> ReadStrings(FileAccess fileAccess)
     {
         List<string> list = new List<string>();
-        int cnt = allBytes.Length / 255;
+        int cnt = (int)fileAccess.GetLength() / 255;
         for (int i = 0; i < cnt; i++)
         {
-            var buffer = allBytes.Skip(i * 255).ToArray();
+            var buffer = fileAccess.GetBuffer(255);
+            if (buffer == null)
+            {
+                break;
+            }
             var convert = Convert(buffer);
             if (convert != null)
             {
@@ -79,55 +110,47 @@ public class FilesystemAtdRepository : IAtdRepository
         return list;
     }
     
-    private List<AtdAction> ConvertToActions(List<string> list)
-    {
-        List<AtdAction> result = new List<AtdAction>();
-        foreach (var str in list)
-        {
-            var strings = str.Split(",");
-            if (string.IsNullOrEmpty(strings[0]) || "Name".Equals(strings[0]))
-            {
-                continue;
-            }
-            result.Add(new AtdAction(strings[1], strings[2], strings[3].ToInt(), strings[4].ToInt(), ToArray(strings)));
-        }
-        return result;
-    }
-
 
     private AtdStructure Load(string path, IDictionary<CreatureState, string> actionMap)
     {
-        if (!path.EndsWith(".atd"))
-        {
-            path += ".atd";
-        }
         if (CACHE.TryGetValue(path, out var structure))
         {
             return structure;
         }
-        var allbytes = File.ReadAllBytes(path);
-        var atdStrings = ConvertToStrings(allbytes);
-        var actions = ConvertToActions(atdStrings);
-        IDictionary<string, List<AtdAction>> dictionary = new Dictionary<string, List<AtdAction>>();
-        foreach (var action in actions)
+
+        FileAccess fileAccess = FileAccess.Open( path, FileAccess.ModeFlags.Read);
+        if (fileAccess == null)
         {
-            if (!dictionary.ContainsKey(action.Action))
+            throw new ArgumentException("Invalid atd:" + path);
+        }
+        var readStrings = ReadStrings(fileAccess);
+        var atdStructs = ConvertToActions(readStrings);
+        IDictionary<string, List<AtdAction>> dictionary = new Dictionary<string, List<AtdAction>>();
+        foreach (var atdStruct in atdStructs)
+        {
+            if (!dictionary.ContainsKey(atdStruct.Action))
             {
-                dictionary.Add(action.Action, new List<AtdAction>());
+                dictionary.Add(atdStruct.Action, new List<AtdAction>());
             }
 
-            if (dictionary.TryGetValue(action.Action, out var list))
+            if (dictionary.TryGetValue(atdStruct.Action, out var list))
             {
-                list.Add(action);
+                list.Add(atdStruct);
             }
         }
+        fileAccess.Dispose();
         var atdStructure = new AtdStructure(dictionary, actionMap);
         CACHE.Add(path, atdStructure);
         return atdStructure;
     }
 
-    public AtdStructure LoadMonster(string fileName)
+    public AtdStructure LoadByName(string fileName)
     {
-        return Load(DIR_PATH + fileName, MONSTER_ACTION_MAP);
+        return Load(DIR_PATH + (fileName.EndsWith(".atd") ? fileName : fileName + ".atd"), MONSTER_ACTION_MAP);
+    }
+
+    public bool HasFile(string fileName)
+    {
+        return FileAccess.FileExists(DIR_PATH + (fileName.EndsWith(".atd") ? fileName : fileName + ".atd"));
     }
 }

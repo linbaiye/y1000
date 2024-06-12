@@ -84,7 +84,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void ChangeWeapon(PlayerWeapon? weapon)
 	{
 		_handAnimation = weapon != null ? PlayerWeaponAnimation.LoadFor(weapon) : null;
-		_effectAnimation = weapon != null ? WeaponEffectAnimation.LoadFor(weapon) : null;
+		//_effectAnimation = weapon != null ? WeaponEffectAnimation.LoadFor(weapon) : null;
 		Weapon = weapon;
 		GetNode<Sprite2D>("Hand").Visible = weapon != null;
 	}

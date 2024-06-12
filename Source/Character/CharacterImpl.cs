@@ -113,7 +113,10 @@ namespace y1000.Source.Character
 
 		public bool CanMoveOneUnit(Direction direction)
 		{
-			return WrappedPlayer().Map.Movable(Coordinate.Move(direction));
+			var nextCoordinate = Coordinate.Move(direction);
+			var ret = WrappedPlayer().Map.Movable(nextCoordinate);
+			LOGGER.Debug("Coordinate {0} {1} movable .", nextCoordinate, ret ? "is" : "is not");
+			return ret;
 		}
 		
         private ICharacterState Rewind(CreatureState state)
@@ -154,7 +157,7 @@ namespace y1000.Source.Character
 
         public void Handle(IEntityMessage message)
         {
-	        LOGGER.Debug("Received message {0}.", message);
+	        //LOGGER.Debug("Received message {0}.", message);
 	        message.Accept(this);
         }
 
@@ -187,7 +190,7 @@ namespace y1000.Source.Character
 
         public void Handle(ICharacterMessage message)
         {
-	        LOGGER.Debug("Received message {0}.", message);
+	        //LOGGER.Debug("Received message {0}.", message);
 	        message.Accept(this);
         }
 
