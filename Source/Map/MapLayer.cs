@@ -219,7 +219,13 @@ public partial class MapLayer : TileMap, IMap
 	public void Occupy(ICreature creature)
 	{
 		Free(creature);
-		_creature2Coordinate.TryAdd(creature.Id, creature.Coordinate);
+		if (_creature2Coordinate.TryAdd(creature.Id, creature.Coordinate))
+		{
+			if (creature.Id > 1000)
+			{
+				LOGGER.Debug("Player occupied {0}.", creature.Coordinate);
+			}
+		}
 	}
 
 	public void Free(ICreature creature)
