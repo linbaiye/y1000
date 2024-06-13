@@ -1,3 +1,4 @@
+using Godot;
 using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature.State;
@@ -7,7 +8,7 @@ namespace y1000.Source.Creature.Monster;
 public sealed class MonsterMoveState : AbstractCreatureMoveState<Monster>
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-    
+
     private MonsterMoveState(int total, Direction towards, int elapsedMillis = 0) : base(total, towards, elapsedMillis)
     {
     }

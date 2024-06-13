@@ -20,7 +20,7 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
     
     public Vector2I? ToCoordinate { get; private set; }
     
-    protected Direction Towards { get; }
+    public Direction Towards { get; }
     
     protected abstract ILogger Logger { get; }
 

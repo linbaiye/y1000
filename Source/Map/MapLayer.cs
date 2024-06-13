@@ -221,10 +221,7 @@ public partial class MapLayer : TileMap, IMap
 		Free(creature);
 		if (_creature2Coordinate.TryAdd(creature.Id, creature.Coordinate))
 		{
-			if (creature.Id > 1000)
-			{
-				LOGGER.Debug("Player occupied {0}.", creature.Coordinate);
-			}
+			LOGGER.Debug("{1} occupied {0}.", creature.Coordinate, creature.Id);
 		}
 	}
 

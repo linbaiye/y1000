@@ -54,9 +54,9 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	{
 		if (_state is MonsterMoveState moveState && moveState.ToCoordinate.HasValue)
 		{
-			if (!Position.ToCoordinate().Equals(moveState.ToCoordinate))
+			if (!Position.ToCoordinate().Equals(moveState.ToCoordinate.Value))
 			{
-				LOGGER.Debug("Shift to coordinate {0}.", moveState.ToCoordinate);
+				LOGGER.Debug("Shift to coordinate {0}.", moveState.ToCoordinate.Value);
 				Position = moveState.ToCoordinate.Value.ToPosition();
 				Map.Occupy(this);
 			}
