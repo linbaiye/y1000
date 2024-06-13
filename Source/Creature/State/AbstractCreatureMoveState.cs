@@ -58,7 +58,6 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
         if (ElapsedMillis >= animationLengthMillis)
         {
             creature.Position = creature.Position.Snapped(VectorUtil.TileSize);
-            creature.Map.Occupy(creature);
         }
     }
 }

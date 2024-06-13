@@ -8,6 +8,7 @@ using y1000.Source.Item;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
+using y1000.Source.Util;
 
 namespace y1000.Source.Player;
 
@@ -224,6 +225,14 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	
 	public void ChangeState(IPlayerState newState)
 	{
+		if (_state is PlayerMoveState moveState && moveState.ToCoordinate.HasValue)
+		{
+			if (!Position.ToCoordinate().Equals(moveState.ToCoordinate.Value))
+			{
+				Position = moveState.ToCoordinate.Value.ToPosition();
+			}
+			Map.Occupy(this);
+		}
 		_state = newState;
 	}
 

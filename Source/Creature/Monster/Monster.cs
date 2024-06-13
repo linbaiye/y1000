@@ -56,10 +56,9 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		{
 			if (!Position.ToCoordinate().Equals(moveState.ToCoordinate.Value))
 			{
-				LOGGER.Debug("Shift to coordinate {0}.", moveState.ToCoordinate.Value);
 				Position = moveState.ToCoordinate.Value.ToPosition();
-				Map.Occupy(this);
 			}
+			Map.Occupy(this);
 		}
 		_state = newState;
 	}
