@@ -254,6 +254,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	}
 	
 	
+	//public override void _Process(double delta)
 	public override void _PhysicsProcess(double delta)
 	{
 		_state.Update(this, (int)(delta * 1000));
