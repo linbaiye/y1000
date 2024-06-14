@@ -1,11 +1,12 @@
-﻿using Godot;
+using Godot;
 
-namespace y1000.Source.Player;
+namespace y1000.Source.Creature;
 
-public partial class KungFuTip : Label
+public partial class LifePercentBar : TextureProgressBar
 {
+    
     private double _time;
-
+    
     public override void _Ready()
     {
         Visible = false;
@@ -20,10 +21,10 @@ public partial class KungFuTip : Label
         }
     }
 
-    public void Display(string text)
+    public void Display(int percent)
     {
         _time = 2;
-        Text = text;
+        Value = percent;
         Visible = true;
     }
 }

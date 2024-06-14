@@ -10,6 +10,7 @@ shader_parameter/offset = Vector2(0, 1)
 shader_parameter/modulate = Color(0, 0, 0, 0.65098)
 
 [sub_resource type="SystemFont" id="SystemFont_qmyq1"]
+subpixel_positioning = 0
 
 [node name="Body" type="Sprite2D"]
 y_sort_enabled = true

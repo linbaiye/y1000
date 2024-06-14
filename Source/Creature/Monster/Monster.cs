@@ -90,6 +90,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	{
 		ChangeState(MonsterStillState.Hurt(MonsterAnimation));
 		SetPosition(hurtMessage.Coordinate, hurtMessage.Direction);
+		ShowLifePercent(hurtMessage.LifePercent);
 	}
 	
 
@@ -112,7 +113,6 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
 	public void Visit(RemoveEntityMessage removeEntityMessage)
 	{
-		LOGGER.Debug("Delete message received.");
 		Delete();
 	}
 

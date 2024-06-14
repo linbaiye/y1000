@@ -54,6 +54,11 @@ public abstract partial class AbstractCreature : AbstractEntity, ICreature
         Position = coordinate.ToPosition();
         Map.Occupy(this);
     }
+    
+	public void ShowLifePercent(int percent)
+	{
+		GetNode<LifePercentBar>("HealthBar").Display(percent);
+	}
 
     public void SetPosition(AbstractPositionMessage positionMessage)
     {

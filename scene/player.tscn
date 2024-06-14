@@ -13,8 +13,8 @@
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="11_0mhdp"]
 [ext_resource type="Script" path="res://Source/Player/AttackEffectSprite.cs" id="11_vx863"]
 [ext_resource type="Script" path="res://Source/Player/KungFuTip.cs" id="12_r6g6t"]
-[ext_resource type="AudioStream" uid="uid://ca6rb87at7c2b" path="res://assets/sound/5800.wav" id="14_f3ppj"]
 [ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="15_3adja"]
+[ext_resource type="PackedScene" uid="uid://c4p2u3bdou5im" path="res://Scenes/HealthBar.tscn" id="15_7nysb"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p7g52"]
 
@@ -101,5 +101,6 @@ horizontal_alignment = 1
 script = ExtResource("12_r6g6t")
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("14_f3ppj")
 script = ExtResource("15_3adja")
+
+[node name="HealthBar" parent="." instance=ExtResource("15_7nysb")]

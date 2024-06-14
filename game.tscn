@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=7 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://7ghuvlfmi4pd" path="res://Scenes/RightSideUI.tscn" id="4_fqpt3"]
 [ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://bottom_ui.tscn" id="5_3t2rd"]
 [ext_resource type="PackedScene" uid="uid://bqv6d0i2cli8e" path="res://Scenes/DropItemUI.tscn" id="6_wxera"]
-[ext_resource type="AudioStream" uid="uid://bbftlpomou8uf" path="res://assets/bgm/1301.mp3" id="7_gwa6p"]
 
 [node name="Game" type="Node2D"]
 z_as_relative = false
@@ -34,4 +33,3 @@ mouse_filter = 1
 [node name="DropItemUI" parent="UILayer" instance=ExtResource("6_wxera")]
 
 [node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_gwa6p")

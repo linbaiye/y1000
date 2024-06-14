@@ -5,6 +5,7 @@ using Source.Networking.Protobuf;
 using y1000.Source.KungFu;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.KungFu.Foot;
+using y1000.Source.Util;
 
 namespace y1000.Source.Networking.Server
 {
@@ -23,11 +24,17 @@ namespace y1000.Source.Networking.Server
             
             public int Number { get; }
         }
-        private JoinedRealmMessage(IAttackKungFu attackKungFu, List<InventoryItemMessage> items, PlayerInfo myInfo)
+        private JoinedRealmMessage(IAttackKungFu attackKungFu, List<InventoryItemMessage> items, PlayerInfo myInfo, ValueBar healthBar, 
+            ValueBar powerBar, ValueBar innerPowerBar, ValueBar outerPowerBar, ValueBar energyBar)
         {
             AttackKungFu = attackKungFu;
             Items = items;
             MyInfo = myInfo;
+            HealthBar = healthBar;
+            PowerBar = powerBar;
+            InnerPowerBar = innerPowerBar;
+            OuterPowerBar = outerPowerBar;
+            EnergyBar = energyBar;
             KungFuBook = KungFuBook.Empty;
         }
         
@@ -46,6 +53,13 @@ namespace y1000.Source.Networking.Server
         public string? AssistantKungFu { get; private init; }
         
         public BreathKungFu? BreathKungFu { get; private init; }
+        
+        public ValueBar HealthBar { get; private init; }
+        public ValueBar PowerBar { get; private init; }
+        public ValueBar InnerPowerBar { get; private init; }
+        public ValueBar OuterPowerBar { get; private init; }
+        
+        public ValueBar EnergyBar { get; private init; }
         
         public PlayerInfo MyInfo { get; }
         
@@ -93,7 +107,14 @@ namespace y1000.Source.Networking.Server
             var footKungFu = loginPacket.HasFootKungFuName
                 ? IFootKungFu.ByName(loginPacket.FootKungFuName, loginPacket.FootKungFuLevel)
                 : null;
-            var message = new JoinedRealmMessage(attackKungFu, itemMessages, PlayerInfo.FromPacket(loginPacket.Info))
+            var attribute = loginPacket.Attribute;
+            var message = new JoinedRealmMessage(attackKungFu, itemMessages, PlayerInfo.FromPacket(loginPacket.Info),
+                new ValueBar(attribute.CurLife, attribute.MaxLife),
+                new ValueBar(attribute.CurPower, attribute.MaxPower),
+                new ValueBar(attribute.CurInnerPower, attribute.MaxInnerPower),
+                new ValueBar(attribute.CurOuterPower, attribute.MaxOuterPower),
+                new ValueBar(attribute.CurEnergy, attribute.MaxEnergy)
+            )
             {
                 Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
                 FootKungFu = footKungFu,

@@ -34,6 +34,16 @@ namespace y1000.Source.Character
 		public event EventHandler<EventArgs>? WhenCharacterUpdated;
 
 		private EventMediator? EventMediator { get; set; }
+		
+		public ValueBar HealthBar { get; private set; } = ValueBar.Default;
+		
+		public ValueBar PowerBar { get; private set; } = ValueBar.Default;
+		
+		public ValueBar InnerPowerBar { get; private set; } = ValueBar.Default;
+		
+		public ValueBar OuterPowerBar { get; private set; } = ValueBar.Default;
+		
+		public ValueBar EnergyBar { get; private set; } = ValueBar.Default;
 
 		public void ChangeState(ICharacterState state)
 		{
@@ -175,6 +185,9 @@ namespace y1000.Source.Character
         public void Visit(HurtMessage message)
         {
 	        SetPositionAndState(message.Coordinate, message.Direction, CharacterHurtState.Hurt(message.AfterHurtState));
+	        WrappedPlayer().ShowLifePercent(message.LifePercent);
+	        HealthBar = new ValueBar(message.CurrentLife, message.MaxLife);
+	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
         }
 
         public void Visit(PlayerUnequipMessage message)
@@ -435,6 +448,11 @@ namespace y1000.Source.Character
 	        character.KungFuBook.EventMediator = eventMediator;
 	        character.ProtectionKungFu = message.ProtectionKungFu;
 	        character.AssistantKungFu = message.AssistantKungFu;
+	        character.HealthBar = message.HealthBar;
+	        character.PowerBar = message.PowerBar;
+	        character.InnerPowerBar = message.InnerPowerBar;
+	        character.OuterPowerBar = message.OuterPowerBar;
+	        character.EnergyBar = message.EnergyBar;
 	        AddItems(character, message, itemFactory);
 	        return character;
         }

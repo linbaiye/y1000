@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://deeloym23hirx"]
+[gd_scene load_steps=24 format=3 uid="uid://deeloym23hirx"]
 
 [ext_resource type="Texture2D" uid="uid://dqj2d287aieb6" path="res://sprite/weapon/j214/000017.png" id="1_838ay"]
 [ext_resource type="Texture2D" uid="uid://b3iqe58lqusbw" path="res://sprite/char/N04/000017.png" id="2_ojhax"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://dj4aumawnglwg" path="res://sprite/char/N04/000041.png" id="16_fq4q2"]
 [ext_resource type="Texture2D" uid="uid://coau3oinhrttq" path="res://sprite/weapon/j214/000041.png" id="17_ew3h4"]
 [ext_resource type="Texture2D" uid="uid://r4yyibwpuqyf" path="res://sprite/weapon/j214/000047.png" id="19_fw342"]
+[ext_resource type="Texture2D" uid="uid://bx3o5n7hjxuna" path="res://assets/ui/life_bar.png" id="20_b0cku"]
+[ext_resource type="Texture2D" uid="uid://36kyaq6oqkqc" path="res://assets/ui/power_bar.png" id="23_7nmag"]
 
 [node name="Bow" type="Node2D"]
 
@@ -138,6 +140,7 @@ centered = false
 offset = Vector2(-25, -37)
 
 [node name="Arrow" type="Sprite2D" parent="LeftDown"]
+visible = false
 position = Vector2(6, -9)
 texture = ExtResource("9_wdkot")
 script = ExtResource("8_susmg")
@@ -162,6 +165,7 @@ texture = ExtResource("9_wdkot")
 script = ExtResource("8_susmg")
 
 [node name="LeftUp" type="Node2D" parent="."]
+visible = false
 position = Vector2(200, 200)
 
 [node name="Body" type="Sprite2D" parent="LeftUp"]
@@ -169,12 +173,22 @@ texture = ExtResource("16_0eklm")
 centered = false
 offset = Vector2(-17, -34)
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="LeftUp/Body"]
+offset_top = -34.0
+offset_right = 19.0
+offset_bottom = -32.0
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("20_b0cku")
+
 [node name="Bow" type="Sprite2D" parent="LeftUp"]
+visible = false
 texture = ExtResource("19_fw342")
 centered = false
 offset = Vector2(-17, -52)
 
 [node name="Arrow" type="Sprite2D" parent="LeftUp"]
+visible = false
 position = Vector2(12, -32)
 texture = ExtResource("9_wdkot")
 script = ExtResource("8_susmg")
@@ -198,3 +212,14 @@ visible = false
 position = Vector2(106, 64)
 texture = ExtResource("9_wdkot")
 centered = false
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 88.0
+offset_top = 129.0
+offset_right = 286.0
+offset_bottom = 140.0
+tooltip_text = "Test"
+mouse_filter = 0
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("23_7nmag")

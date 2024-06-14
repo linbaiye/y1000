@@ -312,7 +312,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void Visit(PlayerAttackMessage message)
 	{
 		SetPosition(message.Coordinate, message.Direction);
-		_state = IPlayerState.Attack(message);
+		ChangeState(IPlayerState.Attack(message));
 	}
 
 	public void PlaySound()
@@ -320,10 +320,12 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		GetNode<CreatureAudio>("Audio").PlaySoundEffect();
 	}
 
+
 	public void Visit(HurtMessage hurtMessage)
 	{
 		SetPosition(hurtMessage.Coordinate, hurtMessage.Direction);
-		_state = IPlayerState.Hurt(hurtMessage.AfterHurtState);
+		ChangeState(IPlayerState.Hurt(hurtMessage.AfterHurtState));
+		ShowLifePercent(hurtMessage.LifePercent);
 	}
 
 	private string Location()

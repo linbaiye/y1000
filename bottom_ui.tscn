@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8pmfxkqej1vd"]
+[gd_scene load_steps=15 format=3 uid="uid://c8pmfxkqej1vd"]
 
 [ext_resource type="Script" path="res://Source/Control/Bottom/BottomControl.cs" id="1_nx2kl"]
 [ext_resource type="Texture2D" uid="uid://d25ml37vvq5mp" path="res://assets/ui/hud_bottom.png" id="2_mrib6"]
@@ -8,6 +8,10 @@
 [ext_resource type="FontFile" uid="uid://dncxdf0s1udqa" path="res://fonts/SweiSpringSugarCJKtc-ExtraLight.ttf" id="6_k2h1g"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_v430x"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/UsedKungFuView.cs" id="8_hxdqm"]
+[ext_resource type="Texture2D" uid="uid://b58wt8qgc1hyq" path="res://assets/ui/yuanqi_bar.png" id="9_xgwoi"]
+[ext_resource type="Texture2D" uid="uid://36kyaq6oqkqc" path="res://assets/ui/power_bar.png" id="10_0ueev"]
+[ext_resource type="Texture2D" uid="uid://bx3o5n7hjxuna" path="res://assets/ui/life_bar.png" id="11_igjoo"]
+[ext_resource type="Texture2D" uid="uid://c1aocdayxnuiv" path="res://assets/ui/hal_bar.png" id="12_5cibo"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kljs2"]
 
@@ -29,6 +33,7 @@ script = ExtResource("1_nx2kl")
 layout_mode = 0
 offset_right = 1024.0
 offset_bottom = 198.0
+mouse_filter = 0
 texture = ExtResource("2_mrib6")
 
 [node name="InventoryButton" type="Button" parent="Container"]
@@ -201,3 +206,77 @@ theme_override_font_sizes/font_size = 12
 text = "不羁浪人槌法"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="YuanqiBar" type="TextureProgressBar" parent="Container"]
+layout_mode = 0
+offset_left = 897.0
+offset_top = 88.0
+offset_right = 995.0
+offset_bottom = 97.0
+value = 100.0
+texture_progress = ExtResource("9_xgwoi")
+
+[node name="InnerPowerBar" type="TextureProgressBar" parent="Container"]
+layout_mode = 0
+offset_left = 897.0
+offset_top = 103.0
+offset_right = 995.0
+offset_bottom = 113.0
+value = 100.0
+texture_progress = ExtResource("10_0ueev")
+
+[node name="OuterPowerBar" type="TextureProgressBar" parent="Container"]
+z_index = 1
+layout_mode = 0
+offset_left = 897.0
+offset_top = 118.0
+offset_right = 995.0
+offset_bottom = 128.0
+mouse_filter = 0
+value = 100.0
+texture_progress = ExtResource("10_0ueev")
+
+[node name="PowerBar" type="TextureProgressBar" parent="Container"]
+layout_mode = 0
+offset_left = 897.0
+offset_top = 133.0
+offset_right = 995.0
+offset_bottom = 142.0
+value = 100.0
+texture_progress = ExtResource("10_0ueev")
+
+[node name="LifeBar" type="TextureProgressBar" parent="Container"]
+layout_mode = 0
+offset_left = 897.0
+offset_top = 148.0
+offset_right = 995.0
+offset_bottom = 157.0
+value = 100.0
+texture_progress = ExtResource("11_igjoo")
+
+[node name="HeadLifeBar" type="TextureProgressBar" parent="Container"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 119.0
+offset_right = 241.0
+offset_bottom = 125.0
+value = 100.0
+texture_progress = ExtResource("12_5cibo")
+
+[node name="ArmLifeBar" type="TextureProgressBar" parent="Container"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 134.0
+offset_right = 241.0
+offset_bottom = 140.0
+value = 100.0
+texture_progress = ExtResource("12_5cibo")
+
+[node name="LegLifeBar" type="TextureProgressBar" parent="Container"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 149.0
+offset_right = 241.0
+offset_bottom = 155.0
+value = 100.0
+texture_progress = ExtResource("12_5cibo")
