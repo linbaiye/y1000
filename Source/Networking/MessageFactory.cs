@@ -116,6 +116,11 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.SitDown => new PlayerSitDownMessage(packet.SitDown.Id),
             Packet.TypedPacketOneofCase.StandUp => new PlayerStandUpMessage(packet.StandUp.Id),
             Packet.TypedPacketOneofCase.Cooldown => new PlayerCooldownMessage(packet.Cooldown.Id),
+            Packet.TypedPacketOneofCase.Attribute => CharacterAttributeMessage.FromPacket(packet.Attribute),
+            Packet.TypedPacketOneofCase.Sound => new CreatureSoundMessage(packet.Sound.Id, packet.Sound.Sound),
+            Packet.TypedPacketOneofCase.Die => new CreatureDieMessage(packet.Die.Id, packet.Die.Sound),
+            Packet.TypedPacketOneofCase.PlayerRevive => new PlayerReviveMessage(packet.PlayerRevive.Id),
+            Packet.TypedPacketOneofCase.GainExp => new GainExpMessage(packet.GainExp.Name, packet.GainExp.Level),
             _ => throw new NotSupportedException()
         };
     }

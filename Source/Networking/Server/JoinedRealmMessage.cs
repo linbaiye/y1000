@@ -80,11 +80,27 @@ namespace y1000.Source.Networking.Server
 
         private static IDictionary<int, IKungFu> ParseKungFu(RepeatedField<KungFuPacket> kungFuPackets)
         {
-            
             IDictionary<int, IKungFu> result = new Dictionary<int, IKungFu>();
             foreach (var kungFuPacket in kungFuPackets)
             {
-                result.TryAdd(kungFuPacket.Slot, new ViewKungFu(kungFuPacket.Name, kungFuPacket.Level));
+                switch (kungFuPacket.Type)
+                {
+                    case (int)KungFuType.BREATHING:
+                        result.TryAdd(kungFuPacket.Slot, new BreathKungFu(kungFuPacket.Name, kungFuPacket.Level));
+                        break;
+                    case (int)KungFuType.ASSISTANT:
+                        result.TryAdd(kungFuPacket.Slot, new AssistantKungFu(kungFuPacket.Name, kungFuPacket.Level));
+                        break;
+                    case (int)KungFuType.FOOT:
+                        result.TryAdd(kungFuPacket.Slot, new Bufa(kungFuPacket.Level, kungFuPacket.Name));
+                        break;
+                    case (int)KungFuType.PROTECTION:
+                        result.TryAdd(kungFuPacket.Slot, new ProtectionKungFu(kungFuPacket.Name, kungFuPacket.Level));
+                        break;
+                    default:
+                        result.TryAdd(kungFuPacket.Slot, IAttackKungFu.ByType((AttackKungFuType)kungFuPacket.Type, kungFuPacket.Name, kungFuPacket.Level));
+                        break;
+                }
             }
             return result;
         }
@@ -102,13 +118,11 @@ namespace y1000.Source.Networking.Server
         public static JoinedRealmMessage FromPacket(LoginPacket loginPacket)
         {
             List<InventoryItemMessage> itemMessages = ItemMessages(loginPacket);
-            var attackKungFu = IAttackKungFu.ByType((AttackKungFuType)loginPacket.AttackKungFuType, loginPacket.AttackKungFuName, 
-                loginPacket.AttackKungFuLevel);
-            var footKungFu = loginPacket.HasFootKungFuName
-                ? IFootKungFu.ByName(loginPacket.FootKungFuName, loginPacket.FootKungFuLevel)
-                : null;
+            var kungFuBook = CreateKungFuBook(loginPacket);
+            var footKungFu = loginPacket.HasFootKungFuName? kungFuBook.FindKungFu<IFootKungFu>(loginPacket.FootKungFuName) : null;
             var attribute = loginPacket.Attribute;
-            var message = new JoinedRealmMessage(attackKungFu, itemMessages, PlayerInfo.FromPacket(loginPacket.Info),
+            var message = new JoinedRealmMessage(kungFuBook.FindAttackKungFu(loginPacket.AttackKungFuName),
+                itemMessages, PlayerInfo.FromPacket(loginPacket.Info),
                 new ValueBar(attribute.CurLife, attribute.MaxLife),
                 new ValueBar(attribute.CurPower, attribute.MaxPower),
                 new ValueBar(attribute.CurInnerPower, attribute.MaxInnerPower),
@@ -118,10 +132,10 @@ namespace y1000.Source.Networking.Server
             {
                 Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
                 FootKungFu = footKungFu,
-                KungFuBook = CreateKungFuBook(loginPacket),
+                KungFuBook = kungFuBook,
                 AssistantKungFu = loginPacket.HasAssistantKungFu ? loginPacket.AssistantKungFu : null,
                 ProtectionKungFu= loginPacket.HasProtectionKungFu ? loginPacket.ProtectionKungFu: null,
-                BreathKungFu = loginPacket.HasBreathKungFu? new BreathKungFu(loginPacket.BreathKungFu, loginPacket.BreathKungFuLevel) : null,
+                BreathKungFu = loginPacket.HasBreathKungFu? kungFuBook.FindKungFu<BreathKungFu>(loginPacket.BreathKungFu) : null,
             };
             return message;
         }

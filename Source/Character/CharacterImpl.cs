@@ -186,10 +186,24 @@ namespace y1000.Source.Character
         {
 	        SetPositionAndState(message.Coordinate, message.Direction, CharacterHurtState.Hurt(message.AfterHurtState));
 	        WrappedPlayer().ShowLifePercent(message.LifePercent);
+	        WrappedPlayer().PlaySound(message.Sound);
 	        HealthBar = new ValueBar(message.CurrentLife, message.MaxLife);
 	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
         }
+        public void Visit(CreatureSoundMessage message)
+        {
+	        WrappedPlayer().Visit(message);
+        }
 
+        public void Visit(CreatureDieMessage message)
+        {
+	        ChangeState(ICharacterState.Create(CreatureState.DIE));
+	        HealthBar = new ValueBar(0, HealthBar.Max);
+	        WrappedPlayer().PlaySound(message.Sound);
+	        WrappedPlayer().ShowLifePercent(HealthBar.Percent);
+	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
+        }
+        
         public void Visit(PlayerUnequipMessage message)
         {
 	        WrappedPlayer().Unequip(message);
@@ -199,7 +213,12 @@ namespace y1000.Source.Character
 	        }
 	        WhenCharacterUpdated?.Invoke(this, new EquipmentChangedEvent(message.Unequipped));
         }
-        
+
+
+        public void Visit(PlayerReviveMessage message)
+        {
+	        ChangeState(ICharacterState.Create(CreatureState.IDLE));
+        }
 
         public void Handle(ICharacterMessage message)
         {
@@ -334,7 +353,13 @@ namespace y1000.Source.Character
         {
 	        Inventory.Swap(message.Slot1, message.Slot2);
         }
-        
+
+        public void Visit(GainExpMessage message)
+        {
+	        KungFuBook.GainExp(message.Name, message.Level);
+	        WhenCharacterUpdated?.Invoke(this, new GainExpEventArgs(message.Name));
+        }
+
 
         public void Visit(DropItemMessage message)
         {
@@ -345,7 +370,15 @@ namespace y1000.Source.Character
         {
 	        Inventory.Update(message.SlotId, message.Item);
         }
-        
+
+        public void Visit(CharacterAttributeMessage message)
+        {
+	        HealthBar = message.Health;
+	        PowerBar = message.Power;
+	        InnerPowerBar = message.InnerPower;
+	        OuterPowerBar = message.OuterPower;
+	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
+        }
 
         public void Visit(PlayerEquipMessage message)
         {

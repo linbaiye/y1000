@@ -10,12 +10,13 @@ public struct ValueBar
         Max = max;
     }
 
-    public int Current { get; }
+    private int Current { get; }
+
     public int Max { get; }
 
     public int Percent => Current * 100 / Max;
 
     public string Text => ((float)Current / 100).ToString("0.00") + "/" + ((float)Max / 100).ToString("0.00");
 
-    public static readonly ValueBar Default = new ValueBar(1, 1);
+    public static readonly ValueBar Default = new(1, 1);
 }

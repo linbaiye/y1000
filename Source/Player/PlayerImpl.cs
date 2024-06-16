@@ -287,6 +287,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	{
 		ChangeState(IPlayerState.NonHurtState(CreatureState.SIT));
 	}
+	
+	public void Visit(CreatureSoundMessage message)
+	{
+		PlaySound(message.Sound);
+	}
 
 	public void ResetState()
 	{
@@ -297,6 +302,12 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	{
 		ChangeState(IPlayerState.NonHurtState(CreatureState.COOLDOWN));
 	}
+
+	public void Visit(PlayerReviveMessage message)
+	{
+		ChangeState(IPlayerState.Idle());
+	}
+
 	
 	public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
 	public OffsetTexture? HandTexture => _handAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
@@ -315,17 +326,18 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		ChangeState(IPlayerState.Attack(message));
 	}
 
-	public void PlaySound()
-	{
-		GetNode<CreatureAudio>("Audio").PlaySoundEffect();
-	}
-
 
 	public void Visit(HurtMessage hurtMessage)
 	{
-		SetPosition(hurtMessage.Coordinate, hurtMessage.Direction);
 		ChangeState(IPlayerState.Hurt(hurtMessage.AfterHurtState));
-		ShowLifePercent(hurtMessage.LifePercent);
+		HandleHurt(hurtMessage);
+	}
+
+	public void Visit(CreatureDieMessage message)
+	{
+		ChangeState(IPlayerState.NonHurtState(CreatureState.DIE));
+		PlaySound(message.Sound);
+		ShowLifePercent(0);
 	}
 
 	private string Location()

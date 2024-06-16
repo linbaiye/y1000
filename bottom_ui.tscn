@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8pmfxkqej1vd"]
+[gd_scene load_steps=16 format=3 uid="uid://c8pmfxkqej1vd"]
 
 [ext_resource type="Script" path="res://Source/Control/Bottom/BottomControl.cs" id="1_nx2kl"]
 [ext_resource type="Texture2D" uid="uid://d25ml37vvq5mp" path="res://assets/ui/hud_bottom.png" id="2_mrib6"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dncxdf0s1udqa" path="res://fonts/SweiSpringSugarCJKtc-ExtraLight.ttf" id="6_k2h1g"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_v430x"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/UsedKungFuView.cs" id="8_hxdqm"]
+[ext_resource type="Script" path="res://Source/Control/Bottom/UsedKungFuLabel.cs" id="9_4y8pv"]
 [ext_resource type="Texture2D" uid="uid://b58wt8qgc1hyq" path="res://assets/ui/yuanqi_bar.png" id="9_xgwoi"]
 [ext_resource type="Texture2D" uid="uid://36kyaq6oqkqc" path="res://assets/ui/power_bar.png" id="10_0ueev"]
 [ext_resource type="Texture2D" uid="uid://bx3o5n7hjxuna" path="res://assets/ui/life_bar.png" id="11_igjoo"]
@@ -72,7 +73,7 @@ offset_right = 758.0
 offset_bottom = 163.0
 theme_override_constants/line_separation = 2
 theme_override_fonts/normal_font = ExtResource("7_v430x")
-theme_override_font_sizes/normal_font_size = 13
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 script = ExtResource("3_56n7n")
 
@@ -171,41 +172,37 @@ offset_bottom = 159.0
 theme_override_constants/separation = 1
 script = ExtResource("8_hxdqm")
 
-[node name="Label1" type="Label" parent="Container/UsedKungFuView"]
+[node name="Label1" type="RichTextLabel" parent="Container/UsedKungFuView"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("7_v430x")
-theme_override_font_sizes/font_size = 12
-text = "无名步法"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_fonts/normal_font = ExtResource("7_v430x")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+script = ExtResource("9_4y8pv")
 
-[node name="Label2" type="Label" parent="Container/UsedKungFuView"]
+[node name="Label2" type="RichTextLabel" parent="Container/UsedKungFuView"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("7_v430x")
-theme_override_font_sizes/font_size = 12
-text = "无名强身"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_fonts/normal_font = ExtResource("7_v430x")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+script = ExtResource("9_4y8pv")
 
-[node name="Label3" type="Label" parent="Container/UsedKungFuView"]
+[node name="Label3" type="RichTextLabel" parent="Container/UsedKungFuView"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("7_v430x")
-theme_override_font_sizes/font_size = 12
-text = "灵动八方"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_fonts/normal_font = ExtResource("7_v430x")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+script = ExtResource("9_4y8pv")
 
-[node name="Label4" type="Label" parent="Container/UsedKungFuView"]
+[node name="Label4" type="RichTextLabel" parent="Container/UsedKungFuView"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("7_v430x")
-theme_override_font_sizes/font_size = 12
-text = "不羁浪人槌法"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_fonts/normal_font = ExtResource("7_v430x")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+script = ExtResource("9_4y8pv")
 
 [node name="YuanqiBar" type="TextureProgressBar" parent="Container"]
 layout_mode = 0

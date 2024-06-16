@@ -73,6 +73,8 @@ public partial class BottomControl : Godot.Control
 				break;
 			case PlayerAttributeEvent: BindAttributeBars(character);
 				break;
+			case GainExpEventArgs gainExp: _kungFuView?.BlinkGainExpKungFu(gainExp.Name);
+				break;
 		}
 	}
 

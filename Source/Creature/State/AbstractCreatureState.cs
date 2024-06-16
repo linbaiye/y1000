@@ -6,8 +6,8 @@ public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : 
 {
     protected AbstractCreatureState(int totalMillis, int elapsedMillis)
     {
-        ElapsedMillis = elapsedMillis;
         TotalMillis = totalMillis;
+        ElapsedMillis = elapsedMillis > TotalMillis ? TotalMillis : elapsedMillis;
     }
     
     public int ElapsedMillis { get; set; }
@@ -19,6 +19,11 @@ public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : 
         if (ElapsedMillis < TotalMillis)
         {
             ElapsedMillis += delta;
+        }
+
+        if (ElapsedMillis > TotalMillis)
+        {
+            ElapsedMillis = TotalMillis;
         }
 
         return ElapsedMillis >= TotalMillis;

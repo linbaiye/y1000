@@ -2,7 +2,7 @@
 
 public interface IKungFu
 {
-    int Level { get; }
+    int Level { get; set; }
     
     string Name { get; }
     

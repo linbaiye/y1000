@@ -11,8 +11,8 @@ public class EmptyAttackKungFu : IAttackKungFu
     }
 
     public static readonly EmptyAttackKungFu Instance = new EmptyAttackKungFu();
+    public int Level { get; set; }
     public string Name => "";
-    public int Level => 0;
     public void Attack(Character.CharacterImpl character, AttackInput input)
     {
         throw new System.NotImplementedException();

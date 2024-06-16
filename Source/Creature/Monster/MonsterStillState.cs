@@ -38,6 +38,11 @@ public sealed class MonsterStillState : AbstractMonsterState
     {
         return Create(animation, CreatureState.HURT, elapsed);
     }
+    
+    public static MonsterStillState Die(MonsterAnimation animation, int elapsed = 0)
+    {
+        return Create(animation, CreatureState.DIE, elapsed);
+    }
 
     public static MonsterStillState Frozen(MonsterAnimation animation, int e = 0)
     {

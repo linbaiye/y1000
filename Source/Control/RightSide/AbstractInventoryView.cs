@@ -10,11 +10,18 @@ public abstract partial class AbstractInventoryView : NinePatchRect
     {
         Visible = false;
         GetNode<TextureButton>("CloseButton").Pressed += OnClosed;
+        ToggleMouseFilter();
     }
 
     public void OnClosed()
     {
         Visible = false;
+        ToggleMouseFilter();
+    }
+
+    protected void ToggleMouseFilter()
+    {
+        MouseFilter = Visible ? MouseFilterEnum.Stop : MouseFilterEnum.Ignore;
     }
 
     protected void ForeachSlot(Action<InventorySlotView> action)

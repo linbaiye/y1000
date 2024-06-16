@@ -120,5 +120,6 @@ public partial class InventoryView : AbstractInventoryView
     public void ButtonClicked()
     {
         Visible = !Visible;
+        ToggleMouseFilter();
     }
 }

@@ -1,5 +1,4 @@
 ﻿
-using Godot;
 using NLog;
 using y1000.Source.Control.RightSide.Inventory;
 using y1000.Source.KungFu;
@@ -89,11 +88,19 @@ public partial class KungFuBookView : AbstractInventoryView
         _kungFuBook = book;
         RefreshPage();
     }
+
+    public void Refresh()
+    {
+        _kungFuBook.ForeachBasic(SetSlotView);
+        _kungFuBook.ForeachUnnamed(SetSlotView);
+    }
+    
     
     public void ButtonClicked()
     {
         Visible = !Visible;
         if (Visible)
             _currentPage?.GrabFocus();
+        ToggleMouseFilter();
     }
 }

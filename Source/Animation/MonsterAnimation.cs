@@ -20,27 +20,4 @@ public class MonsterAnimation : AbstractCreatureAnimation<MonsterAnimation>
         _atdRepository = FilesystemAtdRepository.Instance;
         _spriteRepository = FilesystemSpriteRepository.Instance;
     }
-
-    private static MonsterAnimation Load(string monsterName, string atdName)
-    {
-        var atdReader = AtdStructure.LoadMonster(monsterName, atdName);
-        var spriteReader = AtzSprite.LoadOffsetMonsterSprites(monsterName);
-        return new MonsterAnimation()
-            .ConfigureState(CreatureState.IDLE, atdReader, spriteReader)
-            .ConfigureState(CreatureState.WALK, atdReader, spriteReader)
-            .ConfigureState(CreatureState.HURT, atdReader, spriteReader)
-            .ConfigureState(CreatureState.ATTACK, atdReader, spriteReader)
-            .ConfigureState(CreatureState.FROZEN, atdReader, spriteReader)
-            .ConfigureState(CreatureState.DIE, atdReader, spriteReader);
-    }
-    
-    public static MonsterAnimation LoadFor(string name)
-    {
-        switch (name)
-        {
-            case "牛":
-                return Load("buffalo", "3.atd");
-        }
-        return Instance;
-    }
 }

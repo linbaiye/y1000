@@ -19,6 +19,16 @@ public class TextMessage : IServerMessage
 
         NO_WEAPON = 5,
         
+        NOT_ENOUGH_LIFE = 6,
+
+        NOT_ENOUGH_POWER = 7,
+
+        NOT_ENOUGH_INNER_POWER = 8,
+
+        NOT_ENOUGH_OUTER_POWER = 9,
+        
+        NOT_ENOUGH_ARM_LIFE = 10,
+        
         CUSTOM = 1000000
         ,
     }
@@ -30,6 +40,11 @@ public class TextMessage : IServerMessage
         { Type.INVENTORY_FULL, "物品栏已满" },
         { Type.TRADE_REJECTED, "对方拒绝交易" },
         { Type.NO_WEAPON, "没有对应的武器" },
+        { Type.NOT_ENOUGH_LIFE, "活力不足" },
+        { Type.NOT_ENOUGH_POWER, "武功不足" },
+        { Type.NOT_ENOUGH_INNER_POWER, "内功不足" },
+        { Type.NOT_ENOUGH_OUTER_POWER, "外功不足" },
+        { Type.NOT_ENOUGH_ARM_LIFE, "因攻击力过弱而没能获得经验" },
     };
 
     public static TextMessage FromPacket(TextMessagePacket packet)

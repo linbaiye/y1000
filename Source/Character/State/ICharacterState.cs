@@ -48,6 +48,8 @@ namespace y1000.Source.Character.State
                     return CharacterIdleState.Idle();
                 case CreatureState.COOLDOWN:
                     return CharacterCooldownState.Cooldown();
+                case CreatureState.DIE:
+                    return CharacterDieState.Die();
             }
             throw new NotImplementedException();
         }

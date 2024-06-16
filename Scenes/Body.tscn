@@ -2,15 +2,13 @@
 
 [ext_resource type="Script" path="res://Source/Animation/BodySprite.cs" id="1_4876e"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="1_c3rp6"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="3_0vasa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x2j3f"]
 shader = ExtResource("1_c3rp6")
 shader_parameter/deform = Vector2(0.6, 0.4)
 shader_parameter/offset = Vector2(0, 1)
 shader_parameter/modulate = Color(0, 0, 0, 0.65098)
-
-[sub_resource type="SystemFont" id="SystemFont_qmyq1"]
-subpixel_positioning = 0
 
 [node name="Body" type="Sprite2D"]
 y_sort_enabled = true
@@ -34,4 +32,5 @@ offset_right = 7.0
 offset_bottom = -1.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = SubResource("SystemFont_qmyq1")
+theme_override_fonts/font = ExtResource("3_0vasa")
+theme_override_font_sizes/font_size = 12

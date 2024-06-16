@@ -84,7 +84,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController = GetNode<UIController>("UILayer");
 		_uiController.InitEventMediator(_eventMediator);
 		GetNode<AudioStreamPlayer>("BgmPlayer").Finished += PlayBackgroundMusic;
-		//PlayBackgroundMusic();
+		PlayBackgroundMusic();
 	}
 
 	private void PlayBackgroundMusic()
@@ -136,6 +136,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			return;
 		}
+
 		var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
 		var predictableInput = _inputSampler.SampleInput(@event, mousePos);
 		if (predictableInput != null)

@@ -126,4 +126,25 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)message);
     }
+
+    void Visit(CharacterAttributeMessage message)
+    {
+        Visit((ICharacterMessage)message);
+    }
+    
+    void Visit(CreatureSoundMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
+
+    void Visit(CreatureDieMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
+    
+    void Visit(PlayerReviveMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
+
 }

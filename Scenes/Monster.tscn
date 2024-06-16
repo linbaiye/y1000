@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctox857khwxv3"]
+[gd_scene load_steps=5 format=3 uid="uid://ctox857khwxv3"]
 
 [ext_resource type="Script" path="res://Source/Creature/Monster/Monster.cs" id="1_k86rw"]
 [ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_qsi3r"]
-[ext_resource type="PackedScene" uid="uid://c4p2u3bdou5im" path="res://Scenes/HealthBar.tscn" id="3_sf2jp"]
+[ext_resource type="PackedScene" uid="uid://bqjthq3o0r0ot" path="res://Scenes/HealthBar.tscn" id="3_sf2jp"]
+[ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="4_060ux"]
 
 [node name="Monster" type="Node2D"]
 z_index = 2
@@ -20,4 +21,6 @@ offset_bottom = 40.0
 [node name="HealthBar" parent="." instance=ExtResource("3_sf2jp")]
 offset_top = -30.0
 offset_bottom = -28.0
-tint_under = Color(0, 0, 0, 0.831373)
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+script = ExtResource("4_060ux")

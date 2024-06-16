@@ -1,4 +1,6 @@
-﻿using y1000.Source.Character;
+﻿using System;
+using y1000.Source.Character;
+using y1000.Source.Character.Event;
 using y1000.Source.Control.RightSide.Book;
 using y1000.Source.Control.RightSide.Inventory;
 
@@ -13,6 +15,19 @@ public partial class RightControl : Godot.Control
     {
         _inventory = GetNode<InventoryView>("Inventory");
         _kungFuBookView = GetNode<KungFuBookView>("KungFuBook");
+    }
+    
+    private void WhenCharacterUpdated(object? sender, EventArgs args)
+    {
+        if (sender is not CharacterImpl character)
+        {
+            return;
+        }
+        switch (args)
+        {
+            case GainExpEventArgs: _kungFuBookView?.Refresh();
+                break;
+        }
     }
 
     public void OnInventoryButtonClicked()
@@ -32,5 +47,6 @@ public partial class RightControl : Godot.Control
     {
         _inventory?.BindInventory(character.Inventory);
         _kungFuBookView?.BindKungFuBook(character.KungFuBook);
+        character.WhenCharacterUpdated += WhenCharacterUpdated;
     }
 }

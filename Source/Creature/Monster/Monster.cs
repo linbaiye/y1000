@@ -45,6 +45,8 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 				return MonsterStillState.Attack(animation, elapses);
 			case CreatureState.FROZEN:
 				return MonsterStillState.Frozen(animation, elapses);
+			case CreatureState.DIE:
+				return MonsterStillState.Die(animation, elapses);
 			default:
 				throw new NotImplementedException();
 		}
@@ -69,7 +71,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		{
 			ChangeState(MonsterStillState.Frozen(MonsterAnimation));
 		}
-		else
+		else if (state != CreatureState.DIE)
 		{
 			ChangeState(MonsterStillState.Idle(MonsterAnimation));
 		}
@@ -89,10 +91,9 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	public void Visit(HurtMessage hurtMessage)
 	{
 		ChangeState(MonsterStillState.Hurt(MonsterAnimation));
-		SetPosition(hurtMessage.Coordinate, hurtMessage.Direction);
-		ShowLifePercent(hurtMessage.LifePercent);
+		HandleHurt(hurtMessage);
 	}
-	
+
 
 	public void Visit(SetPositionMessage message)
 	{
@@ -114,6 +115,18 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	public void Visit(RemoveEntityMessage removeEntityMessage)
 	{
 		Delete();
+	}
+
+	public void Visit(CreatureSoundMessage message)
+	{
+		PlaySound(message.Sound);
+	}
+
+	public void Visit(CreatureDieMessage message)
+	{
+		ChangeState(MonsterStillState.Die(MonsterAnimation));
+		PlaySound(message.Sound);
+		ShowLifePercent(0);
 	}
 
 	public void Handle(IEntityMessage message)

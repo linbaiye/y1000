@@ -1,4 +1,4 @@
-namespace y1000.Source.KungFu.Attack;
+namespace y1000.Source.KungFu;
 
 public class ProtectionKungFu : AbstractKungFu
 {

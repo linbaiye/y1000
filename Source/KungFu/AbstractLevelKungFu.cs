@@ -9,7 +9,7 @@ public abstract class AbstractLevelKungFu : IKungFu
         Name = name;
     }
     
-    public int Level { get; }
+    public int Level { get; set; }
 
     public string Name { get; }
 

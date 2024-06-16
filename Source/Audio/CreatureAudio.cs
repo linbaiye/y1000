@@ -4,10 +4,18 @@ namespace y1000.Source.Audio;
 
 public partial class CreatureAudio : AudioStreamPlayer
 {
-    public void PlaySoundEffect()
+    public void PlaySound(string name)
     {
-        var streamWav = ResourceLoader.Load<AudioStreamWav>("res://assets/sound/5804.wav");
-        Stream = streamWav;
-        Play();
+        if (string.IsNullOrEmpty(name))
+        {
+            return;
+        }
+        var path = "res://assets/sound/" + name + ".wav";
+        if (FileAccess.FileExists(path))
+        {
+            var streamWav = ResourceLoader.Load<AudioStreamWav>(path);
+            Stream = streamWav;
+            Play();
+        }
     }
 }

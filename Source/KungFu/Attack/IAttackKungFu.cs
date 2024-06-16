@@ -17,6 +17,7 @@ public interface IAttackKungFu  : IKungFu
             AttackKungFuType.QUANFA => new QuanFa(level, name),
             AttackKungFuType.AXE => new AxeKungFu(level, name),
             AttackKungFuType.SPEAR => new SpearKungFu(level, name),
+            AttackKungFuType.THROW => new ThrowKungFu(level, name),
             _ => throw new NotImplementedException("Type " + type + " not supported.")
         };
     }
