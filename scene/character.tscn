@@ -15,3 +15,4 @@ script = ExtResource("1_0btks")
 [node name="Camera2D" type="Camera2D" parent="player"]
 y_sort_enabled = true
 texture_filter = 1
+process_callback = 0
