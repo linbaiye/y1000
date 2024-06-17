@@ -19,8 +19,10 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="HealthBar" parent="." instance=ExtResource("3_sf2jp")]
-offset_top = -30.0
-offset_bottom = -28.0
+offset_left = 8.0
+offset_top = -50.0
+offset_right = 28.0
+offset_bottom = -48.0
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 script = ExtResource("4_060ux")

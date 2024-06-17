@@ -17,7 +17,8 @@ centered = false
 script = ExtResource("1_4876e")
 
 [node name="Area" type="Panel" parent="."]
-self_modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0.901961)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,10 +27,13 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="."]
 z_index = 1
-offset_left = 6.0
+anchors_preset = -1
+offset_left = 16.0
 offset_top = -24.0
-offset_right = 7.0
-offset_bottom = -1.0
+offset_right = 17.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_0vasa")

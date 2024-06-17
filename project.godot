@@ -23,6 +23,7 @@ LogInit="*res://Source/LogInit.cs"
 
 window/size/viewport_width=1024
 window/size/viewport_height=768
+window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
 [dotnet]
@@ -62,5 +63,4 @@ common/physics_jitter_fix=0.0
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
