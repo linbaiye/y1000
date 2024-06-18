@@ -47,6 +47,12 @@ namespace y1000.Source.Character
 
 		public void ChangeState(ICharacterState state)
 		{
+			if (_state is not EmptyState)
+			{
+			LOGGER.Debug("Change to state {0} {1} {2}.", state, state.WrappedState, state.WrappedState.State);
+			LOGGER.Debug("Current state {0} {1} {2}.", _state, _state.WrappedState, _state.WrappedState.State);
+			LOGGER.Debug("-------------------");
+			}
 			WrappedPlayer().ChangeState(state.WrappedState);
 			_state = state;
 		}
@@ -116,7 +122,7 @@ namespace y1000.Source.Character
 			EventMediator?.NotifyServer(clientEvent);
 		}
 
-		public void EmitMoveEvent()
+		public void EmitMovedEvent()
 		{
 			WhenCharacterUpdated?.Invoke(this, new CharacterMoveEventArgs(Coordinate));
 		}
@@ -145,6 +151,7 @@ namespace y1000.Source.Character
 
         private void OnPlayerAnimationFinished(object? sender, CreatureAnimationDoneEventArgs args)
         {
+	        LOGGER.Debug("Animation done at {0}", _state);
 	        _state.OnWrappedPlayerAnimationFinished(this);
         }
 
@@ -152,16 +159,18 @@ namespace y1000.Source.Character
         {
 	        ChangeState(state);
 	        WrappedPlayer().SetPosition(coordinate, direction);
-	        EmitMoveEvent();
+	        EmitMovedEvent();
         }
 
         public void Visit(RewindMessage rewindMessage)
         {
+	        LOGGER.Debug("Rewind {0}.", rewindMessage);
 	        SetPositionAndState(rewindMessage.Coordinate, rewindMessage.Direction, Rewind(rewindMessage.State));
         }
 
         public void Visit(SetPositionMessage setPositionMessage)
         {
+	        LOGGER.Debug("Setposion {0}.", setPositionMessage);
 	        SetPositionAndState(setPositionMessage.Coordinate, setPositionMessage.Direction, Rewind(setPositionMessage.State));
         }
 
@@ -173,6 +182,7 @@ namespace y1000.Source.Character
 
         public void Visit(PlayerCooldownMessage message)
         {
+	        LOGGER.Debug("Received cooldown.");
 	        ChangeState(CharacterCooldownState.Cooldown());
         }
 
@@ -369,7 +379,6 @@ namespace y1000.Source.Character
 
         public void Visit(UpdateInventorySlotMessage message)
         {
-	        LOGGER.Debug("Slot message {0}.", message.SlotId);
 	        Inventory.Update(message.SlotId, message.Item);
         }
 

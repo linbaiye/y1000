@@ -32,3 +32,4 @@ offset_bottom = 29.0
 [node name="DropItemUI" parent="UILayer" instance=ExtResource("6_wxera")]
 
 [node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -12.18
