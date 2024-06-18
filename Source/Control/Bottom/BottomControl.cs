@@ -98,7 +98,7 @@ public partial class BottomControl : Godot.Control
 		bar.TooltipText = valueBar.Text;
 		bar.Value = valueBar.Percent;
 	}
-	
+
 
 	private void BindAttributeBars(CharacterImpl character)
 	{

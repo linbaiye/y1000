@@ -25,14 +25,14 @@ public interface IPlayerState : ICreatureState<PlayerImpl>
     
     public static IPlayerState Attack(PlayerAttackMessage message)
     {
-        if (message.State == CreatureState.BOW)
-        {
-            return new PlayerRangedAttackState(message.State, message.TargetId);
-        }
-        else
-        {
+        // if (message.State == CreatureState.BOW)
+        // {
+        //     return new PlayerRangedAttackState(message.State, message.TargetId);
+        // }
+        // else
+        // {
             return new PlayerStillState(message.State);
-        }
+        // }
     }
 
 

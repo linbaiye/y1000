@@ -223,26 +223,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		Reconnect();
 	}
 
-	private void OnPlayerShoot(object? sender, PlayerRangedAttackEventArgs args)
-	{
-		LOGGER.Debug("Player shoot.");
-		if (sender is not IPlayer player)
-		{
-			return;
-		}
-		var entity = _entityManager.Get(args.TargetId);
-		LOGGER.Debug("Shoot target {0}.", args.TargetId);
-		if (entity is not ICreature creature)
-		{
-			return;
-		}
-		AddChild(Projectile.Arrow(player, creature));
-	}
-
 	public void Visit(PlayerInterpolation playerInterpolation)
 	{
 		var msgDrivenPlayer = MessageDrivenPlayer.FromInterpolation(playerInterpolation, MapLayer);
-		msgDrivenPlayer.Player.OnPlayerShoot += OnPlayerShoot;
 		msgDrivenPlayer.Player.MouseClicked += OnCreatureClicked;
 		if (_entityManager.Add(msgDrivenPlayer))
 		{
@@ -319,13 +302,27 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		AddChild(groundedItem);
 	}
 
+	public void Visit(PlayerProjectileMessage message)
+	{
+		var player = _entityManager.Get<IPlayer>(message.PlayerId);
+		if (player == null)
+		{
+			return;
+		}
+		var entity = _entityManager.Get(message.TargetId);
+		if (entity is not ICreature creature)
+		{
+			return;
+		}
+		AddChild(Projectile.Arrow(player, creature));
+	}
+
 
 	public void Visit(JoinedRealmMessage joinedRealmMessage)
 	{
 		_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, _itemFactory, _eventMediator);
 		_character.WhenCharacterUpdated += OnCharacterEvent;
 		_character.WrappedPlayer().MouseClicked += OnCreatureClicked;
-		_character.WrappedPlayer().OnPlayerShoot += OnPlayerShoot;
 		_uiController?.BindCharacter(_character);
 		MapLayer.BindCharacter(_character);
 		_entityManager.Add(_character);

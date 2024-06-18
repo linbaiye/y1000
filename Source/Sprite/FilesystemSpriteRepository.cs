@@ -11,8 +11,8 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
     public static readonly FilesystemSpriteRepository Instance = new();
 
     private static readonly ILogger LOG = LogManager.GetCurrentClassLogger();
-    //private static readonly string DIR_PATH = "../sprite/";
-     private static readonly string DIR_PATH = "D:/work/sprite/";
+    private static readonly string DIR_PATH = "../sprite/";
+    // private static readonly string DIR_PATH = "D:/work/sprite/";
     private const bool CacheEnabled = true;
     private static readonly IDictionary<string, AtzSprite> Cache = new Dictionary<string, AtzSprite>();
     private FilesystemSpriteRepository()
@@ -36,7 +36,6 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
         var sizefile = File.ReadLines(spriteDirPath + "size.txt");
         var sizes = ParseVectors(sizefile);
         List<Texture2D> texture2Ds = new List<Texture2D>();
-        LOG.Debug("Loading files in {0}", name);
         for (int i = 0; i < vectors.Length ; i++)
         {
             var filename = spriteDirPath + "000" + i.ToString("D3") + ".png";

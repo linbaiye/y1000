@@ -84,7 +84,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
 	public void Visit(MoveMessage moveMessage)
 	{
-        LOGGER.Debug("Monster {2} leaving coordinate {0} for {1}.", Coordinate, Coordinate.Move(moveMessage.Direction), moveMessage.Id);
+        //LOGGER.Debug("Monster {2} leaving coordinate {0} for {1}.", Coordinate, Coordinate.Move(moveMessage.Direction), moveMessage.Id);
 		ChangeState(MonsterMoveState.Move(MonsterAnimation, moveMessage.Direction));
 	}
 

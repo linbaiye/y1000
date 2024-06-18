@@ -29,6 +29,8 @@ public class TextMessage : IServerMessage
         
         NOT_ENOUGH_ARM_LIFE = 10,
         
+        OUT_OF_AMMO = 11,
+        
         CUSTOM = 1000000
         ,
     }
@@ -45,6 +47,7 @@ public class TextMessage : IServerMessage
         { Type.NOT_ENOUGH_INNER_POWER, "内功不足" },
         { Type.NOT_ENOUGH_OUTER_POWER, "外功不足" },
         { Type.NOT_ENOUGH_ARM_LIFE, "因攻击力过弱而没能获得经验" },
+        { Type.OUT_OF_AMMO, "没有弹药了" },
     };
 
     public static TextMessage FromPacket(TextMessagePacket packet)

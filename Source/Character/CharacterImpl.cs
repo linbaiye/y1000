@@ -125,7 +125,7 @@ namespace y1000.Source.Character
 		{
 			var nextCoordinate = Coordinate.Move(direction);
 			var ret = WrappedPlayer().Map.Movable(nextCoordinate);
-			LOGGER.Debug("Coordinate {0} {1} movable, current {2}", nextCoordinate, ret ? "is" : "is not", Coordinate);
+			// LOGGER.Debug("Coordinate {0} {1} movable, current {2}", nextCoordinate, ret ? "is" : "is not", Coordinate);
 			return ret;
 		}
 		
@@ -202,6 +202,7 @@ namespace y1000.Source.Character
 	        WrappedPlayer().PlaySound(message.Sound);
 	        WrappedPlayer().ShowLifePercent(HealthBar.Percent);
 	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
+	        EventMediator?.NotifyTextArea("请稍后");
         }
         
         public void Visit(PlayerUnequipMessage message)
@@ -327,7 +328,7 @@ namespace y1000.Source.Character
 	        }
 	        if (Inventory.IsFull)
 	        {
-		        EventMediator?.NotifyMessage("物品栏已满");
+		        EventMediator?.NotifyTextArea("物品栏已满");
 		        return;
 	        }
 	        EventMediator?.NotifyServer(new ClientUnequipEvent(type));
@@ -368,6 +369,7 @@ namespace y1000.Source.Character
 
         public void Visit(UpdateInventorySlotMessage message)
         {
+	        LOGGER.Debug("Slot message {0}.", message.SlotId);
 	        Inventory.Update(message.SlotId, message.Item);
         }
 
@@ -393,19 +395,13 @@ namespace y1000.Source.Character
         private void ToggleProtectionKungFu(PlayerToggleKungFuMessage message)
         {
 	        ProtectionKungFu = message.Level > 0 ? message.Name : null;
-	        if (message.Level > 0)
-	        {
-		        BreathKungFu = null;
-	        }
         }
+
+        public bool Dead => _state.WrappedState.State == CreatureState.DIE;
 
         private void ToggleBreathKungFu(PlayerToggleKungFuMessage message)
         {
 	        BreathKungFu = message.Level > 0 ? new BreathKungFu(message.Name, message.Level) : null;
-	        if (message.Level > 0)
-	        {
-		        ProtectionKungFu = null;
-	        }
         }
 
         private void ToggleFootKungFu(PlayerToggleKungFuMessage message)
@@ -415,7 +411,6 @@ namespace y1000.Source.Character
         
         public void Visit(PlayerToggleKungFuMessage message)
         {
-	        LOGGER.Debug("Toggle kungfu {0}.", message);
 	        WrappedPlayer().Visit(message);
 	        switch (message.Type)
 	        {
@@ -454,6 +449,7 @@ namespace y1000.Source.Character
 		        default:
 			        throw new ArgumentOutOfRangeException();
 	        }
+	        LOGGER.Debug("Current prot {0}, foot {1}, breath {2}.", ProtectionKungFu, FootMagic?.Name, BreathKungFu?.Name );
 	        WhenCharacterUpdated?.Invoke(this ,KungFuChangedEvent.Instance);
         }
 

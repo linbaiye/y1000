@@ -55,7 +55,7 @@ public class EventMediator
         _clientEventSender?.Invoke(clientEvent);
     }
 
-    public void NotifyMessage(string message)
+    public void NotifyTextArea(string message)
     {
         _bottomControl?.DisplayMessage(message);
     }

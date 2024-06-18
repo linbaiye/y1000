@@ -1,4 +1,6 @@
+using System;
 using Godot;
+using NLog;
 using y1000.Source.Character;
 
 namespace y1000.Source.Control.Bottom;
@@ -9,6 +11,7 @@ public partial class UsedKungFuView : VBoxContainer
     private UsedKungFuLabel _label2;
     private UsedKungFuLabel _label3;
     private UsedKungFuLabel _label4;
+    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
     public override void _Ready()
     {
@@ -37,17 +40,28 @@ public partial class UsedKungFuView : VBoxContainer
         UsedKungFuLabel[] list = {_label1, _label2, _label3, _label4};
         foreach (var label in list)
         {
-            label.Text = "";
+            label.Reset();
         }
         int index = 0;
         list[index++].SetKungFuName(character.AttackKungFu.Name);
         if (character.ProtectionKungFu != null)
+        {
             list[index++].SetKungFuName(character.ProtectionKungFu);
+        }
+
         if (character.AssistantKungFu != null)
+        {
             list[index++].SetKungFuName(character.AssistantKungFu);
+        }
+
         if (character.FootMagic != null)
+        {
             list[index++].SetKungFuName(character.FootMagic.Name);
+        }
+
         if (character.BreathKungFu != null)
+        {
             list[index].SetKungFuName(character.BreathKungFu.Name);
+        }
     }
 }

@@ -39,7 +39,6 @@ public abstract class AbstractCharacterStillState : ICharacterState
         }
         else
         {
-            Logger.Debug("Moving to coordinate {0}.", character.Coordinate.Move(rightClick.Direction));
             character.EmitPredictionEvent(new MovePrediction(rightClick, character.Coordinate, rightClick.Direction),
                 new PredictMovementEvent(rightClick, character.Coordinate));
             var characterState = character.FootMagic != null ? CharacterMoveState.Move(character.FootMagic, rightClick) :

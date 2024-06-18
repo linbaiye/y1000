@@ -16,6 +16,12 @@ public partial class UsedKungFuLabel : RichTextLabel
         ProcessMode = ProcessModeEnum.Disabled;
     }
 
+    public void Reset()
+    {
+        _kungFuName = "";
+        Text = "";
+    }
+
     public bool BlinkIfMatches(string text)
     {
         if (_kungFuName.Equals(text))

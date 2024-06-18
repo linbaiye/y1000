@@ -2,7 +2,6 @@ using System;
 using Godot;
 using NLog;
 using y1000.Source.Animation;
-using y1000.Source.Audio;
 using y1000.Source.Creature;
 using y1000.Source.Item;
 using y1000.Source.Map;
@@ -35,8 +34,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	private PlayerArmorAnimation? _clothingAnimation;
 	
 	private WeaponEffectAnimation? _effectAnimation;
-	
-	public event EventHandler<PlayerRangedAttackEventArgs>? OnPlayerShoot;
 
 	private KungFuTip? _kungFuTip;
 
@@ -81,23 +78,23 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public Trouser? Trouser { get; private set; }
 	
 	public Clothing? Clothing { get; private set; }
-	
-	public void ChangeWeapon(PlayerWeapon? weapon)
+
+	private void ChangeWeapon(PlayerWeapon? weapon)
 	{
 		_handAnimation = weapon != null ? PlayerWeaponAnimation.LoadFor(weapon) : null;
 		//_effectAnimation = weapon != null ? WeaponEffectAnimation.LoadFor(weapon) : null;
 		Weapon = weapon;
 		GetNode<Sprite2D>("Hand").Visible = weapon != null;
 	}
-	
-	public void ChangeChest(PlayerChest? chest)
+
+	private void ChangeChest(PlayerChest? chest)
 	{
 		_chestAnimation = chest != null ? PlayerArmorAnimation.Create(chest) : null;
 		Chest = chest;
 		GetNode<Sprite2D>("Chest").Visible = chest != null;
 	}
 
-	public void ChangeHat(PlayerHat? hat)
+	private void ChangeHat(PlayerHat? hat)
 	{
 		_hatAnimation = hat != null ? PlayerArmorAnimation.Create(hat) : null;
 		Hat = hat;
@@ -105,35 +102,35 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		LOGGER.Debug("Set hat visible {0}.", hat != null);
 	}
 
-	public void ChangeWrist(Wrist? wrist)
+	private void ChangeWrist(Wrist? wrist)
 	{
 		_wristAnimation = wrist != null ? PlayerArmorAnimation.Create(wrist) : null;
 		Wrist = wrist;
 		GetNode<Sprite2D>("Wrist").Visible = wrist != null;
 	}
-	
-	public void ChangeHair(PlayerHair? hair)
+
+	private void ChangeHair(PlayerHair? hair)
 	{
 		_hairAnimation = hair != null ? PlayerArmorAnimation.Create(hair) : null;
 		Hair = hair;
 		GetNode<Sprite2D>("Hair").Visible = hair != null;
 	}
-	
-	public void ChangeBoot(Boot? boot)
+
+	private void ChangeBoot(Boot? boot)
 	{
 		_bootAnimation = boot != null ? PlayerArmorAnimation.Create(boot) : null;
 		Boot = boot;
 		GetNode<Sprite2D>("Boot").Visible = boot != null;
 	}
-	
-	public void ChangeClothing(Clothing? clothing)
+
+	private void ChangeClothing(Clothing? clothing)
 	{
 		_clothingAnimation = clothing != null ? PlayerArmorAnimation.Create(clothing) : null;
 		Clothing = clothing;
 		GetNode<Sprite2D>("Clothing").Visible = clothing != null;
 	}
-	
-	public void ChangeTrouser(Trouser? trouser)
+
+	private void ChangeTrouser(Trouser? trouser)
 	{
 		_trouserAnimation = trouser != null ? PlayerArmorAnimation.Create(trouser) : null;
 		Trouser = trouser;
@@ -242,10 +239,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			_kungFuTip?.Display(message.Name);
 	}
 
-	public void EmitRangedAttackEvent(long id)
-	{
-		OnPlayerShoot?.Invoke(this, new PlayerRangedAttackEventArgs(id));
-	}
 
 	public void Visit(MoveMessage message)
 	{
