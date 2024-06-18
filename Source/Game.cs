@@ -83,13 +83,20 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
 		_uiController.InitEventMediator(_eventMediator);
-		GetNode<AudioStreamPlayer>("BgmPlayer").Finished += PlayBackgroundMusic;
 		PlayBackgroundMusic();
 	}
 
 	private void PlayBackgroundMusic()
 	{
-		GetNode<AudioStreamPlayer>("BgmPlayer").Play();
+		var path = "res://assets/bgm/1301.mp3";
+		if (FileAccess.FileExists(path))
+		{
+			var audioStreamPlayer = GetNode<AudioStreamPlayer>("BgmPlayer");
+			var streamWav = ResourceLoader.Load<AudioStreamMP3>(path);
+			audioStreamPlayer.Stream = streamWav;
+			audioStreamPlayer.Finished += PlayBackgroundMusic;
+			audioStreamPlayer.Play();
+		}
 	}
 
 	private void OnCharacterEvent(object? sender, EventArgs eventArgs)
