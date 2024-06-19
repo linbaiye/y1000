@@ -36,12 +36,10 @@ namespace y1000.Source.Character.State
             character.EmitMovedEvent();
             if (WrappedState.State == CreatureState.ENFIGHT_WALK)
             {
-                Logger.Debug("Done enfight walking.");
                 character.ChangeState(CharacterCooldownState.Cooldown());
             }
             else
             {
-                Logger.Debug("Done {0} walking.", WrappedState.State);
                 character.ChangeState(CharacterIdleState.Idle());
             }
             if (_current == null && Godot.Input.IsMouseButtonPressed(MouseButton.Right))

@@ -16,11 +16,11 @@ public class AttackPrediction : AbstractPrediction
 
     public override bool Predicted(IPredictableResponse response)
     {
-        var ret = response is CharacterAttackEventResponse { Accepted: true };
-        if (ret)
+        if (response is CharacterAttackEventResponse attackEventResponse)
         {
-            _character.AttackConfirmed();
+            _character.HandleAttackResponse(attackEventResponse.BackToState);
+            return true;
         }
-        return ret;
+        return false;
     }
 }

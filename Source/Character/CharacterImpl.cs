@@ -47,12 +47,6 @@ namespace y1000.Source.Character
 
 		public void ChangeState(ICharacterState state)
 		{
-			if (_state is not EmptyState)
-			{
-			LOGGER.Debug("Change to state {0} {1} {2}.", state, state.WrappedState, state.WrappedState.State);
-			LOGGER.Debug("Current state {0} {1} {2}.", _state, _state.WrappedState, _state.WrappedState.State);
-			LOGGER.Debug("-------------------");
-			}
 			WrappedPlayer().ChangeState(state.WrappedState);
 			_state = state;
 		}
@@ -151,7 +145,6 @@ namespace y1000.Source.Character
 
         private void OnPlayerAnimationFinished(object? sender, CreatureAnimationDoneEventArgs args)
         {
-	        LOGGER.Debug("Animation done at {0}", _state);
 	        _state.OnWrappedPlayerAnimationFinished(this);
         }
 
@@ -164,13 +157,11 @@ namespace y1000.Source.Character
 
         public void Visit(RewindMessage rewindMessage)
         {
-	        LOGGER.Debug("Rewind {0}.", rewindMessage);
 	        SetPositionAndState(rewindMessage.Coordinate, rewindMessage.Direction, Rewind(rewindMessage.State));
         }
 
         public void Visit(SetPositionMessage setPositionMessage)
         {
-	        LOGGER.Debug("Setposion {0}.", setPositionMessage);
 	        SetPositionAndState(setPositionMessage.Coordinate, setPositionMessage.Direction, Rewind(setPositionMessage.State));
         }
 
@@ -182,7 +173,6 @@ namespace y1000.Source.Character
 
         public void Visit(PlayerCooldownMessage message)
         {
-	        LOGGER.Debug("Received cooldown.");
 	        ChangeState(CharacterCooldownState.Cooldown());
         }
 
@@ -251,10 +241,17 @@ namespace y1000.Source.Character
 	        ChangeState(characterAttackState);
         }
 
-        public void AttackConfirmed()
+        public void HandleAttackResponse(CreatureState? backToState)
         {
-	        FootMagic = null;
-	        WhenCharacterUpdated?.Invoke(this, KungFuChangedEvent.Instance);
+	        if (backToState == null)
+	        {
+		        FootMagic = null;
+		        WhenCharacterUpdated?.Invoke(this, KungFuChangedEvent.Instance);
+	        }
+	        else
+	        {
+		        ChangeState(ICharacterState.Create(backToState.Value));
+	        }
         }
 
         private void HandleKeyInput(Key key)
@@ -458,7 +455,6 @@ namespace y1000.Source.Character
 		        default:
 			        throw new ArgumentOutOfRangeException();
 	        }
-	        LOGGER.Debug("Current prot {0}, foot {1}, breath {2}.", ProtectionKungFu, FootMagic?.Name, BreathKungFu?.Name );
 	        WhenCharacterUpdated?.Invoke(this ,KungFuChangedEvent.Instance);
         }
 
