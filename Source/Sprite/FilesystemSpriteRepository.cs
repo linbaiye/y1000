@@ -12,7 +12,7 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository
 
     private static readonly ILogger LOG = LogManager.GetCurrentClassLogger();
     private static readonly string DIR_PATH = "../sprite/";
- //   private static readonly string DIR_PATH = "D:/work/sprite/";
+  //  private static readonly string DIR_PATH = "D:/work/sprite/";
     private const bool CacheEnabled = true;
     private static readonly IDictionary<string, AtzSprite> Cache = new Dictionary<string, AtzSprite>();
     private FilesystemSpriteRepository()
