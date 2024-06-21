@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Item;
 using y1000.Source.Player;
@@ -40,6 +41,11 @@ public class EntityManager
             return t;
         }
         return _entities.GetValueOrDefault(id);
+    }
+
+    public T? Find<T>(string name)
+    {
+        return (T?)_entities.Values.FirstOrDefault(c => c.EntityName.Equals(name) && c is T);
     }
     
     public T? Get<T>(long id)

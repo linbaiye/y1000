@@ -136,11 +136,30 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	private MapLayer MapLayer => GetNode<MapLayer>("MapLayer");
 
 
+	private void TestShoot()
+	{
+		if (_character == null)
+		{
+			return;
+		}
+		var monster = _entityManager.Find<Monster>("赤风");
+		if (monster != null)
+		{
+			//AddChild(Projectile.LoadFor(monster, _character));
+		}
+	}
+
 	
 	private void HandleInput(InputEvent @event)
 	{
 		if (_character == null)
 		{
+			return;
+		}
+
+		if (@event is InputEventKey eventKey && eventKey.Pressed)
+		{
+			TestShoot();
 			return;
 		}
 
@@ -302,10 +321,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		AddChild(groundedItem);
 	}
 
-	public void Visit(PlayerProjectileMessage message)
+	public void Visit(ProjectileMessage message)
 	{
-		var player = _entityManager.Get<IPlayer>(message.PlayerId);
-		if (player == null)
+		var shooter = _entityManager.Get<ICreature>(message.ShooterId);
+		if (shooter == null)
 		{
 			return;
 		}
@@ -314,7 +333,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			return;
 		}
-		AddChild(Projectile.Arrow(player, creature));
+		AddChild(Projectile.LoadFor(shooter, creature, message.SpriteId));
 	}
 
 

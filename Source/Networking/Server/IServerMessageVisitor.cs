@@ -147,7 +147,7 @@ public interface IServerMessageVisitor
         Visit((IEntityMessage)message);
     }
 
-    void Visit(PlayerProjectileMessage message)
+    void Visit(ProjectileMessage message)
     {
         
     }

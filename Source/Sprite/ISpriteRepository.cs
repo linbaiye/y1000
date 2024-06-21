@@ -10,4 +10,5 @@ public interface ISpriteRepository
     AtzSprite LoadByPath(string path, Vector2? offset = null);
 
     AtzSprite LoadByName(string name) => LoadByNameAndOffset(name, DEFAULT_VECTOR);
+
 }

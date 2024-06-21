@@ -36,4 +36,5 @@ public sealed class ArrowAnimation
     {
         return new (AtzSprite.LoadEffect("Arrow"));
     }
+    
 }
