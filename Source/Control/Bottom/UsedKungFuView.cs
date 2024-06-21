@@ -35,7 +35,7 @@ public partial class UsedKungFuView : VBoxContainer
     }
     
 
-    public void DisplayUsedKungFu(CharacterImpl character)
+    public void DisplayUsedKungFus(CharacterImpl character)
     {
         UsedKungFuLabel[] list = {_label1, _label2, _label3, _label4};
         foreach (var label in list)

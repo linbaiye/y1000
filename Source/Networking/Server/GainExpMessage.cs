@@ -4,11 +4,14 @@ namespace y1000.Source.Networking.Server;
 
 public class GainExpMessage :ICharacterMessage
 {
-    public GainExpMessage(string name, int level)
+    public GainExpMessage(string name, int level, bool isKungFu)
     {
         Name = name;
         Level = level;
+        IsKungFu = isKungFu;
     }
+    
+    public bool IsKungFu { get; }
 
 
     public string Name { get; }

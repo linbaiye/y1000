@@ -120,7 +120,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.Sound => new CreatureSoundMessage(packet.Sound.Id, packet.Sound.Sound),
             Packet.TypedPacketOneofCase.Die => new CreatureDieMessage(packet.Die.Id, packet.Die.Sound),
             Packet.TypedPacketOneofCase.PlayerRevive => new PlayerReviveMessage(packet.PlayerRevive.Id),
-            Packet.TypedPacketOneofCase.GainExp => new GainExpMessage(packet.GainExp.Name, packet.GainExp.Level),
+            Packet.TypedPacketOneofCase.GainExp => new GainExpMessage(packet.GainExp.Name, packet.GainExp.Level, packet.GainExp.KungFu),
             Packet.TypedPacketOneofCase.PlayerProjectile => PlayerProjectileMessage.FromPacket(packet.PlayerProjectile),
             _ => throw new NotSupportedException()
         };

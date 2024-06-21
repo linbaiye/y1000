@@ -24,6 +24,10 @@ public partial class BottomControl : Godot.Control
 	private TextureProgressBar? _innerPowerBar;
 	
 	private TextureProgressBar? _outerPowerBar;
+	
+	private TextureProgressBar? _kungFuExpUpBar;
+	
+	private TextureProgressBar? _kungFuExpDownBar;
 
 	public override void _Ready()
 	{
@@ -34,6 +38,8 @@ public partial class BottomControl : Godot.Control
 		_powerBar = GetNode<TextureProgressBar>("Container/PowerBar");
 		_innerPowerBar = GetNode<TextureProgressBar>("Container/InnerPowerBar");
 		_outerPowerBar = GetNode<TextureProgressBar>("Container/OuterPowerBar");
+		_kungFuExpUpBar = GetNode<TextureProgressBar>("Container/ExpUpBar");
+		_kungFuExpDownBar = GetNode<TextureProgressBar>("Container/ExpDownBar");
 	}
 
 	private void UpdateCoordinate(Vector2I coordinate)
@@ -44,6 +50,7 @@ public partial class BottomControl : Godot.Control
 			label.Text = coordinate.X + "." + coordinate.Y;
 		}
 	}
+
 
 	public void DisplayMessage(TextEvent @event)
 	{
@@ -69,12 +76,31 @@ public partial class BottomControl : Godot.Control
 				break;
 			case EquipmentChangedEvent changedEvent : _avatar?.OnCharacterEquipmentChanged(character, changedEvent.EquipmentType);
 				break;
-			case KungFuChangedEvent : _kungFuView?.DisplayUsedKungFu(character);
+			case KungFuChangedEvent : OnKungFuChanged(character);
 				break;
 			case PlayerAttributeEvent: BindAttributeBars(character);
 				break;
-			case GainExpEventArgs gainExp: _kungFuView?.BlinkGainExpKungFu(gainExp.Name);
+			case GainExpEventArgs gainExp: OnGainExp(character, gainExp);
 				break;
+		}
+	}
+
+	private void OnKungFuChanged(CharacterImpl character)
+	{
+		_kungFuView?.DisplayUsedKungFus(character);
+		BindAttackKungFuExpBars(character);
+	}
+
+	private void OnGainExp(CharacterImpl character, GainExpEventArgs gainExp)
+	{
+		if (gainExp.IsKungFu)
+		{
+			BindAttackKungFuExpBars(character);
+			_kungFuView?.BlinkGainExpKungFu(gainExp.Name); 
+		}
+		else
+		{
+			_avatar?.BlinkText(gainExp.Name);
 		}
 	}
 
@@ -83,12 +109,13 @@ public partial class BottomControl : Godot.Control
 		character.WhenCharacterUpdated += WhenCharacterUpdated;
 		_avatar?.BindCharacter(character);
 		UpdateCoordinate(character.Coordinate);
-		_kungFuView?.DisplayUsedKungFu(character);
+		_kungFuView?.DisplayUsedKungFus(character);
 		BindAttributeBars(character);
+		BindAttackKungFuExpBars(character);
 	}
 
 
-	private void BindBar(TextureProgressBar? bar, ValueBar valueBar)
+	private void BindAttributeBar(TextureProgressBar? bar, ValueBar valueBar)
 	{
 		if (bar == null)
 		{
@@ -102,10 +129,20 @@ public partial class BottomControl : Godot.Control
 
 	private void BindAttributeBars(CharacterImpl character)
 	{
-		BindBar(_lifeBar, character.HealthBar);
-		BindBar(_powerBar, character.PowerBar);
-		BindBar(_innerPowerBar, character.InnerPowerBar);
-		BindBar(_outerPowerBar, character.OuterPowerBar);
+		BindAttributeBar(_lifeBar, character.HealthBar);
+		BindAttributeBar(_powerBar, character.PowerBar);
+		BindAttributeBar(_innerPowerBar, character.InnerPowerBar);
+		BindAttributeBar(_outerPowerBar, character.OuterPowerBar);
+	}
+
+	private void BindAttackKungFuExpBars(CharacterImpl character)
+	{
+		var up = character.AttackKungFu.Level % 100;
+		if (_kungFuExpUpBar != null)
+			_kungFuExpUpBar.Value = up;
+		var down = character.AttackKungFu.Level / 100;
+		if (_kungFuExpDownBar != null)
+			_kungFuExpDownBar.Value = down;
 	}
 
 	public Button InventoryButton => GetNode<Button>("Container/InventoryButton");

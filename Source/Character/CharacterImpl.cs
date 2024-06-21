@@ -364,8 +364,9 @@ namespace y1000.Source.Character
 
         public void Visit(GainExpMessage message)
         {
-	        KungFuBook.GainExp(message.Name, message.Level);
-	        WhenCharacterUpdated?.Invoke(this, new GainExpEventArgs(message.Name));
+	        if (message.IsKungFu)
+		        KungFuBook.GainExp(message.Name, message.Level);
+	        WhenCharacterUpdated?.Invoke(this, new GainExpEventArgs(message.Name, message.IsKungFu));
         }
 
 
@@ -407,12 +408,12 @@ namespace y1000.Source.Character
 
         private void ToggleBreathKungFu(PlayerToggleKungFuMessage message)
         {
-	        BreathKungFu = message.Level > 0 ? new BreathKungFu(message.Name, message.Level) : null;
+	        BreathKungFu = message.Level > 0 ? KungFuBook.FindKungFu<BreathKungFu>(message.Name) : null;
         }
 
         private void ToggleFootKungFu(PlayerToggleKungFuMessage message)
         {
-	        FootMagic = message.Level > 0? new Bufa(message.Level, message.Name) : null;
+	        FootMagic = message.Level > 0? KungFuBook.FindKungFu<IFootKungFu>(message.Name) : null;
         }
         
         public void Visit(PlayerToggleKungFuMessage message)
@@ -433,24 +434,25 @@ namespace y1000.Source.Character
 			        ToggleBreathKungFu(message);
 			        break;
 		        case KungFuType.AXE:
-			        AttackKungFu = new AxeKungFu(message.Level, message.Name);
+			        AttackKungFu = KungFuBook.FindKungFu<AxeKungFu>(message.Name);
 			        break;
 		        case KungFuType.BLADE:
-			        AttackKungFu = new BladeKungFu(message.Level, message.Name);
+			        AttackKungFu = KungFuBook.FindKungFu<BladeKungFu>(message.Name);
 			        break;
 		        case KungFuType.SWORD:
-			        AttackKungFu = new SwordKungFu(message.Level, message.Name);
+			        AttackKungFu = KungFuBook.FindKungFu<SwordKungFu>(message.Name);
 			        break;
 		        case KungFuType.SPEAR:
-			        AttackKungFu = new SpearKungFu(message.Level, message.Name);
+			        AttackKungFu = KungFuBook.FindKungFu<SpearKungFu>(message.Name);
 			        break;
 		        case KungFuType.BOW:
-			        AttackKungFu = new BowKungFu(message.Level, message.Name);
+			        AttackKungFu = KungFuBook.FindKungFu<BowKungFu>(message.Name);
 			        break;
 		        case KungFuType.QUANFA:
-			        AttackKungFu = new QuanFa(message.Level, message.Name);
+			        AttackKungFu = KungFuBook.FindKungFu<QuanFa>(message.Name);
 			        break;
 		        case KungFuType.THROW:
+			        AttackKungFu = KungFuBook.FindKungFu<ThrowKungFu>(message.Name);
 			        break;
 		        default:
 			        throw new ArgumentOutOfRangeException();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://7ghuvlfmi4pd"]
+[gd_scene load_steps=15 format=3 uid="uid://7ghuvlfmi4pd"]
 
 [ext_resource type="Script" path="res://Source/Control/RightSide/RightControl.cs" id="1_j2rwp"]
 [ext_resource type="Texture2D" uid="uid://b50oaa3iiic8f" path="res://assets/ui/inventory.png" id="1_ka7tb"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bjyvvn2iffhwr" path="res://assets/ui/unnamed_focus.png" id="9_x0r7q"]
 [ext_resource type="Texture2D" uid="uid://dayrbfw53butg" path="res://assets/ui/basic_focus.png" id="10_6lo56"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Book/BookPage.cs" id="10_wleme"]
+[ext_resource type="Texture2D" uid="uid://cfa4a1ocdta6f" path="res://assets/ui/basic.png" id="11_cxd45"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3r3ul"]
 
@@ -345,6 +346,7 @@ offset_left = 60.0
 offset_top = 41.0
 offset_right = 102.0
 offset_bottom = 73.0
+texture_normal = ExtResource("11_cxd45")
 texture_pressed = ExtResource("10_6lo56")
 texture_focused = ExtResource("10_6lo56")
 script = ExtResource("10_wleme")

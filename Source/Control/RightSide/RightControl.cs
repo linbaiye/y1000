@@ -25,7 +25,7 @@ public partial class RightControl : Godot.Control
         }
         switch (args)
         {
-            case GainExpEventArgs: _kungFuBookView?.Refresh();
+            case GainExpEventArgs expEventArgs: if (expEventArgs.IsKungFu) _kungFuBookView?.RefreshPage();
                 break;
         }
     }

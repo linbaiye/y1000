@@ -48,7 +48,6 @@ public class PlayerMoveState : AbstractCreatureMoveState<PlayerImpl>, IPlayerSta
         Move(player, delta);
         if (ElapsedMillis >= TotalMillis)
         {
-            LOGGER.Debug("Notifying move done");
             player.NotifyAnimationFinished(new CreatureAnimationDoneEventArgs(this));
         }
     }

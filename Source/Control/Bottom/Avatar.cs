@@ -22,6 +22,7 @@ public partial class Avatar : NinePatchRect
 	private AvatarPart _clothing;
 	private AvatarPart _trouser;
 	private Label _equipmentText;
+	private BlinkingText? _blinkingText;
 	private static readonly AvatarPart MAKE_COMPILER_HAPPY = new();
 
 	private Action<EquipmentType>? _doubleClickHandler;
@@ -55,6 +56,7 @@ public partial class Avatar : NinePatchRect
 		_trouser = GetNode<AvatarPart>("Trouser");
 		_equipmentText = GetNode<Label>("EquipmentText");
 		_equipmentText.Visible = false;
+		_blinkingText = GetNode<BlinkingText>("BlinkingText");
 	}
 
 
@@ -79,6 +81,11 @@ public partial class Avatar : NinePatchRect
 		DrawClothing(character.Clothing);
 		DrawTrouser(character.Trouser);
 		_doubleClickHandler = character.OnAvatarDoubleClick;
+	}
+
+	public void BlinkText(string text)
+	{
+		_blinkingText?.Blink(text);
 	}
 
 	public void OnCharacterEquipmentChanged(CharacterImpl character, EquipmentType changedType)

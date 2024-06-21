@@ -70,7 +70,7 @@ public partial class KungFuBookView : AbstractInventoryView
         }
     }
 
-    private void RefreshPage()
+    public void RefreshPage()
     {
         ForeachSlot(slot=>slot.ClearTexture());
         if (_currentPage?.Number == 1)
@@ -89,12 +89,6 @@ public partial class KungFuBookView : AbstractInventoryView
         RefreshPage();
     }
 
-    public void Refresh()
-    {
-        _kungFuBook.ForeachBasic(SetSlotView);
-        _kungFuBook.ForeachUnnamed(SetSlotView);
-    }
-    
     
     public void ButtonClicked()
     {
