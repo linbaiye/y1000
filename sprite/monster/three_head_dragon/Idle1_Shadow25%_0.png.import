@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qidyjk4r1h1j"
-path="res://.godot/imported/000053.png-8163cd0c86fc4d7bd4510a2784728cae.ctex"
+uid="uid://bbyo3yq6jvt1g"
+path="res://.godot/imported/Idle1_Shadow25%_0.png-e9aaec05b066451a1b141a400bc55e57.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/y/7/000053.png"
-dest_files=["res://.godot/imported/000053.png-8163cd0c86fc4d7bd4510a2784728cae.ctex"]
+source_file="res://sprite/monster/three_head_dragon/Idle1_Shadow25%_0.png"
+dest_files=["res://.godot/imported/Idle1_Shadow25%_0.png-e9aaec05b066451a1b141a400bc55e57.ctex"]
 
 [params]
 
