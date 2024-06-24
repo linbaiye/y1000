@@ -9,24 +9,34 @@ public sealed class MonsterMoveState : AbstractCreatureMoveState<Monster>
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
-    private MonsterMoveState(int total, Direction towards, int elapsedMillis = 0) : base(total, towards, elapsedMillis)
+    private readonly int _speedRate;
+
+    private MonsterMoveState(int total, Direction towards, int elapsedMillis = 0, int speedRate = 1) : base(total, towards, elapsedMillis)
     {
+        _speedRate = speedRate;
     }
     
     protected override ILogger Logger => LOGGER;
 
     public override OffsetTexture BodyOffsetTexture(Monster creature)
     {
-        return creature.MonsterAnimation.OffsetTexture(CreatureState.WALK, creature.Direction, ElapsedMillis);
+        var elapsed = ElapsedMillis * _speedRate;
+        if (elapsed > TotalMillis)
+        {
+            elapsed = TotalMillis;
+        }
+        return creature.MonsterAnimation.OffsetTexture(CreatureState.WALK, creature.Direction, elapsed);
     }
 
     public override void Update(Monster c, int delta)
     {
         Move(c, delta);
     }
-
-    public static MonsterMoveState Move(MonsterAnimation animation, Direction towards, int elapsed = 0)
+    
+    public static MonsterMoveState Move(MonsterAnimation animation, Direction towards, int speed, int elapsed = 0)
     {
-        return new MonsterMoveState(animation.AnimationMillis(CreatureState.WALK), towards, elapsed);
+        var originSpeed= animation.AnimationMillis(CreatureState.WALK);
+        int rate = originSpeed / speed;
+        return new MonsterMoveState(speed, towards, elapsed, rate);
     }
 }

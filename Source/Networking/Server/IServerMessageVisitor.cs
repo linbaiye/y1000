@@ -8,7 +8,7 @@ public interface IServerMessageVisitor
 {
     void Visit(IEntityMessage message) {}
 
-    void Visit(MoveMessage moveMessage)
+    void Visit(PlayerMoveMessage moveMessage)
     {
         Visit((IEntityMessage)moveMessage);
     }
@@ -152,4 +152,8 @@ public interface IServerMessageVisitor
         
     }
 
+    void Visit(MonsterMoveMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
 }

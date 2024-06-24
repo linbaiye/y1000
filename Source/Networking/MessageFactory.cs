@@ -29,7 +29,7 @@ public class MessageFactory
     {
         return (PositionType)positionPacket.Type switch
         {
-            PositionType.MOVE => MoveMessage.FromPacket(positionPacket),
+            PositionType.MOVE => PlayerMoveMessage.FromPacket(positionPacket),
             PositionType.TURN => TurnMessage.FromPacket(positionPacket),
             PositionType.SET => SetPositionMessage.FromPacket(positionPacket),
             PositionType.RUN => RunMessage.FromPacket(positionPacket),
@@ -122,6 +122,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.PlayerRevive => new PlayerReviveMessage(packet.PlayerRevive.Id),
             Packet.TypedPacketOneofCase.GainExp => new GainExpMessage(packet.GainExp.Name, packet.GainExp.Level, packet.GainExp.KungFu),
             Packet.TypedPacketOneofCase.Projectile => ProjectileMessage.FromPacket(packet.Projectile),
+            Packet.TypedPacketOneofCase.MonsterMove => new MonsterMoveMessage(packet.MonsterMove.Id, (Direction)packet.MonsterMove.Direction, packet.MonsterMove.Speed),
             _ => throw new NotSupportedException()
         };
     }

@@ -22,6 +22,18 @@ public class EntityFactory
         _eventMediator = eventMediator;
     }
 
+
+    public OnGroundItem CreateOnGroundItem(ShowItemMessage message) 
+    {
+        var iconId = _itemDb.GetIconId(message.Name);
+        var texture2D = _iconReader.Get(iconId);
+        if (texture2D == null)
+        {
+            throw new NotImplementedException(message.Name + " does not have icon.");
+        }
+        return OnGroundItem.Create(message, texture2D, _eventMediator);
+    }
+
     public GroundedItem CreateGroundedItem(ShowItemMessage message)
     {
         var iconId = _itemDb.GetIconId(message.Name);

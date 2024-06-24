@@ -31,8 +31,7 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
 
     protected void Move(TC creature, int delta)
     {
-        var animationLengthMillis = TotalMillis;
-        if (ElapsedMillis >= animationLengthMillis)
+        if (ElapsedMillis >= TotalMillis)
         {
             return;
         }
@@ -47,15 +46,15 @@ public abstract class AbstractCreatureMoveState<TC> : AbstractCreatureState<TC> 
             _directionChanged = true;
         }
         ElapsedMillis += delta;
-        if (ElapsedMillis > animationLengthMillis)
+        if (ElapsedMillis > TotalMillis)
         {
-            creature.Position += _velocity * ((float)(ElapsedMillis - animationLengthMillis) / animationLengthMillis);
+            creature.Position += _velocity * ((float)(ElapsedMillis - TotalMillis) / TotalMillis);
         }
         else
         {
-            creature.Position += _velocity * ((float)delta / animationLengthMillis);
+            creature.Position += _velocity * ((float)delta / TotalMillis);
         }
-        if (ElapsedMillis >= animationLengthMillis)
+        if (ElapsedMillis >= TotalMillis)
         {
             creature.Position = creature.Position.Snapped(VectorUtil.TileSize);
         }

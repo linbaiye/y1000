@@ -157,11 +157,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			return;
 		}
 
-		if (@event is InputEventKey eventKey && eventKey.Pressed)
+		/*if (@event is InputEventKey eventKey && eventKey.Pressed)
 		{
 			TestShoot();
 			return;
-		}
+		}*/
 
 		var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
 		var predictableInput = _inputSampler.SampleInput(@event, mousePos);
@@ -315,9 +315,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(ShowItemMessage message)
 	{
-		var groundedItem = _entityFactory.CreateGroundedItem(message);
+		var groundedItem = _entityFactory.CreateOnGroundItem(message);
 		_entityManager.Add(groundedItem);
-		LOGGER.Debug("Add item {2} at position {0}, {1}.", groundedItem.OffsetBodyPosition, groundedItem.Coordinate, groundedItem.Id);
+		//LOGGER.Debug("Add item {2} at position {0}, {1}.", groundedItem.OffsetBodyPosition, groundedItem.Coordinate, groundedItem.Id);
 		AddChild(groundedItem);
 	}
 

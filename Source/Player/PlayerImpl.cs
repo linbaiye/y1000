@@ -240,7 +240,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	}
 
 
-	public void Visit(MoveMessage message)
+	public void Visit(PlayerMoveMessage message)
 	{
 		var playerState = IPlayerState.NonHurtState(message.State, message.Direction);
 		ChangeState(playerState);

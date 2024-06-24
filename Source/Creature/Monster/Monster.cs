@@ -38,7 +38,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 			case CreatureState.IDLE:
 				return MonsterStillState.Idle(animation, elapses);
 			case CreatureState.WALK:
-				return MonsterMoveState.Move(animation, direction, elapses);
+				return MonsterMoveState.Move(animation, direction, animation.AnimationMillis(CreatureState.WALK), elapses);
 			case CreatureState.HURT:
 				return MonsterStillState.Hurt(animation, elapses);
 			case CreatureState.ATTACK:
@@ -82,10 +82,9 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		_state.Update(this, (int)(delta * 1000));
 	}
 
-	public void Visit(MoveMessage moveMessage)
+	public void Visit(MonsterMoveMessage moveMessage)
 	{
-        //LOGGER.Debug("Monster {2} leaving coordinate {0} for {1}.", Coordinate, Coordinate.Move(moveMessage.Direction), moveMessage.Id);
-		ChangeState(MonsterMoveState.Move(MonsterAnimation, moveMessage.Direction));
+		ChangeState(MonsterMoveState.Move(MonsterAnimation, moveMessage.Direction, moveMessage.Speed));
 	}
 
 	public void Visit(HurtMessage hurtMessage)
