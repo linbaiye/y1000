@@ -111,13 +111,13 @@ namespace y1000.Source.Map
         {
             for (var y = start.Y; y <= end.Y; y++)
             {
-                if (y < 0 || y > Height)
+                if (y < 0 || y >= Height)
                 {
                     continue;
                 }
                 for (var x = start.X; x < end.X; x++)
                 {
-                    if (x < 0 || x > Width)
+                    if (x < 0 || x >= Width)
                     {
                         continue;
                     }

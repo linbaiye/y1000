@@ -1,11 +1,13 @@
 ﻿using Godot;
+using y1000.Source.Audio;
 using y1000.Source.Event;
 using y1000.Source.Networking;
+using y1000.Source.Networking.Server;
 using y1000.Source.Util;
 
 namespace y1000.Source.Entity;
 
-public partial class OnGroundItem : Node2D, IEntity
+public partial class OnGroundItem : Node2D, IEntity, IServerMessageVisitor
 {
 	private EventMediator? EventMediator { get; set; }
     
@@ -43,5 +45,16 @@ public partial class OnGroundItem : Node2D, IEntity
         item.Init(message.Id, name, message.Coordinate, texture2D);
         item.EventMediator = eventMediator;
         return item;
+    }
+
+    public void Visit(CreatureSoundMessage message)
+    {
+        GetNode<CreatureAudio>("Audio").PlaySound(message.Sound);
+    }
+
+
+    public void Handle(IEntityMessage message)
+    {
+        message.Accept(this);
     }
 }
