@@ -127,7 +127,6 @@ public partial class MapLayer : TileMap, IMap
 	{
 		TileGround();
 		CreateLayer(Object);
-		var end = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 	}
 
 
