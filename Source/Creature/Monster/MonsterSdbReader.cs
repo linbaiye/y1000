@@ -11,6 +11,7 @@ public class MonsterSdbReader : AbstractSdbReader
     {
         Read("res://assets/sdb/Monster.sdb");
     }
+    
 
     public string GetSpriteName(string monsterName)
     {

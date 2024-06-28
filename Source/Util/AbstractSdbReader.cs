@@ -25,6 +25,11 @@ public abstract class AbstractSdbReader
         return creator.Invoke(item[index]);
     }
 
+    public bool Contains(string name)
+    {
+        return _items.ContainsKey(name);
+    }
+
     protected string GetString(string name, string key)
     {
         return Parse(name, key, s => s);
