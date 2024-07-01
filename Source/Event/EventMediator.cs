@@ -12,13 +12,15 @@ public class EventMediator
 {
     private BottomControl? _bottomControl;
     
-    private RightControl? _rightControl;
-    
     private DropItemUI? _dropItemUi;
 
     private Action<IClientEvent>? _clientEventSender;
 
     private Action<DragInventorySlotEvent>? _dragItemHandler;
+
+    private UIController? _uiController;
+    
+    
     public void SetComponent(Action<IClientEvent> sender)
     {
         _clientEventSender = sender;
@@ -34,19 +36,14 @@ public class EventMediator
         _bottomControl = control;
     }
 
-    public void RegisterEventHandler()
-    {
-        
-    }
-
     public void SetComponent(DropItemUI dropItemUi)
     {
         _dropItemUi = dropItemUi;
     }
 
-    public void SetComponent(RightControl rightControl)
+    public void SetComponent(UIController uiController)
     {
-        _rightControl = rightControl;
+        _uiController = uiController;
     }
 
 
@@ -74,6 +71,10 @@ public class EventMediator
         else if (e is DragInventorySlotEvent dragInventorySlotEvent)
         {
             _dragItemHandler?.Invoke(dragInventorySlotEvent);
+        }
+        else if (e is ClickInventorySlotEvent slotEvent)
+        {
+            _uiController?.OnClickInventorySlotEvent(slotEvent);
         }
     }
 }

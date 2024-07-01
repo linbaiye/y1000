@@ -89,6 +89,7 @@ public partial class InventoryView : AbstractInventoryView
         }
         if (picked.Number == _currentFocused.Number)
         {
+            _inventory.OnSingleClick(picked.Number);
             return;
         }
         _inventory.OnUISwap(picked.Number, _currentFocused.Number);

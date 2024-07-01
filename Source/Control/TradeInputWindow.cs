@@ -38,11 +38,21 @@ public partial class TradeInputWindow : NinePatchRect
 
 	public void Open(string name, Action<bool> callback)
 	{
+		Open(name, "", callback);
+	}
+
+	private void Open(string name, string number, Action<bool> callback)
+	{
 		_callback = callback;
 		_itemName.Text = name;
-		_input.Text = "";
+		_input.Text = number;
 		Visible = true;
 		_input.GrabFocus();
+	}
+	
+	public void Open(string name, int number, Action<bool> callback)
+	{
+		Open(name, number.ToString(), callback);
 	}
 
 	private void OnCancelPressed()

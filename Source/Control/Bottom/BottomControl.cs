@@ -145,6 +145,16 @@ public partial class BottomControl : Godot.Control
 			_kungFuExpDownBar.Value = down;
 	}
 
+	public bool OnInventorySlotClick(ClickInventorySlotEvent slotEvent)
+	{
+		var item = slotEvent.Inventory.Find(slotEvent.Slot);
+		if (item != null)
+		{
+			_textArea?.Display(new TextEvent(item.ItemName));
+		}
+		return true;
+	}
+
 	public Button InventoryButton => GetNode<Button>("Container/InventoryButton");
 	public Button KungFuButton => GetNode<Button>("Container/KungFuButton");
 

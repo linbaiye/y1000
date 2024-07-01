@@ -3,6 +3,8 @@ using System.Text.RegularExpressions;
 using Godot;
 using NLog;
 using y1000.Source.Creature.Monster;
+using y1000.Source.Event;
+using y1000.Source.Item;
 using y1000.Source.Sprite;
 using y1000.Source.Util;
 
@@ -25,6 +27,8 @@ public partial class MerchantTrading : AbstractMerchantControl
     private TextureButton _confirmButton;
     
     private Label _total;
+
+    private EventMediator? _eventMediator;
     
     private class Item
     {
@@ -42,6 +46,7 @@ public partial class MerchantTrading : AbstractMerchantControl
             return new Item(int.Parse(tokens[1]), tokens[0]);
         }
     }
+
 
     private void AddToTotal()
     {
@@ -108,9 +113,10 @@ public partial class MerchantTrading : AbstractMerchantControl
         }
     }
 
-    public void Initialize(TradeInputWindow tradeInputWindow)
+    public void Initialize(TradeInputWindow tradeInputWindow, EventMediator eventMediator)
     {
         _tradeInputWindow = tradeInputWindow;
+        _eventMediator = eventMediator;
     }
 
     public void Buy(Merchant merchant, ISpriteRepository spriteRepository)
@@ -133,5 +139,32 @@ public partial class MerchantTrading : AbstractMerchantControl
         _selling = true;
         _total.Text = "0";
         Open();
+    }
+
+    public bool OnInventorySlotClick(ClickInventorySlotEvent slotEvent)
+    {
+        if (!Visible || !_selling || Merchant == null)
+        {
+            return false;
+        }
+        var characterItem = slotEvent.Inventory.Find(slotEvent.Slot);
+        if (characterItem == null)
+        {
+            return false;
+        }
+        if (!Merchant.BuyItems.Contains(characterItem.ItemName))
+        {
+            _eventMediator?.NotifyTextArea("不买此种物品。");
+            return true;
+        }
+        if (characterItem is CharacterStackItem stackItem)
+        {
+            _tradeInputWindow?.Open(stackItem.ItemName, stackItem.Number, OnWindowAction);
+        }
+        else
+        {
+            _tradeInputWindow?.Open(characterItem.ItemName, OnWindowAction);
+        }
+        return true;
     }
 }

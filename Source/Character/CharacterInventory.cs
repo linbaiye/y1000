@@ -45,16 +45,6 @@ public class CharacterInventory
         return _items.TryGetValue(slot, out var item) ? item : null;
     }
 
-    public void PutOrRemove(int slot, ICharacterItem? item)
-    {
-        _items.Remove(slot);
-        if (item != null)
-        {
-            _items.TryAdd(slot, item);
-        }
-        Notify();
-    }
-
     public void Update(int slot, ICharacterItem? item)
     {
         _items.Remove(slot);
@@ -103,6 +93,11 @@ public class CharacterInventory
     public void SetEventMediator(EventMediator eventMediator)
     {
         _eventMediator = eventMediator;
+    }
+
+    public void OnSingleClick(int slot)
+    {
+        _eventMediator?.NotifyUiEvent(new ClickInventorySlotEvent(slot, this));
     }
     
     public void Foreach(Action<int, ICharacterItem> consumer)

@@ -14,7 +14,7 @@ public abstract partial class AbstractMerchantControl : NinePatchRect
 
     private Button _close;
     
-    public Merchant? Merchant { get; set; }
+    public Merchant? Merchant { get; private set; }
 
     public override void _Ready()
     {

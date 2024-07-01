@@ -1,5 +1,6 @@
 ﻿using NLog;
 using y1000.Source.Creature.Monster;
+using y1000.Source.Event;
 using y1000.Source.Sprite;
 
 namespace y1000.Source.Control.Dialog;
@@ -20,10 +21,10 @@ public partial class DialogControl : Godot.Control
         _merchantTrading = GetNode<MerchantTrading>("MerchantTrading");
     }
 
-    public void Initialize(ISpriteRepository spriteRepository, TradeInputWindow tradeInputWindow)
+    public void Initialize(ISpriteRepository spriteRepository, TradeInputWindow tradeInputWindow, EventMediator eventMediator)
     {
         _spriteRepository = spriteRepository;
-        _merchantTrading?.Initialize(tradeInputWindow);
+        _merchantTrading?.Initialize(tradeInputWindow, eventMediator);
     }
 
     private void OnTradeClicked(bool sell)
@@ -46,6 +47,11 @@ public partial class DialogControl : Godot.Control
     public void OnMerchantClicked(Merchant merchant)
     {
         _merchantControl?.Popup(merchant, _spriteRepository);
+    }
+
+    public bool OnInventorySlotClick(ClickInventorySlotEvent slotEvent)
+    {
+        return _merchantTrading?.OnInventorySlotClick(slotEvent) ?? false;
     }
     
 }

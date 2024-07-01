@@ -1,4 +1,6 @@
-﻿using Godot;
+﻿using System;
+using System.Collections.Generic;
+using Godot;
 using NLog;
 using y1000.Source.Character;
 using y1000.Source.Control.Bottom;
@@ -24,7 +26,7 @@ public partial class UIController : CanvasLayer
     
     private TradeInputWindow _tradeInputWindow;
 
-    private ISpriteRepository _spriteRepository = EmptySpriteRepository.Instance;
+    private readonly List<Func<ClickInventorySlotEvent, bool>> _inventoryClickActions = new();
 
     public override void _Ready()
     {
@@ -33,17 +35,29 @@ public partial class UIController : CanvasLayer
         _dropItemUi = GetNode<DropItemUI>("DropItemUI");
         _dialogControl = GetNode<DialogControl>("DialogUI");
         _tradeInputWindow = GetNode<TradeInputWindow>("InputWindow");
+        _inventoryClickActions.Add(_dialogControl.OnInventorySlotClick);
+        _inventoryClickActions.Add(_bottomControl.OnInventorySlotClick);
         BindButtons();
     }
 
     public void Initialize(EventMediator eventMediator, ISpriteRepository spriteRepository)
     {
+        eventMediator.SetComponent(this);
         eventMediator.SetComponent(_bottomControl);
-        eventMediator.SetComponent(_rightControl);
         _tradeInputWindow.BindEventMediator(eventMediator);
         _dropItemUi.BindEventMediator(eventMediator);
-        _spriteRepository = spriteRepository;
-        _dialogControl?.Initialize(spriteRepository, _tradeInputWindow);
+        _dialogControl?.Initialize(spriteRepository, _tradeInputWindow, eventMediator);
+    }
+
+    public void OnClickInventorySlotEvent(ClickInventorySlotEvent slotEvent)
+    {
+        foreach (var action in _inventoryClickActions)
+        {
+            if (action.Invoke(slotEvent))
+            {
+                break;
+            }
+        }
     }
 
     public void DisplayMessage(string message)
