@@ -66,11 +66,11 @@ public class PlayerBodyAnimation : AbstractPlayerBodyAnimation<PlayerBodyAnimati
     private static PlayerBodyAnimation Config(string prefix)
     {
         var playerAnimation = new PlayerBodyAnimation();
-        AtzSprite N00 = SpriteRepository.LoadByNameAndOffset(prefix + "00", DEFAULT_OFFSET);
-        AtzSprite N01 = SpriteRepository.LoadByNameAndOffset(prefix + "01", DEFAULT_OFFSET);
-        AtzSprite N04 = SpriteRepository.LoadByNameAndOffset(prefix + "04", DEFAULT_OFFSET);
-        AtzSprite N02 = SpriteRepository.LoadByNameAndOffset(prefix + "02", DEFAULT_OFFSET);
-        AtzSprite N03 = SpriteRepository.LoadByNameAndOffset(prefix + "03", DEFAULT_OFFSET);
+        AtzSprite N00 = SpriteRepository.LoadByNumberAndOffset(prefix + "00", DEFAULT_OFFSET);
+        AtzSprite N01 = SpriteRepository.LoadByNumberAndOffset(prefix + "01", DEFAULT_OFFSET);
+        AtzSprite N04 = SpriteRepository.LoadByNumberAndOffset(prefix + "04", DEFAULT_OFFSET);
+        AtzSprite N02 = SpriteRepository.LoadByNumberAndOffset(prefix + "02", DEFAULT_OFFSET);
+        AtzSprite N03 = SpriteRepository.LoadByNumberAndOffset(prefix + "03", DEFAULT_OFFSET);
         return Config(playerAnimation, N00, N01, N02, N03, N04);
     }
 

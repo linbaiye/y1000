@@ -16,4 +16,6 @@ public class MonsterEmptyState : ICreatureState<Monster>
     {
         throw new System.NotImplementedException();
     }
+
+    public CreatureState State => CreatureState.AXE;
 }

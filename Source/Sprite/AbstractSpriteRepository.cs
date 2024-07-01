@@ -17,6 +17,7 @@ public abstract class AbstractSpriteRepository : ISpriteRepository
             new Vector2(0, 0);
     }
     
-    public abstract AtzSprite LoadByNameAndOffset(string name, Vector2? offset = null);
+    public abstract AtzSprite LoadByNumberAndOffset(string name, Vector2? offset = null);
     public abstract AtzSprite LoadByPath(string path, Vector2? offset = null);
+    public abstract AtzSprite LoadByNpcName(string name);
 }

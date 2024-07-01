@@ -32,4 +32,5 @@ public abstract class AbstractCreatureState<TC> : ICreatureState<TC> where TC : 
     public abstract OffsetTexture BodyOffsetTexture(TC creature);
     
     public abstract void Update(TC c, int delta);
+    public abstract CreatureState State { get; }
 }

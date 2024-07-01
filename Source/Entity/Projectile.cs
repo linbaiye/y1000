@@ -76,7 +76,7 @@ public partial class Projectile : Sprite2D
     {
         PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/Arrow.tscn");
         var arrow = scene.Instantiate<Projectile>();
-        var atzSprite = FilesystemSpriteRepository.Instance.LoadByNameAndOffset("y" + id);
+        var atzSprite = FilesystemSpriteRepository.Instance.LoadByNumberAndOffset("y" + id);
         var offsetTexture = atzSprite.Get(20);
         arrow.Texture = offsetTexture.Texture;
         arrow.Init(shooter, target);

@@ -22,7 +22,7 @@ public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimati
 
     private static WeaponEffectAnimation Load(string name, CreatureState state1, CreatureState? state2 = null)
     {
-        AtzSprite attack = FilesystemSpriteRepository.Instance.LoadByNameAndOffset(name, new Vector2(16, -12));
+        AtzSprite attack = FilesystemSpriteRepository.Instance.LoadByNumberAndOffset(name, new Vector2(16, -12));
         var playerAnimation = new WeaponEffectAnimation(state1, state2);
         playerAnimation.ConfigureState(state1, AtdStructure, attack);
         if (state2 != null)

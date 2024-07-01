@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using Godot;
+using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Item;
+using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Sprite;
 using y1000.Source.Util;
@@ -34,14 +38,55 @@ public class EntityFactory
         return OnGroundItem.Create(message, texture2D, _eventMediator);
     }
 
-    public GroundedItem CreateGroundedItem(ShowItemMessage message)
+
+    private Merchant CreateMerchant(NpcInterpolation interpolation, IMap map)
     {
-        var iconId = _itemDb.GetIconId(message.Name);
-        var texture2D = _iconReader.Get(iconId);
-        if (texture2D == null)
+        PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/Merchant.tscn");
+        var merchant = scene.Instantiate<Merchant>();
+        //ISet<string>[] items = LoadItems("lbn");
+        var fileAccess = FileAccess.Open("res://assets/sdb/npc/" + "lbn" + ".txt", FileAccess.ModeFlags.Read);
+        string? line;
+        List<string>[] items = {new List<string>(), new List<string>() };
+        int avNubmer = 0;
+        while ((line = fileAccess.GetLine()) != null)
         {
-            throw new NotImplementedException(message.Name + " does not have icon.");
+            if (string.IsNullOrEmpty(line))
+            {
+                break;
+            }
+            if (line.StartsWith("SELLITEM"))
+            {
+                var s = line.Split(":")[1];
+                items[0].Add(s); 
+            }
+            else if (line.StartsWith("BUYITEM"))
+            {
+                var s = line.Split(":")[1];
+                items[1].Add(s);
+            }
+            else if (line.StartsWith("SELLIMAGE"))
+            {
+                var s = line.Split(":")[1];
+                avNubmer = int.Parse(s);
+            }
         }
-        return GroundedItem.Build(message, texture2D, _eventMediator);
+        fileAccess.Dispose();
+        merchant.InitializeMerchant(interpolation, map, items[0], items[1], avNubmer);
+        return merchant;
+    }
+
+    private Monster CreateMonster(NpcInterpolation interpolation, IMap map)
+    {
+        PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/Monster.tscn");
+        var monster = scene.Instantiate<Monster>();
+        Monster.Initialize(monster, interpolation, map);
+        return monster;
+    }
+
+    public Monster CreateNpc(NpcInterpolation interpolation, IMap map)
+    {
+        return interpolation.NpcType == NpcType.MERCHANT
+            ? CreateMerchant(interpolation, map)
+            : CreateMonster(interpolation, map);
     }
 }

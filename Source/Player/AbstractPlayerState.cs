@@ -33,8 +33,6 @@ public abstract class AbstractPlayerState : AbstractCreatureState<PlayerImpl>, I
         ElapsedMillis = 0;
     }
 
-    public abstract CreatureState State { get; }
-
     
     public override OffsetTexture BodyOffsetTexture(PlayerImpl player)
     {

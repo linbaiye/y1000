@@ -21,7 +21,7 @@ public class PlayerMoveState : AbstractCreatureMoveState<PlayerImpl>, IPlayerSta
     
     protected override ILogger Logger => LOGGER;
 
-    public CreatureState State { get; }
+    public override CreatureState State { get; }
 
 
     private static PlayerMoveState Create(CreatureState state, Direction dir, int e = 0)

@@ -17,7 +17,7 @@ public sealed class MonsterStillState : AbstractMonsterState
         }
     }
     
-    protected override CreatureState State { get; }
+    public override CreatureState State { get; }
 
     private static MonsterStillState Create(IAnimation animation, CreatureState st, int e = 0)
     {

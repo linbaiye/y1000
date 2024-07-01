@@ -60,7 +60,7 @@ public interface IServerMessageVisitor
         
     }
     
-    void Visit(CreatureInterpolation creatureInterpolation) {}
+    void Visit(NpcInterpolation npcInterpolation) {}
 
     void Visit(CharacterAttackEventResponse response)
     {

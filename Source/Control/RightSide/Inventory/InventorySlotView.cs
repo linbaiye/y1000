@@ -25,10 +25,8 @@ public partial class InventorySlotView : Panel
 
 	public override void _ShortcutInput(InputEvent @event)
 	{
-		if (@event is InputEventKey eventKey && _mouseHovered)
+		if (@event is InputEventKey && _mouseHovered)
 		{
-			if (eventKey.IsPressed())
-				LOGGER.Debug("Key input {0}.", eventKey.Keycode);
 			AcceptEvent();
 		}
 	}

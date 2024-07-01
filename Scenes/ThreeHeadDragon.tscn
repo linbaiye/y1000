@@ -87,7 +87,6 @@ hframes = 4
 vframes = 4
 
 [node name="Label" type="Label" parent="."]
-anchors_preset = -1
 grow_horizontal = 2
 grow_vertical = 2
 text = "test"

@@ -65,6 +65,8 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		_state = newState;
 	}
 
+	public bool IsDead => _state.State == CreatureState.DIE;
+
 	public void AnimationDone(CreatureState state = CreatureState.FROZEN)
 	{
 		if (state == CreatureState.IDLE)
@@ -133,23 +135,18 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		message.Accept(this);
 	}
 
-	public static Monster Create(CreatureInterpolation creatureInterpolation, IMap map)
+	public static void Initialize(Monster monster, NpcInterpolation npcInterpolation, IMap map)
 	{
-		PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/Monster.tscn");
-		var monster = scene.Instantiate<Monster>();
-		var interpolation = creatureInterpolation.Interpolation;
-		var name = creatureInterpolation.Name;
+		var interpolation = npcInterpolation.Interpolation;
+		var name = npcInterpolation.Name;
 		var monsterAnimation = MonsterAnimationFactory.Instance.Load(name);
 		var state = CreateState(interpolation.State,
-				interpolation.ElapsedMillis, interpolation.Direction, monsterAnimation);
-		monster.Init(creatureInterpolation.Id, 
+			interpolation.ElapsedMillis, interpolation.Direction, monsterAnimation);
+		monster.Init(npcInterpolation.Id, 
 			interpolation.Direction, state, interpolation.Coordinate, map, name, monsterAnimation);
 		if (state is AbstractCreatureMoveState<Monster> moveState)
 		{
 			moveState.DriftPosition(monster);
 		}
-		return monster;
 	}
-
-
 }

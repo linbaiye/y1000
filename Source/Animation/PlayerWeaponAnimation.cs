@@ -35,9 +35,9 @@ public class PlayerWeaponAnimation: AbstractPlayerAnimation<PlayerWeaponAnimatio
 
     private static PlayerWeaponAnimation Load(string name, string attackName, CreatureState state1, CreatureState? state2 = null)
     {
-        AtzSprite nonattack = FilesystemSpriteRepository.Instance.LoadByNameAndOffset(name, new Vector2(16, -12));
+        AtzSprite nonattack = FilesystemSpriteRepository.Instance.LoadByNumberAndOffset(name, new Vector2(16, -12));
         //AtzSprite attack = AtzSprite.LoadOffsetWeaponSprites(attackName);
-        AtzSprite attack = FilesystemSpriteRepository.Instance.LoadByNameAndOffset(attackName, new Vector2(16, -12));
+        AtzSprite attack = FilesystemSpriteRepository.Instance.LoadByNumberAndOffset(attackName, new Vector2(16, -12));
         var playerAnimation = new PlayerWeaponAnimation(state1, state2);
         playerAnimation.ConfigureNoneAttack(nonattack)
                 .ConfigureState(state1, AtdStructure, attack);

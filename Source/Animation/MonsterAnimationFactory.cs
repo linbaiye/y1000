@@ -27,7 +27,7 @@ public class MonsterAnimationFactory
         var spriteName = "z" + (_monsterSdb.Contains(name)
             ? _monsterSdb.GetSpriteName(name)
             : _npcSdbReader.GetSpriteName(name));
-        var sprite = _spriteRepository.LoadByName(spriteName);
+        var sprite = _spriteRepository.LoadByNumber(spriteName);
         var atdStructure = _atdRepository.LoadByName(atdName);
         var animation = new MonsterAnimation()
             .ConfigureState(CreatureState.IDLE, atdStructure, sprite)

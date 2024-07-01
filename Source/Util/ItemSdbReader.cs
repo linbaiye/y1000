@@ -34,6 +34,11 @@ public class ItemSdbReader : AbstractSdbReader
         return ParseEquipmentAnimation(equip, male, () => Parse(equip, "HitMotion", s=> s));
     }
 
+    public int GetPrice(string itemName)
+    {
+        return Parse(itemName, "Price", int.Parse);
+    }
+
     public bool IsEquipment(string name)
     {
         var kind = Parse(name, "Kind", s => s);

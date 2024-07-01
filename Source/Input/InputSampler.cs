@@ -59,19 +59,16 @@ namespace y1000.Source.Input
         {
             if (button.DoubleClick)
             {
-                if ((button.GetModifiersMask() & KeyModifierMask.MaskCtrl) != 0)
-                {
-                }
-                else if ((button.GetModifiersMask() & KeyModifierMask.MaskShift) != 0)
+                if ((button.GetModifiersMask() & KeyModifierMask.MaskShift) != 0)
                 {
                     return InputFactory.CreateAttack(entity);
                 }
-                return null;
             }
-            else
+            else if (button.IsPressed())
             {
-                return null;
+                return new CreatureLeftClick(entity);
             }
+            return null;
         }
     }
 }

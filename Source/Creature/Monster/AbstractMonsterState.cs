@@ -10,8 +10,6 @@ public abstract class AbstractMonsterState : AbstractCreatureState<Monster>
     {
     }
     
-    protected abstract CreatureState State { get; }
-
     public override OffsetTexture BodyOffsetTexture(Monster creature)
     {
         return creature.MonsterAnimation.OffsetTexture(State, creature.Direction, ElapsedMillis);

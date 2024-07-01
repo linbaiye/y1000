@@ -2,19 +2,20 @@ using Godot;
 using Source.Networking.Protobuf;
 using y1000.code;
 using y1000.Source.Creature;
+using y1000.Source.Creature.Monster;
 using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Networking;
 
-public class CreatureInterpolation : IServerMessage
+public class NpcInterpolation : IServerMessage
 {
-    private CreatureInterpolation(string name, Interpolation interpolation, long id)
+    private NpcInterpolation(string name, Interpolation interpolation, long id, NpcType npcType)
     {
         
         Name = name;
         Interpolation = interpolation;
         Id = id;
-        
+        NpcType = npcType;
     }
 
     public override string ToString()
@@ -27,19 +28,17 @@ public class CreatureInterpolation : IServerMessage
     public Interpolation Interpolation { get; }
     
     public long Id { get; }
+
+    public NpcType NpcType { get; }
     
     public void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
     }
 
-    public static CreatureInterpolation FromPacket(CreatureInterpolationPacket packet)
+    public static NpcInterpolation FromPacket(CreatureInterpolationPacket packet)
     {
-        return new CreatureInterpolation(packet.Name, Interpolation.FromPacket(packet.Interpolation), packet.Id);
+        return new NpcInterpolation(packet.Name, Interpolation.FromPacket(packet.Interpolation), packet.Id, (NpcType)packet.Type);
     }
 
-    public static CreatureInterpolation Mock(long id, Vector2I coordinate)
-    {
-        return new CreatureInterpolation("牛", new Interpolation(coordinate, CreatureState.IDLE, 0, Direction.LEFT), id);
-    }
 }

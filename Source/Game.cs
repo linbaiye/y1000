@@ -65,9 +65,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_messageFactory = new MessageFactory(_itemFactory);
 		_entityFactory = new EntityFactory(_eventMediator);
 		_entityManager = EntityManager.Instance;
-		GD.Print("Creating sprite repo.");
 		_spriteRepository = FilesystemSpriteRepository.Instance;
-		GD.Print("Done init.");
 	}
 
 	private EventMediator InitializeEventMediator()
@@ -82,7 +80,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
-		_uiController.InitEventMediator(_eventMediator);
+		_uiController.Initialize(_eventMediator, _spriteRepository);
 		PlayBackgroundMusic();
 	}
 
@@ -210,6 +208,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			_character?.HandleInput(attack);
 		}
+        else if (args.Creature is Merchant merchant && click is CreatureLeftClick && !merchant.IsDead)
+		{
+			_uiController?.OnMerchantClicked(merchant);
+		}
 	}
 
 
@@ -291,14 +293,14 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	}
 		
 
-	public void Visit(CreatureInterpolation creatureInterpolation)
+	public void Visit(NpcInterpolation npcInterpolation)
 	{
-		var monster = Monster.Create(creatureInterpolation, MapLayer);
-		monster.MouseClicked += OnCreatureClicked;
-		if (_entityManager.Add(monster))
+		var npc = _entityFactory.CreateNpc(npcInterpolation, MapLayer);
+		npc.MouseClicked += OnCreatureClicked;
+		if (_entityManager.Add(npc))
 		{
-			AddChild(monster);
-			LOGGER.Debug("Added creature {0}.", monster.Id);
+			AddChild(npc);
+			LOGGER.Debug("Added creature {0}.", npc.Id);
 		}
 	}
 

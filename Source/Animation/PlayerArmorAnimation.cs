@@ -9,11 +9,11 @@ public class PlayerArmorAnimation : AbstractPlayerBodyAnimation<PlayerArmorAnima
     public static PlayerArmorAnimation Create(AbstractArmor armor)
     {
         PlayerArmorAnimation animation = new PlayerArmorAnimation();
-        AtzSprite N0 = SpriteRepository.LoadByName(armor.FirstAtzName);
-        AtzSprite N1 = SpriteRepository.LoadByName(armor.SecondAtzName);
-        AtzSprite N2 = SpriteRepository.LoadByName(armor.ThirdAtzName);
-        AtzSprite N3 = SpriteRepository.LoadByName(armor.FourthAtzName);
-        AtzSprite N4 = SpriteRepository.LoadByName(armor.FifthAtzName);
+        AtzSprite N0 = SpriteRepository.LoadByNumber(armor.FirstAtzName);
+        AtzSprite N1 = SpriteRepository.LoadByNumber(armor.SecondAtzName);
+        AtzSprite N2 = SpriteRepository.LoadByNumber(armor.ThirdAtzName);
+        AtzSprite N3 = SpriteRepository.LoadByNumber(armor.FourthAtzName);
+        AtzSprite N4 = SpriteRepository.LoadByNumber(armor.FifthAtzName);
         return Config(animation, N0, N1, N2, N3, N4);
     }
     

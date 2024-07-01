@@ -93,7 +93,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.ResponsePacket => DecodeInputResponse(packet.ResponsePacket),
             Packet.TypedPacketOneofCase.PlayerInterpolation => PlayerInterpolation.FromPacket(
                 packet.PlayerInterpolation),
-            Packet.TypedPacketOneofCase.CreatureInterpolation => CreatureInterpolation.FromPacket(
+            Packet.TypedPacketOneofCase.CreatureInterpolation => NpcInterpolation.FromPacket(
                 packet.CreatureInterpolation),
             Packet.TypedPacketOneofCase.RemoveEntity => new RemoveEntityMessage(packet.RemoveEntity.Id),
             Packet.TypedPacketOneofCase.HurtEventPacket => HurtMessage.FromPacket(packet.HurtEventPacket),

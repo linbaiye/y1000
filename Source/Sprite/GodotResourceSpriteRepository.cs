@@ -49,7 +49,7 @@ public class GodotResourceSpriteRepository : AbstractSpriteRepository
         return new AtzSprite(textures, vectors);
     }
 
-    public override AtzSprite LoadByNameAndOffset(string name, Vector2? offset = null)
+    public override AtzSprite LoadByNumberAndOffset(string name, Vector2? offset = null)
     {
         return LoadFromResource("res://sprite/" + name + "/", offset);
     }
@@ -57,5 +57,10 @@ public class GodotResourceSpriteRepository : AbstractSpriteRepository
     public override AtzSprite LoadByPath(string path, Vector2? offset = null)
     {
         return LoadFromResource(path, offset);
+    }
+
+    public override AtzSprite LoadByNpcName(string name)
+    {
+        throw new NotImplementedException();
     }
 }

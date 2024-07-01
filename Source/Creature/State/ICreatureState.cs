@@ -9,4 +9,6 @@ public interface ICreatureState<in TC> where TC : ICreature
     OffsetTexture BodyOffsetTexture(TC player);
 
     void Update(TC c, int delta);
+    
+    CreatureState State { get; }
 }

@@ -32,7 +32,9 @@ public sealed class MonsterMoveState : AbstractCreatureMoveState<Monster>
     {
         Move(c, delta);
     }
-    
+
+    public override CreatureState State => CreatureState.WALK;
+
     public static MonsterMoveState Move(MonsterAnimation animation, Direction towards, int speed, int elapsed = 0)
     {
         var originSpeed= animation.AnimationMillis(CreatureState.WALK);

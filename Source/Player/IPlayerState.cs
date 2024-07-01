@@ -10,7 +10,6 @@ public interface IPlayerState : ICreatureState<PlayerImpl>
 {
     static readonly IPlayerState Empty = EmptyPlayerState.Instance;
     
-    CreatureState State { get; }
 
     void Reset() { }
     

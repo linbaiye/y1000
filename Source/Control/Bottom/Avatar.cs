@@ -62,7 +62,7 @@ public partial class Avatar : NinePatchRect
 
 	private void DrawBody(bool male)
 	{
-		var atzSprite = _spriteRepository.LoadByNameAndOffset(male ? "N00" : "A00");
+		var atzSprite = _spriteRepository.LoadByNumberAndOffset(male ? "N00" : "A00");
 		var offsetTexture = atzSprite.Get(AvatarIndex);
 		_body.Texture = offsetTexture.Texture;
 		_body.Position = new Vector2((Size.X - offsetTexture.OriginalSize.X) / 2, (Size.Y - offsetTexture.OriginalSize.Y) / 2);
@@ -187,7 +187,7 @@ public partial class Avatar : NinePatchRect
 
 	private void DrawEquipment(string spriteName, AvatarPart rect)
 	{
-		var sprite = _spriteRepository.LoadByNameAndOffset(spriteName);
+		var sprite = _spriteRepository.LoadByNumberAndOffset(spriteName);
 		var offsetTexture = sprite.Get(AvatarIndex);
 		rect.Visible = true;
 		rect.Size = new Vector2(0, 0);
