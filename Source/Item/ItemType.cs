@@ -4,4 +4,5 @@ public enum ItemType
 {
     WEAPON = 1,
     STACK = 2,
+    MONEY = 3,
 }

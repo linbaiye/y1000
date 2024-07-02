@@ -2,7 +2,7 @@
 
 public class CharacterStackItem : ICharacterItem
 {
-    public CharacterStackItem(int iconId, string name, int number)
+    public CharacterStackItem(int iconId, string name, long number)
     {
         IconId = iconId;
         ItemName = name;
@@ -11,7 +11,7 @@ public class CharacterStackItem : ICharacterItem
 
     public int IconId { get; }
     
-    public int Number { get; set; }
+    public long Number { get; set; }
 
     public string ItemName { get; }
 }

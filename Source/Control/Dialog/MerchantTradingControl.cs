@@ -10,7 +10,7 @@ using y1000.Source.Sprite;
 
 namespace y1000.Source.Control.Dialog;
 
-public partial class MerchantTrading : AbstractMerchantControl
+public partial class MerchantTradingControl : AbstractMerchantControl
 {
     private ItemList _itemList;
     
@@ -31,6 +31,8 @@ public partial class MerchantTrading : AbstractMerchantControl
     private CharacterInventory? _inventory;
 
     private readonly MerchantTrade _trade = new();
+
+    private ItemFactory? _itemFactory;
     
     private class Item
     {
@@ -49,9 +51,9 @@ public partial class MerchantTrading : AbstractMerchantControl
         }
     }
 
-    private void AddToTotal(int delta)
+    private void AddToTotal(long delta)
     {
-        int current = string.IsNullOrEmpty(_total.Text) ? 0 : int.Parse(_total.Text);
+        long current = string.IsNullOrEmpty(_total.Text) ? 0 : long.Parse(_total.Text);
         _total.Text = (current + delta).ToString();
     }
 
@@ -109,7 +111,6 @@ public partial class MerchantTrading : AbstractMerchantControl
         {
             return;
         }
-
         if (_playerSelling)
         {
             OnConfirmSell();
@@ -122,11 +123,35 @@ public partial class MerchantTrading : AbstractMerchantControl
 
     private void OnConfirmBuy()
     {
+        if (_tradeInputWindow == null || _tradeInputWindow.ItemName == null ||
+            _itemFactory == null || Merchant == null ||
+            _inventory == null)
+        {
+            return;
+        }
+        var merchantSellingItem = Merchant.FindInSell(_tradeInputWindow.ItemName);
+        if (merchantSellingItem == null)
+        {
+            return;
+        }
+        long total = merchantSellingItem.Price * _tradeInputWindow.Number;
+        if (!_inventory.HasEnoughMoney(total))
+        {
+            _eventMediator?.NotifyTextArea("持有的钱币不足。");
+            return;
+        }
+        if (!_inventory.HasSpace(_tradeInputWindow.ItemName))
+        {
+            _eventMediator?.NotifyTextArea("物品栏已满。");
+            return;
+        }
+        var item = _itemFactory.CreateCharacterItem(_tradeInputWindow.ItemName, _tradeInputWindow.Number);
+        int slot = _inventory.Buy(item, total);
         var selectedItems = _itemList.GetSelectedItems();
-        OnConfirmItem(selectedItems);
+        OnConfirmItem(selectedItems, 0);
     }
 
-    private void OnConfirmItem(int[] indices)
+    private void OnConfirmItem(int[] indices, int slot)
     {
         if (_tradeInputWindow == null || _tradeInputWindow.ItemName == null)
         {
@@ -146,7 +171,7 @@ public partial class MerchantTrading : AbstractMerchantControl
                 _itemList.SetItemText(idx, text + "    " + (_playerSelling ? "出售" : "购买") + "数量: " + _tradeInputWindow.Number);
                 _itemList.SetItemDisabled(idx, true);
                 AddToTotal(_tradeInputWindow.Number * item.Price);
-                _trade.Add(name, _tradeInputWindow.Number);
+                _trade.Add(name, _tradeInputWindow.Number, slot);
                 break;
             }
         }
@@ -159,7 +184,8 @@ public partial class MerchantTrading : AbstractMerchantControl
         {
             array.Add(i);
         }
-        OnConfirmItem(array.ToArray());
+        SellingItem? sellingItem = _tradeInputWindow.Item<SellingItem>();
+        OnConfirmItem(array.ToArray(), sellingItem.Slot);
     }
 
     private void RefreshItemList(List<Merchant.Item> items)
@@ -172,10 +198,12 @@ public partial class MerchantTrading : AbstractMerchantControl
         }
     }
 
-    public void Initialize(TradeInputWindow tradeInputWindow, EventMediator eventMediator)
+    public void Initialize(TradeInputWindow tradeInputWindow,
+        EventMediator eventMediator, ItemFactory itemFactory)
     {
         _tradeInputWindow = tradeInputWindow;
         _eventMediator = eventMediator;
+        _itemFactory = itemFactory;
     }
 
     public void Buy(Merchant merchant, ISpriteRepository spriteRepository)
@@ -225,11 +253,11 @@ public partial class MerchantTrading : AbstractMerchantControl
         }
         if (characterItem is CharacterStackItem stackItem)
         {
-            _tradeInputWindow?.Open(stackItem.ItemName, stackItem.Number, OnWindowAction);
+            _tradeInputWindow?.Open(new SellingItem(slotEvent.Slot, stackItem), stackItem.Number, OnWindowAction);
         }
         else
         {
-            _tradeInputWindow?.Open(characterItem.ItemName, OnWindowAction);
+            _tradeInputWindow?.Open(new SellingItem(slotEvent.Slot, characterItem), 1, OnWindowAction);
         }
         return true;
     }

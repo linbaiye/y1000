@@ -8,6 +8,7 @@ using y1000.Source.Control.Dialog;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
+using y1000.Source.Item;
 using y1000.Source.Sprite;
 
 namespace y1000.Source.Control;
@@ -40,13 +41,14 @@ public partial class UIController : CanvasLayer
         BindButtons();
     }
 
-    public void Initialize(EventMediator eventMediator, ISpriteRepository spriteRepository)
+    public void Initialize(EventMediator eventMediator,
+        ISpriteRepository spriteRepository, ItemFactory itemFactory)
     {
         eventMediator.SetComponent(this);
         eventMediator.SetComponent(_bottomControl);
         _tradeInputWindow.BindEventMediator(eventMediator);
         _dropItemUi.BindEventMediator(eventMediator);
-        _dialogControl.Initialize(spriteRepository, _tradeInputWindow, eventMediator);
+        _dialogControl.Initialize(spriteRepository, _tradeInputWindow, eventMediator, itemFactory);
     }
 
     public void OnClickInventorySlotEvent(ClickInventorySlotEvent slotEvent)

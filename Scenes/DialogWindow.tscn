@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_hml38"]
 [ext_resource type="Script" path="res://Source/Control/Dialog/MerchantControl.cs" id="3_vbo2e"]
 [ext_resource type="Texture2D" uid="uid://c2vm1csclhxbx" path="res://assets/ui/trading_dialog.png" id="5_wnqco"]
-[ext_resource type="Script" path="res://Source/Control/Dialog/MerchantTrading.cs" id="6_yho5n"]
+[ext_resource type="Script" path="res://Source/Control/Dialog/MerchantTradingControl.cs" id="6_yho5n"]
 [ext_resource type="Texture2D" uid="uid://cgpjvsiqfgifo" path="res://assets/ui/input_cancel_down.png" id="7_uiwmd"]
 
 [node name="DialogWindow" type="Control"]

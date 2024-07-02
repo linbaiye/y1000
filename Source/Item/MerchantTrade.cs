@@ -10,15 +10,18 @@ public class MerchantTrade
     
     public class Item
     {
-        public Item(string name, int number)
+        public Item(string name, long number, int slot)
         {
             Name = name;
             Number = number;
+            Slot = slot;
         }
 
         public string Name { get; }
         
-        public int Number { get; }
+        public long Number { get; }
+        
+        public int Slot { get; }
     }
 
     public void Clear()
@@ -35,7 +38,7 @@ public class MerchantTrade
         return _items.Any(i => i.Name.Equals(name));
     }
     
-    public void Add(string name, int number) {
-        _items.Add(new Item(name, number));
+    public void Add(string name, long number, int slot) {
+        _items.Add(new Item(name, number, slot));
     }
 }

@@ -13,7 +13,7 @@ namespace y1000.Source.Networking.Server
     {
         public class InventoryItemMessage
         {
-            public InventoryItemMessage(string name, int slotId, int number)
+            public InventoryItemMessage(string name, int slotId, long number)
             {
                 Name = name;
                 SlotId = slotId;
@@ -22,7 +22,7 @@ namespace y1000.Source.Networking.Server
             public string Name { get; }
             public int SlotId { get; }
             
-            public int Number { get; }
+            public long Number { get; }
         }
         private JoinedRealmMessage(IAttackKungFu attackKungFu, List<InventoryItemMessage> items, PlayerInfo myInfo, ValueBar healthBar, 
             ValueBar powerBar, ValueBar innerPowerBar, ValueBar outerPowerBar, ValueBar energyBar)

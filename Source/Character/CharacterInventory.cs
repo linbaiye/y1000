@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Networking;
@@ -19,8 +20,50 @@ public class CharacterInventory
 
 
     private EventMediator? _eventMediator;
+    private const string Money = "钱币";
 
     public bool IsFull => _items.Count >= MaxSize;
+
+    public bool CanBuy(string name, long totalMoney)
+    {
+        return HasEnoughMoney(totalMoney) && HasSpace(name);
+    }
+
+    public bool HasSpace(string name)
+    {
+        var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
+        return item is CharacterStackItem || !IsFull;
+    }
+
+    public bool HasEnoughMoney(long number)
+    {
+        var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(Money));
+        return item is CharacterStackItem stackItem && stackItem.Number >= number;
+    }
+
+    private void Decrease(string name, long number)
+    {
+        var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
+        if (item is CharacterStackItem stackItem && stackItem.Number >= number)
+        {
+            stackItem.Number -= number;
+        }
+    }
+
+    public int Buy(ICharacterItem item, long totalMoney)
+    {
+        if (!CanBuy(item.ItemName, totalMoney))
+        {
+            return 0;
+        }
+        var ret = AddItem(item);
+        if (ret != 0)
+        {
+            Decrease(Money, totalMoney);
+            Notify();
+        }
+        return ret;
+    }
 
 
     public void DropItem(int slot, int numberLeft)
@@ -60,7 +103,40 @@ public class CharacterInventory
         InventoryChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public bool AddItem(int slot, ICharacterItem item)
+
+    private int AddToEmptySlot(ICharacterItem item)
+    {
+        if (IsFull)
+        {
+            return 0;
+        }
+        for (var i = 1; i <= MaxSize; i++)
+        {
+            if (_items.TryAdd(i, item))
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private int AddItem(ICharacterItem item)
+    {
+        if (item is CharacterStackItem stackItem)
+        {
+            for (int i = 1; i <= MaxSize; i++)
+            {
+                if (_items.TryGetValue(i, out var slotItem) && slotItem.ItemName.Equals(item.ItemName) && slotItem is CharacterStackItem slotStackItem)
+                {
+                    slotStackItem.Number += stackItem.Number;
+                    return i;
+                }
+            }
+        }
+        return AddToEmptySlot(item);
+    }
+
+    public bool PutItem(int slot, ICharacterItem item)
     {
         if (slot < 1 || slot > MaxSize)
         {

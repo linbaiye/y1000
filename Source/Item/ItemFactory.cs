@@ -35,7 +35,12 @@ public class ItemFactory
         return new CharacterItem(_itemDb.GetIconId(message.Name), message.Name);
     }
 
-    public ICharacterItem CreateCharacterItem(string name, int number = 0)
+    public bool IsStackItem(string name)
+    {
+        return _itemDb.CanStack(name);
+    }
+
+    public ICharacterItem CreateCharacterItem(string name, long number = 0)
     {
         if (number == 0)
         {

@@ -19,6 +19,18 @@ public partial class TradeInputWindow : NinePatchRect
 
 	private Action<bool>? _callback;
 	private EventMediator? _eventMediator;
+	
+	private ITradeWindowItem? _item;
+	
+	public T? Item<T>() where T : ITradeWindowItem
+	{
+		return _item != null ? (T)_item : default;
+	}
+	
+	public interface ITradeWindowItem
+	{
+		string Name { get; }
+	}
 
 	public override void _Ready()
 	{
@@ -50,7 +62,18 @@ public partial class TradeInputWindow : NinePatchRect
 		_input.GrabFocus();
 	}
 	
-	public void Open(string name, int number, Action<bool> callback)
+	public void Open(ITradeWindowItem item, long number, Action<bool> callback)
+	{
+		_callback = callback;
+		_itemName.Text = item.Name;
+		_input.Text = number != 0 ? number.ToString() : "";
+		Visible = true;
+		_input.GrabFocus();
+		_item = item;
+	}
+	
+	
+	public void Open(string name, long number, Action<bool> callback)
 	{
 		Open(name, number.ToString(), callback);
 	}
@@ -70,7 +93,7 @@ public partial class TradeInputWindow : NinePatchRect
 			return "请输入正确数量";
 		}
 
-		var i = int.Parse(_input.Text);
+		var i = long.Parse(_input.Text);
 		if (i < 1 || i > 1000000)
 		{
 			return "请输入正确数量";
@@ -78,7 +101,7 @@ public partial class TradeInputWindow : NinePatchRect
 		return null;
 	}
 
-	public int Number => ValidateInput() != null ? 0 : int.Parse(_input.Text);
+	public long Number => ValidateInput() != null ? 0 : long.Parse(_input.Text);
 
 	private void OnConfirmPressed()
 	{

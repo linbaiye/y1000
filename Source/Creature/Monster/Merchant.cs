@@ -11,7 +11,6 @@ public partial class Merchant : Monster
 
     public List<Item> BuyItems { get; set; } = new ();
 
-
     public int AvatarSpriteNumber { get; private set; } = 0;
     
     public class Item
@@ -27,11 +26,15 @@ public partial class Merchant : Monster
         public int IconId { get; }
     }
 
+    public Item? FindInSell(string name)
+    {
+        return SellItems.FirstOrDefault(i => i.Name.Equals(name));
+    }
+
     public bool Buys(string name)
     {
         return BuyItems.Any(i => i.Name.Equals(name));
     }
-    
     
     public void InitializeMerchant(
         NpcInterpolation npcInterpolation, IMap map,

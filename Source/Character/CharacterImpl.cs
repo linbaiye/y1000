@@ -349,7 +349,7 @@ namespace y1000.Source.Character
 	        foreach (var inventoryItemMessage in message.Items)
 	        {
 		        var characterItem = itemFactory.CreateCharacterItem(inventoryItemMessage);
-		        characterImpl.Inventory.AddItem(inventoryItemMessage.SlotId, characterItem);
+		        characterImpl.Inventory.PutItem(inventoryItemMessage.SlotId, characterItem);
 	        }
         }
 
