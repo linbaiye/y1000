@@ -30,7 +30,7 @@ public partial class MerchantTradingControl : AbstractMerchantControl
 
     private CharacterInventory? _inventory;
 
-    private readonly MerchantTrade _trade = new();
+    private MerchantTrade _trade = new();
 
     private ItemFactory? _itemFactory;
     
@@ -105,10 +105,19 @@ public partial class MerchantTradingControl : AbstractMerchantControl
         _tradeInputWindow.Open(item.Name, OnWindowAction);
     }
 
+    private void RollbackTrade()
+    {
+        if (_playerSelling)
+        {
+        }
+        
+    }
+
     private void OnWindowAction(bool confirmed)
     {
         if (!confirmed)
         {
+            RollbackTrade();
             return;
         }
         if (_playerSelling)
@@ -146,12 +155,15 @@ public partial class MerchantTradingControl : AbstractMerchantControl
             return;
         }
         var item = _itemFactory.CreateCharacterItem(_tradeInputWindow.ItemName, _tradeInputWindow.Number);
-        int slot = _inventory.Buy(item, total);
+        if (!_inventory.Buy(item, total, _trade))
+        {
+            return;
+        }
         var selectedItems = _itemList.GetSelectedItems();
-        OnConfirmItem(selectedItems, 0);
+        OnConfirmItem(selectedItems);
     }
 
-    private void OnConfirmItem(int[] indices, int slot)
+    private void OnConfirmItem(int[] indices)
     {
         if (_tradeInputWindow == null || _tradeInputWindow.ItemName == null)
         {
@@ -171,7 +183,6 @@ public partial class MerchantTradingControl : AbstractMerchantControl
                 _itemList.SetItemText(idx, text + "    " + (_playerSelling ? "出售" : "购买") + "数量: " + _tradeInputWindow.Number);
                 _itemList.SetItemDisabled(idx, true);
                 AddToTotal(_tradeInputWindow.Number * item.Price);
-                _trade.Add(name, _tradeInputWindow.Number, slot);
                 break;
             }
         }
@@ -185,7 +196,8 @@ public partial class MerchantTradingControl : AbstractMerchantControl
             array.Add(i);
         }
         SellingItem? sellingItem = _tradeInputWindow.Item<SellingItem>();
-        OnConfirmItem(array.ToArray(), sellingItem.Slot);
+        //_trade.Add(sellingItem.Name, _tradeInputWindow.Number, sellingItem.Slot);
+        OnConfirmItem(array.ToArray());
     }
 
     private void RefreshItemList(List<Merchant.Item> items)
@@ -214,7 +226,7 @@ public partial class MerchantTradingControl : AbstractMerchantControl
         _confirmButton.TexturePressed = (Texture2D)ResourceLoader.Load("res://assets/ui/buy_down.png");
         _confirmButton.TextureNormal = (Texture2D)ResourceLoader.Load("res://assets/ui/buy.png");
         _total.Text = "0";
-        _trade.Clear();
+        _trade = new MerchantTrade();
         Open();
     }
     
@@ -226,7 +238,7 @@ public partial class MerchantTradingControl : AbstractMerchantControl
         _confirmButton.TextureNormal = (Texture2D)ResourceLoader.Load("res://assets/ui/confirm_normal.png");
         _playerSelling = true;
         _total.Text = "0";
-        _trade.Clear();
+        _trade = new MerchantTrade();
         Open();
     }
 

@@ -1,44 +1,71 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using y1000.Source.Creature.Monster;
 
 namespace y1000.Source.Item;
 
 public class MerchantTrade
 {
-
-    private readonly List<Item> _items = new();
-    
-    public class Item
+    public class InventoryItem
     {
-        public Item(string name, long number, int slot)
+        public InventoryItem(int slotId, ICharacterItem item)
         {
-            Name = name;
-            Number = number;
-            Slot = slot;
+            Slot = slotId;
+            Item = item;
         }
 
-        public string Name { get; }
-        
-        public long Number { get; }
-        
         public int Slot { get; }
+        public ICharacterItem Item { get; }
+        public string Name => Item.ItemName;
+        public long Number => Item is CharacterStackItem stackItem ? stackItem.Number : 1;
     }
 
-    public void Clear()
+    private readonly List<InventoryItem> _playerBuying = new ();
+    
+    private InventoryItem? _money;
+
+    public InventoryItem? Money => _money;
+
+    public List<InventoryItem> Items => _playerBuying;
+    
+    public void AddPlayerBuying(ICharacterItem item, int slot,
+        CharacterStackItem money, int moneySlot)
     {
-        _items.Clear();
+        if (item is not CharacterStackItem addStackItem)
+        {
+            _playerBuying.Add(new InventoryItem(slot, item));
+        }
+        else
+        {
+            bool added = false;
+            foreach (var loseItem in _playerBuying)
+            {
+                if (loseItem.Item.ItemName.Equals(item.ItemName) &&
+                    loseItem.Item is CharacterStackItem stackItem)
+                {
+                    stackItem.Number += addStackItem.Number;
+                    added = true;
+                }
+            }
+            if (!added)
+            {
+                _playerBuying.Add(new InventoryItem(slot, item));
+            }
+        }
+        if (_money == null)
+        {
+            _money = new InventoryItem(moneySlot, money);
+        }
+        else
+        {
+            ((CharacterStackItem)_money.Item).Number += money.Number;
+        }
     }
 
-    public bool IsEmpty => _items.Count == 0;
-
-    public List<Item> Items => _items;
+    public bool IsEmpty => _playerBuying.Count == 0;
 
     public bool Contains(string name)
     {
-        return _items.Any(i => i.Name.Equals(name));
-    }
-    
-    public void Add(string name, long number, int slot) {
-        _items.Add(new Item(name, number, slot));
+        return _playerBuying.Any(i => i.Item.ItemName.Equals(name));
     }
 }

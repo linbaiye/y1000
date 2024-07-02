@@ -35,34 +35,75 @@ public class CharacterInventory
         return item is CharacterStackItem || !IsFull;
     }
 
+
+    public void RollbackBuying(MerchantTrade trade)
+    {
+        if (trade.IsEmpty)
+        {
+            return;
+        }
+        foreach (var tradeItem in trade.Items)
+        {
+            bool needRemove = false;
+            if (_items.TryGetValue(tradeItem.Slot, out var characterItem))
+            {
+                if (characterItem is CharacterStackItem stackItem)
+                {
+                    stackItem.Number -= tradeItem.Number;
+                    needRemove = stackItem.Number <= 0;
+                }
+                else
+                {
+                    needRemove = true;
+                }
+            }
+            if (needRemove)
+            {
+                _items.Remove(tradeItem.Slot);
+            }
+        }
+    }
+
     public bool HasEnoughMoney(long number)
     {
         var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(Money));
-        return item is CharacterStackItem stackItem && stackItem.Number >= number;
+        return item is CharacterStackItem money && money.Number >= number;
     }
 
-    private void Decrease(string name, long number)
+    private int FindMoneySlot(out CharacterStackItem? stackItem)
     {
-        var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
-        if (item is CharacterStackItem stackItem && stackItem.Number >= number)
+        for (int i = 1; i <= MaxSize; i++)
         {
-            stackItem.Number -= number;
+            if (_items.TryGetValue(i, out var slotItem) && slotItem.ItemName.Equals(Money) && 
+                slotItem is CharacterStackItem characterStackItem)
+            {
+                stackItem = characterStackItem;
+                return i;
+            }
         }
+        stackItem = null;
+        return 0;
     }
 
-    public int Buy(ICharacterItem item, long totalMoney)
+    public bool Buy(ICharacterItem item, long totalMoney, MerchantTrade trade)
     {
         if (!CanBuy(item.ItemName, totalMoney))
         {
-            return 0;
+            return false;
         }
-        var ret = AddItem(item);
-        if (ret != 0)
+        var moneySlot = FindMoneySlot(out var money);
+        if (money == null)
         {
-            Decrease(Money, totalMoney);
+            return false;
+        }
+        var slot = AddItem(item);
+        if (slot != 0)
+        {
+            money.Number -= totalMoney;
+            trade.AddPlayerBuying(item, slot, money, moneySlot);
             Notify();
         }
-        return ret;
+        return slot != 0;
     }
 
 
