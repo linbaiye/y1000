@@ -46,7 +46,7 @@ public class EntityFactory
         //ISet<string>[] items = LoadItems("lbn");
         var fileAccess = FileAccess.Open("res://assets/sdb/npc/" + "lbn" + ".txt", FileAccess.ModeFlags.Read);
         string? line;
-        List<string>[] items = {new List<string>(), new List<string>() };
+        List<Merchant.Item>[] items = {new(), new() };
         int avNubmer = 0;
         while ((line = fileAccess.GetLine()) != null)
         {
@@ -57,12 +57,12 @@ public class EntityFactory
             if (line.StartsWith("SELLITEM"))
             {
                 var s = line.Split(":")[1];
-                items[0].Add(s); 
+                items[0].Add(new Merchant.Item(s, _itemDb.GetPrice(s), _itemDb.GetIconId(s)));
             }
             else if (line.StartsWith("BUYITEM"))
             {
                 var s = line.Split(":")[1];
-                items[1].Add(s);
+                items[1].Add(new Merchant.Item(s, _itemDb.GetPrice(s), _itemDb.GetIconId(s)));
             }
             else if (line.StartsWith("SELLIMAGE"))
             {

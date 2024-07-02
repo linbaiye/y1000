@@ -24,6 +24,11 @@ public partial class MerchantControl : AbstractMerchantControl
         Close();
     }
 
+    public override void Close()
+    {
+        Visible = false;
+    }
+
     public void SetCallback(Action<bool> cb)
     {
         _tradingCallback = cb;

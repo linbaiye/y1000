@@ -69,6 +69,12 @@ public partial class TradeInputWindow : NinePatchRect
 		{
 			return "请输入正确数量";
 		}
+
+		var i = int.Parse(_input.Text);
+		if (i < 1 || i > 1000000)
+		{
+			return "请输入正确数量";
+		}
 		return null;
 	}
 

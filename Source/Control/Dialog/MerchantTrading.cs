@@ -2,11 +2,11 @@
 using System.Text.RegularExpressions;
 using Godot;
 using NLog;
+using y1000.Source.Character;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Sprite;
-using y1000.Source.Util;
 
 namespace y1000.Source.Control.Dialog;
 
@@ -16,19 +16,21 @@ public partial class MerchantTrading : AbstractMerchantControl
     
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
-    private readonly ItemSdbReader _itemSdbReader = ItemSdbReader.ItemSdb;
-    
     private readonly IconReader _iconReader = IconReader.ItemIconReader;
 
     private TradeInputWindow? _tradeInputWindow;
 
-    private bool _selling;
+    private bool _playerSelling;
     
     private TextureButton _confirmButton;
     
     private Label _total;
 
     private EventMediator? _eventMediator;
+
+    private CharacterInventory? _inventory;
+
+    private readonly MerchantTrade _trade = new();
     
     private class Item
     {
@@ -47,10 +49,10 @@ public partial class MerchantTrading : AbstractMerchantControl
         }
     }
 
-
-    private void AddToTotal()
+    private void AddToTotal(int delta)
     {
-        _total.Text = "";
+        int current = string.IsNullOrEmpty(_total.Text) ? 0 : int.Parse(_total.Text);
+        _total.Text = (current + delta).ToString();
     }
 
     public override void _Ready()
@@ -58,12 +60,37 @@ public partial class MerchantTrading : AbstractMerchantControl
         base._Ready();
         _itemList = GetNode<ItemList>("ItemList");
         _confirmButton = GetNode<TextureButton>("ConfirmButton");
+        _confirmButton.Pressed += OnConfirmTrade;
         GetNode<TextureButton>("CancelButton").Pressed += Close;
         _total = GetNode<Label>("Total");
         _itemList.ItemClicked += OnItemClicked;
         Close();
     }
-    
+
+    private void OnConfirmTrade()
+    {
+        if (_trade.IsEmpty || Merchant == null)
+        {
+            return;
+        }
+
+        if (_playerSelling)
+        {
+            _inventory?.OnSell(Merchant.Id, _trade);
+        }
+        Visible = false;
+    }
+
+    public void BindInventory(CharacterInventory inventory)
+    {
+        _inventory = inventory;
+    }
+
+    public override void Close()
+    {
+        Visible = false;
+        _itemList.Clear();
+    }
 
     private void OnItemClicked(long index, Vector2 vector2, long buttonIndex)
     {
@@ -83,33 +110,65 @@ public partial class MerchantTrading : AbstractMerchantControl
             return;
         }
 
-        var name = _tradeInputWindow.ItemName;
-        var selectedItems = _itemList.GetSelectedItems();
-        foreach (var selectedItem in selectedItems)
+        if (_playerSelling)
         {
-            var text = _itemList.GetItemText(selectedItem);
-            if (text.Contains(name))
+            OnConfirmSell();
+        }
+        else
+        {
+            OnConfirmBuy();
+        }
+    }
+
+    private void OnConfirmBuy()
+    {
+        var selectedItems = _itemList.GetSelectedItems();
+        OnConfirmItem(selectedItems);
+    }
+
+    private void OnConfirmItem(int[] indices)
+    {
+        if (_tradeInputWindow == null || _tradeInputWindow.ItemName == null)
+        {
+            return;
+        }
+        var name = _tradeInputWindow.ItemName;
+        foreach (var idx in indices)
+        {
+            var text = _itemList.GetItemText(idx);
+            if (text == null)
             {
-                var item = Item.Parse(text);
-                _itemList.SetItemText(selectedItem, text + "    " + (_selling ? "出售" : "购买") + "数量: " + _tradeInputWindow.Number);
-                Logger.Debug("Trade item {}, number {}.", item.Name, _tradeInputWindow.Number);
+                continue;
+            }
+            var item = Item.Parse(text);
+            if (item.Name.Equals(name))
+            {
+                _itemList.SetItemText(idx, text + "    " + (_playerSelling ? "出售" : "购买") + "数量: " + _tradeInputWindow.Number);
+                _itemList.SetItemDisabled(idx, true);
+                AddToTotal(_tradeInputWindow.Number * item.Price);
+                _trade.Add(name, _tradeInputWindow.Number);
                 break;
             }
         }
     }
 
-    private void RefreshItemList(List<string> items)
+    private void OnConfirmSell()
+    {
+        var array = new List<int>();
+        for (var i = 0; i < _itemList.ItemCount; i++)
+        {
+            array.Add(i);
+        }
+        OnConfirmItem(array.ToArray());
+    }
+
+    private void RefreshItemList(List<Merchant.Item> items)
     {
         _itemList.Clear();
         foreach (var item in items)
         {
-            if (!_itemSdbReader.Contains(item))
-            {
-                continue;
-            }
-            var price = _itemSdbReader.GetPrice(item);
-            var icon = _iconReader.Get(_itemSdbReader.GetIconId(item));
-            _itemList.AddItem(item + "  " + price, icon);
+            var icon = _iconReader.Get(item.IconId);
+            _itemList.AddItem(item.Name + "  " + item.Price, icon);
         }
     }
 
@@ -123,27 +182,29 @@ public partial class MerchantTrading : AbstractMerchantControl
     {
         PopulateCommonFields(merchant, spriteRepository, "侠士需要什么？我这里物廉价美。");
         RefreshItemList(merchant.SellItems);
-        _selling = false;
+        _playerSelling = false;
         _confirmButton.TexturePressed = (Texture2D)ResourceLoader.Load("res://assets/ui/buy_down.png");
         _confirmButton.TextureNormal = (Texture2D)ResourceLoader.Load("res://assets/ui/buy.png");
         _total.Text = "0";
+        _trade.Clear();
         Open();
     }
     
     public void Sell(Merchant merchant, ISpriteRepository spriteRepository)
     {
-        PopulateCommonFields(merchant, spriteRepository, "侠士想卖东西吗？我这里高价收购。");
+        PopulateCommonFields(merchant, spriteRepository, "侠士要卖什么？我这里高价收购。");
         RefreshItemList(merchant.BuyItems);
         _confirmButton.TexturePressed = (Texture2D)ResourceLoader.Load("res://assets/ui/input_confirm_down.png");
         _confirmButton.TextureNormal = (Texture2D)ResourceLoader.Load("res://assets/ui/confirm_normal.png");
-        _selling = true;
+        _playerSelling = true;
         _total.Text = "0";
+        _trade.Clear();
         Open();
     }
 
     public bool OnInventorySlotClick(ClickInventorySlotEvent slotEvent)
     {
-        if (!Visible || !_selling || Merchant == null)
+        if (!Visible || !_playerSelling || Merchant == null)
         {
             return false;
         }
@@ -152,9 +213,14 @@ public partial class MerchantTrading : AbstractMerchantControl
         {
             return false;
         }
-        if (!Merchant.BuyItems.Contains(characterItem.ItemName))
+        if (!Merchant.Buys(characterItem.ItemName))
         {
             _eventMediator?.NotifyTextArea("不买此种物品。");
+            return true;
+        }
+        if (_trade.Contains(characterItem.ItemName))
+        {
+            _eventMediator?.NotifyTextArea("交易中的物品无法变更。");
             return true;
         }
         if (characterItem is CharacterStackItem stackItem)

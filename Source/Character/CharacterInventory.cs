@@ -21,7 +21,7 @@ public class CharacterInventory
     private EventMediator? _eventMediator;
 
     public bool IsFull => _items.Count >= MaxSize;
-    
+
 
     public void DropItem(int slot, int numberLeft)
     {
@@ -89,6 +89,13 @@ public class CharacterInventory
             _eventMediator?.NotifyUiEvent(new DragInventorySlotEvent(slot, item));
         }
     }
+
+
+    public void OnSell(long merchantId, MerchantTrade trade)
+    {
+        _eventMediator?.NotifyServer(new ClientSellEvent(trade, merchantId));
+    }
+
 
     public void SetEventMediator(EventMediator eventMediator)
     {

@@ -22,7 +22,7 @@ public partial class UIController : CanvasLayer
 
     private DropItemUI _dropItemUi;
 
-    private DialogControl? _dialogControl;
+    private DialogControl _dialogControl;
     
     private TradeInputWindow _tradeInputWindow;
 
@@ -46,7 +46,7 @@ public partial class UIController : CanvasLayer
         eventMediator.SetComponent(_bottomControl);
         _tradeInputWindow.BindEventMediator(eventMediator);
         _dropItemUi.BindEventMediator(eventMediator);
-        _dialogControl?.Initialize(spriteRepository, _tradeInputWindow, eventMediator);
+        _dialogControl.Initialize(spriteRepository, _tradeInputWindow, eventMediator);
     }
 
     public void OnClickInventorySlotEvent(ClickInventorySlotEvent slotEvent)
@@ -76,10 +76,11 @@ public partial class UIController : CanvasLayer
     {
         _bottomControl.BindCharacter(character);
         _rightControl.BindCharacter(character);
+        _dialogControl.BindCharacter(character);
     }
 
     public void OnMerchantClicked(Merchant merchant)
     {
-        _dialogControl?.OnMerchantClicked(merchant);
+        _dialogControl.OnMerchantClicked(merchant);
     }
 }

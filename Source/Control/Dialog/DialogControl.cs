@@ -1,4 +1,5 @@
 ﻿using NLog;
+using y1000.Source.Character;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Sprite;
@@ -47,6 +48,11 @@ public partial class DialogControl : Godot.Control
     public void OnMerchantClicked(Merchant merchant)
     {
         _merchantControl?.Popup(merchant, _spriteRepository);
+    }
+
+    public void BindCharacter(CharacterImpl character)
+    {
+        _merchantTrading?.BindInventory(character.Inventory);
     }
 
     public bool OnInventorySlotClick(ClickInventorySlotEvent slotEvent)

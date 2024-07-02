@@ -26,10 +26,7 @@ public abstract partial class AbstractMerchantControl : NinePatchRect
         Visible = false;
     }
 
-    public void Close()
-    {
-        Visible = false;
-    }
+    public abstract void Close();
 
     protected void Open()
     {
