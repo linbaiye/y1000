@@ -64,6 +64,7 @@ public class CharacterInventory
         }
     }
 
+
     public bool HasEnoughMoney(long number)
     {
         var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(Money));
@@ -85,6 +86,38 @@ public class CharacterInventory
         return 0;
     }
 
+    public bool HasEnough(string name, long number)
+    {
+        var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
+        return item is CharacterStackItem stackItem && stackItem.Number >= number
+            || item is CharacterItem;
+    }
+
+    public bool Sell(ICharacterItem sellingItem, long money, MerchantTrade trade)
+    {
+        ICharacterItem? slotItem = null;
+        int i = 1;
+        for (; i <= MaxSize; i++)
+        {
+            if (_items.TryGetValue(i, out slotItem) &&
+                slotItem.ItemName.Equals(sellingItem.ItemName))
+            {
+                break;
+            }
+        }
+        bool needRemove = false;
+        if (slotItem is CharacterItem)
+        {
+            _items.Remove(i);
+            // trade.AddItem();
+        }
+        if (slotItem is CharacterStackItem stackItem)
+        {
+            // stackItem.Number -= sellingItem
+        }
+        return false;
+    }
+
     public bool Buy(ICharacterItem item, long totalMoney, MerchantTrade trade)
     {
         if (!CanBuy(item.ItemName, totalMoney))
@@ -100,7 +133,7 @@ public class CharacterInventory
         if (slot != 0)
         {
             money.Number -= totalMoney;
-            trade.AddPlayerBuying(item, slot, money, moneySlot);
+            trade.AddItem(item, slot, money, moneySlot);
             Notify();
         }
         return slot != 0;

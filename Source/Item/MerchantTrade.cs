@@ -20,25 +20,25 @@ public class MerchantTrade
         public long Number => Item is CharacterStackItem stackItem ? stackItem.Number : 1;
     }
 
-    private readonly List<InventoryItem> _playerBuying = new ();
+    private readonly List<InventoryItem> _items = new ();
     
     private InventoryItem? _money;
 
     public InventoryItem? Money => _money;
 
-    public List<InventoryItem> Items => _playerBuying;
+    public List<InventoryItem> Items => _items;
     
-    public void AddPlayerBuying(ICharacterItem item, int slot,
+    public void AddItem(ICharacterItem item, int slot,
         CharacterStackItem money, int moneySlot)
     {
         if (item is not CharacterStackItem addStackItem)
         {
-            _playerBuying.Add(new InventoryItem(slot, item));
+            _items.Add(new InventoryItem(slot, item));
         }
         else
         {
             bool added = false;
-            foreach (var loseItem in _playerBuying)
+            foreach (var loseItem in _items)
             {
                 if (loseItem.Item.ItemName.Equals(item.ItemName) &&
                     loseItem.Item is CharacterStackItem stackItem)
@@ -49,7 +49,7 @@ public class MerchantTrade
             }
             if (!added)
             {
-                _playerBuying.Add(new InventoryItem(slot, item));
+                _items.Add(new InventoryItem(slot, item));
             }
         }
         if (_money == null)
@@ -62,10 +62,10 @@ public class MerchantTrade
         }
     }
 
-    public bool IsEmpty => _playerBuying.Count == 0;
+    public bool IsEmpty => _items.Count == 0;
 
     public bool Contains(string name)
     {
-        return _playerBuying.Any(i => i.Item.ItemName.Equals(name));
+        return _items.Any(i => i.Item.ItemName.Equals(name));
     }
 }

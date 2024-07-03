@@ -190,11 +190,28 @@ public partial class MerchantTradingControl : AbstractMerchantControl
 
     private void OnConfirmSell()
     {
+        if (_tradeInputWindow == null || _inventory == null || _itemFactory == null)
+        {
+            return;
+        }
         var array = new List<int>();
         for (var i = 0; i < _itemList.ItemCount; i++)
         {
             array.Add(i);
         }
+        var name = _tradeInputWindow.ItemName;
+        if (name == null)
+        {
+            return;
+        }
+        var number = _tradeInputWindow.Number;
+        if (!_inventory.HasEnough(name, number))
+        {
+            _eventMediator?.NotifyTextArea("数量不足。");
+            return;
+        }
+        var characterItem = _itemFactory.CreateCharacterItem(name, number);
+        _inventory.Sell(name, number, _trade);
         SellingItem? sellingItem = _tradeInputWindow.Item<SellingItem>();
         //_trade.Add(sellingItem.Name, _tradeInputWindow.Number, sellingItem.Slot);
         OnConfirmItem(array.ToArray());
