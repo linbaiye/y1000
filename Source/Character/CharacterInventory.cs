@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NLog;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Networking;
@@ -17,6 +18,7 @@ public class CharacterInventory
     private readonly IDictionary<int, ICharacterItem> _items = new Dictionary<int, ICharacterItem>(MaxSize);
 
     public event EventHandler<EventArgs>? InventoryChanged;
+    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
 
     private EventMediator? _eventMediator;
@@ -29,16 +31,52 @@ public class CharacterInventory
         return HasEnoughMoney(totalMoney) && HasSpace(name);
     }
 
+    public bool HasMoneySpace()
+    {
+        return HasSpace(Money);
+    }
+
     public bool HasSpace(string name)
     {
         var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
         return item is CharacterStackItem || !IsFull;
     }
 
+    public void RollbackSelling(MerchantTrade trade)
+    {
+        if (trade.IsEmpty)
+        {
+            return;
+        }
+        foreach (var inventoryItem in trade.Items)
+        {
+            if (_items.TryGetValue(inventoryItem.Slot, out var slotItem))
+            {
+                if (slotItem is CharacterStackItem stackItem)
+                {
+                    stackItem.Number += inventoryItem.Number;
+                }
+            }
+            else
+            {
+                _items.TryAdd(inventoryItem.Slot, inventoryItem.Item);
+            }
+        }
+        int slot = FindMoneySlot(out var money);
+        if (money != null)
+        {
+            money.Number -= trade.Money?.Number ?? 0;
+            if (money.Number <= 0)
+            {
+                _items.Remove(slot);
+            }
+        }
+        Notify();
+    }
 
     public void RollbackBuying(MerchantTrade trade)
     {
-        if (trade.IsEmpty)
+        if (trade.IsEmpty || trade.Money == null)
         {
             return;
         }
@@ -62,6 +100,15 @@ public class CharacterInventory
                 _items.Remove(tradeItem.Slot);
             }
         }
+        if (_items.TryGetValue(trade.Money.Slot, out var moneyInSlot))
+        {
+            ((CharacterStackItem)moneyInSlot).Number += trade.Money.Number;
+        }
+        else
+        {
+            _items.TryAdd(trade.Money.Slot, trade.Money.Item);
+        }
+        Notify();
     }
 
 
@@ -93,8 +140,12 @@ public class CharacterInventory
             || item is CharacterItem;
     }
 
-    public bool Sell(ICharacterItem sellingItem, long money, MerchantTrade trade)
+    public bool Sell(ICharacterItem sellingItem, CharacterStackItem money, MerchantTrade trade)
     {
+        if (!HasMoneySpace())
+        {
+            return false;
+        }
         ICharacterItem? slotItem = null;
         int i = 1;
         for (; i <= MaxSize; i++)
@@ -105,17 +156,34 @@ public class CharacterInventory
                 break;
             }
         }
-        bool needRemove = false;
+        if (slotItem == null)
+        {
+            return false;
+        }
         if (slotItem is CharacterItem)
         {
             _items.Remove(i);
-            // trade.AddItem();
-        }
-        if (slotItem is CharacterStackItem stackItem)
+        } 
+        else if (slotItem is CharacterStackItem stackItem)
         {
-            // stackItem.Number -= sellingItem
+            stackItem.Number -= ((CharacterStackItem)sellingItem).Number;
+            if (stackItem.Number <= 0)
+            {
+                _items.Remove(i);
+            }
         }
-        return false;
+        int moneySlot = FindMoneySlot(out var moneyItem);
+        if (moneyItem != null)
+        {
+            moneyItem.Number += money.Number;
+        }
+        else
+        {
+            AddItem(money);
+        }
+        trade.AddItem(sellingItem, i, money, moneySlot);
+        Notify();
+        return true;
     }
 
     public bool Buy(ICharacterItem item, long totalMoney, MerchantTrade trade)
@@ -133,7 +201,11 @@ public class CharacterInventory
         if (slot != 0)
         {
             money.Number -= totalMoney;
-            trade.AddItem(item, slot, money, moneySlot);
+            if (money.Number <= 0)
+            {
+                _items.Remove(moneySlot);
+            }
+            trade.AddItem(item, slot, new CharacterStackItem(money.IconId, money.ItemName, totalMoney), moneySlot);
             Notify();
         }
         return slot != 0;
@@ -176,7 +248,6 @@ public class CharacterInventory
     {
         InventoryChanged?.Invoke(this, EventArgs.Empty);
     }
-
 
     private int AddToEmptySlot(ICharacterItem item)
     {
@@ -243,9 +314,14 @@ public class CharacterInventory
 
     public void OnSell(long merchantId, MerchantTrade trade)
     {
-        _eventMediator?.NotifyServer(new ClientSellEvent(trade, merchantId));
+        _eventMediator?.NotifyServer(ClientTradeEvent.Sell(trade, merchantId));
     }
 
+    
+    public void OnBuy(long merchantId, MerchantTrade trade)
+    {
+        _eventMediator?.NotifyServer(ClientTradeEvent.Buy(trade, merchantId));
+    }
 
     public void SetEventMediator(EventMediator eventMediator)
     {

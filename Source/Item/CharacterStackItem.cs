@@ -14,4 +14,7 @@ public class CharacterStackItem : ICharacterItem
     public long Number { get; set; }
 
     public string ItemName { get; }
+
+    public static readonly string MoneyName = "钱币";
+    
 }

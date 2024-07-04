@@ -7,9 +7,9 @@ namespace y1000.Source.Creature.Monster;
 
 public partial class Merchant : Monster
 {
-    public List<Item> SellItems { get; set; } = new();
+    public List<Item> SellItems { get; private set; } = new();
 
-    public List<Item> BuyItems { get; set; } = new ();
+    public List<Item> BuyItems { get; private set; } = new ();
 
     public int AvatarSpriteNumber { get; private set; } = 0;
     
@@ -29,6 +29,11 @@ public partial class Merchant : Monster
     public Item? FindInSell(string name)
     {
         return SellItems.FirstOrDefault(i => i.Name.Equals(name));
+    }
+    
+    public Item? FindInBuy(string name)
+    {
+        return BuyItems.FirstOrDefault(i => i.Name.Equals(name));
     }
 
     public bool Buys(string name)

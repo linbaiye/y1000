@@ -27,7 +27,7 @@ public class MerchantTrade
     public InventoryItem? Money => _money;
 
     public List<InventoryItem> Items => _items;
-    
+
     public void AddItem(ICharacterItem item, int slot,
         CharacterStackItem money, int moneySlot)
     {

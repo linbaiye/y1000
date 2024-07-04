@@ -75,10 +75,13 @@ public partial class MerchantTradingControl : AbstractMerchantControl
         {
             return;
         }
-
         if (_playerSelling)
         {
             _inventory?.OnSell(Merchant.Id, _trade);
+        }
+        else
+        {
+            _inventory?.OnBuy(Merchant.Id, _trade);
         }
         Visible = false;
     }
@@ -90,6 +93,14 @@ public partial class MerchantTradingControl : AbstractMerchantControl
 
     public override void Close()
     {
+        if (_playerSelling)
+        {
+            _inventory?.RollbackSelling(_trade);
+        }
+        else
+        {
+            _inventory?.RollbackBuying(_trade);
+        }
         Visible = false;
         _itemList.Clear();
     }
@@ -102,39 +113,31 @@ public partial class MerchantTradingControl : AbstractMerchantControl
         }
         var itemText = _itemList.GetItemText((int)index);
         Item item = Item.Parse(itemText);
-        _tradeInputWindow.Open(item.Name, OnWindowAction);
+        _tradeInputWindow.Open(item.Name, OnInputWindowAction);
     }
 
-    private void RollbackTrade()
-    {
-        if (_playerSelling)
-        {
-        }
-        
-    }
 
-    private void OnWindowAction(bool confirmed)
+
+    private void OnInputWindowAction(bool confirmed)
     {
         if (!confirmed)
         {
-            RollbackTrade();
             return;
         }
         if (_playerSelling)
         {
-            OnConfirmSell();
+            OnConfirmSellItem();
         }
         else
         {
-            OnConfirmBuy();
+            OnConfirmBuyItem();
         }
     }
 
-    private void OnConfirmBuy()
+    private void OnConfirmBuyItem()
     {
         if (_tradeInputWindow == null || _tradeInputWindow.ItemName == null ||
-            _itemFactory == null || Merchant == null ||
-            _inventory == null)
+            _itemFactory == null || Merchant == null || _inventory == null)
         {
             return;
         }
@@ -155,15 +158,16 @@ public partial class MerchantTradingControl : AbstractMerchantControl
             return;
         }
         var item = _itemFactory.CreateCharacterItem(_tradeInputWindow.ItemName, _tradeInputWindow.Number);
+        Logger.Debug("Buying item {0} for {1}.", item.ItemName, total);
         if (!_inventory.Buy(item, total, _trade))
         {
             return;
         }
         var selectedItems = _itemList.GetSelectedItems();
-        OnConfirmItem(selectedItems);
+        LockItem(selectedItems);
     }
 
-    private void OnConfirmItem(int[] indices)
+    private void LockItem(int[] indices)
     {
         if (_tradeInputWindow == null || _tradeInputWindow.ItemName == null)
         {
@@ -188,20 +192,25 @@ public partial class MerchantTradingControl : AbstractMerchantControl
         }
     }
 
-    private void OnConfirmSell()
+    private void OnConfirmSellItem()
     {
-        if (_tradeInputWindow == null || _inventory == null || _itemFactory == null)
+        if (_tradeInputWindow == null || _inventory == null || _itemFactory == null || Merchant == null)
         {
             return;
-        }
-        var array = new List<int>();
-        for (var i = 0; i < _itemList.ItemCount; i++)
-        {
-            array.Add(i);
         }
         var name = _tradeInputWindow.ItemName;
         if (name == null)
         {
+            return;
+        }
+        var buyingItem = Merchant.FindInBuy(name);
+        if (buyingItem == null)
+        {
+            return;
+        }
+        if (!_inventory.HasMoneySpace())
+        {
+            _eventMediator?.NotifyTextArea("物品栏已满。");
             return;
         }
         var number = _tradeInputWindow.Number;
@@ -211,10 +220,17 @@ public partial class MerchantTradingControl : AbstractMerchantControl
             return;
         }
         var characterItem = _itemFactory.CreateCharacterItem(name, number);
-        _inventory.Sell(name, number, _trade);
-        SellingItem? sellingItem = _tradeInputWindow.Item<SellingItem>();
-        //_trade.Add(sellingItem.Name, _tradeInputWindow.Number, sellingItem.Slot);
-        OnConfirmItem(array.ToArray());
+        var money = (CharacterStackItem)_itemFactory.CreateCharacterItem(CharacterStackItem.MoneyName, number * buyingItem.Price);
+        if (!_inventory.Sell(characterItem, money, _trade))
+        {
+            return;
+        }
+        var array = new List<int>();
+        for (var i = 0; i < _itemList.ItemCount; i++)
+        {
+            array.Add(i);
+        }
+        LockItem(array.ToArray());
     }
 
     private void RefreshItemList(List<Merchant.Item> items)
@@ -259,6 +275,9 @@ public partial class MerchantTradingControl : AbstractMerchantControl
         Open();
     }
 
+    /*
+     * Clicking in inventory meaning we are selling things.
+     */
     public bool OnInventorySlotClick(ClickInventorySlotEvent slotEvent)
     {
         if (!Visible || !_playerSelling || Merchant == null)
@@ -282,11 +301,11 @@ public partial class MerchantTradingControl : AbstractMerchantControl
         }
         if (characterItem is CharacterStackItem stackItem)
         {
-            _tradeInputWindow?.Open(new SellingItem(slotEvent.Slot, stackItem), stackItem.Number, OnWindowAction);
+            _tradeInputWindow?.Open(stackItem.ItemName, stackItem.Number, OnInputWindowAction);
         }
         else
         {
-            _tradeInputWindow?.Open(new SellingItem(slotEvent.Slot, characterItem), 1, OnWindowAction);
+            _tradeInputWindow?.Open(characterItem.ItemName, 1, OnInputWindowAction);
         }
         return true;
     }
