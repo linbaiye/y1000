@@ -257,7 +257,7 @@ public partial class MerchantTradingControl : AbstractMerchantControl
         RefreshItemList(merchant.SellItems);
         _playerSelling = false;
         _confirmButton.TexturePressed = (Texture2D)ResourceLoader.Load("res://assets/ui/buy_down.png");
-        _confirmButton.TextureNormal = (Texture2D)ResourceLoader.Load("res://assets/ui/buy.png");
+        _confirmButton.TextureNormal = (Texture2D)ResourceLoader.Load("res://assets/ui/buy_normal.png");
         _total.Text = "0";
         _trade = new MerchantTrade();
         Open();

@@ -36,6 +36,7 @@ public partial class InventorySlotView : Panel
 	{
 		if (eventMouse.ButtonIndex == MouseButton.Left)
 		{
+			LOGGER.Debug("Clicked {0}.", eventMouse.AsText());
 			if (eventMouse.DoubleClick)
 			{
 				OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK));

@@ -5,10 +5,12 @@ using NLog;
 using y1000.Source.Character;
 using y1000.Source.Control.Bottom;
 using y1000.Source.Control.Dialog;
+using y1000.Source.Control.LeftSide;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Item;
+using y1000.Source.Networking.Server;
 using y1000.Source.Sprite;
 
 namespace y1000.Source.Control;
@@ -26,6 +28,8 @@ public partial class UIController : CanvasLayer
     private DialogControl _dialogControl;
     
     private TradeInputWindow _tradeInputWindow;
+    
+    private LeftsideTextControl _leftsideTextControl;
 
     private readonly List<Func<ClickInventorySlotEvent, bool>> _inventoryClickActions = new();
 
@@ -35,6 +39,7 @@ public partial class UIController : CanvasLayer
         _rightControl = GetNode<RightControl>("RightSideUI");
         _dropItemUi = GetNode<DropItemUI>("DropItemUI");
         _dialogControl = GetNode<DialogControl>("DialogUI");
+        _leftsideTextControl = GetNode<LeftsideTextControl>("LeftsideTextArea");
         _tradeInputWindow = GetNode<TradeInputWindow>("InputWindow");
         _inventoryClickActions.Add(_dialogControl.OnInventorySlotClick);
         _inventoryClickActions.Add(_bottomControl.OnInventorySlotClick);
@@ -62,9 +67,16 @@ public partial class UIController : CanvasLayer
         }
     }
 
-    public void DisplayMessage(string message)
+    public void HandleTextMessage(TextMessage message)
     {
-        _bottomControl.DisplayMessage(new TextEvent(message));
+        if (message.Location == TextMessage.TextLocation.LEFT)
+        {
+            _leftsideTextControl.Display(message.Text);
+        }
+        else
+        {
+            _bottomControl.DisplayMessage(new TextEvent(message.Text));
+        }
     }
     
 

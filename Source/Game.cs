@@ -289,7 +289,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(TextMessage message)
 	{
-		_uiController?.DisplayMessage(message.Text);
+		_uiController?.HandleTextMessage(message);
 	}
 		
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=10 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bqv6d0i2cli8e" path="res://Scenes/DropItemUI.tscn" id="6_wxera"]
 [ext_resource type="Script" path="res://Source/Control/TradeInputWindow.cs" id="7_6qoal"]
 [ext_resource type="PackedScene" uid="uid://dj8hiigwray" path="res://Scenes/DialogWindow.tscn" id="7_syuii"]
+[ext_resource type="PackedScene" uid="uid://dmbkl8odtuwu3" path="res://Scenes/LeftsideTextArea.tscn" id="9_0412u"]
 
 [node name="Game" type="Node2D"]
 z_as_relative = false
@@ -32,8 +33,10 @@ offset_top = 220.0
 offset_bottom = 29.0
 
 [node name="DropItemUI" parent="UILayer" instance=ExtResource("6_wxera")]
+visible = false
 
 [node name="InputWindow" parent="UILayer" instance=ExtResource("6_wxera")]
+visible = false
 script = ExtResource("7_6qoal")
 
 [node name="DialogUI" parent="UILayer" instance=ExtResource("7_syuii")]
@@ -42,6 +45,12 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="LeftsideTextArea" parent="UILayer" instance=ExtResource("9_0412u")]
+offset_left = 3.0
+offset_top = 486.0
+offset_right = -775.0
+offset_bottom = -172.0
 
 [node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -12.18

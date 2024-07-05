@@ -6,6 +6,11 @@ namespace y1000.Source.Networking.Server;
 
 public class TextMessage : IServerMessage
 {
+    public enum TextLocation
+    {
+        DOWN = 1,
+        LEFT = 2,
+    }
     
     public enum Type
     {
@@ -54,17 +59,20 @@ public class TextMessage : IServerMessage
     {
         if ((Type)packet.Type != Type.CUSTOM)
         {
-            return new TextMessage(TYPE_MAP.GetValueOrDefault((Type)packet.Type, ""));
+            return new TextMessage(TYPE_MAP.GetValueOrDefault((Type)packet.Type, ""), (TextLocation)packet.Location);
         }
 
-        return new TextMessage(packet.Text);
+        return new TextMessage(packet.Text, (TextLocation)packet.Location);
     }
     
     
-    public TextMessage(string text)
+    public TextMessage(string text, TextLocation location)
     {
         Text = text;
+        Location = location;
     }
+    
+    public TextLocation Location { get; set; }
 
     public string Text { get; }
     
