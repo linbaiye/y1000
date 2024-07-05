@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_hml38"]
 [ext_resource type="Script" path="res://Source/Control/Dialog/MerchantControl.cs" id="3_vbo2e"]
 [ext_resource type="Texture2D" uid="uid://c2vm1csclhxbx" path="res://assets/ui/trading_dialog.png" id="5_wnqco"]
-[ext_resource type="Script" path="res://Source/Control/Dialog/MerchantTradingControl.cs" id="6_yho5n"]
+[ext_resource type="Script" path="res://Source/Control/Dialog/MerchantTradingControl.cs" id="6_hxhsb"]
 [ext_resource type="Texture2D" uid="uid://cgpjvsiqfgifo" path="res://assets/ui/input_cancel_down.png" id="7_uiwmd"]
 
 [node name="DialogWindow" type="Control"]
@@ -91,11 +91,12 @@ offset_bottom = -16.168
 theme_override_font_sizes/font_size = 14
 
 [node name="MerchantTrading" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 380.0
 offset_bottom = 404.0
 texture = ExtResource("5_wnqco")
-script = ExtResource("6_yho5n")
+script = ExtResource("6_hxhsb")
 
 [node name="Name" type="Label" parent="MerchantTrading"]
 layout_mode = 0
@@ -143,6 +144,7 @@ offset_left = 13.0
 offset_top = 173.0
 offset_right = 366.0
 offset_bottom = 325.0
+theme_override_font_sizes/font_size = 12
 allow_search = false
 same_column_width = true
 fixed_icon_size = Vector2i(20, 20)
