@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmbkl8odtuwu3"]
+[gd_scene load_steps=4 format=3 uid="uid://dfsv4j0dgxkm3"]
 
-[ext_resource type="FontFile" uid="uid://dncxdf0s1udqa" path="res://fonts/SweiSpringSugarCJKtc-ExtraLight.ttf" id="1_i5q8j"]
 [ext_resource type="Script" path="res://Source/Control/LeftSide/LeftsideTextControl.cs" id="1_kpyqx"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_7paov"]
 [ext_resource type="Script" path="res://Source/Control/LeftSide/LeftsideTextLabel.cs" id="2_qd4dk"]
 
 [node name="LeftsideTextArea" type="VBoxContainer"]
@@ -17,7 +17,7 @@ script = ExtResource("1_kpyqx")
 [node name="Label1" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(120, 18)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_i5q8j")
+theme_override_fonts/normal_font = ExtResource("2_7paov")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 script = ExtResource("2_qd4dk")
@@ -25,7 +25,7 @@ script = ExtResource("2_qd4dk")
 [node name="Label2" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(120, 18)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_i5q8j")
+theme_override_fonts/normal_font = ExtResource("2_7paov")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 script = ExtResource("2_qd4dk")
@@ -33,7 +33,7 @@ script = ExtResource("2_qd4dk")
 [node name="Label3" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(120, 18)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_i5q8j")
+theme_override_fonts/normal_font = ExtResource("2_7paov")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 script = ExtResource("2_qd4dk")
@@ -41,7 +41,7 @@ script = ExtResource("2_qd4dk")
 [node name="Label4" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(120, 18)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_i5q8j")
+theme_override_fonts/normal_font = ExtResource("2_7paov")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 script = ExtResource("2_qd4dk")
@@ -49,7 +49,7 @@ script = ExtResource("2_qd4dk")
 [node name="Label5" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(120, 18)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_i5q8j")
+theme_override_fonts/normal_font = ExtResource("2_7paov")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 script = ExtResource("2_qd4dk")
