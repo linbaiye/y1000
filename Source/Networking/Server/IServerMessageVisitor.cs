@@ -156,4 +156,8 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)message);
     }
+    
+    void Visit(PlayerLearnKungFuMessage message)
+    {
+    }
 }

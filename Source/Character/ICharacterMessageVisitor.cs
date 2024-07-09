@@ -14,4 +14,6 @@ public interface ICharacterMessageVisitor
     void Visit(CharacterAttributeMessage message);
     
     void Visit(GainExpMessage message);
+
+    void Visit(PlayerLearnKungFuMessage message);
 }

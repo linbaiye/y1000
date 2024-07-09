@@ -122,6 +122,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.GainExp => new GainExpMessage(packet.GainExp.Name, packet.GainExp.Level, packet.GainExp.KungFu),
             Packet.TypedPacketOneofCase.Projectile => ProjectileMessage.FromPacket(packet.Projectile),
             Packet.TypedPacketOneofCase.MonsterMove => new MonsterMoveMessage(packet.MonsterMove.Id, (Direction)packet.MonsterMove.Direction, packet.MonsterMove.Speed),
+            Packet.TypedPacketOneofCase.LearnKungFu => PlayerLearnKungFuMessage.FromPacket(packet.LearnKungFu),
             _ => throw new NotSupportedException()
         };
     }
