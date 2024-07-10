@@ -83,24 +83,7 @@ namespace y1000.Source.Networking.Server
             IDictionary<int, IKungFu> result = new Dictionary<int, IKungFu>();
             foreach (var kungFuPacket in kungFuPackets)
             {
-                switch (kungFuPacket.Type)
-                {
-                    case (int)KungFuType.BREATHING:
-                        result.TryAdd(kungFuPacket.Slot, new BreathKungFu(kungFuPacket.Name, kungFuPacket.Level));
-                        break;
-                    case (int)KungFuType.ASSISTANT:
-                        result.TryAdd(kungFuPacket.Slot, new AssistantKungFu(kungFuPacket.Name, kungFuPacket.Level));
-                        break;
-                    case (int)KungFuType.FOOT:
-                        result.TryAdd(kungFuPacket.Slot, new Bufa(kungFuPacket.Level, kungFuPacket.Name));
-                        break;
-                    case (int)KungFuType.PROTECTION:
-                        result.TryAdd(kungFuPacket.Slot, new ProtectionKungFu(kungFuPacket.Name, kungFuPacket.Level));
-                        break;
-                    default:
-                        result.TryAdd(kungFuPacket.Slot, IAttackKungFu.ByType((AttackKungFuType)kungFuPacket.Type, kungFuPacket.Name, kungFuPacket.Level));
-                        break;
-                }
+                result.TryAdd(kungFuPacket.Slot, IKungFu.Create(kungFuPacket));
             }
             return result;
         }

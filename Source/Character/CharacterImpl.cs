@@ -223,7 +223,7 @@ namespace y1000.Source.Character
 
         public void Handle(ICharacterMessage message)
         {
-	        //LOGGER.Debug("Received message {0}.", message);
+	        LOGGER.Debug("Received message {0}.", message);
 	        message.Accept(this);
         }
 
@@ -369,6 +369,12 @@ namespace y1000.Source.Character
 	        WhenCharacterUpdated?.Invoke(this, new GainExpEventArgs(message.Name, message.IsKungFu));
         }
 
+        public void Visit(PlayerLearnKungFuMessage message)
+        {
+	        KungFuBook.Add(message.SlotId, message.KungFu);
+	        LOGGER.Debug("Learned kungfu {}.", message.KungFu);
+	        WhenCharacterUpdated?.Invoke(this, LearnKungFuEventArgs.Instance);
+        }
 
         public void Visit(DropItemMessage message)
         {

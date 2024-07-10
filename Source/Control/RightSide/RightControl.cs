@@ -19,13 +19,15 @@ public partial class RightControl : Godot.Control
     
     private void WhenCharacterUpdated(object? sender, EventArgs args)
     {
-        if (sender is not CharacterImpl character)
+        if (sender is not CharacterImpl)
         {
             return;
         }
         switch (args)
         {
             case GainExpEventArgs expEventArgs: if (expEventArgs.IsKungFu) _kungFuBookView?.RefreshPage();
+                break;
+            case LearnKungFuEventArgs: _kungFuBookView?.RefreshPage();
                 break;
         }
     }

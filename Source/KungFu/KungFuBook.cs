@@ -52,6 +52,11 @@ public class KungFuBook
         return false;
     }
 
+    public void Add(int slot, IKungFu kungFu)
+    {
+        _basic.TryAdd(slot, kungFu);
+    }
+
     public void GainExp(string name, int newLevel)
     {
         if (KungFuGainExp(_basic.Values, name, newLevel))

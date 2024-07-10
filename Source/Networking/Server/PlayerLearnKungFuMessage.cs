@@ -6,6 +6,12 @@ namespace y1000.Source.Networking.Server;
 
 public class PlayerLearnKungFuMessage : ICharacterMessage
 {
+    private PlayerLearnKungFuMessage(IKungFu kungFu, int slotId)
+    {
+        KungFu = kungFu;
+        SlotId = slotId;
+    }
+
     public void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
@@ -13,10 +19,8 @@ public class PlayerLearnKungFuMessage : ICharacterMessage
     
     public int SlotId { get; }
     
-    public string Name { get; }
+    public IKungFu KungFu { get; }
     
-    public string KungFuType { get; }
-
     public void Accept(ICharacterMessageVisitor visitor)
     {
         visitor.Visit(this);
@@ -24,7 +28,7 @@ public class PlayerLearnKungFuMessage : ICharacterMessage
 
     public static PlayerLearnKungFuMessage FromPacket(KungFuPacket kungFuPacket)
     {
-        
-        
+        var kungFu = IKungFu.Create(kungFuPacket);
+        return new PlayerLearnKungFuMessage(kungFu, kungFuPacket.Slot);
     }
 }
