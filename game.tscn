@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bqv6d0i2cli8e" path="res://Scenes/DropItemUI.tscn" id="6_wxera"]
 [ext_resource type="Script" path="res://Source/Control/TradeInputWindow.cs" id="7_6qoal"]
 [ext_resource type="PackedScene" uid="uid://dj8hiigwray" path="res://Scenes/DialogWindow.tscn" id="7_syuii"]
-[ext_resource type="PackedScene" uid="uid://dmbkl8odtuwu3" path="res://Scenes/LeftsideTextArea.tscn" id="9_0412u"]
+[ext_resource type="PackedScene" uid="uid://dfsv4j0dgxkm3" path="res://Scenes/LeftsideTextArea.tscn" id="9_0412u"]
 
 [node name="Game" type="Node2D"]
 z_as_relative = false

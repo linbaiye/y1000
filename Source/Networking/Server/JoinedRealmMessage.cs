@@ -61,6 +61,10 @@ namespace y1000.Source.Networking.Server
         
         public ValueBar EnergyBar { get; private init; }
         
+        public int HeadPercent { get; private init; }
+        public int ArmPercent { get; private init; }
+        public int LegPercent { get; private init; }
+        
         public PlayerInfo MyInfo { get; }
         
         private static List<InventoryItemMessage> ItemMessages(LoginPacket loginPacket)
@@ -119,6 +123,9 @@ namespace y1000.Source.Networking.Server
                 AssistantKungFu = loginPacket.HasAssistantKungFu ? loginPacket.AssistantKungFu : null,
                 ProtectionKungFu= loginPacket.HasProtectionKungFu ? loginPacket.ProtectionKungFu: null,
                 BreathKungFu = loginPacket.HasBreathKungFu? kungFuBook.FindKungFu<BreathKungFu>(loginPacket.BreathKungFu) : null,
+                HeadPercent = attribute.HeadPercent,
+                ArmPercent= attribute.ArmPercent,
+                LegPercent= attribute.LegPercent,
             };
             return message;
         }

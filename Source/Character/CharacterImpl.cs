@@ -45,6 +45,10 @@ namespace y1000.Source.Character
 		
 		public ValueBar EnergyBar { get; private set; } = ValueBar.Default;
 
+		public int HeadPercent { get; private set; } = 100;
+		public int ArmPercent { get; private set; } = 100;
+		public int LegPercent { get; private set; } = 100;
+
 		public void ChangeState(ICharacterState state)
 		{
 			WrappedPlayer().ChangeState(state.WrappedState);
@@ -99,7 +103,7 @@ namespace y1000.Source.Character
 
 		public void Rewind(IPredictableResponse response)
 		{
-			LOGGER.Debug("Need to rewind, message {0}.", response);
+			//LOGGER.Debug("Need to rewind, message {0}.", response);
 			if (response is MoveEventResponse { PositionMessage: RewindMessage rewind})
 			{
 				Visit(rewind);
@@ -223,7 +227,7 @@ namespace y1000.Source.Character
 
         public void Handle(ICharacterMessage message)
         {
-	        LOGGER.Debug("Received message {0}.", message);
+	        // LOGGER.Debug("Received message {0}.", message);
 	        message.Accept(this);
         }
 
@@ -392,6 +396,9 @@ namespace y1000.Source.Character
 	        PowerBar = message.Power;
 	        InnerPowerBar = message.InnerPower;
 	        OuterPowerBar = message.OuterPower;
+	        HeadPercent = message.HeadPercent;
+	        ArmPercent = message.ArmPercent;
+	        LegPercent = message.LegPercent;
 	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
         }
 
@@ -495,6 +502,9 @@ namespace y1000.Source.Character
 	        character.InnerPowerBar = message.InnerPowerBar;
 	        character.OuterPowerBar = message.OuterPowerBar;
 	        character.EnergyBar = message.EnergyBar;
+	        character.HeadPercent = message.HeadPercent;
+	        character.ArmPercent = message.ArmPercent;
+	        character.LegPercent = message.LegPercent;
 	        AddItems(character, message, itemFactory);
 	        return character;
         }
