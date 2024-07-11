@@ -12,6 +12,7 @@ public partial class InventorySlotView : Panel
 	
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 	public event EventHandler<SlotEvent>? OnInputEvent;
+	
 
 	private bool _mouseHovered;
 
@@ -36,15 +37,14 @@ public partial class InventorySlotView : Panel
 	{
 		if (eventMouse.ButtonIndex == MouseButton.Left)
 		{
-			LOGGER.Debug("Clicked {0}.", eventMouse.AsText());
 			if (eventMouse.DoubleClick)
 			{
 				OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK));
 			}
-			else if (eventMouse.Pressed)
-			{
-				OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_LEFT_CLICK));
-			}
+			// else if (eventMouse.Pressed)
+			// {
+			// 	OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_LEFT_CLICK));
+			// }
 			else if (eventMouse.IsReleased())
 			{
 				OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_LEFT_RELEASE));
@@ -97,9 +97,10 @@ public partial class InventorySlotView : Panel
 		TooltipText = tip;
 	}
 
-	public void ClearTexture()
+	public void Clear()
 	{
 		GetNode<TextureRect>("CenterContainer/TextureRect").Texture = null;
+		TooltipText = "";
 	}
 	
     public void ButtonClicked()

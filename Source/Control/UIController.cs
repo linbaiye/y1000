@@ -30,6 +30,8 @@ public partial class UIController : CanvasLayer
     private TradeInputWindow _tradeInputWindow;
     
     private LeftsideTextControl _leftsideTextControl;
+    
+    private ItemAttributeControl _itemAttributeControl;
 
     private readonly List<Func<ClickInventorySlotEvent, bool>> _inventoryClickActions = new();
 
@@ -43,6 +45,7 @@ public partial class UIController : CanvasLayer
         _tradeInputWindow = GetNode<TradeInputWindow>("InputWindow");
         _inventoryClickActions.Add(_dialogControl.OnInventorySlotClick);
         _inventoryClickActions.Add(_bottomControl.OnInventorySlotClick);
+        _itemAttributeControl = GetNode<ItemAttributeControl>("ItemAttribute");
         BindButtons();
     }
 
@@ -96,5 +99,10 @@ public partial class UIController : CanvasLayer
     public void OnMerchantClicked(Merchant merchant)
     {
         _dialogControl.OnMerchantClicked(merchant);
+    }
+
+    public void DisplayItemAttribute(IItem item, string description)
+    {
+        _itemAttributeControl.Display(item, description);
     }
 }

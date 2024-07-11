@@ -12,6 +12,7 @@ namespace y1000.Source.Input
 
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
         
+        
         private IPredictableInput? SampleMouseButton(InputEventMouseButton button, Vector2 mouseOffset)
         {
             if (button.ButtonIndex == MouseButton.Right)
@@ -64,10 +65,15 @@ namespace y1000.Source.Input
                     return InputFactory.CreateAttack(entity);
                 }
             }
-            else if (button.IsPressed())
+            else if (button.IsPressed() && button.GetModifiersMask() == 0)
             {
                 return new CreatureLeftClick(entity);
             }
+            return null;
+        }
+
+        public IInput? SampleLeftClickInput(InputEventMouseButton button)
+        {
             return null;
         }
     }

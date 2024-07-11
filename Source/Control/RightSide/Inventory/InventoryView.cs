@@ -49,6 +49,10 @@ public partial class InventoryView : AbstractInventoryView
         {
             _inventory.OnUIDoubleClick(slot.Number);
         }
+        else if (type == SlotEvent.Type.MOUSE_RIGHT_CLICK)
+        {
+            _inventory.OnBuy();
+        }
     }
 
     private string Format(ICharacterItem item)
@@ -87,12 +91,10 @@ public partial class InventoryView : AbstractInventoryView
             _inventory.OnUIDragItem(picked.Number);
             return;
         }
-        if (picked.Number == _currentFocused.Number)
+        if (picked.Number != _currentFocused.Number)
         {
-            _inventory.OnSingleClick(picked.Number);
-            return;
+            _inventory.OnUISwap(picked.Number, _currentFocused.Number);
         }
-        _inventory.OnUISwap(picked.Number, _currentFocused.Number);
     }
     
     public void BindInventory(CharacterInventory inventory)
@@ -106,7 +108,7 @@ public partial class InventoryView : AbstractInventoryView
     {
         if (sender is CharacterInventory inventory)
         {
-            ForeachSlot(slot=>slot.ClearTexture());
+            ForeachSlot(slot=>slot.Clear());
             inventory.Foreach(SetIconToSlot);
         }
     }

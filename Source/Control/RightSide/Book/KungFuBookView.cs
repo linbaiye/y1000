@@ -72,7 +72,7 @@ public partial class KungFuBookView : AbstractInventoryView
 
     public void RefreshPage()
     {
-        ForeachSlot(slot=>slot.ClearTexture());
+        ForeachSlot(slot=>slot.Clear());
         if (_currentPage?.Number == 1)
         {
             _kungFuBook.ForeachUnnamed(SetSlotView);
