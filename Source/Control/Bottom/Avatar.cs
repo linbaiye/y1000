@@ -219,6 +219,11 @@ public partial class Avatar : NinePatchRect
 		LOG.Debug("Name {0} was clicked", name);
 	}
 
+	public void OnPartClicked()
+	{
+		
+	}
+
 	public void OnMouseEntered(AvatarPart part)
 	{
 		if (part.Text.StartsWith("男子") || part.Text.StartsWith("女子"))

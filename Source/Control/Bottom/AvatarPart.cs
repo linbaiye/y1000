@@ -16,10 +16,17 @@ public partial class AvatarPart : TextureRect
 
     private void OnInput(InputEvent inputEvent)
     {
-        if (inputEvent is InputEventMouseButton { DoubleClick: true } button &&
-            (button.ButtonMask & MouseButtonMask.Left) != 0 && Texture != null)
+        if (inputEvent is not InputEventMouseButton button)
+        {
+            return;
+        }
+        if (button.DoubleClick && (button.ButtonMask & MouseButtonMask.Left) != 0 && Texture != null)
         {
             GetParent<Avatar>().OnPartClicked(this, Name);
+        }
+        else if (button.Pressed && (button.ButtonMask & MouseButtonMask.Right) != 0)
+        {
+            
         }
     }
 
