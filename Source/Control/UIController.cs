@@ -10,6 +10,7 @@ using y1000.Source.Control.RightSide;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Item;
+using y1000.Source.KungFu;
 using y1000.Source.Networking.Server;
 using y1000.Source.Sprite;
 
@@ -104,5 +105,10 @@ public partial class UIController : CanvasLayer
     public void DisplayItemAttribute(IItem item, string description)
     {
         _itemAttributeControl.Display(item, description);
+    }
+    
+    public void DisplayKungFuAttribute(IKungFu kungFu, string description)
+    {
+        _itemAttributeControl.Display(kungFu, description);
     }
 }

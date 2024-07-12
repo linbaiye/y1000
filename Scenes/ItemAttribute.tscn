@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvqgh5uxjoqh1"]
+[gd_scene load_steps=5 format=3 uid="uid://dw4kky7kku6qg"]
 
 [ext_resource type="Texture2D" uid="uid://dqvduyhkh1vab" path="res://assets/ui/item_attribute_window.png" id="1_imumr"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_2pw5q"]
@@ -26,17 +26,22 @@ script = null
 
 [node name="ItemName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 56.0
+offset_left = 60.0
 offset_top = 19.0
 offset_right = 203.0
 offset_bottom = 36.0
+theme_override_fonts/font = ExtResource("3_3lwp1")
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
 
 [node name="ItemDescription" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 53.0
-offset_right = 247.0
+offset_left = 14.0
+offset_top = 58.0
+offset_right = 234.0
 offset_bottom = 162.0
+theme_override_fonts/normal_font = ExtResource("3_3lwp1")
+theme_override_font_sizes/normal_font_size = 12
 
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 0

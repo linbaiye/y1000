@@ -328,10 +328,9 @@ public class CharacterInventory
         _eventMediator = eventMediator;
     }
     
-
     public void OnRightClick(int slot)
     {
-        _eventMediator?.NotifyServer(new Cli);
+        _eventMediator?.NotifyServer(new ClientRightClickItemEvent(RightClickType.INVENTORY, slot));
     }
     
     public void Foreach(Action<int, ICharacterItem> consumer)

@@ -5,7 +5,7 @@ namespace y1000.Source.Networking;
 
 public class ClientRightClickItemEvent: IClientEvent
 {
-    public ClientRightClickItemEvent(RightClickType type, int slot, int page)
+    public ClientRightClickItemEvent(RightClickType type, int slot, int page = 0)
     {
         Type = type;
         Slot = slot;
@@ -20,7 +20,12 @@ public class ClientRightClickItemEvent: IClientEvent
     {
         return new ClientPacket()
         {
-            Right
+            RightClick = new RightClickPacket()
+            {
+                Page = Page,
+                SlotId = Slot,
+                Type = (int)Type
+            }
         };
     }
 }

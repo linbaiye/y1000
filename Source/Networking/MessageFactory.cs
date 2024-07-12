@@ -123,6 +123,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.Projectile => ProjectileMessage.FromPacket(packet.Projectile),
             Packet.TypedPacketOneofCase.MonsterMove => new MonsterMoveMessage(packet.MonsterMove.Id, (Direction)packet.MonsterMove.Direction, packet.MonsterMove.Speed),
             Packet.TypedPacketOneofCase.LearnKungFu => PlayerLearnKungFuMessage.FromPacket(packet.LearnKungFu),
+            Packet.TypedPacketOneofCase.ItemAttribute => KungFuOrItemAttributeMessage.FromPacket(packet.ItemAttribute),
             _ => throw new NotSupportedException()
         };
     }

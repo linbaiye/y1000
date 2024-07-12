@@ -380,6 +380,25 @@ namespace y1000.Source.Character
 	        WhenCharacterUpdated?.Invoke(this, LearnKungFuEventArgs.Instance);
         }
 
+        public void Visit(KungFuOrItemAttributeMessage message)
+        {
+	        if (message.Type == RightClickType.INVENTORY)
+	        {
+		        var characterItem = Inventory.Find(message.SlotId);
+		        if (characterItem != null)
+		        {
+			        EventMediator?.NotifyUiEvent(new ItemAttributeEvent(characterItem, message.Description));
+		        }
+	        } else if (message.Type == RightClickType.KUNGFU)
+	        {
+		        var kungFu = KungFuBook.Get(message.Page, message.SlotId);
+		        if (kungFu != null)
+		        {
+			        EventMediator?.NotifyUiEvent(new KungFuAttributeEvent(kungFu, message.Description));
+		        }
+	        }
+        }
+
         public void Visit(DropItemMessage message)
         {
 	        Inventory.DropItem(message.Slot, message.NumberLeft);

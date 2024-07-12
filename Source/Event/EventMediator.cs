@@ -5,6 +5,7 @@ using y1000.Source.Control;
 using y1000.Source.Control.Bottom;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Input;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Event;
 
@@ -75,6 +76,14 @@ public class EventMediator
         else if (e is ClickInventorySlotEvent slotEvent)
         {
             _uiController?.OnClickInventorySlotEvent(slotEvent);
+        }
+        else if (e is ItemAttributeEvent attributeEvent)
+        {
+            _uiController?.DisplayItemAttribute(attributeEvent.Item, attributeEvent.Description);
+        }
+        else if (e is KungFuAttributeEvent kungFuAttributeEvent)
+        {
+            _uiController?.DisplayKungFuAttribute(kungFuAttributeEvent.KungFu, kungFuAttributeEvent.Description);
         }
     }
 }

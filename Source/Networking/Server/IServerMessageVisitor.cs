@@ -161,4 +161,8 @@ public interface IServerMessageVisitor
     {
         Visit((ICharacterMessage)message);
     }
+    
+    void Visit(KungFuOrItemAttributeMessage message) {
+        Visit((ICharacterMessage)message);
+    }
 }

@@ -39,17 +39,18 @@ public partial class KungFuBookView : AbstractInventoryView
 
     private void OnSlotEvent(object? sender, SlotEvent inputEvent)
     {
-        if (sender is not InventorySlotView slotView)
+        if (sender is not InventorySlotView slotView || _currentPage == null)
         {
             return;
         }
 
         if (inputEvent.EventType == SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
         {
-            if (_currentPage != null)
-            {
-                _kungFuBook.OnKungFuUsed(_currentPage.Number, slotView.Number);
-            }
+            _kungFuBook.OnKungFuUsed(_currentPage.Number, slotView.Number);
+        }
+        else if (inputEvent.EventType == SlotEvent.Type.MOUSE_RIGHT_CLICK)
+        {
+            _kungFuBook.OnRightClick(_currentPage.Number, slotView.Number);
         }
     }
     

@@ -51,7 +51,7 @@ public partial class InventoryView : AbstractInventoryView
         }
         else if (type == SlotEvent.Type.MOUSE_RIGHT_CLICK)
         {
-            _inventory.OnBuy();
+            _inventory.OnRightClick(slot.Number);
         }
     }
 

@@ -86,6 +86,29 @@ public class KungFuBook
         return FindKungFu<IAttackKungFu>(name);
     }
 
+    public IKungFu? Get(int page, int nr)
+    {
+        if (page == 1)
+        {
+            _unnamed.TryGetValue(nr, out var k);
+            return k;
+        }
+        if (page == 2)
+        {
+            _basic.TryGetValue(nr, out var k);
+            return k;
+        }
+        return null;
+    }
+
+    public void OnRightClick(int page, int nr)
+    {
+        if (page == 1 || page == 2)
+        {
+            EventMediator?.NotifyServer(new ClientRightClickItemEvent(RightClickType.KUNGFU, nr, page));
+        }
+    }
+
     public void OnKungFuUsed(int page, int nr)
     {
         if (_unnamed.ContainsKey(nr))
