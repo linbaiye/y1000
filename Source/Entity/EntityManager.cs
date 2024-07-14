@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Item;
@@ -28,6 +29,10 @@ public class EntityManager
         return null;
     }
 
+    public T? SelectFirst<T>(Func<T, bool> filter)
+    {
+        return (T?)_entities.Values.FirstOrDefault(e => e is T t && filter.Invoke(t));
+    }
 
     public bool Add(IEntity entity)
     {

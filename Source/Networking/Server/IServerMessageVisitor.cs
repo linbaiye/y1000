@@ -165,4 +165,18 @@ public interface IServerMessageVisitor
     void Visit(KungFuOrItemAttributeMessage message) {
         Visit((ICharacterMessage)message);
     }
+    
+    void Visit(PlayerAttributeMessage message) {
+        Visit((ICharacterMessage)message);
+    }
+
+    void Visit(OpenTradeWindowMessage message)
+    {
+        
+    }
+
+    void Visit(UpdateTradeWindowMessage message)
+    {
+        
+    }
 }

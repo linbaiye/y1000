@@ -117,7 +117,7 @@ public partial class InventoryView : AbstractInventoryView
         var texture = TEXTURE_READER.Get(item.IconId);
         if (texture != null)
         {
-            GetNode<InventorySlotView>("Slots/Slot" + slot).PutItem(texture);
+            GetNode<InventorySlotView>("Slots/Slot" + slot).PutTexture(texture);
         }
     }
     public void ButtonClicked()

@@ -56,12 +56,23 @@ public partial class DialogControl : Godot.Control
 
     public void BindCharacter(CharacterImpl character)
     {
-        _merchantTrading?.BindInventory(character.Inventory);
+        if (_merchantTrading != null)
+        {
+            _merchantTrading.BindInventory(character.Inventory);
+            character.Inventory.RegisterRightClickHandler(_merchantTrading);
+        }
     }
 
-    public bool OnInventorySlotClick(ClickInventorySlotEvent slotEvent)
+    public bool IsTrading
     {
-        return _merchantTrading?.OnInventorySlotClick(slotEvent) ?? false;
+        get
+        {
+            if (_merchantControl != null && _merchantControl.Visible)
+            {
+                return true;
+            }
+            return _merchantTrading != null && _merchantTrading.IsTrading;
+        }
     }
     
 }

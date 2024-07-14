@@ -38,7 +38,6 @@ public partial class DropItemUI : NinePatchRect
 	public void BindEventMediator(EventMediator eventMediator)
 	{
 		_eventMediator = eventMediator;
-		_eventMediator.SetComponent(this);
 	}
 	
 	private bool MouseWithinCharacterDropRange(Vector2 globalMousePosition, Vector2I characterCoordinate)

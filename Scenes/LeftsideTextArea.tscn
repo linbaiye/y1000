@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfsv4j0dgxkm3"]
+[gd_scene load_steps=4 format=3 uid="uid://cqtmvg303wl2s"]
 
 [ext_resource type="Script" path="res://Source/Control/LeftSide/LeftsideTextControl.cs" id="1_kpyqx"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_7paov"]

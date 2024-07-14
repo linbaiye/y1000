@@ -26,7 +26,7 @@ public partial class AvatarPart : TextureRect
         }
         else if (button.Pressed && (button.ButtonMask & MouseButtonMask.Right) != 0)
         {
-            
+            GetParent<Avatar>().OnRightClicked();
         }
     }
 

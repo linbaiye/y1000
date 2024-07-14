@@ -124,6 +124,9 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.MonsterMove => new MonsterMoveMessage(packet.MonsterMove.Id, (Direction)packet.MonsterMove.Direction, packet.MonsterMove.Speed),
             Packet.TypedPacketOneofCase.LearnKungFu => PlayerLearnKungFuMessage.FromPacket(packet.LearnKungFu),
             Packet.TypedPacketOneofCase.ItemAttribute => KungFuOrItemAttributeMessage.FromPacket(packet.ItemAttribute),
+            Packet.TypedPacketOneofCase.RightClickAttribute => PlayerAttributeMessage.FromPacket(packet.RightClickAttribute),
+            Packet.TypedPacketOneofCase.OpenTradeWindow => OpenTradeWindowMessage.FromPacket(packet.OpenTradeWindow),
+            Packet.TypedPacketOneofCase.UpdateTradeWindow => UpdateTradeWindowMessage.FromPacket(packet.UpdateTradeWindow),
             _ => throw new NotSupportedException()
         };
     }

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cddg0m2xyiw2b"]
+
+[ext_resource type="Texture2D" uid="uid://d4h87537y72f1" path="res://assets/ui/confirm_normal.png" id="1_pg3f2"]
+[ext_resource type="Texture2D" uid="uid://637xatose3tu" path="res://assets/ui/input_confirm_down.png" id="2_j1p8p"]
+
+[node name="ConfirmButton" type="TextureButton"]
+offset_right = 80.0
+offset_bottom = 30.0
+texture_normal = ExtResource("1_pg3f2")
+texture_pressed = ExtResource("2_j1p8p")

@@ -26,9 +26,16 @@ public class CharacterInventory
 
     public bool IsFull => _items.Count >= MaxSize;
 
+    private readonly List<ISlotDoubleClickHandler> _rightClickHandlers = new();
+
     public bool CanBuy(string name, long totalMoney)
     {
         return HasEnoughMoney(totalMoney) && HasSpace(name);
+    }
+
+    public void RegisterRightClickHandler(ISlotDoubleClickHandler handler)
+    {
+        _rightClickHandlers.Add(handler);
     }
 
     public bool HasMoneySpace()
@@ -40,6 +47,19 @@ public class CharacterInventory
     {
         var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
         return item is CharacterStackItem || !IsFull;
+    }
+    public bool HasItem(int slot)
+    {
+        return _items.ContainsKey(slot);
+    }
+
+    public IItem GetOrThrow(int slot)
+    {
+        if (_items.TryGetValue(slot, out var item))
+        {
+            return item;
+        }
+        throw new KeyNotFoundException("Slot not present " + slot);
     }
 
     public void RollbackSelling(MerchantTrade trade)
@@ -297,10 +317,18 @@ public class CharacterInventory
 
     public void OnUIDoubleClick(int slot)
     {
-        if (_items.ContainsKey(slot))
+        if (!_items.ContainsKey(slot))
         {
-            _eventMediator?.NotifyServer(new DoubleClickInventorySlotMessage(slot));
+            return;
         }
+        foreach (var handler in _rightClickHandlers)
+        {
+            if (handler.Handle(this, slot))
+            {
+                return;
+            }
+        }
+        _eventMediator?.NotifyServer(new DoubleClickInventorySlotMessage(slot));
     }
 
     public void OnUIDragItem(int slot)
@@ -330,7 +358,7 @@ public class CharacterInventory
     
     public void OnRightClick(int slot)
     {
-        _eventMediator?.NotifyServer(new ClientRightClickItemEvent(RightClickType.INVENTORY, slot));
+        _eventMediator?.NotifyServer(new ClientRightClickEvent(RightClickType.INVENTORY, slot));
     }
     
     public void Foreach(Action<int, ICharacterItem> consumer)

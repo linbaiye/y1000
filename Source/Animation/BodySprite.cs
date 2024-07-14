@@ -40,7 +40,7 @@ namespace y1000.Source.Animation
 		public Panel Area => _panel;
 
 		public Label Label => _label;
-
+		
 		public override void _Process(double delta)
 		{
 			var texture = OffsetTexture;

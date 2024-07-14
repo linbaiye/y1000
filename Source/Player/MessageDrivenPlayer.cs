@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Godot;
+using y1000.Source.Character;
 using y1000.Source.Creature;
 using y1000.Source.Entity;
-using y1000.Source.Item;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
+using y1000.Source.Util;
 
 namespace y1000.Source.Player;
 
@@ -69,6 +68,16 @@ public class MessageDrivenPlayer : IEntity
     public void Handle(IEntityMessage message)
     {
         Player.Handle(message);
+    }
+
+    public bool HasPoint(Vector2 point)
+    {
+        return Player.BodyRectangle.HasPoint(point);
+    }
+
+    public bool CanBeTraded(CharacterImpl character)
+    {
+        return Player.Coordinate.Distance(character.Coordinate) <= 2;
     }
 
     public static MessageDrivenPlayer FromInterpolation(PlayerInterpolation playerInterpolation,

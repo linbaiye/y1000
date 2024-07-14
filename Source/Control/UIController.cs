@@ -6,6 +6,8 @@ using y1000.Source.Character;
 using y1000.Source.Control.Bottom;
 using y1000.Source.Control.Dialog;
 using y1000.Source.Control.LeftSide;
+using y1000.Source.Control.PlayerAttribute;
+using y1000.Source.Control.PlayerTrade;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
@@ -34,7 +36,11 @@ public partial class UIController : CanvasLayer
     
     private ItemAttributeControl _itemAttributeControl;
 
-    private readonly List<Func<ClickInventorySlotEvent, bool>> _inventoryClickActions = new();
+    private PlayerAttributeWindow _attributeWindow;
+    
+    private PlayerTradeWindow _playerTradeWindow;
+
+    private static readonly string TRADING_ERROR = "另一交易正在进行中。";
 
     public override void _Ready()
     {
@@ -44,9 +50,9 @@ public partial class UIController : CanvasLayer
         _dialogControl = GetNode<DialogControl>("DialogUI");
         _leftsideTextControl = GetNode<LeftsideTextControl>("LeftsideTextArea");
         _tradeInputWindow = GetNode<TradeInputWindow>("InputWindow");
-        _inventoryClickActions.Add(_dialogControl.OnInventorySlotClick);
-        _inventoryClickActions.Add(_bottomControl.OnInventorySlotClick);
         _itemAttributeControl = GetNode<ItemAttributeControl>("ItemAttribute");
+        _attributeWindow = GetNode<PlayerAttributeWindow>("PlayerAttributeWindow");
+        _playerTradeWindow = GetNode<PlayerTradeWindow>("PlayerTradeWindow");
         BindButtons();
     }
 
@@ -58,20 +64,10 @@ public partial class UIController : CanvasLayer
         _tradeInputWindow.BindEventMediator(eventMediator);
         _dropItemUi.BindEventMediator(eventMediator);
         _dialogControl.Initialize(spriteRepository, _tradeInputWindow, eventMediator, itemFactory);
+        _playerTradeWindow.Initialize(_tradeInputWindow);
     }
 
-    public void OnClickInventorySlotEvent(ClickInventorySlotEvent slotEvent)
-    {
-        foreach (var action in _inventoryClickActions)
-        {
-            if (action.Invoke(slotEvent))
-            {
-                break;
-            }
-        }
-    }
-
-    public void HandleTextMessage(TextMessage message)
+    public void DisplayTextMessage(TextMessage message)
     {
         if (message.Location == TextMessage.TextLocation.LEFT)
         {
@@ -96,19 +92,76 @@ public partial class UIController : CanvasLayer
         _rightControl.BindCharacter(character);
         _dialogControl.BindCharacter(character);
     }
+    
 
     public void OnMerchantClicked(Merchant merchant)
     {
-        _dialogControl.OnMerchantClicked(merchant);
+        if (IsTrading())
+        {
+            DisplayTextMessage(TRADING_ERROR);
+        }
+        else
+        {
+            _dialogControl.OnMerchantClicked(merchant);
+        }
     }
 
+    // Triggered by right-clicking item.
     public void DisplayItemAttribute(IItem item, string description)
     {
         _itemAttributeControl.Display(item, description);
     }
     
+    // Triggered by right-clicking kungfu.
     public void DisplayKungFuAttribute(IKungFu kungFu, string description)
     {
         _itemAttributeControl.Display(kungFu, description);
+    }
+
+    // Triggered by right-clicking character avatar.
+    public void DisplayCharacterAttributes(List<string> attributes)
+    {
+        _attributeWindow.DisplayAttributes(attributes);
+    }
+
+
+    private void DisplayTextMessage(string text)
+    {
+        DisplayTextMessage(new TextMessage(text, TextMessage.TextLocation.DOWN));
+    }
+
+    public void DropItem(DragInventorySlotEvent slotEvent, Vector2 mousePosition, Vector2I characterCoordinate)
+    {
+        if (IsTrading())
+        {
+            DisplayTextMessage(TRADING_ERROR);
+        }
+        else
+        {
+            _dropItemUi.OnDropItem(slotEvent, mousePosition, characterCoordinate);
+        }
+    }
+
+    public void OpenTrade(CharacterImpl character, string anotherName, int slot = 0)
+    {
+        _playerTradeWindow.Open(character, anotherName, slot);
+    }
+
+    public void UpdateTrade(UpdateTradeWindowMessage message)
+    {
+        _playerTradeWindow.Update(message);
+    }
+
+    public bool IsTrading()
+    {
+        if (_dialogControl.IsTrading)
+        {
+            return true;
+        }
+        if (_dropItemUi.Visible)
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -36,6 +36,10 @@ public class TextMessage : IServerMessage
         
         OUT_OF_AMMO = 11,
         
+        NO_MORE_PILL = 12,
+        
+        MULTI_TRADE = 13,
+        
         CUSTOM = 1000000
         ,
     }
@@ -53,6 +57,8 @@ public class TextMessage : IServerMessage
         { Type.NOT_ENOUGH_OUTER_POWER, "外功不足。" },
         { Type.NOT_ENOUGH_ARM_LIFE, "因攻击力过弱而没能获得经验。" },
         { Type.OUT_OF_AMMO, "没有弹药了。" },
+        { Type.NO_MORE_PILL, "无法再服用。" },
+        { Type.MULTI_TRADE, "交易正在进行中。" },
     };
 
     public static TextMessage FromPacket(TextMessagePacket packet)
@@ -61,7 +67,6 @@ public class TextMessage : IServerMessage
         {
             return new TextMessage(TYPE_MAP.GetValueOrDefault((Type)packet.Type, ""), (TextLocation)packet.Location);
         }
-
         return new TextMessage(packet.Text, (TextLocation)packet.Location);
     }
     

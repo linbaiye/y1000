@@ -3,17 +3,18 @@ using y1000.Source.Input;
 
 namespace y1000.Source.Networking;
 
-public class ClientRightClickItemEvent: IClientEvent
+public class ClientRightClickEvent: IClientEvent
 {
-    public ClientRightClickItemEvent(RightClickType type, int slot, int page = 0)
+    public ClientRightClickEvent(RightClickType type, int slot = 0 , int page = 0)
     {
         Type = type;
         Slot = slot;
         Page = page;
     }
+    
 
     private RightClickType Type { get; }
-    private int Slot { get; }
+    private int Slot { get; } = 0;
     private int Page { get; } = 0;
     
     public ClientPacket ToPacket()

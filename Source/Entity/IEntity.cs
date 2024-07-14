@@ -1,7 +1,5 @@
 using Godot;
-using y1000.Source.Animation;
 using y1000.Source.Networking.Server;
-using y1000.Source.Util;
 
 namespace y1000.Source.Entity
 {

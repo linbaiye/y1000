@@ -105,7 +105,7 @@ public class KungFuBook
     {
         if (page == 1 || page == 2)
         {
-            EventMediator?.NotifyServer(new ClientRightClickItemEvent(RightClickType.KUNGFU, nr, page));
+            EventMediator?.NotifyServer(new ClientRightClickEvent(RightClickType.KUNGFU, nr, page));
         }
     }
 

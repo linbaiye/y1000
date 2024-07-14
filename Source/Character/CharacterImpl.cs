@@ -344,6 +344,11 @@ namespace y1000.Source.Character
 	        }
 	        EventMediator?.NotifyServer(new ClientUnequipEvent(type));
         }
+
+        public void OnAvatarRightClick()
+        {
+	        EventMediator?.NotifyServer(new ClientRightClickEvent(RightClickType.CHARACTER));
+        }
         
 
         public CharacterInventory Inventory { get; } = new();
@@ -356,6 +361,8 @@ namespace y1000.Source.Character
 		        characterImpl.Inventory.PutItem(inventoryItemMessage.SlotId, characterItem);
 	        }
         }
+
+  
 
         public OffsetTexture BodyOffsetTexture => WrappedPlayer().BodyOffsetTexture;
         
@@ -397,6 +404,11 @@ namespace y1000.Source.Character
 			        EventMediator?.NotifyUiEvent(new KungFuAttributeEvent(kungFu, message.Description));
 		        }
 	        }
+        }
+
+        public void Visit(PlayerAttributeMessage message)
+        {
+	        EventMediator?.NotifyUiEvent(message);
         }
 
         public void Visit(DropItemMessage message)
@@ -497,6 +509,18 @@ namespace y1000.Source.Character
 	        ChangeState(CharacterStandUpState.StandUp());
         }
 
+        public void TradeWith(MessageDrivenPlayer player, int inventorySlot)
+        {
+			if (player.CanBeTraded(this) && Inventory.HasItem(inventorySlot))
+			{
+				EventMediator?.NotifyServer(new ClientTradePlayerEvent(player.Id, inventorySlot));
+			}
+			else
+			{
+				EventMediator?.NotifyTextArea("距离过远。");
+			}
+        }
+
 
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,
 	        IMap map,  ItemFactory itemFactory, EventMediator eventMediator)
@@ -527,5 +551,7 @@ namespace y1000.Source.Character
 	        AddItems(character, message, itemFactory);
 	        return character;
         }
+
+        public Rect2 BodyRectangle => WrappedPlayer().BodyRectangle;
 	}
 }

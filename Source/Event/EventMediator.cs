@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using Godot;
 using y1000.Source.Control;
 using y1000.Source.Control.Bottom;
-using y1000.Source.Control.RightSide;
 using y1000.Source.Input;
 using y1000.Source.Networking.Server;
 
@@ -13,8 +10,6 @@ public class EventMediator
 {
     private BottomControl? _bottomControl;
     
-    private DropItemUI? _dropItemUi;
-
     private Action<IClientEvent>? _clientEventSender;
 
     private Action<DragInventorySlotEvent>? _dragItemHandler;
@@ -37,11 +32,6 @@ public class EventMediator
         _bottomControl = control;
     }
 
-    public void SetComponent(DropItemUI dropItemUi)
-    {
-        _dropItemUi = dropItemUi;
-    }
-
     public void SetComponent(UIController uiController)
     {
         _uiController = uiController;
@@ -58,10 +48,6 @@ public class EventMediator
         _bottomControl?.DisplayMessage(message);
     }
 
-    public void NotifyDragItemEvent(DragInventorySlotEvent slotEvent, Vector2 mousePosition, Vector2I characterCoordinate)
-    {
-        _dropItemUi?.OnDropItem(slotEvent, mousePosition, characterCoordinate);
-    }
 
     public void NotifyUiEvent(IUiEvent e)
     {
@@ -73,10 +59,6 @@ public class EventMediator
         {
             _dragItemHandler?.Invoke(dragInventorySlotEvent);
         }
-        else if (e is ClickInventorySlotEvent slotEvent)
-        {
-            _uiController?.OnClickInventorySlotEvent(slotEvent);
-        }
         else if (e is ItemAttributeEvent attributeEvent)
         {
             _uiController?.DisplayItemAttribute(attributeEvent.Item, attributeEvent.Description);
@@ -84,6 +66,10 @@ public class EventMediator
         else if (e is KungFuAttributeEvent kungFuAttributeEvent)
         {
             _uiController?.DisplayKungFuAttribute(kungFuAttributeEvent.KungFu, kungFuAttributeEvent.Description);
+        }
+        else if (e is PlayerAttributeMessage message)
+        {
+            _uiController?.DisplayCharacterAttributes(message.FormatAttributes());
         }
     }
 }

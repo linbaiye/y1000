@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx54mp4v8uiii"]
+
+[ext_resource type="Texture2D" uid="uid://d3p4vx7toa2qu" path="res://assets/ui/cancel_normal.png" id="1_y2yrt"]
+[ext_resource type="Texture2D" uid="uid://cgpjvsiqfgifo" path="res://assets/ui/input_cancel_down.png" id="2_v7kg3"]
+
+[node name="CancelButton" type="TextureButton"]
+offset_right = 80.0
+offset_bottom = 30.0
+texture_normal = ExtResource("1_y2yrt")
+texture_pressed = ExtResource("2_v7kg3")

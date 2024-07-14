@@ -265,9 +265,25 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private void OnDragItemEvent(DragInventorySlotEvent slotEvent)
 	{
-		if (_character != null)
+		if (_character == null || _uiController == null)
 		{
-			_eventMediator.NotifyDragItemEvent(slotEvent, GetGlobalMousePosition(), _character.Coordinate);
+			return;
+		}
+
+		if (_uiController.IsTrading())
+		{
+			_uiController.DisplayTextMessage(new TextMessage("另一交易正在进行中。", TextMessage.TextLocation.DOWN));
+			return;
+		}
+		var globalMousePosition = GetGlobalMousePosition();
+		var player = _entityManager.SelectFirst<MessageDrivenPlayer>(player => player.Id != _character.Id && player.HasPoint(globalMousePosition));
+		if (player != null)
+		{
+			_character.TradeWith(player, slotEvent.Slot);
+		}
+		else
+		{
+			_uiController.DropItem(slotEvent, globalMousePosition, _character.Coordinate);
 		}
 	}
 
@@ -289,7 +305,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(TextMessage message)
 	{
-		_uiController?.HandleTextMessage(message);
+		_uiController?.DisplayTextMessage(message);
 	}
 		
 
@@ -338,6 +354,21 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		AddChild(Projectile.LoadFor(shooter, creature, message.SpriteId));
 	}
 
+
+	public void Visit(OpenTradeWindowMessage message)
+	{
+		var player = _entityManager.SelectFirst<MessageDrivenPlayer>(p => p.Id.Equals(message.TargetId));
+		if (player == null || _character == null)
+		{
+			return;
+		}
+		_uiController?.OpenTrade(_character, player.EntityName, message.SlotId);
+	}
+	
+	public void Visit(UpdateTradeWindowMessage message)
+	{
+		_uiController?.UpdateTrade(message);
+	}
 
 	public void Visit(JoinedRealmMessage joinedRealmMessage)
 	{

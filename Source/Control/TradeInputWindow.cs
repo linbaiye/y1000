@@ -20,18 +20,6 @@ public partial class TradeInputWindow : NinePatchRect
 	private Action<bool>? _callback;
 	private EventMediator? _eventMediator;
 	
-	private ITradeWindowItem? _item;
-	
-	public T? Item<T>() where T : ITradeWindowItem
-	{
-		return _item != null ? (T)_item : default;
-	}
-	
-	public interface ITradeWindowItem
-	{
-		string Name { get; }
-	}
-
 	public override void _Ready()
 	{
 		_itemName = GetNode<Label>("ItemName");
@@ -60,16 +48,6 @@ public partial class TradeInputWindow : NinePatchRect
 		_input.Text = number;
 		Visible = true;
 		_input.GrabFocus();
-	}
-	
-	public void Open(ITradeWindowItem item, long number, Action<bool> callback)
-	{
-		_callback = callback;
-		_itemName.Text = item.Name;
-		_input.Text = number != 0 ? number.ToString() : "";
-		Visible = true;
-		_input.GrabFocus();
-		_item = item;
 	}
 	
 	

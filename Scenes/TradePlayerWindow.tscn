@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=3 uid="uid://clr852egfmuqb"]
+
+[ext_resource type="Texture2D" uid="uid://t6dv2k2758dm" path="res://assets/ui/trade_window.png" id="1_aa8iq"]
+[ext_resource type="Script" path="res://Source/Control/PlayerTrade/PlayerTradeWindow.cs" id="2_e3ryd"]
+[ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_equnm"]
+[ext_resource type="PackedScene" uid="uid://maxv8qp7tdqt" path="res://Scenes/TextLabel.tscn" id="3_eq3qf"]
+[ext_resource type="PackedScene" uid="uid://cddg0m2xyiw2b" path="res://Scenes/ConfirmButton.tscn" id="4_lv45r"]
+[ext_resource type="PackedScene" uid="uid://bx54mp4v8uiii" path="res://Scenes/CancelButton.tscn" id="5_fu3tp"]
+
+[node name="PlayerTradeWindow" type="NinePatchRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -806.0
+offset_bottom = -511.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_aa8iq")
+script = ExtResource("2_e3ryd")
+
+[node name="Slot1" parent="." instance=ExtResource("2_equnm")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 72.0
+offset_right = 59.0
+offset_bottom = 112.0
+
+[node name="Slot2" parent="." instance=ExtResource("2_equnm")]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 72.0
+offset_right = 105.0
+offset_bottom = 112.0
+
+[node name="Slot3" parent="." instance=ExtResource("2_equnm")]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 72.0
+offset_right = 151.0
+offset_bottom = 112.0
+
+[node name="Slot4" parent="." instance=ExtResource("2_equnm")]
+layout_mode = 0
+offset_left = 157.0
+offset_top = 72.0
+offset_right = 197.0
+offset_bottom = 112.0
+
+[node name="Slot5" parent="." instance=ExtResource("2_equnm")]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 156.0
+offset_right = 59.0
+offset_bottom = 196.0
+
+[node name="Slot6" parent="." instance=ExtResource("2_equnm")]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 156.0
+offset_right = 105.0
+offset_bottom = 196.0
+
+[node name="Slot7" parent="." instance=ExtResource("2_equnm")]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 156.0
+offset_right = 151.0
+offset_bottom = 196.0
+
+[node name="Slot8" parent="." instance=ExtResource("2_equnm")]
+layout_mode = 0
+offset_left = 157.0
+offset_top = 156.0
+offset_right = 197.0
+offset_bottom = 196.0
+
+[node name="MyNameLabel" parent="." instance=ExtResource("3_eq3qf")]
+layout_mode = 1
+offset_left = 93.0
+offset_top = 43.0
+offset_right = -29.0
+offset_bottom = -198.0
+
+[node name="AnotherNameLabel" parent="." instance=ExtResource("3_eq3qf")]
+layout_mode = 1
+offset_left = 93.0
+offset_top = 127.0
+offset_right = -29.0
+offset_bottom = -114.0
+
+[node name="ConfirmButton" parent="." instance=ExtResource("4_lv45r")]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 214.0
+offset_right = 97.0
+offset_bottom = 244.0
+
+[node name="CancelButton" parent="." instance=ExtResource("5_fu3tp")]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 214.0
+offset_right = 200.0
+offset_bottom = 244.0

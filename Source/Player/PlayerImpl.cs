@@ -353,4 +353,16 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		LOGGER.Debug("Created player {0} at {1}, visible {2}.", player.Id, player.Position, player.Visible);
 		return player;
 	}
+
+	public Rect2 BodyRectangle
+	{
+		get
+		{
+			var bodySprite = GetNode<BodySprite>("Body");
+			var position = Position;
+			position += bodySprite.Offset;
+			var size = bodySprite.Texture.GetSize();
+			return new Rect2(position, size);
+		}
+	}
 }

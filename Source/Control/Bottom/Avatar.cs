@@ -2,6 +2,7 @@ using System;
 using Godot;
 using NLog;
 using y1000.Source.Character;
+using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Sprite;
 
@@ -25,7 +26,7 @@ public partial class Avatar : NinePatchRect
 	private BlinkingText? _blinkingText;
 	private static readonly AvatarPart MAKE_COMPILER_HAPPY = new();
 
-	private Action<EquipmentType>? _doubleClickHandler;
+	private CharacterImpl? _character;
 	
 	private const int AvatarIndex = 57;
 
@@ -80,7 +81,7 @@ public partial class Avatar : NinePatchRect
 		DrawWrist(character.Wrist);
 		DrawClothing(character.Clothing);
 		DrawTrouser(character.Trouser);
-		_doubleClickHandler = character.OnAvatarDoubleClick;
+		_character = character;
 	}
 
 	public void BlinkText(string text)
@@ -199,29 +200,29 @@ public partial class Avatar : NinePatchRect
 	{
 		switch (name)
 		{
-			case "Chest":  _doubleClickHandler?.Invoke(EquipmentType.CHEST);
+			case "Chest":  _character?.OnAvatarDoubleClick(EquipmentType.CHEST);
 				break;
-			case "Hat":  _doubleClickHandler?.Invoke(EquipmentType.HAT);
+			case "Hat":  _character?.OnAvatarDoubleClick(EquipmentType.HAT);
 				break;
-			case "Boot":  _doubleClickHandler?.Invoke(EquipmentType.BOOT);
+			case "Boot":  _character?.OnAvatarDoubleClick(EquipmentType.BOOT);
 				break;
-			case "Hair":  _doubleClickHandler?.Invoke(EquipmentType.HAIR);
+			case "Hair":  _character?.OnAvatarDoubleClick(EquipmentType.HAIR);
 				break;
-			case "Wrist":  _doubleClickHandler?.Invoke(EquipmentType.WRIST);
+			case "Wrist":  _character?.OnAvatarDoubleClick(EquipmentType.WRIST);
 				break;
-			case "Hand":  _doubleClickHandler?.Invoke(EquipmentType.WEAPON);
+			case "Hand":  _character?.OnAvatarDoubleClick(EquipmentType.WEAPON);
 				break;
-			case "Trouser":  _doubleClickHandler?.Invoke(EquipmentType.TROUSER);
+			case "Trouser":  _character?.OnAvatarDoubleClick(EquipmentType.TROUSER);
 				break;
-			case "Clothing":  _doubleClickHandler?.Invoke(EquipmentType.CLOTHING);
+			case "Clothing":  _character?.OnAvatarDoubleClick(EquipmentType.CLOTHING);
 				break;
 		}
 		LOG.Debug("Name {0} was clicked", name);
 	}
 
-	public void OnPartClicked()
+	public void OnRightClicked()
 	{
-		
+		_character?.OnAvatarRightClick();
 	}
 
 	public void OnMouseEntered(AvatarPart part)

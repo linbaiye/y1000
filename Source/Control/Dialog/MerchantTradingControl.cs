@@ -10,7 +10,7 @@ using y1000.Source.Sprite;
 
 namespace y1000.Source.Control.Dialog;
 
-public partial class MerchantTradingControl : AbstractMerchantControl
+public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoubleClickHandler
 {
     private ItemList _itemList;
     
@@ -274,17 +274,25 @@ public partial class MerchantTradingControl : AbstractMerchantControl
         _trade = new MerchantTrade();
         Open();
     }
+    
+    public bool IsTrading {
+        get
+        {
+            if (_tradeInputWindow != null && _tradeInputWindow.Visible)
+            {
+                return true;
+            }
+            return Visible;
+        }
+    }
 
-    /*
-     * Clicking in inventory meaning we are selling things.
-     */
-    public bool OnInventorySlotClick(ClickInventorySlotEvent slotEvent)
+    public bool Handle(CharacterInventory inventory, int slot)
     {
         if (!Visible || !_playerSelling || Merchant == null)
         {
             return false;
         }
-        var characterItem = slotEvent.Inventory.Find(slotEvent.Slot);
+        var characterItem = inventory.Find(slot);
         if (characterItem == null)
         {
             return false;

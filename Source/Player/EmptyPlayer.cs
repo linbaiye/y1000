@@ -25,4 +25,5 @@ public class EmptyPlayer : IPlayer
     public Vector2 BodyPosition { get; }
 
     public Vector2I Coordinate { get; }
+    public Rect2 BodyRectangle { get; }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=13 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://bqv6d0i2cli8e" path="res://Scenes/DropItemUI.tscn" id="6_wxera"]
 [ext_resource type="Script" path="res://Source/Control/TradeInputWindow.cs" id="7_6qoal"]
 [ext_resource type="PackedScene" uid="uid://dj8hiigwray" path="res://Scenes/DialogWindow.tscn" id="7_syuii"]
-[ext_resource type="PackedScene" uid="uid://dfsv4j0dgxkm3" path="res://Scenes/LeftsideTextArea.tscn" id="9_0412u"]
-[ext_resource type="PackedScene" uid="uid://dvqgh5uxjoqh1" path="res://Scenes/ItemAttribute.tscn" id="10_xy80o"]
+[ext_resource type="PackedScene" uid="uid://cqtmvg303wl2s" path="res://Scenes/LeftsideTextArea.tscn" id="9_0412u"]
+[ext_resource type="PackedScene" uid="uid://dw4kky7kku6qg" path="res://Scenes/ItemAttribute.tscn" id="10_xy80o"]
+[ext_resource type="PackedScene" uid="uid://bf5l5nu0lr8qr" path="res://Scenes/PlayerAttributeWindow.tscn" id="11_yghsv"]
+[ext_resource type="PackedScene" uid="uid://clr852egfmuqb" path="res://Scenes/TradePlayerWindow.tscn" id="12_mif0g"]
 
 [node name="Game" type="Node2D"]
 z_as_relative = false
@@ -37,7 +39,6 @@ offset_bottom = 29.0
 visible = false
 
 [node name="InputWindow" parent="UILayer" instance=ExtResource("6_wxera")]
-visible = false
 script = ExtResource("7_6qoal")
 
 [node name="DialogUI" parent="UILayer" instance=ExtResource("7_syuii")]
@@ -58,6 +59,10 @@ offset_left = 383.0
 offset_top = 226.0
 offset_right = -385.0
 offset_bottom = -355.0
+
+[node name="PlayerAttributeWindow" parent="UILayer" instance=ExtResource("11_yghsv")]
+
+[node name="PlayerTradeWindow" parent="UILayer" instance=ExtResource("12_mif0g")]
 
 [node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -12.18

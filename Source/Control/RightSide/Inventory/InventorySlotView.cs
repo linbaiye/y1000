@@ -16,6 +16,8 @@ public partial class InventorySlotView : Panel
 
 	private bool _mouseHovered;
 
+	private TextureRect _textureRect;
+	
 	public override void _GuiInput(InputEvent @event)
 	{
 		if (@event is InputEventMouseButton eventMouseButton)
@@ -74,6 +76,7 @@ public partial class InventorySlotView : Panel
 		ParseNumber();
 		MouseEntered += OnMouseEntered;
 		MouseExited += OnMouseExited;
+		_textureRect = GetNode<TextureRect>("CenterContainer/TextureRect");
 	}
 
 
@@ -85,26 +88,22 @@ public partial class InventorySlotView : Panel
 
 	public int Number => _number;
 
-	public void PutItem(Texture2D texture2D)
+	public void PutTexture(Texture2D texture2D)
 	{
-		GetNode<TextureRect>("CenterContainer/TextureRect").Texture = texture2D;
+		_textureRect.Texture = texture2D;
 	}
 
 	public void PutTextureAndTooltip(Texture2D texture2D, string tip)
 	{
-		var textureRect = GetNode<TextureRect>("CenterContainer/TextureRect");
-		textureRect.Texture = texture2D;
+		_textureRect.Texture = texture2D;
 		TooltipText = tip;
 	}
 
 	public void Clear()
 	{
-		GetNode<TextureRect>("CenterContainer/TextureRect").Texture = null;
+		_textureRect.Texture = null;
 		TooltipText = "";
 	}
-	
-    public void ButtonClicked()
-    {
-        Visible = !Visible;
-    }
+
+	public bool IsEmpty => _textureRect.Texture != null;
 }
