@@ -286,7 +286,7 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         }
     }
 
-    public bool Handle(CharacterInventory inventory, int slot)
+    public bool HandleInventorySlotDoubleClick(CharacterInventory inventory, int slot)
     {
         if (!Visible || !_playerSelling || Merchant == null)
         {

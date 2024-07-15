@@ -4,5 +4,5 @@ namespace y1000.Source.Character;
 
 public interface ISlotDoubleClickHandler
 {
-    bool Handle(CharacterInventory inventory, int slot);
+    bool HandleInventorySlotDoubleClick(CharacterInventory inventory, int slot);
 }

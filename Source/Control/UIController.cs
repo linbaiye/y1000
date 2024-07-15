@@ -64,7 +64,7 @@ public partial class UIController : CanvasLayer
         _tradeInputWindow.BindEventMediator(eventMediator);
         _dropItemUi.BindEventMediator(eventMediator);
         _dialogControl.Initialize(spriteRepository, _tradeInputWindow, eventMediator, itemFactory);
-        _playerTradeWindow.Initialize(_tradeInputWindow);
+        _playerTradeWindow.Initialize(_tradeInputWindow, eventMediator);
     }
 
     public void DisplayTextMessage(TextMessage message)

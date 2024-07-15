@@ -19,6 +19,19 @@ public partial class TradeInputWindow : NinePatchRect
 
 	private Action<bool>? _callback;
 	private EventMediator? _eventMediator;
+
+	private InventoryTradeItem? _tradeItem;
+	
+	public class InventoryTradeItem
+	{
+		public InventoryTradeItem(string name, int slot)
+		{
+			Name = name;
+			Slot = slot;
+		}
+		public string Name { get; }
+		public int Slot { get; }
+	}
 	
 	public override void _Ready()
 	{
@@ -55,6 +68,14 @@ public partial class TradeInputWindow : NinePatchRect
 	{
 		Open(name, number.ToString(), callback);
 	}
+	
+	public void Open(InventoryTradeItem inventoryTradeItem, long number, Action<bool> callback)
+	{
+		Open(inventoryTradeItem.Name, number.ToString(), callback);
+		_tradeItem = inventoryTradeItem;
+	}
+
+	public InventoryTradeItem? TradeItem => _tradeItem;
 
 	private void OnCancelPressed()
 	{

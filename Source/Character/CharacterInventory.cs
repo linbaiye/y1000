@@ -160,6 +160,20 @@ public class CharacterInventory
             || item is CharacterItem;
     }
 
+    public bool HasEnough(int slot, string name, long number)
+    {
+        if (!_items.TryGetValue(slot, out var item))
+        {
+            return false;
+        }
+        if (!item.ItemName.Equals(name))
+        {
+            return false;
+        }
+        return item is CharacterStackItem stackItem && stackItem.Number >= number
+            || item is CharacterItem;
+    }
+
     public bool Sell(ICharacterItem sellingItem, CharacterStackItem money, MerchantTrade trade)
     {
         if (!HasMoneySpace())
@@ -323,7 +337,7 @@ public class CharacterInventory
         }
         foreach (var handler in _rightClickHandlers)
         {
-            if (handler.Handle(this, slot))
+            if (handler.HandleInventorySlotDoubleClick(this, slot))
             {
                 return;
             }

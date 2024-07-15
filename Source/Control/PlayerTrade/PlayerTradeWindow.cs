@@ -2,6 +2,8 @@
 using y1000.Source.Character;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Control.RightSide.Inventory;
+using y1000.Source.Event;
+using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 using y1000.Source.Sprite;
 
@@ -24,6 +26,10 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
     private readonly IconReader _itemIconReader = IconReader.ItemIconReader;
 
     private TradeInputWindow _tradeInputWindow;
+    
+    private CharacterInventory _inventory;
+    
+    private EventMediator? EventMediator { get; set; }
 
     public override void _Ready()
     {
@@ -46,9 +52,10 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
     }
 
 
-    public void Initialize(TradeInputWindow tradeInputWindow)
+    public void Initialize(TradeInputWindow tradeInputWindow, EventMediator eventMediator)
     {
         _tradeInputWindow = tradeInputWindow;
+        EventMediator = eventMediator;
     }
 
     private void OnSlotEvent(object? sender, SlotEvent slotEvent)
@@ -78,14 +85,16 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         {
             return;
         }
+
         Clear();
         _myNameLabel.Text = character.EntityName;
         _anoterNameLabel.Text = anotherName;
         if (slot != 0)
         {
             var item = character.Inventory.GetOrThrow(slot);
-            _tradeInputWindow.Open(item.ItemName, 1, OnInputWindowEvent);
+            _tradeInputWindow.Open(new TradeInputWindow.InventoryTradeItem(item.ItemName, slot), 1, OnInputWindowEvent);
         }
+        _inventory = character.Inventory;
         Visible = true;
     }
 
@@ -100,7 +109,20 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
 
     private void OnInputWindowEvent(bool confirmed)
     {
-        
+        if (!confirmed)
+        {
+            return;
+        }
+        var tradeItem = _tradeInputWindow.TradeItem;
+        if (tradeItem == null)
+        {
+            return;
+        }
+        if (!_inventory.HasEnough(tradeItem.Slot, tradeItem.Name, _tradeInputWindow.Number))
+        {
+            return;
+        }
+        EventMediator?.NotifyServer(new ClientAddTradeItemEvent(tradeItem.Slot, _tradeInputWindow.Number));
     }
 
     private void OnCancelPressed()
@@ -114,7 +136,7 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
     }
     
 
-    public bool Handle(CharacterInventory inventory, int slot)
+    public bool HandleInventorySlotDoubleClick(CharacterInventory inventory, int slot)
     {
         if (!Visible)
         {
