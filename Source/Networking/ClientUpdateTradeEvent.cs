@@ -51,5 +51,14 @@ public class ClientUpdateTradeEvent : IClientEvent
     {
         return new (0, 0,UpdateType.REMOVE_ITEM, tradeWindowSlot);
     }
+
+    public static ClientUpdateTradeEvent Cancel()
+    {
+        return new (0, 0,UpdateType.CANCEL, 0);
+    }
     
+    public static ClientUpdateTradeEvent Confirm()
+    {
+        return new (0, 0,UpdateType.CONFIRM, 0);
+    }
 }

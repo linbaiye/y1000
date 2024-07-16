@@ -84,9 +84,9 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         {
             slot.Clear();
         }
-
         _myNameLabel.Text = "";
         _anoterNameLabel.Text = "";
+        _confirmButton.ButtonPressed = false;
     }
 
     public void Open(CharacterImpl character, string anotherName, int slot = 0)
@@ -126,6 +126,19 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         }
     }
 
+    private void RemoveItem(UpdateTradeWindowMessage message)
+    {
+        if (message.Self)
+        {
+            _mySlots[message.Slot - 1].Clear();
+        }
+        else
+        {
+            _playerSlots[message.Slot - 1].Clear();
+        }
+        
+    }
+
     public void Update(UpdateTradeWindowMessage message)
     {
         if (message.Type == UpdateTradeWindowMessage.UpdateType.CLOSE_WINDOW)
@@ -135,6 +148,10 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         else if (message.Type == UpdateTradeWindowMessage.UpdateType.ADD_ITEM)
         {
             AddItem(message);
+        }
+        else if (message.Type == UpdateTradeWindowMessage.UpdateType.REMOVE_ITEM)
+        {
+            RemoveItem(message);
         }
     }
 
@@ -160,13 +177,12 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
 
     private void OnCancelPressed()
     {
-        Visible = false;
-        // EventMediator?.NotifyServer();
+        EventMediator?.NotifyServer(ClientUpdateTradeEvent.Cancel());
     }
     
     private void OnConfirmPressed()
     {
-        Visible = false;
+        EventMediator?.NotifyServer(ClientUpdateTradeEvent.Confirm());
     }
     
 
