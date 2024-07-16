@@ -1,8 +1,10 @@
 ﻿using Godot;
+using Source.Networking.Protobuf;
 using y1000.Source.Character;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Control.RightSide.Inventory;
 using y1000.Source.Event;
+using y1000.Source.Item;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 using y1000.Source.Sprite;
@@ -28,6 +30,7 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
     private TradeInputWindow _tradeInputWindow;
     
     private CharacterInventory _inventory;
+    private readonly ItemFactory _itemFactory = ItemFactory.Instance;
     
     private EventMediator? EventMediator { get; set; }
 
@@ -60,7 +63,14 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
 
     private void OnSlotEvent(object? sender, SlotEvent slotEvent)
     {
-        
+        if (sender is not InventorySlotView slotView)
+        {
+            return;
+        }
+        if (slotEvent.EventType == SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK && slotView.Number < 5)
+        {
+            EventMediator?.NotifyServer(ClientUpdateTradeEvent.RemoveItem(slotView.Number));
+        }
     }
 
 
@@ -85,7 +95,7 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         {
             return;
         }
-
+        character.Inventory.RegisterRightClickHandler(this);
         Clear();
         _myNameLabel.Text = character.EntityName;
         _anoterNameLabel.Text = anotherName;
@@ -98,11 +108,33 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         Visible = true;
     }
 
+    private void AddItem(UpdateTradeWindowMessage message)
+    {
+        var item = _itemFactory.CreateCharacterItem(message.Name, message.Number);
+        var texture2D = _itemIconReader.Get(item.IconId);
+        if (texture2D == null)
+        {
+            return;
+        }
+        if (message.Self)
+        {
+            _mySlots[message.Slot - 1].PutTextureAndTooltip(texture2D, item.ItemName + ":" + message.Number);
+        }
+        else
+        {
+            _playerSlots[message.Slot - 1].PutTextureAndTooltip(texture2D, item.ItemName + ":" + message.Number);
+        }
+    }
+
     public void Update(UpdateTradeWindowMessage message)
     {
-        if (message.Type == UpdateTradeWindowMessage.UpdateType.CLOSE)
+        if (message.Type == UpdateTradeWindowMessage.UpdateType.CLOSE_WINDOW)
         {
             Visible = false;
+        }
+        else if (message.Type == UpdateTradeWindowMessage.UpdateType.ADD_ITEM)
+        {
+            AddItem(message);
         }
     }
 
@@ -120,14 +152,16 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         }
         if (!_inventory.HasEnough(tradeItem.Slot, tradeItem.Name, _tradeInputWindow.Number))
         {
+            EventMediator?.NotifyTextArea("持有数量不足。");
             return;
         }
-        EventMediator?.NotifyServer(new ClientAddTradeItemEvent(tradeItem.Slot, _tradeInputWindow.Number));
+        EventMediator?.NotifyServer(ClientUpdateTradeEvent.AddItem(tradeItem.Slot, _tradeInputWindow.Number));
     }
 
     private void OnCancelPressed()
     {
         Visible = false;
+        // EventMediator?.NotifyServer();
     }
     
     private void OnConfirmPressed()
@@ -142,7 +176,8 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         {
             return false;
         }
-
+        var item = inventory.GetOrThrow(slot);
+        _tradeInputWindow.Open(new TradeInputWindow.InventoryTradeItem(item.ItemName, slot), 1, OnInputWindowEvent);
         return true;
     }
 }

@@ -35,7 +35,8 @@ public class CharacterInventory
 
     public void RegisterRightClickHandler(ISlotDoubleClickHandler handler)
     {
-        _rightClickHandlers.Add(handler);
+        if (!_rightClickHandlers.Contains(handler))
+            _rightClickHandlers.Add(handler);
     }
 
     public bool HasMoneySpace()
