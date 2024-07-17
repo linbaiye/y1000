@@ -357,7 +357,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(OpenTradeWindowMessage message)
 	{
-		var player = _entityManager.SelectFirst<MessageDrivenPlayer>(p => p.Id.Equals(message.TargetId));
+		var player = _entityManager.SelectFirst<IPlayer>(p => p.Id.Equals(message.TargetId));
 		if (player == null || _character == null)
 		{
 			return;

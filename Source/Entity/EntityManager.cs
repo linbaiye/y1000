@@ -15,9 +15,9 @@ public class EntityManager
     
     private EntityManager() {}
 
-    public void Add(IPlayer player)
+    public bool Add(IPlayer player)
     {
-        _entities.TryAdd(player.Id, player);
+        return _entities.TryAdd(player.Id, player);
     }
 
     public IEntity? Remove(long id)

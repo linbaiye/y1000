@@ -88,8 +88,8 @@ public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimati
         return weapon.AttackKungFuType switch
         {
             AttackKungFuType.QUANFA=>  Load("_/_11" + MAGIC_SDB_READER.GetEffect("无名拳法"), CreatureState.FIST, CreatureState.KICK),
-            //AttackKungFuType.SWORD => Load("_/_22" + MAGIC_SDB_READER.GetEffect("飞龙剑法"), CreatureState.SWORD, CreatureState.SWORD2H),
-            AttackKungFuType.SWORD => Load("_/_12" + MAGIC_SDB_READER.GetEffect("无名剑法"), CreatureState.SWORD, CreatureState.SWORD2H),
+            AttackKungFuType.SWORD => Load("_/_22" + MAGIC_SDB_READER.GetEffect("飞龙剑法"), CreatureState.SWORD, CreatureState.SWORD2H),
+            //AttackKungFuType.SWORD => Load("_/_12" + MAGIC_SDB_READER.GetEffect("无名剑法"), CreatureState.SWORD, CreatureState.SWORD2H),
             AttackKungFuType.BLADE =>  Load("_/_13" + MAGIC_SDB_READER.GetEffect("无名刀法"), CreatureState.BLADE, CreatureState.BLADE2H),
             AttackKungFuType.AXE =>  Load("_/_14" + MAGIC_SDB_READER.GetEffect("无名槌法"), CreatureState.AXE),
             AttackKungFuType.SPEAR =>  Load("_/_15" + MAGIC_SDB_READER.GetEffect("无名枪术"), CreatureState.SPEAR),

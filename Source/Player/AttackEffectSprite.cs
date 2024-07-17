@@ -5,7 +5,6 @@ namespace y1000.Source.Player;
 
 public partial class AttackEffectSprite  : Sprite2D
 {
-
     public override void _Process(double delta)
     {
         OffsetTexture? offsetTexture = GetParent<IPlayerAnimation>().AttackEffect;
