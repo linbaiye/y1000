@@ -11,13 +11,17 @@ namespace y1000.Source.Animation;
 public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimation>
 {
     private static readonly MagicSdbReader MAGIC_SDB_READER = MagicSdbReader.Instance;
-    public WeaponEffectAnimation(CreatureState state1, CreatureState? state2)
+
+    private WeaponEffectAnimation(CreatureState state1, CreatureState? state2)
     {
         State1 = state1;
         State2 = state2;
     }
 
+    public int EffectId { get; private set; } = 0;
+
     private CreatureState State1 { get; }
+    
     private CreatureState? State2 { get; }
 
     private static WeaponEffectAnimation Load(string name, CreatureState state1, CreatureState? state2 = null)
@@ -29,7 +33,6 @@ public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimati
         {
             playerAnimation.ConfigureState(state2.Value, AtdStructure, attack);
         }
-
         return playerAnimation;
     }
 
@@ -81,23 +84,31 @@ public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimati
         }
         return OffsetTexture(state, direction, elpased);
     }
-    
 
-    public static WeaponEffectAnimation LoadFor(PlayerWeapon weapon)
+
+    private static WeaponEffectAnimation Create(CreatureState state, int id)
     {
-        return weapon.AttackKungFuType switch
+        return state switch 
         {
-            AttackKungFuType.QUANFA=>  Load("_/_11" + MAGIC_SDB_READER.GetEffect("无名拳法"), CreatureState.FIST, CreatureState.KICK),
-            AttackKungFuType.SWORD => Load("_/_22" + MAGIC_SDB_READER.GetEffect("飞龙剑法"), CreatureState.SWORD, CreatureState.SWORD2H),
-            //AttackKungFuType.SWORD => Load("_/_12" + MAGIC_SDB_READER.GetEffect("无名剑法"), CreatureState.SWORD, CreatureState.SWORD2H),
-            AttackKungFuType.BLADE =>  Load("_/_13" + MAGIC_SDB_READER.GetEffect("无名刀法"), CreatureState.BLADE, CreatureState.BLADE2H),
-            AttackKungFuType.AXE =>  Load("_/_14" + MAGIC_SDB_READER.GetEffect("无名槌法"), CreatureState.AXE),
-            AttackKungFuType.SPEAR =>  Load("_/_15" + MAGIC_SDB_READER.GetEffect("无名枪术"), CreatureState.SPEAR),
-            AttackKungFuType.BOW =>  Load("_/_16" + MAGIC_SDB_READER.GetEffect("无名弓术"), CreatureState.BOW),
-            /*AttackKungFuType.AXE =>  Load("_/_14" + MAGIC_SDB_READER.GetEffect("无名槌法"), CreatureState.SWORD, CreatureState.SWORD2H),
-            AttackKungFuType.BOW => Load(),
-            AttackKungFuType.SPEAR => Load(weapon.NonAttackAnimation, weapon.AttackAnimation, CreatureState.SPEAR),*/
+            CreatureState.FIST => Load("_/_11" + id, CreatureState.FIST, CreatureState.KICK),
+            CreatureState.KICK => Load("_/_11" + id, CreatureState.FIST, CreatureState.KICK),
+            CreatureState.SWORD => Load("_/_12" + id, CreatureState.SWORD, CreatureState.SWORD2H),
+            CreatureState.SWORD2H => Load("_/_12" + id, CreatureState.SWORD, CreatureState.SWORD2H),
+            CreatureState.BLADE => Load("_/_13" + id, CreatureState.BLADE, CreatureState.BLADE2H),
+            CreatureState.BLADE2H => Load("_/_13" + id, CreatureState.BLADE, CreatureState.BLADE2H),
+            CreatureState.AXE => Load("_/_14" + id, CreatureState.AXE),
+            CreatureState.SPEAR => Load("_/_15" + id, CreatureState.SPEAR),
+            CreatureState.BOW => Load("_/_16" + id, CreatureState.BOW),
+            CreatureState.THROW => Load("_/_17" + id, CreatureState.THROW),
             _ => throw new NotImplementedException()
         };
+    }
+
+
+    public static WeaponEffectAnimation LoadFor(CreatureState state, int id)
+    {
+        var ani = Create(state, id);
+        ani.EffectId = id;
+        return ani;
     }
 }

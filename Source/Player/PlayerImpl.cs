@@ -82,7 +82,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	private void ChangeWeapon(PlayerWeapon? weapon)
 	{
 		_handAnimation = weapon != null ? PlayerWeaponAnimation.LoadFor(weapon) : null;
-		_effectAnimation = weapon != null ? WeaponEffectAnimation.LoadFor(weapon) : null;
 		Weapon = weapon;
 		GetNode<Sprite2D>("Hand").Visible = weapon != null;
 	}
@@ -313,9 +312,24 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public OffsetTexture? TrouserTexture => _trouserAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? AttackEffect => _effectAnimation?.GetIfAttacking(_state.State, Direction, _state.ElapsedMillis);
 
+
+	public void UpdateAttackEffect(PlayerAttackMessage message)
+	{
+		if (message.EffectId != 0)
+		{
+			if (_effectAnimation == null || _effectAnimation.EffectId != message.EffectId)
+				_effectAnimation = WeaponEffectAnimation.LoadFor(message.State, message.EffectId);
+		}
+		else
+		{
+			_effectAnimation = null;
+		}
+	}
+
 	public void Visit(PlayerAttackMessage message)
 	{
 		SetPosition(message.Coordinate, message.Direction);
+		UpdateAttackEffect(message);
 		ChangeState(IPlayerState.Attack(message));
 	}
 

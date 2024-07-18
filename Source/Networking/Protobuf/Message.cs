@@ -42,7 +42,7 @@ namespace Source.Networking.Protobuf {
             "aWQYASABKAMSDQoFc291bmQYAiABKAkikwEKGUNyZWF0dXJlQXR0YWNrRXZl",
             "bnRQYWNrZXQSCgoCaWQYASABKAMSEQoJZGlyZWN0aW9uGAIgASgFEg0KBXN0",
             "YXRlGAMgASgFEg4KBnBsYXllchgEIAEoCBIJCgF4GAUgASgFEgkKAXkYBiAB",
-            "KAUSFQoIdGFyZ2V0SWQYByABKANIAIgBAUILCglfdGFyZ2V0SWQiNQoYQ3Jl",
+            "KAUSFQoIZWZmZWN0SWQYByABKAVIAIgBAUILCglfZWZmZWN0SWQiNQoYQ3Jl",
             "YXR1cmVTb3VuZEV2ZW50UGFja2V0EgoKAmlkGAEgASgDEg0KBXNvdW5kGAIg",
             "ASgJIpsBChdDcmVhdHVyZUh1cnRFdmVudFBhY2tldBIKCgJpZBgBIAEoAxIR",
             "CglkaXJlY3Rpb24YAiABKAUSCQoBeBgDIAEoBRIJCgF5GAQgASgFEhYKDmFm",
@@ -247,7 +247,7 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PickItemPacket), global::Source.Networking.Protobuf.PickItemPacket.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerLoginPacket), global::Source.Networking.Protobuf.PlayerLoginPacket.Parser, new[]{ "Token" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureDieEventPacket), global::Source.Networking.Protobuf.CreatureDieEventPacket.Parser, new[]{ "Id", "Sound" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureAttackEventPacket), global::Source.Networking.Protobuf.CreatureAttackEventPacket.Parser, new[]{ "Id", "Direction", "State", "Player", "X", "Y", "TargetId" }, new[]{ "TargetId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureAttackEventPacket), global::Source.Networking.Protobuf.CreatureAttackEventPacket.Parser, new[]{ "Id", "Direction", "State", "Player", "X", "Y", "EffectId" }, new[]{ "EffectId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureSoundEventPacket), global::Source.Networking.Protobuf.CreatureSoundEventPacket.Parser, new[]{ "Id", "Sound" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureHurtEventPacket), global::Source.Networking.Protobuf.CreatureHurtEventPacket.Parser, new[]{ "Id", "Direction", "X", "Y", "AfterHurtState", "CurrentLife", "MaxLife", "Sound" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ChangeStatePacket), global::Source.Networking.Protobuf.ChangeStatePacket.Parser, new[]{ "Id", "State" }, null, null, null, null),
@@ -2838,7 +2838,7 @@ namespace Source.Networking.Protobuf {
       player_ = other.player_;
       x_ = other.x_;
       y_ = other.y_;
-      targetId_ = other.targetId_;
+      effectId_ = other.effectId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2920,30 +2920,30 @@ namespace Source.Networking.Protobuf {
       }
     }
 
-    /// <summary>Field number for the "targetId" field.</summary>
-    public const int TargetIdFieldNumber = 7;
-    private readonly static long TargetIdDefaultValue = 0L;
+    /// <summary>Field number for the "effectId" field.</summary>
+    public const int EffectIdFieldNumber = 7;
+    private readonly static int EffectIdDefaultValue = 0;
 
-    private long targetId_;
+    private int effectId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long TargetId {
-      get { if ((_hasBits0 & 1) != 0) { return targetId_; } else { return TargetIdDefaultValue; } }
+    public int EffectId {
+      get { if ((_hasBits0 & 1) != 0) { return effectId_; } else { return EffectIdDefaultValue; } }
       set {
         _hasBits0 |= 1;
-        targetId_ = value;
+        effectId_ = value;
       }
     }
-    /// <summary>Gets whether the "targetId" field is set</summary>
+    /// <summary>Gets whether the "effectId" field is set</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool HasTargetId {
+    public bool HasEffectId {
       get { return (_hasBits0 & 1) != 0; }
     }
-    /// <summary>Clears the value of the "targetId" field</summary>
+    /// <summary>Clears the value of the "effectId" field</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void ClearTargetId() {
+    public void ClearEffectId() {
       _hasBits0 &= ~1;
     }
 
@@ -2968,7 +2968,7 @@ namespace Source.Networking.Protobuf {
       if (Player != other.Player) return false;
       if (X != other.X) return false;
       if (Y != other.Y) return false;
-      if (TargetId != other.TargetId) return false;
+      if (EffectId != other.EffectId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2982,7 +2982,7 @@ namespace Source.Networking.Protobuf {
       if (Player != false) hash ^= Player.GetHashCode();
       if (X != 0) hash ^= X.GetHashCode();
       if (Y != 0) hash ^= Y.GetHashCode();
-      if (HasTargetId) hash ^= TargetId.GetHashCode();
+      if (HasEffectId) hash ^= EffectId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3025,9 +3025,9 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(48);
         output.WriteInt32(Y);
       }
-      if (HasTargetId) {
+      if (HasEffectId) {
         output.WriteRawTag(56);
-        output.WriteInt64(TargetId);
+        output.WriteInt32(EffectId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3063,9 +3063,9 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(48);
         output.WriteInt32(Y);
       }
-      if (HasTargetId) {
+      if (HasEffectId) {
         output.WriteRawTag(56);
-        output.WriteInt64(TargetId);
+        output.WriteInt32(EffectId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -3095,8 +3095,8 @@ namespace Source.Networking.Protobuf {
       if (Y != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
       }
-      if (HasTargetId) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TargetId);
+      if (HasEffectId) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(EffectId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3128,8 +3128,8 @@ namespace Source.Networking.Protobuf {
       if (other.Y != 0) {
         Y = other.Y;
       }
-      if (other.HasTargetId) {
-        TargetId = other.TargetId;
+      if (other.HasEffectId) {
+        EffectId = other.EffectId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3171,7 +3171,7 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 56: {
-            TargetId = input.ReadInt64();
+            EffectId = input.ReadInt32();
             break;
           }
         }
@@ -3214,7 +3214,7 @@ namespace Source.Networking.Protobuf {
             break;
           }
           case 56: {
-            TargetId = input.ReadInt64();
+            EffectId = input.ReadInt32();
             break;
           }
         }

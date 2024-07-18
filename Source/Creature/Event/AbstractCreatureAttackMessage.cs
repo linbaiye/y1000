@@ -25,7 +25,8 @@ public abstract class AbstractCreatureAttackMessage : AbstractEntityMessage
     {
         if (packet.Player)
         {
-            return new PlayerAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State, new Vector2I(packet.X, packet.Y), packet.TargetId);
+            var effectId = packet.HasEffectId ? packet.EffectId : 0;
+            return new PlayerAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State, new Vector2I(packet.X, packet.Y), effectId);
         }
         return new CreatureAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State, new Vector2I(packet.X, packet.Y));
     }

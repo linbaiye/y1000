@@ -8,12 +8,13 @@ namespace y1000.Source.Networking.Server;
 public sealed class PlayerAttackMessage : AbstractCreatureAttackMessage
 {
     
-    public PlayerAttackMessage(long id, Direction direction, CreatureState state, Vector2I coor, long targetId) : base(id, direction, state, coor)
+    public PlayerAttackMessage(long id, Direction direction, CreatureState state, Vector2I coor, int effectId) : base(id, direction, state, coor)
     {
-        TargetId = targetId;
+        EffectId = effectId;
     }
     
-    public long TargetId { get; }
+    public int EffectId { get; }
+    
 
     public override void Accept(IServerMessageVisitor visitor)
     {
@@ -23,6 +24,6 @@ public sealed class PlayerAttackMessage : AbstractCreatureAttackMessage
 
     public override string ToString()
     {
-        return "Attack [Id: " + Id + ", TargetId: " + TargetId + ", State: " + State + "]";
+        return "Attack [Id: " + Id + ", State: " + State + "]";
     }
 }
