@@ -1,8 +1,6 @@
 ﻿using System;
 using Godot;
 using y1000.Source.Creature;
-using y1000.Source.Item;
-using y1000.Source.KungFu.Attack;
 using y1000.Source.Sprite;
 using y1000.Source.Util;
 
@@ -10,8 +8,6 @@ namespace y1000.Source.Animation;
 
 public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimation>
 {
-    private static readonly MagicSdbReader MAGIC_SDB_READER = MagicSdbReader.Instance;
-
     private WeaponEffectAnimation(CreatureState state1, CreatureState? state2)
     {
         State1 = state1;
@@ -36,25 +32,6 @@ public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimati
         return playerAnimation;
     }
 
-    public bool Compatible(CreatureState state)
-    {
-        switch (state)
-        {
-            case CreatureState.FIST:
-            case CreatureState.KICK:
-            case CreatureState.AXE:
-            case CreatureState.SPEAR:
-            case CreatureState.BLADE:
-            case CreatureState.BLADE2H:
-            case CreatureState.SWORD:
-            case CreatureState.SWORD2H:
-            case CreatureState.BOW:
-            case CreatureState.THROW:
-                return State1 == state || State2 == state;
-            default:
-                return true;
-        }
-    }
     
     private bool IsAttacking(CreatureState state)
     {
@@ -90,16 +67,16 @@ public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimati
     {
         return state switch 
         {
-            CreatureState.FIST => Load("_/_11" + id, CreatureState.FIST, CreatureState.KICK),
-            CreatureState.KICK => Load("_/_11" + id, CreatureState.FIST, CreatureState.KICK),
-            CreatureState.SWORD => Load("_/_12" + id, CreatureState.SWORD, CreatureState.SWORD2H),
-            CreatureState.SWORD2H => Load("_/_12" + id, CreatureState.SWORD, CreatureState.SWORD2H),
-            CreatureState.BLADE => Load("_/_13" + id, CreatureState.BLADE, CreatureState.BLADE2H),
-            CreatureState.BLADE2H => Load("_/_13" + id, CreatureState.BLADE, CreatureState.BLADE2H),
-            CreatureState.AXE => Load("_/_14" + id, CreatureState.AXE),
-            CreatureState.SPEAR => Load("_/_15" + id, CreatureState.SPEAR),
-            CreatureState.BOW => Load("_/_16" + id, CreatureState.BOW),
-            CreatureState.THROW => Load("_/_17" + id, CreatureState.THROW),
+            CreatureState.FIST => Load("_/_" + id, CreatureState.FIST, CreatureState.KICK),
+            CreatureState.KICK => Load("_/_" + id, CreatureState.FIST, CreatureState.KICK),
+            CreatureState.SWORD => Load("_/_" + id, CreatureState.SWORD, CreatureState.SWORD2H),
+            CreatureState.SWORD2H => Load("_/_" + id, CreatureState.SWORD, CreatureState.SWORD2H),
+            CreatureState.BLADE => Load("_/_" + id, CreatureState.BLADE, CreatureState.BLADE2H),
+            CreatureState.BLADE2H => Load("_/_" + id, CreatureState.BLADE, CreatureState.BLADE2H),
+            CreatureState.AXE => Load("_/_" + id, CreatureState.AXE),
+            CreatureState.SPEAR => Load("_/_" + id, CreatureState.SPEAR),
+            CreatureState.BOW => Load("_/_" + id, CreatureState.BOW),
+            CreatureState.THROW => Load("_/_" + id, CreatureState.THROW),
             _ => throw new NotImplementedException()
         };
     }

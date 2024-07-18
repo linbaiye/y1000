@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bqjthq3o0r0ot" path="res://Scenes/HealthBar.tscn" id="15_7nysb"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p7g52"]
-blend_mode = 1
+blend_mode = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51gj6"]
 bg_color = Color(0, 0, 0, 0.415686)
