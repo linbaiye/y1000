@@ -37,14 +37,15 @@ public class EntityFactory
         }
         return OnGroundItem.Create(message, texture2D, _eventMediator);
     }
-
+    
+    
 
     private Merchant CreateMerchant(NpcInterpolation interpolation, IMap map)
     {
         PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/Merchant.tscn");
         var merchant = scene.Instantiate<Merchant>();
         //ISet<string>[] items = LoadItems("lbn");
-        var fileAccess = FileAccess.Open("res://assets/sdb/npc/" + "lbn" + ".txt", FileAccess.ModeFlags.Read);
+        var fileAccess = FileAccess.Open("res://assets/sdb/npc/" + interpolation.TextFile, FileAccess.ModeFlags.Read);
         string? line;
         List<Merchant.Item>[] items = {new(), new() };
         int avNubmer = 0;
@@ -85,8 +86,10 @@ public class EntityFactory
 
     public Monster CreateNpc(NpcInterpolation interpolation, IMap map)
     {
-        return interpolation.NpcType == NpcType.MERCHANT
-            ? CreateMerchant(interpolation, map)
-            : CreateMonster(interpolation, map);
+        if (interpolation.NpcType == NpcType.MERCHANT)
+        {
+            return CreateMerchant(interpolation, map);
+        }
+        return CreateMonster(interpolation, map);
     }
 }

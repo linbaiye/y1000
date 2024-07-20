@@ -31,10 +31,10 @@ public class FilesystemAtdRepository : IAtdRepository
     };
 
     
-    private static List<AtdFrameDescriptor> ToFrameArray(string[] strings)
+    private static List<AtdFrameDescriptor> ToFrameArray(int total, string[] strings)
     {
         List<AtdFrameDescriptor> result = new List<AtdFrameDescriptor>();
-        for (int i = 'A', index = 5; i <= 'P' && index + 2 < strings.Length; i++, index += 3)
+        for (int i = 'A', index = 5, j = 0; i <= 'Z' && index + 2 < strings.Length && j < total; i++, index += 3, j++)
         {
             var frame = strings[index];
             if (string.IsNullOrEmpty(frame))
@@ -84,7 +84,7 @@ public class FilesystemAtdRepository : IAtdRepository
             string direction = strings[2];
             int frame = strings[3].ToInt();
             int frameTime = action.Equals("TURN") ? strings[4].ToInt() * 10 : strings[4].ToInt();
-            result.Add(new AtdAction(action, direction, frame, frameTime, ToFrameArray(strings)));
+            result.Add(new AtdAction(action, direction, frame, frameTime, ToFrameArray(frame, strings)));
         }
         return result;
     }

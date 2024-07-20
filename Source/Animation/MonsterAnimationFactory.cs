@@ -1,4 +1,5 @@
-﻿using y1000.Source.Creature;
+﻿using Godot;
+using y1000.Source.Creature;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Sprite;
 

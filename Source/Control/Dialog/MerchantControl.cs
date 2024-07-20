@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Godot;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Sprite;
@@ -37,6 +38,8 @@ public partial class MerchantControl : AbstractMerchantControl
     public void Popup(Merchant merchant, ISpriteRepository spriteRepository)
     {
         PopulateCommonFields(merchant, spriteRepository, "侠士有什么要买卖的吗？");
+        _buy.Visible = merchant.SellItems.Any();
+        _sell.Visible = merchant.BuyItems.Any();
         Visible = true;
     }
 }

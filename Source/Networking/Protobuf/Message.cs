@@ -218,22 +218,23 @@ namespace Source.Networking.Protobuf {
             "cm90b2J1Zi5QbGF5ZXJSaWdodENsaWNrQXR0cmlidXRlUGFja2V0SAASUAoR",
             "dXBkYXRlVHJhZGVXaW5kb3cYJSABKAsyMy5Tb3VyY2UuTmV0d29ya2luZy5Q",
             "cm90b2J1Zi5VcGRhdGVUcmFkZVdpbmRvd1BhY2tldEgAQg0KC1R5cGVkUGFj",
-            "a2V0Io0BChtDcmVhdHVyZUludGVycG9sYXRpb25QYWNrZXQSRgoNaW50ZXJw",
+            "a2V0IrkBChtDcmVhdHVyZUludGVycG9sYXRpb25QYWNrZXQSRgoNaW50ZXJw",
             "b2xhdGlvbhgBIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLklu",
             "dGVycG9sYXRpb25QYWNrZXQSCgoCaWQYAiABKAMSDAoEbmFtZRgDIAEoCRIM",
-            "CgR0eXBlGAQgASgFIu4CChBQbGF5ZXJJbmZvUGFja2V0EgoKAmlkGAIgASgD",
-            "EgwKBG1hbGUYAyABKAgSDAoEbmFtZRgEIAEoCRIXCgp3ZWFwb25OYW1lGAUg",
-            "ASgJSACIAQESFgoJY2hlc3ROYW1lGAYgASgJSAGIAQESFQoIaGFpck5hbWUY",
-            "ByABKAlIAogBARIUCgdoYXROYW1lGAggASgJSAOIAQESFgoJd3Jpc3ROYW1l",
-            "GAkgASgJSASIAQESFQoIYm9vdE5hbWUYCiABKAlIBYgBARIZCgxjbG90aGlu",
-            "Z05hbWUYCyABKAlIBogBARIYCgt0cm91c2VyTmFtZRgMIAEoCUgHiAEBQg0K",
-            "C193ZWFwb25OYW1lQgwKCl9jaGVzdE5hbWVCCwoJX2hhaXJOYW1lQgoKCF9o",
-            "YXROYW1lQgwKCl93cmlzdE5hbWVCCwoJX2Jvb3ROYW1lQg8KDV9jbG90aGlu",
-            "Z05hbWVCDgoMX3Ryb3VzZXJOYW1lIp8BChlQbGF5ZXJJbnRlcnBvbGF0aW9u",
-            "UGFja2V0EkYKDWludGVycG9sYXRpb24YASABKAsyLy5Tb3VyY2UuTmV0d29y",
-            "a2luZy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EjoKBGluZm8YAiAB",
-            "KAsyLC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJJbmZvUGFj",
-            "a2V0IiAKElJlbW92ZUVudGl0eVBhY2tldBIKCgJpZBgBIAEoA2IGcHJvdG8z"));
+            "CgR0eXBlGAQgASgFEhkKDG1lcmNoYW50RmlsZRgFIAEoCUgAiAEBQg8KDV9t",
+            "ZXJjaGFudEZpbGUi7gIKEFBsYXllckluZm9QYWNrZXQSCgoCaWQYAiABKAMS",
+            "DAoEbWFsZRgDIAEoCBIMCgRuYW1lGAQgASgJEhcKCndlYXBvbk5hbWUYBSAB",
+            "KAlIAIgBARIWCgljaGVzdE5hbWUYBiABKAlIAYgBARIVCghoYWlyTmFtZRgH",
+            "IAEoCUgCiAEBEhQKB2hhdE5hbWUYCCABKAlIA4gBARIWCgl3cmlzdE5hbWUY",
+            "CSABKAlIBIgBARIVCghib290TmFtZRgKIAEoCUgFiAEBEhkKDGNsb3RoaW5n",
+            "TmFtZRgLIAEoCUgGiAEBEhgKC3Ryb3VzZXJOYW1lGAwgASgJSAeIAQFCDQoL",
+            "X3dlYXBvbk5hbWVCDAoKX2NoZXN0TmFtZUILCglfaGFpck5hbWVCCgoIX2hh",
+            "dE5hbWVCDAoKX3dyaXN0TmFtZUILCglfYm9vdE5hbWVCDwoNX2Nsb3RoaW5n",
+            "TmFtZUIOCgxfdHJvdXNlck5hbWUinwEKGVBsYXllckludGVycG9sYXRpb25Q",
+            "YWNrZXQSRgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIvLlNvdXJjZS5OZXR3b3Jr",
+            "aW5nLlByb3RvYnVmLkludGVycG9sYXRpb25QYWNrZXQSOgoEaW5mbxgCIAEo",
+            "CzIsLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllckluZm9QYWNr",
+            "ZXQiIAoSUmVtb3ZlRW50aXR5UGFja2V0EgoKAmlkGAEgASgDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -289,7 +290,7 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ProjectilePacket), global::Source.Networking.Protobuf.ProjectilePacket.Parser, new[]{ "Id", "TargetId", "FlyingTimeMillis", "Sprite" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ItemAttributePacket), global::Source.Networking.Protobuf.ItemAttributePacket.Parser, new[]{ "Type", "SlotId", "Page", "Text" }, new[]{ "Page" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.Packet), global::Source.Networking.Protobuf.Packet.Parser, new[]{ "PositionPacket", "CreatureInterpolation", "LoginPacket", "Interpolations", "ResponsePacket", "PlayerInterpolation", "RemoveEntity", "AttackEventResponsePacket", "AttackEventPacket", "HurtEventPacket", "ChangeStatePacket", "SwapInventorySlotPacket", "DropItem", "ShowItem", "UpdateSlot", "Text", "Unequip", "Equip", "OpenTradeWindow", "ToggleKungFu", "SitDown", "StandUp", "Cooldown", "Attribute", "Sound", "Die", "PlayerRevive", "GainExp", "Projectile", "MonsterMove", "LearnKungFu", "ItemAttribute", "RightClickAttribute", "UpdateTradeWindow" }, new[]{ "TypedPacket" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureInterpolationPacket), global::Source.Networking.Protobuf.CreatureInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Name", "Type" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureInterpolationPacket), global::Source.Networking.Protobuf.CreatureInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Name", "Type", "MerchantFile" }, new[]{ "MerchantFile" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInfoPacket), global::Source.Networking.Protobuf.PlayerInfoPacket.Parser, new[]{ "Id", "Male", "Name", "WeaponName", "ChestName", "HairName", "HatName", "WristName", "BootName", "ClothingName", "TrouserName" }, new[]{ "WeaponName", "ChestName", "HairName", "HatName", "WristName", "BootName", "ClothingName", "TrouserName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Info" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.RemoveEntityPacket), global::Source.Networking.Protobuf.RemoveEntityPacket.Parser, new[]{ "Id" }, null, null, null, null)
@@ -17789,6 +17790,7 @@ namespace Source.Networking.Protobuf {
       id_ = other.id_;
       name_ = other.name_;
       type_ = other.type_;
+      merchantFile_ = other.merchantFile_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -17846,6 +17848,32 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "merchantFile" field.</summary>
+    public const int MerchantFileFieldNumber = 5;
+    private readonly static string MerchantFileDefaultValue = "";
+
+    private string merchantFile_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string MerchantFile {
+      get { return merchantFile_ ?? MerchantFileDefaultValue; }
+      set {
+        merchantFile_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "merchantFile" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasMerchantFile {
+      get { return merchantFile_ != null; }
+    }
+    /// <summary>Clears the value of the "merchantFile" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearMerchantFile() {
+      merchantFile_ = null;
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -17865,6 +17893,7 @@ namespace Source.Networking.Protobuf {
       if (Id != other.Id) return false;
       if (Name != other.Name) return false;
       if (Type != other.Type) return false;
+      if (MerchantFile != other.MerchantFile) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -17876,6 +17905,7 @@ namespace Source.Networking.Protobuf {
       if (Id != 0L) hash ^= Id.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Type != 0) hash ^= Type.GetHashCode();
+      if (HasMerchantFile) hash ^= MerchantFile.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -17910,6 +17940,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(32);
         output.WriteInt32(Type);
       }
+      if (HasMerchantFile) {
+        output.WriteRawTag(42);
+        output.WriteString(MerchantFile);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -17936,6 +17970,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(32);
         output.WriteInt32(Type);
       }
+      if (HasMerchantFile) {
+        output.WriteRawTag(42);
+        output.WriteString(MerchantFile);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -17957,6 +17995,9 @@ namespace Source.Networking.Protobuf {
       }
       if (Type != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
+      }
+      if (HasMerchantFile) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MerchantFile);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -17984,6 +18025,9 @@ namespace Source.Networking.Protobuf {
       }
       if (other.Type != 0) {
         Type = other.Type;
+      }
+      if (other.HasMerchantFile) {
+        MerchantFile = other.MerchantFile;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -18019,6 +18063,10 @@ namespace Source.Networking.Protobuf {
             Type = input.ReadInt32();
             break;
           }
+          case 42: {
+            MerchantFile = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -18051,6 +18099,10 @@ namespace Source.Networking.Protobuf {
           }
           case 32: {
             Type = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            MerchantFile = input.ReadString();
             break;
           }
         }

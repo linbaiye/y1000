@@ -191,7 +191,6 @@ public partial class Avatar : NinePatchRect
 		var sprite = _spriteRepository.LoadByNumberAndOffset(spriteName);
 		var offsetTexture = sprite.Get(AvatarIndex);
 		rect.Visible = true;
-		rect.Size = new Vector2(0, 0);
 		rect.Position = _bodyOffset + offsetTexture.Offset;
 		rect.Texture = offsetTexture.Texture;
 	}

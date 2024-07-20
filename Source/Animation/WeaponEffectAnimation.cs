@@ -2,7 +2,6 @@
 using Godot;
 using y1000.Source.Creature;
 using y1000.Source.Sprite;
-using y1000.Source.Util;
 
 namespace y1000.Source.Animation;
 

@@ -9,13 +9,14 @@ namespace y1000.Source.Networking;
 
 public class NpcInterpolation : IServerMessage
 {
-    private NpcInterpolation(string name, Interpolation interpolation, long id, NpcType npcType)
+    private NpcInterpolation(string name, Interpolation interpolation, long id, NpcType npcType, string textFile)
     {
         
         Name = name;
         Interpolation = interpolation;
         Id = id;
         NpcType = npcType;
+        TextFile = textFile;
     }
 
     public override string ToString()
@@ -31,6 +32,9 @@ public class NpcInterpolation : IServerMessage
 
     public NpcType NpcType { get; }
     
+    public string TextFile { get; } 
+    
+    
     public void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
@@ -38,7 +42,7 @@ public class NpcInterpolation : IServerMessage
 
     public static NpcInterpolation FromPacket(CreatureInterpolationPacket packet)
     {
-        return new NpcInterpolation(packet.Name, Interpolation.FromPacket(packet.Interpolation), packet.Id, (NpcType)packet.Type);
+        return new NpcInterpolation(packet.Name, Interpolation.FromPacket(packet.Interpolation), packet.Id, (NpcType)packet.Type, packet.HasMerchantFile ? packet.MerchantFile : "");
     }
 
 }
