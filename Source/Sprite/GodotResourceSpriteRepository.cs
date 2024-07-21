@@ -58,9 +58,4 @@ public class GodotResourceSpriteRepository : AbstractSpriteRepository
     {
         return LoadFromResource(path, offset);
     }
-
-    public override AtzSprite LoadByNpcName(string name)
-    {
-        throw new NotImplementedException();
-    }
 }

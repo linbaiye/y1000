@@ -28,6 +28,10 @@ public partial class BottomControl : Godot.Control
 	private TextureProgressBar? _kungFuExpUpBar;
 	
 	private TextureProgressBar? _kungFuExpDownBar;
+	
+	private TextureProgressBar? _headLifeBar;
+	private TextureProgressBar? _armLifeBar;
+	private TextureProgressBar? _legLifeBar;
 
 	public override void _Ready()
 	{
@@ -40,6 +44,9 @@ public partial class BottomControl : Godot.Control
 		_outerPowerBar = GetNode<TextureProgressBar>("Container/OuterPowerBar");
 		_kungFuExpUpBar = GetNode<TextureProgressBar>("Container/ExpUpBar");
 		_kungFuExpDownBar = GetNode<TextureProgressBar>("Container/ExpDownBar");
+		_headLifeBar = GetNode<TextureProgressBar>("Container/HeadLifeBar");
+		_armLifeBar = GetNode<TextureProgressBar>("Container/ArmLifeBar");
+		_legLifeBar = GetNode<TextureProgressBar>("Container/LegLifeBar");
 	}
 
 	private void UpdateCoordinate(Vector2I coordinate)
@@ -126,6 +133,16 @@ public partial class BottomControl : Godot.Control
 		bar.Value = valueBar.Percent;
 	}
 
+	private void BindPercentLifeBar(TextureProgressBar? bar, int percent)
+	{
+		if (bar == null)
+		{
+			return;
+		}
+		bar.Value = percent;
+		bar.TooltipText = percent.ToString();
+	}
+
 
 	private void BindAttributeBars(CharacterImpl character)
 	{
@@ -133,6 +150,9 @@ public partial class BottomControl : Godot.Control
 		BindAttributeBar(_powerBar, character.PowerBar);
 		BindAttributeBar(_innerPowerBar, character.InnerPowerBar);
 		BindAttributeBar(_outerPowerBar, character.OuterPowerBar);
+		BindPercentLifeBar(_headLifeBar, character.HeadPercent);
+		BindPercentLifeBar(_armLifeBar, character.ArmPercent);
+		BindPercentLifeBar(_legLifeBar, character.LegPercent);
 	}
 
 	private void BindAttackKungFuExpBars(CharacterImpl character)

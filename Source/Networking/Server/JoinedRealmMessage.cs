@@ -64,6 +64,8 @@ namespace y1000.Source.Networking.Server
         public int HeadPercent { get; private init; }
         public int ArmPercent { get; private init; }
         public int LegPercent { get; private init; }
+
+        public string MapName { get; private init; } = "";
         
         public PlayerInfo MyInfo { get; }
         
@@ -126,6 +128,7 @@ namespace y1000.Source.Networking.Server
                 HeadPercent = attribute.HeadPercent,
                 ArmPercent= attribute.ArmPercent,
                 LegPercent= attribute.LegPercent,
+                MapName = loginPacket.MapName,
             };
             return message;
         }

@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.Json;
 using Godot;
-using Google.ProtocolBuffers.Serialization;
 using NLog;
-using y1000.code;
+using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Creature;
 using y1000.Source.Util;
@@ -22,75 +19,120 @@ public partial class MapLayer : TileMap, IMap
 
 	private const int Ground1Zindex = 0;
 	private const int Ground2Zindex = 1;
-	private const string MAP_DIR = "res://assets/maps/start";
+	private const string MapDir = "res://assets/maps/";
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
 	private Vector2I _origin;
 	
-	private const string Object = "object";
+	private const string ObjectLayerName = "object";
 
-	private readonly IDictionary<int, ObjectInfo> _objectInfos = new Dictionary<int, ObjectInfo>();
+	private IDictionary<int, MapObject> _objectInfos = new Dictionary<int, MapObject>();
 
 	private readonly IDictionary<long, Vector2I> _creature2Coordinate = new Dictionary<long, Vector2I>();
 
+	private readonly ISet<string> _animatedSprites = new HashSet<string>();
+
+	private readonly IMapObjectRepository _mapObjectRepository = FilesystemMapObjectRepository.Instance;
+
+	private string _currentMap = "";
+
 	public override void _Ready()
 	{
-		_gameMap = GameMap.Load("res://assets/maps/start/start.map");
-		BuildTileSets();
-		BuildObjectSets();
+		/*_gameMap = GameMap.Load(MapDir + "start.map");
+		BuildTileSets("start");
+		BuildObjectSets("start");*/
 	}
-	
-	private class ObjectInfo
-	{
-		public ObjectInfo(Texture2D texture, Vector2 offset)
-		{
-			Texture = texture;
-			Offset = offset;
-		}
 
-		public Texture2D Texture { get; }
-		
-		public Vector2 Offset { get;  }
-	
+	private void BuildObjectSets(string name)
+	{
+		_objectInfos = _mapObjectRepository.LoadObjects(name);
 	}
 
 	private void BuildObjectSets()
 	{
-		var dirpath = "res://assets/maps/start/" + Object;
+		var dirpath = MapDir + ObjectLayerName;
 		var dirAccess = DirAccess.Open(dirpath);
 		var subdirs = dirAccess.GetDirectories();
 		foreach (var subdir in subdirs)
 		{
-			var imagePath = dirpath + "/" + subdir + "/image.png";
-			if (ResourceLoader.Load(imagePath) is not Texture2D texture)
-			{
-				continue;
-			}
 			var jsonString = FileAccess.GetFileAsString(dirpath + "/" + subdir + "/struct.json");
 			Object2Json json = Object2Json.FromJsonString(jsonString);
 			var offset = new Vector2(json.X, json.Y);
-			_objectInfos.TryAdd(subdir.ToInt(), new ObjectInfo(texture, offset));
+			Texture2D[] texture2Ds = new Texture2D[json.Number];
+			for (int i = 0; i < json.Number; i++)
+			{
+				var imagePath = dirpath + "/" + subdir + "/" + i + ".png";
+				if (ResourceLoader.Load(imagePath) is not Texture2D texture)
+				{
+					LOGGER.Error("Not a texture: {0}.", imagePath);
+					throw new Exception();
+				}
+
+				texture2Ds[i] = texture;
+			}
+			_objectInfos.TryAdd(subdir.ToInt(), new MapObject(texture2Ds, offset, int.Parse(subdir)));
 		}
 		dirAccess.Dispose();
-		
 	}
 
-	public void BindCharacter(Character.CharacterImpl character)
+	private void InitMap(string mapName)
 	{
+		if (!_currentMap.Equals(mapName))
+		{
+			_gameMap = GameMap.Load(MapDir + "/" + mapName + "/" + mapName + ".map");
+			BuildTileSets(mapName);
+			BuildObjectSets(mapName);
+			PaintMap();
+		}
+	}
+
+	public void BindCharacter(CharacterImpl character, string mapName)
+	{
+		if (mapName.EndsWith(".map"))
+		{
+			//Remove .map
+			mapName = mapName.Substring(0, mapName.Length - 4);
+		}
 		_origin = character.Coordinate;
 		character.WhenCharacterUpdated += OnCharacterEvent;
-		PaintMap();
+		InitMap(mapName);
 	}
 
 	private void OnCharacterEvent(object? sender, EventArgs args)
 	{
-		if (sender is Character.CharacterImpl && args is CharacterMoveEventArgs eventArgs &&
+		if (sender is CharacterImpl && args is CharacterMoveEventArgs eventArgs &&
 		    !_origin.Equals(eventArgs.Coordinate))
 		{
 			_origin = eventArgs.Coordinate;
 			PaintMap();
 		}
+	}
+
+	private void BuildTileSets(string mapName)
+	{
+		if (_gameMap == null)
+		{
+			return;
+		}
+		var ids = _gameMap.TileIds;
+		IDictionary<int, Texture2D> texture2Ds = _mapObjectRepository.LoadTiles(mapName);
+		foreach(var id in ids)
+		{
+			if (!texture2Ds.TryGetValue(id, out var texture))
+			{
+				continue;
+			}
+			TileSetAtlasSource source = new TileSetAtlasSource() { Texture = texture , TextureRegionSize = new Vector2I(32, 24)};
+			int width = texture.GetWidth() / 32;
+			for (int w = 0; w < width; w++)
+			{
+				source.CreateTile(new Vector2I(w, 0));
+			}
+			int sourceId = TileSet.AddSource(source);
+			_tileIdToSourceId.TryAdd(id, sourceId);
+		}
+		
 	}
 
 	private void BuildTileSets()
@@ -102,7 +144,7 @@ public partial class MapLayer : TileMap, IMap
 		var ids = _gameMap.TileIds;
 		foreach(var id in ids)
 		{
-			var path = "res://assets/maps/start/tile/" + id + ".png";
+			var path = MapDir + "tile/" + id + ".png";
 			if (!Godot.FileAccess.FileExists(path))
 			{
 				continue;
@@ -126,7 +168,7 @@ public partial class MapLayer : TileMap, IMap
 	private void PaintMap()
 	{
 		TileGround();
-		CreateLayer(Object);
+		CreateLayer(ObjectLayerName);
 	}
 
 
@@ -134,7 +176,6 @@ public partial class MapLayer : TileMap, IMap
 	
 	private Vector2I MapEnd => _origin.Move(30, 20);
 	
-
 	private void TileGround()
 	{
 		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) =>
@@ -149,10 +190,19 @@ public partial class MapLayer : TileMap, IMap
 			}
 		});
 	}
-
-
+	
 	public struct Object2Json
 	{
+		public Object2Json()
+		{
+			Width = 0;
+			Height = 0;
+			X = 0;
+			Y = 0;
+			Number = 1;
+			Delay = 0;
+		}
+
 		public byte Version => 2;
 
 		public int Width { get; set; }
@@ -162,12 +212,15 @@ public partial class MapLayer : TileMap, IMap
 		public int X { get; set; }
 		public int Y { get; set; }
 
+		public int Number { get; set; }
+		
+		public int Delay { get; set; }
+
 		public static Object2Json FromJsonString(string jsonString)
 		{
 			return JsonSerializer.Deserialize<Object2Json>(jsonString);
 		}
 	}
-
 
 	private void NotifyCharPosition(Vector2I point)
 	{
@@ -181,28 +234,64 @@ public partial class MapLayer : TileMap, IMap
 		}
 	}
 
-	public GameMap? Map => _gameMap;
-
 	private void CreateLayer(string layer)
 	{
 		var layerNode = GetNode<Node2D>(layer);
 		foreach (var child in layerNode.GetChildren())
 		{
-			layerNode.RemoveChild(child);
-			child.QueueFree();
+			if (child is not AnimatedSprite2D animatedSprite2D  ||
+			    string.IsNullOrEmpty(animatedSprite2D.Name) || 
+			    !animatedSprite2D.Name.ToString().StartsWith("obj_"))
+			{
+				layerNode.RemoveChild(child);
+				child.QueueFree();
+			}
 		}
-		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) => PutObject(Object.Equals(layer)? cell.ObjectId : cell.RoofId, x, y, layer, layerNode));
+		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) => DrawObjectAtCoordinate(ObjectLayerName.Equals(layer)? cell.ObjectId : cell.RoofId, x, y, layerNode));
+	}
+	
+	private AnimatedSprite2D CreateAnimatedSprite2d(MapObject mapObject, int x, int y)
+	{
+		SpriteFrames frames = new SpriteFrames();
+		for (int i = 0; i < mapObject.Textures.Length; i++)
+		{
+			frames.AddFrame("default",mapObject.Textures[i]);
+		}
+		var ani = new AnimatedSprite2D()
+		{
+			Centered = false, Position = new Vector2(x * VectorUtil.TileSizeX, y * VectorUtil.TileSizeY), Offset = mapObject.Offset, YSortEnabled = true,
+			SpriteFrames = frames,
+			Autoplay = "default",
+			Name = mapObject.Name(x, y),
+		};
+		return ani;
 	}
 	
 
-	private void PutObject(int objectId, int x, int y, string layer, Node2D parent)
+	private void DrawObjectAtCoordinate(int objectId, int x, int y, Node2D parent)
 	{
 		if (_objectInfos.TryGetValue(objectId, out var objectInfo))
 		{
 			int xPos = x * VectorUtil.TileSizeX;
 			int yPos = y * VectorUtil.TileSizeY;
-			Sprite2D objectSprite = new Sprite2D() { Texture = objectInfo.Texture, Centered = false, Position = new Vector2(xPos, yPos), Offset = objectInfo.Offset, YSortEnabled = true};
-			parent.AddChild(objectSprite);
+			if (objectInfo.Textures.Length > 1)
+			{
+				if (!_animatedSprites.Contains(objectInfo.Name(x, y)))
+				{
+					var animatedSprite2D = CreateAnimatedSprite2d(objectInfo, x, y);
+					parent.AddChild(animatedSprite2D);
+					_animatedSprites.Add(animatedSprite2D.Name);
+				}
+			}
+			else
+			{
+				Sprite2D objectSprite = new Sprite2D()
+				{
+					Texture = objectInfo.Textures[0], Centered = false, Position = new Vector2(xPos, yPos),
+					Offset = objectInfo.Offset, YSortEnabled = true
+				};
+				parent.AddChild(objectSprite);
+			}
 		}
 	}
 

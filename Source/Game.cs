@@ -59,6 +59,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	private readonly EventMediator _eventMediator;
 
 	private readonly ISpriteRepository _spriteRepository;
+	
+	private AudioStreamPlayer _audioStreamPlayer;
 
 	public Game()
 	{
@@ -80,25 +82,26 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public override void _Ready()
 	{
+		//new TileReader("D:\\qn\\starttil.til").Test();
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
 		_uiController.Initialize(_eventMediator, _spriteRepository, _itemFactory);
-		PlayBackgroundMusic();
-//		AtdChecker.Check();
+		_audioStreamPlayer = GetNode<AudioStreamPlayer>("BgmPlayer");
+		//LoadAndPlayBackgroundMusic();
 	}
 
-	private void PlayBackgroundMusic()
+	private void LoadAndPlayBackgroundMusic()
 	{
 		var path = "res://assets/bgm/1301.mp3";
 		if (FileAccess.FileExists(path))
 		{
-			var audioStreamPlayer = GetNode<AudioStreamPlayer>("BgmPlayer");
 			var streamWav = ResourceLoader.Load<AudioStreamMP3>(path);
-			audioStreamPlayer.Stream = streamWav;
-			audioStreamPlayer.Finished += PlayBackgroundMusic;
-			audioStreamPlayer.Play();
+			_audioStreamPlayer.Stream = streamWav;
+			_audioStreamPlayer.Finished += () => _audioStreamPlayer.Play();
+			_audioStreamPlayer.Play();
 		}
 	}
+	
 
 	private void OnCharacterEvent(object? sender, EventArgs eventArgs)
 	{
@@ -379,7 +382,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_character.WhenCharacterUpdated += OnCharacterEvent;
 		_character.WrappedPlayer().MouseClicked += OnCreatureClicked;
 		_uiController?.BindCharacter(_character);
-		MapLayer.BindCharacter(_character);
+		MapLayer.BindCharacter(_character, joinedRealmMessage.MapName);
 		_entityManager.Add(_character);
 		AddChild(_character);
 	}

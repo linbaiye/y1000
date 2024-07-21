@@ -46,7 +46,7 @@ public partial class KungFuBookView : AbstractInventoryView
 
         if (inputEvent.EventType == SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
         {
-            _kungFuBook.OnKungFuUsed(_currentPage.Number, slotView.Number);
+            _kungFuBook.OnDoubleClick(_currentPage.Number, slotView.Number);
         }
         else if (inputEvent.EventType == SlotEvent.Type.MOUSE_RIGHT_CLICK)
         {

@@ -109,9 +109,10 @@ public class KungFuBook
         }
     }
 
-    public void OnKungFuUsed(int page, int nr)
+    public void OnDoubleClick(int page, int nr)
     {
-        if (_unnamed.ContainsKey(nr))
+        IDictionary<int, IKungFu> kungFus = page == 1 ? _unnamed : _basic;
+        if (kungFus.ContainsKey(nr))
         {
             EventMediator?.NotifyServer(new ToggleKungFuEvent(page, nr));
         }

@@ -36,7 +36,6 @@ public abstract partial class AbstractCreature : AbstractEntity, ICreature
 
     protected void Delete()
     {
-        Log.Debug("Deleting {0}.", Id);
         Map.Free(this);
         QueueFree();
     }

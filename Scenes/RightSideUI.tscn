@@ -32,6 +32,7 @@ mouse_filter = 2
 script = ExtResource("1_j2rwp")
 
 [node name="Inventory" type="NinePatchRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(252, 384)
 layout_mode = 0
 offset_right = 40.0
@@ -158,7 +159,6 @@ theme_override_font_sizes/font_size = 13
 vertical_alignment = 1
 
 [node name="KungFuBook" type="NinePatchRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(252, 384)
 layout_mode = 0
 offset_right = 40.0

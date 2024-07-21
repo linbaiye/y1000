@@ -36,7 +36,7 @@ public abstract partial class AbstractMerchantControl : NinePatchRect
     protected void PopulateCommonFields(Merchant merchant, ISpriteRepository spriteRepository, string dialog)
     {
         _nameLabel.Text = merchant.EntityName;
-        AtzSprite sprite = spriteRepository.LoadByNpcName(merchant.EntityName);
+        AtzSprite sprite = spriteRepository.LoadByNumber(merchant.AtzName);
         _avatar.Texture = sprite.Get(merchant.AvatarSpriteNumber).Texture;
         _dialog.Text = dialog;
         Merchant = merchant;

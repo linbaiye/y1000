@@ -21,12 +21,16 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
 	private MonsterAnimation _animation = MonsterAnimation.Instance;
+
+	public string AtzName { get; private set; } = "";
 	
-	private void Init(long id, Direction direction, ICreatureState<Monster> state, Vector2I coordinate, IMap map, string name, MonsterAnimation animation)
+	private void Init(long id, Direction direction, ICreatureState<Monster> state, Vector2I coordinate, IMap map,
+		string name, MonsterAnimation animation, string atz)
 	{
 		base.Init(id, direction, coordinate, map, name);
 		_state = state;
 		_animation = animation;
+		AtzName = atz;
 	}
 
 	public MonsterAnimation MonsterAnimation => _animation;
@@ -139,11 +143,13 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	{
 		var interpolation = npcInterpolation.Interpolation;
 		var name = npcInterpolation.Name;
-		var monsterAnimation = MonsterAnimationFactory.Instance.Load(name);
+		var monsterAnimation = MonsterAnimationFactory.Instance.Load("z" + npcInterpolation.Shape,
+			npcInterpolation.Animate);
 		var state = CreateState(interpolation.State,
 			interpolation.ElapsedMillis, interpolation.Direction, monsterAnimation);
-		monster.Init(npcInterpolation.Id, 
-			interpolation.Direction, state, interpolation.Coordinate, map, name, monsterAnimation);
+		monster.Init(npcInterpolation.Id, interpolation.Direction, 
+			state, interpolation.Coordinate, map, name, monsterAnimation,
+			"z" + npcInterpolation.Shape);
 		if (state is AbstractCreatureMoveState<Monster> moveState)
 		{
 			moveState.DriftPosition(monster);

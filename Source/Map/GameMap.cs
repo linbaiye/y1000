@@ -165,7 +165,7 @@ namespace y1000.Source.Map
             {
                 int len = Marshal.SizeOf(typeof(Header));
                 var bytes = fileAccess.GetBuffer(len);
-                var header = BytesToStructure<Header>(bytes);
+                var header = BinaryDataUtil.BytesToStructure<Header>(bytes);
                 MapCell[,] coor = new MapCell[header.Height, header.Width];
                 if (!header.Magic.StartsWith("ATZMAP2"))
                 {
@@ -176,7 +176,7 @@ namespace y1000.Source.Map
                     for (int w = 0; w < header.Width / BLOCK_SIZE; w++)
                     {
                         bytes = fileAccess.GetBuffer(Marshal.SizeOf<MapBlockData>());
-                        var block = BytesToStructure<MapBlockData>(bytes);
+                        var block = BinaryDataUtil.BytesToStructure<MapBlockData>(bytes);
                         for (int by = 0; by < BLOCK_SIZE; by++)
                         {
                             for (int bx = 0; bx < BLOCK_SIZE; bx++)
@@ -190,22 +190,7 @@ namespace y1000.Source.Map
             }
         }
 
-        public static T BytesToStructure<T>(byte[] bytes)
-        {
-            int size = Marshal.SizeOf(typeof(T));
-            if (bytes.Length < size)
-                size = bytes.Length;
-            IntPtr ptr = Marshal.AllocHGlobal(size);
-            try
-            {
-                Marshal.Copy(bytes, 0, ptr, size);
-                return (T)Marshal.PtrToStructure(ptr, typeof(T));
-            }
-            finally
-            {
-                Marshal.FreeHGlobal(ptr);
-            }
-        }
+    
 
         public bool CanMove(Vector2I coordinate)
         {
