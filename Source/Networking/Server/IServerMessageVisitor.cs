@@ -179,4 +179,10 @@ public interface IServerMessageVisitor
     {
         
     }
+
+    void Visit(DynamicObjectInterpolation message)
+    {
+        
+    }
+    
 }

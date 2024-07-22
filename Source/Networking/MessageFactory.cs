@@ -127,6 +127,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.RightClickAttribute => PlayerAttributeMessage.FromPacket(packet.RightClickAttribute),
             Packet.TypedPacketOneofCase.OpenTradeWindow => OpenTradeWindowMessage.FromPacket(packet.OpenTradeWindow),
             Packet.TypedPacketOneofCase.UpdateTradeWindow => UpdateTradeWindowMessage.FromPacket(packet.UpdateTradeWindow),
+            Packet.TypedPacketOneofCase.ShowDynamicObject => DynamicObjectInterpolation.FromPacket(packet.ShowDynamicObject),
             _ => throw new NotSupportedException()
         };
     }

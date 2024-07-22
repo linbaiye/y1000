@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using Godot;
 using y1000.Source.Creature.Monster;
+using y1000.Source.DynamicObject;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Map;
 using y1000.Source.Networking;
+using y1000.Source.Networking.Server;
 using y1000.Source.Sprite;
 using y1000.Source.Util;
 
@@ -91,5 +93,10 @@ public class EntityFactory
             return CreateMerchant(interpolation, map);
         }
         return CreateMonster(interpolation, map);
+    }
+
+    public GameDynamicObject CreateObject(DynamicObjectInterpolation interpolation)
+    {
+        return null;
     }
 }

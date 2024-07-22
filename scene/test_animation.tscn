@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://cdhrxlx64ks6p"]
+[gd_scene load_steps=116 format=3 uid="uid://cdhrxlx64ks6p"]
 
 [ext_resource type="Texture2D" uid="uid://6e7agsbkde4r" path="res://sprite/char/N00/000000.png" id="1_aa18q"]
 [ext_resource type="Texture2D" uid="uid://cf328w2nq1syi" path="res://sprite/char/N00/000001.png" id="2_23pth"]
@@ -104,6 +104,11 @@
 [ext_resource type="Texture2D" uid="uid://2xamqcejya54" path="res://sprite/char/N02/000012.png" id="82_r8g1l"]
 [ext_resource type="Texture2D" uid="uid://j7ersmefosj6" path="res://sprite/weapon/j10/000038.png" id="101_na8bl"]
 [ext_resource type="Texture2D" uid="uid://8ac4s1jx8qdt" path="res://sprite/monster/buffalo/000046.png" id="104_m15ct"]
+[ext_resource type="Texture2D" uid="uid://bj701p8cgcpeb" path="res://assets/maps/fox/x16/000000.png" id="105_akt0w"]
+[ext_resource type="Texture2D" uid="uid://c3vc0lwbw7rdh" path="res://assets/maps/fox/x16/000001.png" id="106_2rc18"]
+[ext_resource type="Texture2D" uid="uid://b6frp4gvp26lv" path="res://assets/maps/fox/x16/000002.png" id="107_sbnyl"]
+[ext_resource type="Texture2D" uid="uid://c024qh735sbk2" path="res://assets/maps/fox/x16/000003.png" id="108_s05iu"]
+[ext_resource type="Texture2D" uid="uid://d7l0bxmbttwa" path="res://assets/maps/fox/x16/000004.png" id="109_14sil"]
 
 [sub_resource type="Animation" id="Animation_56fvw"]
 length = 0.5
@@ -480,6 +485,29 @@ shader_parameter/deform = Vector2(0.6, 0.4)
 shader_parameter/offset = Vector2(0, 1)
 shader_parameter/modulate = null
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_i20xh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("105_akt0w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_2rc18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_sbnyl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_s05iu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_14sil")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 
 [node name="BladeSwordNormal" type="Sprite2D" parent="."]
@@ -553,6 +581,7 @@ texture = ExtResource("61_jko8c")
 centered = false
 
 [node name="WalkRight" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_wu7ov")
 position = Vector2(50, 40)
 texture = ExtResource("82_r8g1l")
@@ -600,3 +629,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(20, 20)
+sprite_frames = SubResource("SpriteFrames_i20xh")
+centered = false

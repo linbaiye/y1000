@@ -106,42 +106,30 @@ script = ExtResource("4_mdb7g")
 y_sort_enabled = true
 layout_mode = 2
 mouse_filter = 0
-stretch_mode = 2
 script = ExtResource("5_rq0is")
 
 [node name="Trouser" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 2
 mouse_filter = 0
-stretch_mode = 2
 script = ExtResource("5_rq0is")
 
 [node name="Boot" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
-stretch_mode = 2
-script = ExtResource("5_rq0is")
-
-[node name="Wrist" type="TextureRect" parent="Container/Avatar"]
-y_sort_enabled = true
-layout_mode = 0
-mouse_filter = 0
-stretch_mode = 2
 script = ExtResource("5_rq0is")
 
 [node name="Clothing" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
-stretch_mode = 2
 script = ExtResource("5_rq0is")
 
 [node name="Chest" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
-stretch_mode = 2
 script = ExtResource("5_rq0is")
 
 [node name="Hand" type="TextureRect" parent="Container/Avatar"]
@@ -151,18 +139,22 @@ mouse_filter = 0
 stretch_mode = 2
 script = ExtResource("5_rq0is")
 
+[node name="Wrist" type="TextureRect" parent="Container/Avatar"]
+y_sort_enabled = true
+layout_mode = 0
+mouse_filter = 0
+script = ExtResource("5_rq0is")
+
 [node name="Hair" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
-stretch_mode = 2
 script = ExtResource("5_rq0is")
 
 [node name="Hat" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
-stretch_mode = 2
 script = ExtResource("5_rq0is")
 
 [node name="EquipmentText" type="Label" parent="Container/Avatar"]

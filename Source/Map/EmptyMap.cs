@@ -1,5 +1,6 @@
 ﻿using Godot;
 using y1000.Source.Creature;
+using y1000.Source.Entity;
 
 namespace y1000.Source.Map;
 
@@ -10,13 +11,14 @@ public class EmptyMap: IMap
         throw new System.NotImplementedException();
     }
 
-    public void Occupy(ICreature creature)
+    public void Occupy(IEntity entity)
     {
         throw new System.NotImplementedException();
     }
 
-    public void Free(ICreature creature)
+    public void Free(IEntity creature)
     {
         throw new System.NotImplementedException();
     }
+
 }

@@ -345,6 +345,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		AddChild(groundedItem);
 	}
 
+	public void Visit(DynamicObjectInterpolation message)
+	{
+		LOGGER.Debug("Need to create dynamic object.");
+	}
+
 	public void Visit(ProjectileMessage message)
 	{
 		var shooter = _entityManager.Get<ICreature>(message.ShooterId);

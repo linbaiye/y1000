@@ -6,6 +6,7 @@ using NLog;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Creature;
+using y1000.Source.Entity;
 using y1000.Source.Util;
 using FileAccess = Godot.FileAccess;
 
@@ -255,7 +256,7 @@ public partial class MapLayer : TileMap, IMap
 		SpriteFrames frames = new SpriteFrames();
 		for (int i = 0; i < mapObject.Textures.Length; i++)
 		{
-			frames.AddFrame("default",mapObject.Textures[i]);
+			frames.AddFrame("default",mapObject.Textures[i], 0.1f);
 		}
 		var ani = new AnimatedSprite2D()
 		{
@@ -305,16 +306,16 @@ public partial class MapLayer : TileMap, IMap
 	}
 	
 	
-	public void Occupy(ICreature creature)
+	public void Occupy(IEntity entity)
 	{
-		Free(creature);
-		if (_creature2Coordinate.TryAdd(creature.Id, creature.Coordinate))
+		Free(entity);
+		if (_creature2Coordinate.TryAdd(entity.Id, entity.Coordinate))
 		{
 			// LOGGER.Debug("{1} occupied {0}.", creature.Coordinate, creature.Id);
 		}
 	}
 
-	public void Free(ICreature creature)
+	public void Free(IEntity creature)
 	{
 		_creature2Coordinate.Remove(creature.Id);
 	}
