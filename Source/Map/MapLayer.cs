@@ -256,7 +256,7 @@ public partial class MapLayer : TileMap, IMap
 		SpriteFrames frames = new SpriteFrames();
 		for (int i = 0; i < mapObject.Textures.Length; i++)
 		{
-			frames.AddFrame("default",mapObject.Textures[i], 0.1f);
+			frames.AddFrame("default",mapObject.Textures[i]);
 		}
 		var ani = new AnimatedSprite2D()
 		{

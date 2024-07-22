@@ -184,5 +184,10 @@ public interface IServerMessageVisitor
     {
         
     }
+
+    void Visit(UpdateDynamicObjectMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
     
 }

@@ -14,6 +14,7 @@ using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.KungFu;
 using y1000.Source.Networking.Server;
+using y1000.Source.Player;
 using y1000.Source.Sprite;
 
 namespace y1000.Source.Control;
@@ -140,6 +141,16 @@ public partial class UIController : CanvasLayer
         {
             _dropItemUi.OnDropItem(slotEvent, mousePosition, characterCoordinate);
         }
+    }
+
+    public void TradePlayer(CharacterImpl character, MessageDrivenPlayer messageDrivenPlayer, int slot)
+    {
+        if (IsTrading())
+        {
+            DisplayTextMessage(new TextMessage("另一交易正在进行中。", TextMessage.TextLocation.DOWN));
+            return;
+        }
+        character.TradeWith(messageDrivenPlayer, slot);
     }
 
     public void OpenTrade(CharacterImpl character, string anotherName, int slot = 0)

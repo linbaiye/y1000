@@ -21,11 +21,15 @@ public class EntityFactory
     private readonly IconReader _iconReader;
 
     private readonly EventMediator _eventMediator;
-    public EntityFactory(EventMediator eventMediator)
+
+    private readonly ISpriteRepository _spriteRepository;
+    
+    public EntityFactory(EventMediator eventMediator, ISpriteRepository spriteRepository)
     {
         _itemDb = ItemSdbReader.ItemSdb;
         _iconReader = IconReader.ItemIconReader;
         _eventMediator = eventMediator;
+        _spriteRepository = spriteRepository;
     }
 
 
@@ -95,8 +99,12 @@ public class EntityFactory
         return CreateMonster(interpolation, map);
     }
 
-    public GameDynamicObject CreateObject(DynamicObjectInterpolation interpolation)
+    public GameDynamicObject CreateObject(DynamicObjectInterpolation interpolation, IMap map)
     {
-        return null;
+        PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/DynamicObject.tscn");
+        var obj = scene.Instantiate<GameDynamicObject>();
+        var atzSprite = _spriteRepository.LoadByNumberAndOffset("x" + interpolation.Shape, new Vector2I(16, 12));
+        obj.Init(interpolation.Id, interpolation.Coordinate, map, interpolation.Name, atzSprite.GetAll(), interpolation.FrameStart, interpolation.FrameEnd, interpolation.Elapsed);
+        return obj;
     }
 }

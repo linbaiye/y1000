@@ -12,6 +12,11 @@ namespace y1000.Source.Sprite
         private readonly OffsetTexture[] _offsetTextures;
 
 
+        public List<OffsetTexture> GetAll()
+        {
+            return new List<OffsetTexture>(_offsetTextures);
+        }
+
 
         public AtzSprite(Texture2D[] textures, Vector2[] offsets, Vector2[]? sizes = null)
         {

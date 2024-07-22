@@ -128,6 +128,8 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.OpenTradeWindow => OpenTradeWindowMessage.FromPacket(packet.OpenTradeWindow),
             Packet.TypedPacketOneofCase.UpdateTradeWindow => UpdateTradeWindowMessage.FromPacket(packet.UpdateTradeWindow),
             Packet.TypedPacketOneofCase.ShowDynamicObject => DynamicObjectInterpolation.FromPacket(packet.ShowDynamicObject),
+            Packet.TypedPacketOneofCase.UpdateDynamicObject => new UpdateDynamicObjectMessage(packet.UpdateDynamicObject.Id, 
+                packet.UpdateDynamicObject.Start, packet.UpdateDynamicObject.End),
             _ => throw new NotSupportedException()
         };
     }

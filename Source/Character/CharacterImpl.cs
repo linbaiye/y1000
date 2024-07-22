@@ -511,14 +511,14 @@ namespace y1000.Source.Character
 
         public void TradeWith(MessageDrivenPlayer player, int inventorySlot)
         {
-			if (player.CanBeTraded(this) && Inventory.HasItem(inventorySlot))
-			{
-				EventMediator?.NotifyServer(new ClientTradePlayerEvent(player.Id, inventorySlot));
-			}
-			else
-			{
-				EventMediator?.NotifyTextArea("距离过远。");
-			}
+	        if (player.CanBeTraded(this) && Inventory.HasItem(inventorySlot))
+	        {
+		        EventMediator?.NotifyServer(new ClientTradePlayerEvent(player.Id, inventorySlot));
+	        }
+	        else
+	        {
+		        EventMediator?.NotifyTextArea("距离过远。");
+	        }
         }
 
 

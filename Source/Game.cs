@@ -16,6 +16,7 @@ using y1000.Source.Character.State.Prediction;
 using y1000.Source.Control;
 using y1000.Source.Creature;
 using y1000.Source.Creature.Monster;
+using y1000.Source.DynamicObject;
 using y1000.Source.Entity;
 using y1000.Source.Event;
 using y1000.Source.Input;
@@ -26,7 +27,6 @@ using y1000.Source.Networking.Connection;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 using y1000.Source.Sprite;
-using y1000.Source.Util;
 
 namespace y1000.Source;
 
@@ -67,9 +67,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_eventMediator = InitializeEventMediator();
 		_itemFactory = ItemFactory.Instance;
 		_messageFactory = new MessageFactory(_itemFactory);
-		_entityFactory = new EntityFactory(_eventMediator);
 		_entityManager = EntityManager.Instance;
 		_spriteRepository = FilesystemSpriteRepository.Instance;
+		_entityFactory = new EntityFactory(_eventMediator, _spriteRepository);
 	}
 
 	private EventMediator InitializeEventMediator()
@@ -140,18 +140,19 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	private MapLayer MapLayer => GetNode<MapLayer>("MapLayer");
 
 
-	private void TestShoot()
+	private void LocalTest()
 	{
 		if (_character == null)
 		{
 			return;
 		}
-		var monster = _entityManager.Find<Monster>("赤风");
+		var monster = _entityManager.Find<GameDynamicObject>("");
 		if (monster != null)
 		{
-			//AddChild(Projectile.LoadFor(monster, _character));
+			monster.Handle(new UpdateDynamicObjectMessage(1L, 0, 4));
 		}
 	}
+	
 
 	
 	private void HandleInput(InputEvent @event)
@@ -161,11 +162,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			return;
 		}
 
-		/*if (@event is InputEventKey eventKey && eventKey.Pressed)
+		if (@event is InputEventKey eventKey && eventKey.Pressed)
 		{
-			TestShoot();
+			LocalTest();
 			return;
-		}*/
+		}
 
 		var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
 		var predictableInput = _inputSampler.SampleInput(@event, mousePos);
@@ -275,17 +276,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			return;
 		}
-
-		if (_uiController.IsTrading())
-		{
-			_uiController.DisplayTextMessage(new TextMessage("另一交易正在进行中。", TextMessage.TextLocation.DOWN));
-			return;
-		}
 		var globalMousePosition = GetGlobalMousePosition();
 		var player = _entityManager.SelectFirst<MessageDrivenPlayer>(player => player.Id != _character.Id && player.HasPoint(globalMousePosition));
 		if (player != null)
 		{
-			_character.TradeWith(player, slotEvent.Slot);
+			_uiController.TradePlayer(_character, player, slotEvent.Slot);
 		}
 		else
 		{
@@ -347,7 +342,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(DynamicObjectInterpolation message)
 	{
-		LOGGER.Debug("Need to create dynamic object.");
+		var gameDynamicObject = _entityFactory.CreateObject(message, MapLayer);
+		if (_entityManager.Add(gameDynamicObject)) 
+			AddChild(gameDynamicObject);
 	}
 
 	public void Visit(ProjectileMessage message)
