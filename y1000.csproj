@@ -68,4 +68,7 @@
     <Compile Remove="Source\Character\Event\CharacterEventArgs.cs" />
     <Compile Remove="Source\Event\PressKungFuSlotEvent.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source\Networking\Protobuf\" />
+  </ItemGroup>
 </Project>

@@ -98,13 +98,14 @@ public class EntityFactory
         }
         return CreateMonster(interpolation, map);
     }
+    
 
     public GameDynamicObject CreateObject(DynamicObjectInterpolation interpolation, IMap map)
     {
         PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/DynamicObject.tscn");
         var obj = scene.Instantiate<GameDynamicObject>();
         var atzSprite = _spriteRepository.LoadByNumberAndOffset("x" + interpolation.Shape, new Vector2I(16, 12));
-        obj.Init(interpolation.Id, interpolation.Coordinate, map, interpolation.Name, atzSprite.GetAll(), interpolation.FrameStart, interpolation.FrameEnd, interpolation.Elapsed);
+        obj.Initialize(interpolation, map, atzSprite.GetAll());
         return obj;
     }
 }

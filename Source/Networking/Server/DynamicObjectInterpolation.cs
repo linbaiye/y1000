@@ -1,11 +1,16 @@
+using System.Collections.Generic;
 using Godot;
 using Source.Networking.Protobuf;
+using y1000.Source.DynamicObject;
 
 namespace y1000.Source.Networking.Server;
 
 public class DynamicObjectInterpolation : IServerMessage
 {
-    private DynamicObjectInterpolation(string name, long id, string shape, Vector2I coordinate, int start, int end, int elapsed)
+    private DynamicObjectInterpolation(string name, long id, string shape, Vector2I coordinate, int start, int end, int elapsed,
+        IEnumerable<Vector2I> coordinates,
+        DynamicObjectType type,
+        string requiredItem)
     {
         Name = name;
         Id = id;
@@ -14,6 +19,9 @@ public class DynamicObjectInterpolation : IServerMessage
         FrameStart = start;
         FrameEnd = end;
         Elapsed = elapsed;
+        Coordinates = coordinates;
+        Type = type;
+        RequiredItem = requiredItem;
     }
     
     public Vector2I Coordinate { get; }
@@ -27,6 +35,12 @@ public class DynamicObjectInterpolation : IServerMessage
     public int FrameEnd { get; }
     public int Elapsed { get; }
     
+    public string RequiredItem { get; }
+    
+    public DynamicObjectType Type { get; }
+    
+    public IEnumerable<Vector2I> Coordinates { get; }
+    
     public void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
@@ -34,7 +48,15 @@ public class DynamicObjectInterpolation : IServerMessage
 
     public static DynamicObjectInterpolation FromPacket(ShowDynamicObjectPacket packet)
     {
+        List<Vector2I> coordinates = new List<Vector2I>();
+        for (var i = 0; i < packet.GuardX.Count; i++)
+        {
+            var x = packet.GuardX[i];
+            var y = packet.GuardY[i];
+            coordinates.Add(new Vector2I(x, y));
+        }
         return new DynamicObjectInterpolation(packet.HasName ? packet.Name : "", packet.Id, packet.Shape, 
-            new Vector2I(packet.X, packet.Y), packet.Start, packet.End, packet.Elapsed);
+            new Vector2I(packet.X, packet.Y), packet.Start, packet.End, packet.Elapsed, coordinates,
+            (DynamicObjectType)packet.Type, packet.HasRequiredItem ? packet.RequiredItem : "");
     }
 }

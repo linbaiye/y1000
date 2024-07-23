@@ -44,14 +44,4 @@ public partial class GroundedItem : AbstractEntity, IBody, IEntity
 	}
 
 	public override OffsetTexture BodyOffsetTexture => _texture;
-
-	public static GroundedItem Build(ShowItemMessage message, Texture2D texture2D, EventMediator eventMediator)
-	{
-		OffsetTexture offsetTexture = new OffsetTexture(texture2D, message.Coordinate.ToPosition());
-		PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/Item.tscn");
-		var item = scene.Instantiate<GroundedItem>();
-		item.Init(message.Id, message.Coordinate, message.Name, message.Number, offsetTexture);
-		item.EventMediator = eventMediator;
-		return item;
-	}
 }

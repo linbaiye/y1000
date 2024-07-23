@@ -57,6 +57,7 @@ namespace y1000.Source.Util
         {
             return Math.Max(Math.Abs(src.X - dst.X), Math.Abs(src.Y - dst.Y));
         }
+
         
         public static Vector2I Move(this Vector2I src, int x, int y)
         {

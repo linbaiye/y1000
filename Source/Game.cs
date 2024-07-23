@@ -323,9 +323,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(RemoveEntityMessage removeEntityMessage)
 	{
-		var remove = _entityManager.Remove(removeEntityMessage.Id);
-		remove?.Handle(removeEntityMessage);
-		if (remove is Node2D node2D)
+		var removedEntity = _entityManager.Remove(removeEntityMessage.Id);
+		removedEntity?.Handle(removeEntityMessage);
+		if (removedEntity is Node2D node2D)
 		{
 			RemoveChild(node2D);
 		}
@@ -343,6 +343,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	public void Visit(DynamicObjectInterpolation message)
 	{
 		var gameDynamicObject = _entityFactory.CreateObject(message, MapLayer);
+		gameDynamicObject.BindCharacter(_character, _eventMediator);
 		if (_entityManager.Add(gameDynamicObject)) 
 			AddChild(gameDynamicObject);
 	}
