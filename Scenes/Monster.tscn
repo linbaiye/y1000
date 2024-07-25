@@ -13,6 +13,8 @@ script = ExtResource("1_k86rw")
 
 [node name="Body" parent="." instance=ExtResource("2_qsi3r")]
 
+[node name="Effect" type="Sprite2D" parent="."]
+
 [node name="Panel" type="Panel" parent="."]
 visible = false
 offset_right = 40.0

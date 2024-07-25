@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using NLog;
 using y1000.Source.Animation;
+using y1000.Source.Audio;
 using y1000.Source.Character;
 using y1000.Source.Creature;
 using y1000.Source.Entity;
@@ -29,6 +31,8 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
     private CharacterImpl? _character;
 
     private EventMediator? _eventMediator;
+    
+    public event EventHandler<EntityMouseClickEventArgs>? MouseClicked;
 
     private void Delete()
     {
@@ -59,9 +63,13 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
             _total = (update.FrameEnd - update.FrameStart) * FrameDuration;
             Elapsed = 0;
         }
+        else if (message is CreatureSoundMessage soundMessage)
+        {
+            GetNode<CreatureAudio>("Audio").PlaySound(soundMessage.Sound);
+        }
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (Start == End || Elapsed >= _total)
         {
@@ -80,13 +88,18 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
         {
             return End;
         }
-        return Elapsed / FrameDuration;
+        var ret = Elapsed / FrameDuration;
+        return ret;
     }
     
     public override OffsetTexture BodyOffsetTexture => _textures[ComputeTextureIndex()];
     
     protected override void MyEvent(InputEvent inputEvent)
     {
+        if (inputEvent is InputEventMouseButton { ButtonIndex: MouseButton.Left } mouse && mouse.IsPressed())
+        {
+            MouseClicked?.Invoke(this, new EntityMouseClickEventArgs(this, mouse));
+        }
         // display help.
     }
 

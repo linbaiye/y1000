@@ -164,8 +164,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 		if (@event is InputEventKey eventKey && eventKey.Pressed)
 		{
-			LocalTest();
-			return;
+			//LocalTest();
+			//return;
 		}
 
 		var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
@@ -208,14 +208,14 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
-	private void OnCreatureClicked(object? sender, CreatureMouseClickEventArgs args)
+	private void OnEntityClicked(object? sender, EntityMouseClickEventArgs args)
 	{
-		var click = _inputSampler.SampleLeftClickInput(args.MouseEvent, args.Creature);
+		var click = _inputSampler.SampleLeftClickInput(args.MouseEvent, args.Entity);
 		if (click is AttackInput attack)
 		{
 			_character?.HandleInput(attack);
 		}
-        else if (args.Creature is Merchant merchant && click is CreatureLeftClick && !merchant.IsDead)
+        else if (args.Entity is Merchant merchant && click is CreatureLeftClick && !merchant.IsDead)
 		{
 			_uiController?.OnMerchantClicked(merchant);
 		}
@@ -254,7 +254,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	public void Visit(PlayerInterpolation playerInterpolation)
 	{
 		var msgDrivenPlayer = MessageDrivenPlayer.FromInterpolation(playerInterpolation, MapLayer);
-		msgDrivenPlayer.Player.MouseClicked += OnCreatureClicked;
+		msgDrivenPlayer.Player.MouseClicked += OnEntityClicked;
 		if (_entityManager.Add(msgDrivenPlayer))
 		{
 			AddChild(msgDrivenPlayer.Player);
@@ -313,7 +313,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	public void Visit(NpcInterpolation npcInterpolation)
 	{
 		var npc = _entityFactory.CreateNpc(npcInterpolation, MapLayer);
-		npc.MouseClicked += OnCreatureClicked;
+		npc.MouseClicked += OnEntityClicked;
 		if (_entityManager.Add(npc))
 		{
 			AddChild(npc);
@@ -344,6 +344,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		var gameDynamicObject = _entityFactory.CreateObject(message, MapLayer);
 		gameDynamicObject.BindCharacter(_character, _eventMediator);
+		gameDynamicObject.MouseClicked += OnEntityClicked;
 		if (_entityManager.Add(gameDynamicObject)) 
 			AddChild(gameDynamicObject);
 	}
@@ -383,7 +384,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, _itemFactory, _eventMediator);
 		_character.WhenCharacterUpdated += OnCharacterEvent;
-		_character.WrappedPlayer().MouseClicked += OnCreatureClicked;
+		_character.WrappedPlayer().MouseClicked += OnEntityClicked;
 		_uiController?.BindCharacter(_character);
 		MapLayer.BindCharacter(_character, joinedRealmMessage.MapName);
 		_entityManager.Add(_character);

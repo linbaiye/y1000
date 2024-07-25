@@ -11,7 +11,7 @@ namespace y1000.Source.Creature;
 
 public abstract partial class AbstractCreature : AbstractEntity, ICreature
 {
-    public event EventHandler<CreatureMouseClickEventArgs>? MouseClicked;
+    public event EventHandler<EntityMouseClickEventArgs>? MouseClicked;
     
 	public event EventHandler<CreatureAnimationDoneEventArgs>? StateAnimationEventHandler;
 
@@ -25,7 +25,7 @@ public abstract partial class AbstractCreature : AbstractEntity, ICreature
     {
         if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left } mouse && mouse.IsPressed())
         {
-            MouseClicked?.Invoke(this, new CreatureMouseClickEventArgs(this, mouse));
+            MouseClicked?.Invoke(this, new EntityMouseClickEventArgs(this, mouse));
         }
     }
     

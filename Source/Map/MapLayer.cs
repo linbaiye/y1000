@@ -9,6 +9,7 @@ using y1000.Source.Character.Event;
 using y1000.Source.Creature;
 using y1000.Source.DynamicObject;
 using y1000.Source.Entity;
+using y1000.Source.Player;
 using y1000.Source.Util;
 using FileAccess = Godot.FileAccess;
 
@@ -32,8 +33,7 @@ public partial class MapLayer : TileMap, IMap
 
 	private IDictionary<int, MapObject> _objectInfos = new Dictionary<int, MapObject>();
 
-	// private readonly IDictionary<long, Vector2I> _creature2Coordinate = new Dictionary<long, Vector2I>();
-	private readonly IDictionary<Vector2I, ISet<long>> _coordinateEntityMap = new Dictionary<Vector2I, ISet<long>>();
+	private readonly IDictionary<long, ISet<Vector2I>> _entityCoordinates= new Dictionary<long, ISet<Vector2I>>();
 
 	private readonly ISet<string> _animatedSprites = new HashSet<string>();
 
@@ -305,67 +305,30 @@ public partial class MapLayer : TileMap, IMap
 		{
 			return false;
 		}
-		return !_coordinateEntityMap.ContainsKey(coordinate);
-		// return !_creature2Coordinate.Values.Contains(coordinate);
+		return !_entityCoordinates.Values.Any(s => s.Contains(coordinate));
 	}
 
 
-	private void TryOccupy(Vector2I coordinate, long id)
-	{
-		if (_coordinateEntityMap.TryGetValue(coordinate, out var entityIds))
-		{
-			entityIds.Add(id);
-		}
-		else
-		{
-			var ids = new HashSet<long> { id };
-			_coordinateEntityMap.TryAdd(coordinate, ids);
-		}
-	}
-	
 	
 	public void Occupy(IEntity entity)
 	{
 		Free(entity);
-		TryOccupy(entity.Coordinate, entity.Id);
-		/*if (_creature2Coordinate.TryAdd(entity.Id, entity.Coordinate))
-		{
-			 LOGGER.Debug("{1} occupied {0}.", creature.Coordinate, creature.Id);
-		}*/
+		_entityCoordinates.TryAdd(entity.Id, new HashSet<Vector2I>() { entity.Coordinate });
 	}
 
-	private void TryFree(Vector2I coordinate, long id)
-	{
-		if (_coordinateEntityMap.TryGetValue(coordinate, out var entities))
-		{
-			entities.Remove(id);
-			if (!entities.Any())
-			{
-				_coordinateEntityMap.Remove(coordinate);
-			}
-		}
-		
-	}
 
 	public void Free(IEntity entity)
 	{
-		TryFree(entity.Coordinate, entity.Id);
-		// _creature2Coordinate.Remove(entity.Id);
+		_entityCoordinates.Remove(entity.Id);
 	}
 
 	public void Occupy(GameDynamicObject dynamicObject)
 	{
-		foreach (var coordinate in dynamicObject.Coordinates)
-		{
-			TryOccupy(coordinate, dynamicObject.Id);
-		}
+		_entityCoordinates.TryAdd(dynamicObject.Id, new HashSet<Vector2I>(dynamicObject.Coordinates));
 	}
 	
 	public void Free(GameDynamicObject dynamicObject)
 	{
-		foreach (var coordinate in dynamicObject.Coordinates)
-		{
-			TryFree(coordinate, dynamicObject.Id);
-		}
+		_entityCoordinates.Remove(dynamicObject.Id);
 	}
 }
