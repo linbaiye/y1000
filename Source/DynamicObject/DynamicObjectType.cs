@@ -4,6 +4,6 @@ public enum DynamicObjectType
 {
     TRIGGER = 2,
     
-    IMMUNE = 8,
+    OTHER = 8,
     
 }
