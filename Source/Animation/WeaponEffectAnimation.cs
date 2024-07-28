@@ -58,7 +58,9 @@ public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimati
         {
             return null;
         }
-        return OffsetTexture(state, direction, elpased);
+        if (State1 == state || State2 == state)
+            return OffsetTexture(state, direction, elpased);
+        return null;
     }
 
 

@@ -56,6 +56,18 @@ namespace y1000.Source.Input
             };
         }
 
+        public IInput? SampleEntityClickInput(InputEventMouseButton button, IEntity entity, Vector2 mouseOffset)
+        {
+            if (button.ButtonIndex == MouseButton.Left)
+            {
+                return SampleLeftClickInput(button, entity);
+            }
+            else
+            {
+                return SampleMouseButton(button, mouseOffset);
+            }
+        }
+
         public IInput? SampleLeftClickInput(InputEventMouseButton button, IEntity entity)
         {
             if (button.DoubleClick)
@@ -69,11 +81,6 @@ namespace y1000.Source.Input
             {
                 return new CreatureLeftClick(entity);
             }
-            return null;
-        }
-
-        public IInput? SampleLeftClickInput(InputEventMouseButton button)
-        {
             return null;
         }
     }

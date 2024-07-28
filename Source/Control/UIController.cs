@@ -87,9 +87,9 @@ public partial class UIController : CanvasLayer
         _bottomControl.KungFuButton.Pressed += _rightControl.OnKungFuButtonClicked;
     }
     
-    public void BindCharacter(CharacterImpl character)
+    public void BindCharacter(CharacterImpl character, string realmName)
     {
-        _bottomControl.BindCharacter(character);
+        _bottomControl.BindCharacter(character, realmName);
         _rightControl.BindCharacter(character);
         _dialogControl.BindCharacter(character);
     }

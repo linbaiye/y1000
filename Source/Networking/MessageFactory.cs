@@ -130,6 +130,8 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.ShowDynamicObject => DynamicObjectInterpolation.FromPacket(packet.ShowDynamicObject),
             Packet.TypedPacketOneofCase.UpdateDynamicObject => new UpdateDynamicObjectMessage(packet.UpdateDynamicObject.Id, 
                 packet.UpdateDynamicObject.Start, packet.UpdateDynamicObject.End),
+            Packet.TypedPacketOneofCase.Teleport => TeleportMessage.FromPacket(packet.Teleport),
+            Packet.TypedPacketOneofCase.Lifebar => new LifebarMessage(packet.Lifebar.Id, packet.Lifebar.Percent),
             _ => throw new NotSupportedException()
         };
     }

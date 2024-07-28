@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://cdhrxlx64ks6p"]
+[gd_scene load_steps=119 format=3 uid="uid://cdhrxlx64ks6p"]
 
 [ext_resource type="Texture2D" uid="uid://6e7agsbkde4r" path="res://sprite/char/N00/000000.png" id="1_aa18q"]
 [ext_resource type="Texture2D" uid="uid://cf328w2nq1syi" path="res://sprite/char/N00/000001.png" id="2_23pth"]
@@ -109,6 +109,8 @@
 [ext_resource type="Texture2D" uid="uid://b6frp4gvp26lv" path="res://assets/maps/fox/x16/000002.png" id="107_sbnyl"]
 [ext_resource type="Texture2D" uid="uid://c024qh735sbk2" path="res://assets/maps/fox/x16/000003.png" id="108_s05iu"]
 [ext_resource type="Texture2D" uid="uid://d7l0bxmbttwa" path="res://assets/maps/fox/x16/000004.png" id="109_14sil"]
+[ext_resource type="Texture2D" uid="uid://cib0m65pj30hg" path="res://assets/test/monster.png" id="110_gs68e"]
+[ext_resource type="Texture2D" uid="uid://b7e0gh647j0sb" path="res://assets/test/teleporter-effect-blue.png" id="111_oedgk"]
 
 [sub_resource type="Animation" id="Animation_56fvw"]
 length = 0.5
@@ -508,6 +510,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5uvv"]
+shader = ExtResource("54_3lv3l")
+shader_parameter/deform = Vector2(1, 1)
+shader_parameter/offset = Vector2(5, 6)
+shader_parameter/modulate = null
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 
 [node name="BladeSwordNormal" type="Sprite2D" parent="."]
@@ -631,6 +639,22 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(20, 20)
 sprite_frames = SubResource("SpriteFrames_i20xh")
 centered = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_t5uvv")
+texture = ExtResource("110_gs68e")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("111_oedgk")
+centered = false
+offset = Vector2(-40, -70)
+hframes = 10
+vframes = 10
+frame = 50

@@ -199,6 +199,7 @@ namespace y1000.Source.Character
 	        WrappedPlayer().Visit(message);
         }
 
+
         public void Visit(CreatureDieMessage message)
         {
 	        ChangeState(ICharacterState.Create(CreatureState.DIE));
@@ -223,6 +224,12 @@ namespace y1000.Source.Character
         public void Visit(PlayerReviveMessage message)
         {
 	        ChangeState(ICharacterState.Create(CreatureState.IDLE));
+        }
+
+        public void Visit(TeleportMessage message)
+        {
+	        WhenCharacterUpdated?.Invoke(this, new CharacterTeleportedArgs(message));
+	        WrappedPlayer().SetPosition(message.Coordinate, WrappedPlayer().Direction);
         }
 
         public void Handle(ICharacterMessage message)

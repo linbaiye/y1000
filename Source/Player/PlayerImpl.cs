@@ -61,6 +61,12 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		InitEquipment(info.TrouserName, n => equipmentFactory.CreateTrouser(n, IsMale), ChangeTrouser);
 		InitEquipment(info.ClothingName, n => equipmentFactory.CreateClothing(n, IsMale), ChangeClothing);
 	}
+
+	public void Teleport(Vector2I coordiante)
+	{
+		Position = coordiante.ToPosition();
+		Direction = Direction.DOWN;
+	}
 	
 	
 	public PlayerWeapon? Weapon { get; private set; }

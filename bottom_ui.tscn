@@ -82,10 +82,22 @@ script = ExtResource("3_56n7n")
 
 [node name="Coordinate" type="Label" parent="Container"]
 layout_mode = 0
-offset_left = 54.0
-offset_top = 167.0
-offset_right = 120.0
-offset_bottom = 188.0
+offset_left = 55.0
+offset_top = 168.0
+offset_right = 121.0
+offset_bottom = 189.0
+theme_override_colors/font_color = Color(0.905882, 0.8, 0.717647, 1)
+theme_override_fonts/font = ExtResource("7_v430x")
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RealmName" type="Label" parent="Container"]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 168.0
+offset_right = 253.0
+offset_bottom = 189.0
 theme_override_colors/font_color = Color(0.905882, 0.8, 0.717647, 1)
 theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 14

@@ -32,7 +32,7 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
 
     private EventMediator? _eventMediator;
     
-    public event EventHandler<EntityMouseClickEventArgs>? MouseClicked;
+    public event EventHandler<EntityMouseEventArgs>? MouseClicked;
 
     private void Delete()
     {
@@ -62,18 +62,27 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
             End = update.FrameEnd;
             _total = (update.FrameEnd - update.FrameStart) * FrameDuration;
             Elapsed = 0;
+            Logger.Debug("Start {0}, End {1}.", Start, End);
         }
         else if (message is CreatureSoundMessage soundMessage)
         {
             GetNode<CreatureAudio>("Audio").PlaySound(soundMessage.Sound);
         }
+        else if (message is LifebarMessage lifebarMessage)
+        {
+            GetNode<LifePercentBar>("HealthBar").Display(lifebarMessage.Percent);
+        }
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Start == End || Elapsed >= _total)
+        if (Start == End)
         {
             return;
+        }
+        if (Elapsed > _total && Start != 0)
+        {
+            Elapsed = 0;
         }
         Elapsed += (int)(delta * 1000);
     }
@@ -89,7 +98,7 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
             return End;
         }
         var ret = Elapsed / FrameDuration;
-        return ret;
+        return ret + Start;
     }
     
     public override OffsetTexture BodyOffsetTexture => _textures[ComputeTextureIndex()];
@@ -98,7 +107,7 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
     {
         if (inputEvent is InputEventMouseButton { ButtonIndex: MouseButton.Left } mouse && mouse.IsPressed())
         {
-            MouseClicked?.Invoke(this, new EntityMouseClickEventArgs(this, mouse));
+            MouseClicked?.Invoke(this, new EntityMouseEventArgs(this, mouse));
         }
         // display help.
     }
@@ -143,7 +152,7 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
             return false;
         }
         var minCoor = Coordinates.MinBy(c => c.Distance(_character.Coordinate));
-        if (minCoor.Distance(_character.Coordinate) > 1)
+        if (minCoor.Distance(_character.Coordinate) > 2)
         {
             return false;
         }

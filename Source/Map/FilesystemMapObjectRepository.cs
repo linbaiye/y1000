@@ -19,9 +19,9 @@ public class FilesystemMapObjectRepository : IMapObjectRepository
     {
     }
 
-    public IDictionary<int, Texture2D> LoadTiles(string mapName)
+    public IDictionary<int, Texture2D> LoadTiles(string tileName)
     {
-        var tileDirName = DirPath + mapName + "/" + TileDirName;
+        var tileDirName = DirPath + tileName + "/" + TileDirName;
         var files = Directory.GetFiles(tileDirName);
         IDictionary<int, Texture2D> result = new Dictionary<int, Texture2D>();
         foreach(var path in files)

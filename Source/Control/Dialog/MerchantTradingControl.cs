@@ -113,7 +113,14 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         }
         var itemText = _itemList.GetItemText((int)index);
         Item item = Item.Parse(itemText);
-        _tradeInputWindow.Open(item.Name, OnInputWindowAction);
+        if (_itemFactory.IsStackItem(item.Name))
+        {
+            _tradeInputWindow.Open(item.Name, OnInputWindowAction);
+        }
+        else
+        {
+            _tradeInputWindow.OpenUniqueItem(item.Name, OnInputWindowAction);
+        }
     }
 
 

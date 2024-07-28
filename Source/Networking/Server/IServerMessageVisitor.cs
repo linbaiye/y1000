@@ -48,7 +48,7 @@ public interface IServerMessageVisitor
 
     void Visit(IPredictableResponse response) {}
 
-    void Visit(JoinedRealmMessage joinedRealmMessage) {}
+    void Visit(JoinedRealmMessage message) {}
 
     void Visit(MoveEventResponse moveEventResponse)
     {
@@ -189,5 +189,14 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)message);
     }
-    
+
+    void Visit(TeleportMessage teleportMessage)
+    {
+        Visit((ICharacterMessage)teleportMessage);
+    }
+
+    void Visit(LifebarMessage lifebarMessage)
+    {
+        Visit((IEntityMessage)lifebarMessage);
+    }
 }

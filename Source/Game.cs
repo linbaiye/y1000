@@ -9,7 +9,6 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using NLog;
-using y1000.Source.Animation;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
@@ -70,6 +69,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_entityManager = EntityManager.Instance;
 		_spriteRepository = FilesystemSpriteRepository.Instance;
 		_entityFactory = new EntityFactory(_eventMediator, _spriteRepository);
+		_character = null;
 	}
 
 	private EventMediator InitializeEventMediator()
@@ -87,17 +87,21 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController = GetNode<UIController>("UILayer");
 		_uiController.Initialize(_eventMediator, _spriteRepository, _itemFactory);
 		_audioStreamPlayer = GetNode<AudioStreamPlayer>("BgmPlayer");
-		//LoadAndPlayBackgroundMusic();
+		_audioStreamPlayer.Finished += () => _audioStreamPlayer.Play();
 	}
 
-	private void LoadAndPlayBackgroundMusic()
+	private void LoadAndPlayBackgroundMusic(string bgm)
 	{
-		var path = "res://assets/bgm/1301.mp3";
+		var path = "res://assets/bgm/" + bgm + ".mp3";
+		if (!FileAccess.FileExists(path))
+		{
+			path = "res://assets/bgm/" + bgm + ".wav";
+		}
 		if (FileAccess.FileExists(path))
 		{
 			var streamWav = ResourceLoader.Load<AudioStreamMP3>(path);
+			_audioStreamPlayer.Stop();
 			_audioStreamPlayer.Stream = streamWav;
-			_audioStreamPlayer.Finished += () => _audioStreamPlayer.Play();
 			_audioStreamPlayer.Play();
 		}
 	}
@@ -105,13 +109,26 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private void OnCharacterEvent(object? sender, EventArgs eventArgs)
 	{
-		if (sender is not CharacterImpl ||
-		    eventArgs is not CharacterPredictionEventArgs predictionEventArgs)
+		if (sender is not CharacterImpl)
 		{
 			return;
 		}
-		_predictionManager.Save(predictionEventArgs.Prediction);
-		WriteMessage(predictionEventArgs.Event);
+
+		if (eventArgs is CharacterPredictionEventArgs predictionEventArgs)
+		{
+			_predictionManager.Save(predictionEventArgs.Prediction);
+			WriteMessage(predictionEventArgs.Event);
+		}
+		else if (eventArgs is CharacterTeleportedArgs teleportedArgs)
+		{
+			var all = _entityManager.Select<AbstractEntity>(e => !e.Id.Equals(_character.Id));
+			foreach (var entity in all)
+			{
+				RemoveChild(entity);
+				_entityManager.Remove(entity.Id);
+			}
+			LoadAndPlayBackgroundMusic(teleportedArgs.Bgm);
+		}
 	}
 
 	private async void SetupNetwork()
@@ -208,9 +225,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
-	private void OnEntityClicked(object? sender, EntityMouseClickEventArgs args)
+	private void OnEntityClicked(object? sender, EntityMouseEventArgs args)
 	{
-		var click = _inputSampler.SampleLeftClickInput(args.MouseEvent, args.Entity);
+		var click = _inputSampler.SampleEntityClickInput(args.MouseEvent, args.Entity, 
+			_character.WrappedPlayer().GetLocalMousePosition());
 		if (click is AttackInput attack)
 		{
 			_character?.HandleInput(attack);
@@ -218,6 +236,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
         else if (args.Entity is Merchant merchant && click is CreatureLeftClick && !merchant.IsDead)
 		{
 			_uiController?.OnMerchantClicked(merchant);
+		}
+		else if (click is IPredictableInput predictableInput)
+		{
+			_character?.HandleInput(predictableInput);
 		}
 	}
 
@@ -308,7 +330,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		_uiController?.DisplayTextMessage(message);
 	}
-		
 
 	public void Visit(NpcInterpolation npcInterpolation)
 	{
@@ -345,8 +366,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		var gameDynamicObject = _entityFactory.CreateObject(message, MapLayer);
 		gameDynamicObject.BindCharacter(_character, _eventMediator);
 		gameDynamicObject.MouseClicked += OnEntityClicked;
-		if (_entityManager.Add(gameDynamicObject)) 
+		if (_entityManager.Add(gameDynamicObject))
+		{
 			AddChild(gameDynamicObject);
+			LOGGER.Debug("Added object {0}.", gameDynamicObject.Id);
+		}
 	}
 
 	public void Visit(ProjectileMessage message)
@@ -380,14 +404,16 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController?.UpdateTrade(message);
 	}
 
-	public void Visit(JoinedRealmMessage joinedRealmMessage)
+
+	public void Visit(JoinedRealmMessage message)
 	{
-		_character = CharacterImpl.LoggedIn(joinedRealmMessage, MapLayer, _itemFactory, _eventMediator);
+		_character = CharacterImpl.LoggedIn(message, MapLayer, _itemFactory, _eventMediator);
 		_character.WhenCharacterUpdated += OnCharacterEvent;
 		_character.WrappedPlayer().MouseClicked += OnEntityClicked;
-		_uiController?.BindCharacter(_character);
-		MapLayer.BindCharacter(_character, joinedRealmMessage.MapName);
+		_uiController?.BindCharacter(_character, message.RealmName);
+		MapLayer.BindCharacter(_character, message.MapName, message.TileName, message.ObjName, message.RoofName);
 		_entityManager.Add(_character);
 		AddChild(_character);
+		LoadAndPlayBackgroundMusic(message.Bgm);
 	}
 }

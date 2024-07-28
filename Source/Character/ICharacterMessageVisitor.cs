@@ -20,4 +20,6 @@ public interface ICharacterMessageVisitor
     void Visit(KungFuOrItemAttributeMessage message);
 
     void Visit(PlayerAttributeMessage message);
+    
+    void Visit(TeleportMessage message);
 }

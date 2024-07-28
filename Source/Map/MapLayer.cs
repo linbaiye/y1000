@@ -31,7 +31,7 @@ public partial class MapLayer : TileMap, IMap
 	
 	private const string ObjectLayerName = "object";
 
-	private IDictionary<int, MapObject> _objectInfos = new Dictionary<int, MapObject>();
+	private IDictionary<int, MapObject> _mapObjectInfos = new Dictionary<int, MapObject>();
 
 	private readonly IDictionary<long, ISet<Vector2I>> _entityCoordinates= new Dictionary<long, ISet<Vector2I>>();
 
@@ -50,77 +50,68 @@ public partial class MapLayer : TileMap, IMap
 
 	private void BuildObjectSets(string name)
 	{
-		_objectInfos = _mapObjectRepository.LoadObjects(name);
+		_mapObjectInfos = _mapObjectRepository.LoadObjects(name);
 	}
 
-	private void BuildObjectSets()
-	{
-		var dirpath = MapDir + ObjectLayerName;
-		var dirAccess = DirAccess.Open(dirpath);
-		var subdirs = dirAccess.GetDirectories();
-		foreach (var subdir in subdirs)
-		{
-			var jsonString = FileAccess.GetFileAsString(dirpath + "/" + subdir + "/struct.json");
-			Object2Json json = Object2Json.FromJsonString(jsonString);
-			var offset = new Vector2(json.X, json.Y);
-			Texture2D[] texture2Ds = new Texture2D[json.Number];
-			for (int i = 0; i < json.Number; i++)
-			{
-				var imagePath = dirpath + "/" + subdir + "/" + i + ".png";
-				if (ResourceLoader.Load(imagePath) is not Texture2D texture)
-				{
-					LOGGER.Error("Not a texture: {0}.", imagePath);
-					throw new Exception();
-				}
-
-				texture2Ds[i] = texture;
-			}
-			_objectInfos.TryAdd(subdir.ToInt(), new MapObject(texture2Ds, offset, int.Parse(subdir)));
-		}
-		dirAccess.Dispose();
-	}
-
-	private void InitMap(string mapName)
-	{
-		if (!_currentMap.Equals(mapName))
-		{
-			_gameMap = GameMap.Load(MapDir + "/" + mapName + "/" + mapName + ".map");
-			BuildTileSets(mapName);
-			BuildObjectSets(mapName);
-			PaintMap();
-		}
-	}
-
-	public void BindCharacter(CharacterImpl character, string mapName)
+	private void InitMap(string mapName, string tileName, string objName, string rofName)
 	{
 		if (mapName.EndsWith(".map"))
 		{
-			//Remove .map
 			mapName = mapName.Substring(0, mapName.Length - 4);
 		}
-		_origin = character.Coordinate;
-		character.WhenCharacterUpdated += OnCharacterEvent;
-		InitMap(mapName);
+		_entityCoordinates.Clear();
+		if (!_currentMap.Equals(mapName))
+		{
+			_gameMap = GameMap.Load(MapDir + "/" +  mapName + ".map");
+			_animatedSprites.Clear();
+			_tileIdToSourceId.Clear();
+			Clear();
+			ClearLayer(ObjectLayerName);
+			tileName = tileName.EndsWith("til.til") ? tileName.Substring(0, tileName.Length - 7) : tileName;
+			BuildTileSets(tileName);
+			objName = objName.EndsWith("obj.obj") ? objName.Substring(0, objName.Length - 7) : objName;
+			BuildObjectSets(objName);
+			_currentMap = mapName;
+		}
 	}
+
+	public void BindCharacter(CharacterImpl character, string mapName, string tileName, string objName, string rofName)
+	{
+		InitMap(mapName, tileName, objName, rofName);
+		_origin = character.Coordinate;
+		PaintMap();
+		character.WhenCharacterUpdated += OnCharacterEvent;
+	}
+
 
 	private void OnCharacterEvent(object? sender, EventArgs args)
 	{
-		if (sender is CharacterImpl && args is CharacterMoveEventArgs eventArgs &&
-		    !_origin.Equals(eventArgs.Coordinate))
+		if (sender is not CharacterImpl)
+		{
+			return;
+			
+		}
+		if (args is CharacterMoveEventArgs eventArgs && !_origin.Equals(eventArgs.Coordinate))
 		{
 			_origin = eventArgs.Coordinate;
 			PaintMap();
 		}
+		else if (args is CharacterTeleportedArgs teleportedArgs)
+		{
+			InitMap(teleportedArgs.NewMap, teleportedArgs.Tile, teleportedArgs.Object, teleportedArgs.Roof);
+			_origin = teleportedArgs.Coordinate;
+			PaintMap();
+		}
 	}
 
-	private void BuildTileSets(string mapName)
+	private void BuildTileSets(string tileFile)
 	{
 		if (_gameMap == null)
 		{
 			return;
 		}
+		IDictionary<int, Texture2D> texture2Ds = _mapObjectRepository.LoadTiles(tileFile);
 		var ids = _gameMap.TileIds;
-		IDictionary<int, Texture2D> texture2Ds = _mapObjectRepository.LoadTiles(mapName);
 		foreach(var id in ids)
 		{
 			if (!texture2Ds.TryGetValue(id, out var texture))
@@ -139,40 +130,10 @@ public partial class MapLayer : TileMap, IMap
 		
 	}
 
-	private void BuildTileSets()
-	{
-		if (_gameMap == null)
-		{
-			return;
-		}
-		var ids = _gameMap.TileIds;
-		foreach(var id in ids)
-		{
-			var path = MapDir + "tile/" + id + ".png";
-			if (!Godot.FileAccess.FileExists(path))
-			{
-				continue;
-			}
-			if (ResourceLoader.Load(path) is not Texture2D texture)
-			{
-				continue;
-			}
-			TileSetAtlasSource source = new TileSetAtlasSource() { Texture = texture , TextureRegionSize = new Vector2I(32, 24)};
-			int width = texture.GetWidth() / 32;
-			for (int w = 0; w < width; w++)
-			{
-				source.CreateTile(new Vector2I(w, 0));
-			}
-			int sourceId = TileSet.AddSource(source);
-			_tileIdToSourceId.TryAdd(id, sourceId);
-		}
-	}
-
-
 	private void PaintMap()
 	{
 		TileGround();
-		CreateLayer(ObjectLayerName);
+		RefreshLayer(ObjectLayerName);
 	}
 
 
@@ -238,7 +199,17 @@ public partial class MapLayer : TileMap, IMap
 		}
 	}
 
-	private void CreateLayer(string layer)
+	private void ClearLayer(string layer)
+	{
+		var layerNode = GetNode<Node2D>(layer);
+		foreach (var child in layerNode.GetChildren())
+		{
+			layerNode.RemoveChild(child);
+			child.QueueFree();
+		}
+	}
+
+	private void RefreshLayer(string layer)
 	{
 		var layerNode = GetNode<Node2D>(layer);
 		foreach (var child in layerNode.GetChildren())
@@ -274,7 +245,7 @@ public partial class MapLayer : TileMap, IMap
 
 	private void DrawObjectAtCoordinate(int objectId, int x, int y, Node2D parent)
 	{
-		if (_objectInfos.TryGetValue(objectId, out var objectInfo))
+		if (_mapObjectInfos.TryGetValue(objectId, out var objectInfo))
 		{
 			int xPos = x * VectorUtil.TileSizeX;
 			int yPos = y * VectorUtil.TileSizeY;

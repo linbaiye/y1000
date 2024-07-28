@@ -89,6 +89,20 @@ public partial class BottomControl : Godot.Control
 				break;
 			case GainExpEventArgs gainExp: OnGainExp(character, gainExp);
 				break;
+			case CharacterTeleportedArgs teleportedArgs:
+				UpdateCoordinate(teleportedArgs.Coordinate);
+				UpdateRealmName(teleportedArgs.Realm);
+				break;
+		}
+	}
+
+	private void UpdateRealmName(string name)
+	{
+		
+		var label = GetNode<Label>("Container/RealmName");
+		if (label != null)
+		{
+			label.Text = name;
 		}
 	}
 
@@ -111,7 +125,7 @@ public partial class BottomControl : Godot.Control
 		}
 	}
 
-	public void BindCharacter(CharacterImpl character)
+	public void BindCharacter(CharacterImpl character, string realmName)
 	{
 		character.WhenCharacterUpdated += WhenCharacterUpdated;
 		_avatar?.BindCharacter(character);
@@ -119,6 +133,7 @@ public partial class BottomControl : Godot.Control
 		_kungFuView?.DisplayUsedKungFus(character);
 		BindAttributeBars(character);
 		BindAttackKungFuExpBars(character);
+		UpdateRealmName(realmName);
 	}
 
 
@@ -163,16 +178,6 @@ public partial class BottomControl : Godot.Control
 		var down = character.AttackKungFu.Level / 100;
 		if (_kungFuExpDownBar != null)
 			_kungFuExpDownBar.Value = down;
-	}
-
-	public bool OnInventorySlotClick(ClickInventorySlotEvent slotEvent)
-	{
-		var item = slotEvent.Inventory.Find(slotEvent.Slot);
-		if (item != null)
-		{
-			_textArea?.Display(new TextEvent(item.ItemName));
-		}
-		return true;
 	}
 
 	public Button InventoryButton => GetNode<Button>("Container/InventoryButton");

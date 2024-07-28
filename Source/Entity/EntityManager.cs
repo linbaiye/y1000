@@ -29,10 +29,16 @@ public class EntityManager
         return null;
     }
 
+    public IEnumerable<T> Select<T>(Func<T, bool> filter)
+    {
+        return _entities.Values.OfType<T>().Where(filter);
+    }
+
     public T? SelectFirst<T>(Func<T, bool> filter)
     {
         return (T?)_entities.Values.FirstOrDefault(e => e is T t && filter.Invoke(t));
     }
+
 
     public bool Add(IEntity entity)
     {

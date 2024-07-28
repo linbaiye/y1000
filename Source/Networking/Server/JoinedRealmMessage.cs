@@ -67,6 +67,16 @@ namespace y1000.Source.Networking.Server
 
         public string MapName { get; private init; } = "";
         
+        public string TileName { get; private init; } = "";
+        
+        public string ObjName { get; private init; } = "";
+        
+        public string RoofName { get; private init; } = "";
+        
+        public string Bgm { get; private init; } = "";
+        
+        public string RealmName { get; private init; } = "";
+        
         public PlayerInfo MyInfo { get; }
         
         private static List<InventoryItemMessage> ItemMessages(LoginPacket loginPacket)
@@ -110,6 +120,7 @@ namespace y1000.Source.Networking.Server
             var kungFuBook = CreateKungFuBook(loginPacket);
             var footKungFu = loginPacket.HasFootKungFuName? kungFuBook.FindKungFu<IFootKungFu>(loginPacket.FootKungFuName) : null;
             var attribute = loginPacket.Attribute;
+            var teleport = loginPacket.Teleport;
             var message = new JoinedRealmMessage(kungFuBook.FindAttackKungFu(loginPacket.AttackKungFuName),
                 itemMessages, PlayerInfo.FromPacket(loginPacket.Info),
                 new ValueBar(attribute.CurLife, attribute.MaxLife),
@@ -119,7 +130,7 @@ namespace y1000.Source.Networking.Server
                 new ValueBar(attribute.CurEnergy, attribute.MaxEnergy)
             )
             {
-                Coordinate = new Vector2I(loginPacket.X, loginPacket.Y),
+                Coordinate = new Vector2I(teleport.X, teleport.Y),
                 FootKungFu = footKungFu,
                 KungFuBook = kungFuBook,
                 AssistantKungFu = loginPacket.HasAssistantKungFu ? loginPacket.AssistantKungFu : null,
@@ -128,7 +139,12 @@ namespace y1000.Source.Networking.Server
                 HeadPercent = attribute.HeadPercent,
                 ArmPercent= attribute.ArmPercent,
                 LegPercent= attribute.LegPercent,
-                MapName = loginPacket.MapName,
+                MapName = teleport.Map,
+                RealmName = teleport.Realm,
+                ObjName = teleport.Obj,
+                RoofName = teleport.Rof,
+                TileName = teleport.Tile,
+                Bgm = teleport.Bgm,
             };
             return message;
         }

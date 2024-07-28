@@ -53,13 +53,19 @@ public partial class TradeInputWindow : NinePatchRect
 	{
 		Open(name, "", callback);
 	}
+	
+	public void OpenUniqueItem(string name, Action<bool> callback)
+	{
+		Open(name, "1", callback, false);
+	}
 
-	private void Open(string name, string number, Action<bool> callback)
+	private void Open(string name, string number, Action<bool> callback, bool editable = true)
 	{
 		_callback = callback;
 		_itemName.Text = name;
 		_input.Text = number;
 		Visible = true;
+		_input.Editable = editable;
 		_input.GrabFocus();
 	}
 	
