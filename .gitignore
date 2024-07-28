@@ -5,3 +5,6 @@
 .vscode/tasks.json
 y1000.csproj.old*
 .idea/
+assets/maps/
+assets/sound/
+assets/bgm/
