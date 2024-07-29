@@ -166,7 +166,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		var monster = _entityManager.Find<GameDynamicObject>("");
 		if (monster != null)
 		{
-			monster.Handle(new UpdateDynamicObjectMessage(1L, 0, 4));
+			monster.Handle(new UpdateDynamicObjectMessage(1L, 0, 4, false));
 		}
 	}
 	

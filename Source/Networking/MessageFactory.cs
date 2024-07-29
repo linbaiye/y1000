@@ -128,8 +128,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.OpenTradeWindow => OpenTradeWindowMessage.FromPacket(packet.OpenTradeWindow),
             Packet.TypedPacketOneofCase.UpdateTradeWindow => UpdateTradeWindowMessage.FromPacket(packet.UpdateTradeWindow),
             Packet.TypedPacketOneofCase.ShowDynamicObject => DynamicObjectInterpolation.FromPacket(packet.ShowDynamicObject),
-            Packet.TypedPacketOneofCase.UpdateDynamicObject => new UpdateDynamicObjectMessage(packet.UpdateDynamicObject.Id, 
-                packet.UpdateDynamicObject.Start, packet.UpdateDynamicObject.End),
+            Packet.TypedPacketOneofCase.UpdateDynamicObject => UpdateDynamicObjectMessage.FromPacket(packet.UpdateDynamicObject),
             Packet.TypedPacketOneofCase.Teleport => TeleportMessage.FromPacket(packet.Teleport),
             Packet.TypedPacketOneofCase.Lifebar => new LifebarMessage(packet.Lifebar.Id, packet.Lifebar.Percent),
             _ => throw new NotSupportedException()

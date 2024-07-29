@@ -10,7 +10,7 @@ public class DynamicObjectInterpolation : IServerMessage
     private DynamicObjectInterpolation(string name, long id, string shape, Vector2I coordinate, int start, int end, int elapsed,
         IEnumerable<Vector2I> coordinates,
         DynamicObjectType type,
-        string requiredItem)
+        string requiredItem, bool loop)
     {
         Name = name;
         Id = id;
@@ -22,6 +22,7 @@ public class DynamicObjectInterpolation : IServerMessage
         Coordinates = coordinates;
         Type = type;
         RequiredItem = requiredItem;
+        Loop = loop;
     }
     
     public Vector2I Coordinate { get; }
@@ -38,6 +39,9 @@ public class DynamicObjectInterpolation : IServerMessage
     public string RequiredItem { get; }
     
     public DynamicObjectType Type { get; }
+    
+    public bool Loop { get; }
+    
     
     public IEnumerable<Vector2I> Coordinates { get; }
     
@@ -58,6 +62,6 @@ public class DynamicObjectInterpolation : IServerMessage
         return new DynamicObjectInterpolation(packet.HasName ? packet.Name : "", packet.Id, packet.Shape, 
             new Vector2I(packet.X, packet.Y), packet.Start, packet.End, packet.Elapsed, coordinates,
             packet.Type == 2? (DynamicObjectType)packet.Type : DynamicObjectType.OTHER,
-            packet.HasRequiredItem ? packet.RequiredItem : "");
+            packet.HasRequiredItem ? packet.RequiredItem : "", packet.Loop);
     }
 }

@@ -46,6 +46,8 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
     
     private int Elapsed { get; set; } = 0;
 
+    private bool Loop { get; set; } = false;
+
     private DynamicObjectType Type { get; set; }
 
     public IEnumerable<Vector2I> Coordinates { get; private set; } = new HashSet<Vector2I>();
@@ -62,6 +64,7 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
             End = update.FrameEnd;
             _total = (update.FrameEnd - update.FrameStart) * FrameDuration;
             Elapsed = 0;
+            Loop = update.Loop;
             Logger.Debug("Start {0}, End {1}.", Start, End);
         }
         else if (message is CreatureSoundMessage soundMessage)
@@ -80,10 +83,10 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
         {
             return;
         }
-        if (Elapsed > _total && Start != 0)
+        if (Elapsed > _total)
         {
-            Elapsed = 0;
-        }
+            Elapsed = Loop ? 0 : _total;
+        } 
         Elapsed += (int)(delta * 1000);
     }
 
@@ -124,6 +127,7 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
         Coordinates = interpolation.Coordinates;
         Type = interpolation.Type;
         RequiredItem = interpolation.RequiredItem;
+        Loop = interpolation.Loop;
         map.Occupy(this);
     }
 
