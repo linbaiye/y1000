@@ -96,6 +96,7 @@ public class PlayerWeaponAnimation: AbstractPlayerAnimation<PlayerWeaponAnimatio
             AttackKungFuType.AXE => Load(weapon.NonAttackAnimation, weapon.AttackAnimation, CreatureState.AXE),
             AttackKungFuType.SPEAR => Load(weapon.NonAttackAnimation, weapon.AttackAnimation, CreatureState.SPEAR),
             AttackKungFuType.QUANFA => Load(weapon.NonAttackAnimation, weapon.AttackAnimation, CreatureState.FIST, CreatureState.KICK),
+            AttackKungFuType.THROW => Load(weapon.NonAttackAnimation, weapon.AttackAnimation, CreatureState.THROW, CreatureState.THROW),
             _ => throw new NotImplementedException()
         };
     }

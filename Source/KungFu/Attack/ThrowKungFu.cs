@@ -8,6 +8,6 @@ public class ThrowKungFu : AbstractAttackKungFu
     {
     }
 
-    protected override CreatureState Above50 { get; }
-    protected override CreatureState Below50 { get; }
+    protected override CreatureState Above50 => CreatureState.THROW;
+    protected override CreatureState Below50 => CreatureState.THROW;
 }

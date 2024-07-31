@@ -40,6 +40,8 @@ public class TextMessage : IServerMessage
         
         MULTI_TRADE = 13,
         
+        KUNGFU_LEVEL_LOW = 14,
+        
         CUSTOM = 1000000
         ,
     }
@@ -59,6 +61,7 @@ public class TextMessage : IServerMessage
         { Type.OUT_OF_AMMO, "没有弹药了。" },
         { Type.NO_MORE_PILL, "无法再服用。" },
         { Type.MULTI_TRADE, "交易正在进行中。" },
+        { Type.KUNGFU_LEVEL_LOW, "辅助性武功只能用于满级武功。" },
     };
 
     public static TextMessage FromPacket(TextMessagePacket packet)
