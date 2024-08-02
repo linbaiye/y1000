@@ -26,6 +26,7 @@ using y1000.Source.Networking.Connection;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 using y1000.Source.Sprite;
+using y1000.Source.Util;
 
 namespace y1000.Source;
 
@@ -88,6 +89,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController.Initialize(_eventMediator, _spriteRepository, _itemFactory);
 		_audioStreamPlayer = GetNode<AudioStreamPlayer>("BgmPlayer");
 		_audioStreamPlayer.Finished += () => _audioStreamPlayer.Play();
+		//AtdChecker.Dump();
 	}
 
 	private void LoadAndPlayBackgroundMusic(string bgm)

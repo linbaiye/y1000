@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cib0m65pj30hg" path="res://assets/test/monster.png" id="13_hn2ex"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="13_klljd"]
 [ext_resource type="PackedScene" uid="uid://b8qn25p71tho" path="res://assets/test/teleport.tscn" id="15_a4yjb"]
-[ext_resource type="PackedScene" uid="uid://d1epkvdyumhgi" path="res://assets/test/rune_teleport.tscn" id="16_wmncn"]
+[ext_resource type="PackedScene" uid="uid://b8qn25p71tho" path="res://assets/test/teleport.tscn" id="16_wmncn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tknte"]
 shader = ExtResource("13_klljd")

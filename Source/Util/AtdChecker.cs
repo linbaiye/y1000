@@ -37,4 +37,17 @@ public class AtdChecker
         }
         
     }
+
+
+    private static void Print(AtdAction atdAction)
+    {
+        Logger.Debug("State {3}, frame time {0}, number {1}, total time {2}", atdAction.FrameTime, atdAction.Frame, atdAction.ActionTime, atdAction.Action);
+    }
+
+    public static void Dump()
+    {
+        var atd = FilesystemAtdRepository.Instance.LoadByName("22");
+        Print(atd.FindFirst(CreatureState.WALK));
+        Print(atd.FindFirst(CreatureState.IDLE));
+    }
 }
