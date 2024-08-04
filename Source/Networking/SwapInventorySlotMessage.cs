@@ -7,7 +7,7 @@ using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Networking;
 
-public class SwapInventorySlotMessage : AbstractInventoryEvent , IServerMessage, IClientEvent, ICharacterMessage
+public class SwapInventorySlotMessage : AbstractInventoryEvent , IClientEvent, ICharacterMessage
 {
     public SwapInventorySlotMessage(int slot1, int slot2) : base(slot1)
     {

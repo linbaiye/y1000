@@ -26,4 +26,6 @@ public interface IKungFu
                 return IAttackKungFu.ByType((AttackKungFuType)kungFuPacket.Type, kungFuPacket.Name, kungFuPacket.Level);
         }
     }
+
+    string FormatLevel => Level / 100 + "." + (Level% 100).ToString("00");
 }

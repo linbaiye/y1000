@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c8pmfxkqej1vd"]
+[gd_scene load_steps=24 format=3 uid="uid://c8pmfxkqej1vd"]
 
 [ext_resource type="Script" path="res://Source/Control/Bottom/BottomControl.cs" id="1_nx2kl"]
 [ext_resource type="Texture2D" uid="uid://d25ml37vvq5mp" path="res://assets/ui/hud_bottom.png" id="2_mrib6"]
@@ -16,10 +16,17 @@
 [ext_resource type="Texture2D" uid="uid://c1aocdayxnuiv" path="res://assets/ui/hal_bar.png" id="12_5cibo"]
 [ext_resource type="Texture2D" uid="uid://bc2n2y6iilswj" path="res://assets/ui/exp_up.png" id="15_kfsle"]
 [ext_resource type="Texture2D" uid="uid://bt4hl6nb11bon" path="res://assets/ui/exp_down.png" id="16_jqb70"]
+[ext_resource type="Script" path="res://Source/Control/Bottom/Shortcut/Shortcuts.cs" id="17_d3qri"]
+[ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="17_meto4"]
+[ext_resource type="Script" path="res://Source/Control/Bottom/InputEdit.cs" id="19_ysobf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kljs2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3amq6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ov7pw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7grrv"]
 
 [node name="BottomUI" type="Control"]
 layout_direction = 1
@@ -328,3 +335,89 @@ offset_right = 241.0
 offset_bottom = 155.0
 value = 100.0
 texture_progress = ExtResource("12_5cibo")
+
+[node name="Shortcuts" type="NinePatchRect" parent="Container"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 26.0
+offset_right = 662.0
+offset_bottom = 63.0
+script = ExtResource("17_d3qri")
+
+[node name="shortcut1" parent="Container/Shortcuts" instance=ExtResource("17_meto4")]
+custom_minimum_size = Vector2(29, 29)
+layout_mode = 0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = 33.0
+
+[node name="shortcut2" parent="Container/Shortcuts" instance=ExtResource("17_meto4")]
+custom_minimum_size = Vector2(29, 29)
+layout_mode = 0
+offset_left = 33.0
+offset_top = 4.0
+offset_right = 62.0
+offset_bottom = 33.0
+
+[node name="shortcut3" parent="Container/Shortcuts" instance=ExtResource("17_meto4")]
+custom_minimum_size = Vector2(29, 29)
+layout_mode = 0
+offset_left = 63.0
+offset_top = 4.0
+offset_right = 92.0
+offset_bottom = 33.0
+
+[node name="shortcut4" parent="Container/Shortcuts" instance=ExtResource("17_meto4")]
+custom_minimum_size = Vector2(29, 29)
+layout_mode = 0
+offset_left = 93.0
+offset_top = 4.0
+offset_right = 122.0
+offset_bottom = 33.0
+
+[node name="shortcut5" parent="Container/Shortcuts" instance=ExtResource("17_meto4")]
+custom_minimum_size = Vector2(29, 29)
+layout_mode = 0
+offset_left = 180.0
+offset_top = 4.0
+offset_right = 209.0
+offset_bottom = 33.0
+
+[node name="shortcut6" parent="Container/Shortcuts" instance=ExtResource("17_meto4")]
+custom_minimum_size = Vector2(29, 29)
+layout_mode = 0
+offset_left = 210.0
+offset_top = 4.0
+offset_right = 239.0
+offset_bottom = 33.0
+
+[node name="shortcut7" parent="Container/Shortcuts" instance=ExtResource("17_meto4")]
+custom_minimum_size = Vector2(29, 29)
+layout_mode = 0
+offset_left = 240.0
+offset_top = 4.0
+offset_right = 269.0
+offset_bottom = 33.0
+
+[node name="shortcut8" parent="Container/Shortcuts" instance=ExtResource("17_meto4")]
+custom_minimum_size = Vector2(29, 29)
+layout_mode = 0
+offset_left = 270.0
+offset_top = 4.0
+offset_right = 299.0
+offset_bottom = 33.0
+
+[node name="InputLine" type="LineEdit" parent="Container"]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 164.0
+offset_right = 738.0
+offset_bottom = 189.0
+theme_override_fonts/font = ExtResource("7_v430x")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ov7pw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7grrv")
+shortcut_keys_enabled = false
+caret_blink = true
+script = ExtResource("19_ysobf")

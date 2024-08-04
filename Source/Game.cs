@@ -83,7 +83,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public override void _Ready()
 	{
-		//new TileReader("D:\\qn\\starttil.til").Test();
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
 		_uiController.Initialize(_eventMediator, _spriteRepository, _itemFactory);
@@ -180,13 +179,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			return;
 		}
-
-		if (@event is InputEventKey eventKey && eventKey.Pressed)
-		{
-			//LocalTest();
-			//return;
-		}
-
 		var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
 		var predictableInput = _inputSampler.SampleInput(@event, mousePos);
 		if (predictableInput != null)

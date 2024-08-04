@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 using NLog;
 using y1000.Source.Creature;
 using y1000.Source.Sprite;
@@ -50,7 +51,7 @@ public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : Abs
             throw new NotImplementedException("No direction configured: " + direction);
         }
 
-        private int MillisToFrameNumber(int millis)
+        public int MillisToFrameNumber(int millis)
         {
             if (millis == TotalMillis)
             {

@@ -2,7 +2,7 @@
 
 namespace y1000.Source.Control.RightSide;
 
-public class SlotEvent : EventArgs
+public class SlotMouseEvent : EventArgs
 {
     public enum Type
     {
@@ -14,10 +14,11 @@ public class SlotEvent : EventArgs
         MOUSE_LEFT_DOUBLE_CLICK,
     }
     
-    public SlotEvent(Type type)
+    public SlotMouseEvent(Type type)
     {
         EventType = type;
     }
     
     public Type EventType { get; }
+    
 }

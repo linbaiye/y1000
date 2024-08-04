@@ -199,4 +199,9 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)lifebarMessage);
     }
+    
+    void Visit(UpdateKungFuSlotMessage message)
+    {
+        Visit((ICharacterMessage)message);
+    }
 }

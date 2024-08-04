@@ -41,13 +41,16 @@ public class AtdChecker
 
     private static void Print(AtdAction atdAction)
     {
-        Logger.Debug("State {3}, frame time {0}, number {1}, total time {2}", atdAction.FrameTime, atdAction.Frame, atdAction.ActionTime, atdAction.Action);
+        var descriptors = atdAction.FrameDescriptors;
+        Logger.Debug("State {3}, frame time {0}, number {1}, total time {2}, start {4}, end {5}.", atdAction.FrameTime, atdAction.Frame, atdAction.ActionTime, atdAction.Action, descriptors[0].Number, 
+            descriptors[atdAction.Frame - 1].Number);
     }
 
     public static void Dump()
     {
-        var atd = FilesystemAtdRepository.Instance.LoadByName("22");
+        var atd = FilesystemAtdRepository.Instance.LoadByName("29");
         Print(atd.FindFirst(CreatureState.WALK));
         Print(atd.FindFirst(CreatureState.IDLE));
+        Print(atd.FindFirst(CreatureState.FROZEN));
     }
 }

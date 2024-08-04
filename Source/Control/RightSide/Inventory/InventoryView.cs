@@ -22,37 +22,47 @@ public partial class InventoryView : AbstractInventoryView
     public override void _Ready()
     {
         base._Ready();
-        ForeachSlot(view => view.OnInputEvent += OnSlotEvent);
+        ForeachSlot(view =>
+        {
+            view.OnMouseInputEvent += OnSlotEvent;
+            view.OnKeyboardEvent += OnSlotKeyEvent;
+        });
         _textLabel = GetNode<Label>("TextLabel");
     }
 
-    private void OnSlotEvent(object? sender, SlotEvent @event)
+    private void OnSlotEvent(object? sender, SlotMouseEvent mouseEvent)
     {
         if (sender is not InventorySlotView slot)
         {
             return;
         }
-        var type = @event.EventType;
-        if (type == SlotEvent.Type.MOUSE_ENTERED)
+        var type = mouseEvent.EventType;
+        if (type == SlotMouseEvent.Type.MOUSE_ENTERED)
         {
             OnMouseEntered(slot);
         }
-        else if (type == SlotEvent.Type.MOUSE_GONE)
+        else if (type == SlotMouseEvent.Type.MOUSE_GONE)
         {
             OnMouseGone();
         }
-        else if (type == SlotEvent.Type.MOUSE_LEFT_RELEASE)
+        else if (type == SlotMouseEvent.Type.MOUSE_LEFT_RELEASE)
         {
             OnMouseLeftRelease(slot);
         }
-        else if (type == SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
+        else if (type == SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
         {
             _inventory.OnUIDoubleClick(slot.Number);
         }
-        else if (type == SlotEvent.Type.MOUSE_RIGHT_CLICK)
+        else if (type == SlotMouseEvent.Type.MOUSE_RIGHT_CLICK)
         {
             _inventory.OnRightClick(slot.Number);
         }
+    }
+    
+    private void OnSlotKeyEvent(object? sender, SlotKeyEvent keyEvent)
+    {
+        if (sender is InventorySlotView slotView)
+            _inventory.OnViewKeyPressed(slotView.Number, keyEvent.Key);
     }
 
     private string Format(ICharacterItem item)
@@ -64,6 +74,7 @@ public partial class InventoryView : AbstractInventoryView
 
         return item.ItemName;
     }
+
 
     private void OnMouseEntered(InventorySlotView slot)
     {
@@ -112,6 +123,7 @@ public partial class InventoryView : AbstractInventoryView
             inventory.Foreach(SetIconToSlot);
         }
     }
+    
     private void SetIconToSlot(int slot, ICharacterItem item)
     {
         var texture = TEXTURE_READER.Get(item.IconId);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://cdhrxlx64ks6p"]
+[gd_scene load_steps=139 format=3 uid="uid://cdhrxlx64ks6p"]
 
 [ext_resource type="Texture2D" uid="uid://6e7agsbkde4r" path="res://sprite/char/N00/000000.png" id="1_aa18q"]
 [ext_resource type="Texture2D" uid="uid://cf328w2nq1syi" path="res://sprite/char/N00/000001.png" id="2_23pth"]
@@ -95,12 +95,31 @@
 [ext_resource type="Texture2D" uid="uid://db355hqoq154d" path="res://sprite/weapon/j10/000039.png" id="43_t17yk"]
 [ext_resource type="Texture2D" uid="uid://1slscxm0kjac" path="res://sprite/char/N02/000186.png" id="44_dnflb"]
 [ext_resource type="Texture2D" uid="uid://qpvm3om2q5go" path="res://sprite/weapon/j10/000040.png" id="44_utf88"]
+[ext_resource type="Texture2D" uid="uid://sidjq8mqj8ni" path="res://assets/_0png/00.png" id="45_e36kd"]
 [ext_resource type="Texture2D" uid="uid://823mfa6cirmp" path="res://sprite/char/N02/000187.png" id="45_h5x4n"]
 [ext_resource type="Texture2D" uid="uid://4yku554fnv1r" path="res://sprite/weapon/j10/000041.png" id="45_ltfve"]
 [ext_resource type="Texture2D" uid="uid://dvnqfabdmu8jr" path="res://sprite/char/N02/000121.png" id="46_jdu6k"]
+[ext_resource type="Texture2D" uid="uid://cntj4s6uiwmvo" path="res://assets/_0png/01.png" id="46_kqwp8"]
+[ext_resource type="Texture2D" uid="uid://c50a6e8roivuh" path="res://assets/_0png/02.png" id="47_0fbmo"]
 [ext_resource type="Texture2D" uid="uid://dq0b4j8fxrrol" path="res://sprite/char/N02/000122.png" id="47_m06r2"]
+[ext_resource type="Texture2D" uid="uid://co0fa4n01gbyn" path="res://assets/_0png/03.png" id="48_t60m7"]
+[ext_resource type="Texture2D" uid="uid://d5h6fm5fdakh" path="res://assets/_0png/04.png" id="49_m5q3a"]
+[ext_resource type="Texture2D" uid="uid://bnrjq0v67l3bv" path="res://assets/_0png/05.png" id="50_aw86f"]
+[ext_resource type="Texture2D" uid="uid://c8d2tdx0d8hb0" path="res://assets/_0png/06.png" id="51_sq0ww"]
+[ext_resource type="Texture2D" uid="uid://dmoslrjlivqw1" path="res://assets/_0png/07.png" id="52_djwnh"]
+[ext_resource type="Texture2D" uid="uid://da77c5y51ib4v" path="res://assets/_0png/08.png" id="53_46uky"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="54_3lv3l"]
+[ext_resource type="Texture2D" uid="uid://bg2y4apaf4pgr" path="res://assets/_0png/09.png" id="54_kd161"]
+[ext_resource type="Texture2D" uid="uid://dlpjhh7ia678w" path="res://assets/_0png/10.png" id="55_la56n"]
+[ext_resource type="Texture2D" uid="uid://cvowqc4aulib0" path="res://assets/_0png/11.png" id="56_o0k6n"]
+[ext_resource type="Texture2D" uid="uid://cyshnoxo0lpgs" path="res://assets/_0png/12.png" id="57_wl3m2"]
+[ext_resource type="Texture2D" uid="uid://b87jwvu2c7b1q" path="res://assets/_0png/13.png" id="58_5obw8"]
+[ext_resource type="Texture2D" uid="uid://c8w2wl3l734wf" path="res://assets/_0png/14.png" id="59_2fdfn"]
+[ext_resource type="Texture2D" uid="uid://xpgjwd4oyxcf" path="res://assets/_0png/15.png" id="60_ygjs2"]
 [ext_resource type="Texture2D" uid="uid://cwf20qhswsg8v" path="res://sprite/Effect/Arrow/000000.png" id="61_jko8c"]
+[ext_resource type="Texture2D" uid="uid://b3sqni884y2ms" path="res://assets/_0png/16.png" id="61_xqrhk"]
+[ext_resource type="Texture2D" uid="uid://cl5c5hvoj0uwx" path="res://assets/_0png/17.png" id="62_alrmx"]
+[ext_resource type="Texture2D" uid="uid://dwuvtj2yko7bk" path="res://assets/_0png/18.png" id="63_jmtsm"]
 [ext_resource type="Texture2D" uid="uid://2xamqcejya54" path="res://sprite/char/N02/000012.png" id="82_r8g1l"]
 [ext_resource type="Texture2D" uid="uid://j7ersmefosj6" path="res://sprite/weapon/j10/000038.png" id="101_na8bl"]
 [ext_resource type="Texture2D" uid="uid://8ac4s1jx8qdt" path="res://sprite/monster/buffalo/000046.png" id="104_m15ct"]
@@ -113,7 +132,7 @@
 [ext_resource type="Texture2D" uid="uid://b7e0gh647j0sb" path="res://assets/test/teleporter-effect-blue.png" id="111_oedgk"]
 
 [sub_resource type="Animation" id="Animation_56fvw"]
-length = 0.5
+length = 1.9
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -379,6 +398,30 @@ tracks/21/keys = {
 "update": 1,
 "values": [ExtResource("41_jxq3x"), ExtResource("101_na8bl"), ExtResource("43_t17yk"), ExtResource("44_utf88"), ExtResource("45_ltfve")]
 }
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Sprite2D3:texture")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("45_e36kd"), ExtResource("46_kqwp8"), ExtResource("47_0fbmo"), ExtResource("48_t60m7"), ExtResource("49_m5q3a"), ExtResource("50_aw86f"), ExtResource("51_sq0ww"), ExtResource("52_djwnh"), ExtResource("53_46uky"), ExtResource("54_kd161"), ExtResource("55_la56n"), ExtResource("56_o0k6n"), ExtResource("57_wl3m2"), ExtResource("58_5obw8"), ExtResource("59_2fdfn"), ExtResource("60_ygjs2"), ExtResource("61_xqrhk"), ExtResource("62_alrmx"), ExtResource("63_jmtsm")]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Sprite2D3:offset")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-14, -11), Vector2(-19, -39), Vector2(-23, -54), Vector2(-24, -66), Vector2(-27, -75), Vector2(-30, -82), Vector2(-33, -87), Vector2(-35, -91), Vector2(-38, -95), Vector2(-40, -99), Vector2(-42, -103), Vector2(-41, -106), Vector2(-41, -109), Vector2(-42, -110), Vector2(-44, -106), Vector2(-47, -110), Vector2(-48, -114), Vector2(-45, -114), Vector2(-36, -114)]
+}
 
 [sub_resource type="Animation" id="Animation_7ei63"]
 resource_name = "new_animation"
@@ -515,6 +558,9 @@ shader = ExtResource("54_3lv3l")
 shader_parameter/deform = Vector2(1, 1)
 shader_parameter/offset = Vector2(5, 6)
 shader_parameter/modulate = null
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b17c7"]
+blend_mode = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 
@@ -658,3 +704,9 @@ offset = Vector2(-40, -70)
 hframes = 10
 vframes = 10
 frame = 50
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_b17c7")
+texture = ExtResource("45_e36kd")
+centered = false
+offset = Vector2(-14, -11)

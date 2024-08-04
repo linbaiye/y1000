@@ -18,12 +18,17 @@ public partial class KungFuBookView : AbstractInventoryView
     private readonly MagicSdbReader _magicSdbReader = MagicSdbReader.Instance;
 
     private BookPage? _currentPage;
-
+    private InventorySlotView? _currentFocused;
+    
     
     public override void _Ready()
     {
         base._Ready();
-        ForeachSlot(view => view.OnInputEvent += OnSlotEvent);
+        ForeachSlot(view =>
+        {
+            view.OnMouseInputEvent += OnSlotEvent;
+            view.OnKeyboardEvent += OnSlotKeyEvent;
+        });
         var page1 = GetNode<BookPage>("Page1");
         var page2 = GetNode<BookPage>("Page2");
         _currentPage = page1;
@@ -37,27 +42,54 @@ public partial class KungFuBookView : AbstractInventoryView
         RefreshPage();
     }
 
-    private void OnSlotEvent(object? sender, SlotEvent inputEvent)
+    private void OnSlotKeyEvent(object? sender, SlotKeyEvent keyEvent)
+    {
+        if (sender is InventorySlotView slotView && _currentPage != null)
+            _kungFuBook.OnKeyPressed(_currentPage.Number, slotView.Number, keyEvent.Key);
+    }
+
+    private void OnSlotEvent(object? sender, SlotMouseEvent inputMouseEvent)
     {
         if (sender is not InventorySlotView slotView || _currentPage == null)
         {
             return;
         }
 
-        if (inputEvent.EventType == SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
+        if (inputMouseEvent.EventType == SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
         {
             _kungFuBook.OnDoubleClick(_currentPage.Number, slotView.Number);
         }
-        else if (inputEvent.EventType == SlotEvent.Type.MOUSE_RIGHT_CLICK)
+        else if (inputMouseEvent.EventType == SlotMouseEvent.Type.MOUSE_RIGHT_CLICK)
         {
             _kungFuBook.OnRightClick(_currentPage.Number, slotView.Number);
+        }
+        else if (inputMouseEvent.EventType == SlotMouseEvent.Type.MOUSE_LEFT_RELEASE)
+        {
+            OnMouseLeftRelease(slotView);
+        }
+        else if (inputMouseEvent.EventType == SlotMouseEvent.Type.MOUSE_ENTERED)
+        {
+            _currentFocused = slotView;
+        }
+        else if (inputMouseEvent.EventType == SlotMouseEvent.Type.MOUSE_GONE)
+        {
+            _currentFocused = null;
         }
     }
     
 
-    private string KungFuLevel(int level)
+    
+    private void OnMouseLeftRelease(InventorySlotView picked)
     {
-        return level / 100 + "." + (level % 100).ToString("00");
+        if (_currentPage == null || _currentFocused == null)
+        {
+            return;
+        }
+        if (picked.Number != _currentFocused.Number)
+        {
+            Log.Debug("Swap drag slots {0} {1}.", picked.Number, _currentFocused.Number);
+            _kungFuBook.OnUISwapSlot(_currentPage.Number, picked.Number, _currentFocused.Number);
+        }
     }
 
     private void SetSlotView(int index, IKungFu kungFu)
@@ -67,7 +99,7 @@ public partial class KungFuBookView : AbstractInventoryView
         if (texture2D != null)
         {
             var slotView = GetSlot(index);
-            slotView.PutTextureAndTooltip(texture2D, kungFu.Name + ":" + KungFuLevel(kungFu.Level));
+            slotView.PutTextureAndTooltip(texture2D, kungFu.Name + ":" + kungFu.FormatLevel);
         }
     }
 
@@ -88,8 +120,8 @@ public partial class KungFuBookView : AbstractInventoryView
     {
         _kungFuBook = book;
         RefreshPage();
+        book.UpdatedEvent += (_, _) => RefreshPage();
     }
-
     
     public void ButtonClicked()
     {

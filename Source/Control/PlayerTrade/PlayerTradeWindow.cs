@@ -39,7 +39,7 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         for (int i = 1; i <= 4; i++)
         {
             _mySlots[i - 1] = GetNode<InventorySlotView>("Slot" + i);
-            _mySlots[i - 1].OnInputEvent += OnSlotEvent;
+            _mySlots[i - 1].OnMouseInputEvent += OnMouseSlotEvent;
         }
         for (int i = 5; i <= 8; i++)
         {
@@ -61,13 +61,13 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         EventMediator = eventMediator;
     }
 
-    private void OnSlotEvent(object? sender, SlotEvent slotEvent)
+    private void OnMouseSlotEvent(object? sender, SlotMouseEvent slotMouseEvent)
     {
         if (sender is not InventorySlotView slotView)
         {
             return;
         }
-        if (slotEvent.EventType == SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK && slotView.Number < 5)
+        if (slotMouseEvent.EventType == SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK && slotView.Number < 5)
         {
             EventMediator?.NotifyServer(ClientUpdateTradeEvent.RemoveItem(slotView.Number));
         }

@@ -5,7 +5,7 @@ using y1000.Source.Creature.State;
 
 namespace y1000.Source.Creature.Monster;
 
-public sealed class MonsterMoveState : AbstractCreatureMoveState<Monster>
+public sealed class MonsterMoveState : AbstractCreatureMoveState<Monster>, IMonsterState
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
@@ -34,11 +34,20 @@ public sealed class MonsterMoveState : AbstractCreatureMoveState<Monster>
     }
 
     public override CreatureState State => CreatureState.WALK;
+    public OffsetTexture? EffectOffsetTexture(Monster creature)
+    {
+        var elapsed = ElapsedMillis * _speedRate;
+        if (elapsed > TotalMillis)
+        {
+            elapsed = TotalMillis;
+        }
+        return creature.EffectAnimation?.OffsetTexture(State, creature.Direction, elapsed);
+    }
 
     public static MonsterMoveState Move(MonsterAnimation animation, Direction towards, int speed, int elapsed = 0)
     {
         var originSpeed= animation.AnimationMillis(CreatureState.WALK);
         int rate = originSpeed / speed;
-        return new MonsterMoveState(speed, towards, elapsed, rate);
+        return new MonsterMoveState(originSpeed, towards, elapsed, 1);
     }
 }

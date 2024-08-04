@@ -32,6 +32,10 @@ public partial class RightControl : Godot.Control
         }
     }
 
+    public InventoryView? InventoryView => _inventory;
+    
+    public KungFuBookView? KungFuBookView => _kungFuBookView;
+
     public void OnInventoryButtonClicked()
     {
         _kungFuBookView?.OnClosed();

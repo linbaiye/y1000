@@ -11,8 +11,8 @@ public partial class InventorySlotView : Panel
 	private int _number;
 	
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
-	public event EventHandler<SlotEvent>? OnInputEvent;
-	
+	public event EventHandler<SlotMouseEvent>? OnMouseInputEvent;
+	public event EventHandler<SlotKeyEvent>? OnKeyboardEvent;
 
 	private bool _mouseHovered;
 
@@ -26,10 +26,12 @@ public partial class InventorySlotView : Panel
 		}
 	}
 
-	public override void _ShortcutInput(InputEvent @event)
+	public override void _UnhandledKeyInput(InputEvent @event)
 	{
-		if (@event is InputEventKey && _mouseHovered)
+		if (@event is InputEventKey eventKey && _mouseHovered && 
+		    eventKey.IsPressed() && eventKey.Keycode != Key.Enter)
 		{
+			OnKeyboardEvent?.Invoke(this, new SlotKeyEvent(eventKey.Keycode));
 			AcceptEvent();
 		}
 	}
@@ -41,7 +43,7 @@ public partial class InventorySlotView : Panel
 		{
 			if (eventMouse.DoubleClick)
 			{
-				OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_LEFT_DOUBLE_CLICK));
+				OnMouseInputEvent?.Invoke(this, new SlotMouseEvent(SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK));
 			}
 			// else if (eventMouse.Pressed)
 			// {
@@ -49,25 +51,25 @@ public partial class InventorySlotView : Panel
 			// }
 			else if (eventMouse.IsReleased())
 			{
-				OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_LEFT_RELEASE));
+				OnMouseInputEvent?.Invoke(this, new SlotMouseEvent(SlotMouseEvent.Type.MOUSE_LEFT_RELEASE));
 			}
 		}
 		else if (eventMouse.ButtonMask == MouseButtonMask.Right)
 		{
-			OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_RIGHT_CLICK));
+			OnMouseInputEvent?.Invoke(this, new SlotMouseEvent(SlotMouseEvent.Type.MOUSE_RIGHT_CLICK));
 		}
 	}
 
 	private void OnMouseEntered()
 	{
 		_mouseHovered = true;
-		OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_ENTERED));
+		OnMouseInputEvent?.Invoke(this, new SlotMouseEvent(SlotMouseEvent.Type.MOUSE_ENTERED));
 	}
 	
 	private void OnMouseExited()
 	{
 		_mouseHovered = false;
-		OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_GONE));
+		OnMouseInputEvent?.Invoke(this, new SlotMouseEvent(SlotMouseEvent.Type.MOUSE_GONE));
 	}
 
 
@@ -90,7 +92,7 @@ public partial class InventorySlotView : Panel
 
 	public void PutTexture(Texture2D texture2D)
 	{
-		_textureRect.Texture = texture2D;
+		PutTextureAndTooltip(texture2D, "");
 	}
 
 	public void PutTextureAndTooltip(Texture2D texture2D, string tip)
@@ -99,6 +101,8 @@ public partial class InventorySlotView : Panel
 		TooltipText = tip;
 	}
 
+	public Texture2D Texture => _textureRect.Texture;
+
 	public void Clear()
 	{
 		_textureRect.Texture = null;
@@ -106,4 +110,5 @@ public partial class InventorySlotView : Panel
 	}
 
 	public bool IsEmpty => _textureRect.Texture != null;
+	
 }

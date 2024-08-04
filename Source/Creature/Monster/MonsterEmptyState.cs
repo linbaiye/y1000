@@ -5,7 +5,7 @@ using y1000.Source.Creature.State;
 
 namespace y1000.Source.Creature.Monster;
 
-public class MonsterEmptyState : ICreatureState<Monster>
+public class MonsterEmptyState : IMonsterState
 {
     public OffsetTexture BodyOffsetTexture(Monster player)
     {
@@ -18,4 +18,8 @@ public class MonsterEmptyState : ICreatureState<Monster>
     }
 
     public CreatureState State => CreatureState.AXE;
+    public OffsetTexture? EffectOffsetTexture(Monster creature)
+    {
+        throw new System.NotImplementedException();
+    }
 }

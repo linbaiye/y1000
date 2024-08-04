@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
 using NLog;
+using y1000.Source.Character.Event;
+using y1000.Source.Control.Bottom.Shortcut;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Networking;
@@ -19,6 +22,7 @@ public class CharacterInventory
 
     public event EventHandler<EventArgs>? InventoryChanged;
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
+    public event EventHandler<InventoryShortcutEvent>? ShortcutEvent;
 
 
     private EventMediator? _eventMediator;
@@ -61,6 +65,11 @@ public class CharacterInventory
             return item;
         }
         throw new KeyNotFoundException("Slot not present " + slot);
+    }
+
+    public IItem? Get(int slot)
+    {
+        return HasItem(slot) ? GetOrThrow(slot) : null;
     }
 
     public void RollbackSelling(MerchantTrade trade)
@@ -409,6 +418,14 @@ public class CharacterInventory
         if (_items.ContainsKey(pickedSlot))
         {
             _eventMediator?.NotifyServer(new SwapInventorySlotMessage(pickedSlot, slot2));
+        }
+    }
+
+    public void OnViewKeyPressed(int slot, Key key)
+    {
+        if (_items.TryGetValue(slot, out var item))
+        {
+            ShortcutEvent?.Invoke(this, new InventoryShortcutEvent(ShortcutContext.OfInventory(slot, key), item));
         }
     }
 }

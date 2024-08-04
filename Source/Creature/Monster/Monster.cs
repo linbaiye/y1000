@@ -13,29 +13,37 @@ namespace y1000.Source.Creature.Monster;
 
 public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 {
-	private ICreatureState<Monster> _state = new MonsterEmptyState();
-
-	public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
+	private IMonsterState _state = new MonsterEmptyState();
 
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
 	private MonsterAnimation _animation = MonsterAnimation.Instance;
+	
+	private MonsterAnimation? _effectAnimation;
+	
+	public MonsterAnimation? EffectAnimation => _effectAnimation;
 
 	public string AtzName { get; private set; } = "";
 	
-	private void Init(long id, Direction direction, ICreatureState<Monster> state, Vector2I coordinate, IMap map,
-		string name, MonsterAnimation animation, string atz)
+	public override OffsetTexture BodyOffsetTexture => _state.BodyOffsetTexture(this);
+	
+	public OffsetTexture? EffectOffsetTexture => _state.EffectOffsetTexture(this);
+
+	
+	private void Init(long id, Direction direction, IMonsterState state, Vector2I coordinate, IMap map,
+		string name, MonsterAnimation animation, string atz, MonsterAnimation? effect)
 	{
 		base.Init(id, direction, coordinate, map, name);
 		_state = state;
 		_animation = animation;
 		AtzName = atz;
+		_effectAnimation = effect;
 	}
 
 	public MonsterAnimation MonsterAnimation => _animation;
 
-	private static ICreatureState<Monster> CreateState(CreatureState state, int elapses, Direction direction, MonsterAnimation animation)
+	private static IMonsterState CreateState(CreatureState state, int elapses, Direction direction, MonsterAnimation animation)
 	{
 		switch (state)
 		{
@@ -56,7 +64,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		}
 	}
 
-	private void ChangeState(ICreatureState<Monster> newState)
+	private void ChangeState(IMonsterState newState)
 	{
 		if (_state is MonsterMoveState moveState && moveState.ToCoordinate.HasValue)
 		{
@@ -90,6 +98,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
 	public void Visit(MonsterMoveMessage moveMessage)
 	{
+		SetPosition(moveMessage.Coordinate, moveMessage.Direction);
 		ChangeState(MonsterMoveState.Move(MonsterAnimation, moveMessage.Direction, moveMessage.Speed));
 	}
 
@@ -139,17 +148,21 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		message.Accept(this);
 	}
 
+
 	public static void Initialize(Monster monster, NpcInterpolation npcInterpolation, IMap map)
 	{
 		var interpolation = npcInterpolation.Interpolation;
 		var name = npcInterpolation.Name;
 		var monsterAnimation = MonsterAnimationFactory.Instance.Load("z" + npcInterpolation.Shape,
 			npcInterpolation.Animate);
+		var effectAnimation =
+			MonsterAnimationFactory.Instance.LoadEffect("z" + npcInterpolation.Shape,
+				npcInterpolation.Animate);
 		var state = CreateState(interpolation.State,
 			interpolation.ElapsedMillis, interpolation.Direction, monsterAnimation);
 		monster.Init(npcInterpolation.Id, interpolation.Direction, 
 			state, interpolation.Coordinate, map, name, monsterAnimation,
-			"z" + npcInterpolation.Shape);
+			"z" + npcInterpolation.Shape, effectAnimation);
 		if (state is AbstractCreatureMoveState<Monster> moveState)
 		{
 			moveState.DriftPosition(monster);

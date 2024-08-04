@@ -121,7 +121,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.PlayerRevive => new PlayerReviveMessage(packet.PlayerRevive.Id),
             Packet.TypedPacketOneofCase.GainExp => new GainExpMessage(packet.GainExp.Name, packet.GainExp.Level, packet.GainExp.KungFu),
             Packet.TypedPacketOneofCase.Projectile => ProjectileMessage.FromPacket(packet.Projectile),
-            Packet.TypedPacketOneofCase.MonsterMove => new MonsterMoveMessage(packet.MonsterMove.Id, (Direction)packet.MonsterMove.Direction, packet.MonsterMove.Speed),
+            Packet.TypedPacketOneofCase.MonsterMove => MonsterMoveMessage.FromPacket(packet.MonsterMove),
             Packet.TypedPacketOneofCase.LearnKungFu => PlayerLearnKungFuMessage.FromPacket(packet.LearnKungFu),
             Packet.TypedPacketOneofCase.ItemAttribute => KungFuOrItemAttributeMessage.FromPacket(packet.ItemAttribute),
             Packet.TypedPacketOneofCase.RightClickAttribute => PlayerAttributeMessage.FromPacket(packet.RightClickAttribute),
@@ -131,6 +131,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.UpdateDynamicObject => UpdateDynamicObjectMessage.FromPacket(packet.UpdateDynamicObject),
             Packet.TypedPacketOneofCase.Teleport => TeleportMessage.FromPacket(packet.Teleport),
             Packet.TypedPacketOneofCase.Lifebar => new LifebarMessage(packet.Lifebar.Id, packet.Lifebar.Percent),
+            Packet.TypedPacketOneofCase.UpdateKungFuSlot => UpdateKungFuSlotMessage.FromPacket(packet.UpdateKungFuSlot),
             _ => throw new NotSupportedException()
         };
     }

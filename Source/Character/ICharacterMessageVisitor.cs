@@ -22,4 +22,6 @@ public interface ICharacterMessageVisitor
     void Visit(PlayerAttributeMessage message);
     
     void Visit(TeleportMessage message);
+    
+    void Visit(UpdateKungFuSlotMessage message);
 }

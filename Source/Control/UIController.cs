@@ -89,9 +89,10 @@ public partial class UIController : CanvasLayer
     
     public void BindCharacter(CharacterImpl character, string realmName)
     {
-        _bottomControl.BindCharacter(character, realmName);
         _rightControl.BindCharacter(character);
+        _bottomControl.BindCharacter(character, realmName);
         _dialogControl.BindCharacter(character);
+        //_bottomControl.BindShortcuts(_rightControl.InventoryView, character.KungFuBook);
     }
     
 
@@ -163,16 +164,8 @@ public partial class UIController : CanvasLayer
         _playerTradeWindow.Update(message);
     }
 
-    public bool IsTrading()
+    private bool IsTrading()
     {
-        if (_dialogControl.IsTrading)
-        {
-            return true;
-        }
-        if (_dropItemUi.Visible)
-        {
-            return true;
-        }
-        return false;
+        return _dialogControl.IsTrading || _dropItemUi.Visible;
     }
 }

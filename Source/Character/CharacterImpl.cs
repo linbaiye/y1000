@@ -232,6 +232,11 @@ namespace y1000.Source.Character
 	        WrappedPlayer().SetPosition(message.Coordinate, WrappedPlayer().Direction);
         }
 
+        public void Visit(UpdateKungFuSlotMessage message)
+        {
+	        KungFuBook.UpdateSlot(message.Slot, message.KungFu);
+        }
+
         public void Handle(ICharacterMessage message)
         {
 	        // LOGGER.Debug("Received message {0}.", message);

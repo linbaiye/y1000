@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
+using y1000.Source.Control.Bottom.Shortcut;
 using y1000.Source.Event;
 using y1000.Source.KungFu.Attack;
 using y1000.Source.Networking;
@@ -14,6 +16,9 @@ public class KungFuBook
     private readonly IDictionary<int, IKungFu> _basic;
 
     public EventMediator? EventMediator { get; set; }
+
+    public EventHandler<KungFuShortcutEvent>? ShortcutPressed;
+    public EventHandler<EventArgs>? UpdatedEvent;
 
     public KungFuBook(IDictionary<int, IKungFu> unnamed, IDictionary<int, IKungFu> basic)
     {
@@ -46,6 +51,7 @@ public class KungFuBook
             if (kungFu.Name.Equals(name))
             {
                 kungFu.Level = newLevel;
+                UpdatedEvent?.Invoke(this, EventArgs.Empty);
                 return true;
             }
         }
@@ -54,7 +60,8 @@ public class KungFuBook
 
     public void Add(int slot, IKungFu kungFu)
     {
-        _basic.TryAdd(slot, kungFu);
+        if (_basic.TryAdd(slot, kungFu))
+            UpdatedEvent?.Invoke(this, EventArgs.Empty);
     }
 
     public void GainExp(string name, int newLevel)
@@ -107,6 +114,40 @@ public class KungFuBook
         {
             EventMediator?.NotifyServer(new ClientRightClickEvent(RightClickType.KUNGFU, nr, page));
         }
+    }
+
+    public void OnKeyPressed(int page, int nr, Key key)
+    {
+        var kungFu = Get(page, nr);
+        if (kungFu != null)
+        {
+            ShortcutPressed?.Invoke(this, new KungFuShortcutEvent(ShortcutContext.OfKungFu(page, nr, key), kungFu));
+        }
+    }
+
+    public void UpdateSlot(int slot, IKungFu? kungFu)
+    {
+        _basic.Remove(slot);
+        if (kungFu != null)
+        {
+            _basic.TryAdd(slot, kungFu);
+        }
+        UpdatedEvent?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void OnShortcutPressed(int page, int nr)
+    {
+        OnDoubleClick(page, nr);
+    }
+
+    
+    public void OnUISwapSlot(int page, int slot1, int slot2)
+    {
+        if (page != 2 || slot2 == slot1)
+        {
+            return;
+        }
+        EventMediator?.NotifyServer(new ClientSwapKungFuSlotEvent(page, slot1, slot2));
     }
 
     public void OnDoubleClick(int page, int nr)

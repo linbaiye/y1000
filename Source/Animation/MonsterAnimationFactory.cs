@@ -31,4 +31,13 @@ public class MonsterAnimationFactory
         }
         return animation;
     }
+
+    public MonsterAnimation? LoadEffect(string atz, string atd)
+    {
+        if (!_spriteRepository.Exists(atz + "m"))
+        {
+            return null;
+        }
+        return Load(atz + "m", atd);
+    }
 }
