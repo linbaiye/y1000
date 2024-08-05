@@ -51,7 +51,7 @@ public partial class Shortcuts : NinePatchRect
     }
 
 
-    public override void _ShortcutInput(InputEvent @event)
+    public override void _UnhandledKeyInput(InputEvent @event)
     {
         if (@event is InputEventKey key && key.IsPressed() && KEY_TO_INDEX.TryGetValue(key.Keycode, out var index) && 
             _mappedContext.TryGetValue(index, out var context))
@@ -59,7 +59,8 @@ public partial class Shortcuts : NinePatchRect
             if (context.Receiver == Shortcut.ShortcutContext.Component.KUNGFU_BOOK)
             {
                 _kungFuBook?.OnShortcutPressed(context.Page, context.Slot);
-            } else if (context.Receiver == Shortcut.ShortcutContext.Component.INVENTORY)
+            }
+            else if (context.Receiver == Shortcut.ShortcutContext.Component.INVENTORY)
             {
                 _inventory?.OnUIDoubleClick(context.Slot);
             }

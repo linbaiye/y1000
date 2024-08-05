@@ -19,6 +19,7 @@ public partial class Avatar : NinePatchRect
 	private AvatarPart _hair;
 	private AvatarPart _hat;
 	private AvatarPart _wrist;
+	private AvatarPart _wrist1;
 	private AvatarPart _boot;
 	private AvatarPart _clothing;
 	private AvatarPart _trouser;
@@ -29,6 +30,7 @@ public partial class Avatar : NinePatchRect
 	private CharacterImpl? _character;
 	
 	private const int AvatarIndex = 57;
+	private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
 	public Avatar()
 	{
@@ -39,6 +41,7 @@ public partial class Avatar : NinePatchRect
 		_hair = MAKE_COMPILER_HAPPY;
 		_hat = MAKE_COMPILER_HAPPY;
 		_wrist = MAKE_COMPILER_HAPPY;
+		_wrist1 = MAKE_COMPILER_HAPPY;
 		_boot = MAKE_COMPILER_HAPPY;
 		_clothing = MAKE_COMPILER_HAPPY;
 		_trouser = MAKE_COMPILER_HAPPY;
@@ -53,6 +56,7 @@ public partial class Avatar : NinePatchRect
 		_hat = GetNode<AvatarPart>("Hat");
 		_boot = GetNode<AvatarPart>("Boot");
 		_wrist = GetNode<AvatarPart>("Wrist");
+		_wrist1 = GetNode<AvatarPart>("Wrist1");
 		_clothing = GetNode<AvatarPart>("Clothing");
 		_trouser = GetNode<AvatarPart>("Trouser");
 		_equipmentText = GetNode<Label>("EquipmentText");
@@ -155,9 +159,18 @@ public partial class Avatar : NinePatchRect
 		if (wrist == null)
 		{
 			_wrist.Visible = false;
+			_wrist1.Visible = false;
+			Logger.Debug("Hide wrist");
 		}
-		DrawArmor(wrist, _wrist);
+		else
+		{
+			DrawEquipment(wrist.FirstAtzName, _wrist);
+			DrawEquipment(wrist.FirstAtz1, _wrist1);
+			_wrist1.Text = wrist.Name;
+			_wrist.Text = wrist.Name;
+		}
 	}
+	
 	
 	public void DrawBoot(Boot? boot)
 	{
@@ -208,6 +221,8 @@ public partial class Avatar : NinePatchRect
 			case "Hair":  _character?.OnAvatarDoubleClick(EquipmentType.HAIR);
 				break;
 			case "Wrist":  _character?.OnAvatarDoubleClick(EquipmentType.WRIST);
+				break;
+			case "Wrist1":  _character?.OnAvatarDoubleClick(EquipmentType.WRIST);
 				break;
 			case "Hand":  _character?.OnAvatarDoubleClick(EquipmentType.WEAPON);
 				break;

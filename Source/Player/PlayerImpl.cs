@@ -27,6 +27,8 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	
 	private PlayerArmorAnimation? _wristAnimation;
 	
+	private PlayerArmorAnimation? _wristAnimation1;
+	
 	private PlayerArmorAnimation? _bootAnimation;
 	
 	private PlayerArmorAnimation? _trouserAnimation;
@@ -45,6 +47,16 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			equip.Invoke(equipment);
 		}
 	}
+
+	private void InitWrist(string? name)
+	{
+		if (name != null)
+		{
+			var wrist = EquipmentFactory.Instance.CreateWrist(name, IsMale);
+			ChangeWrist(wrist);
+		}
+		
+	}
 	
 	public void Init(IPlayerState state, Direction direction,  Vector2I coordinate, IMap map, PlayerInfo info)
 	{
@@ -56,7 +68,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		InitEquipment(info.ChestName, n => equipmentFactory.CreatePlayerChest(n, IsMale), ChangeChest);
 		InitEquipment(info.HairName, n => equipmentFactory.CreatePlayerHair(n, IsMale), ChangeHair);
 		InitEquipment(info.HatName, n => equipmentFactory.CreatePlayerHat(n, IsMale), ChangeHat);
-		InitEquipment(info.WristName, n => equipmentFactory.CreateWrist(n, IsMale, false), ChangeWrist);
+		InitWrist(info.WristName);
 		InitEquipment(info.BootName, n => equipmentFactory.CreateBoot(n, IsMale), ChangeBoot);
 		InitEquipment(info.TrouserName, n => equipmentFactory.CreateTrouser(n, IsMale), ChangeTrouser);
 		InitEquipment(info.ClothingName, n => equipmentFactory.CreateClothing(n, IsMale), ChangeClothing);
@@ -104,14 +116,23 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		_hatAnimation = hat != null ? PlayerArmorAnimation.Create(hat) : null;
 		Hat = hat;
 		GetNode<Sprite2D>("Hat").Visible = hat != null;
-		LOGGER.Debug("Set hat visible {0}.", hat != null);
 	}
 
 	private void ChangeWrist(Wrist? wrist)
 	{
-		_wristAnimation = wrist != null ? PlayerArmorAnimation.Create(wrist) : null;
 		Wrist = wrist;
-		GetNode<Sprite2D>("Wrist").Visible = wrist != null;
+		if (wrist != null)
+		{
+			_wristAnimation = PlayerArmorAnimation.CreateWrist(wrist);
+			_wristAnimation1 = PlayerArmorAnimation.CreateWrist1(wrist);
+			GetNode<Sprite2D>("Wrist").Visible = true;
+			GetNode<Sprite2D>("Wrist1").Visible = true;
+		}
+		else
+		{
+			GetNode<Sprite2D>("Wrist").Visible = false;
+			GetNode<Sprite2D>("Wrist1").Visible = false;
+		}
 	}
 
 	private void ChangeHair(PlayerHair? hair)
@@ -313,6 +334,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public OffsetTexture? HairTexture => _hairAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? HatTexture => _hatAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? WristTexture => _wristAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? Wrist1Texture => _wristAnimation1?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? BootTexture => _bootAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? ClothingTexture => _clothingAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? TrouserTexture => _trouserAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);

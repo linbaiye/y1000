@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://duo0butuerf3j"]
+[gd_scene load_steps=19 format=3 uid="uid://duo0butuerf3j"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerImpl.cs" id="1_68hen"]
 [ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_1av6c"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Source/Player/HairSprite.cs" id="3_50fj6"]
 [ext_resource type="Script" path="res://Source/Player/Hand.cs" id="3_b4kwg"]
 [ext_resource type="Script" path="res://Source/Player/TrouserSprite.cs" id="3_yqfac"]
+[ext_resource type="Script" path="res://Source/Player/Wrist1Sprite.cs" id="6_1cfdh"]
 [ext_resource type="Script" path="res://Source/Player/ClothingSprite.cs" id="6_ousk6"]
 [ext_resource type="Script" path="res://Source/Player/HatSprite.cs" id="6_vu6ta"]
 [ext_resource type="Script" path="res://Source/Player/WristSprite.cs" id="7_hcmfo"]
@@ -48,6 +49,12 @@ visible = false
 y_sort_enabled = true
 centered = false
 script = ExtResource("7_hcmfo")
+
+[node name="Wrist1" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+centered = false
+script = ExtResource("6_1cfdh")
 
 [node name="Clothing" type="Sprite2D" parent="."]
 visible = false

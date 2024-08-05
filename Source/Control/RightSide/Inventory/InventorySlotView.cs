@@ -26,12 +26,17 @@ public partial class InventorySlotView : Panel
 		}
 	}
 
-	public override void _UnhandledKeyInput(InputEvent @event)
+	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event is InputEventKey eventKey && _mouseHovered && 
-		    eventKey.IsPressed() && eventKey.Keycode != Key.Enter)
+		if (@event is not InputEventKey eventKey)
+			return;
+		if (_mouseHovered && eventKey.IsPressed() && eventKey.Keycode != Key.Enter)
 		{
 			OnKeyboardEvent?.Invoke(this, new SlotKeyEvent(eventKey.Keycode));
+		}
+
+		if (eventKey.Keycode == Key.Enter && eventKey.IsPressed())
+		{
 			AcceptEvent();
 		}
 	}

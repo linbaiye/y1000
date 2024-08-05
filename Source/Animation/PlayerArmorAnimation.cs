@@ -16,5 +16,21 @@ public class PlayerArmorAnimation : AbstractPlayerBodyAnimation<PlayerArmorAnima
         AtzSprite N4 = SpriteRepository.LoadByNumber(armor.FifthAtzName);
         return Config(animation, N0, N1, N2, N3, N4);
     }
-    
+
+    public static PlayerArmorAnimation CreateWrist(Wrist wrist)
+    {
+        return Create(wrist);
+    }
+
+    public static PlayerArmorAnimation CreateWrist1(Wrist wrist)
+    {
+        PlayerArmorAnimation animation = new PlayerArmorAnimation();
+        AtzSprite N0 = SpriteRepository.LoadByNumber(wrist.FirstAtz1);
+        AtzSprite N1 = SpriteRepository.LoadByNumber(wrist.SecondAtz1);
+        AtzSprite N2 = SpriteRepository.LoadByNumber(wrist.ThirdAtz1);
+        AtzSprite N3 = SpriteRepository.LoadByNumber(wrist.FourthAtz1);
+        AtzSprite N4 = SpriteRepository.LoadByNumber(wrist.FifthAtz1);
+        return Config(animation, N0, N1, N2, N3, N4);
+    }
+
 }
