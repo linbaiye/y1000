@@ -122,8 +122,9 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
 	public void Visit(CreatureAttackMessage attackMessage)
 	{
-		ChangeState(MonsterStillState.Attack(MonsterAnimation));
+		LOGGER.Debug("Received attack message {0}.", attackMessage);
 		SetPosition(attackMessage.Coordinate, attackMessage.Direction);
+		ChangeState(MonsterStillState.Attack(MonsterAnimation));
 	}
 
 	public void Visit(RemoveEntityMessage removeEntityMessage)

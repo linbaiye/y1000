@@ -51,7 +51,7 @@ public partial class Shortcuts : NinePatchRect
     }
 
 
-    public override void _UnhandledKeyInput(InputEvent @event)
+    public override void _ShortcutInput(InputEvent @event)
     {
         if (@event is InputEventKey key && key.IsPressed() && KEY_TO_INDEX.TryGetValue(key.Keycode, out var index) && 
             _mappedContext.TryGetValue(index, out var context))

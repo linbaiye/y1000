@@ -34,6 +34,10 @@ public partial class InventorySlotView : Panel
 		{
 			OnKeyboardEvent?.Invoke(this, new SlotKeyEvent(eventKey.Keycode));
 		}
+		if (eventKey.Keycode != Key.Enter && _mouseHovered)
+		{
+			AcceptEvent();
+		}
 	}
 
 

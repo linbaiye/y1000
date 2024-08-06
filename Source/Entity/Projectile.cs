@@ -62,15 +62,7 @@ public partial class Projectile : Sprite2D
         }
     }
 
-    public static Projectile LoadFor(ICreature shooter, ICreature target)
-    {
-        PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/Arrow.tscn");
-        var arrow = scene.Instantiate<Projectile>();
-        var image = Image.LoadFromFile("res://sprite/y/7/000020.png");
-        arrow.Texture = ImageTexture.CreateFromImage(image);
-        arrow.Init(shooter, target);
-        return arrow;
-    }
+
     
     public static Projectile LoadFor(ICreature shooter, ICreature target, int id)
     {
