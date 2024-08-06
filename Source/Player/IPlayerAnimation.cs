@@ -12,8 +12,8 @@ public interface IPlayerAnimation
     
     OffsetTexture? HatTexture { get; }
     
-    OffsetTexture? WristTexture { get; }
-    OffsetTexture? Wrist1Texture { get; }
+    OffsetTexture? LeftWristTexture { get; }
+    OffsetTexture? RightWristTexture { get; }
     
     OffsetTexture? BootTexture { get; }
     

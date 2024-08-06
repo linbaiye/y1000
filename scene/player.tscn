@@ -6,10 +6,10 @@
 [ext_resource type="Script" path="res://Source/Player/HairSprite.cs" id="3_50fj6"]
 [ext_resource type="Script" path="res://Source/Player/Hand.cs" id="3_b4kwg"]
 [ext_resource type="Script" path="res://Source/Player/TrouserSprite.cs" id="3_yqfac"]
-[ext_resource type="Script" path="res://Source/Player/Wrist1Sprite.cs" id="6_1cfdh"]
+[ext_resource type="Script" path="res://Source/Player/LeftWristSprite.cs" id="5_2ywke"]
+[ext_resource type="Script" path="res://Source/Player/RightWristSprite.cs" id="6_b4hi7"]
 [ext_resource type="Script" path="res://Source/Player/ClothingSprite.cs" id="6_ousk6"]
 [ext_resource type="Script" path="res://Source/Player/HatSprite.cs" id="6_vu6ta"]
-[ext_resource type="Script" path="res://Source/Player/WristSprite.cs" id="7_hcmfo"]
 [ext_resource type="Script" path="res://Source/Player/BootSprite.cs" id="8_1757e"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="11_0mhdp"]
 [ext_resource type="Script" path="res://Source/Player/AttackEffectSprite.cs" id="11_vx863"]
@@ -44,17 +44,17 @@ y_sort_enabled = true
 centered = false
 script = ExtResource("8_1757e")
 
-[node name="Wrist" type="Sprite2D" parent="."]
+[node name="LeftWrist" type="Sprite2D" parent="."]
 visible = false
 y_sort_enabled = true
 centered = false
-script = ExtResource("7_hcmfo")
+script = ExtResource("5_2ywke")
 
-[node name="Wrist1" type="Sprite2D" parent="."]
+[node name="RightWrist" type="Sprite2D" parent="."]
 visible = false
 y_sort_enabled = true
 centered = false
-script = ExtResource("6_1cfdh")
+script = ExtResource("6_b4hi7")
 
 [node name="Clothing" type="Sprite2D" parent="."]
 visible = false

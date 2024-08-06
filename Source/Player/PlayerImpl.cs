@@ -25,9 +25,9 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	
 	private PlayerArmorAnimation? _hatAnimation;
 	
-	private PlayerArmorAnimation? _wristAnimation;
+	private PlayerArmorAnimation? _leftWristAnimation;
 	
-	private PlayerArmorAnimation? _wristAnimation1;
+	private PlayerArmorAnimation? _rightWristAnimation;
 	
 	private PlayerArmorAnimation? _bootAnimation;
 	
@@ -74,9 +74,9 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		InitEquipment(info.ClothingName, n => equipmentFactory.CreateClothing(n, IsMale), ChangeClothing);
 	}
 
-	public void Teleport(Vector2I coordiante)
+	public void Teleport(Vector2I coordinate)
 	{
-		Position = coordiante.ToPosition();
+		Position = coordinate.ToPosition();
 		Direction = Direction.DOWN;
 	}
 	
@@ -123,15 +123,15 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		Wrist = wrist;
 		if (wrist != null)
 		{
-			_wristAnimation = PlayerArmorAnimation.CreateWrist(wrist);
-			_wristAnimation1 = PlayerArmorAnimation.CreateWrist1(wrist);
-			GetNode<Sprite2D>("Wrist").Visible = true;
-			GetNode<Sprite2D>("Wrist1").Visible = true;
+			_leftWristAnimation = PlayerArmorAnimation.CreateLeftWrist(wrist);
+			_rightWristAnimation = PlayerArmorAnimation.CreateRightWrist(wrist);
+			GetNode<Sprite2D>("LeftWrist").Visible = true;
+			GetNode<Sprite2D>("RightWrist").Visible = true;
 		}
 		else
 		{
-			GetNode<Sprite2D>("Wrist").Visible = false;
-			GetNode<Sprite2D>("Wrist1").Visible = false;
+			GetNode<Sprite2D>("LeftWrist").Visible = false;
+			GetNode<Sprite2D>("RightWrist").Visible = false;
 		}
 	}
 
@@ -333,8 +333,8 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public OffsetTexture? ChestTexture => _chestAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? HairTexture => _hairAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? HatTexture => _hatAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
-	public OffsetTexture? WristTexture => _wristAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
-	public OffsetTexture? Wrist1Texture => _wristAnimation1?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? LeftWristTexture => _leftWristAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
+	public OffsetTexture? RightWristTexture => _rightWristAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? BootTexture => _bootAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? ClothingTexture => _clothingAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);
 	public OffsetTexture? TrouserTexture => _trouserAnimation?.OffsetTexture(_state.State, Direction, _state.ElapsedMillis);

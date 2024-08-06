@@ -17,12 +17,12 @@ public class PlayerArmorAnimation : AbstractPlayerBodyAnimation<PlayerArmorAnima
         return Config(animation, N0, N1, N2, N3, N4);
     }
 
-    public static PlayerArmorAnimation CreateWrist(Wrist wrist)
+    public static PlayerArmorAnimation CreateLeftWrist(Wrist wrist)
     {
         return Create(wrist);
     }
 
-    public static PlayerArmorAnimation CreateWrist1(Wrist wrist)
+    public static PlayerArmorAnimation CreateRightWrist(Wrist wrist)
     {
         PlayerArmorAnimation animation = new PlayerArmorAnimation();
         AtzSprite N0 = SpriteRepository.LoadByNumber(wrist.FirstAtz1);

@@ -121,6 +121,7 @@ public partial class Shortcuts : NinePatchRect
 
     private void SetInventoryShortcut(object? sender, InventoryShortcutEvent shortcutEvent)
     {
+        Logger.Debug("Received shortcut.");
         if (sender is CharacterInventory)
         {
             SetItem(shortcutEvent.Item, shortcutEvent.Context);

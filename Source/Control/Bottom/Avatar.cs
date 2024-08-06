@@ -18,8 +18,8 @@ public partial class Avatar : NinePatchRect
 	private AvatarPart _chest;
 	private AvatarPart _hair;
 	private AvatarPart _hat;
-	private AvatarPart _wrist;
-	private AvatarPart _wrist1;
+	private AvatarPart _leftWrist;
+	private AvatarPart _rightWrist;
 	private AvatarPart _boot;
 	private AvatarPart _clothing;
 	private AvatarPart _trouser;
@@ -40,8 +40,8 @@ public partial class Avatar : NinePatchRect
 		_chest = MAKE_COMPILER_HAPPY;
 		_hair = MAKE_COMPILER_HAPPY;
 		_hat = MAKE_COMPILER_HAPPY;
-		_wrist = MAKE_COMPILER_HAPPY;
-		_wrist1 = MAKE_COMPILER_HAPPY;
+		_leftWrist = MAKE_COMPILER_HAPPY;
+		_rightWrist = MAKE_COMPILER_HAPPY;
 		_boot = MAKE_COMPILER_HAPPY;
 		_clothing = MAKE_COMPILER_HAPPY;
 		_trouser = MAKE_COMPILER_HAPPY;
@@ -55,8 +55,8 @@ public partial class Avatar : NinePatchRect
 		_hair = GetNode<AvatarPart>("Hair");
 		_hat = GetNode<AvatarPart>("Hat");
 		_boot = GetNode<AvatarPart>("Boot");
-		_wrist = GetNode<AvatarPart>("Wrist");
-		_wrist1 = GetNode<AvatarPart>("Wrist1");
+		_leftWrist = GetNode<AvatarPart>("LeftWrist");
+		_rightWrist = GetNode<AvatarPart>("RightWrist");
 		_clothing = GetNode<AvatarPart>("Clothing");
 		_trouser = GetNode<AvatarPart>("Trouser");
 		_equipmentText = GetNode<Label>("EquipmentText");
@@ -158,16 +158,15 @@ public partial class Avatar : NinePatchRect
 	{
 		if (wrist == null)
 		{
-			_wrist.Visible = false;
-			_wrist1.Visible = false;
-			Logger.Debug("Hide wrist");
+			_leftWrist.Visible = false;
+			_rightWrist.Visible = false;
 		}
 		else
 		{
-			DrawEquipment(wrist.FirstAtzName, _wrist);
-			DrawEquipment(wrist.FirstAtz1, _wrist1);
-			_wrist1.Text = wrist.Name;
-			_wrist.Text = wrist.Name;
+			DrawEquipment(wrist.FirstAtzName, _leftWrist);
+			DrawEquipment(wrist.FirstAtz1, _rightWrist);
+			_rightWrist.Text = wrist.Name;
+			_leftWrist.Text = wrist.Name;
 		}
 	}
 	

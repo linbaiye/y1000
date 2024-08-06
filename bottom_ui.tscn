@@ -162,14 +162,14 @@ mouse_filter = 0
 stretch_mode = 2
 script = ExtResource("5_rq0is")
 
-[node name="Wrist" type="TextureRect" parent="Container/Avatar"]
+[node name="LeftWrist" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
 stretch_mode = 2
 script = ExtResource("5_rq0is")
 
-[node name="Wrist1" type="TextureRect" parent="Container/Avatar"]
+[node name="RightWrist" type="TextureRect" parent="Container/Avatar"]
 y_sort_enabled = true
 layout_mode = 0
 mouse_filter = 0
