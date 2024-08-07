@@ -367,10 +367,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
-	public void Visit(CreatureSoundMessage message)
-	{
-		
-	}
 
 	public void Visit(ProjectileMessage message)
 	{

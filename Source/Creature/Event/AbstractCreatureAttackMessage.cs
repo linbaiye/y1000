@@ -36,7 +36,6 @@ public abstract class AbstractCreatureAttackMessage : AbstractEntityMessage
             return new PlayerAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State, new Vector2I(packet.X, packet.Y), effectId);
         }
         var ret = new CreatureAttackMessage(packet.Id, (Direction)packet.Direction, (CreatureState)packet.State, new Vector2I(packet.X, packet.Y));
-        Logger.Debug("Received attack message {0}.", ret);
         return ret;
     }
 }
