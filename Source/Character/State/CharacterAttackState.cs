@@ -29,6 +29,11 @@ public class CharacterAttackState : ICharacterState
         return true;
     }
 
+    public bool CanAttack()
+    {
+        return true;
+    }
+
     public static CharacterAttackState Attack(CreatureState state)
     {
         return new CharacterAttackState(IPlayerState.Attack(state));

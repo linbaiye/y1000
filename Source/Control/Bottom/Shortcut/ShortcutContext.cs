@@ -2,7 +2,7 @@
 
 namespace y1000.Source.Control.Bottom.Shortcut;
 
-public sealed class ShortcutContext
+public class ShortcutContext
 {
     public ShortcutContext(int slot, Component receiver, int page, Key key)
     {

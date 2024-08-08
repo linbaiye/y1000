@@ -4,7 +4,9 @@ using Godot;
 using NLog;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
+using y1000.Source.Control.RightSide;
 using y1000.Source.Control.RightSide.Inventory;
+using y1000.Source.Input;
 using y1000.Source.Item;
 using y1000.Source.KungFu;
 using y1000.Source.Sprite;
@@ -21,6 +23,8 @@ public partial class Shortcuts : NinePatchRect
 
     private KungFuBook? _kungFuBook;
     private CharacterInventory? _inventory;
+
+    private long _nextInputAfter;
 
     private static readonly IDictionary<Key, int> KEY_TO_INDEX = new Dictionary<Key, int>()
     {
@@ -47,14 +51,22 @@ public partial class Shortcuts : NinePatchRect
         for (int i = 1; i <= 8; i++)
         {
             _slots[i - 1] = GetNode<InventorySlotView>("shortcut" + i);
+            _slots[i - 1].OnMouseInputEvent += OnSlotMouseEvent;
         }
     }
 
-
-    public override void _ShortcutInput(InputEvent @event)
+    private void OnSlotMouseEvent(object? sender, SlotMouseEvent mouseEvent)
     {
-        if (@event is InputEventKey key && key.IsPressed() && KEY_TO_INDEX.TryGetValue(key.Keycode, out var index) && 
-            _mappedContext.TryGetValue(index, out var context))
+        if (mouseEvent.EventType == SlotMouseEvent.Type.MOUSE_LEFT_CLICK ||
+            mouseEvent.EventType == SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
+        {
+        }
+    }
+
+    private void SendShortcutIfAllowed(ShortcutContext context)
+    {
+        var milliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        if (milliseconds >= _nextInputAfter)
         {
             if (context.Receiver == Shortcut.ShortcutContext.Component.KUNGFU_BOOK)
             {
@@ -64,6 +76,17 @@ public partial class Shortcuts : NinePatchRect
             {
                 _inventory?.OnUIDoubleClick(context.Slot);
             }
+            _nextInputAfter = milliseconds + 300;
+        }
+    }
+
+
+    public override void _ShortcutInput(InputEvent @event)
+    {
+        if (@event is InputEventKey key && key.IsPressed() && KEY_TO_INDEX.TryGetValue(key.Keycode, out var index) && 
+            _mappedContext.TryGetValue(index, out var context))
+        {
+            SendShortcutIfAllowed(context);
         }
     }
 
