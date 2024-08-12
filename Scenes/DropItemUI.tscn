@@ -11,6 +11,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p8kr6"]
 
 [node name="DropItemUI" type="NinePatchRect"]
+z_index = 1
 offset_left = 1.0
 offset_top = 455.0
 offset_right = 225.0

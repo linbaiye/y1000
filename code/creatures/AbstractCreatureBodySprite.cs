@@ -26,7 +26,7 @@ namespace y1000.code.creatures
             return bodyHoverRect != null ?  bodyHoverRect.HoverRect() : EMPTY;
         }
 
-        protected virtual int GetTextureWidth()
+        protected int GetTextureWidth()
         {
             return Texture.GetWidth() - 20;
         }

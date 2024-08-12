@@ -132,7 +132,7 @@ public interface IServerMessageVisitor
         Visit((ICharacterMessage)message);
     }
     
-    void Visit(CreatureSoundMessage message)
+    void Visit(EntitySoundMessage message)
     {
         Visit((IEntityMessage)message);
     }
@@ -203,5 +203,10 @@ public interface IServerMessageVisitor
     void Visit(UpdateKungFuSlotMessage message)
     {
         Visit((ICharacterMessage)message);
+    }
+
+    void Visit(TeleportInterpolation message)
+    {
+        
     }
 }

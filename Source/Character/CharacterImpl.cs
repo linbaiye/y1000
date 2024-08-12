@@ -194,7 +194,7 @@ namespace y1000.Source.Character
 	        HealthBar = new ValueBar(message.CurrentLife, message.MaxLife);
 	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
         }
-        public void Visit(CreatureSoundMessage message)
+        public void Visit(EntitySoundMessage message)
         {
 	        WrappedPlayer().Visit(message);
         }

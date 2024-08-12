@@ -1,5 +1,4 @@
 ﻿using Godot;
-using y1000.Source.Item;
 using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Networking;
@@ -7,8 +6,6 @@ namespace y1000.Source.Networking;
 public class ShowItemMessage : AbstractEntityMessage
 {
     public string Name { get; }
-    
-    public ItemType Type { get; }
     
     public int Number { get; }
     

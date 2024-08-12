@@ -8,4 +8,6 @@ public interface IMapObjectRepository
     IDictionary<int, Texture2D> LoadTiles(string tileName);
 
     IDictionary<int, MapObject> LoadObjects(string name);
+    
+    IDictionary<int, MapObject> LoadRoof(string mapName);
 }

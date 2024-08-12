@@ -47,6 +47,7 @@ namespace y1000.Source.Animation
 			Offset = texture.Offset;
 			Texture = texture.Texture;
 			_panel.Position = texture.Offset;
+			_panel.Size = texture.OriginalSize;
 		}
 	}
 }

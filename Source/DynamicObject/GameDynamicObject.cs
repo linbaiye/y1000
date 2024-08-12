@@ -65,9 +65,9 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
             _total = (update.FrameEnd - update.FrameStart) * FrameDuration;
             Elapsed = 0;
             Loop = update.Loop;
-            Logger.Debug("Start {0}, End {1}.", Start, End);
+            Logger.Debug("Start {0}, End {1}, Loop {2}.", Start, End, Loop);
         }
-        else if (message is CreatureSoundMessage soundMessage)
+        else if (message is EntitySoundMessage soundMessage)
         {
             GetNode<CreatureAudio>("Audio").PlaySound(soundMessage.Sound);
         }

@@ -9,6 +9,7 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using NLog;
+using y1000.Source.Audio;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
@@ -26,7 +27,6 @@ using y1000.Source.Networking.Connection;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 using y1000.Source.Sprite;
-using y1000.Source.Util;
 
 namespace y1000.Source;
 
@@ -60,7 +60,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private readonly ISpriteRepository _spriteRepository;
 	
-	private AudioStreamPlayer _audioStreamPlayer;
+	private AudioStreamPlayer _bgmAudioPlayer;
+
+	private readonly CreatureAudio[] _entitySoundPlayers;
 
 	public Game()
 	{
@@ -71,6 +73,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_spriteRepository = FilesystemSpriteRepository.Instance;
 		_entityFactory = new EntityFactory(_eventMediator, _spriteRepository);
 		_character = null;
+		_entitySoundPlayers = new CreatureAudio[3];
 	}
 
 	private EventMediator InitializeEventMediator()
@@ -86,8 +89,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
 		_uiController.Initialize(_eventMediator, _spriteRepository, _itemFactory);
-		_audioStreamPlayer = GetNode<AudioStreamPlayer>("BgmPlayer");
-		_audioStreamPlayer.Finished += () => _audioStreamPlayer.Play();
+		_bgmAudioPlayer = GetNode<AudioStreamPlayer>("BgmPlayer");
+		_bgmAudioPlayer.Finished += () => _bgmAudioPlayer.Play();
+		for (int i = 0; i < _entitySoundPlayers.Length; i++)
+		{
+			_entitySoundPlayers[i] = GetNode<CreatureAudio>("SoundPlayer" + (i + 1));
+		}
 		//AtdChecker.Dump();
 	}
 
@@ -101,16 +108,16 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (FileAccess.FileExists(path))
 		{
 			var streamWav = ResourceLoader.Load<AudioStreamMP3>(path);
-			_audioStreamPlayer.Stop();
-			_audioStreamPlayer.Stream = streamWav;
-			_audioStreamPlayer.Play();
+			_bgmAudioPlayer.Stop();
+			_bgmAudioPlayer.Stream = streamWav;
+			_bgmAudioPlayer.Play();
 		}
 	}
 	
 
 	private void OnCharacterEvent(object? sender, EventArgs eventArgs)
 	{
-		if (sender is not CharacterImpl)
+		if (sender is not CharacterImpl || _character == null)
 		{
 			return;
 		}
@@ -170,6 +177,29 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			monster.Handle(new UpdateDynamicObjectMessage(1L, 0, 4, false));
 		}
 	}
+
+
+	public void Visit(EntitySoundMessage message)
+	{
+		if (message.Id == _character.Id)
+		{
+			_character.Handle(message);
+		}
+		else
+		{
+			foreach (var entitySoundPlayer in _entitySoundPlayers)
+			{
+				if (!entitySoundPlayer.Playing)
+				{
+					entitySoundPlayer.PlaySound(message.Sound);
+					return;
+				}
+			}
+			LOGGER.Debug("No player to play sound.");
+		}
+		
+	}
+	
 	
 
 	
@@ -333,6 +363,16 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			AddChild(npc);
 			LOGGER.Debug("Added creature {0}.", npc.Id);
+		}
+	}
+
+	public void Visit(TeleportInterpolation interpolation)
+	{
+		var entity = _entityFactory.CreateTeleport(interpolation);
+		if (_entityManager.Add(entity))
+		{
+			AddChild(entity);
+			LOGGER.Debug("Added telport at {0}.", entity.Coordinate);
 		}
 	}
 

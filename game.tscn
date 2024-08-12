@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=18 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://clr852egfmuqb" path="res://Scenes/TradePlayerWindow.tscn" id="12_mif0g"]
 [ext_resource type="Texture2D" uid="uid://cib0m65pj30hg" path="res://assets/test/monster.png" id="13_hn2ex"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="13_klljd"]
+[ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="16_ing8y"]
 [ext_resource type="PackedScene" uid="uid://b8qn25p71tho" path="res://assets/test/teleport.tscn" id="16_wmncn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tknte"]
@@ -62,6 +63,7 @@ offset_left = 3.0
 offset_top = 486.0
 offset_right = -775.0
 offset_bottom = -172.0
+mouse_filter = 2
 
 [node name="ItemAttribute" parent="UILayer" instance=ExtResource("10_xy80o")]
 offset_left = 383.0
@@ -86,10 +88,23 @@ texture = ExtResource("13_hn2ex")
 centered = false
 
 [node name="Teleport" parent="." instance=ExtResource("16_wmncn")]
+visible = false
 z_index = 4
-y_sort_enabled = true
 position = Vector2(3080, 750)
 
 [node name="RuneTeleport" parent="." instance=ExtResource("16_wmncn")]
+visible = false
 z_index = 2
 position = Vector2(3840, 1728)
+
+[node name="SoundPlayer1" type="AudioStreamPlayer" parent="."]
+script = ExtResource("16_ing8y")
+
+[node name="SoundPlayer2" type="AudioStreamPlayer" parent="."]
+script = ExtResource("16_ing8y")
+
+[node name="SoundPlayer3" type="AudioStreamPlayer" parent="."]
+script = ExtResource("16_ing8y")
+
+[node name="SoundPlayer4" type="AudioStreamPlayer" parent="."]
+script = ExtResource("16_ing8y")

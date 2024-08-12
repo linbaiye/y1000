@@ -47,7 +47,7 @@ public partial class OnGroundItem : Node2D, IEntity, IServerMessageVisitor
         return item;
     }
 
-    public void Visit(CreatureSoundMessage message)
+    public void Visit(EntitySoundMessage message)
     {
         GetNode<CreatureAudio>("Audio").PlaySound(message.Sound);
     }

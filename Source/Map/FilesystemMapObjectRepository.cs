@@ -11,6 +11,7 @@ public class FilesystemMapObjectRepository : IMapObjectRepository
     private const string DirPath = "../map/";
     private const string ObjectDirName = "object";
     private const string TileDirName =  "tile";
+    private const string RoofDirName = "roof";
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
     public static readonly FilesystemMapObjectRepository Instance = new();
@@ -82,7 +83,11 @@ public class FilesystemMapObjectRepository : IMapObjectRepository
 
     public IDictionary<int, MapObject> LoadObjects(string mapName)
     {
-        var dirpath = DirPath + mapName + "/" + ObjectDirName;
+        return LoadObjectsByPath(DirPath + mapName + "/" + ObjectDirName);
+    }
+
+    private IDictionary<int, MapObject> LoadObjectsByPath(string dirpath)
+    {
         var objectDirs = Directory.GetDirectories(dirpath);
         IDictionary<int, MapObject> mapObjects = new Dictionary<int, MapObject>();
         foreach (var objDir in objectDirs)
@@ -101,5 +106,10 @@ public class FilesystemMapObjectRepository : IMapObjectRepository
             mapObjects.TryAdd(name.ToInt(), new MapObject(texture2Ds, offset, name.ToInt()));
         }
         return mapObjects;
+    }
+
+    public IDictionary<int, MapObject> LoadRoof(string mapName)
+    {
+        return LoadObjectsByPath(DirPath + mapName + "/" + RoofDirName);
     }
 }

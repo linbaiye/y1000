@@ -10,7 +10,7 @@
 blend_mode = 1
 
 [node name="Monster" type="Node2D"]
-z_index = 2
+z_index = 3
 z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_k86rw")

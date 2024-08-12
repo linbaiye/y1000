@@ -6,12 +6,9 @@ using Godot;
 using NLog;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
-using y1000.Source.Creature;
 using y1000.Source.DynamicObject;
 using y1000.Source.Entity;
-using y1000.Source.Player;
 using y1000.Source.Util;
-using FileAccess = Godot.FileAccess;
 
 namespace y1000.Source.Map;
 
@@ -23,6 +20,9 @@ public partial class MapLayer : TileMap, IMap
 
 	private const int Ground1Zindex = 0;
 	private const int Ground2Zindex = 1;
+	//private const int ItemZindex = 2;
+	private const int EntityZindex = 3;
+	private const int RoofZindex = 4;
 	private const string MapDir = "res://assets/maps/";
 
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
@@ -30,16 +30,19 @@ public partial class MapLayer : TileMap, IMap
 	private Vector2I _origin;
 	
 	private const string ObjectLayerName = "object";
+	private const string RoofLayerName = "roof";
 
 	private IDictionary<int, MapObject> _mapObjectInfos = new Dictionary<int, MapObject>();
+	private IDictionary<int, MapObject> _mapRoofInfos = new Dictionary<int, MapObject>();
 
 	private readonly IDictionary<long, ISet<Vector2I>> _entityCoordinates= new Dictionary<long, ISet<Vector2I>>();
 
-	private readonly ISet<string> _animatedSprites = new HashSet<string>();
+	private readonly ISet<string> _animatedObjectSprites = new HashSet<string>();
 
 	private readonly IMapObjectRepository _mapObjectRepository = FilesystemMapObjectRepository.Instance;
 
 	private string _currentMap = "";
+
 
 	public override void _Ready()
 	{
@@ -48,10 +51,6 @@ public partial class MapLayer : TileMap, IMap
 		BuildObjectSets("start");*/
 	}
 
-	private void BuildObjectSets(string name)
-	{
-		_mapObjectInfos = _mapObjectRepository.LoadObjects(name);
-	}
 
 	private void InitMap(string mapName, string tileName, string objName, string rofName)
 	{
@@ -63,14 +62,30 @@ public partial class MapLayer : TileMap, IMap
 		if (!_currentMap.Equals(mapName))
 		{
 			_gameMap = GameMap.Load(MapDir + "/" +  mapName + ".map");
-			_animatedSprites.Clear();
+			_animatedObjectSprites.Clear();
 			_tileIdToSourceId.Clear();
 			Clear();
 			ClearLayer(ObjectLayerName);
-			tileName = tileName.EndsWith("til.til") ? tileName.Substring(0, tileName.Length - 7) : tileName;
+			if (tileName.EndsWith("til.til"))
+				tileName = tileName.Substring(0, tileName.Length - 7);
+			else if (tileName.EndsWith(".til"))
+				tileName = tileName.Substring(0, tileName.Length - 4);
 			BuildTileSets(tileName);
-			objName = objName.EndsWith("obj.obj") ? objName.Substring(0, objName.Length - 7) : objName;
-			BuildObjectSets(objName);
+			if (objName.EndsWith("obj.obj"))
+				objName = objName.Substring(0, objName.Length - 7);
+			else if (objName.EndsWith(".obj"))
+				objName = objName.Substring(0, objName.Length - 4);
+			_mapObjectInfos = _mapObjectRepository.LoadObjects(objName);
+			if (rofName.EndsWith("rof.obj"))
+				rofName = rofName.Substring(0, rofName.Length - 7);
+			else if (rofName.EndsWith("obj.obj"))
+				rofName = rofName.Substring(0, rofName.Length - 7);
+			else if (rofName.EndsWith(".obj"))
+				rofName= rofName.Substring(0, rofName.Length - 4);
+			if (!rofName.Equals(objName))
+			{
+				_mapRoofInfos = _mapObjectRepository.LoadRoof(rofName);
+			}
 			_currentMap = mapName;
 		}
 	}
@@ -89,18 +104,19 @@ public partial class MapLayer : TileMap, IMap
 		if (sender is not CharacterImpl)
 		{
 			return;
-			
 		}
 		if (args is CharacterMoveEventArgs eventArgs && !_origin.Equals(eventArgs.Coordinate))
 		{
 			_origin = eventArgs.Coordinate;
 			PaintMap();
+			HideRoofIfNeed();
 		}
 		else if (args is CharacterTeleportedArgs teleportedArgs)
 		{
 			InitMap(teleportedArgs.NewMap, teleportedArgs.Tile, teleportedArgs.Object, teleportedArgs.Roof);
 			_origin = teleportedArgs.Coordinate;
 			PaintMap();
+			HideRoofIfNeed();
 		}
 	}
 
@@ -127,13 +143,13 @@ public partial class MapLayer : TileMap, IMap
 			int sourceId = TileSet.AddSource(source);
 			_tileIdToSourceId.TryAdd(id, sourceId);
 		}
-		
 	}
 
 	private void PaintMap()
 	{
 		TileGround();
-		RefreshLayer(ObjectLayerName);
+		RefreshObjectLayer();
+		RefreshRoofLayer();
 	}
 
 
@@ -187,15 +203,15 @@ public partial class MapLayer : TileMap, IMap
 		}
 	}
 
-	private void NotifyCharPosition(Vector2I point)
+	private void HideRoofIfNeed()
 	{
-		if (_gameMap != null && _gameMap.HideRoof(point))  
+		if (_gameMap != null && _gameMap.HideRoof(_origin))  
 		{
-			GetNode<Node2D>("roof").Hide();
+			GetNode<Node2D>(RoofLayerName).Hide();
 		}
 		else 
 		{
-			GetNode<Node2D>("roof").Show();
+			GetNode<Node2D>(RoofLayerName).Show();
 		}
 	}
 
@@ -209,9 +225,20 @@ public partial class MapLayer : TileMap, IMap
 		}
 	}
 
-	private void RefreshLayer(string layer)
+	private void RefreshRoofLayer()
 	{
-		var layerNode = GetNode<Node2D>(layer);
+		var layerNode = GetNode<Node2D>(RoofLayerName);
+		foreach (var child in layerNode.GetChildren())
+		{
+			layerNode.RemoveChild(child);
+			child.QueueFree();
+		}
+		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) => DrawRoofAtCoordinate(cell.RoofId, x, y, layerNode));
+	}
+
+	private void RefreshObjectLayer()
+	{
+		var layerNode = GetNode<Node2D>(ObjectLayerName);
 		foreach (var child in layerNode.GetChildren())
 		{
 			if (child is not AnimatedSprite2D animatedSprite2D  ||
@@ -222,8 +249,9 @@ public partial class MapLayer : TileMap, IMap
 				child.QueueFree();
 			}
 		}
-		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) => DrawObjectAtCoordinate(ObjectLayerName.Equals(layer)? cell.ObjectId : cell.RoofId, x, y, layerNode));
+		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) => DrawObjectAtCoordinate(cell.ObjectId, x, y, layerNode));
 	}
+	
 	
 	private AnimatedSprite2D CreateAnimatedSprite2d(MapObject mapObject, int x, int y)
 	{
@@ -234,15 +262,32 @@ public partial class MapLayer : TileMap, IMap
 		}
 		var ani = new AnimatedSprite2D()
 		{
-			Centered = false, Position = new Vector2(x * VectorUtil.TileSizeX, y * VectorUtil.TileSizeY), Offset = mapObject.Offset, YSortEnabled = true,
+			Centered = false, Position = new Vector2(x * VectorUtil.TileSizeX, y * VectorUtil.TileSizeY), Offset = mapObject.Offset,
+			YSortEnabled = true,
+			ZIndex = EntityZindex,
+			ZAsRelative = false,
 			SpriteFrames = frames,
 			Autoplay = "default",
 			Name = mapObject.Name(x, y),
 		};
 		return ani;
 	}
-	
 
+	private void DrawRoofAtCoordinate(int rofId, int x, int y, Node2D parent)
+	{
+		if (_mapRoofInfos.TryGetValue(rofId, out var rofInfo))
+		{
+			int xPos = x * VectorUtil.TileSizeX;
+			int yPos = y * VectorUtil.TileSizeY;
+			Sprite2D objectSprite = new Sprite2D()
+			{
+				Texture = rofInfo.Textures[0], Centered = false, Position = new Vector2(xPos, yPos),
+				Offset = rofInfo.Offset, YSortEnabled = true, ZIndex = RoofZindex
+			};
+			parent.AddChild(objectSprite);
+		}
+	}
+	
 	private void DrawObjectAtCoordinate(int objectId, int x, int y, Node2D parent)
 	{
 		if (_mapObjectInfos.TryGetValue(objectId, out var objectInfo))
@@ -251,11 +296,11 @@ public partial class MapLayer : TileMap, IMap
 			int yPos = y * VectorUtil.TileSizeY;
 			if (objectInfo.Textures.Length > 1)
 			{
-				if (!_animatedSprites.Contains(objectInfo.Name(x, y)))
+				if (!_animatedObjectSprites.Contains(objectInfo.Name(x, y)))
 				{
 					var animatedSprite2D = CreateAnimatedSprite2d(objectInfo, x, y);
 					parent.AddChild(animatedSprite2D);
-					_animatedSprites.Add(animatedSprite2D.Name);
+					_animatedObjectSprites.Add(animatedSprite2D.Name);
 				}
 			}
 			else
@@ -263,7 +308,7 @@ public partial class MapLayer : TileMap, IMap
 				Sprite2D objectSprite = new Sprite2D()
 				{
 					Texture = objectInfo.Textures[0], Centered = false, Position = new Vector2(xPos, yPos),
-					Offset = objectInfo.Offset, YSortEnabled = true
+					Offset = objectInfo.Offset, YSortEnabled = true, ZIndex = EntityZindex, ZAsRelative = false
 				};
 				parent.AddChild(objectSprite);
 			}

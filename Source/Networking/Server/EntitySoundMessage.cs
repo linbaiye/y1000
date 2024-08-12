@@ -1,8 +1,8 @@
 ﻿namespace y1000.Source.Networking.Server;
 
-public class CreatureSoundMessage : AbstractEntityMessage
+public class EntitySoundMessage : AbstractEntityMessage
 {
-    public CreatureSoundMessage(long id, string sound) : base(id)
+    public EntitySoundMessage(long id, string sound) : base(id)
     {
         Sound = sound;
     }

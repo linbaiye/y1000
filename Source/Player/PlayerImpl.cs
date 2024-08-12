@@ -307,7 +307,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		ChangeState(IPlayerState.NonHurtState(CreatureState.SIT));
 	}
 	
-	public void Visit(CreatureSoundMessage message)
+	public void Visit(EntitySoundMessage message)
 	{
 		PlaySound(message.Sound);
 	}

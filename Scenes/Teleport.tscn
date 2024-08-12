@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://vpcwwut7dp0r"]
+
+[ext_resource type="Script" path="res://Source/Entity/Teleport.cs" id="1_ffj38"]
+[ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_eo6uk"]
+
+[node name="Teleport" type="Node2D"]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_ffj38")
+
+[node name="Body" parent="." instance=ExtResource("2_eo6uk")]

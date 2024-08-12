@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Godot;
+using y1000.Source.Animation;
 using y1000.Source.Creature.Monster;
 using y1000.Source.DynamicObject;
 using y1000.Source.Event;
-using y1000.Source.Item;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
@@ -18,7 +18,7 @@ public class EntityFactory
 
     private readonly ItemSdbReader _itemDb;
     
-    private readonly IconReader _iconReader;
+    private readonly IconReader _itemIconReader;
 
     private readonly EventMediator _eventMediator;
 
@@ -27,7 +27,7 @@ public class EntityFactory
     public EntityFactory(EventMediator eventMediator, ISpriteRepository spriteRepository)
     {
         _itemDb = ItemSdbReader.ItemSdb;
-        _iconReader = IconReader.ItemIconReader;
+        _itemIconReader = IconReader.ItemIconReader;
         _eventMediator = eventMediator;
         _spriteRepository = spriteRepository;
     }
@@ -36,7 +36,7 @@ public class EntityFactory
     public OnGroundItem CreateOnGroundItem(ShowItemMessage message) 
     {
         var iconId = _itemDb.GetIconId(message.Name);
-        var texture2D = _iconReader.Get(iconId);
+        var texture2D = _itemIconReader.Get(iconId);
         if (texture2D == null)
         {
             throw new NotImplementedException(message.Name + " does not have icon.");
@@ -97,6 +97,20 @@ public class EntityFactory
             return CreateMerchant(interpolation, map);
         }
         return CreateMonster(interpolation, map);
+    }
+
+    public Teleport CreateTeleport(TeleportInterpolation interpolation)
+    {
+        PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/Teleport.tscn");
+        var teleport = scene.Instantiate<Teleport>();
+        var texture2D = _itemIconReader.Get(interpolation.Shape);
+        if (texture2D == null)
+        {
+            throw new NotImplementedException("no shape id " + interpolation.Id);
+        }
+        teleport.Init(interpolation.Id, interpolation.Coordinate, interpolation.Name, 
+            new OffsetTexture(texture2D, new Vector2I(-VectorUtil.TileSizeX / 2, - VectorUtil.TileSizeY  )));
+        return teleport;
     }
     
 

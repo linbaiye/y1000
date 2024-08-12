@@ -24,5 +24,5 @@ z_index = 2
 y_sort_enabled = true
 
 [node name="roof" type="Node2D" parent="."]
-z_index = 3
+z_index = 10
 y_sort_enabled = true

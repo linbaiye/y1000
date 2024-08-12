@@ -132,7 +132,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		Delete();
 	}
 
-	public void Visit(CreatureSoundMessage message)
+	public void Visit(EntitySoundMessage message)
 	{
 		PlaySound(message.Sound);
 	}

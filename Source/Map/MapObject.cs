@@ -4,7 +4,7 @@ namespace y1000.Source.Map;
 
 public class MapObject
 {
-    public MapObject(Texture2D[] texture, Vector2 offset,int id)
+    public MapObject(Texture2D[] texture, Vector2 offset, int id)
     {
         Textures = texture;
         Offset = offset;
