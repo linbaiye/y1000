@@ -109,7 +109,7 @@ public class EntityFactory
             throw new NotImplementedException("no shape id " + interpolation.Id);
         }
         teleport.Init(interpolation.Id, interpolation.Coordinate, interpolation.Name, 
-            new OffsetTexture(texture2D, new Vector2I(-VectorUtil.TileSizeX / 2, - VectorUtil.TileSizeY  )));
+            new OffsetTexture(texture2D, new Vector2I(-VectorUtil.TileSizeX / 2, 0 )));
         return teleport;
     }
     

@@ -4,17 +4,14 @@ namespace y1000.Source.Control.Bottom;
 
 public class TextEvent : IUiEvent
 {
-    public TextEvent(string message, TextColor? color = null, BgColor? bgColor = null)
+    public TextEvent(string message, ColorType bgColor = ColorType.SAY)
     {
         Message = message;
-        Color = color;
-        BgColor = bgColor;
+        ColorType= bgColor;
     }
 
     public string Message { get; }
     
-    public TextColor? Color { get; }
-    
-    public BgColor? BgColor { get; }
+    public ColorType ColorType { get; }
     
 }

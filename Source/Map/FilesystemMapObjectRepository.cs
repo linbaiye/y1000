@@ -86,6 +86,11 @@ public class FilesystemMapObjectRepository : IMapObjectRepository
         return LoadObjectsByPath(DirPath + mapName + "/" + ObjectDirName);
     }
 
+    public bool HasRoof(string mapName)
+    {
+        return Directory.Exists(DirPath + mapName + "/" + RoofDirName);
+    }
+
     private IDictionary<int, MapObject> LoadObjectsByPath(string dirpath)
     {
         var objectDirs = Directory.GetDirectories(dirpath);

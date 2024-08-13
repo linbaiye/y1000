@@ -14,6 +14,7 @@ using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Control;
+using y1000.Source.Control.Bottom;
 using y1000.Source.Creature;
 using y1000.Source.Creature.Monster;
 using y1000.Source.DynamicObject;
@@ -73,7 +74,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_spriteRepository = FilesystemSpriteRepository.Instance;
 		_entityFactory = new EntityFactory(_eventMediator, _spriteRepository);
 		_character = null;
-		_entitySoundPlayers = new CreatureAudio[3];
+		_entitySoundPlayers = new CreatureAudio[4];
 	}
 
 	private EventMediator InitializeEventMediator()
@@ -165,16 +166,26 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	private MapLayer MapLayer => GetNode<MapLayer>("MapLayer");
 
 
-	private void LocalTest()
+	private void LocalTest(InputEventKey eventKey)
 	{
-		if (_character == null)
+		if (_character == null || !eventKey.IsPressed())
 		{
 			return;
 		}
-		var monster = _entityManager.Find<GameDynamicObject>("");
-		if (monster != null)
+
+		if (eventKey.Keycode >= Key.Key1 && eventKey.Keycode <= Key.Key9)
 		{
-			monster.Handle(new UpdateDynamicObjectMessage(1L, 0, 4, false));
+			var index = (ColorType)(eventKey.Keycode - Key.Key1);
+			for (int i = 0; i < _entitySoundPlayers.Length; i++)
+			{
+				if (!_entitySoundPlayers[i].Playing)
+				{
+					var name = (8950 + index).ToString();
+					LOGGER.Debug("Play sound {} with player {}", name, i);
+					_entitySoundPlayers[i].PlaySound(name);
+					break;
+				}
+			}
 		}
 	}
 
@@ -187,19 +198,18 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 		else
 		{
-			foreach (var entitySoundPlayer in _entitySoundPlayers)
+			for (int i = 0; i < _entitySoundPlayers.Length; i++)
 			{
-				if (!entitySoundPlayer.Playing)
+				if (!_entitySoundPlayers[i].Playing)
 				{
-					entitySoundPlayer.PlaySound(message.Sound);
+					LOGGER.Debug("Play sound {} with player {}", message.Sound, i);
+					_entitySoundPlayers[i].PlaySound(message.Sound);
 					return;
 				}
 			}
-			LOGGER.Debug("No player to play sound.");
+			LOGGER.Debug("No player to play {}.", message.Sound);
 		}
-		
 	}
-	
 	
 
 	
@@ -208,6 +218,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (_character == null)
 		{
 			return;
+		}
+
+		if (@event is InputEventKey eventKey)
+		{
+		//	LocalTest(eventKey);
+			//return;//
 		}
 		var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
 		var predictableInput = _inputSampler.SampleInput(@event, mousePos);
@@ -326,7 +342,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		var player = _entityManager.SelectFirst<MessageDrivenPlayer>(player => player.Id != _character.Id && player.HasPoint(globalMousePosition));
 		if (player != null)
 		{
-			_uiController.TradePlayer(_character, player, slotEvent.Slot);
+			if (!player.Dead)
+				_uiController.TradePlayer(_character, player, slotEvent.Slot);
+			else 
+				_eventMediator.NotifyServer();
 		}
 		else
 		{

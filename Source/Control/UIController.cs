@@ -76,8 +76,13 @@ public partial class UIController : CanvasLayer
         }
         else
         {
-            _bottomControl.DisplayMessage(new TextEvent(message.Text));
+            _bottomControl.DisplayMessage(new TextEvent(message.Text, message.ColorType));
         }
+    }
+
+    public void DisplayText(TextEvent textEvent)
+    {
+        _bottomControl.DisplayMessage(textEvent);
     }
     
 

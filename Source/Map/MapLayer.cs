@@ -82,10 +82,8 @@ public partial class MapLayer : TileMap, IMap
 				rofName = rofName.Substring(0, rofName.Length - 7);
 			else if (rofName.EndsWith(".obj"))
 				rofName= rofName.Substring(0, rofName.Length - 4);
-			if (!rofName.Equals(objName))
-			{
+			if (_mapObjectRepository.HasRoof(rofName))
 				_mapRoofInfos = _mapObjectRepository.LoadRoof(rofName);
-			}
 			_currentMap = mapName;
 		}
 	}

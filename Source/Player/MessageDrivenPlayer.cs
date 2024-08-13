@@ -80,6 +80,8 @@ public class MessageDrivenPlayer : IPlayer
         return Player.Coordinate.Distance(character.Coordinate) <= 2;
     }
 
+    public bool Dead => Player.Dead;
+
     public static MessageDrivenPlayer FromInterpolation(PlayerInterpolation playerInterpolation,
         IMap map)
     {

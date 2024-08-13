@@ -259,6 +259,8 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		_state = newState;
 	}
 
+	public bool Dead => _state.State == CreatureState.DIE;
+
 	public void Visit(PlayerToggleKungFuMessage message)
 	{
 		if (!message.Quietly)
