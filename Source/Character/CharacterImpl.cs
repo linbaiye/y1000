@@ -164,9 +164,10 @@ namespace y1000.Source.Character
 	        SetPositionAndState(rewindMessage.Coordinate, rewindMessage.Direction, Rewind(rewindMessage.State));
         }
 
-        public void Visit(SetPositionMessage setPositionMessage)
+        public void Visit(SetPositionMessage message)
         {
-	        SetPositionAndState(setPositionMessage.Coordinate, setPositionMessage.Direction, Rewind(setPositionMessage.State));
+	        WrappedPlayer().SetPosition(message.Coordinate, message.Direction);
+	        EmitMovedEvent();
         }
 
         public void Handle(IEntityMessage message)
@@ -521,8 +522,20 @@ namespace y1000.Source.Character
 	        ChangeState(CharacterStandUpState.StandUp());
         }
 
-        public void TradeWith(MessageDrivenPlayer player, int inventorySlot)
+        public void DropItemOnPlayer(MessageDrivenPlayer player, int inventorySlot)
         {
+	        if (Dead)
+	        {
+		        return;
+	        }
+	        if (player.Dead)
+	        {
+		        if (Inventory.HasItem(inventorySlot) && Inventory.GetOrThrow(inventorySlot).ItemName.Equals("追魂索"))
+		        {
+			        EventMediator?.NotifyServer(new ClientDragPlayerEvent(player.Id, inventorySlot));
+		        }
+		        return;
+	        }
 	        if (player.CanBeTraded(this) && Inventory.HasItem(inventorySlot))
 	        {
 		        EventMediator?.NotifyServer(new ClientTradePlayerEvent(player.Id, inventorySlot));

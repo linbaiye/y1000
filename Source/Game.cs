@@ -342,10 +342,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		var player = _entityManager.SelectFirst<MessageDrivenPlayer>(player => player.Id != _character.Id && player.HasPoint(globalMousePosition));
 		if (player != null)
 		{
-			if (!player.Dead)
-				_uiController.TradePlayer(_character, player, slotEvent.Slot);
-			else 
-				_eventMediator.NotifyServer();
+			_uiController.DropItemOnPlayer(_character, player, slotEvent.Slot);
 		}
 		else
 		{

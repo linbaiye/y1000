@@ -80,10 +80,6 @@ public partial class UIController : CanvasLayer
         }
     }
 
-    public void DisplayText(TextEvent textEvent)
-    {
-        _bottomControl.DisplayMessage(textEvent);
-    }
     
 
     private void BindButtons()
@@ -149,14 +145,14 @@ public partial class UIController : CanvasLayer
         }
     }
 
-    public void TradePlayer(CharacterImpl character, MessageDrivenPlayer messageDrivenPlayer, int slot)
+    public void DropItemOnPlayer(CharacterImpl character, MessageDrivenPlayer messageDrivenPlayer, int slot)
     {
         if (IsTrading())
         {
             DisplayTextMessage(new TextMessage("另一交易正在进行中。", TextMessage.TextLocation.DOWN));
             return;
         }
-        character.TradeWith(messageDrivenPlayer, slot);
+        character.DropItemOnPlayer(messageDrivenPlayer, slot);
     }
 
     public void OpenTrade(CharacterImpl character, string anotherName, int slot = 0)

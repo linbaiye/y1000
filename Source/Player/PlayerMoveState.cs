@@ -29,13 +29,6 @@ public class PlayerMoveState : AbstractCreatureMoveState<PlayerImpl>, IPlayerSta
         return new PlayerMoveState(PlayerBodyAnimation.Male.AnimationMillis(state), state, dir, e);
     }
 
-    public void CheckMoving()
-    {
-        if (ElapsedMillis < TotalMillis)
-        {
-            LOGGER.Debug("{0} millis left.",  TotalMillis - ElapsedMillis);
-        }
-    }
 
     public override OffsetTexture BodyOffsetTexture(PlayerImpl player)
     {
