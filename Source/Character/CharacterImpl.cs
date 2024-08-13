@@ -166,8 +166,14 @@ namespace y1000.Source.Character
 
         public void Visit(SetPositionMessage message)
         {
-	        WrappedPlayer().SetPosition(message.Coordinate, message.Direction);
-	        EmitMovedEvent();
+	        if (message.State == CreatureState.DIE)
+	        {
+		        SetPositionAndState(message.Coordinate, message.Direction, CharacterDraggedState.Towards(message.Direction));
+	        }
+	        else
+	        {
+		        SetPositionAndState(message.Coordinate, message.Direction, ICharacterState.Create(message.State));
+	        }
         }
 
         public void Handle(IEntityMessage message)
