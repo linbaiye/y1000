@@ -294,6 +294,23 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		}
 	}
 
+	public void SlowCamera()
+	{
+		GetNode<Camera2D>("MainCamera").Enabled = false;
+		GetNode<Camera2D>("DraggedCamera").Enabled = true;
+	}
+
+	public void RestoreCamera()
+	{
+		GetNode<Camera2D>("MainCamera").Enabled = true;
+		GetNode<Camera2D>("DraggedCamera").Enabled = false;
+	}
+
+	public void Visit(DraggedMessage draggedMessage)
+	{
+		SetPosition(draggedMessage);
+	}
+
 	public void Handle(IEntityMessage message)
 	{
 		message.Accept(this);

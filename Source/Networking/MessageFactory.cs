@@ -30,10 +30,8 @@ public class MessageFactory
         return (PositionType)positionPacket.Type switch
         {
             PositionType.MOVE => PlayerMoveMessage.FromPacket(positionPacket),
-            PositionType.TURN => TurnMessage.FromPacket(positionPacket),
             PositionType.SET => SetPositionMessage.FromPacket(positionPacket),
-            PositionType.RUN => RunMessage.FromPacket(positionPacket),
-            PositionType.FLY => FlyMessage.FromPacket(positionPacket),
+            PositionType.DRAGGED => DraggedMessage.FromPacket(positionPacket),
             PositionType.REWIND=> RewindMessage.FromPacket(positionPacket),
             _ => throw new NotSupportedException(),
         };
@@ -138,6 +136,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.Lifebar => new LifebarMessage(packet.Lifebar.Id, packet.Lifebar.Percent),
             Packet.TypedPacketOneofCase.UpdateKungFuSlot => UpdateKungFuSlotMessage.FromPacket(packet.UpdateKungFuSlot),
             Packet.TypedPacketOneofCase.ShowTeleport => Parse(packet.ShowTeleport),
+            Packet.TypedPacketOneofCase.BreakRope => DragEndedMessage.Instance,
             _ => throw new NotSupportedException()
         };
     }

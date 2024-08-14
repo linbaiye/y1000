@@ -2,36 +2,35 @@
 using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
-using y1000.Source.Creature.State;
 
 namespace y1000.Source.Player;
 
-public class PlayerDraggedState  : AbstractCreatureMoveState<PlayerImpl>, IPlayerState
+public class PlayerDraggedState  :  IPlayerState
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+    
+    private readonly Direction _direction;
+    
 
-    public PlayerDraggedState(Direction towards) : base(300, towards)
+    public PlayerDraggedState(Direction towards)
+    {
+        _direction = towards;
+    }
+    
+    public void Update(PlayerImpl player, int delta)
     {
     }
     
-    
-    protected override ILogger Logger => LOGGER;
 
-    public override void Update(PlayerImpl player, int delta)
-    {
-        Move(player, delta);
-        /*if (ElapsedMillis >= TotalMillis)
-        {
-        }*/
-    }
+    public CreatureState State => CreatureState.DIE;
 
-    public override CreatureState State => CreatureState.DIE;
-
-
-    public override OffsetTexture BodyOffsetTexture(PlayerImpl player)
+    public OffsetTexture BodyOffsetTexture(PlayerImpl player)
     {
         var ani = player.IsMale ? PlayerBodyAnimation.Male : PlayerBodyAnimation.Female;
         var animationMillis = PlayerBodyAnimation.Male.AnimationMillis(CreatureState.DIE);
-        return ani.OffsetTexture(CreatureState.DIE, Towards, animationMillis);
+        return ani.OffsetTexture(State, _direction, animationMillis);
     }
+
+    public int ElapsedMillis => PlayerBodyAnimation.Male.AnimationMillis(CreatureState.DIE);
+    public int TotalMillis => PlayerBodyAnimation.Male.AnimationMillis(CreatureState.DIE);
 }

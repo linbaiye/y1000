@@ -24,4 +24,6 @@ public interface ICharacterMessageVisitor
     void Visit(TeleportMessage message);
     
     void Visit(UpdateKungFuSlotMessage message);
+    
+    void Visit(DragEndedMessage message);
 }

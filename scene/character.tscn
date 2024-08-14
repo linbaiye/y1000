@@ -12,7 +12,14 @@ script = ExtResource("1_0btks")
 
 [node name="player" parent="." instance=ExtResource("2_od4km")]
 
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="MainCamera" type="Camera2D" parent="player"]
 y_sort_enabled = true
-texture_filter = 2
+texture_filter = 1
 process_callback = 0
+position_smoothing_speed = 1.0
+rotation_smoothing_speed = 1.0
+
+[node name="DraggedCamera" type="Camera2D" parent="player"]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0

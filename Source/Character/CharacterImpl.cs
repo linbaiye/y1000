@@ -53,6 +53,14 @@ namespace y1000.Source.Character
 		{
 			WrappedPlayer().ChangeState(state.WrappedState);
 			_state = state;
+	        if (_state is CharacterDraggedState)
+	        {
+		        WrappedPlayer().SlowCamera();
+	        }
+	        else
+	        {
+		        WrappedPlayer().RestoreCamera();
+	        }
 		}
 
 		public bool IsMale => WrappedPlayer().IsMale;
@@ -157,6 +165,7 @@ namespace y1000.Source.Character
 	        ChangeState(state);
 	        WrappedPlayer().SetPosition(coordinate, direction);
 	        EmitMovedEvent();
+
         }
 
         public void Visit(RewindMessage rewindMessage)
@@ -164,16 +173,14 @@ namespace y1000.Source.Character
 	        SetPositionAndState(rewindMessage.Coordinate, rewindMessage.Direction, Rewind(rewindMessage.State));
         }
 
+        public void Visit(DraggedMessage message)
+        {
+	        SetPositionAndState(message.Coordinate, message.Direction, CharacterDraggedState.Towards(message.Direction));
+        }
+
         public void Visit(SetPositionMessage message)
         {
-	        if (message.State == CreatureState.DIE)
-	        {
-		        SetPositionAndState(message.Coordinate, message.Direction, CharacterDraggedState.Towards(message.Direction));
-	        }
-	        else
-	        {
-		        SetPositionAndState(message.Coordinate, message.Direction, ICharacterState.Create(message.State));
-	        }
+	        SetPositionAndState(message.Coordinate, message.Direction, ICharacterState.Create(message.State));
         }
 
         public void Handle(IEntityMessage message)
@@ -550,6 +557,11 @@ namespace y1000.Source.Character
 	        {
 		        EventMediator?.NotifyTextArea("距离过远。");
 	        }
+        }
+
+        public void Visit(DragEndedMessage message)
+        {
+	        WrappedPlayer().RestoreCamera();
         }
 
 

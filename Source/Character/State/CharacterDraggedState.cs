@@ -1,4 +1,5 @@
-﻿using y1000.Source.Creature;
+﻿using Godot;
+using y1000.Source.Creature;
 using y1000.Source.Player;
 
 namespace y1000.Source.Character.State;

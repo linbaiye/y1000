@@ -13,9 +13,9 @@ public interface IServerMessageVisitor
         Visit((IEntityMessage)moveMessage);
     }
     
-    void Visit(RunMessage runMessage)
+    void Visit(DraggedMessage draggedMessage)
     {
-        Visit((IEntityMessage)runMessage);
+        Visit((IEntityMessage)draggedMessage);
     }
     
     void Visit(FlyMessage flyMessage)
@@ -208,5 +208,10 @@ public interface IServerMessageVisitor
     void Visit(TeleportInterpolation message)
     {
         
+    }
+
+    void Visit(DragEndedMessage message)
+    {
+        Visit((ICharacterMessage)message);
     }
 }
