@@ -130,12 +130,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 		else if (eventArgs is CharacterTeleportedArgs teleportedArgs)
 		{
-			var all = _entityManager.Select<AbstractEntity>(e => !e.Id.Equals(_character.Id));
-			foreach (var entity in all)
-			{
-				RemoveChild(entity);
-				_entityManager.Remove(entity.Id);
-			}
+			LOGGER.Debug("Add character for teleport.");
+			AddChild(_character);
 			LoadAndPlayBackgroundMusic(teleportedArgs.Bgm);
 		}
 	}
@@ -392,13 +388,31 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
-	public void Visit(RemoveEntityMessage removeEntityMessage)
+	private void Remove(IEntity? entity, RemoveEntityMessage message)
 	{
-		var removedEntity = _entityManager.Remove(removeEntityMessage.Id);
-		removedEntity?.Handle(removeEntityMessage);
-		if (removedEntity is Node2D node2D)
+		entity?.Handle(message);
+		if (entity is Node2D node2D)
 		{
 			RemoveChild(node2D);
+		}
+	}
+
+	public void Visit(RemoveEntityMessage removeEntityMessage)
+	{
+		if (_character != null && removeEntityMessage.Id == _character.Id)
+		{
+			var all = _entityManager.Select<AbstractEntity>(e => !e.Id.Equals(_character.Id));
+			foreach (var entity in all)
+			{
+				Remove(entity, removeEntityMessage);
+			}
+			RemoveChild(_character);
+			LOGGER.Debug("Removed character");
+		}
+		else
+		{
+			var removedEntity = _entityManager.Remove(removeEntityMessage.Id);
+			Remove(removedEntity, removeEntityMessage);
 		}
 		LOGGER.Debug("Removed creature {0}.", removeEntityMessage.Id);
 	}
