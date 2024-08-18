@@ -2,7 +2,8 @@
 
 public class Boot : AbstractArmor
 {
-    public Boot(string firstAtzName, string secondAtzName, string thirdAtzName, string fourthAtzName, string fifthAtzName, string name) : base(firstAtzName, secondAtzName, thirdAtzName, fourthAtzName, fifthAtzName, name)
+    public Boot(string firstAtzName, string secondAtzName, string thirdAtzName, string fourthAtzName, string fifthAtzName, string name, int color = 0) :
+        base(firstAtzName, secondAtzName, thirdAtzName, fourthAtzName, fifthAtzName, name, color)
     {
     }
 

@@ -15,13 +15,11 @@ public class ItemFactory
 
     public static readonly ItemFactory Instance = new ();
 
-    private readonly IconReader _textureReader;
 
     private readonly ItemSdbReader _itemDb;
 
     private ItemFactory()
     {
-        _textureReader = IconReader.ItemIconReader;
         _itemDb = ItemSdbReader.ItemSdb;
     }
 
@@ -30,9 +28,9 @@ public class ItemFactory
         bool canstack = _itemDb.CanStack(message.Name);
         if (canstack)
         {
-            return new CharacterStackItem(_itemDb.GetIconId(message.Name), message.Name, message.Number);
+            return new CharacterStackItem(_itemDb.GetIconId(message.Name), message.Name, message.Number, message.Color);
         }
-        return new CharacterItem(_itemDb.GetIconId(message.Name), message.Name);
+        return new CharacterItem(_itemDb.GetIconId(message.Name), message.Name, message.Color);
     }
 
     public bool IsStackItem(string name)
@@ -40,12 +38,17 @@ public class ItemFactory
         return _itemDb.CanStack(name);
     }
 
-    public ICharacterItem CreateCharacterItem(string name, long number = 0)
+    public ICharacterItem CreateCharacterItem(string name, int color = 0, long number = 0)
     {
         if (number == 0)
         {
-            return new CharacterItem(_itemDb.GetIconId(name), name);
+            return new CharacterItem(_itemDb.GetIconId(name), name, color);
         }
-        return new CharacterStackItem(_itemDb.GetIconId(name), name, number);
+        return new CharacterStackItem(_itemDb.GetIconId(name), name, number, color);
+    }
+
+    public ICharacterItem CreateCharacterItem(string name, long number = 0)
+    {
+        return CreateCharacterItem(name, 0, number);
     }
 }

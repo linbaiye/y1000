@@ -13,16 +13,19 @@ namespace y1000.Source.Networking.Server
     {
         public class InventoryItemMessage
         {
-            public InventoryItemMessage(string name, int slotId, long number)
+            public InventoryItemMessage(string name, int slotId, long number, int color)
             {
                 Name = name;
                 SlotId = slotId;
                 Number = number;
+                Color = color;
             }
             public string Name { get; }
             public int SlotId { get; }
             
             public long Number { get; }
+            
+            public int Color { get; }
         }
         private JoinedRealmMessage(IAttackKungFu attackKungFu, List<InventoryItemMessage> items, PlayerInfo myInfo, ValueBar healthBar, 
             ValueBar powerBar, ValueBar innerPowerBar, ValueBar outerPowerBar, ValueBar energyBar)
@@ -84,7 +87,7 @@ namespace y1000.Source.Networking.Server
             List<InventoryItemMessage> itemMessages = new List<InventoryItemMessage>();
             foreach (var inventoryItem in loginPacket.InventoryItems)
             {
-                itemMessages.Add(new InventoryItemMessage(inventoryItem.Name,  inventoryItem.SlotId, inventoryItem.Number));
+                itemMessages.Add(new InventoryItemMessage(inventoryItem.Name,  inventoryItem.SlotId, inventoryItem.Number, inventoryItem.Color));
             }
             return itemMessages;
         }

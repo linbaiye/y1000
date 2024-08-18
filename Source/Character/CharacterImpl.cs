@@ -53,14 +53,7 @@ namespace y1000.Source.Character
 		{
 			WrappedPlayer().ChangeState(state.WrappedState);
 			_state = state;
-	        if (_state is CharacterDraggedState)
-	        {
-		        WrappedPlayer().SlowCamera();
-	        }
-	        else
-	        {
-		        WrappedPlayer().RestoreCamera();
-	        }
+
 		}
 
 		public bool IsMale => WrappedPlayer().IsMale;
@@ -175,6 +168,7 @@ namespace y1000.Source.Character
 
         public void Visit(DraggedMessage message)
         {
+	        WrappedPlayer().SlowCamera();
 	        SetPositionAndState(message.Coordinate, message.Direction, CharacterDraggedState.Towards(message.Direction));
         }
 
@@ -221,7 +215,7 @@ namespace y1000.Source.Character
 	        WrappedPlayer().PlaySound(message.Sound);
 	        WrappedPlayer().ShowLifePercent(HealthBar.Percent);
 	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
-	        EventMediator?.NotifyTextArea("请稍后");
+	        EventMediator?.NotifyTextArea("请稍后。");
         }
         
         public void Visit(PlayerUnequipMessage message)
@@ -387,7 +381,6 @@ namespace y1000.Source.Character
 		        characterImpl.Inventory.PutItem(inventoryItemMessage.SlotId, characterItem);
 	        }
         }
-
   
 
         public OffsetTexture BodyOffsetTexture => WrappedPlayer().BodyOffsetTexture;
@@ -562,6 +555,21 @@ namespace y1000.Source.Character
         public void Visit(DragEndedMessage message)
         {
 	        WrappedPlayer().RestoreCamera();
+        }
+
+        public void Visit(RemoveEntityMessage message)
+        {
+	        WrappedPlayer().Map.Free(WrappedPlayer());
+        }
+
+        public void ReachEdge()
+        {
+	        LOGGER.Debug("Reached edge.");
+        }
+
+        public void LimitCamera(Vector2I leftUp, Vector2I bottomDown)
+        {
+	        WrappedPlayer().LimitCamera(leftUp, bottomDown);
         }
 
 

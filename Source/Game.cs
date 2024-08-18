@@ -14,10 +14,8 @@ using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Character.State.Prediction;
 using y1000.Source.Control;
-using y1000.Source.Control.Bottom;
 using y1000.Source.Creature;
 using y1000.Source.Creature.Monster;
-using y1000.Source.DynamicObject;
 using y1000.Source.Entity;
 using y1000.Source.Event;
 using y1000.Source.Input;
@@ -28,6 +26,7 @@ using y1000.Source.Networking.Connection;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 using y1000.Source.Sprite;
+using y1000.Source.Util;
 
 namespace y1000.Source;
 
@@ -96,7 +95,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			_entitySoundPlayers[i] = GetNode<CreatureAudio>("SoundPlayer" + (i + 1));
 		}
-		//AtdChecker.Dump();
+		//AtdChecker.Check();
 	}
 
 	private void LoadAndPlayBackgroundMusic(string bgm)
@@ -130,8 +129,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 		else if (eventArgs is CharacterTeleportedArgs teleportedArgs)
 		{
-			LOGGER.Debug("Add character for teleport.");
 			AddChild(_character);
+			_entityManager.Add(_character);
 			LoadAndPlayBackgroundMusic(teleportedArgs.Bgm);
 		}
 	}
@@ -169,7 +168,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			return;
 		}
 
-		if (eventKey.Keycode >= Key.Key1 && eventKey.Keycode <= Key.Key9)
+		if (eventKey.Keycode == Key.M )
+		{
+			_uiController?.ToggleMap(MapLayer);
+		}
+
+		/*if (eventKey.Keycode >= Key.Key1 && eventKey.Keycode <= Key.Key9)
 		{
 			var index = (ColorType)(eventKey.Keycode - Key.Key1);
 			for (int i = 0; i < _entitySoundPlayers.Length; i++)
@@ -182,7 +186,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 					break;
 				}
 			}
-		}
+		}*/
 	}
 
 
@@ -218,7 +222,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 		if (@event is InputEventKey eventKey)
 		{
-		//	LocalTest(eventKey);
+			LocalTest(eventKey);
 			//return;//
 		}
 		var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
@@ -263,6 +267,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private void OnEntityClicked(object? sender, EntityMouseEventArgs args)
 	{
+		if (_character == null)
+		{
+			return;
+		}
 		var click = _inputSampler.SampleEntityClickInput(args.MouseEvent, args.Entity, 
 			_character.WrappedPlayer().GetLocalMousePosition());
 		if (click is AttackInput attack)
@@ -374,7 +382,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (_entityManager.Add(npc))
 		{
 			AddChild(npc);
-			LOGGER.Debug("Added creature {0}.", npc.Id);
+			LOGGER.Debug("Added npc {0}.", npc.Id);
 		}
 	}
 
@@ -384,7 +392,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (_entityManager.Add(entity))
 		{
 			AddChild(entity);
-			LOGGER.Debug("Added telport at {0}.", entity.Coordinate);
 		}
 	}
 
@@ -394,27 +401,29 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (entity is Node2D node2D)
 		{
 			RemoveChild(node2D);
+			LOGGER.Debug("Removed entity {0}.", entity.Id);
 		}
+		if (entity != null)
+			_entityManager.Remove(entity.Id);
 	}
 
 	public void Visit(RemoveEntityMessage removeEntityMessage)
 	{
 		if (_character != null && removeEntityMessage.Id == _character.Id)
 		{
-			var all = _entityManager.Select<AbstractEntity>(e => !e.Id.Equals(_character.Id));
+			LOGGER.Debug("Removing char {0}.", _character.Id);
+			var all = _entityManager.Select<IEntity>(_ => true);
 			foreach (var entity in all)
 			{
 				Remove(entity, removeEntityMessage);
 			}
-			RemoveChild(_character);
-			LOGGER.Debug("Removed character");
+			LOGGER.Debug("Removed char {0}.", _character.Id);
 		}
 		else
 		{
-			var removedEntity = _entityManager.Remove(removeEntityMessage.Id);
+			var removedEntity = _entityManager.Get(removeEntityMessage.Id);
 			Remove(removedEntity, removeEntityMessage);
 		}
-		LOGGER.Debug("Removed creature {0}.", removeEntityMessage.Id);
 	}
 
 	public void Visit(ShowItemMessage message)
@@ -469,6 +478,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController?.UpdateTrade(message);
 	}
 
+	public void Visit(NpcPositionMessage message)
+	{
+		_uiController?.DrawNpc(message);
+	}
 
 	public void Visit(JoinedRealmMessage message)
 	{

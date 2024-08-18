@@ -33,7 +33,7 @@ public class EntityFactory
     }
 
 
-    public OnGroundItem CreateOnGroundItem(ShowItemMessage message) 
+    public GroundItem CreateOnGroundItem(ShowItemMessage message) 
     {
         var iconId = _itemDb.GetIconId(message.Name);
         var texture2D = _itemIconReader.Get(iconId);
@@ -41,7 +41,8 @@ public class EntityFactory
         {
             throw new NotImplementedException(message.Name + " does not have icon.");
         }
-        return OnGroundItem.Create(message, texture2D, _eventMediator);
+        return GroundItem.Create(message, texture2D, _eventMediator);
+        //return OnGroundItem.Create(message, texture2D, _eventMediator);
     }
     
     

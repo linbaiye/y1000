@@ -5,4 +5,6 @@ public interface IItem
 {
     string ItemName { get; }
     int IconId { get; }
+    
+    int Color { get; }
 }

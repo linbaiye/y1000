@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Microsoft.Extensions.Logging;
 using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature.State;
@@ -8,6 +9,7 @@ using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 using y1000.Source.Util;
+using ILogger = NLog.ILogger;
 
 namespace y1000.Source.Creature.Monster;
 
@@ -154,6 +156,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	{
 		var interpolation = npcInterpolation.Interpolation;
 		var name = npcInterpolation.Name;
+		LOGGER.Debug("Trying to initialize {0}", npcInterpolation.Name);
 		var monsterAnimation = MonsterAnimationFactory.Instance.Load("z" + npcInterpolation.Shape,
 			npcInterpolation.Animate);
 		var effectAnimation =

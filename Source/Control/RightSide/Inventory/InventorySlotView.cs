@@ -2,6 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using Godot;
 using NLog;
+using y1000.Source.Util;
 
 namespace y1000.Source.Control.RightSide.Inventory;
 
@@ -94,15 +95,20 @@ public partial class InventorySlotView : Panel
 
 	public int Number => _number;
 
-	public void PutTexture(Texture2D texture2D)
+	public void PutTexture(Texture2D texture2D, int color = 0)
 	{
-		PutTextureAndTooltip(texture2D, "");
+		PutTextureAndTooltip(texture2D, "", color);
 	}
 
-	public void PutTextureAndTooltip(Texture2D texture2D, string tip)
+	public void PutTextureAndTooltip(Texture2D texture2D, string tip, int color = 0)
 	{
+		_textureRect.Material = null;
 		_textureRect.Texture = texture2D;
 		TooltipText = tip;
+		if (color != 0)
+		{
+			_textureRect.Material = DyeShader.CreateShaderMaterial(color);
+		}
 	}
 
 	public Texture2D Texture => _textureRect.Texture;

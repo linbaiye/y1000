@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using System.IO;
+using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
 
@@ -12,6 +13,7 @@ public class AtdChecker
     {
         if (!atdStructure.HasState(state))
         {
+            Logger.Debug("{0} has no state {1}.", name, state);
             return;
         }
         var atdActions = atdStructure.Find(state);
@@ -52,5 +54,18 @@ public class AtdChecker
         Print(atd.FindFirst(CreatureState.WALK));
         Print(atd.FindFirst(CreatureState.IDLE));
         Print(atd.FindFirst(CreatureState.FROZEN));
+    }
+
+    public static void Convert()
+    {
+        var dirPath = "D:\\1000y研究\\九星千年UI\\maps\\";
+        var files = Directory.GetFiles(dirPath);
+        foreach (var file in files)
+        {
+            Logger.Debug("File {0}.", file);
+            var fileName = Path.GetFileName(file);
+            var newFile = dirPath + fileName.ToLower();
+            File.Move(file, newFile);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Godot;
+using NLog;
 using Source.Networking.Protobuf;
 using y1000.code.networking.message;
 using y1000.Source.Character.Event;
@@ -18,6 +19,7 @@ public class MessageFactory
     private readonly ItemFactory _itemFactory;
 
     private readonly MagicSdbReader _magicSdbReader;
+    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
     public MessageFactory(ItemFactory factory)
     {
@@ -64,7 +66,7 @@ public class MessageFactory
         ICharacterItem? item = null;
         if (!string.IsNullOrEmpty(packet.Name)) {
             var number = packet.HasNumber ? packet.Number : 0;
-            item = _itemFactory.CreateCharacterItem(packet.Name, number);
+            item = _itemFactory.CreateCharacterItem(packet.Name, packet.Color, number);
         }
         return new UpdateInventorySlotMessage(packet.SlotId, item);
     }
@@ -76,7 +78,7 @@ public class MessageFactory
     
     private PlayerEquipMessage Parse(PlayerEquipPacket packet)
     {
-        return new PlayerEquipMessage(packet.Id, packet.EquipmentName);
+        return new PlayerEquipMessage(packet.Id, packet.EquipmentName, packet.Color);
     }
 
 
@@ -137,6 +139,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.UpdateKungFuSlot => UpdateKungFuSlotMessage.FromPacket(packet.UpdateKungFuSlot),
             Packet.TypedPacketOneofCase.ShowTeleport => Parse(packet.ShowTeleport),
             Packet.TypedPacketOneofCase.BreakRope => DragEndedMessage.Instance,
+            Packet.TypedPacketOneofCase.NpcPosition => NpcPositionMessage.FromPacket(packet.NpcPosition),
             _ => throw new NotSupportedException()
         };
     }

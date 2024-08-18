@@ -92,21 +92,39 @@ public abstract class AbstractCreatureAnimation<TA> : IAnimation  where TA : Abs
     
     private readonly IDictionary<CreatureState, StateAnimation> _animations = new Dictionary<CreatureState, StateAnimation>();
     
-    public TA ConfigureState(CreatureState state, AtdStructure atdStructure, AtzSprite atzSprite)
+    /// <summary>
+    /// Use replacingState animation configuration to replace expectedState's animation. Some state has no animations, like HURT,
+    /// DIE, so FRONZEN could be used.
+    /// </summary>
+    /// <param name="expectedState"></param>
+    /// <param name="replacingState"></param>
+    /// <param name="atdStructure"></param>
+    /// <param name="atzSprite"></param>
+    /// <returns></returns>
+    public TA ConfigureState(CreatureState expectedState, CreatureState replacingState, AtdStructure atdStructure, AtzSprite atzSprite)
     {
-        if (_animations.ContainsKey(state))
+        if (_animations.ContainsKey(expectedState))
         {
             return (TA)this;
         }
-        var atdStruct = atdStructure.FindFirst(state);
+        if (atdStructure.HasState(expectedState))
+        {
+            replacingState = expectedState;
+        }
+        var atdStruct = atdStructure.FindFirst(replacingState);
         var stateAnimation = new StateAnimation(atdStruct.Frame, atdStruct.FrameTime * FrameTimeInMillis);
-        var atdStructs = atdStructure.Find(state);
+        var atdStructs = atdStructure.Find(replacingState);
         foreach (var @struct in atdStructs)
         {
             stateAnimation.Add(@struct, atzSprite);
         }
-        _animations.TryAdd(state, stateAnimation);
+        _animations.TryAdd(expectedState, stateAnimation);
         return (TA)this;
+    }
+    
+    public TA ConfigureState(CreatureState state, AtdStructure atdStructure, AtzSprite atzSprite)
+    {
+        return ConfigureState(state, state, atdStructure, atzSprite);
     }
 
     private StateAnimation GetOrThrow(CreatureState state)

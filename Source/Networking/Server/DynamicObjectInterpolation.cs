@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using NLog;
 using Source.Networking.Protobuf;
 using y1000.Source.DynamicObject;
 
@@ -7,6 +8,7 @@ namespace y1000.Source.Networking.Server;
 
 public class DynamicObjectInterpolation : IServerMessage
 {
+    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
     private DynamicObjectInterpolation(string name, long id, string shape, Vector2I coordinate, int start, int end, int elapsed,
         IEnumerable<Vector2I> coordinates,
         DynamicObjectType type,

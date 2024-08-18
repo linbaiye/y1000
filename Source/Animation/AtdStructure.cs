@@ -87,7 +87,7 @@ public class AtdStructure
     {
         if (!_actionMap.TryGetValue(state, out var stateStr))
         {
-            throw new NotImplementedException("No state string mapping found.");
+            throw new NotImplementedException("No state string mapping found: " + state);
         }
         if (!_structs.TryGetValue(stateStr, out var list))
         {
@@ -186,10 +186,6 @@ public class AtdStructure
         return new AtdStructure(dictionary, actionMap);
     }
 
-    public static AtdStructure LoadMonster(string monster, string atdName)
-    {
-        return Load("res://sprite/monster/" + monster + "/" + atdName, MONSTER_ACTION_MAP);
-    }
     
     public static AtdStructure LoadPlayer(string atdName)
     {

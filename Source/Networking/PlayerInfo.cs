@@ -26,6 +26,14 @@ public class PlayerInfo
     
     public string? TrouserName { get; private set; }
 
+    public int HairColor { get; set; }
+    public int HatColor { get; set; }
+    public int ChestColor { get; set; }
+    public int TrouserColor { get; set; }
+    public int ClothingColor { get; set; }
+    public int BootColor { get; set; }
+    public int WristColor { get; set; }
+
     public static PlayerInfo FromPacket(PlayerInfoPacket packet)
     {
         return new PlayerInfo()
@@ -41,6 +49,13 @@ public class PlayerInfo
             BootName = packet.HasBootName? packet.BootName: null,
             ClothingName= packet.HasClothingName? packet.ClothingName: null,
             TrouserName= packet.HasTrouserName? packet.TrouserName: null,
+            HairColor = packet.HairColor,
+            HatColor = packet.HatColor,
+            ChestColor = packet.ChestColor,
+            TrouserColor = packet.TrouserColor,
+            ClothingColor = packet.ClothingColor,
+            BootColor = packet.BootColor,
+            WristColor = packet.WristColor,
         };
     }
     

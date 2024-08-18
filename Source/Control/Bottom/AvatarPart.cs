@@ -1,5 +1,6 @@
 using Godot;
 using NLog;
+using y1000.Source.Util;
 
 namespace y1000.Source.Control.Bottom;
 
@@ -27,6 +28,18 @@ public partial class AvatarPart : TextureRect
         else if (button.Pressed && (button.ButtonMask & MouseButtonMask.Right) != 0)
         {
             GetParent<Avatar>().OnRightClicked();
+        }
+    }
+
+    public void Populate(Texture2D texture2D, Vector2 position, int color)
+    {
+        Position = position;
+		Visible = true;
+        Texture = texture2D;
+        Material = null;
+        if (color != 0)
+        {
+            Material = DyeShader.CreateShaderMaterial(color);
         }
     }
 

@@ -110,7 +110,7 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
 
     private void AddItem(UpdateTradeWindowMessage message)
     {
-        var item = _itemFactory.CreateCharacterItem(message.Name, message.Number);
+        var item = _itemFactory.CreateCharacterItem(message.Name, message.Color, message.Number);
         var texture2D = _itemIconReader.Get(item.IconId);
         if (texture2D == null)
         {
@@ -118,11 +118,11 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
         }
         if (message.Self)
         {
-            _mySlots[message.Slot - 1].PutTextureAndTooltip(texture2D, item.ItemName + ":" + message.Number);
+            _mySlots[message.Slot - 1].PutTextureAndTooltip(texture2D, item.ItemName + ":" + message.Number, item.Color);
         }
         else
         {
-            _playerSlots[message.Slot - 1].PutTextureAndTooltip(texture2D, item.ItemName + ":" + message.Number);
+            _playerSlots[message.Slot - 1].PutTextureAndTooltip(texture2D, item.ItemName + ":" + message.Number, item.Color);
         }
     }
 

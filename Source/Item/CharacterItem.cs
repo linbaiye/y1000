@@ -2,13 +2,15 @@
 
 public class CharacterItem : ICharacterItem
 {
-    public CharacterItem(int iconId, string itemName)
+    public CharacterItem(int iconId, string itemName, int color)
     {
         ItemName = itemName;
+        Color = color;
         IconId = iconId;
     }
 
     public string ItemName { get; }
     
     public int IconId { get; }
+    public int Color { get; }
 }

@@ -710,13 +710,13 @@ texture = ExtResource("110_gs68e")
 centered = false
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("130_k4c4h")
 centered = false
 hframes = 22
 vframes = 8
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
-visible = false
 material = SubResource("CanvasItemMaterial_b17c7")
 position = Vector2(100, 100)
 texture = ExtResource("45_e36kd")

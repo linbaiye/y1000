@@ -6,6 +6,7 @@ using y1000.Source.Character;
 using y1000.Source.Control.Bottom;
 using y1000.Source.Control.Dialog;
 using y1000.Source.Control.LeftSide;
+using y1000.Source.Control.Map;
 using y1000.Source.Control.PlayerAttribute;
 using y1000.Source.Control.PlayerTrade;
 using y1000.Source.Control.RightSide;
@@ -13,6 +14,7 @@ using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.KungFu;
+using y1000.Source.Map;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 using y1000.Source.Sprite;
@@ -41,6 +43,9 @@ public partial class UIController : CanvasLayer
     
     private PlayerTradeWindow _playerTradeWindow;
 
+    private MapView _mapView;
+
+    
     private static readonly string TRADING_ERROR = "另一交易正在进行中。";
 
     public override void _Ready()
@@ -54,6 +59,7 @@ public partial class UIController : CanvasLayer
         _itemAttributeControl = GetNode<ItemAttributeControl>("ItemAttribute");
         _attributeWindow = GetNode<PlayerAttributeWindow>("PlayerAttributeWindow");
         _playerTradeWindow = GetNode<PlayerTradeWindow>("PlayerTradeWindow");
+        _mapView = GetNode<MapView>("MapView");
         BindButtons();
     }
 
@@ -66,6 +72,7 @@ public partial class UIController : CanvasLayer
         _dropItemUi.BindEventMediator(eventMediator);
         _dialogControl.Initialize(spriteRepository, _tradeInputWindow, eventMediator, itemFactory);
         _playerTradeWindow.Initialize(_tradeInputWindow, eventMediator);
+        _mapView.Initialize(eventMediator);
     }
 
     public void DisplayTextMessage(TextMessage message)
@@ -93,6 +100,7 @@ public partial class UIController : CanvasLayer
         _rightControl.BindCharacter(character);
         _bottomControl.BindCharacter(character, realmName);
         _dialogControl.BindCharacter(character);
+        _mapView.BindCharacter(character);
         //_bottomControl.BindShortcuts(_rightControl.InventoryView, character.KungFuBook);
     }
     
@@ -169,4 +177,15 @@ public partial class UIController : CanvasLayer
     {
         return _dialogControl.IsTrading || _dropItemUi.Visible;
     }
+
+    public void ToggleMap(IMap map)
+    {
+        _mapView.Toggle(map);
+    }
+
+    public void DrawNpc(NpcPositionMessage message)
+    {
+        _mapView.DrawNpcs(message);
+    }
+    
 }

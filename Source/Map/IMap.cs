@@ -19,5 +19,9 @@ public interface IMap
 
 
     public static IMap Empty = new EmptyMap();
+    
+    Vector2I MapSize { get; }
+    
+    string MapName { get; }
 
 }

@@ -20,11 +20,11 @@ public class MonsterAnimationFactory
         var sprite = _spriteRepository.LoadByNumber(atz);
         var atdStructure = _atdRepository.LoadByName(atd);
         var animation = new MonsterAnimation()
-            .ConfigureState(CreatureState.IDLE, atdStructure, sprite)
             .ConfigureState(CreatureState.WALK, atdStructure, sprite)
-            .ConfigureState(CreatureState.HURT, atdStructure, sprite)
+            .ConfigureState(CreatureState.IDLE, CreatureState.FROZEN, atdStructure, sprite)
+            .ConfigureState(CreatureState.HURT, CreatureState.FROZEN, atdStructure, sprite)
             .ConfigureState(CreatureState.FROZEN, atdStructure, sprite)
-            .ConfigureState(CreatureState.DIE, atdStructure, sprite);
+            .ConfigureState(CreatureState.DIE, CreatureState.FROZEN, atdStructure, sprite);
         if (atdStructure.HasState(CreatureState.ATTACK))
         {
             animation.ConfigureState(CreatureState.ATTACK, atdStructure, sprite);

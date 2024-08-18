@@ -10,6 +10,5 @@ namespace y1000.code.world
     {
         bool CanMove(Vector2I coordinate);
 
-        public static readonly IRealm Empty = new EmptyRealm();
     }
 }

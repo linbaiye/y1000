@@ -47,15 +47,24 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			equip.Invoke(equipment);
 		}
 	}
+	
+	private void InitEquipment<T>(string? name, int c, Action<T> equip) where T : IEquipment
+	{
+		var equipmentFactory = EquipmentFactory.Instance;
+		if (name != null)
+		{
+			var equipment = equipmentFactory.Create<T>(name, IsMale, c);
+			equip.Invoke(equipment);
+		}
+	}
 
-	private void InitWrist(string? name)
+	private void InitWrist(string? name, int color)
 	{
 		if (name != null)
 		{
-			var wrist = EquipmentFactory.Instance.CreateWrist(name, IsMale);
+			var wrist = EquipmentFactory.Instance.CreateWrist(name, IsMale, color);
 			ChangeWrist(wrist);
 		}
-		
 	}
 	
 	public void Init(IPlayerState state, Direction direction,  Vector2I coordinate, IMap map, PlayerInfo info)
@@ -65,22 +74,15 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		_state = state;
 		var equipmentFactory = EquipmentFactory.Instance;
 		InitEquipment(info.WeaponName, n => equipmentFactory.CreatePlayerWeapon(n, IsMale), ChangeWeapon);
-		InitEquipment(info.ChestName, n => equipmentFactory.CreatePlayerChest(n, IsMale), ChangeChest);
-		InitEquipment(info.HairName, n => equipmentFactory.CreatePlayerHair(n, IsMale), ChangeHair);
-		InitEquipment(info.HatName, n => equipmentFactory.CreatePlayerHat(n, IsMale), ChangeHat);
-		InitWrist(info.WristName);
-		InitEquipment(info.BootName, n => equipmentFactory.CreateBoot(n, IsMale), ChangeBoot);
-		InitEquipment(info.TrouserName, n => equipmentFactory.CreateTrouser(n, IsMale), ChangeTrouser);
-		InitEquipment(info.ClothingName, n => equipmentFactory.CreateClothing(n, IsMale), ChangeClothing);
+		InitEquipment<PlayerChest>(info.ChestName, info.ChestColor, ChangeChest);
+		InitEquipment<PlayerHair>(info.HairName,  info.HairColor, ChangeHair);
+		InitEquipment<PlayerHat>(info.HatName, info.HatColor, ChangeHat);
+		InitWrist(info.WristName, info.WristColor);
+		InitEquipment<Boot>(info.BootName, info.BootColor, ChangeBoot);
+		InitEquipment<Trouser>(info.TrouserName, info.TrouserColor, ChangeTrouser);
+		InitEquipment<Clothing>(info.ClothingName, info.ClothingColor, ChangeClothing);
 	}
 
-	public void Teleport(Vector2I coordinate)
-	{
-		Position = coordinate.ToPosition();
-		Direction = Direction.DOWN;
-	}
-	
-	
 	public PlayerWeapon? Weapon { get; private set; }
 	
 	public PlayerChest? Chest { get; private set; }
@@ -108,59 +110,51 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	{
 		_chestAnimation = chest != null ? PlayerArmorAnimation.Create(chest) : null;
 		Chest = chest;
-		GetNode<Sprite2D>("Chest").Visible = chest != null;
+		GetNode<ChestSprite>("Chest").OnEquipmentChanged(chest);
 	}
 
 	private void ChangeHat(PlayerHat? hat)
 	{
 		_hatAnimation = hat != null ? PlayerArmorAnimation.Create(hat) : null;
 		Hat = hat;
-		GetNode<Sprite2D>("Hat").Visible = hat != null;
+		GetNode<HatSprite>("Hat").OnEquipmentChanged(hat);
 	}
 
 	private void ChangeWrist(Wrist? wrist)
 	{
 		Wrist = wrist;
-		if (wrist != null)
-		{
-			_leftWristAnimation = PlayerArmorAnimation.CreateLeftWrist(wrist);
-			_rightWristAnimation = PlayerArmorAnimation.CreateRightWrist(wrist);
-			GetNode<Sprite2D>("LeftWrist").Visible = true;
-			GetNode<Sprite2D>("RightWrist").Visible = true;
-		}
-		else
-		{
-			GetNode<Sprite2D>("LeftWrist").Visible = false;
-			GetNode<Sprite2D>("RightWrist").Visible = false;
-		}
+		_leftWristAnimation = wrist != null ? PlayerArmorAnimation.CreateLeftWrist(wrist) : null;
+		_rightWristAnimation = wrist != null ? PlayerArmorAnimation.CreateRightWrist(wrist) : null;
+		GetNode<LeftWristSprite>("LeftWrist").OnEquipmentChanged(wrist);
+		GetNode<RightWristSprite>("RightWrist").OnEquipmentChanged(wrist);
 	}
 
 	private void ChangeHair(PlayerHair? hair)
 	{
 		_hairAnimation = hair != null ? PlayerArmorAnimation.Create(hair) : null;
 		Hair = hair;
-		GetNode<Sprite2D>("Hair").Visible = hair != null;
+		GetNode<HairSprite>("Hair").OnEquipmentChanged(hair);
 	}
 
 	private void ChangeBoot(Boot? boot)
 	{
 		_bootAnimation = boot != null ? PlayerArmorAnimation.Create(boot) : null;
 		Boot = boot;
-		GetNode<Sprite2D>("Boot").Visible = boot != null;
+		GetNode<BootSprite>("Boot").OnEquipmentChanged(boot);
 	}
 
 	private void ChangeClothing(Clothing? clothing)
 	{
 		_clothingAnimation = clothing != null ? PlayerArmorAnimation.Create(clothing) : null;
 		Clothing = clothing;
-		GetNode<Sprite2D>("Clothing").Visible = clothing != null;
+		GetNode<ClothingSprite>("Clothing").OnEquipmentChanged(clothing);
 	}
 
 	private void ChangeTrouser(Trouser? trouser)
 	{
 		_trouserAnimation = trouser != null ? PlayerArmorAnimation.Create(trouser) : null;
 		Trouser = trouser;
-		GetNode<Sprite2D>("Trouser").Visible = trouser != null;
+		GetNode<TrouserSprite>("Trouser").OnEquipmentChanged(trouser);
 	}
 
 	public bool IsHandAnimationCompatible => _handAnimation == null || _handAnimation.Compatible(_state.State);
@@ -194,7 +188,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	public IEquipment Equip(PlayerEquipMessage message)
 	{
-		var equipment = EquipmentFactory.Instance.Create(message.EquipmentName, IsMale);
+		var equipment = EquipmentFactory.Instance.Create(message.EquipmentName, IsMale, message.Color);
 		switch (equipment)
 		{
 			case Trouser trouser: ChangeTrouser(trouser);
@@ -300,6 +294,20 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		GetNode<Camera2D>("DraggedCamera").Enabled = true;
 	}
 
+	private void LimitCamera(Camera2D camera, Vector2I leftTop, Vector2I bottomRight)
+	{
+		camera.LimitLeft = leftTop.X;
+		camera.LimitTop = leftTop.Y;
+		camera.LimitRight = bottomRight.X;
+		camera.LimitBottom = bottomRight.Y;
+	}
+
+	public void LimitCamera(Vector2I leftTop, Vector2I bottomRight)
+	{
+		LimitCamera(GetNode<Camera2D>("MainCamera"), leftTop, bottomRight);
+		LimitCamera(GetNode<Camera2D>("DraggedCamera"), leftTop, bottomRight);
+	}
+
 	public void RestoreCamera()
 	{
 		GetNode<Camera2D>("MainCamera").Enabled = true;
@@ -379,7 +387,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		UpdateAttackEffect(message);
 		ChangeState(IPlayerState.Attack(message));
 	}
-
 
 	public void Visit(HurtMessage hurtMessage)
 	{

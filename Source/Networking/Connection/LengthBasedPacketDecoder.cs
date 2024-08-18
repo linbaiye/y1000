@@ -32,7 +32,8 @@ namespace y1000.Source.Networking.Connection
                 input.ReadBytes(bytes);
                 Packet packet = Packet.Parser.ParseFrom(bytes);
                 input.Release();
-                return _messageFactory.Create(packet);
+                var msg = _messageFactory.Create(packet);
+                return msg;
             }
             catch (Exception e)
             {

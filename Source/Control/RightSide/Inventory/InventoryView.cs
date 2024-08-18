@@ -4,6 +4,7 @@ using NLog;
 using y1000.Source.Character;
 using y1000.Source.Item;
 using y1000.Source.Sprite;
+using y1000.Source.Util;
 
 namespace y1000.Source.Control.RightSide.Inventory;
 
@@ -129,7 +130,7 @@ public partial class InventoryView : AbstractInventoryView
         var texture = TEXTURE_READER.Get(item.IconId);
         if (texture != null)
         {
-            GetNode<InventorySlotView>("Slots/Slot" + slot).PutTexture(texture);
+            GetNode<InventorySlotView>("Slots/Slot" + slot).PutTexture(texture, item.Color);
         }
     }
     public void ButtonClicked()

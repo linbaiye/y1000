@@ -31,4 +31,7 @@ public class EmptyMap: IMap
     {
         throw new System.NotImplementedException();
     }
+
+    public Vector2I MapSize => Vector2I.Zero;
+    public string MapName => "";
 }

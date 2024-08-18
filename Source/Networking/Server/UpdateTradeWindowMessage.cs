@@ -4,13 +4,14 @@ namespace y1000.Source.Networking.Server;
 
 public class UpdateTradeWindowMessage : IServerMessage
 {
-    public UpdateTradeWindowMessage(UpdateType type, string name, long number, int slot, bool self)
+    private UpdateTradeWindowMessage(UpdateType type, string name, long number, int slot, bool self, int color)
     {
         Type = type;
         Name = name;
         Number = number;
         Slot = slot;
         Self = self;
+        Color = color;
     }
 
     public enum UpdateType 
@@ -25,6 +26,7 @@ public class UpdateTradeWindowMessage : IServerMessage
     public int Slot { get; }
     public bool Self { get; }
     public UpdateType Type { get; }
+    public int Color { get; }
     public void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
@@ -32,6 +34,6 @@ public class UpdateTradeWindowMessage : IServerMessage
     public static UpdateTradeWindowMessage FromPacket(UpdateTradeWindowPacket packet)
     {
         var name = packet.HasName ? packet.Name : "";
-        return new UpdateTradeWindowMessage((UpdateType)packet.Type, name, packet.HasNumber ? packet.Number : 0, packet.HasSlot ? packet.Slot : 0, packet.HasSelf && packet.Self);
+        return new UpdateTradeWindowMessage((UpdateType)packet.Type, name, packet.HasNumber ? packet.Number : 0, packet.HasSlot ? packet.Slot : 0, packet.HasSelf && packet.Self, packet.Color);
     }
 }

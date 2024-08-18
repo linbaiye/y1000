@@ -214,4 +214,8 @@ public interface IServerMessageVisitor
     {
         Visit((ICharacterMessage)message);
     }
+
+    void Visit(NpcPositionMessage message)
+    {
+    }
 }

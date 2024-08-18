@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using Godot;
-using y1000.code.world;
 
 namespace y1000.Source.Map
 {
-    public class GameMap: IRealm
+    public class GameMap
     {
+        public override string ToString()
+        {
+            return $"{nameof(Height)}: {Height}, {nameof(Width)}: {Width}";
+        }
+
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         struct Header
         {
@@ -59,41 +63,44 @@ namespace y1000.Source.Map
         
         private readonly int _width;
 
-        private ISet<int>? ids;
+        private ISet<int>? _ids;
+        
+        public string Name { get; } 
 
         public IEnumerable<int> TileIds
         {
             get
             {
-                if (ids != null)
+                if (_ids != null)
                 {
-                    return ids;
+                    return _ids;
                 }
-                ids = new HashSet<int>();
+                _ids = new HashSet<int>();
                 for (int i = 0; i < _width; i++)
                 {
                     for (int j = 0; j < _height; j++)
                     {
-                        if (!ids.Contains(_cells[j, i].TileId))
+                        if (!_ids.Contains(_cells[j, i].TileId))
                         {
-                            ids.Add(_cells[j, i].TileId);
+                            _ids.Add(_cells[j, i].TileId);
                         }
-                        if (!ids.Contains(_cells[j, i].TileOverId))
+                        if (!_ids.Contains(_cells[j, i].TileOverId))
                         {
-                            ids.Add(_cells[j, i].TileOverId);
+                            _ids.Add(_cells[j, i].TileOverId);
                         }
                     }
                 }
-                return ids;
+                return _ids;
             }
         }
 
 
-        public GameMap(MapCell[,] coor, int heigh, int width)
+        private GameMap(MapCell[,] coor, int heigh, int width, string name)
         {
             _cells = coor;
             _height = heigh;
             _width = width;
+            Name = name;
         }
 
         public void ForeachCell(Action<MapCell, int, int> action)
@@ -132,10 +139,6 @@ namespace y1000.Source.Map
         }
 
 
-        public bool IsMovable(Point point)
-        {
-            return IsMovable(point.X, point.Y);
-        }
 
         private bool IsMovable(int x, int y)
         {
@@ -186,11 +189,11 @@ namespace y1000.Source.Map
                         }
                     }
                 }
-                return new GameMap(coor, header.Height, header.Width);
+                var name = Path.GetFileName(path);
+                return new GameMap(coor, header.Height, header.Width, name.Substring(0, name.Length - 4)); // -4 to remove .map
             }
         }
 
-    
 
         public bool CanMove(Vector2I coordinate)
         {

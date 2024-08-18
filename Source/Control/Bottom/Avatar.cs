@@ -127,7 +127,7 @@ public partial class Avatar : NinePatchRect
 		_hand.Text = weapon.Name;
 	}
 
-	public void DrawChest(PlayerChest? chest)
+	private void DrawChest(PlayerChest? chest)
 	{
 		if (chest == null)
 		{
@@ -135,8 +135,8 @@ public partial class Avatar : NinePatchRect
 		}
 		DrawArmor(chest, _chest);
 	}
-	
-	public void DrawHair(PlayerHair? hair)
+
+	private void DrawHair(PlayerHair? hair)
 	{
 		if (hair == null)
 		{
@@ -144,8 +144,8 @@ public partial class Avatar : NinePatchRect
 		}
 		DrawArmor(hair, _hair);
 	}
-	
-	public void DrawHat(PlayerHat? hat)
+
+	private void DrawHat(PlayerHat? hat)
 	{
 		if (hat == null)
 		{
@@ -153,8 +153,8 @@ public partial class Avatar : NinePatchRect
 		}
 		DrawArmor(hat, _hat);
 	}
-	
-	public void DrawWrist(Wrist? wrist)
+
+	private void DrawWrist(Wrist? wrist)
 	{
 		if (wrist == null)
 		{
@@ -163,15 +163,15 @@ public partial class Avatar : NinePatchRect
 		}
 		else
 		{
-			DrawEquipment(wrist.FirstAtzName, _leftWrist);
-			DrawEquipment(wrist.FirstAtz1, _rightWrist);
+			DrawEquipment(wrist.FirstAtzName, _leftWrist, wrist.Color);
+			DrawEquipment(wrist.FirstAtz1, _rightWrist, wrist.Color);
 			_rightWrist.Text = wrist.Name;
 			_leftWrist.Text = wrist.Name;
 		}
 	}
-	
-	
-	public void DrawBoot(Boot? boot)
+
+
+	private void DrawBoot(Boot? boot)
 	{
 		if (boot == null)
 		{
@@ -179,8 +179,8 @@ public partial class Avatar : NinePatchRect
 		}
 		DrawArmor(boot, _boot);
 	}
-	
-	public void DrawTrouser(Trouser? trouser)
+
+	private void DrawTrouser(Trouser? trouser)
 	{
 		if (trouser == null)
 		{
@@ -188,8 +188,8 @@ public partial class Avatar : NinePatchRect
 		}
 		DrawArmor(trouser, _trouser);
 	}
-	
-	public void DrawClothing(Clothing? clothing)
+
+	private void DrawClothing(Clothing? clothing)
 	{
 		if (clothing == null)
 		{
@@ -198,13 +198,11 @@ public partial class Avatar : NinePatchRect
 		DrawArmor(clothing, _clothing);
 	}
 
-	private void DrawEquipment(string spriteName, AvatarPart rect)
+	private void DrawEquipment(string spriteName, AvatarPart rect, int color = 0)
 	{
 		var sprite = _spriteRepository.LoadByNumberAndOffset(spriteName);
 		var offsetTexture = sprite.Get(AvatarIndex);
-		rect.Visible = true;
-		rect.Position = _bodyOffset + offsetTexture.Offset;
-		rect.Texture = offsetTexture.Texture;
+		rect.Populate(offsetTexture.Texture, _bodyOffset + offsetTexture.Offset, color);
 	}
 
 	public void OnPartClicked(AvatarPart part, string name)
@@ -219,9 +217,9 @@ public partial class Avatar : NinePatchRect
 				break;
 			case "Hair":  _character?.OnAvatarDoubleClick(EquipmentType.HAIR);
 				break;
-			case "Wrist":  _character?.OnAvatarDoubleClick(EquipmentType.WRIST);
+			case "LeftWrist":  _character?.OnAvatarDoubleClick(EquipmentType.WRIST);
 				break;
-			case "Wrist1":  _character?.OnAvatarDoubleClick(EquipmentType.WRIST);
+			case "RightWrist":  _character?.OnAvatarDoubleClick(EquipmentType.WRIST);
 				break;
 			case "Hand":  _character?.OnAvatarDoubleClick(EquipmentType.WEAPON);
 				break;
@@ -261,7 +259,7 @@ public partial class Avatar : NinePatchRect
 		{
 			return;
 		}
-		DrawEquipment(armor.FirstAtzName, rect);
+		DrawEquipment(armor.FirstAtzName, rect, armor.Color);
 		rect.Text = armor.Name;
 	}
 }

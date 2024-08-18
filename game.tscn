@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=21 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -14,8 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://clr852egfmuqb" path="res://Scenes/TradePlayerWindow.tscn" id="12_mif0g"]
 [ext_resource type="Texture2D" uid="uid://cib0m65pj30hg" path="res://assets/test/monster.png" id="13_hn2ex"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="13_klljd"]
+[ext_resource type="Script" path="res://Source/Control/Map/MapView.cs" id="13_xh10o"]
+[ext_resource type="PackedScene" uid="uid://bjjg8uukhy3s8" path="res://Scenes/MapNpcView.tscn" id="14_vdhs2"]
 [ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="16_ing8y"]
 [ext_resource type="PackedScene" uid="uid://b8qn25p71tho" path="res://assets/test/teleport.tscn" id="16_wmncn"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tknte"]
 shader = ExtResource("13_klljd")
@@ -74,6 +78,22 @@ offset_bottom = -355.0
 [node name="PlayerAttributeWindow" parent="UILayer" instance=ExtResource("11_yghsv")]
 
 [node name="PlayerTradeWindow" parent="UILayer" instance=ExtResource("12_mif0g")]
+
+[node name="MapView" type="TextureRect" parent="UILayer"]
+z_index = 4
+offset_left = 282.0
+offset_top = 111.0
+offset_right = 742.0
+offset_bottom = 459.0
+texture = SubResource("CompressedTexture2D_ufimi")
+stretch_mode = 2
+script = ExtResource("13_xh10o")
+
+[node name="Character" parent="UILayer/MapView" instance=ExtResource("14_vdhs2")]
+z_index = 4
+layout_mode = 0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -12.18

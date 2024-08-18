@@ -41,8 +41,7 @@ public partial class MapLayer : TileMap, IMap
 
 	private readonly IMapObjectRepository _mapObjectRepository = FilesystemMapObjectRepository.Instance;
 
-	private string _currentMap = "";
-
+	private const int CameraLimitOffset = 6;
 
 	public override void _Ready()
 	{
@@ -59,7 +58,7 @@ public partial class MapLayer : TileMap, IMap
 			mapName = mapName.Substring(0, mapName.Length - 4);
 		}
 		_entityCoordinates.Clear();
-		if (!_currentMap.Equals(mapName))
+		if (_gameMap == null || !_gameMap.Name.Equals(mapName))
 		{
 			_gameMap = GameMap.Load(MapDir + "/" +  mapName + ".map");
 			_animatedObjectSprites.Clear();
@@ -84,7 +83,6 @@ public partial class MapLayer : TileMap, IMap
 				rofName= rofName.Substring(0, rofName.Length - 4);
 			if (_mapObjectRepository.HasRoof(rofName))
 				_mapRoofInfos = _mapObjectRepository.LoadRoof(rofName);
-			_currentMap = mapName;
 		}
 	}
 
@@ -94,12 +92,60 @@ public partial class MapLayer : TileMap, IMap
 		_origin = character.Coordinate;
 		PaintMap();
 		character.WhenCharacterUpdated += OnCharacterEvent;
+		PutCameraLimit(character);
 	}
 
+	private void PutCameraLimit(CharacterImpl character)
+	{
+		if (_gameMap == null)
+		{
+			return;
+		}
 
+		var leftTopLimit = ComputeCameraLeftTopLimit(_gameMap);
+		var rightBottomLimit = ComputeCameraRightBottomLimit(_gameMap);
+		character.LimitCamera(leftTopLimit, rightBottomLimit);
+	}
+
+	private Vector2I ComputeCameraRightBottomLimit(GameMap map)
+	{
+		if (map.Name.Equals("start"))
+		{
+			int x = map.Width > CameraLimitOffset ? map.Width - CameraLimitOffset : map.Width;
+			int y = map.Height > CameraLimitOffset ? map.Height - CameraLimitOffset : map.Height;
+			return new Vector2I(x * VectorUtil.TileSizeX, y * VectorUtil.TileSizeY);
+		}
+		return new Vector2I(map.Width * VectorUtil.TileSizeX, map.Height * VectorUtil.TileSizeY);
+	}
+
+	private Vector2I ComputeCameraLeftTopLimit(GameMap map)
+	{
+		if (map.Name.Equals("start"))
+		{
+			int x = map.Width > CameraLimitOffset ? CameraLimitOffset : map.Width;
+			int y = map.Height > CameraLimitOffset ? CameraLimitOffset : map.Height;
+			return new Vector2I(x * VectorUtil.TileSizeX, y * VectorUtil.TileSizeY);
+		}
+		return new Vector2I(0, 0);
+	}
+	
+	private void NotifyIfReachEdge(CharacterImpl character, Vector2I coordinate)
+	{
+		if (_gameMap == null)
+		{
+			return;
+		}
+
+		int range = 20;
+		if (coordinate.X < range || coordinate.X > _gameMap.Width -range 
+		    || coordinate.Y < range|| coordinate.Y > _gameMap.Height - range)
+		{
+			character.ReachEdge();
+		}
+	}
 	private void OnCharacterEvent(object? sender, EventArgs args)
 	{
-		if (sender is not CharacterImpl)
+		if (sender is not CharacterImpl character)
 		{
 			return;
 		}
@@ -115,6 +161,7 @@ public partial class MapLayer : TileMap, IMap
 			_origin = teleportedArgs.Coordinate;
 			PaintMap();
 			HideRoofIfNeed();
+			PutCameraLimit(character);
 		}
 	}
 
@@ -250,7 +297,6 @@ public partial class MapLayer : TileMap, IMap
 		_gameMap?.ForeachCell(MapStart, MapEnd, (cell, x, y) => DrawObjectAtCoordinate(cell.ObjectId, x, y, layerNode));
 	}
 	
-	
 	private AnimatedSprite2D CreateAnimatedSprite2d(MapObject mapObject, int x, int y)
 	{
 		SpriteFrames frames = new SpriteFrames();
@@ -345,4 +391,7 @@ public partial class MapLayer : TileMap, IMap
 	{
 		_entityCoordinates.Remove(dynamicObject.Id);
 	}
+
+	public Vector2I MapSize => _gameMap != null ? new Vector2I(_gameMap.Width, _gameMap.Height) : Vector2I.Zero;
+	public string MapName => _gameMap != null ? _gameMap.Name : "";
 }
