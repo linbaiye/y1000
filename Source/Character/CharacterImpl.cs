@@ -413,7 +413,7 @@ namespace y1000.Source.Character
 		        var characterItem = Inventory.Find(message.SlotId);
 		        if (characterItem != null)
 		        {
-			        EventMediator?.NotifyUiEvent(new ItemAttributeEvent(characterItem, message.Description));
+			        EventMediator?.NotifyUiEvent(new ItemAttributeEvent(characterItem, message.Description, message.SlotId));
 		        }
 	        } else if (message.Type == RightClickType.KUNGFU)
 	        {

@@ -28,6 +28,12 @@ public class ItemSdbReader : AbstractSdbReader
     {
         return Parse(itemName, "Shape", int.Parse);
     }
+
+    public int GetColor(string itemName)
+    {
+        return string.IsNullOrEmpty(GetString(itemName, "Color")) ? 0:
+            Parse(itemName, "Color", int.Parse);
+    }
     
     public string GetAttackSpriteIndex(string equip, bool male)
     {

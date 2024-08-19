@@ -61,7 +61,7 @@ public class EventMediator
         }
         else if (e is ItemAttributeEvent attributeEvent)
         {
-            _uiController?.DisplayItemAttribute(attributeEvent.Item, attributeEvent.Description);
+            _uiController?.DisplayItemAttribute(attributeEvent);
         }
         else if (e is KungFuAttributeEvent kungFuAttributeEvent)
         {

@@ -277,6 +277,21 @@ public class CharacterInventory
     {
         return _items.TryGetValue(slot, out var item) ? item : null;
     }
+    
+    public int FindSlot(IItem item)
+    {
+        for (var i = 1; i <= MaxSize; i++)
+        {
+            if (_items.TryGetValue(i, out var slotItem))
+            {
+                if (slotItem == item)
+                {
+                    return i;
+                }
+            }
+        }
+        return 0;
+    }
 
     public void Update(int slot, ICharacterItem? item)
     {

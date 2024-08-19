@@ -1,3 +1,4 @@
+using System;
 using System.Text.RegularExpressions;
 using Godot;
 using NLog;
@@ -7,6 +8,7 @@ using y1000.Source.Control.RightSide.Inventory;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.KungFu;
+using y1000.Source.Networking;
 using y1000.Source.Sprite;
 using y1000.Source.Util;
 
@@ -26,6 +28,7 @@ public partial class ItemAttributeControl : NinePatchRect
     private readonly MagicSdbReader _magicSdbReader = MagicSdbReader.Instance;
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
     private EventMediator? _eventMediator;
+    private int _viewedSlot;
     private bool _mouseHoveredIcon;
     
     public override void _Ready()
@@ -40,9 +43,8 @@ public partial class ItemAttributeControl : NinePatchRect
         _mouseHoveredIcon = false;
     }
 
-    public void Display(IItem item, string description)
+    private bool DisplayIcon(IItem item)
     {
-        _itemDescription.Text = Regex.Replace(description, "<br>", "\n");
         var texture2D = _itemIconReader.Get(item.IconId);
         if (texture2D != null)
         {
@@ -50,6 +52,16 @@ public partial class ItemAttributeControl : NinePatchRect
             _itemName.Text = item.ItemName;
             Visible = true;
         }
+
+        return Visible;
+    }
+
+    public void Display(ItemAttributeEvent attributeEvent)
+    {
+        _itemDescription.Text = Regex.Replace(attributeEvent.Description, "<br>", "\n");
+        var item = attributeEvent.Item;
+        if (DisplayIcon(item))
+            _viewedSlot = attributeEvent.Slot;
     }
 
     private void OnSlotMouseEvent(object? sender, SlotMouseEvent mouseEvent)
@@ -63,6 +75,28 @@ public partial class ItemAttributeControl : NinePatchRect
             _mouseHoveredIcon = false;
         }
         Logger.Debug("Hovered {0}.", _mouseHoveredIcon);
+    }
+
+    public void BindCharacter(CharacterImpl character)
+    {
+        character.Inventory.InventoryChanged += OnInventoryUpdated;
+    }
+
+    private void OnInventoryUpdated(object? sender, EventArgs args)
+    {
+        if (!Visible)
+        {
+            return;
+        }
+        if (sender is not CharacterInventory inventory)
+        {
+            return;
+        }
+        var item = inventory.Find(_viewedSlot);
+        if (item != null)
+        {
+            DisplayIcon(item);
+        }
     }
 
     public void Display(IKungFu kungFu, string description)
@@ -83,15 +117,13 @@ public partial class ItemAttributeControl : NinePatchRect
         _eventMediator = eventMediator;
     }
     
-
-    public bool HandleDragEvent(DragInventorySlotEvent slotEvent, CharacterImpl character)
+    public bool HandleDragEvent(DragInventorySlotEvent slotEvent)
     {
-        if (!Visible || !_mouseHoveredIcon)
+        if (!Visible || !_mouseHoveredIcon || _viewedSlot == 0)
         {
             return false;
         }
-        Logger.Debug("Dye item.");
-        //_eventMediator.NotifyServer();
+        _eventMediator?.NotifyServer(new ClientDyeEvent(_viewedSlot, slotEvent.Slot));
         return true;
     }
     

@@ -88,7 +88,6 @@ public partial class UIController : CanvasLayer
         }
     }
 
-    
 
     private void BindButtons()
     {
@@ -102,6 +101,7 @@ public partial class UIController : CanvasLayer
         _bottomControl.BindCharacter(character, realmName);
         _dialogControl.BindCharacter(character);
         _mapView.BindCharacter(character);
+        _itemAttributeControl.BindCharacter(character);
         //_bottomControl.BindShortcuts(_rightControl.InventoryView, character.KungFuBook);
     }
     
@@ -119,9 +119,9 @@ public partial class UIController : CanvasLayer
     }
 
     // Triggered by right-clicking item.
-    public void DisplayItemAttribute(IItem item, string description)
+    public void DisplayItemAttribute(ItemAttributeEvent itemAttributeEvent)
     {
-        _itemAttributeControl.Display(item, description);
+        _itemAttributeControl.Display(itemAttributeEvent);
     }
     
     // Triggered by right-clicking kungfu.
@@ -149,7 +149,7 @@ public partial class UIController : CanvasLayer
             DisplayTextMessage(TRADING_ERROR);
             return;
         }
-        if (_itemAttributeControl.HandleDragEvent(slotEvent, character))
+        if (_itemAttributeControl.HandleDragEvent(slotEvent))
         {
             return;
         }

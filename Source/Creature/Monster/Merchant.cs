@@ -16,15 +16,18 @@ public partial class Merchant : Monster
     
     public class Item
     {
-        public Item(string name, int price, int iconId)
+        public Item(string name, int price, int iconId, int color = 0)
         {
             Price = price;
             IconId = iconId;
+            Color = color;
             Name = name;
         }
         public string Name { get; }
         public int Price { get; }
         public int IconId { get; }
+        
+        public int Color { get; }
     }
 
     public Item? FindInSell(string name)

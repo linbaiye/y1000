@@ -32,7 +32,10 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
 
     private MerchantTrade _trade = new();
 
+    
     private ItemFactory? _itemFactory;
+
+    private ItemsContainer _itemsContainer;
     
     private class Item
     {
@@ -51,11 +54,6 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         }
     }
 
-    private void AddToTotal(long delta)
-    {
-        long current = string.IsNullOrEmpty(_total.Text) ? 0 : long.Parse(_total.Text);
-        _total.Text = (current + delta).ToString();
-    }
 
     public override void _Ready()
     {
@@ -65,10 +63,33 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         _confirmButton.Pressed += OnConfirmTrade;
         GetNode<TextureButton>("CancelButton").Pressed += Close;
         _total = GetNode<Label>("Total");
-        _itemList.ItemClicked += OnItemClicked;
+        _itemsContainer = GetNode<ItemsContainer>("ItemsContainer");
+        _itemsContainer.ItemDoubleClicked += OnItemDoubleClicked;
         Close();
     }
 
+    private void AddToTotal(long delta)
+    {
+        long current = string.IsNullOrEmpty(_total.Text) ? 0 : long.Parse(_total.Text);
+        _total.Text = (current + delta).ToString();
+    }
+
+    private void OnItemDoubleClicked(y1000.Source.Control.Dialog.Item item)
+    {
+        if (_tradeInputWindow == null || _itemFactory == null)
+        {
+            return;
+        }
+        var itemName = item.ItemName;
+        if (_itemFactory.IsStackItem(itemName))
+        {
+            _tradeInputWindow.Open(itemName, OnInputWindowAction);
+        }
+        else
+        {
+            _tradeInputWindow.OpenUniqueItem(itemName, OnInputWindowAction);
+        }
+    }
     private void OnConfirmTrade()
     {
         if (_trade.IsEmpty || Merchant == null)
@@ -103,27 +124,8 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         }
         Visible = false;
         _itemList.Clear();
+        _itemsContainer.Clear();
     }
-
-    private void OnItemClicked(long index, Vector2 vector2, long buttonIndex)
-    {
-        if ((int)buttonIndex != (int)MouseButtonMask.Left || _tradeInputWindow == null)
-        {
-            return;
-        }
-        var itemText = _itemList.GetItemText((int)index);
-        Item item = Item.Parse(itemText);
-        if (_itemFactory.IsStackItem(item.Name))
-        {
-            _tradeInputWindow.Open(item.Name, OnInputWindowAction);
-        }
-        else
-        {
-            _tradeInputWindow.OpenUniqueItem(item.Name, OnInputWindowAction);
-        }
-    }
-
-
 
     private void OnInputWindowAction(bool confirmed)
     {
@@ -243,10 +245,13 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
     private void RefreshItemList(List<Merchant.Item> items)
     {
         _itemList.Clear();
+        _itemsContainer.Clear();
         foreach (var item in items)
         {
             var icon = _iconReader.Get(item.IconId);
-            _itemList.AddItem(item.Name + "  " + item.Price, icon);
+            if (icon != null)
+                _itemsContainer.AddItem(item.Name, icon, item.Color, item.Price);
+            //_itemList.AddItem(item.Name + "  " + item.Price, icon);
         }
     }
 

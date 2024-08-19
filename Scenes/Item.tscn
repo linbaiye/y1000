@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwu4hdppidtua"]
+
+[ext_resource type="Script" path="res://Source/Control/Dialog/Item.cs" id="1_pvaax"]
+[ext_resource type="Texture2D" uid="uid://b557jvyog0gwn" path="res://sprite/item/000052.png" id="2_tgqmi"]
+
+[sub_resource type="Theme" id="Theme_1r13o"]
+default_font_size = 0
+
+[node name="Item" type="Panel"]
+custom_minimum_size = Vector2(0, 30)
+script = ExtResource("1_pvaax")
+
+[node name="DetailsContainer" type="VFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_1r13o")
+theme_override_constants/h_separation = 20
+
+[node name="IconContainer" type="CenterContainer" parent="DetailsContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="DetailsContainer/IconContainer"]
+layout_mode = 2
+texture = ExtResource("2_tgqmi")
+stretch_mode = 3
+
+[node name="Name" type="Label" parent="DetailsContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+text = "女子短裙"
+vertical_alignment = 1
+text_direction = 3
+
+[node name="Price" type="Label" parent="DetailsContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+text = "100"
+vertical_alignment = 1
+text_direction = 3

@@ -65,12 +65,12 @@ public class EntityFactory
             if (line.StartsWith("SELLITEM"))
             {
                 var s = line.Split(":")[1];
-                items[0].Add(new Merchant.Item(s, _itemDb.GetPrice(s), _itemDb.GetIconId(s)));
+                items[0].Add(new Merchant.Item(s, _itemDb.GetPrice(s), _itemDb.GetIconId(s), _itemDb.GetColor(s)));
             }
             else if (line.StartsWith("BUYITEM"))
             {
                 var s = line.Split(":")[1];
-                items[1].Add(new Merchant.Item(s, _itemDb.GetPrice(s), _itemDb.GetIconId(s)));
+                items[1].Add(new Merchant.Item(s, _itemDb.GetPrice(s), _itemDb.GetIconId(s), _itemDb.GetColor(s)));
             }
             else if (line.StartsWith("SELLIMAGE"))
             {
