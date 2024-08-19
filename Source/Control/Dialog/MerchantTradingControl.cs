@@ -172,8 +172,12 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         {
             return;
         }
-        var selectedItems = _itemList.GetSelectedItems();
-        LockItem(selectedItems);
+        var i = _itemsContainer.FindItem(item.ItemName);
+        if (i != null)
+        {
+            i.Lock("购买数量: " + _tradeInputWindow.Number);
+            AddToTotal(_tradeInputWindow.Number * i.Price);
+        }
     }
 
     private void LockItem(int[] indices)

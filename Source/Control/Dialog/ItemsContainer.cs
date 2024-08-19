@@ -9,8 +9,8 @@ public partial class ItemsContainer : ScrollContainer
 {
 
     private VBoxContainer _itemContainer;
-
     public event Action<Item>? ItemDoubleClicked;
+
     public override void _Ready()
     {
         _itemContainer = GetNode<VBoxContainer>("ItemContainer");
@@ -32,9 +32,16 @@ public partial class ItemsContainer : ScrollContainer
         item.Clicked += ItemClicked;
     }
 
-    public void DisableItem(string text)
+    public Item? FindItem(string itemName)
     {
-        
+        foreach (var item in _itemContainer.GetChildren().OfType<Item>())
+        {
+            if (item.ItemName.Equals(itemName))
+            {
+                return item;
+            }
+        }
+        return null;
     }
     
     private void ItemClicked(object? sender, SlotMouseEvent eventArgs)

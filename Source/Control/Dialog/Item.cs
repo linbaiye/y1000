@@ -14,8 +14,10 @@ public partial class Item : Panel
     private Label _name;
     
     private Label _price;
-
-    private int _number;
+    
+    private Label _lockedReason;
+    
+    private bool _locked;
 
     public event EventHandler<SlotMouseEvent>? Clicked;
     public override void _Ready()
@@ -24,12 +26,19 @@ public partial class Item : Panel
         _iconContainer = _detailsContainer.GetNode<CenterContainer>("IconContainer");
         _name = _detailsContainer.GetNode<Label>("Name");
         _price = _detailsContainer.GetNode<Label>("Price");
+        _lockedReason = _detailsContainer.GetNode<Label>("LockedReason");
     }
 
     public string ItemName => _name.Text;
 
+    public int Price => int.Parse(_price.Text);
+
     public void ToggleHighlight(bool highlight)
     {
+        if (_locked)
+        {
+            return;
+        }
         if (highlight)
         {
             AddThemeStyleboxOverride("panel", new StyleBoxFlat()
@@ -45,6 +54,10 @@ public partial class Item : Panel
 
     public override void _GuiInput(InputEvent inputEvent)
     {
+        if (_locked)
+        {
+            return;
+        }
         if (inputEvent.IsPressed() &&
             inputEvent is InputEventMouseButton mouseButton &&
             mouseButton.ButtonIndex == MouseButton.Left)
@@ -58,6 +71,10 @@ public partial class Item : Panel
 
     public void SetDetails(string name, Texture2D icon, int iconColor, int price)
     {
+        if (_locked)
+        {
+            return;
+        }
         _name.Text = name;
         _price.Text = price.ToString();
         var textureRect = _iconContainer.GetNode<TextureRect>("Icon");
@@ -66,6 +83,19 @@ public partial class Item : Panel
         {
             textureRect.Material = DyeShader.CreateShaderMaterial(iconColor);
         }
+    }
+
+    public void Lock(string text = "")
+    {
+        if (_locked) 
+            return;
+        _locked = true;
+        RemoveThemeStyleboxOverride("panel");
+        _lockedReason.Text = text;
+        AddThemeStyleboxOverride("panel", new StyleBoxFlat()
+        {
+            BgColor = new Color("4a4a4a")
+        });
     }
 
     public static Item Create()
