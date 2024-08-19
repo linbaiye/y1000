@@ -37,8 +37,9 @@ public class DyeShader
 
     private const float Max = 31;
 
-    public static ShaderMaterial CreateShaderMaterial(int colorIndex)
+    public static ShaderMaterial CreateShaderMaterial(int clrIndex)
     {
+        var colorIndex = clrIndex is < 0 or >= 256 ? 0 : clrIndex;
         var color = COLOR_TABLE[colorIndex * 2];
         var add = COLOR_TABLE[colorIndex * 2 + 1];
         var shader = ResourceLoader.Load<Shader>("res://Shaders/Dye.gdshader");

@@ -70,7 +70,7 @@ public partial class DropItemUI : NinePatchRect
 		}
 		else
 		{
-			_eventMediator?.NotifyTextArea("距离过远");
+			_eventMediator?.NotifyTextArea("距离过远。");
 			_currentEvent = null;
 		}
 	}

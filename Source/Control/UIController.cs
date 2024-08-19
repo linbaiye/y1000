@@ -73,6 +73,7 @@ public partial class UIController : CanvasLayer
         _dialogControl.Initialize(spriteRepository, _tradeInputWindow, eventMediator, itemFactory);
         _playerTradeWindow.Initialize(_tradeInputWindow, eventMediator);
         _mapView.Initialize(eventMediator);
+        _itemAttributeControl.Initialize(eventMediator);
     }
 
     public void DisplayTextMessage(TextMessage message)
@@ -141,16 +142,18 @@ public partial class UIController : CanvasLayer
         DisplayTextMessage(new TextMessage(text, TextMessage.TextLocation.DOWN));
     }
 
-    public void DropItem(DragInventorySlotEvent slotEvent, Vector2 mousePosition, Vector2I characterCoordinate)
+    public void DragItem(DragInventorySlotEvent slotEvent, Vector2 mousePosition, CharacterImpl character)
     {
         if (IsTrading())
         {
             DisplayTextMessage(TRADING_ERROR);
+            return;
         }
-        else
+        if (_itemAttributeControl.HandleDragEvent(slotEvent, character))
         {
-            _dropItemUi.OnDropItem(slotEvent, mousePosition, characterCoordinate);
+            return;
         }
+        _dropItemUi.OnDropItem(slotEvent, mousePosition, character.Coordinate);
     }
 
     public void DropItemOnPlayer(CharacterImpl character, MessageDrivenPlayer messageDrivenPlayer, int slot)

@@ -350,7 +350,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 		else
 		{
-			_uiController.DropItem(slotEvent, globalMousePosition, _character.Coordinate);
+			_uiController.DragItem(slotEvent, globalMousePosition, _character);
 		}
 	}
 
