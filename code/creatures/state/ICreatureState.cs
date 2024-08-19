@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using y1000.code.player;
+using y1000.Source.Animation;
+using y1000.Source.Creature;
 
-namespace y1000.code.creatures
+namespace y1000.code.creatures.state
 {
     public interface ICreatureState
     {
         Direction Direction { get; }
 
-        State State { get; }
-
-        int GetSpriteOffset();
+        CreatureState State { get; }
 
         void Move(Direction direction);
 
@@ -22,10 +18,16 @@ namespace y1000.code.creatures
 
         void Attack();
 
+        void Attack(Direction direction) { }
+
         void Hurt();
 
         void PlayAnimation();
 
         void Die();
+
+        OffsetTexture OffsetTexture(int animationSpriteNumber);
+
+        void Process(double delta) { }
     }
 }

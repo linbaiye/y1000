@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using y1000.Source.Creature;
 
 namespace y1000.code.creatures.state
 {
-    public class AbstractCreatureDieState : AbstractCreatureState
+    public abstract class AbstractCreatureDieState : AbstractCreatureState
     {
         private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new()
         {
@@ -23,12 +24,8 @@ namespace y1000.code.creatures.state
             creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(3, 0.2f, Godot.Animation.LoopModeEnum.None));
         }
 
-        public override State State => State.DIE;
+        protected override int SpriteOffset => SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 
-        public override int GetSpriteOffset()
-        {
-            return SPRITE_OFFSET.GetValueOrDefault(Direction, 1);
-        }
-
+        public override CreatureState State => CreatureState.DIE;
     }
 }

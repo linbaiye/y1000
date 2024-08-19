@@ -1,39 +1,130 @@
-[gd_scene load_steps=7 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=21 format=3 uid="uid://db0iclaskno1q"]
 
-[ext_resource type="Script" path="res://code/Game.cs" id="1_jbp1s"]
-[ext_resource type="PackedScene" uid="uid://ca1rxwb2uxu2c" path="res://character_body_2d.tscn" id="2_nolib"]
+[ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
-[ext_resource type="PackedScene" uid="uid://vg1lgwdiop8g" path="res://right_ui.tscn" id="4_j24ll"]
-[ext_resource type="PackedScene" uid="uid://doa5i8dejap1d" path="res://button_ui.tscn" id="5_3t2rd"]
-[ext_resource type="PackedScene" uid="uid://e8ttci8m45bv" path="res://monster.tscn" id="5_nmyyi"]
+[ext_resource type="Script" path="res://Source/Control/UIController.cs" id="3_akyoc"]
+[ext_resource type="PackedScene" uid="uid://7ghuvlfmi4pd" path="res://Scenes/RightSideUI.tscn" id="4_fqpt3"]
+[ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://bottom_ui.tscn" id="5_3t2rd"]
+[ext_resource type="PackedScene" uid="uid://bqv6d0i2cli8e" path="res://Scenes/DropItemUI.tscn" id="6_wxera"]
+[ext_resource type="Script" path="res://Source/Control/TradeInputWindow.cs" id="7_6qoal"]
+[ext_resource type="PackedScene" uid="uid://dj8hiigwray" path="res://Scenes/DialogWindow.tscn" id="7_syuii"]
+[ext_resource type="PackedScene" uid="uid://cqtmvg303wl2s" path="res://Scenes/LeftsideTextArea.tscn" id="9_0412u"]
+[ext_resource type="PackedScene" uid="uid://dw4kky7kku6qg" path="res://Scenes/ItemAttribute.tscn" id="10_xy80o"]
+[ext_resource type="PackedScene" uid="uid://bf5l5nu0lr8qr" path="res://Scenes/PlayerAttributeWindow.tscn" id="11_yghsv"]
+[ext_resource type="PackedScene" uid="uid://clr852egfmuqb" path="res://Scenes/TradePlayerWindow.tscn" id="12_mif0g"]
+[ext_resource type="Texture2D" uid="uid://cib0m65pj30hg" path="res://assets/test/monster.png" id="13_hn2ex"]
+[ext_resource type="Shader" path="res://MaleShadow.gdshader" id="13_klljd"]
+[ext_resource type="Script" path="res://Source/Control/Map/MapView.cs" id="13_xh10o"]
+[ext_resource type="PackedScene" uid="uid://bjjg8uukhy3s8" path="res://Scenes/MapNpcView.tscn" id="14_vdhs2"]
+[ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="16_ing8y"]
+[ext_resource type="PackedScene" uid="uid://b8qn25p71tho" path="res://assets/test/teleport.tscn" id="16_wmncn"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tknte"]
+shader = ExtResource("13_klljd")
+shader_parameter/deform = Vector2(1, 1)
+shader_parameter/offset = Vector2(5, 5)
+shader_parameter/modulate = null
 
 [node name="Game" type="Node2D"]
 z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
-script = ExtResource("1_jbp1s")
+script = ExtResource("1_yu5bc")
 
 [node name="MapLayer" parent="." instance=ExtResource("2_r4kyb")]
 
-[node name="Character" parent="." instance=ExtResource("2_nolib")]
-z_index = 2
-position = Vector2(1255.47, 1077.15)
-
-[node name="Camera2D" type="Camera2D" parent="Character"]
-z_as_relative = false
-
 [node name="UILayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_akyoc")
 
-[node name="RightUI" parent="UILayer" instance=ExtResource("4_j24ll")]
-
-[node name="ButtonUI" parent="UILayer" instance=ExtResource("5_3t2rd")]
-offset_left = 1.0
-offset_top = -196.0
-offset_right = 1.0
-offset_bottom = 2.0
+[node name="BottomUI" parent="UILayer" instance=ExtResource("5_3t2rd")]
 mouse_filter = 1
 
-[node name="Monster" parent="." instance=ExtResource("5_nmyyi")]
+[node name="RightSideUI" parent="UILayer" instance=ExtResource("4_fqpt3")]
+anchors_preset = -1
+anchor_left = 0.75
+anchor_bottom = 0.75
+offset_left = 5.0
+offset_top = 220.0
+offset_bottom = 29.0
+
+[node name="DropItemUI" parent="UILayer" instance=ExtResource("6_wxera")]
+visible = false
+
+[node name="InputWindow" parent="UILayer" instance=ExtResource("6_wxera")]
+script = ExtResource("7_6qoal")
+
+[node name="DialogUI" parent="UILayer" instance=ExtResource("7_syuii")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="LeftsideTextArea" parent="UILayer" instance=ExtResource("9_0412u")]
+offset_left = 3.0
+offset_top = 486.0
+offset_right = -775.0
+offset_bottom = -172.0
+mouse_filter = 2
+
+[node name="ItemAttribute" parent="UILayer" instance=ExtResource("10_xy80o")]
+offset_left = 383.0
+offset_top = 226.0
+offset_right = -385.0
+offset_bottom = -355.0
+
+[node name="PlayerAttributeWindow" parent="UILayer" instance=ExtResource("11_yghsv")]
+
+[node name="PlayerTradeWindow" parent="UILayer" instance=ExtResource("12_mif0g")]
+
+[node name="MapView" type="TextureRect" parent="UILayer"]
+z_index = 4
+offset_left = 282.0
+offset_top = 111.0
+offset_right = 742.0
+offset_bottom = 459.0
+texture = SubResource("CompressedTexture2D_ufimi")
+stretch_mode = 2
+script = ExtResource("13_xh10o")
+
+[node name="Character" parent="UILayer/MapView" instance=ExtResource("14_vdhs2")]
+z_index = 4
+layout_mode = 0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -12.18
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_tknte")
+position = Vector2(3120, 840)
+texture = ExtResource("13_hn2ex")
+centered = false
+
+[node name="Teleport" parent="." instance=ExtResource("16_wmncn")]
+visible = false
+z_index = 4
+position = Vector2(3080, 750)
+
+[node name="RuneTeleport" parent="." instance=ExtResource("16_wmncn")]
+visible = false
 z_index = 2
-texture_filter = 1
-position = Vector2(1401, 921)
+position = Vector2(3840, 1728)
+
+[node name="SoundPlayer1" type="AudioStreamPlayer" parent="."]
+script = ExtResource("16_ing8y")
+
+[node name="SoundPlayer2" type="AudioStreamPlayer" parent="."]
+script = ExtResource("16_ing8y")
+
+[node name="SoundPlayer3" type="AudioStreamPlayer" parent="."]
+script = ExtResource("16_ing8y")
+
+[node name="SoundPlayer4" type="AudioStreamPlayer" parent="."]
+script = ExtResource("16_ing8y")

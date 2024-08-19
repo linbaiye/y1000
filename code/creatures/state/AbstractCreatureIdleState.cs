@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using y1000.Source.Creature;
 
 namespace y1000.code.creatures.state
 {
     public abstract class AbstractCreatureIdleState : AbstractCreatureState
     {
-        private static readonly Dictionary<Direction, int> SPRITE_OFFSET = new()
+        private static readonly Dictionary<Direction, int> DEFAULT_SPRITE_OFFSET = new()
         {
             { Direction.UP, 18},
 			{ Direction.UP_RIGHT, 41},
@@ -19,17 +20,27 @@ namespace y1000.code.creatures.state
 			{ Direction.UP_LEFT, 179},
         };
 
+
+        private readonly Dictionary<Direction, int> spriteOffset;
+
         public AbstractCreatureIdleState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
-            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(5, 0.5f, Godot.Animation.LoopModeEnum.Linear));
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(5, 0.25f, Godot.Animation.LoopModeEnum.Pingpong));
+            spriteOffset = DEFAULT_SPRITE_OFFSET;
         }
 
-        public override State State => State.IDLE;
-
-        public override int GetSpriteOffset()
+        public AbstractCreatureIdleState(AbstractCreature creature, Direction direction, Dictionary<Direction, int> _spriteOffset,
+        int totalSrpite, float step, AbstractCreatureStateFactory stateFactory) :
+         base(creature, direction, stateFactory)
         {
-            return SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(totalSrpite, step, Godot.Animation.LoopModeEnum.Pingpong));
+            spriteOffset = _spriteOffset;
         }
+
+
+        public override CreatureState State => CreatureState.IDLE;
+
+        protected override int SpriteOffset => spriteOffset.GetValueOrDefault(Direction, -1);
 
         public override void Move(Direction direction)
         {

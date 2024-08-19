@@ -1,0 +1,206 @@
+[gd_scene load_steps=6 format=3 uid="uid://bf5l5nu0lr8qr"]
+
+[ext_resource type="Texture2D" uid="uid://cj3np7357yr60" path="res://assets/ui/player_attribute.png" id="1_d6a61"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_cdrvo"]
+[ext_resource type="Script" path="res://Source/Control/PlayerAttribute/PlayerAttributeWindow.cs" id="2_y6m1e"]
+[ext_resource type="Script" path="res://Source/Control/PlayerAttribute/PlayerAttributeGroup.cs" id="3_0d3v6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h3xdh"]
+
+[node name="PlayerAttributeWindow" type="NinePatchRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -700.0
+offset_bottom = -411.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_d6a61")
+script = ExtResource("2_y6m1e")
+
+[node name="Group1" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 68.0
+offset_right = 173.0
+offset_bottom = 314.0
+script = ExtResource("3_0d3v6")
+
+[node name="Attribute1" type="RichTextLabel" parent="Group1"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute2" type="RichTextLabel" parent="Group1"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute3" type="RichTextLabel" parent="Group1"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute4" type="RichTextLabel" parent="Group1"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute5" type="RichTextLabel" parent="Group1"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute6" type="RichTextLabel" parent="Group1"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute7" type="RichTextLabel" parent="Group1"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute8" type="RichTextLabel" parent="Group1"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute9" type="RichTextLabel" parent="Group1"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute10" type="RichTextLabel" parent="Group1"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Group2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 68.0
+offset_right = 279.0
+offset_bottom = 314.0
+script = ExtResource("3_0d3v6")
+
+[node name="Attribute1" type="RichTextLabel" parent="Group2"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute2" type="RichTextLabel" parent="Group2"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute3" type="RichTextLabel" parent="Group2"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute4" type="RichTextLabel" parent="Group2"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute5" type="RichTextLabel" parent="Group2"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute6" type="RichTextLabel" parent="Group2"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute7" type="RichTextLabel" parent="Group2"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute8" type="RichTextLabel" parent="Group2"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute9" type="RichTextLabel" parent="Group2"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Attribute10" type="RichTextLabel" parent="Group2"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdrvo")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 282.0
+offset_top = 314.0
+offset_right = 314.0
+offset_bottom = 335.0
+theme_override_fonts/font = ExtResource("2_cdrvo")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h3xdh")
+text = "关闭"

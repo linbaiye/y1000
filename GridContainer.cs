@@ -1,11 +1,9 @@
+using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Security.Principal;
 using y1000.code.item;
+
+namespace y1000;
 
 public partial class GridContainer : Godot.GridContainer
 {
@@ -16,26 +14,26 @@ public partial class GridContainer : Godot.GridContainer
 		//all[0].Connect("gui_input", Callable.From<InputEvent, int>((e, i) => GD.Print(0)));
 		//Action<InputEvent> action = (e) => GD.Print("event " + 1);
 		/*int k = 0;
-			((PanelContainer)all[0]).GuiInput += (e) => {
-				GD.Print("world");
-				ButtonInput(e, k);
-			};
-			++k;*/
+		((PanelContainer)all[0]).GuiInput += (e) => {
+			GD.Print("world");
+			ButtonInput(e, k);
+		};
+		++k;*/
 		int i = 0;
 		while (i < all.Count)
 		{
 			Array<int> attr = new Array<int>(){i};
-			((InventorySlot)all[i]).GuiInput += (e) => ButtonInput(e, attr);
+			((code.control.InventorySlot)all[i]).GuiInput += (e) => ButtonInput(e, attr);
 			i++;
 		}
 	}
 
 	/*for (int i = 0; i < all.Count; i++)
-	{
-		var c = all[i];
-		((PanelContainer)all[i]).GuiInput += (e) => ButtonInput(e, new Godot.Collections.Array(){i});
-		//((PanelContainer)all[1]).GuiInput += (e) => ButtonInput(e, i);
-	}*/
+{
+	var c = all[i];
+	((PanelContainer)all[i]).GuiInput += (e) => ButtonInput(e, new Godot.Collections.Array(){i});
+	//((PanelContainer)all[1]).GuiInput += (e) => ButtonInput(e, i);
+}*/
 
 
 	private class ItemContainerNode
@@ -44,16 +42,16 @@ public partial class GridContainer : Godot.GridContainer
 
 		private readonly int deepth;
 
-        public ItemContainerNode(IItemContainer container, int deepth)
-        {
-            this.container = container;
-            this.deepth = deepth;
-        }
+		public ItemContainerNode(IItemContainer container, int deepth)
+		{
+			this.container = container;
+			this.deepth = deepth;
+		}
 
 		public IItemContainer Container => container;
 
 		public int Deepth => deepth;
-    }
+	}
 
 
 	private void CollectContainers(Node node, int depth, List<ItemContainerNode> containers)

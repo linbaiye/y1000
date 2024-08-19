@@ -1,0 +1,219 @@
+syntax = "proto3";
+package Source.Networking.Protobuf;
+
+
+message PositionPacket {
+  int32 x = 1;
+  int32 y = 2;
+  int32 direction = 3;
+  int64 id = 4;
+  int32 type = 5;
+  int32 state = 6;
+}
+
+message InputResponsePacket {
+  int64 sequence = 1;
+  PositionPacket positionPacket = 2;
+}
+
+message InputPacket {
+  int32 type = 1;
+  int64 sequence = 2;
+  int32 clickedDirection = 3;
+}
+
+message ClickPacket {
+  int64 id = 1;
+}
+
+message ClickItemPacket {
+  int64 id = 1;
+}
+
+message PlayerLoginPacket {
+  string token = 1;
+}
+
+message CreatureAttackEventPacket {
+  int64 id = 1;
+  int32 direction = 2;
+  int32 state = 3;
+  bool player = 4;
+  int32 x = 5;
+  int32 y = 6;
+  optional int64 targetId = 7;
+}
+
+message CreatureHurtEventPacket {
+  int64 id = 1;
+  int32 direction = 2;
+  int32 x = 3;
+  int32 y = 4;
+  int32 afterHurtState = 5;
+}
+
+message ChangeStatePacket {
+  int64 id = 1;
+  int32 state = 2;
+}
+
+message ChangeWeaponPacket {
+  int64 id = 1;
+  string name = 2;
+  int32 state = 3;
+}
+
+message MoveEventPacket {
+  InputPacket input = 1;
+  int32 happenedAtX = 2;
+  int32 happenedAtY = 3;
+}
+
+message ClientAttackEventPacket {
+  int64 sequence = 1;
+  int64 targetId = 2;
+  int32 state = 3;
+  int32 direction = 4;
+}
+
+message ClientAttackResponsePacket {
+  int64 sequence = 1;
+  bool accepted = 2;
+}
+
+message SwapInventorySlotPacket {
+  int32 slot1 = 1;
+  int32 slot2 = 2;
+}
+
+message DoubleClickInventorySlotPacket {
+  int32 slot = 1;
+}
+
+message DropItemPacket {
+  int32 slot = 1;
+  int32 x = 2;
+  int32 y = 3;
+  int32 number = 4;
+  int32 coordinateX = 5;
+  int32 coordinateY = 6;
+}
+
+message DropItemConfirmPacket {
+  int32 slot = 1;
+  int32 numberLeft = 2;
+}
+
+
+message ShowItemPacket {
+  int32 id = 1;
+  int32 x = 2;
+  int32 y = 3;
+  optional int32 number = 4;
+  int32 coordinateX = 5;
+  int32 coordinateY = 6;
+  string name = 7;
+  int32 itemType = 8;
+}
+
+message CharacterChangeWeaponPacket {
+  string name = 1;
+  int32 affectedSlot = 2;
+  optional string slotNewItemName = 4;
+  optional int32 slotNewItemType = 5;
+  optional string attackKungFuName = 6;
+  optional int32 attackKungFuLevel = 7;
+  optional int32 attackKungFuType = 8;
+  int32 state = 9;
+}
+
+message CharacterKungFuPacket {
+  string attackKungFuName = 1;
+  int32 attackKungFuLevel = 2;
+  int32 attackKungFuType = 3;
+}
+
+message ClientPacket {
+  oneof Type {
+    MoveEventPacket moveEventPacket = 1;
+    ClickPacket clickPacket = 2;
+    PlayerLoginPacket loginPacket = 3;
+    ClientAttackEventPacket attackEventPacket = 4;
+    SwapInventorySlotPacket swapInventorySlotPacket = 5;
+    DoubleClickInventorySlotPacket doubleClickInventorySlotPacket = 6;
+    DropItemPacket dropItem = 7;
+  }
+}
+
+message InterpolationPacket {
+  int32 state = 2;
+  int32 elapsedMillis = 5;
+  int32 direction = 7;
+  int32 x = 8;
+  int32 y = 9;
+}
+
+message InterpolationsPacket {
+  repeated InterpolationPacket interpolations = 1;
+}
+
+message InventoryItemPacket {
+  string name = 2;
+  int32 shapeId = 3;
+  int32 itemType = 4;
+  int32 slotId = 5;
+  optional int32 number = 6;
+}
+
+message LoginPacket {
+  int32 x = 1;
+  int32 y = 2;
+  int64 id = 3;
+  optional string weaponName = 4;
+  int32 attackKungFuLevel = 5;
+  string attackKungFuName = 6;
+  optional int32 footKungFuLevel = 7;
+  optional string footKungFuName = 8;
+  repeated InventoryItemPacket inventoryItems = 9;
+  int32 attackKungFuType = 10;
+  string name = 11;
+}
+
+message Packet {
+  oneof TypedPacket {
+    PositionPacket positionPacket = 1;
+    CreatureInterpolationPacket creatureInterpolation = 2;
+    LoginPacket loginPacket = 4;
+    InterpolationsPacket interpolations = 5;
+    InputResponsePacket responsePacket = 6;
+    PlayerInterpolationPacket playerInterpolation = 7;
+    RemoveEntityPacket removeEntity = 8;
+    ClientAttackResponsePacket attackEventResponsePacket = 9;
+    CreatureAttackEventPacket attackEventPacket = 10;
+    CreatureHurtEventPacket hurtEventPacket = 11;
+    ChangeStatePacket changeStatePacket = 12;
+    SwapInventorySlotPacket swapInventorySlotPacket = 13;
+    CharacterChangeWeaponPacket characterChangeWeaponPacket = 14;
+    ChangeWeaponPacket changeWeaponPacket = 15;
+    DropItemConfirmPacket dropItem = 16;
+    ShowItemPacket showItem = 17;
+  }
+}
+
+message CreatureInterpolationPacket {
+  InterpolationPacket interpolation = 1;
+  int64 id = 2;
+  string name = 3;
+}
+
+message PlayerInterpolationPacket {
+  InterpolationPacket interpolation = 1;
+  int64 id = 2;
+  bool male = 3;
+  string name = 4;
+  optional string weaponName = 5;
+}
+
+message RemoveEntityPacket {
+  int64 id = 1;
+}

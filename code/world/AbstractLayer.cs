@@ -1,21 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Godot;
-using y1000.code;
-using y1000.code.world;
+using y1000.Source.Map;
+using y1000.Source.Util;
+
+namespace y1000.code.world;
 
 public abstract partial class AbstractLayer : Node2D
 {
-    protected void Layout(string layer)
-    {
-        var gameMap = GameMap.Load("res://assets/maps/prison/prison.map");
-        gameMap?.ForeachCell((cell, x, y) => Layout("object".Equals(layer) ? cell.ObjectId : cell.RoofId, x, y, layer));
-    }
+	protected void Layout(string layer)
+	{
+		var gameMap = GameMap.Load("res://assets/maps/prison/prison.map");
+		gameMap?.ForeachCell((cell, x, y) => Layout("object".Equals(layer) ? cell.ObjectId : cell.RoofId, x, y, layer));
+	}
 
-    private void Layout(int objectId, int x, int y, string layer)
-    {
+	private void Layout(int objectId, int x, int y, string layer)
+	{
 		var dirpath = "res://assets/maps/prison/" + layer + "/" + objectId;
 		var imagePath = dirpath + "/image.png";
 		if (!Godot.FileAccess.FileExists(imagePath))
@@ -30,8 +28,8 @@ public abstract partial class AbstractLayer : Node2D
 		{
 			var jsonString = fileAccess.GetAsText();
 			Object2Json json = Object2Json.FromJsonString(jsonString);
-			int xPos = x * VectorUtil.TILE_SIZE_X;
-			int yPos = y * VectorUtil.TILE_SIZE_Y;
+			int xPos = x * VectorUtil.TileSizeX;
+			int yPos = y * VectorUtil.TileSizeY;
 			Sprite2D objectSprite = new Sprite2D() { Texture = texture, Centered = false, Position = new Vector2(xPos, yPos), Offset = new Vector2(json.X, json.Y), YSortEnabled = true};
 			AddChild(objectSprite);
 		}

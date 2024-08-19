@@ -1,0 +1,74 @@
+[gd_scene load_steps=13 format=3 uid="uid://ck0wrnm4ob8gj"]
+
+[ext_resource type="Script" path="res://code/character/Character.cs" id="1_nlcos"]
+[ext_resource type="Script" path="res://code/creatures/CreatureAnimationPlayer.cs" id="2_2338q"]
+[ext_resource type="Shader" path="res://MaleShadow.gdshader" id="3_rxwdt"]
+[ext_resource type="Script" path="res://code/player/PlayerBodySprite.cs" id="4_altaf"]
+[ext_resource type="Script" path="res://code/player/HandSprite.cs" id="4_xfi8r"]
+[ext_resource type="Texture2D" uid="uid://bk1xwhmelwsbl" path="res://sprite/white.png" id="5_i4t2q"]
+[ext_resource type="PackedScene" uid="uid://cjmh77c4p87tv" path="res://scene/body_hover_rect.tscn" id="5_jjc3p"]
+[ext_resource type="Script" path="res://code/player/ChestSprite.cs" id="7_l1fks"]
+[ext_resource type="Script" path="res://code/player/HatSprite.cs" id="8_6lq4u"]
+[ext_resource type="Script" path="res://code/player/TrousersSprite.cs" id="9_r27bl"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6swyu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ts8u"]
+shader = ExtResource("3_rxwdt")
+shader_parameter/deform = Vector2(0.5, 1)
+shader_parameter/offset = Vector2(0, 4)
+shader_parameter/modulate = Color(0, 0, 0, 0.509804)
+
+[node name="Player" type="Node2D"]
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(177, 154)
+script = ExtResource("1_nlcos")
+metadata/spriteNumber = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6swyu")
+}
+script = ExtResource("2_2338q")
+metadata/test = false
+
+[node name="Body" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_6ts8u")
+centered = false
+script = ExtResource("4_altaf")
+
+[node name="BodyHoverRect" parent="Body" instance=ExtResource("5_jjc3p")]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+clip_contents = true
+offset_right = 32.0
+offset_bottom = 24.0
+texture = ExtResource("5_i4t2q")
+
+[node name="Hat" type="Sprite2D" parent="."]
+y_sort_enabled = true
+centered = false
+script = ExtResource("8_6lq4u")
+
+[node name="Trousers" type="Sprite2D" parent="."]
+y_sort_enabled = true
+centered = false
+script = ExtResource("9_r27bl")
+
+[node name="Chest" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+centered = false
+script = ExtResource("7_l1fks")
+
+[node name="Hand" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+centered = false
+script = ExtResource("4_xfi8r")
+metadata/frame = false

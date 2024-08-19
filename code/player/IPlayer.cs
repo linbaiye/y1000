@@ -4,20 +4,41 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using y1000.code.creatures;
+using y1000.code.entity.equipment.chest;
+using y1000.code.entity.equipment.hat;
+using y1000.code.entity.equipment.trousers;
+using y1000.code.entity.equipment.weapon;
+using y1000.code.player.skill;
+using y1000.Source.Animation;
 
 namespace y1000.code.player
 {
     public interface IPlayer : ICreature
     {
-        AnimationPlayer AnimationPlayer { get; }
+        void Sit();
 
-        void ChangeState(IPlayerState newState);
+        void Bow();
 
+        bool IsMale();
 
-        void Move(Vector2 mousePosition);
+        OffsetTexture? ChestTexture { get; }
 
-        void StopMove();
+        ChestArmor? ChestArmor { get; set; }
 
-        void Attack(ICreature target);
+        OffsetTexture? HatTexture { get; }
+
+        Hat? Hat { get; set; }
+
+        Trousers? Trousers { get; set; }
+
+        OffsetTexture? TrousersTexture { get; }
+
+        IWeapon? Weapon {get; set;}
+
+        OffsetTexture? WeaponTexture { get; }
+
+        IBufa? Bufa {get;}
+
+        void PressBufa(IBufa bufa);
     }
 }

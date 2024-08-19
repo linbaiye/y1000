@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.Source.Animation;
 
 namespace y1000.code.player
 {
     public abstract partial class AbstractBodyPart : Sprite2D
     {
-        protected abstract PositionedTexture PositionedTexture {get;}
+        protected abstract OffsetTexture OffsetTexture {get;}
 
         public override void _Process(double delta)
         {
-            PositionedTexture positionedTexture = PositionedTexture;
+            OffsetTexture positionedTexture = OffsetTexture;
             Offset = positionedTexture.Offset;
             Texture = positionedTexture.Texture;
         }

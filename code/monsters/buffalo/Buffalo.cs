@@ -1,34 +1,56 @@
+using System.Drawing;
 using Godot;
-using System;
-using y1000.code;
-using y1000.code.creatures;
 using y1000.code.creatures.state;
-using y1000.code.monsters;
-using y1000.code.player;
+using y1000.Source.Animation;
+using y1000.Source.Creature;
+using y1000.Source.Sprite;
+using AbstractCreature = y1000.code.creatures.AbstractCreature;
+
+namespace y1000.code.monsters.buffalo;
 
 public partial class Buffalo : AbstractCreature
 {
+
+	private AtzSprite? spriteContainer;
+
+	private Point initCoordinate = Point.Empty;
+
+	private long id;
+
+	private Direction initDirection;
+
+	private void Initiliaze(Point i, AtzSprite atzSprite, long id, Direction direction)
+	{
+		initCoordinate = i;
+		this.id = id;
+		spriteContainer = atzSprite;
+		initDirection = direction;
+	}
+
+	public override long Id => id;
+
 	public override void _Ready()
 	{
-		Setup(MonsterNames.BUFFALO);
-		ChangeState(new SimpleCreatureIdleState(this, Direction.DOWN));
+		SetupAnimationPlayer();
+		ChangeState(new SimpleCreatureIdleState(this, initDirection));
+		ZIndex = 2;
+		YSortEnabled = true;
+		ZAsRelative = true;
+		Coordinate = initCoordinate;
 		CurrentState.PlayAnimation();
-		Position = Position.Snapped(VectorUtil.TILE_SIZE);
 	}
 
-	public static Buffalo Load()
+
+	public static Buffalo Load(Point coordinate, long id, Direction direction)
 	{
-		PackedScene scene = ResourceLoader.Load<PackedScene>("res://monster.tcsn");
+		PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/Monster.tscn");
 		Buffalo buffalo = scene.Instantiate<Buffalo>();
-		buffalo._Ready();
+		AtzSprite atzSprite = AtzSprite.LoadOffsetMonsterSprites(MonsterNames.BUFFALO);
+		buffalo.Initiliaze(coordinate, atzSprite, id, direction);
 		return buffalo;
 	}
-
-    public override void _Process(double delta)
-    {
-		base._Process(delta);
-		PositionedTexture texture = BodyTexture;
-		GetNode<TextureRect>("Hover").Position = new (texture.Offset.X, 0);
-    }
+	public static Buffalo Load(Point coordinate, long id)
+	{
+		return Load(coordinate, id, Direction.DOWN);
+	}
 }
-

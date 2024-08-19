@@ -7,7 +7,7 @@ using y1000.code.creatures;
 
 namespace y1000.code.player
 {
-    public class AttackingState : AbstractPlayerState
+    /*public class AttackingState : AbstractPlayerState
     {
         private static readonly Dictionary<int, Dictionary<Direction, int>> UNARMED_SPRITE_OFFSET = new Dictionary<int, Dictionary<Direction, int>>()
         {
@@ -74,8 +74,8 @@ namespace y1000.code.player
             SetupAnimations();
             actionGroup = RANDOM.Next(2);
             string animationName = GetAnimationName();
-            trackIdx = Character.AnimationPlayer.RegisterCallback(animationName, 
-            actionGroup == 0 ? 0.3 : 0.6, OnHit);
+            //trackIdx = Character.AnimationPlayer.RegisterCallback(animationName, 
+            //actionGroup == 0 ? 0.3 : 0.6, OnHit);
             Character.AnimationPlayer.Play(animationName);
         }
 
@@ -132,7 +132,7 @@ namespace y1000.code.player
 
         public override State State => State.ATTACKING;
 
-        public override PositionedTexture BodyTexture
+        public override OffsetTexture BodyTexture
         {
             get
             {
@@ -141,19 +141,20 @@ namespace y1000.code.player
                 switch (weapon)
                 {
                     case Weapon.SWORD:
-                        container = SpriteContainer.LoadMaleCharacterSprites("N00");
+                        container = SpriteContainer.LoadMalePlayerSprites("N00");
                         spriteGroup = SWORD_SPRITE_OFFSET;
                         break;
                     default:
-                        container = SpriteContainer.LoadMaleCharacterSprites("N01");
+                        container = SpriteContainer.LoadMalePlayerSprites("N01");
                         spriteGroup = UNARMED_SPRITE_OFFSET;
                         break;
                 }
-                return container.Get(spriteGroup.GetValueOrDefault(actionGroup).GetValueOrDefault(Direction) + Character.PictureNumber);
+                throw new NotSupportedException();
+                //return container.Get(spriteGroup.GetValueOrDefault(actionGroup).GetValueOrDefault(Direction) + Character.PictureNumber);
             }
         }
 
-        public override PositionedTexture HandTexture => throw new NotImplementedException();
+        public override OffsetTexture HandTexture => throw new NotImplementedException();
 
 
         public override void Process(double delta)
@@ -163,9 +164,13 @@ namespace y1000.code.player
 
         public override void OnAnimationFinished(StringName animationName) 
         {
-            Character.AnimationPlayer.DeregisterCallback(GetAnimationName(), trackIdx);
+            //Character.AnimationPlayer.DeregisterCallback(GetAnimationName(), trackIdx);
             Character.ChangeState(new EnfightState(Character, Direction));
         }
 
-    }
+        public override OffsetTexture OffsetTexture(int animationSpriteNumber)
+        {
+            throw new NotImplementedException();
+        }
+    }*/
 }

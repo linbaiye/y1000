@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace y1000.code;
 
 public partial class Enemy : Area2D
 {

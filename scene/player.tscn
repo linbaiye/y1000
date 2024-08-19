@@ -1,0 +1,112 @@
+[gd_scene load_steps=19 format=3 uid="uid://duo0butuerf3j"]
+
+[ext_resource type="Script" path="res://Source/Player/PlayerImpl.cs" id="1_68hen"]
+[ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_1av6c"]
+[ext_resource type="Script" path="res://Source/Player/ChestSprite.cs" id="3_6xxhi"]
+[ext_resource type="Script" path="res://Source/Player/HairSprite.cs" id="3_50fj6"]
+[ext_resource type="Script" path="res://Source/Player/Hand.cs" id="3_b4kwg"]
+[ext_resource type="Script" path="res://Source/Player/TrouserSprite.cs" id="3_yqfac"]
+[ext_resource type="Script" path="res://Source/Player/LeftWristSprite.cs" id="5_2ywke"]
+[ext_resource type="Script" path="res://Source/Player/RightWristSprite.cs" id="6_b4hi7"]
+[ext_resource type="Script" path="res://Source/Player/ClothingSprite.cs" id="6_ousk6"]
+[ext_resource type="Script" path="res://Source/Player/HatSprite.cs" id="6_vu6ta"]
+[ext_resource type="Script" path="res://Source/Player/BootSprite.cs" id="8_1757e"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="11_0mhdp"]
+[ext_resource type="Script" path="res://Source/Player/AttackEffectSprite.cs" id="11_vx863"]
+[ext_resource type="Script" path="res://Source/Player/KungFuTip.cs" id="12_r6g6t"]
+[ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="15_3adja"]
+[ext_resource type="PackedScene" uid="uid://bqjthq3o0r0ot" path="res://Scenes/HealthBar.tscn" id="15_7nysb"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p7g52"]
+blend_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51gj6"]
+bg_color = Color(0, 0, 0, 0.415686)
+
+[node name="player" type="Node2D"]
+z_index = 3
+z_as_relative = false
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("1_68hen")
+
+[node name="Body" parent="." instance=ExtResource("2_1av6c")]
+
+[node name="Trouser" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+centered = false
+script = ExtResource("3_yqfac")
+
+[node name="Boot" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+centered = false
+script = ExtResource("8_1757e")
+
+[node name="LeftWrist" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+centered = false
+script = ExtResource("5_2ywke")
+
+[node name="RightWrist" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+centered = false
+script = ExtResource("6_b4hi7")
+
+[node name="Clothing" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+centered = false
+script = ExtResource("6_ousk6")
+
+[node name="Chest" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+centered = false
+script = ExtResource("3_6xxhi")
+
+[node name="Hand" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+centered = false
+script = ExtResource("3_b4kwg")
+
+[node name="Hair" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+centered = false
+script = ExtResource("3_50fj6")
+
+[node name="Hat" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+centered = false
+script = ExtResource("6_vu6ta")
+
+[node name="AttackEffect" type="Sprite2D" parent="."]
+y_sort_enabled = true
+material = SubResource("CanvasItemMaterial_p7g52")
+centered = false
+script = ExtResource("11_vx863")
+
+[node name="KungFuTip" type="Label" parent="."]
+z_index = 1
+offset_left = 20.0
+offset_top = -72.0
+offset_right = 13.75
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("11_0mhdp")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_51gj6")
+horizontal_alignment = 1
+script = ExtResource("12_r6g6t")
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+script = ExtResource("15_3adja")
+
+[node name="HealthBar" parent="." instance=ExtResource("15_7nysb")]

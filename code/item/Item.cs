@@ -1,8 +1,7 @@
-using Godot;
-using System;
 using System.IO;
-using y1000.code.item;
+using Godot;
 
+namespace y1000.code.item;
 
 public partial class Item : TextureRect, IItem
 {
@@ -13,9 +12,9 @@ public partial class Item : TextureRect, IItem
 		Texture = texture;
 	}
 
-    public string ItemName => "新罗宝剑";
+	public string ItemName => "新罗宝剑";
 
-    public static Item Load(string name)
+	public static Item Load(string name)
 	{
 		var texture = ResourceLoader.Load("res://sprite/item/" + name + ".png") as Texture2D;
 		if (texture == null)

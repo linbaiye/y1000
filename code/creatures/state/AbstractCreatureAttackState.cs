@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using y1000.Source.Creature;
 
 namespace y1000.code.creatures.state
 {
@@ -24,17 +25,14 @@ namespace y1000.code.creatures.state
             {Direction.UP_LEFT, 168}
         };
 
-        public override State State => State.ATTACKING;
+        public override CreatureState State => CreatureState.ATTACK;
 
         public override void OnAnimationFinised()
         {
             StopAndChangeState(StateFactory.CreateIdleState(Creature));
         }
 
-        public override int GetSpriteOffset()
-        {
-            return SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
-        }
+        protected override int SpriteOffset => SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
 
         public override void Hurt()
         {

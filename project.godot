@@ -12,8 +12,12 @@ config_version=5
 
 config/name="y1000"
 run/main_scene="res://game.tscn"
-config/features=PackedStringArray("4.1", "C#", "Forward Plus")
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+LogInit="*res://Source/LogInit.cs"
 
 [display]
 
@@ -29,6 +33,10 @@ project/assembly_name="y1000"
 [editor_plugins]
 
 enabled=PackedStringArray()
+
+[gui]
+
+theme/custom_font="res://fonts/SweiSpringSugarCJKtc-Regular.ttf"
 
 [input]
 
@@ -48,6 +56,11 @@ attack={
 ]
 }
 
+[physics]
+
+common/physics_jitter_fix=0.0
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_vertices_to_pixel=true

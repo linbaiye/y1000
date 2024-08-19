@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 using y1000.code.item;
 
-namespace y1000.code
+namespace y1000.code.control
 {
 
 	public partial class Inventory : Godot.GridContainer

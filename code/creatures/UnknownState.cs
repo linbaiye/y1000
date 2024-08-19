@@ -3,45 +3,28 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using y1000.code.creatures.state;
+using y1000.Source.Animation;
+using y1000.Source.Creature;
+using y1000.Source.Sprite;
 
 namespace y1000.code.creatures
 {
-    public partial class UnknownState : AbstractCreatureState
+    public class UnknownState : AbstractCreatureState
     {
         public static readonly UnknownState INSTANCE = new UnknownState();
 
-        private partial class UnknownCreature : AbstractCreature
-        {
-
-        }
-
-        private static readonly UnknownCreature UNKNOWN_CREATURE = new UnknownCreature();
+        private static readonly UnknowCreature UNKNOWN_CREATURE = new UnknowCreature();
 
         public UnknownState() : base(UNKNOWN_CREATURE, Direction.DOWN)
         {
         }
 
-        public override State State => throw new NotImplementedException();
+        public override CreatureState State => throw new NotImplementedException();
 
-        public override int GetSpriteOffset()
-        {
-            throw new NotImplementedException();
-        }
 
-        public override void Move(Direction direction)
-        {
-            throw new NotImplementedException();
-        }
+        protected override AtzSprite AtzSprite => throw new NotImplementedException();
 
-        public override void Turn(Direction newDirection)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Hurt()
-        {
-            throw new NotImplementedException();
-        }
+        protected override int SpriteOffset => throw new NotImplementedException();
     }
-
 }

@@ -1,6 +1,7 @@
 using Godot;
-using System;
 using y1000.code.item;
+
+namespace y1000.code.control;
 
 public partial class GameHud : Control
 {
@@ -23,9 +24,9 @@ public partial class GameHud : Control
 	}
 
 
-    public override bool _CanDropData(Vector2 atPosition, Variant data)
-    {
-		IItem item = data.As<Item>();
+	public override bool _CanDropData(Vector2 atPosition, Variant data)
+	{
+		IItem item = data.As<item.Item>();
 		if (item == null)
 		{
 			return false;
@@ -33,12 +34,12 @@ public partial class GameHud : Control
 		return true;
 	}
 
-    public override void _DropData(Vector2 atPosition, Variant data)
-    {
+	public override void _DropData(Vector2 atPosition, Variant data)
+	{
 		if (!_CanDropData(atPosition, data))
 			return;
 
-		var item = data.As<Item>();
+		var item = data.As<item.Item>();
 		if (item.GetParent() is IItemContainer container)
 		{
 			container.RemoveItem(item);

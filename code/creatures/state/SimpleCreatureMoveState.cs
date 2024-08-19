@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using y1000.Source.Animation;
+using y1000.Source.Creature;
+using y1000.Source.Sprite;
 
 namespace y1000.code.creatures.state
 {
@@ -10,6 +13,21 @@ namespace y1000.code.creatures.state
         public SimpleCreatureMoveState(AbstractCreature creature, Direction direction) : base(creature, direction)
         {
 
+        }
+
+        protected override AtzSprite AtzSprite => ((SimpleCreature)Creature).AtzSprite;
+
+        public override CreatureState State => CreatureState.WALK;
+
+        public override void OnAnimationFinised()
+        {
+            UpdateCooridnate();
+            StopAndChangeState(StateFactory.CreateIdleState(Creature));
+        }
+
+        public override void Hurt()
+        {
+            StopAndChangeState(StateFactory.CreateHurtState(Creature));
         }
     }
 }

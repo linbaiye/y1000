@@ -2,10 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Godot;
 using y1000.code.creatures.state;
+using y1000.code.entity;
 using y1000.code.player;
+using y1000.code.util;
+using y1000.Source.Animation;
+using y1000.Source.Creature;
+using y1000.Source.Entity;
+using y1000.Source.Networking.Server;
+using y1000.Source.Util;
 
 namespace y1000.code.creatures
 {
@@ -15,38 +23,42 @@ namespace y1000.code.creatures
 
         private ICreatureState currentState = UnknownState.INSTANCE;
 
-        private static readonly AnimationPlayer NULL_PLAYER = new();
+        private static readonly CreatureAnimationPlayer NULL_PLAYER = new();
 
-        private AnimationPlayer animationPlayer;
+        private static readonly Rect2I EMPTY = new (0, 0, 0, 0);
 
-	    private SpriteContainer spriteContainer = SpriteContainer.EmptyContainer;
+        private CreatureAnimationPlayer animationPlayer;
 
+        public Point coordinate;
+
+        private string name = "test";
+        private Vector2I coordinate1;
 
         protected AbstractCreature()
         {
             animationPlayer = NULL_PLAYER;
         }
-
-        public Point Coordinate
-        {
+        
+        public Point Coordinate {
             get
             {
-                var t = Position / VectorUtil.TILE_SIZE;
-                return new Point((int)t.X, (int)t.Y);
+                return coordinate;
+            }
+            set
+            {
+                coordinate = value;
+                Position = coordinate.CoordinateToPixel();
             }
         }
 
-        protected void Setup(string spriteName)
+        public string EntityName  => name;
+
+        protected void SetupAnimationPlayer()
         {
-            // Customing AnimaationPlayer might be a better idea.
-            animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
             SetMeta("spriteNumber", 0);
-            spriteContainer= SpriteContainer.LoadSprites(spriteName);
-		    Position = Position.Snapped(VectorUtil.TILE_SIZE);
+            animationPlayer = GetNode<CreatureAnimationPlayer>("AnimationPlayer");
             animationPlayer.AnimationFinished += OnAnimationFinised;
         }
-
-
 
         internal void ChangeState(ICreatureState newState)
         {
@@ -54,18 +66,12 @@ namespace y1000.code.creatures
             currentState.PlayAnimation();
         }
 
-        public State State => currentState.State;
+
+        protected int SpriteNumber => (int)GetMeta("spriteNumber");
 
         public Direction Direction => currentState.Direction;
 
-        public PositionedTexture BodyTexture
-        {
-            get
-            {
-                int nr = (int)GetMeta("spriteNumber");
-                return spriteContainer.Get(currentState.GetSpriteOffset() + nr);
-            }
-        }
+        public OffsetTexture BodyTexture => CurrentState.OffsetTexture(SpriteNumber);
 
         public void Move(Direction direction)
         {
@@ -76,17 +82,19 @@ namespace y1000.code.creatures
 
         public ICreatureState CurrentState => currentState;
 
+        public abstract long Id { get; }
+
+        Vector2I IEntity.Coordinate => coordinate1;
+
+
         public override void _Process(double delta)
         {
-            if (CurrentState is AbstractCreatureMoveState moveState)
-            {
-                moveState.Process(delta);
-            }
+            CurrentState.Process(delta);
         }
-
 
         protected void OnAnimationFinised(StringName name)
         {
+            LOG.Debug("Animation finished.");
             CurrentState.OnAnimationFinised();
         }
 
@@ -110,21 +118,29 @@ namespace y1000.code.creatures
             CurrentState.Die();
         }
 
-        public Rectangle CollisionRect()
+        public Rect2I HoverRect()
         {
-            var p = Coordinate;
-            return new Rectangle(VectorUtil.TILE_SIZE_X * p.X - 16, VectorUtil.TILE_SIZE_Y * p.Y, VectorUtil.TILE_SIZE_X, VectorUtil.TILE_SIZE_Y);
+            foreach (var child in GetChildren())
+            {
+                if (child is ICreatureBodySprite creatureBody)
+                {
+                    return creatureBody.HoverRect();
+                }
+            }
+            return EMPTY;
         }
 
-        public long Id()
-        {
-            throw new NotImplementedException();
-        }
-
+ 
         public void Remove()
         {
             QueueFree();
         }
 
+        public Direction DirectionTo(ICreature another)
+        {
+            var anotherBody = ((AbstractCreature)another).GetNode<AbstractCreatureBodySprite>("Body");
+            var thisBody = GetNode<AbstractCreatureBodySprite>("Body");
+            return (thisBody.GlobalTextureCenter(thisBody.GlobalPosition) - anotherBody.GlobalTextureCenter(anotherBody.GlobalPosition)).GetDirection();
+        }
     }
 }

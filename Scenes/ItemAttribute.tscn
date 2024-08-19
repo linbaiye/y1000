@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw4kky7kku6qg"]
+
+[ext_resource type="Texture2D" uid="uid://dqvduyhkh1vab" path="res://assets/ui/item_attribute_window.png" id="1_imumr"]
+[ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_2pw5q"]
+[ext_resource type="Script" path="res://Source/Control/ItemAttributeControl.cs" id="2_j3t8l"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="3_3lwp1"]
+
+[node name="ItemAttribute" type="NinePatchRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -768.0
+offset_bottom = -581.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_imumr")
+script = ExtResource("2_j3t8l")
+
+[node name="ItemName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 19.0
+offset_right = 203.0
+offset_bottom = 36.0
+theme_override_fonts/font = ExtResource("3_3lwp1")
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
+
+[node name="ItemDescription" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 58.0
+offset_right = 234.0
+offset_bottom = 162.0
+theme_override_fonts/normal_font = ExtResource("3_3lwp1")
+theme_override_font_sizes/normal_font_size = 12
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 163.0
+offset_right = 239.0
+offset_bottom = 182.0
+theme_override_fonts/font = ExtResource("3_3lwp1")
+theme_override_font_sizes/font_size = 10
+text = "关闭"
+
+[node name="InventorySlot1" parent="." instance=ExtResource("2_2pw5q")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 9.0
+offset_right = 50.0
+offset_bottom = 49.0

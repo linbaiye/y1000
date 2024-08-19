@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 using Godot;
 using y1000.code.entity;
 using y1000.code.player;
+using y1000.Source.Animation;
+using y1000.Source.Creature;
+using y1000.Source.Entity;
 
 namespace y1000.code.creatures
 {
     public interface ICreature : IEntity
     {
-        PositionedTexture BodyTexture { get; }
-
-        State State { get; }
+        OffsetTexture BodyTexture { get; }
 
         Direction Direction { get; }
 
@@ -28,5 +29,11 @@ namespace y1000.code.creatures
         void Die();
 
         void Remove();
+
+        Direction DirectionTo(ICreature another);
+
+        Point Coordinate { get; }
+
+        Rect2I HoverRect();
     }
 }

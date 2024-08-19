@@ -1,8 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using y1000.code.character.state;
+using y1000.code.util;
+using y1000.Source.Creature;
+using y1000.Source.Util;
 
 namespace y1000.code.creatures.state
 {
@@ -22,36 +27,69 @@ namespace y1000.code.creatures.state
 			{ Direction.UP_LEFT, 161},
         };
 
+        private readonly Dictionary<Direction, int> spriteOffset;
+
         private const int SPRITE_NUMBERS = 7;
 
-        public AbstractCreatureMoveState(AbstractCreature creature, Direction direction) : base(creature, direction)
-        {
-            velocity = VectorUtil.Velocity(direction) / (0.1f * SPRITE_NUMBERS);
-            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(SPRITE_NUMBERS, 0.1f, Animation.LoopModeEnum.None));
-        }
-        public override State State => State.MOVE;
+        private Point nextCoordinate;
 
-        public override int GetSpriteOffset()
+        private readonly int totalSpriteNumber;
+
+        private readonly float step;
+
+        private float speed;
+
+
+        public AbstractCreatureMoveState(AbstractCreature creature, Direction direction) : this(creature, direction, SPRITE_OFFSET, SPRITE_NUMBERS, 0.1f, SimpleCreatureStateFactory.INSTANCE, 1.0f)
         {
-            return SPRITE_OFFSET.GetValueOrDefault(Direction, -1);
         }
+
+        public AbstractCreatureMoveState(AbstractCreature creature, Direction direction, 
+            Dictionary<Direction, int> _spriteOffset, int totalSpriteNumber, float step, AbstractCreatureStateFactory abstractCreatureStateFactory, float speed) : base(creature, direction, abstractCreatureStateFactory)
+        {
+            creature.AnimationPlayer.AddIfAbsent(State.ToString(), () => AnimationUtil.CreateAnimations(totalSpriteNumber, step, Animation.LoopModeEnum.None));
+            spriteOffset = _spriteOffset;
+            nextCoordinate = creature.Coordinate.Next(direction);
+            this.totalSpriteNumber = totalSpriteNumber;
+            this.step = step;
+            ChangeSpeed(speed);
+            ComputeVelocity();
+        }
+
+        protected override int SpriteOffset => spriteOffset.GetValueOrDefault(Direction, -1);
 
         public void Process(double delta)
         {
             Creature.Position += velocity * (float) delta;
+            //Creature.Position = Creature.Coordinate.CoordinateToPixel() + (float)Creature.AnimationPlayer.CurrentAnimationPosition * velocity;
+        }
+
+        protected void UpdateCooridnate()
+        {
+            Creature.Coordinate = nextCoordinate;
+        }
+
+        private void ComputeVelocity()
+        {
+            velocity = VectorUtil.Velocity(Direction) / (step * totalSpriteNumber) * speed;
+            //velocity = VectorUtil.Velocity(Direction) / (step * spriteNumber);
+        }
+
+        protected void ChangeSpeed(float newSpeed)
+        {
+            if (newSpeed > 0)
+            {
+                speed = newSpeed;
+                Creature.AnimationPlayer.SpeedScale = speed;
+            }
         }
 
 
-        public override void OnAnimationFinised()
+        protected void ReadyToMoveTo(Direction direction, Point next)
         {
-            Creature.Position = Creature.Position.Snapped(VectorUtil.TILE_SIZE);
-            StopAndChangeState(StateFactory.CreateIdleState(Creature));
-        }
-
-
-        public override void Hurt()
-        {
-            StopAndChangeState(StateFactory.CreateHurtState(Creature));
+            SetDirection(direction);
+            ComputeVelocity();
+            nextCoordinate = next;
         }
     }
 }
