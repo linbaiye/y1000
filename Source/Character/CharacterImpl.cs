@@ -603,6 +603,12 @@ namespace y1000.Source.Character
 	        return character;
         }
 
+        public void Say(string text)
+        {
+	        LOGGER.Debug("Say {0}.", text);
+	        EventMediator?.NotifyServer(new ClientTextEvent(text));
+        }
+
         public Rect2 BodyRectangle => WrappedPlayer().BodyRectangle;
 	}
 }

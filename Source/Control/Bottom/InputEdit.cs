@@ -1,10 +1,19 @@
 ﻿using Godot;
+using NLog;
+using y1000.Source.Character;
 
 namespace y1000.Source.Control.Bottom;
 
 public partial class InputEdit : LineEdit
 {
     private int _counter;
+    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
+    private CharacterImpl? _character;
+
+    public void BindCharacter(CharacterImpl character)
+    {
+        _character = character;
+    }
     public override void _UnhandledKeyInput(InputEvent @event)
     {
         if (@event is not InputEventKey inputEvent || inputEvent.Keycode != Key.Enter)
@@ -15,6 +24,8 @@ public partial class InputEdit : LineEdit
             {
                 return;
             }
+            if (!string.IsNullOrEmpty(Text))
+                _character?.Say(Text);
             Text = "";
             ReleaseFocus();
         }
