@@ -42,7 +42,6 @@ public class EntityFactory
             throw new NotImplementedException(message.Name + " does not have icon.");
         }
         return GroundItem.Create(message, texture2D, _eventMediator);
-        //return OnGroundItem.Create(message, texture2D, _eventMediator);
     }
     
     

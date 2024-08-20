@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Control.RightSide.Inventory;
 using y1000.Source.Event;
@@ -16,21 +16,24 @@ public partial class GroundItem  :  Node2D, IEntity, IServerMessageVisitor
 
     private Label _name;
 
+    private Texture2D? _texture;
+
     public override void _Ready()
     {
         _name = GetNode<Label>("Name");
+        _slotView = GetNode<InventorySlotView>("Slot1");
         _slotView.OnMouseInputEvent += OnEvent;
+        if (_texture != null)
+            _slotView.PutTexture(_texture);
     }
 
     private void Init(long id, string entityName, 
         Vector2I coordinate, Texture2D texture2D)
     {
-        _slotView = GetNode<InventorySlotView>("Slot1");
-        _slotView._Ready();
         Id = id;
         EntityName = entityName;
         Position = coordinate.ToPosition();
-        _slotView.PutTexture(texture2D);
+        _texture = texture2D;
     }
 
     private void OnEvent(object? sender, SlotMouseEvent slotMouseEvent)

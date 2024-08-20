@@ -36,6 +36,7 @@ public partial class GameDynamicObject : AbstractEntity, IBody, IEntity, ISlotDo
 
     private void Delete()
     {
+        _character?.Inventory.DeregisterRightClickHandler(this);
         Map.Free(this);
         QueueFree();
     }

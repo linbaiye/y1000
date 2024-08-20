@@ -11,6 +11,9 @@ y_sort_enabled = true
 script = ExtResource("1_mtrgt")
 
 [node name="Slot1" parent="." instance=ExtResource("1_nkhl7")]
+custom_minimum_size = Vector2(30, 30)
+offset_right = 30.0
+offset_bottom = 30.0
 
 [node name="Name" type="Label" parent="."]
 offset_right = 40.0

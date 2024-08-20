@@ -43,6 +43,11 @@ public class CharacterInventory
             _rightClickHandlers.Add(handler);
     }
 
+    public void DeregisterRightClickHandler(ISlotDoubleClickHandler handler)
+    {
+        _rightClickHandlers.Remove(handler);
+    }
+
     public bool HasMoneySpace()
     {
         return HasSpace(Money);
