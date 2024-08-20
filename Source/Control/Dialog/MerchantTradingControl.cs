@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Godot;
 using NLog;
 using y1000.Source.Character;
@@ -31,30 +30,11 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
     private CharacterInventory? _inventory;
 
     private MerchantTrade _trade = new();
-
     
     private ItemFactory? _itemFactory;
 
     private ItemsContainer _itemsContainer;
     
-    private class Item
-    {
-        private Item(int price, string name)
-        {
-            Price = price;
-            Name = name;
-        }
-        public string Name { get; }
-        public int Price { get; }
-
-        public static Item Parse(string text)
-        {
-            var tokens = Regex.Split(text, @"\s+");
-            return new Item(int.Parse(tokens[1]), tokens[0]);
-        }
-    }
-
-
     public override void _Ready()
     {
         base._Ready();
@@ -74,7 +54,7 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         _total.Text = (current + delta).ToString();
     }
 
-    private void OnItemDoubleClicked(y1000.Source.Control.Dialog.Item item)
+    private void OnItemDoubleClicked(Item item)
     {
         if (_tradeInputWindow == null || _itemFactory == null)
         {
@@ -180,30 +160,6 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         }
     }
 
-    private void LockItem(int[] indices)
-    {
-        if (_tradeInputWindow == null || _tradeInputWindow.ItemName == null)
-        {
-            return;
-        }
-        var name = _tradeInputWindow.ItemName;
-        foreach (var idx in indices)
-        {
-            var text = _itemList.GetItemText(idx);
-            if (text == null)
-            {
-                continue;
-            }
-            var item = Item.Parse(text);
-            if (item.Name.Equals(name))
-            {
-                _itemList.SetItemText(idx, text + "    " + (_playerSelling ? "出售" : "购买") + "数量: " + _tradeInputWindow.Number);
-                _itemList.SetItemDisabled(idx, true);
-                AddToTotal(_tradeInputWindow.Number * item.Price);
-                break;
-            }
-        }
-    }
 
     private void OnConfirmSellItem()
     {
@@ -238,12 +194,12 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         {
             return;
         }
-        var array = new List<int>();
-        for (var i = 0; i < _itemList.ItemCount; i++)
+        var i = _itemsContainer.FindItem(name);
+        if (i != null)
         {
-            array.Add(i);
+            i.Lock("出售数量: " + _tradeInputWindow.Number);
+            AddToTotal(_tradeInputWindow.Number * i.Price);
         }
-        LockItem(array.ToArray());
     }
 
     private void RefreshItemList(List<Merchant.Item> items)
@@ -255,7 +211,6 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
             var icon = _iconReader.Get(item.IconId);
             if (icon != null)
                 _itemsContainer.AddItem(item.Name, icon, item.Color, item.Price);
-            //_itemList.AddItem(item.Name + "  " + item.Price, icon);
         }
     }
 
