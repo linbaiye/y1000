@@ -21,6 +21,10 @@
 blend_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51gj6"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
 bg_color = Color(0, 0, 0, 0.415686)
 
 [node name="player" type="Node2D"]

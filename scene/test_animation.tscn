@@ -18,6 +18,7 @@
 [ext_resource type="Shader" path="res://Shaders/Dye.gdshader" id="39_irldi"]
 [ext_resource type="Texture2D" uid="uid://d1is6jipnlfsd" path="res://sprite/item/000012.png" id="40_i3xl8"]
 [ext_resource type="Texture2D" uid="uid://d05yafqa8c7rr" path="res://sprite/item/000015.png" id="41_p1jo8"]
+[ext_resource type="Texture2D" uid="uid://iqdk7hdabnuc" path="res://assets/test/idle.png" id="42_1sawt"]
 [ext_resource type="Texture2D" uid="uid://bmhgch7t3vedq" path="res://sprite/item/000021.png" id="42_h7yf5"]
 [ext_resource type="Texture2D" uid="uid://sidjq8mqj8ni" path="res://assets/_0png/00.png" id="45_e36kd"]
 [ext_resource type="Texture2D" uid="uid://cntj4s6uiwmvo" path="res://assets/_0png/01.png" id="46_kqwp8"]
@@ -41,7 +42,6 @@
 [ext_resource type="Texture2D" uid="uid://cl5c5hvoj0uwx" path="res://assets/_0png/17.png" id="62_alrmx"]
 [ext_resource type="Texture2D" uid="uid://dwuvtj2yko7bk" path="res://assets/_0png/18.png" id="63_jmtsm"]
 [ext_resource type="Texture2D" uid="uid://cib0m65pj30hg" path="res://assets/test/monster.png" id="110_gs68e"]
-[ext_resource type="Texture2D" uid="uid://do8mynykrs71a" path="res://assets/test/diablo.png" id="130_k4c4h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arldo"]
 shader = ExtResource("39_irldi")
@@ -51,7 +51,7 @@ shader_parameter/ab = 0.032
 shader_parameter/add = 0.096
 
 [sub_resource type="Animation" id="Animation_56fvw"]
-length = 2.2
+length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -192,10 +192,10 @@ texture = ExtResource("110_gs68e")
 centered = false
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("130_k4c4h")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("42_1sawt")
 centered = false
-hframes = 22
+hframes = 12
 vframes = 8
 
 [node name="SplitEffect" type="Sprite2D" parent="."]
@@ -206,42 +206,8 @@ texture = ExtResource("45_e36kd")
 centered = false
 offset = Vector2(-14, -11)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 129.0
-offset_bottom = 156.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
-
-[node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
-
-[node name="HBoxContainer7" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
-
-[node name="HBoxContainer8" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
-
-[node name="HBoxContainer9" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.666667, 0.666667, 0.666667, 1)

@@ -84,13 +84,19 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		return eventMediator;
 	}
 
+	private async void ReplayBgm()
+	{
+		await Task.Delay(10000);
+		_bgmAudioPlayer.Play();
+	}
+
 	public override void _Ready()
 	{
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
 		_uiController.Initialize(_eventMediator, _spriteRepository, _itemFactory);
 		_bgmAudioPlayer = GetNode<AudioStreamPlayer>("BgmPlayer");
-		_bgmAudioPlayer.Finished += () => _bgmAudioPlayer.Play();
+		_bgmAudioPlayer.Finished += ReplayBgm;
 		for (int i = 0; i < _entitySoundPlayers.Length; i++)
 		{
 			_entitySoundPlayers[i] = GetNode<CreatureAudio>("SoundPlayer" + (i + 1));

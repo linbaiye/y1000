@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Net.Mime;
+using Godot;
 using NLog;
 using y1000.Source.Character;
 
@@ -16,7 +17,18 @@ public partial class InputEdit : LineEdit
     }
     public override void _UnhandledKeyInput(InputEvent @event)
     {
-        if (@event is not InputEventKey inputEvent || inputEvent.Keycode != Key.Enter)
+        if (@event is not InputEventKey inputEvent) 
+            return;
+        if (inputEvent.Keycode == Key.Backspace && inputEvent.IsPressed() && HasFocus())
+        {
+            if (!string.IsNullOrEmpty(Text) && Text.Length > 1)
+            {
+                Text = Text.Substring(0, Text.Length - 1);
+            }
+            AcceptEvent();
+            return;
+        }
+        if (inputEvent.Keycode != Key.Enter)
             return;
         if (HasFocus() && inputEvent.IsReleased())
         {

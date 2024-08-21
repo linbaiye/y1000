@@ -605,8 +605,8 @@ namespace y1000.Source.Character
 
         public void Say(string text)
         {
-	        LOGGER.Debug("Say {0}.", text);
 	        EventMediator?.NotifyServer(new ClientTextEvent(text));
+	        WrappedPlayer().Say(WrappedPlayer().EntityName + ":" + text);
         }
 
         public Rect2 BodyRectangle => WrappedPlayer().BodyRectangle;

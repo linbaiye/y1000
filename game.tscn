@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=18 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -12,20 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://dw4kky7kku6qg" path="res://Scenes/ItemAttribute.tscn" id="10_xy80o"]
 [ext_resource type="PackedScene" uid="uid://bf5l5nu0lr8qr" path="res://Scenes/PlayerAttributeWindow.tscn" id="11_yghsv"]
 [ext_resource type="PackedScene" uid="uid://clr852egfmuqb" path="res://Scenes/TradePlayerWindow.tscn" id="12_mif0g"]
-[ext_resource type="Texture2D" uid="uid://cib0m65pj30hg" path="res://assets/test/monster.png" id="13_hn2ex"]
-[ext_resource type="Shader" path="res://MaleShadow.gdshader" id="13_klljd"]
 [ext_resource type="Script" path="res://Source/Control/Map/MapView.cs" id="13_xh10o"]
 [ext_resource type="PackedScene" uid="uid://bjjg8uukhy3s8" path="res://Scenes/MapNpcView.tscn" id="14_vdhs2"]
 [ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="16_ing8y"]
 [ext_resource type="PackedScene" uid="uid://b8qn25p71tho" path="res://assets/test/teleport.tscn" id="16_wmncn"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tknte"]
-shader = ExtResource("13_klljd")
-shader_parameter/deform = Vector2(1, 1)
-shader_parameter/offset = Vector2(5, 5)
-shader_parameter/modulate = null
 
 [node name="Game" type="Node2D"]
 z_as_relative = false
@@ -97,15 +89,6 @@ offset_bottom = 0.0
 
 [node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -12.18
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-z_index = 3
-y_sort_enabled = true
-material = SubResource("ShaderMaterial_tknte")
-position = Vector2(3120, 840)
-texture = ExtResource("13_hn2ex")
-centered = false
 
 [node name="Teleport" parent="." instance=ExtResource("16_wmncn")]
 visible = false
