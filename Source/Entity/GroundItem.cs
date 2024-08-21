@@ -18,19 +18,22 @@ public partial class GroundItem  :  Node2D, IEntity, IServerMessageVisitor
 
     private Texture2D? _texture;
 
+    private int _color;
+
     public override void _Ready()
     {
         _name = GetNode<Label>("Name");
         _slotView = GetNode<InventorySlotView>("Slot1");
         _slotView.OnMouseInputEvent += OnEvent;
         if (_texture != null)
-            _slotView.PutTexture(_texture);
+            _slotView.PutTexture(_texture, _color);
     }
 
     private void Init(long id, string entityName, 
-        Vector2I coordinate, Texture2D texture2D)
+        Vector2I coordinate, Texture2D texture2D, int color)
     {
         Id = id;
+        _color = color;
         EntityName = entityName;
         Position = coordinate.ToPosition();
         _texture = texture2D;
@@ -64,7 +67,7 @@ public partial class GroundItem  :  Node2D, IEntity, IServerMessageVisitor
         PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/GroundItem.tscn");
         var item = scene.Instantiate<GroundItem>();
         var name = message.Number > 0 ? message.Name + ":" + message.Number : message.Name;
-        item.Init(message.Id, name, message.Coordinate, texture2D);
+        item.Init(message.Id, name, message.Coordinate, texture2D, message.Color);
         item.EventMediator = eventMediator;
         return item;
     }

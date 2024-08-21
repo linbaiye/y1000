@@ -48,7 +48,7 @@ public class MessageFactory
     private ShowItemMessage Parse(ShowItemPacket packet)
     {
         return new ShowItemMessage(packet.Id, packet.Name, packet.HasNumber ? packet.Number : 0,
-            new Vector2I(packet.CoordinateX, packet.CoordinateY));
+            new Vector2I(packet.CoordinateX, packet.CoordinateY), packet.Color);
     }
 
     private TeleportInterpolation Parse(ShowTeleportPacket packet)
