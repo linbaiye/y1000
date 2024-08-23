@@ -261,12 +261,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			_kungFuTip?.Display(message.Name);
 	}
 
-	public void Say(string message)
-	{
-		_kungFuTip?.Display(message);
-	}
-
-
 	public void Visit(PlayerMoveMessage message)
 	{
 		SetPosition(message.Coordinate, message.Direction);
@@ -405,6 +399,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		ChangeState(IPlayerState.NonHurtState(CreatureState.DIE));
 		PlaySound(message.Sound);
 		ShowLifePercent(0);
+	}
+
+	public void Visit(PlayerChatMessage message)
+	{
+		_kungFuTip?.Display(message.Content);
 	}
 
 	private string Location()

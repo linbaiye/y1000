@@ -207,7 +207,6 @@ centered = false
 offset = Vector2(-14, -11)
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
-color = Color(0.666667, 0.666667, 0.666667, 1)
+color = Color(0.882353, 0.223529, 0.698039, 1)

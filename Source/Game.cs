@@ -489,6 +489,13 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController?.DrawNpc(message);
 	}
 
+	public void Visit(PlayerChatMessage message)
+	{
+		_uiController?.DisplayTextMessage(new TextMessage(message.Content, TextMessage.TextLocation.DOWN));
+		Visit((IEntityMessage)message);
+	}
+	
+
 	public void Visit(JoinedRealmMessage message)
 	{
 		_character = CharacterImpl.LoggedIn(message, MapLayer, _itemFactory, _eventMediator);

@@ -603,10 +603,15 @@ namespace y1000.Source.Character
 	        return character;
         }
 
-        public void Say(string text)
+        public void Visit(PlayerChatMessage message)
         {
+	        WrappedPlayer().Visit(message);
+        }
+
+        public void Chat(string text)
+        {
+	        LOGGER.Debug("Sent text {0}.", text);
 	        EventMediator?.NotifyServer(new ClientTextEvent(text));
-	        WrappedPlayer().Say(WrappedPlayer().EntityName + ":" + text);
         }
 
         public Rect2 BodyRectangle => WrappedPlayer().BodyRectangle;

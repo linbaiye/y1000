@@ -456,6 +456,5 @@ theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ov7pw")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7grrv")
-shortcut_keys_enabled = false
 caret_blink = true
 script = ExtResource("19_ysobf")

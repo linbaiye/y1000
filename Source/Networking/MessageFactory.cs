@@ -140,6 +140,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.ShowTeleport => Parse(packet.ShowTeleport),
             Packet.TypedPacketOneofCase.BreakRope => DragEndedMessage.Instance,
             Packet.TypedPacketOneofCase.NpcPosition => NpcPositionMessage.FromPacket(packet.NpcPosition),
+            Packet.TypedPacketOneofCase.Chat => new PlayerChatMessage(packet.Chat.Id, packet.Chat.Content),
             _ => throw new NotSupportedException()
         };
     }

@@ -23,7 +23,9 @@ public partial class InputEdit : LineEdit
         {
             if (!string.IsNullOrEmpty(Text) && Text.Length > 1)
             {
+                Logger.Debug("Before {0}.", Text);
                 Text = Text.Substring(0, Text.Length - 1);
+                Logger.Debug("After {0}.", Text);
             }
             AcceptEvent();
             return;
@@ -37,7 +39,7 @@ public partial class InputEdit : LineEdit
                 return;
             }
             if (!string.IsNullOrEmpty(Text))
-                _character?.Say(Text);
+                _character?.Chat(Text);
             Text = "";
             ReleaseFocus();
         }

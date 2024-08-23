@@ -218,4 +218,8 @@ public interface IServerMessageVisitor
     void Visit(NpcPositionMessage message)
     {
     }
+
+    void Visit(PlayerChatMessage message)
+    {
+    }
 }
