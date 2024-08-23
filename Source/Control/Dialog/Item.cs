@@ -37,6 +37,7 @@ public partial class Item : Panel
     {
         if (_locked)
         {
+            
             return;
         }
         if (highlight)
