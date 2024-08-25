@@ -4,7 +4,6 @@ using NLog;
 using y1000.Source.Character;
 using y1000.Source.Item;
 using y1000.Source.Sprite;
-using y1000.Source.Util;
 
 namespace y1000.Source.Control.RightSide.Inventory;
 

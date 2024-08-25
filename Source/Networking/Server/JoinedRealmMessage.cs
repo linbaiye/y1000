@@ -11,22 +11,6 @@ namespace y1000.Source.Networking.Server
 {
     public class JoinedRealmMessage  : IServerMessage
     {
-        public class InventoryItemMessage
-        {
-            public InventoryItemMessage(string name, int slotId, long number, int color)
-            {
-                Name = name;
-                SlotId = slotId;
-                Number = number;
-                Color = color;
-            }
-            public string Name { get; }
-            public int SlotId { get; }
-            
-            public long Number { get; }
-            
-            public int Color { get; }
-        }
         private JoinedRealmMessage(IAttackKungFu attackKungFu, List<InventoryItemMessage> items, PlayerInfo myInfo, ValueBar healthBar, 
             ValueBar powerBar, ValueBar innerPowerBar, ValueBar outerPowerBar, ValueBar energyBar)
         {
@@ -82,16 +66,6 @@ namespace y1000.Source.Networking.Server
         
         public PlayerInfo MyInfo { get; }
         
-        private static List<InventoryItemMessage> ItemMessages(LoginPacket loginPacket)
-        {
-            List<InventoryItemMessage> itemMessages = new List<InventoryItemMessage>();
-            foreach (var inventoryItem in loginPacket.InventoryItems)
-            {
-                itemMessages.Add(new InventoryItemMessage(inventoryItem.Name,  inventoryItem.SlotId, inventoryItem.Number, inventoryItem.Color));
-            }
-            return itemMessages;
-        }
-
         private static IDictionary<int, IKungFu> ParseUnnamedKungFu(LoginPacket packet)
         {
             return ParseKungFu(packet.UnnamedKungFuList);
@@ -119,7 +93,7 @@ namespace y1000.Source.Networking.Server
 
         public static JoinedRealmMessage FromPacket(LoginPacket loginPacket)
         {
-            List<InventoryItemMessage> itemMessages = ItemMessages(loginPacket);
+            List<InventoryItemMessage> itemMessages = InventoryItemMessage.ItemMessages(loginPacket.InventoryItems);
             var kungFuBook = CreateKungFuBook(loginPacket);
             var footKungFu = loginPacket.HasFootKungFuName? kungFuBook.FindKungFu<IFootKungFu>(loginPacket.FootKungFuName) : null;
             var attribute = loginPacket.Attribute;

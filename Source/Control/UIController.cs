@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Godot;
 using NLog;
 using y1000.Source.Character;
+using y1000.Source.Control.Bank;
 using y1000.Source.Control.Bottom;
 using y1000.Source.Control.Dialog;
 using y1000.Source.Control.LeftSide;
@@ -45,6 +46,8 @@ public partial class UIController : CanvasLayer
 
     private MapView _mapView;
 
+    private BankView _bankView;
+
     
     private static readonly string TRADING_ERROR = "另一交易正在进行中。";
 
@@ -60,6 +63,7 @@ public partial class UIController : CanvasLayer
         _attributeWindow = GetNode<PlayerAttributeWindow>("PlayerAttributeWindow");
         _playerTradeWindow = GetNode<PlayerTradeWindow>("PlayerTradeWindow");
         _mapView = GetNode<MapView>("MapView");
+        _bankView = GetNode<BankView>("Bank");
         BindButtons();
     }
 
@@ -190,5 +194,9 @@ public partial class UIController : CanvasLayer
     {
         _mapView.DrawNpcs(message);
     }
-    
+
+    public void OpenBank(CharacterBank bank)
+    {
+        _bankView.Open(bank);
+    }
 }

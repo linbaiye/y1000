@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=19 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://clr852egfmuqb" path="res://Scenes/TradePlayerWindow.tscn" id="12_mif0g"]
 [ext_resource type="Script" path="res://Source/Control/Map/MapView.cs" id="13_xh10o"]
 [ext_resource type="PackedScene" uid="uid://bjjg8uukhy3s8" path="res://Scenes/MapNpcView.tscn" id="14_vdhs2"]
+[ext_resource type="PackedScene" uid="uid://ca6kivqahtqcd" path="res://Scenes/Bank.tscn" id="15_25end"]
 [ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="16_ing8y"]
 [ext_resource type="PackedScene" uid="uid://b8qn25p71tho" path="res://assets/test/teleport.tscn" id="16_wmncn"]
 
@@ -86,6 +87,20 @@ z_index = 4
 layout_mode = 0
 offset_right = 0.0
 offset_bottom = 0.0
+
+[node name="Bank" parent="UILayer" instance=ExtResource("15_25end")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -239.0
+offset_top = -149.0
+offset_right = 239.0
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -12.18

@@ -1,0 +1,53 @@
+﻿using Source.Networking.Protobuf;
+using y1000.Source.Input;
+
+namespace y1000.Source.Networking;
+
+public class ClientOperateBankEvent : IClientEvent
+{
+    private enum Operation
+    {
+        OPEN = 1,
+        INVENTORY_TO_BANK = 2,
+        BANK_TO_INVENTORY = 3,
+        UNLOCK_SLOTS = 4,
+    }
+    
+    private Operation Op { get; init; }
+    
+    private long BankerId { get; init; }
+    
+    private int FromSlot { get; init; }
+
+
+    public static ClientOperateBankEvent Open(long bankerId)
+    {
+        return new ClientOperateBankEvent()
+        {
+            Op = Operation.OPEN,
+            BankerId = bankerId,
+        };
+    }
+
+    public static ClientOperateBankEvent Unlock(int slot)
+    {
+        return new ClientOperateBankEvent()
+        {
+            Op = Operation.UNLOCK_SLOTS,
+            FromSlot = slot,
+        };
+    }
+    
+    public ClientPacket ToPacket()
+    {
+        return new ClientPacket()
+        {
+            BankOperation = new ClientBankOperationPacket()
+            {
+                Type = (int)Op,
+                BankerId = BankerId,
+                FromSlot = FromSlot,
+            }
+        };
+    }
+}

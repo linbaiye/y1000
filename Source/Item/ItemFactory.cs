@@ -23,7 +23,7 @@ public class ItemFactory
         _itemDb = ItemSdbReader.ItemSdb;
     }
 
-    public ICharacterItem CreateCharacterItem(JoinedRealmMessage.InventoryItemMessage message)
+    public ICharacterItem CreateCharacterItem(InventoryItemMessage message)
     {
         bool canstack = _itemDb.CanStack(message.Name);
         if (canstack)

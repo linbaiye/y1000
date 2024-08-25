@@ -222,4 +222,9 @@ public interface IServerMessageVisitor
     void Visit(PlayerChatMessage message)
     {
     }
+
+    void Visit(OpenBankMessage message)
+    {
+        
+    }
 }

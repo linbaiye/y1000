@@ -141,6 +141,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.BreakRope => DragEndedMessage.Instance,
             Packet.TypedPacketOneofCase.NpcPosition => NpcPositionMessage.FromPacket(packet.NpcPosition),
             Packet.TypedPacketOneofCase.Chat => new PlayerChatMessage(packet.Chat.Id, packet.Chat.Content),
+            Packet.TypedPacketOneofCase.OpenBank => OpenBankMessage.FromPacket(packet.OpenBank),
             _ => throw new NotSupportedException()
         };
     }

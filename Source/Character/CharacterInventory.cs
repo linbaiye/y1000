@@ -11,24 +11,23 @@ using y1000.Source.Networking;
 
 namespace y1000.Source.Character;
 
-public class CharacterInventory
+public class CharacterInventory : AbstractInventory
 {
     private const int MaxSize = 30;
 
     public static readonly CharacterInventory Empty = new();
-    
-    
-    private readonly IDictionary<int, ICharacterItem> _items = new Dictionary<int, ICharacterItem>(MaxSize);
 
-    public event EventHandler<EventArgs>? InventoryChanged;
+    public CharacterInventory() : base(MaxSize)
+    {
+    }
+
+    public override event EventHandler<EventArgs>? InventoryChanged;
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
     public event EventHandler<InventoryShortcutEvent>? ShortcutEvent;
 
 
     private EventMediator? _eventMediator;
     private const string Money = "钱币";
-
-    public bool IsFull => _items.Count >= MaxSize;
 
     private readonly List<ISlotDoubleClickHandler> _rightClickHandlers = new();
 
@@ -51,16 +50,6 @@ public class CharacterInventory
     public bool HasMoneySpace()
     {
         return HasSpace(Money);
-    }
-
-    public bool HasSpace(string name)
-    {
-        var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
-        return item is CharacterStackItem || !IsFull;
-    }
-    public bool HasItem(int slot)
-    {
-        return _items.ContainsKey(slot);
     }
 
     public IItem GetOrThrow(int slot)
@@ -168,27 +157,6 @@ public class CharacterInventory
         return 0;
     }
 
-    public bool HasEnough(string name, long number)
-    {
-        var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
-        return item is CharacterStackItem stackItem && stackItem.Number >= number
-            || item is CharacterItem;
-    }
-
-    public bool HasEnough(int slot, string name, long number)
-    {
-        if (!_items.TryGetValue(slot, out var item))
-        {
-            return false;
-        }
-        if (!item.ItemName.Equals(name))
-        {
-            return false;
-        }
-        return item is CharacterStackItem stackItem && stackItem.Number >= number
-            || item is CharacterItem;
-    }
-
     public bool Sell(ICharacterItem sellingItem, CharacterStackItem money, MerchantTrade trade)
     {
         if (!HasMoneySpace())
@@ -278,86 +246,6 @@ public class CharacterInventory
         Notify();
     }
 
-    public ICharacterItem? Find(int slot)
-    {
-        return _items.TryGetValue(slot, out var item) ? item : null;
-    }
-    
-    public int FindSlot(IItem item)
-    {
-        for (var i = 1; i <= MaxSize; i++)
-        {
-            if (_items.TryGetValue(i, out var slotItem))
-            {
-                if (slotItem == item)
-                {
-                    return i;
-                }
-            }
-        }
-        return 0;
-    }
-
-    public void Update(int slot, ICharacterItem? item)
-    {
-        _items.Remove(slot);
-        if (item != null)
-        {
-            _items.TryAdd(slot, item);
-        }
-        Notify();
-    }
-
-    private void Notify()
-    {
-        InventoryChanged?.Invoke(this, EventArgs.Empty);
-    }
-
-    private int AddToEmptySlot(ICharacterItem item)
-    {
-        if (IsFull)
-        {
-            return 0;
-        }
-        for (var i = 1; i <= MaxSize; i++)
-        {
-            if (_items.TryAdd(i, item))
-            {
-                return i;
-            }
-        }
-        return 0;
-    }
-
-    private int AddItem(ICharacterItem item)
-    {
-        if (item is CharacterStackItem stackItem)
-        {
-            for (int i = 1; i <= MaxSize; i++)
-            {
-                if (_items.TryGetValue(i, out var slotItem) && slotItem.ItemName.Equals(item.ItemName) && slotItem is CharacterStackItem slotStackItem)
-                {
-                    slotStackItem.Number += stackItem.Number;
-                    return i;
-                }
-            }
-        }
-        return AddToEmptySlot(item);
-    }
-
-    public bool PutItem(int slot, ICharacterItem item)
-    {
-        if (slot < 1 || slot > MaxSize)
-        {
-            throw new ArgumentException("Invalid slot " + slot);
-        }
-        var ret = !IsFull && _items.TryAdd(slot, item);
-        if (ret)
-        {
-            InventoryChanged?.Invoke(this, EventArgs.Empty);
-        }
-        return ret;
-    }
 
     public void OnUIDoubleClick(int slot)
     {
@@ -372,7 +260,15 @@ public class CharacterInventory
                 return;
             }
         }
-        _eventMediator?.NotifyServer(new DoubleClickInventorySlotMessage(slot));
+        var item = Get(slot);
+        if (item != null && item.ItemName.Equals("福袋"))
+        {
+            _eventMediator?.NotifyServer(ClientOperateBankEvent.Unlock(slot));
+        }
+        else
+        {
+            _eventMediator?.NotifyServer(new DoubleClickInventorySlotMessage(slot));
+        }
     }
 
     public void OnUIDragItem(int slot)
@@ -404,34 +300,6 @@ public class CharacterInventory
     {
         _eventMediator?.NotifyServer(new ClientRightClickEvent(RightClickType.INVENTORY, slot));
     }
-    
-    public void Foreach(Action<int, ICharacterItem> consumer)
-    {
-        foreach (var keyValuePair in _items)
-        {
-            consumer.Invoke(keyValuePair.Key, keyValuePair.Value);
-        }
-    }
-
-    public void Swap(int slot1, int slot2)
-    {
-        _items.TryGetValue(slot1, out var item1);
-        _items.TryGetValue(slot2, out var item2);
-        if (item1 != null || item2 != null)
-        {
-            _items.Remove(slot1);
-            _items.Remove(slot2);
-            if (item1 != null)
-            {
-                _items.TryAdd(slot2, item1);
-            }
-            if (item2 != null)
-            {
-                _items.TryAdd(slot1, item2);
-            }
-            InventoryChanged?.Invoke(this, EventArgs.Empty);
-        }
-    }
 
     public void OnUISwap(int pickedSlot, int slot2)
     {
@@ -448,4 +316,6 @@ public class CharacterInventory
             ShortcutEvent?.Invoke(this, new InventoryShortcutEvent(ShortcutContext.OfInventory(slot, key), item));
         }
     }
+
+
 }

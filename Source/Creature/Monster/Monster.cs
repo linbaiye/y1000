@@ -32,15 +32,19 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	
 	public OffsetTexture? EffectOffsetTexture => _state.EffectOffsetTexture(this);
 
+
+	public NpcType Type { get; set; } = NpcType.MONSTER;
 	
 	private void Init(long id, Direction direction, IMonsterState state, Vector2I coordinate, IMap map,
-		string name, MonsterAnimation animation, string atz, MonsterAnimation? effect)
+		string name, MonsterAnimation animation, string atz, MonsterAnimation? effect,
+		NpcType type)
 	{
 		base.Init(id, direction, coordinate, map, name);
 		_state = state;
 		_animation = animation;
 		AtzName = atz;
 		_effectAnimation = effect;
+		Type = type;
 	}
 
 	public MonsterAnimation MonsterAnimation => _animation;
@@ -166,7 +170,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 			interpolation.ElapsedMillis, interpolation.Direction, monsterAnimation);
 		monster.Init(npcInterpolation.Id, interpolation.Direction, 
 			state, interpolation.Coordinate, map, name, monsterAnimation,
-			"z" + npcInterpolation.Shape, effectAnimation);
+			"z" + npcInterpolation.Shape, effectAnimation, npcInterpolation.NpcType);
 		if (state is AbstractCreatureMoveState<Monster> moveState)
 		{
 			moveState.DriftPosition(monster);

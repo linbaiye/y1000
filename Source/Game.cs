@@ -291,6 +291,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			_character?.HandleInput(predictableInput);
 		}
+		else if (args.Entity is Monster monster && monster.Type == NpcType.BANKER &&
+		         click is CreatureLeftClick)
+		{
+			_eventMediator.NotifyServer(ClientOperateBankEvent.Open(args.Entity.Id));
+		}
 	}
 
 
@@ -466,6 +471,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			return;
 		}
 		AddChild(Projectile.LoadFor(shooter, creature, message.SpriteId));
+	}
+
+	public void Visit(OpenBankMessage message)
+	{
+		var bank = CharacterBank.Create(_itemFactory, message);
+		_uiController?.OpenBank(bank);
 	}
 
 
