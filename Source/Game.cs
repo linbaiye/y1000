@@ -476,7 +476,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	public void Visit(OpenBankMessage message)
 	{
 		var bank = CharacterBank.Create(_itemFactory, message);
-		_uiController?.OpenBank(bank);
+		_uiController?.OpenBank(bank, _character.Inventory);
 	}
 
 

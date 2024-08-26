@@ -18,6 +18,8 @@ public class ClientOperateBankEvent : IClientEvent
     private long BankerId { get; init; }
     
     private int FromSlot { get; init; }
+    private int ToSlot { get; init; }
+    private long Number { get; init; }
 
 
     public static ClientOperateBankEvent Open(long bankerId)
@@ -28,6 +30,18 @@ public class ClientOperateBankEvent : IClientEvent
             BankerId = bankerId,
         };
     }
+
+    public static ClientOperateBankEvent InventoryToBank(int fromSlot, int toSlot, long number)
+    {
+        return new ClientOperateBankEvent()
+        {
+            Op = Operation.INVENTORY_TO_BANK,
+            FromSlot = fromSlot,
+            ToSlot= toSlot,
+            Number = number,
+        };
+    }
+        
 
     public static ClientOperateBankEvent Unlock(int slot)
     {
@@ -47,6 +61,8 @@ public class ClientOperateBankEvent : IClientEvent
                 Type = (int)Op,
                 BankerId = BankerId,
                 FromSlot = FromSlot,
+                ToSlot = ToSlot,
+                Number = Number,
             }
         };
     }

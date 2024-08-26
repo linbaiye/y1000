@@ -21,7 +21,8 @@ public class CharacterInventory : AbstractInventory
     {
     }
 
-    public override event EventHandler<EventArgs>? InventoryChanged;
+    public event EventHandler<EventArgs>? InventoryChanged;
+    
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
     public event EventHandler<InventoryShortcutEvent>? ShortcutEvent;
 
@@ -46,24 +47,30 @@ public class CharacterInventory : AbstractInventory
     {
         _rightClickHandlers.Remove(handler);
     }
+    
+    public void Swap(int slot1, int slot2)
+    {
+        _items.TryGetValue(slot1, out var item1);
+        _items.TryGetValue(slot2, out var item2);
+        if (item1 != null || item2 != null)
+        {
+            _items.Remove(slot1);
+            _items.Remove(slot2);
+            if (item1 != null)
+            {
+                _items.TryAdd(slot2, item1);
+            }
+            if (item2 != null)
+            {
+                _items.TryAdd(slot1, item2);
+            }
+            Notify();
+        }
+    }
 
     public bool HasMoneySpace()
     {
         return HasSpace(Money);
-    }
-
-    public IItem GetOrThrow(int slot)
-    {
-        if (_items.TryGetValue(slot, out var item))
-        {
-            return item;
-        }
-        throw new KeyNotFoundException("Slot not present " + slot);
-    }
-
-    public IItem? Get(int slot)
-    {
-        return HasItem(slot) ? GetOrThrow(slot) : null;
     }
 
     public void RollbackSelling(MerchantTrade trade)
@@ -163,7 +170,7 @@ public class CharacterInventory : AbstractInventory
         {
             return false;
         }
-        ICharacterItem? slotItem = null;
+        IItem? slotItem = null;
         int i = 1;
         for (; i <= MaxSize; i++)
         {
@@ -318,4 +325,8 @@ public class CharacterInventory : AbstractInventory
     }
 
 
+    protected override void Notify()
+    {
+        InventoryChanged?.Invoke(this, EventArgs.Empty);
+    }
 }

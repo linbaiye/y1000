@@ -18,6 +18,10 @@ public partial class InventoryView : AbstractInventoryView
     private CharacterInventory _inventory = CharacterInventory.Empty;
 
     private Label? _textLabel;
+
+    private bool _bankMode;
+
+    private Action<InventorySlotView>? _dragHandler;
     
     public override void _Ready()
     {
@@ -28,7 +32,46 @@ public partial class InventoryView : AbstractInventoryView
             view.OnKeyboardEvent += OnSlotKeyEvent;
         });
         _textLabel = GetNode<Label>("TextLabel");
+        _bankMode = false;
     }
+
+    public void EnableBankMode(Action<InventorySlotView> dragHandler)
+    {
+        _bankMode = true;
+        _dragHandler = dragHandler;
+    }
+
+    public void DisableBankMode()
+    {
+        _bankMode = false;
+    }
+
+    private void OnBankModeSlotEvent(InventorySlotView slot, SlotMouseEvent mouseEvent)
+    {
+        var type = mouseEvent.EventType;
+        if (type == SlotMouseEvent.Type.MOUSE_LEFT_RELEASE)
+        {
+            _dragHandler?.Invoke(slot);
+        }
+    }
+
+    private void OnInventorySlotEvent(InventorySlotView slot, SlotMouseEvent mouseEvent)
+    {
+        var type = mouseEvent.EventType;
+        if (type == SlotMouseEvent.Type.MOUSE_LEFT_RELEASE)
+        {
+            OnMouseLeftRelease(slot);
+        }
+        else if (type == SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
+        {
+            _inventory.OnUIDoubleClick(slot.Number);
+        }
+        else if (type == SlotMouseEvent.Type.MOUSE_RIGHT_CLICK)
+        {
+            _inventory.OnRightClick(slot.Number);
+        }
+    }
+    
 
     private void OnSlotEvent(object? sender, SlotMouseEvent mouseEvent)
     {
@@ -45,17 +88,16 @@ public partial class InventoryView : AbstractInventoryView
         {
             OnMouseGone();
         }
-        else if (type == SlotMouseEvent.Type.MOUSE_LEFT_RELEASE)
+        else
         {
-            OnMouseLeftRelease(slot);
-        }
-        else if (type == SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
-        {
-            _inventory.OnUIDoubleClick(slot.Number);
-        }
-        else if (type == SlotMouseEvent.Type.MOUSE_RIGHT_CLICK)
-        {
-            _inventory.OnRightClick(slot.Number);
+            if (_bankMode)
+            {
+                OnBankModeSlotEvent(slot, mouseEvent);
+            }
+            else
+            {
+                OnInventorySlotEvent(slot, mouseEvent);
+            }
         }
     }
     
@@ -65,15 +107,6 @@ public partial class InventoryView : AbstractInventoryView
             _inventory.OnViewKeyPressed(slotView.Number, keyEvent.Key);
     }
 
-    private string Format(ICharacterItem item)
-    {
-        if (item is CharacterStackItem stackItem)
-        {
-            return item.ItemName + ":" + stackItem.Number;
-        }
-
-        return item.ItemName;
-    }
 
 
     private void OnMouseEntered(InventorySlotView slot)
@@ -82,7 +115,7 @@ public partial class InventoryView : AbstractInventoryView
         var item = _inventory.Find(slot.Number);
         if (item != null && _textLabel != null)
         {
-            _textLabel.Text = Format(item);
+            _textLabel.Text = item.ToString();
         }
     }
 
@@ -124,7 +157,7 @@ public partial class InventoryView : AbstractInventoryView
         }
     }
     
-    private void SetIconToSlot(int slot, ICharacterItem item)
+    private void SetIconToSlot(int slot, IItem item)
     {
         var texture = TEXTURE_READER.Get(item.IconId);
         if (texture != null)

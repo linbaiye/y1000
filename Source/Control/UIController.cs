@@ -11,6 +11,7 @@ using y1000.Source.Control.Map;
 using y1000.Source.Control.PlayerAttribute;
 using y1000.Source.Control.PlayerTrade;
 using y1000.Source.Control.RightSide;
+using y1000.Source.Control.RightSide.Inventory;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Item;
@@ -78,6 +79,7 @@ public partial class UIController : CanvasLayer
         _playerTradeWindow.Initialize(_tradeInputWindow, eventMediator);
         _mapView.Initialize(eventMediator);
         _itemAttributeControl.Initialize(eventMediator);
+        _bankView.Initialize(eventMediator, _tradeInputWindow);
     }
 
     public void DisplayTextMessage(TextMessage message)
@@ -182,7 +184,7 @@ public partial class UIController : CanvasLayer
 
     private bool IsTrading()
     {
-        return _dialogControl.IsTrading || _dropItemUi.Visible;
+        return _dialogControl.IsTrading || _dropItemUi.Visible || _bankView.Visible;
     }
 
     public void ToggleMap(IMap map)
@@ -195,8 +197,15 @@ public partial class UIController : CanvasLayer
         _mapView.DrawNpcs(message);
     }
 
-    public void OpenBank(CharacterBank bank)
+    public void OpenBank(CharacterBank bank, CharacterInventory inventory)
     {
-        _bankView.Open(bank);
+        if (IsTrading())
+        {
+            DisplayTextMessage(new TextMessage("另一交易正在进行中。", TextMessage.TextLocation.DOWN));
+        }
+        else
+        {
+            _bankView.Open(bank, inventory, _rightControl.InventoryView);
+        }
     }
 }

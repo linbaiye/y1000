@@ -6,7 +6,7 @@ namespace y1000.Source.Event;
 
 public class DragInventorySlotEvent : AbstractInventoryEvent
 {
-    public DragInventorySlotEvent(int slot, ICharacterItem item) : base(slot)
+    public DragInventorySlotEvent(int slot, IItem item) : base(slot)
     {
         Item = item;
     }
@@ -14,6 +14,6 @@ public class DragInventorySlotEvent : AbstractInventoryEvent
     public Vector2 AtPosition { get; set; }
     
     
-    public ICharacterItem Item { get; }
+    public IItem Item { get; }
     
 }

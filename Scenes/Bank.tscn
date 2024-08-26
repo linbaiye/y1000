@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca6kivqahtqcd"]
+[gd_scene load_steps=8 format=3 uid="uid://ca6kivqahtqcd"]
 
 [ext_resource type="Texture2D" uid="uid://bbhl24jlqorty" path="res://assets/ui/bank.png" id="1_hh7pn"]
 [ext_resource type="Script" path="res://Source/Control/Bank/BankView.cs" id="2_lwrk5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cddg0m2xyiw2b" path="res://Scenes/ConfirmButton.tscn" id="2_xx01r"]
 [ext_resource type="PackedScene" uid="uid://bx54mp4v8uiii" path="res://Scenes/CancelButton.tscn" id="3_a1n88"]
 [ext_resource type="Script" path="res://Source/Control/Bank/BankSlots.cs" id="3_tjbvg"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_pjerj"]
 
 [node name="Bank" type="NinePatchRect"]
 offset_right = 478.0
@@ -147,14 +148,24 @@ layout_mode = 2
 
 [node name="ConfirmButton" parent="." instance=ExtResource("2_xx01r")]
 layout_mode = 0
-offset_left = 311.0
-offset_top = 236.0
-offset_right = 391.0
-offset_bottom = 266.0
+offset_left = 378.0
+offset_top = 235.0
+offset_right = 458.0
+offset_bottom = 265.0
 
 [node name="CancelButton" parent="." instance=ExtResource("3_a1n88")]
+visible = false
 layout_mode = 0
 offset_left = 86.0
 offset_top = 236.0
 offset_right = 166.0
 offset_bottom = 266.0
+
+[node name="TextLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 242.0
+offset_right = 175.0
+offset_bottom = 259.0
+theme_override_fonts/font = ExtResource("7_pjerj")
+theme_override_font_sizes/font_size = 12

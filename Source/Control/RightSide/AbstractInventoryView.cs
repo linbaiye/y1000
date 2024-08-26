@@ -24,7 +24,7 @@ public abstract partial class AbstractInventoryView : NinePatchRect
         MouseFilter = Visible ? MouseFilterEnum.Stop : MouseFilterEnum.Ignore;
     }
 
-    public void ForeachSlot(Action<InventorySlotView> action)
+    protected void ForeachSlot(Action<InventorySlotView> action)
     {
         var container = GetNode<Godot.GridContainer>("Slots");
         foreach (var child in container.GetChildren())

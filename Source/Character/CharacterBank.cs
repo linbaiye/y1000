@@ -5,12 +5,10 @@ using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Character;
 
-public class CharacterBank
+public class CharacterBank : AbstractInventory
 {
-    private readonly Dictionary<int, IItem> _items;
-    public CharacterBank(int unlocked, List<IItem> items)
+    public CharacterBank(int unlocked, List<IItem> items) : base(40)
     {
-        _items = new Dictionary<int, IItem>();
         for (int i = 0; i < items.Count; i++)
         {
             _items[i + 1] = items[i];
@@ -18,20 +16,12 @@ public class CharacterBank
         Unlocked = unlocked;
     }
 
-    public int Capacity => 40;
-    
+    protected override void Notify()
+    {
+    }
+
     public int Unlocked { get; }
 
-    public void ForeachSlot(Action<int, IItem> action)
-    {
-        for (int i = 1; i <= Capacity ; i++)
-        {
-            if (_items.TryGetValue(i, out var item))
-            {
-                action.Invoke(i, item);
-            }
-        }
-    }
 
     public static CharacterBank Create(ItemFactory itemFactory, OpenBankMessage message)
     {

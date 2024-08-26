@@ -1,5 +1,7 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 using y1000.Source.Character;
+using y1000.Source.Control.RightSide;
 using y1000.Source.Control.RightSide.Inventory;
 using y1000.Source.Sprite;
 
@@ -19,9 +21,24 @@ public partial class BankSlots : GridContainer
         }
     }
 
+
+    public void Foreach(Action<InventorySlotView> action)
+    {
+        foreach (var inventorySlotView in _slotViews)
+        {
+            action.Invoke(inventorySlotView);
+        }
+    }
+
+    public void Clear()
+    {
+        Foreach(i => i.Clear());
+    }
+    
+
     public void Display(CharacterBank bank)
     {
-        bank.ForeachSlot((slot, item) =>
+        bank.Foreach((slot, item) =>
         {
             var texture2D = _iconReader.Get(item.IconId);
             if (texture2D != null)

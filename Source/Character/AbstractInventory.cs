@@ -7,14 +7,13 @@ namespace y1000.Source.Character;
 
 public abstract class AbstractInventory
 {
-    protected readonly IDictionary<int, ICharacterItem> _items;
-    public virtual event EventHandler<EventArgs>? InventoryChanged;
+    protected readonly IDictionary<int, IItem> _items;
     public bool IsFull => _items.Count >= Capacity;
 
     public AbstractInventory(int capacity)
     {
         Capacity = capacity;
-        _items = new Dictionary<int, ICharacterItem>();
+        _items = new Dictionary<int, IItem>();
     }
     
     public int Capacity { get; }
@@ -51,7 +50,7 @@ public abstract class AbstractInventory
                || item is CharacterItem;
     }
 
-    public ICharacterItem? Find(int slot)
+    public IItem? Find(int slot)
     {
         return _items.TryGetValue(slot, out var item) ? item : null;
     }
@@ -65,11 +64,8 @@ public abstract class AbstractInventory
         }
         Notify();
     }
-    
-    protected void Notify()
-    {
-        InventoryChanged?.Invoke(this, EventArgs.Empty);
-    }
+
+    protected abstract void Notify();
 
     private int AddToEmptySlot(ICharacterItem item)
     {
@@ -112,12 +108,12 @@ public abstract class AbstractInventory
         var ret = !IsFull && _items.TryAdd(slot, item);
         if (ret)
         {
-            InventoryChanged?.Invoke(this, EventArgs.Empty);
+            Notify();
         }
         return ret;
     }
 
-    public void Foreach(Action<int, ICharacterItem> consumer)
+    public void Foreach(Action<int, IItem> consumer)
     {
         foreach (var keyValuePair in _items)
         {
@@ -125,23 +121,17 @@ public abstract class AbstractInventory
         }
     }
 
-    public void Swap(int slot1, int slot2)
+    public IItem? Get(int slot)
     {
-        _items.TryGetValue(slot1, out var item1);
-        _items.TryGetValue(slot2, out var item2);
-        if (item1 != null || item2 != null)
+        return HasItem(slot) ? GetOrThrow(slot) : null;
+    }
+
+    public IItem GetOrThrow(int slot)
+    {
+        if (_items.TryGetValue(slot, out var item))
         {
-            _items.Remove(slot1);
-            _items.Remove(slot2);
-            if (item1 != null)
-            {
-                _items.TryAdd(slot2, item1);
-            }
-            if (item2 != null)
-            {
-                _items.TryAdd(slot1, item2);
-            }
-            InventoryChanged?.Invoke(this, EventArgs.Empty);
+            return item;
         }
+        throw new KeyNotFoundException("Slot not present " + slot);
     }
 }

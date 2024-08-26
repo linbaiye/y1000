@@ -10,7 +10,12 @@ public class CharacterItem : ICharacterItem
     }
 
     public string ItemName { get; }
-    
+
     public int IconId { get; }
     public int Color { get; }
+
+    public override string ToString()
+    {
+        return ItemName;
+    }
 }
