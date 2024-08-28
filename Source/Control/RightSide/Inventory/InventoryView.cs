@@ -165,6 +165,9 @@ public partial class InventoryView : AbstractInventoryView
             GetNode<InventorySlotView>("Slots/Slot" + slot).PutTexture(texture, item.Color);
         }
     }
+
+    public InventorySlotView? FocusedSlotView => _currentFocused;
+    
     public void ButtonClicked()
     {
         Visible = !Visible;

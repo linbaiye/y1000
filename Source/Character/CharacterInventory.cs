@@ -68,6 +68,11 @@ public class CharacterInventory : AbstractInventory
         }
     }
 
+    public bool CanPut(int slot, IItem item)
+    {
+        return CanPut(item, slot);
+    }
+
     public bool HasMoneySpace()
     {
         return HasSpace(Money);

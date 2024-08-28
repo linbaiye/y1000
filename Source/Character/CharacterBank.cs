@@ -7,12 +7,8 @@ namespace y1000.Source.Character;
 
 public class CharacterBank : AbstractInventory
 {
-    public CharacterBank(int unlocked, List<IItem> items) : base(40)
+    public CharacterBank(int unlocked) : base(40)
     {
-        for (int i = 0; i < items.Count; i++)
-        {
-            _items[i + 1] = items[i];
-        }
         Unlocked = unlocked;
     }
 
@@ -27,15 +23,14 @@ public class CharacterBank : AbstractInventory
         {
             return false;
         }
-
         var bankItem = Get(slot);
         if (bankItem == null)
         {
             return true;
         }
-
-        return bankItem is CharacterStackItem bankStack && item is CharacterStackItem stackItem
-                                                        && bankStack.ItemName.Equals(stackItem.ItemName);
+        return bankItem is CharacterStackItem bankStack
+               && item is CharacterStackItem stackItem
+               && bankStack.ItemName.Equals(stackItem.ItemName);
     }
 
     public int Unlocked { get; }
@@ -43,13 +38,14 @@ public class CharacterBank : AbstractInventory
 
     public static CharacterBank Create(ItemFactory itemFactory, OpenBankMessage message)
     {
-        List<IItem> items = new List<IItem>();
+        var characterBank = new CharacterBank(message.Unlocked);
         foreach (var inventoryItemMessage in message.ItemMessages)
         {
             var characterItem = itemFactory.CreateCharacterItem(inventoryItemMessage);
-            items.Add(characterItem);
+            characterBank.PutItem(inventoryItemMessage.SlotId, characterItem);
         }
-        return new CharacterBank(message.Unlocked, items);
+
+        return characterBank;
     }
 
 }

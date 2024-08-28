@@ -35,6 +35,18 @@ public abstract class AbstractInventory
         return item is CharacterStackItem stackItem && stackItem.Number >= number
                || item != null;
     }
+    
+    protected bool CanPut(IItem item, int slot)
+    {
+        var bankItem = Get(slot);
+        if (bankItem == null)
+        {
+            return true;
+        }
+        return bankItem is CharacterStackItem bankStack
+               && item is CharacterStackItem stackItem
+               && bankStack.ItemName.Equals(stackItem.ItemName);
+    }
 
     public bool HasEnough(int slot, string name, long number)
     {

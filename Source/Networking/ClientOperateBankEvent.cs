@@ -50,6 +50,17 @@ public class ClientOperateBankEvent : IClientEvent
             Number = number,
         };
     }
+    
+    public static ClientOperateBankEvent BankToInventory(int fromSlot, int toSlot, long number)
+    {
+        return new ClientOperateBankEvent()
+        {
+            Op = Operation.BANK_TO_INVENTORY,
+            FromSlot = fromSlot,
+            ToSlot= toSlot,
+            Number = number,
+        };
+    }
         
 
     public static ClientOperateBankEvent Unlock(int slot)
