@@ -208,4 +208,9 @@ public partial class UIController : CanvasLayer
             _bankView.Open(bank, inventory, _rightControl.InventoryView);
         }
     }
+
+    public void OperateBank(BankOperationMessage message)
+    {
+        _bankView.Operate(message);
+    }
 }

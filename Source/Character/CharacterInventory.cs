@@ -42,7 +42,7 @@ public class CharacterInventory : AbstractInventory
         if (!_rightClickHandlers.Contains(handler))
             _rightClickHandlers.Add(handler);
     }
-
+    
     public void DeregisterRightClickHandler(ISlotDoubleClickHandler handler)
     {
         _rightClickHandlers.Remove(handler);
@@ -164,7 +164,7 @@ public class CharacterInventory : AbstractInventory
         return 0;
     }
 
-    public bool Sell(ICharacterItem sellingItem, CharacterStackItem money, MerchantTrade trade)
+    public bool Sell(IItem sellingItem, CharacterStackItem money, MerchantTrade trade)
     {
         if (!HasMoneySpace())
         {
@@ -210,7 +210,7 @@ public class CharacterInventory : AbstractInventory
         return true;
     }
 
-    public bool Buy(ICharacterItem item, long totalMoney, MerchantTrade trade)
+    public bool Buy(IItem item, long totalMoney, MerchantTrade trade)
     {
         if (!CanBuy(item.ItemName, totalMoney))
         {

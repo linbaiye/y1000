@@ -23,7 +23,7 @@ public class ItemFactory
         _itemDb = ItemSdbReader.ItemSdb;
     }
 
-    public ICharacterItem CreateCharacterItem(InventoryItemMessage message)
+    public IItem CreateCharacterItem(InventoryItemMessage message)
     {
         bool canstack = _itemDb.CanStack(message.Name);
         if (canstack)
@@ -38,7 +38,7 @@ public class ItemFactory
         return _itemDb.CanStack(name);
     }
 
-    public ICharacterItem CreateCharacterItem(string name, int color = 0, long number = 0)
+    public IItem CreateCharacterItem(string name, int color = 0, long number = 0)
     {
         if (number == 0)
         {
@@ -47,7 +47,7 @@ public class ItemFactory
         return new CharacterStackItem(_itemDb.GetIconId(name), name, number, color);
     }
 
-    public ICharacterItem CreateCharacterItem(string name, long number = 0)
+    public IItem CreateCharacterItem(string name, long number = 0)
     {
         return CreateCharacterItem(name, 0, number);
     }

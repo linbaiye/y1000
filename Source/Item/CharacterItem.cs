@@ -1,6 +1,6 @@
 ﻿namespace y1000.Source.Item;
 
-public class CharacterItem : ICharacterItem
+public class CharacterItem : IItem
 {
     public CharacterItem(int iconId, string itemName, int color)
     {

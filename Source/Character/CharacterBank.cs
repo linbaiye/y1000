@@ -20,6 +20,24 @@ public class CharacterBank : AbstractInventory
     {
     }
 
+
+    public bool CanPut(int slot, IItem item)
+    {
+        if (Unlocked < slot)
+        {
+            return false;
+        }
+
+        var bankItem = Get(slot);
+        if (bankItem == null)
+        {
+            return true;
+        }
+
+        return bankItem is CharacterStackItem bankStack && item is CharacterStackItem stackItem
+                                                        && bankStack.ItemName.Equals(stackItem.ItemName);
+    }
+
     public int Unlocked { get; }
 
 

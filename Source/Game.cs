@@ -505,6 +505,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController?.DisplayTextMessage(new TextMessage(message.Content, TextMessage.TextLocation.DOWN));
 		Visit((IEntityMessage)message);
 	}
+
+	public void Visit(BankOperationMessage message)
+	{
+		_uiController?.OperateBank(message);
+	}
 	
 
 	public void Visit(JoinedRealmMessage message)

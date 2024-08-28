@@ -33,7 +33,7 @@ public abstract class AbstractInventory
     {
         var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
         return item is CharacterStackItem stackItem && stackItem.Number >= number
-               || item is CharacterItem;
+               || item != null;
     }
 
     public bool HasEnough(int slot, string name, long number)
@@ -46,8 +46,8 @@ public abstract class AbstractInventory
         {
             return false;
         }
-        return item is CharacterStackItem stackItem && stackItem.Number >= number
-               || item is CharacterItem;
+
+        return item is CharacterStackItem stackItem && stackItem.Number >= number;
     }
 
     public IItem? Find(int slot)
@@ -55,7 +55,7 @@ public abstract class AbstractInventory
         return _items.TryGetValue(slot, out var item) ? item : null;
     }
 
-    public void Update(int slot, ICharacterItem? item)
+    public void Update(int slot, IItem? item)
     {
         _items.Remove(slot);
         if (item != null)
@@ -67,7 +67,7 @@ public abstract class AbstractInventory
 
     protected abstract void Notify();
 
-    private int AddToEmptySlot(ICharacterItem item)
+    private int AddToEmptySlot(IItem item)
     {
         if (IsFull)
         {
@@ -83,7 +83,7 @@ public abstract class AbstractInventory
         return 0;
     }
 
-    protected int AddItem(ICharacterItem item)
+    protected int AddItem(IItem item)
     {
         if (item is CharacterStackItem stackItem)
         {
@@ -99,7 +99,7 @@ public abstract class AbstractInventory
         return AddToEmptySlot(item);
     }
 
-    public bool PutItem(int slot, ICharacterItem item)
+    public bool PutItem(int slot, IItem item)
     {
         if (slot < 1 || slot > Capacity)
         {

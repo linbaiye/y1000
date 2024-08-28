@@ -227,4 +227,9 @@ public interface IServerMessageVisitor
     {
         
     }
+
+    void Visit(BankOperationMessage operationMessage)
+    {
+        
+    }
 }

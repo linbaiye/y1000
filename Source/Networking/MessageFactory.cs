@@ -63,13 +63,34 @@ public class MessageFactory
     
     private UpdateInventorySlotMessage ParseUpdateSlot(InventoryItemPacket packet)
     {
-        ICharacterItem? item = null;
+        IItem? item = null;
         if (!string.IsNullOrEmpty(packet.Name)) {
             var number = packet.HasNumber ? packet.Number : 0;
             item = _itemFactory.CreateCharacterItem(packet.Name, packet.Color, number);
         }
         return new UpdateInventorySlotMessage(packet.SlotId, item);
     }
+    
+    private BankOperationMessage ParseBankOperation(UpdateBankPacket packet)
+    {
+        BankOperationMessage.Type type = (BankOperationMessage.Type)packet.Type;
+        if (type == BankOperationMessage.Type.CLOSE)
+        {
+            return new BankOperationMessage(BankOperationMessage.Type.CLOSE);
+        }
+        if (packet.UpdateSlot == null)
+        {
+            throw new ArgumentNullException();
+        }
+        IItem? item = null;
+        var itemPacket = packet.UpdateSlot;
+        if (!string.IsNullOrEmpty(itemPacket.Name)) {
+            var number = itemPacket.HasNumber ? itemPacket.Number : 0;
+            item = _itemFactory.CreateCharacterItem(itemPacket.Name, itemPacket.Color, number);
+        }
+        return new BankOperationMessage(BankOperationMessage.Type.UPDATE, itemPacket.SlotId, item);
+    }
+
 
     private PlayerUnequipMessage Parse(PlayerUnequipPacket packet)
     {
@@ -142,6 +163,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.NpcPosition => NpcPositionMessage.FromPacket(packet.NpcPosition),
             Packet.TypedPacketOneofCase.Chat => new PlayerChatMessage(packet.Chat.Id, packet.Chat.Content),
             Packet.TypedPacketOneofCase.OpenBank => OpenBankMessage.FromPacket(packet.OpenBank),
+            Packet.TypedPacketOneofCase.UpdateBank => ParseBankOperation(packet.UpdateBank),
             _ => throw new NotSupportedException()
         };
     }

@@ -11,6 +11,7 @@ public class ClientOperateBankEvent : IClientEvent
         INVENTORY_TO_BANK = 2,
         BANK_TO_INVENTORY = 3,
         UNLOCK_SLOTS = 4,
+        CLOSE = 5,
     }
     
     private Operation Op { get; init; }
@@ -28,6 +29,14 @@ public class ClientOperateBankEvent : IClientEvent
         {
             Op = Operation.OPEN,
             BankerId = bankerId,
+        };
+    }
+    
+    public static ClientOperateBankEvent Close()
+    {
+        return new ClientOperateBankEvent()
+        {
+            Op = Operation.CLOSE,
         };
     }
 

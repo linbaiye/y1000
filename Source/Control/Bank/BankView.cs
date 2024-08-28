@@ -6,6 +6,7 @@ using y1000.Source.Control.RightSide.Inventory;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Networking;
+using y1000.Source.Networking.Server;
 
 namespace y1000.Source.Control.Bank;
 
@@ -13,22 +14,28 @@ public partial class BankView : NinePatchRect
 {
     private BankSlots _slots;
     
-    private InventoryView? _inventoryView;
+    private InventoryView _inventoryView;
     
-    private EventMediator? _eventMediator;
+    private EventMediator _eventMediator;
     private TextureButton _confirmButton;
     private CharacterInventory? _inventory;
     private CharacterBank? _bank;
     private Label _textLabel;
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
     private InventorySlotView? _currentFocusedSlot;
-    private TradeInputWindow? _tradeInputWindow;
+    private TradeInputWindow _tradeInputWindow;
         
 
     public void Initialize(EventMediator eventMediator, TradeInputWindow tradeInputWindow)
     {
         _eventMediator = eventMediator;
         _tradeInputWindow = tradeInputWindow;
+    }
+
+    private enum TxType
+    {
+        INV_TO_BANK,
+        BANK_TO_INV,
     }
     
     public override void _Ready()
@@ -42,7 +49,7 @@ public partial class BankView : NinePatchRect
 
     private void OnConfirmed()
     {
-        Close();
+        _eventMediator.NotifyServer(ClientOperateBankEvent.Close());
     }
 
     private void OnSlotEvent(object? sender, SlotMouseEvent mouseEvent)
@@ -84,10 +91,30 @@ public partial class BankView : NinePatchRect
         Visible = true;
     }
 
-    private void OnMouseEntered()
+
+    private void OnBankSlotDragEvent(InventorySlotView bankSlot)
     {
-        //var item = _bank.Get();
+        
     }
+
+    public void Operate(BankOperationMessage message)
+    {
+        if (!Visible || _bank == null)
+        {
+            return;
+        }
+        if (message.IsClose)
+        {
+            Visible = false;
+        } 
+        else if (message.IsUpdate)
+        {
+            _bank.Update(message.SlotId, message.Item);
+            _slots.Clear();
+            _slots.Display(_bank);
+        }
+    }
+
 
     public void Close()
     {
@@ -97,16 +124,27 @@ public partial class BankView : NinePatchRect
         Visible = false;
     }
 
+    private void OnInputWindowClicked(bool confirm)
+    {
+        if (!confirm)
+            return;
+    }
+
     private void OnInventorySlotDragEvent(InventorySlotView slot)
     {
-        if (_inventory == null || _currentFocusedSlot == null)
+        if (_inventory == null || _currentFocusedSlot == null || _bank == null)
         {
             return;
         }
         var item = _inventory.Get(slot.Number);
-        if (item is CharacterStackItem)
+        if (item == null || !_bank.CanPut(_currentFocusedSlot.Number, item))
         {
+            return;
         }
+        if (item is CharacterStackItem stackItem)
+            _tradeInputWindow.Open(new TradeInputWindow.InventoryTradeItem(item.ItemName, slot.Number, TxType.INV_TO_BANK), stackItem.Number, OnInputWindowClicked);
+        else
+            _eventMediator.NotifyServer(ClientOperateBankEvent.InventoryToBank(slot.Number, _currentFocusedSlot.Number, 1));
         Logger.Debug("Drag inventory {0}.", slot.Number);
     }
     

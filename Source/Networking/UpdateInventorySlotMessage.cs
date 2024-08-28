@@ -6,13 +6,13 @@ namespace y1000.Source.Networking;
 
 public class UpdateInventorySlotMessage :  ICharacterMessage
 {
-    public UpdateInventorySlotMessage(int slotId, ICharacterItem? item)
+    public UpdateInventorySlotMessage(int slotId, IItem? item)
     {
         SlotId = slotId;
         Item = item;
     }
     
-    public ICharacterItem? Item { get; }
+    public IItem? Item { get; }
 
     public int SlotId { get; }
 
