@@ -26,7 +26,6 @@ using y1000.Source.Networking.Connection;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 using y1000.Source.Sprite;
-using y1000.Source.Util;
 
 namespace y1000.Source;
 
@@ -64,8 +63,13 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private readonly CreatureAudio[] _entitySoundPlayers;
 
+	private string _token = "";
+	
+	private string _charName = "";
+
 	public Game()
 	{
+		// 1024, 768
 		_eventMediator = InitializeEventMediator();
 		_itemFactory = ItemFactory.Instance;
 		_messageFactory = new MessageFactory(_itemFactory);
@@ -82,6 +86,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		eventMediator.SetComponent(WriteMessage);
 		eventMediator.SetComponent(OnDragItemEvent);
 		return eventMediator;
+	}
+
+	public void SetToken(string t, string n)
+	{
+		_token = t;
+		_charName = n;
 	}
 
 	private async void ReplayBgm()
@@ -101,7 +111,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			_entitySoundPlayers[i] = GetNode<CreatureAudio>("SoundPlayer" + (i + 1));
 		}
-		//AtdChecker.Check();
+		GetWindow().Size = new Vector2I(1024, 768);
+		GetWindow().ContentScaleSize = new Vector2I(1024, 768);
 	}
 
 	private void LoadAndPlayBackgroundMusic(string bgm)
@@ -151,7 +162,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 				new MessageHandler(this))
 				)).Channel<TcpSocketChannel>();
 		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
-		await _channel.WriteAndFlushAsync(new LoginEvent());
+		await _channel.WriteAndFlushAsync(new LoginEvent(_token, _charName));
 	}
 
 	private async void WriteMessage(IClientEvent message)

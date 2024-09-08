@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="y1000"
-run/main_scene="res://game.tscn"
+run/main_scene="res://Login.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,8 +21,8 @@ LogInit="*res://Source/LogInit.cs"
 
 [display]
 
-window/size/viewport_width=1024
-window/size/viewport_height=768
+window/size/viewport_width=527
+window/size/viewport_height=479
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
