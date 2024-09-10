@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Godot;
 using NLog;
+using y1000.Source.Assistant;
 using y1000.Source.Character;
 using y1000.Source.Control.Bank;
 using y1000.Source.Control.Bottom;
@@ -99,11 +100,12 @@ public partial class UIController : CanvasLayer
     {
         _bottomControl.InventoryButton.Pressed += _rightControl.OnInventoryButtonClicked;
         _bottomControl.KungFuButton.Pressed += _rightControl.OnKungFuButtonClicked;
+        _bottomControl.AssistantButton.Pressed += _rightControl.OnAssistantClicked;
     }
     
-    public void BindCharacter(CharacterImpl character, string realmName)
+    public void BindCharacter(CharacterImpl character, string realmName, AutoFillAssistant autoFillAssistant)
     {
-        _rightControl.BindCharacter(character);
+        _rightControl.BindCharacter(character, autoFillAssistant);
         _bottomControl.BindCharacter(character, realmName);
         _dialogControl.BindCharacter(character);
         _mapView.BindCharacter(character);

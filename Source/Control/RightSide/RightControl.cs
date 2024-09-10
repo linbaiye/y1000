@@ -1,6 +1,8 @@
 ﻿using System;
+using y1000.Source.Assistant;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
+using y1000.Source.Control.Assistance;
 using y1000.Source.Control.RightSide.Book;
 using y1000.Source.Control.RightSide.Inventory;
 
@@ -10,11 +12,14 @@ public partial class RightControl : Godot.Control
 {
     private InventoryView? _inventory;
     private KungFuBookView? _kungFuBookView;
+
+    private AssistantView _assistantView;
     
     public override void _Ready()
     {
         _inventory = GetNode<InventoryView>("Inventory");
         _kungFuBookView = GetNode<KungFuBookView>("KungFuBook");
+        _assistantView = GetNode<AssistantView>("Assistance");
     }
     
     private void WhenCharacterUpdated(object? sender, EventArgs args)
@@ -39,20 +44,30 @@ public partial class RightControl : Godot.Control
     public void OnInventoryButtonClicked()
     {
         _kungFuBookView?.OnClosed();
+        _assistantView.OnClosed();
         _inventory?.ButtonClicked();
     }
     
     public void OnKungFuButtonClicked()
     {
         _inventory?.OnClosed();
+        _assistantView.OnClosed();
         _kungFuBookView?.ButtonClicked();
+    }
+    
+    public void OnAssistantClicked()
+    {
+        _inventory?.OnClosed();
+        _kungFuBookView?.OnClosed();
+        _assistantView.OnAssistantButtonClicked();
     }
 
     
-    public void BindCharacter(CharacterImpl character)
+    public void BindCharacter(CharacterImpl character, AutoFillAssistant assistant)
     {
         _inventory?.BindInventory(character.Inventory);
         _kungFuBookView?.BindKungFuBook(character.KungFuBook);
         character.WhenCharacterUpdated += WhenCharacterUpdated;
+        _assistantView.BindCharacter(character, assistant);
     }
 }

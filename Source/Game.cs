@@ -9,6 +9,7 @@ using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using Godot;
 using NLog;
+using y1000.Source.Assistant;
 using y1000.Source.Audio;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
@@ -62,6 +63,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	private AudioStreamPlayer _bgmAudioPlayer;
 
 	private readonly CreatureAudio[] _entitySoundPlayers;
+
+	private AutoFillAssistant? _autoFillAssistant;
 
 	private string _token = "";
 	
@@ -260,6 +263,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	public override void _Process(double delta)
 	{
 		HandleMessages();
+		_autoFillAssistant?.Update();
 	}
 
 
@@ -528,7 +532,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_character = CharacterImpl.LoggedIn(message, MapLayer, _itemFactory, _eventMediator);
 		_character.WhenCharacterUpdated += OnCharacterEvent;
 		_character.WrappedPlayer().MouseClicked += OnEntityClicked;
-		_uiController?.BindCharacter(_character, message.RealmName);
+		_autoFillAssistant = new AutoFillAssistant(_character);
+		_uiController?.BindCharacter(_character, message.RealmName, _autoFillAssistant);
 		MapLayer.BindCharacter(_character, message.MapName, message.TileName, message.ObjName, message.RoofName);
 		_entityManager.Add(_character);
 		AddChild(_character);
