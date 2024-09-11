@@ -1,7 +1,10 @@
 ﻿using System.IO;
+using System.IO.Compression;
+using Godot;
 using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
+using y1000.Source.Map;
 
 namespace y1000.Source.Util;
 
@@ -24,6 +27,18 @@ public class AtdChecker
                 Logger.Error("{0} has error, state {1}, frame count {2}, list length {3}.", name, state, atdAction.Frame,atdAction.FrameDescriptors.Count);
             }
         }
+    }
+
+    public static void TestZip()
+    {
+        // var zipArchive = ZipFile.Open("/Users/ab000785/learn/map/start.zip", ZipArchiveMode.Read);
+        // var zipArchiveEntry = zipArchive.GetEntry("start/object/101/0.png");
+        // if (zipArchiveEntry != null)
+        // {
+        //     var stream = zipArchiveEntry.Open();
+        //     Logger.Debug("Readable {0}.", stream.CanRead);
+        // }
+        new ZipFileMapObjectRepository().LoadTiles("start");
     }
 
     public static void Check()

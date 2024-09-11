@@ -1,6 +1,7 @@
 ﻿using Godot;
 using y1000.Source.Assistant;
 using y1000.Source.Character;
+using y1000.Source.Util;
 
 namespace y1000.Source.Control.Assistance;
 
@@ -14,6 +15,9 @@ public partial class AutoFillView : NinePatchRect
     private HealItemView _lifeView;
     private HealItemView _lowLifeView;
 
+    private CheckBox _grindExp;
+    private LineEdit _interval;
+
     private CharacterImpl? _character;
     
     private AutoFillAssistant? _autoFillAssistant;
@@ -26,6 +30,8 @@ public partial class AutoFillView : NinePatchRect
         _powerView = GetNode<HealItemView>("Item4");
         _lifeView = GetNode<HealItemView>("Item5");
         _lowLifeView = GetNode<HealItemView>("Item6");
+        _grindExp = GetNode<CheckBox>("GrindExp");
+        _interval = GetNode<LineEdit>("Interval");
         _engeryView.Disable();
     }
 
@@ -40,16 +46,32 @@ public partial class AutoFillView : NinePatchRect
         _autoFillAssistant.UpdateAutoFillItem(AutoFillOption.OUTER_POWER, _outerPowerView);
         _autoFillAssistant.UpdateAutoFillItem(AutoFillOption.INNER_POWER, _innerPowerView);
         _autoFillAssistant.UpdateAutoFillItem(AutoFillOption.LOW_LIFE, _lowLifeView);
+        int v = 0;
+        if (_interval.Text != null && _interval.Text.DigitOnly())
+        {
+            v = _interval.Text.ToInt();
+        }
+        _autoFillAssistant.UpdateExpAndInterval(_grindExp.ButtonPressed, v);
+        _autoFillAssistant.OnViewClosed();
+    }
+
+    private void SetValues(HealItemView itemView, AutoFillAssistant.Setting setting, CharacterImpl character)
+    {
+        itemView.BindInventory(character.Inventory);
+        itemView.SetValues(setting.Enabled, setting.Threshold, setting.UseItem);
     }
 
     public void BindCharacter(CharacterImpl character, AutoFillAssistant autoFillAssistant)
     {
         _character = character;
-        _innerPowerView.BindInventory(character.Inventory);
-        _outerPowerView.BindInventory(character.Inventory);
-        _powerView.BindInventory(character.Inventory);
-        _lifeView.BindInventory(character.Inventory);
-        _lowLifeView.BindInventory(character.Inventory);
         _autoFillAssistant = autoFillAssistant;
+        SetValues(_innerPowerView, autoFillAssistant.GetSettingsOrDefault(AutoFillOption.INNER_POWER), character);
+        SetValues(_outerPowerView, autoFillAssistant.GetSettingsOrDefault(AutoFillOption.OUTER_POWER), character);
+        SetValues(_powerView, autoFillAssistant.GetSettingsOrDefault(AutoFillOption.POWER), character);
+        SetValues(_lifeView, autoFillAssistant.GetSettingsOrDefault(AutoFillOption.LIFE), character);
+        SetValues(_lowLifeView, autoFillAssistant.GetSettingsOrDefault(AutoFillOption.LOW_LIFE), character);
+        if (autoFillAssistant.GrindExp)
+            _grindExp.ButtonPressed = true;
+        _interval.Text = autoFillAssistant.Interval.ToString();
     }
 }

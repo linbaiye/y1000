@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dayrbfw53butg" path="res://assets/ui/basic_focus.png" id="10_6lo56"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Book/BookPage.cs" id="10_wleme"]
 [ext_resource type="Texture2D" uid="uid://cfa4a1ocdta6f" path="res://assets/ui/basic.png" id="11_cxd45"]
-[ext_resource type="PackedScene" uid="uid://dypy6nd07sjb1" path="res://Scenes/Assistance.tscn" id="14_hnjge"]
+[ext_resource type="PackedScene" uid="uid://bgcmf4adq48gs" path="res://Scenes/Assistance.tscn" id="14_hnjge"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3r3ul"]
 

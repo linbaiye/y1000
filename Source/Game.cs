@@ -65,6 +65,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	private readonly CreatureAudio[] _entitySoundPlayers;
 
 	private AutoFillAssistant? _autoFillAssistant;
+	private AutoLootAssistant? _autoLootAssistant;
 
 	private string _token = "";
 	
@@ -222,12 +223,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			{
 				if (!_entitySoundPlayers[i].Playing)
 				{
-					LOGGER.Debug("Play sound {} with player {}", message.Sound, i);
 					_entitySoundPlayers[i].PlaySound(message.Sound);
 					return;
 				}
 			}
-			LOGGER.Debug("No player to play {}.", message.Sound);
 		}
 	}
 	
@@ -263,7 +262,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	public override void _Process(double delta)
 	{
 		HandleMessages();
-		_autoFillAssistant?.Update();
+		_autoFillAssistant?.Process(delta);
+		_autoLootAssistant?.Process(delta);
 	}
 
 
@@ -408,7 +408,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (_entityManager.Add(npc))
 		{
 			AddChild(npc);
-			LOGGER.Debug("Added npc {0}.", npc.Id);
 		}
 	}
 
@@ -532,7 +531,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_character = CharacterImpl.LoggedIn(message, MapLayer, _itemFactory, _eventMediator);
 		_character.WhenCharacterUpdated += OnCharacterEvent;
 		_character.WrappedPlayer().MouseClicked += OnEntityClicked;
-		_autoFillAssistant = new AutoFillAssistant(_character);
+		_autoFillAssistant = AutoFillAssistant.Create(_character);
+		_autoLootAssistant = AutoLootAssistant.Create(_entityManager, _character);
 		_uiController?.BindCharacter(_character, message.RealmName, _autoFillAssistant);
 		MapLayer.BindCharacter(_character, message.MapName, message.TileName, message.ObjName, message.RoofName);
 		_entityManager.Add(_character);

@@ -1,5 +1,6 @@
 ﻿using Godot;
 using y1000.Source.Character;
+using y1000.Source.Util;
 
 namespace y1000.Source.Control.Assistance;
 
@@ -41,7 +42,7 @@ public partial class HealItemView : NinePatchRect
         _optionButton.Disabled = true;
     }
 
-    private bool Checked()
+    public bool Checked()
     {
         return _checkBox.ButtonPressed;
     }
@@ -49,30 +50,26 @@ public partial class HealItemView : NinePatchRect
     private bool IsInputValid()
     {
         var str = _lineEdit.Text;
-        if (str == null)
-        {
-            return false;
-        }
-        foreach (char c in str)
-        {
-            if (c < '0' || c > '9')
-                return false;
-        }
-        var i = str.ToInt();
-        return i is > 0 and <= 99;
+        return str != null && str.DigitOnly();
     }
 
-    public bool IsAutoFillEnabled()
+    public int? Percentage()
     {
-        return IsInputValid() && Checked();
+        return IsInputValid() ? _lineEdit.Text.ToInt() : null;
     }
 
-    public int Percentage()
+    public void SetValues(bool e, int value, string? itemName)
     {
-        return IsInputValid() ? _lineEdit.Text.ToInt() : 100;
+        if (e)
+            _checkBox.ButtonPressed = true;
+        _lineEdit.Text = value.ToString();
+        if (itemName != null)
+        {
+            _optionButton.Text = itemName;
+        }
     }
 
-    public int BondSlot => _optionButton.GetSelectedId() == -1 ? 0 : _optionButton.GetSelectedId();
+    public string? BondName => _optionButton.Text;
 
     public void BindInventory(CharacterInventory inventory)
     {

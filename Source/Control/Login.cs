@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text.Json;
 using Godot;
 using NLog;
+using y1000.Source.Util;
 
 namespace y1000.Source.Control;
 
@@ -53,6 +54,8 @@ public partial class Login : NinePatchRect
         _maleCheckbox.Pressed += CheckMale;
         _femaleCheckBox.Pressed += CheckFemale;
         CheckMale();
+        AtdChecker.TestZip();
+        
     }
 
     

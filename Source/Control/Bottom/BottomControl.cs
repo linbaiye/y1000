@@ -140,8 +140,7 @@ public partial class BottomControl : Godot.Control
 		BindAttributeBars(character);
 		BindAttackKungFuExpBars(character);
 		UpdateRealmName(realmName);
-		_shortcuts?.BindKungFuBook(character.KungFuBook);
-		_shortcuts?.BindInventory(character.Inventory);
+		_shortcuts?.Bind(character);
 		_inputEdit?.BindCharacter(character);
 	}
 

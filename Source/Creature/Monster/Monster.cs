@@ -160,7 +160,6 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	{
 		var interpolation = npcInterpolation.Interpolation;
 		var name = npcInterpolation.Name;
-		LOGGER.Debug("Trying to initialize {0}", npcInterpolation.Name);
 		var monsterAnimation = MonsterAnimationFactory.Instance.Load("z" + npcInterpolation.Shape,
 			npcInterpolation.Animate);
 		var effectAnimation =

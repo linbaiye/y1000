@@ -1,68 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using NLog;
 using y1000.Source.Character;
 using y1000.Source.Control.Assistance;
+using y1000.Source.Storage;
 
 namespace y1000.Source.Assistant;
 
 public class AutoFillAssistant
 {
     
-    private CharacterImpl _character;
+    private readonly CharacterImpl _character;
 
-    private long _nextMillis;
+    private double _timer;
 
-    private bool _grindExp;
+    private Setting? _currentFill;
 
-    private int _interval;
+    private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+    private const string Name = "assist";
 
-    private class Setting
+    public class Setting
     {
         public AutoFillOption Option { get; set; }
+        
+        public bool Enabled { get; set; }
         public int Threshold { get; set; }
-        public int UseSlot { get; set; }
-
-        public bool Valid => Threshold > 0 && UseSlot > 0;
+        public string? UseItem { get; set; }
     }
 
-    private IDictionary<AutoFillOption, Setting> _settings;
-    
-    public AutoFillAssistant(CharacterImpl character)
+    private AutoFillAssistant(CharacterImpl character)
     {
-        _nextMillis = 0;
-        _grindExp = false;
-        _settings = new Dictionary<AutoFillOption, Setting>();
+        _timer = 0;
+        Settings = new Dictionary<AutoFillOption, Setting>();
         _character = character;
-        _interval = 300;
+        GrindExp = false;
+        Interval = 300;
     }
 
     public void UpdateAutoFillItem(AutoFillOption option, HealItemView view)
     {
-        _settings.Remove(option);
-        if (view.IsAutoFillEnabled())
+        Settings.Remove(option);
+        Settings.Add(option, new Setting()
         {
-            _settings.Add(option, new Setting()
-            {
-                Option = option,
-                Threshold = view.Percentage(),
-                UseSlot = view.BondSlot,
-            });
-        }
-        else
-        {
-            _settings.Add(option, new Setting()
-            {
-                Option = option,
-                Threshold = -1,
-                UseSlot = 0,
-            });
-        }
+            Option = option,
+            Threshold = view.Percentage() ?? 0,
+            Enabled = view.Checked(),
+            UseItem = view.BondName,
+        });
     }
 
     public void UpdateExpAndInterval(bool enableExp, int interval)
     {
-        _grindExp = enableExp;
-        _interval = interval > 300 ? interval : 300;
+        GrindExp = enableExp;
+        Interval = interval > 300 ? interval : 300;
+    }
+    
+    public void OnViewClosed()
+    {
+        new FileStorage(_character.EntityName).Save(Name, ToString());
     }
 
     private bool ShouldUse(AutoFillOption option, int threshold)
@@ -81,21 +77,143 @@ public class AutoFillAssistant
         return false;
     }
 
-    public void Update()
+    private bool IsValid(Setting setting)
     {
-        var current = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        if (current < _nextMillis)
+        return setting.Enabled && setting.Threshold > 0
+                               && setting.UseItem != null;
+    }
+
+    private void UseItem(Setting setting)
+    {
+        if (!IsValid(setting)|| setting.UseItem == null)
+            return;
+        int slot = _character.Inventory.FindSlot(setting.UseItem);
+        if (slot != 0)
+            _character.Inventory.OnUIDoubleClick(slot);
+    }
+
+
+    private void UpdateKeepFill()
+    {
+        if (!GrindExp || _currentFill == null)
+        {
+            _currentFill = null;
+            return;
+        }
+        bool done = true;
+        switch (_currentFill.Option)
+        {
+            case AutoFillOption.POWER:
+                done = _character.PowerBar.Percent >= 95;
+                break;
+            case AutoFillOption.INNER_POWER:
+                done = _character.InnerPowerBar.Percent >= 95;
+                break;
+            case AutoFillOption.OUTER_POWER:
+                done = _character.OuterPowerBar.Percent >= 95;
+                break;
+        }
+        if (done)
+        {
+            _currentFill = null;
+        }
+    }
+    
+
+    public bool GrindExp { get; private set; }
+
+    public int Interval { get; private set; }
+        
+    private IDictionary<AutoFillOption, Setting> Settings { get; set; }
+
+    public Setting GetSettingsOrDefault(AutoFillOption option)
+    {
+        if (Settings.TryGetValue(option, out var s))
+            return s;
+        return new Setting()
+        {
+            Enabled = false,
+            Option = option,
+            Threshold = 10,
+            UseItem = null
+        };
+    }
+    
+    private class Storage
+    {
+        public bool GrindExp { get; set; }
+        public int Interval { get; set; }
+        public IDictionary<AutoFillOption, Setting> Settings { get; set; } = new Dictionary<AutoFillOption, Setting>();
+    }
+
+    public override string ToString()
+    {
+        var storage = new Storage()
+        {
+            GrindExp = GrindExp,
+            Interval = Interval,
+            Settings = Settings,
+        };
+        return JsonSerializer.Serialize(storage);
+    }
+
+    private bool CanGrind(AutoFillOption option)
+    {
+        return option is AutoFillOption.POWER or AutoFillOption.INNER_POWER or AutoFillOption.OUTER_POWER;
+    }
+
+
+    public void Process(double delta)
+    {
+        if (_character.Dead) 
+            return;
+        UpdateKeepFill();
+        _timer -= delta;
+        if (_timer > 0)
         {
             return;
         }
-        _nextMillis = current + _interval;
-        foreach (var setting in _settings.Values)
+        _timer = (double)Interval / 1000;
+        if (_currentFill != null)
         {
-            if (setting.Valid && ShouldUse(setting.Option, setting.Threshold))
+            UseItem(_currentFill);
+            return;
+        }
+        foreach (var setting in Settings.Values)
+        {
+            if (IsValid(setting) && ShouldUse(setting.Option, setting.Threshold))
             {
-                _character.Inventory.OnUIDoubleClick(setting.UseSlot);
+                UseItem(setting);
+                if (GrindExp && CanGrind(setting.Option))
+                    _currentFill = setting;
                 break;
             }
         }
+    }
+
+    public static AutoFillAssistant Create(CharacterImpl character)
+    {
+        FileStorage fileStorage = new FileStorage(character.EntityName);
+        var content = fileStorage.Load(Name);
+        var autoFillAssistant = new AutoFillAssistant(character);
+        if (content == null)
+        {
+            return autoFillAssistant;
+        }
+        try
+        {
+            var storage = JsonSerializer.Deserialize<Storage>(content);
+            if (storage != null)
+            {
+                autoFillAssistant.Settings = storage.Settings;
+                autoFillAssistant.GrindExp = storage.GrindExp;
+                autoFillAssistant.Interval = storage.Interval;
+            }
+        }
+        catch (Exception e)
+        {
+            LOGGER.Debug(e);
+        }
+        return autoFillAssistant;
     }
 }

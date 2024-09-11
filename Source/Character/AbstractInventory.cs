@@ -66,6 +66,18 @@ public abstract class AbstractInventory
     {
         return _items.TryGetValue(slot, out var item) ? item : null;
     }
+    
+    public int FindSlot(string name)
+    {
+        foreach (var itemsKey in _items.Keys)
+        {
+            if (_items.TryGetValue(itemsKey, out var i) && i.ItemName.Equals(name))
+            {
+                return itemsKey;
+            }
+        }
+        return 0;
+    }
 
     public void Update(int slot, IItem? item)
     {

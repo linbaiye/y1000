@@ -55,6 +55,11 @@ public partial class GroundItem  :  Node2D, IEntity, IServerMessageVisitor
         }
     }
 
+    public void Pick()
+    {
+        EventMediator?.NotifyServer(new PickItemEvent((int)Id));
+    }
+
     public long Id { get; private set; }
     
     public string EntityName { get; private set; } = "";
