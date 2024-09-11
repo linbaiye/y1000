@@ -11,7 +11,7 @@ public class MonsterAnimationFactory
     private readonly IAtdRepository _atdRepository;
     private MonsterAnimationFactory()
     {
-        _spriteRepository = FilesystemSpriteRepository.Instance;
+        _spriteRepository = ISpriteRepository.Instance;
         _atdRepository = FilesystemAtdRepository.Instance;
     }
 

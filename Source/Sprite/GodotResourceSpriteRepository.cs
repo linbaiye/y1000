@@ -54,8 +54,5 @@ public class GodotResourceSpriteRepository : AbstractSpriteRepository
         return LoadFromResource("res://sprite/" + name + "/", offset);
     }
 
-    public override AtzSprite LoadByPath(string path, Vector2? offset = null)
-    {
-        return LoadFromResource(path, offset);
-    }
+
 }

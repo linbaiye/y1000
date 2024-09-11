@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx8diosi0sqr"]
+
+[ext_resource type="Script" path="res://Source/Audio/AudioManager.cs" id="1_1ghpa"]
+[ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="1_432ss"]
+
+[node name="AudioManager" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1ghpa")
+
+[node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="SoundPlayer1" type="AudioStreamPlayer" parent="."]
+script = ExtResource("1_432ss")
+
+[node name="SoundPlayer2" type="AudioStreamPlayer" parent="."]
+script = ExtResource("1_432ss")
+
+[node name="SoundPlayer3" type="AudioStreamPlayer" parent="."]
+script = ExtResource("1_432ss")
+
+[node name="SoundPlayer4" type="AudioStreamPlayer" parent="."]
+script = ExtResource("1_432ss")

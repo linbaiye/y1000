@@ -88,14 +88,9 @@ namespace y1000.Source.Sprite
         public static AtzSprite LoadOffsetMalePlayerSprites(string nr)
         {
             //return Load("res://sprite/char/" + nr + "/");
-            return Repository.LoadByPath("res://sprite/char/" + nr + "/", new Vector2(16, -12));
+            throw new Exception();
         }
         
-        public static AtzSprite LoadOffsetWeaponSprites(string nr)
-        {
-            //return Load("res://sprite/weapon/" + nr + "/");
-            return Load("res://sprite/weapon/" + nr + "/", new Vector2(16, -12));
-        }
 
         public static AtzSprite LoadSprites(string name)
         {
@@ -107,10 +102,6 @@ namespace y1000.Source.Sprite
             return Load("res://sprite/Effect/" + name + "/");
         }
 
-        public static AtzSprite LoadSprites(string name, Vector2 offset)
-        {
-            return Load("res://sprite/" + name + "/", offset);
-        }
 
 
         public static AtzSprite LoadOffsetMonsterSprites(string name)

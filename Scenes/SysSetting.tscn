@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://qaao0hadvugj"]
+
+[ext_resource type="Texture2D" uid="uid://c10dt2ie4f3if" path="res://assets/ui/sys_setting.png" id="1_8hr4h"]
+[ext_resource type="Script" path="res://Source/Control/System/SystemSettings.cs" id="2_mgyti"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kvt7"]
+
+[node name="SysSetting" type="NinePatchRect"]
+custom_minimum_size = Vector2(263, 287)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -264.0
+offset_bottom = -192.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8hr4h")
+script = ExtResource("2_mgyti")
+
+[node name="BgmCheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 52.0
+offset_right = 44.0
+offset_bottom = 76.0
+
+[node name="BgmVolSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 56.0
+offset_right = 208.0
+offset_bottom = 72.0
+theme_override_styles/slider = SubResource("StyleBoxFlat_5kvt7")
+value = 100.0
+
+[node name="SoundCheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 82.0
+offset_right = 44.0
+offset_bottom = 106.0
+
+[node name="SoundVolSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 86.0
+offset_right = 208.0
+offset_bottom = 102.0
+theme_override_styles/slider = SubResource("StyleBoxFlat_5kvt7")
+value = 100.0
+
+[node name="ShoutCheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 135.0
+offset_right = 44.0
+offset_bottom = 159.0
+
+[node name="GuildCheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 135.0
+offset_right = 158.0
+offset_bottom = 159.0
+
+[node name="SpeakCheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 169.0
+offset_right = 158.0
+offset_bottom = 193.0
+
+[node name="BroadcastCheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 169.0
+offset_right = 44.0
+offset_bottom = 193.0
+
+[node name="AliasCheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 204.0
+offset_right = 44.0
+offset_bottom = 228.0
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 4.0
+offset_right = 258.0
+offset_bottom = 29.0
+flat = true

@@ -33,6 +33,7 @@ public partial class InventoryView : AbstractInventoryView
         });
         _textLabel = GetNode<Label>("TextLabel");
         _bankMode = false;
+        Visible = false;
     }
 
     public void EnableBankMode(Action<InventorySlotView> dragHandler)

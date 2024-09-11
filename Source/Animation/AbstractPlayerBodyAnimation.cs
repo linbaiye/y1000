@@ -5,7 +5,7 @@ namespace y1000.Source.Animation;
 
 public abstract class AbstractPlayerBodyAnimation<TA> : AbstractPlayerAnimation<TA> where TA: AbstractPlayerBodyAnimation<TA>
 {
-    protected static readonly ISpriteRepository SpriteRepository = FilesystemSpriteRepository.Instance;
+    protected static readonly ISpriteRepository SpriteRepository = ISpriteRepository.Instance;
     
     protected static TA Config(TA animation, AtzSprite normal, AtzSprite fistKick, AtzSprite swordBladeThrow, AtzSprite axeSpear, AtzSprite bow)
     {

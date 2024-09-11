@@ -59,11 +59,6 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository, ISpriteReposi
         return atzSprite;
     }
 
-    public override AtzSprite LoadByPath(string path, Vector2? offset = null)
-    {
-        return new AtzSprite(new Texture2D[1], new Vector2[1]);
-    }
-
     public bool Exists(string number)
     {
         return Directory.Exists(DIR_PATH + number.ToLower());

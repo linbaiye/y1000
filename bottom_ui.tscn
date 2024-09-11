@@ -89,6 +89,20 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3amq6")
 text = "辅助"
 
+[node name="SystemButton" type="Button" parent="Container"]
+layout_mode = 0
+offset_left = 967.0
+offset_top = 166.0
+offset_right = 1006.0
+offset_bottom = 188.0
+theme_override_colors/font_color = Color(0.847656, 0.688255, 0.062912, 1)
+theme_override_colors/font_focus_color = Color(0.847656, 0.688255, 0.062912, 1)
+theme_override_fonts/font = ExtResource("6_k2h1g")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3amq6")
+text = "系统"
+
 [node name="TextArea" type="VBoxContainer" parent="Container"]
 layout_mode = 0
 offset_left = 261.0

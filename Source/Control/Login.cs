@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text.Json;
 using Godot;
 using NLog;
-using y1000.Source.Util;
+using HttpClient = System.Net.Http.HttpClient;
 
 namespace y1000.Source.Control;
 
@@ -54,8 +54,7 @@ public partial class Login : NinePatchRect
         _maleCheckbox.Pressed += CheckMale;
         _femaleCheckBox.Pressed += CheckFemale;
         CheckMale();
-        AtdChecker.TestZip();
-        
+        //AtdChecker.ZipAll();
     }
 
     
@@ -114,7 +113,7 @@ public partial class Login : NinePatchRect
         bool male = _maleCheckbox.ButtonPressed;
         try
         {
-            System.Net.Http.HttpClient httpClient = new();
+            HttpClient httpClient = new();
             var httpRequestMessage = new HttpRequestMessage();
             httpRequestMessage.Headers.Add("X-Type", "CREATE_CHAR");
             httpRequestMessage.RequestUri = new Uri("http://localhost:9901");
@@ -246,7 +245,7 @@ public partial class Login : NinePatchRect
         httpRequestMessage.RequestUri = new Uri("http://localhost:9901");
         httpRequestMessage.Method = HttpMethod.Post;
         httpRequestMessage.Content = new StringContent("{\"username\" : \"" + user.Text+ "\", \"password\": \"" + pswd.Text + "\"}");
-        System.Net.Http.HttpClient httpClient = new();
+        HttpClient httpClient = new();
         try
         {
             var httpResponseMessage = httpClient.Send(httpRequestMessage);
@@ -298,7 +297,7 @@ public partial class Login : NinePatchRect
             tip.Text = "请输入密码";
             return;
         }
-        System.Net.Http.HttpClient httpClient = new();
+        HttpClient httpClient = new();
         var httpRequestMessage = new HttpRequestMessage();
         httpRequestMessage.Headers.Add("X-Type", "LOGIN");
         httpRequestMessage.RequestUri = new Uri("http://localhost:9901");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Godot;
 using NLog;
 using y1000.Source.Assistant;
+using y1000.Source.Audio;
 using y1000.Source.Character;
 using y1000.Source.Control.Bank;
 using y1000.Source.Control.Bottom;
@@ -12,7 +13,7 @@ using y1000.Source.Control.Map;
 using y1000.Source.Control.PlayerAttribute;
 using y1000.Source.Control.PlayerTrade;
 using y1000.Source.Control.RightSide;
-using y1000.Source.Control.RightSide.Inventory;
+using y1000.Source.Control.System;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Item;
@@ -50,6 +51,9 @@ public partial class UIController : CanvasLayer
 
     private BankView _bankView;
 
+    private SystemMenu _systemMenu;
+    
+    private SystemSettings _systemSettings;
     
     private static readonly string TRADING_ERROR = "另一交易正在进行中。";
 
@@ -66,7 +70,16 @@ public partial class UIController : CanvasLayer
         _playerTradeWindow = GetNode<PlayerTradeWindow>("PlayerTradeWindow");
         _mapView = GetNode<MapView>("MapView");
         _bankView = GetNode<BankView>("Bank");
+        _systemMenu = GetNode<SystemMenu>("SysMenu");
+        _systemMenu.SettingPressed += OnSysSettingPressed;
+        _systemSettings = GetNode<SystemSettings>("SysSetting");
         BindButtons();
+    }
+
+    private void OnSysSettingPressed()
+    {
+        _systemMenu.Visible = false;
+        _systemSettings.Visible = true;
     }
 
     public void Initialize(EventMediator eventMediator,
@@ -101,16 +114,21 @@ public partial class UIController : CanvasLayer
         _bottomControl.InventoryButton.Pressed += _rightControl.OnInventoryButtonClicked;
         _bottomControl.KungFuButton.Pressed += _rightControl.OnKungFuButtonClicked;
         _bottomControl.AssistantButton.Pressed += _rightControl.OnAssistantClicked;
+        _bottomControl.SystemButton.Pressed += _systemMenu.OnSystemButtonClicked;
     }
     
-    public void BindCharacter(CharacterImpl character, string realmName, AutoFillAssistant autoFillAssistant)
+    public void BindCharacter(CharacterImpl character,
+        string realmName,
+        AutoFillAssistant autoFillAssistant,
+        AudioManager? audioManager)
     {
         _rightControl.BindCharacter(character, autoFillAssistant);
         _bottomControl.BindCharacter(character, realmName);
         _dialogControl.BindCharacter(character);
         _mapView.BindCharacter(character);
         _itemAttributeControl.BindCharacter(character);
-        //_bottomControl.BindShortcuts(_rightControl.InventoryView, character.KungFuBook);
+        if (audioManager != null)
+            _systemSettings.BindAudioManager(audioManager);
     }
     
 

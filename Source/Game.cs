@@ -60,9 +60,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private readonly ISpriteRepository _spriteRepository;
 	
-	private AudioStreamPlayer _bgmAudioPlayer;
-
-	private readonly CreatureAudio[] _entitySoundPlayers;
+	private AudioManager? _audioManager;
 
 	private AutoFillAssistant? _autoFillAssistant;
 	private AutoLootAssistant? _autoLootAssistant;
@@ -78,10 +76,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_itemFactory = ItemFactory.Instance;
 		_messageFactory = new MessageFactory(_itemFactory);
 		_entityManager = EntityManager.Instance;
-		_spriteRepository = FilesystemSpriteRepository.Instance;
+		_spriteRepository = ISpriteRepository.Instance;;
 		_entityFactory = new EntityFactory(_eventMediator, _spriteRepository);
 		_character = null;
-		_entitySoundPlayers = new CreatureAudio[4];
 	}
 
 	private EventMediator InitializeEventMediator()
@@ -98,43 +95,15 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_charName = n;
 	}
 
-	private async void ReplayBgm()
-	{
-		await Task.Delay(10000);
-		_bgmAudioPlayer.Play();
-	}
-
 	public override void _Ready()
 	{
 		SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
 		_uiController.Initialize(_eventMediator, _spriteRepository, _itemFactory);
-		_bgmAudioPlayer = GetNode<AudioStreamPlayer>("BgmPlayer");
-		_bgmAudioPlayer.Finished += ReplayBgm;
-		for (int i = 0; i < _entitySoundPlayers.Length; i++)
-		{
-			_entitySoundPlayers[i] = GetNode<CreatureAudio>("SoundPlayer" + (i + 1));
-		}
 		GetWindow().Size = new Vector2I(1024, 768);
 		GetWindow().ContentScaleSize = new Vector2I(1024, 768);
+		_audioManager = GetNode<AudioManager>("AudioManager");
 	}
-
-	private void LoadAndPlayBackgroundMusic(string bgm)
-	{
-		var path = "res://assets/bgm/" + bgm + ".mp3";
-		if (!FileAccess.FileExists(path))
-		{
-			path = "res://assets/bgm/" + bgm + ".wav";
-		}
-		if (FileAccess.FileExists(path))
-		{
-			var streamWav = ResourceLoader.Load<AudioStreamMP3>(path);
-			_bgmAudioPlayer.Stop();
-			_bgmAudioPlayer.Stream = streamWav;
-			_bgmAudioPlayer.Play();
-		}
-	}
-	
 
 	private void OnCharacterEvent(object? sender, EventArgs eventArgs)
 	{
@@ -152,7 +121,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			AddChild(_character);
 			_entityManager.Add(_character);
-			LoadAndPlayBackgroundMusic(teleportedArgs.Bgm);
+			_audioManager?.LoadAndPlayBackgroundMusic(teleportedArgs.Bgm);
 		}
 	}
 
@@ -180,7 +149,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 
 	private MapLayer MapLayer => GetNode<MapLayer>("MapLayer");
-
 
 	private void LocalTest(InputEventKey eventKey)
 	{
@@ -219,14 +187,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 		else
 		{
-			for (int i = 0; i < _entitySoundPlayers.Length; i++)
-			{
-				if (!_entitySoundPlayers[i].Playing)
-				{
-					_entitySoundPlayers[i].PlaySound(message.Sound);
-					return;
-				}
-			}
+			_audioManager?.PlaySound(message);
 		}
 	}
 	
@@ -524,7 +485,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		_uiController?.OperateBank(message);
 	}
-	
 
 	public void Visit(JoinedRealmMessage message)
 	{
@@ -533,10 +493,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_character.WrappedPlayer().MouseClicked += OnEntityClicked;
 		_autoFillAssistant = AutoFillAssistant.Create(_character);
 		_autoLootAssistant = AutoLootAssistant.Create(_entityManager, _character);
-		_uiController?.BindCharacter(_character, message.RealmName, _autoFillAssistant);
+		_uiController?.BindCharacter(_character, message.RealmName, _autoFillAssistant, _audioManager);
 		MapLayer.BindCharacter(_character, message.MapName, message.TileName, message.ObjName, message.RoofName);
 		_entityManager.Add(_character);
 		AddChild(_character);
-		LoadAndPlayBackgroundMusic(message.Bgm);
+		_audioManager?.LoadAndPlayBackgroundMusic(message.Bgm);
 	}
 }

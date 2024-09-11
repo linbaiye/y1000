@@ -94,8 +94,7 @@ namespace y1000.code.player.state
 
         public OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)
         {
-            AtzSprite reader = AtzSprite.LoadSprites(weapon.SpriteBasePath + "0" , weapon.Offset);
-            return GetOffsetTexture(reader, animationSpriteNumber);
+            throw new Exception();
         }
 
     }

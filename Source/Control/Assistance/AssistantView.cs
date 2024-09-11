@@ -36,7 +36,7 @@ public partial class AssistantView : NinePatchRect
     {
         _heal.GrabFocus();
         DisplayHealSettings();
-        Visible = true;
+        Visible = !Visible;
     }
 
     public void OnClosed()

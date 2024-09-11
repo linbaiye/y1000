@@ -191,5 +191,6 @@ public partial class BottomControl : Godot.Control
 	public Button InventoryButton => GetNode<Button>("Container/InventoryButton");
 	public Button KungFuButton => GetNode<Button>("Container/KungFuButton");
 	public Button AssistantButton => GetNode<Button>("Container/AssistantButton");
+	public Button SystemButton => GetNode<Button>("Container/SystemButton");
 
 }

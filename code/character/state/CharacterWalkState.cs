@@ -65,7 +65,7 @@ namespace y1000.code.character.state
 
         public override OffsetTexture WeaponTexture(int animationSpriteNumber, IWeapon weapon)
         {
-            return AtzSprite.LoadSprites(weapon.SpriteBasePath + "0", weapon.Offset).Get(SpriteOffset + animationSpriteNumber);
+            throw new Exception();
         }
 
 

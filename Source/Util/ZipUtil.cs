@@ -1,0 +1,31 @@
+﻿using System.IO;
+using System.IO.Compression;
+using System.Text;
+using Godot;
+
+namespace y1000.Source.Util;
+
+public static class ZipUtil
+{
+        
+    public static string ReadAsString(this ZipArchiveEntry entry)
+    {
+        using var osr = new StreamReader(entry.Open(), Encoding.Default);
+        return osr.ReadToEnd();
+    }
+    
+    public static ImageTexture? ReadAsTexture(this ZipArchiveEntry entry)
+    {
+        if (!entry.FullName.EndsWith(".png"))
+        {
+            return null;
+        }
+        using var stream = entry.Open();
+        using var ms = new MemoryStream();
+        stream.CopyTo(ms);
+        var image = new Image();
+        var error = image.LoadPngFromBuffer(ms.ToArray());
+        return error == Error.Ok ? ImageTexture.CreateFromImage(image) : null;
+    }
+    
+}

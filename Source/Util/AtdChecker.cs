@@ -5,6 +5,7 @@ using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
 using y1000.Source.Map;
+using FileAccess = System.IO.FileAccess;
 
 namespace y1000.Source.Util;
 
@@ -38,8 +39,19 @@ public class AtdChecker
         //     var stream = zipArchiveEntry.Open();
         //     Logger.Debug("Readable {0}.", stream.CanRead);
         // }
-        new ZipFileMapObjectRepository().LoadTiles("start");
+        //new ZipFileMapObjectRepository().LoadObjects("start");
     }
+
+    public static void ZipAll()
+    {
+        var directories = Directory.GetDirectories("D:\\work\\godot\\map");
+        foreach (var dir in directories)
+        {
+            Logger.Debug("Zip file {0}.", dir);
+            //ZipFile.CreateFromDirectory(dir, dir + ".zip");
+        }
+    }
+        
 
     public static void Check()
     {

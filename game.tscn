@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=22 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -15,8 +15,11 @@
 [ext_resource type="Script" path="res://Source/Control/Map/MapView.cs" id="13_xh10o"]
 [ext_resource type="PackedScene" uid="uid://bjjg8uukhy3s8" path="res://Scenes/MapNpcView.tscn" id="14_vdhs2"]
 [ext_resource type="PackedScene" uid="uid://ca6kivqahtqcd" path="res://Scenes/Bank.tscn" id="15_25end"]
+[ext_resource type="PackedScene" uid="uid://p7bamjypilc0" path="res://Scenes/SysMenu.tscn" id="16_0v5gr"]
 [ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="16_ing8y"]
 [ext_resource type="PackedScene" uid="uid://b8qn25p71tho" path="res://assets/test/teleport.tscn" id="16_wmncn"]
+[ext_resource type="PackedScene" uid="uid://qaao0hadvugj" path="res://Scenes/SysSetting.tscn" id="17_77laa"]
+[ext_resource type="PackedScene" uid="uid://cx8diosi0sqr" path="res://Scenes/AudioManager.tscn" id="20_0dkt0"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
 
@@ -46,6 +49,7 @@ offset_bottom = 29.0
 visible = false
 
 [node name="InputWindow" parent="UILayer" instance=ExtResource("6_wxera")]
+visible = false
 script = ExtResource("7_6qoal")
 
 [node name="DialogUI" parent="UILayer" instance=ExtResource("7_syuii")]
@@ -56,6 +60,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="LeftsideTextArea" parent="UILayer" instance=ExtResource("9_0412u")]
+visible = false
 offset_left = 3.0
 offset_top = 486.0
 offset_right = -775.0
@@ -63,16 +68,20 @@ offset_bottom = -172.0
 mouse_filter = 2
 
 [node name="ItemAttribute" parent="UILayer" instance=ExtResource("10_xy80o")]
+visible = false
 offset_left = 383.0
 offset_top = 226.0
 offset_right = -385.0
 offset_bottom = -355.0
 
 [node name="PlayerAttributeWindow" parent="UILayer" instance=ExtResource("11_yghsv")]
+visible = false
 
 [node name="PlayerTradeWindow" parent="UILayer" instance=ExtResource("12_mif0g")]
+visible = false
 
 [node name="MapView" type="TextureRect" parent="UILayer"]
+visible = false
 z_index = 4
 offset_left = 282.0
 offset_top = 111.0
@@ -102,6 +111,30 @@ offset_bottom = 149.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="SysMenu" parent="UILayer" instance=ExtResource("16_0v5gr")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -127.5
+offset_right = 86.0
+offset_bottom = 127.5
+
+[node name="SysSetting" parent="UILayer" instance=ExtResource("17_77laa")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -131.5
+offset_top = -143.5
+offset_right = 131.5
+offset_bottom = 143.5
+
 [node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -12.18
 
@@ -126,3 +159,5 @@ script = ExtResource("16_ing8y")
 
 [node name="SoundPlayer4" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_ing8y")
+
+[node name="AudioManager" parent="." instance=ExtResource("20_0dkt0")]
