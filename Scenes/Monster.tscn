@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctox857khwxv3"]
+[gd_scene load_steps=6 format=3 uid="uid://ctox857khwxv3"]
 
 [ext_resource type="Script" path="res://Source/Creature/Monster/Monster.cs" id="1_k86rw"]
 [ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_qsi3r"]
 [ext_resource type="Script" path="res://Source/Creature/Monster/MonsterEffectSprite.cs" id="3_s6wlh"]
 [ext_resource type="PackedScene" uid="uid://bqjthq3o0r0ot" path="res://Scenes/HealthBar.tscn" id="3_sf2jp"]
-[ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="4_060ux"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g6ou6"]
 blend_mode = 1
@@ -33,6 +32,3 @@ offset_left = 8.0
 offset_top = -50.0
 offset_right = 28.0
 offset_bottom = -48.0
-
-[node name="Audio" type="AudioStreamPlayer" parent="."]
-script = ExtResource("4_060ux")

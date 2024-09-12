@@ -183,7 +183,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		if (message.Id == _character.Id)
 		{
-			_character.Handle(message);
+			_audioManager?.PlayCharacterSound(message.Sound);
 		}
 		else
 		{

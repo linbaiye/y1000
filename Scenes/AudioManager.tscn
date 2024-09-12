@@ -23,3 +23,6 @@ script = ExtResource("1_432ss")
 
 [node name="SoundPlayer4" type="AudioStreamPlayer" parent="."]
 script = ExtResource("1_432ss")
+
+[node name="PlayerAudio" type="AudioStreamPlayer" parent="."]
+script = ExtResource("1_432ss")

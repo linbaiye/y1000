@@ -334,11 +334,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		ChangeState(IPlayerState.NonHurtState(CreatureState.SIT));
 	}
 	
-	public void Visit(EntitySoundMessage message)
-	{
-		PlaySound(message.Sound);
-	}
-
 	public void ResetState()
 	{
 		_state.Reset();
@@ -397,7 +392,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void Visit(CreatureDieMessage message)
 	{
 		ChangeState(IPlayerState.NonHurtState(CreatureState.DIE));
-		PlaySound(message.Sound);
 		ShowLifePercent(0);
 	}
 

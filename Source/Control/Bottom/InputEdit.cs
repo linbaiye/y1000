@@ -15,6 +15,7 @@ public partial class InputEdit : LineEdit
     {
         _character = character;
     }
+
     public override void _UnhandledKeyInput(InputEvent @event)
     {
         if (@event is not InputEventKey inputEvent) 
@@ -23,9 +24,7 @@ public partial class InputEdit : LineEdit
         {
             if (!string.IsNullOrEmpty(Text) && Text.Length > 1)
             {
-                Logger.Debug("Before {0}.", Text);
                 Text = Text.Substring(0, Text.Length - 1);
-                Logger.Debug("After {0}.", Text);
             }
             AcceptEvent();
             return;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://duo0butuerf3j"]
+[gd_scene load_steps=18 format=3 uid="uid://duo0butuerf3j"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerImpl.cs" id="1_68hen"]
 [ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_1av6c"]
@@ -14,7 +14,6 @@
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="11_0mhdp"]
 [ext_resource type="Script" path="res://Source/Player/AttackEffectSprite.cs" id="11_vx863"]
 [ext_resource type="Script" path="res://Source/Player/KungFuTip.cs" id="12_r6g6t"]
-[ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="15_3adja"]
 [ext_resource type="PackedScene" uid="uid://bqjthq3o0r0ot" path="res://Scenes/HealthBar.tscn" id="15_7nysb"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p7g52"]
@@ -109,8 +108,5 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_51gj6")
 horizontal_alignment = 1
 script = ExtResource("12_r6g6t")
-
-[node name="Audio" type="AudioStreamPlayer" parent="."]
-script = ExtResource("15_3adja")
 
 [node name="HealthBar" parent="." instance=ExtResource("15_7nysb")]

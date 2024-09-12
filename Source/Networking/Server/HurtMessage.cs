@@ -6,14 +6,13 @@ namespace y1000.Source.Networking.Server;
 
 public class HurtMessage : AbstractEntityMessage
 {
-    private HurtMessage(long id, Vector2I coordinate, Direction direction, CreatureState afterHurtState, int currentLife, int maxLife, string sound) : base(id)
+    private HurtMessage(long id, Vector2I coordinate, Direction direction, CreatureState afterHurtState, int currentLife, int maxLife) : base(id)
     {
         Coordinate = coordinate;
         Direction = direction;
         AfterHurtState = afterHurtState;
         CurrentLife = currentLife;
         MaxLife = maxLife;
-        Sound = sound;
     }
     public Vector2I Coordinate { get; }
     
@@ -27,8 +26,6 @@ public class HurtMessage : AbstractEntityMessage
     
     public int MaxLife { get; }
 
-    public string Sound { get; }
-    
     public override void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
@@ -43,6 +40,6 @@ public class HurtMessage : AbstractEntityMessage
     public static HurtMessage FromPacket(CreatureHurtEventPacket packet)
     {
         return new HurtMessage(packet.Id, new(packet.X, packet.Y), (Direction)packet.Direction, (CreatureState)packet.AfterHurtState, 
-            packet.CurrentLife, packet.MaxLife, packet.Sound);
+            packet.CurrentLife, packet.MaxLife);
     }
 }

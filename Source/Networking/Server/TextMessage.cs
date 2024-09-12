@@ -74,9 +74,10 @@ public class TextMessage : IServerMessage
 
     public static TextMessage FromPacket(TextMessagePacket packet)
     {
-        if ((Type)packet.Type != Type.CUSTOM)
+        var type = (Type)packet.Type;
+        if (TYPE_MAP.TryGetValue(type, out var str))
         {
-            return new TextMessage(TYPE_MAP.GetValueOrDefault((Type)packet.Type, ""), (TextLocation)packet.Location, (ColorType)packet.ColorType);
+            return new TextMessage(str, (TextLocation)packet.Location, (ColorType)packet.ColorType);
         }
         return new TextMessage(packet.Text, (TextLocation)packet.Location, (ColorType)packet.ColorType);
     }

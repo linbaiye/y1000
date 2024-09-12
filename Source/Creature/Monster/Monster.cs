@@ -138,15 +138,10 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		Delete();
 	}
 
-	public void Visit(EntitySoundMessage message)
-	{
-		PlaySound(message.Sound);
-	}
 
 	public void Visit(CreatureDieMessage message)
 	{
 		ChangeState(MonsterStillState.Die(MonsterAnimation));
-		PlaySound(message.Sound);
 		ShowLifePercent(0);
 	}
 

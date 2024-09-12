@@ -198,21 +198,14 @@ namespace y1000.Source.Character
         {
 	        SetPositionAndState(message.Coordinate, message.Direction, CharacterHurtState.Hurt(message.AfterHurtState));
 	        WrappedPlayer().ShowLifePercent(message.LifePercent);
-	        WrappedPlayer().PlaySound(message.Sound);
 	        HealthBar = new ValueBar(message.CurrentLife, message.MaxLife);
 	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
         }
-        public void Visit(EntitySoundMessage message)
-        {
-	        WrappedPlayer().Visit(message);
-        }
-
-
+ 
         public void Visit(CreatureDieMessage message)
         {
 	        ChangeState(ICharacterState.Create(CreatureState.DIE));
 	        HealthBar = new ValueBar(0, HealthBar.Max);
-	        WrappedPlayer().PlaySound(message.Sound);
 	        WrappedPlayer().ShowLifePercent(HealthBar.Percent);
 	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
 	        EventMediator?.NotifyTextArea("请稍后。");
@@ -607,11 +600,24 @@ namespace y1000.Source.Character
         {
 	        WrappedPlayer().Visit(message);
         }
+        
 
         public void Chat(string text)
         {
-	        LOGGER.Debug("Sent text {0}.", text);
+	        if (text.StartsWith("!"))
+	        {
+		        if (Dead)
+		        {
+			        return;
+		        }
+		        if (HealthBar.Current < 5000)
+		        {
+			        EventMediator?.NotifyTextArea("活力须在50以上");
+			        return;
+		        }
+	        }
 	        EventMediator?.NotifyServer(new ClientTextEvent(text));
+	        LOGGER.Debug("Sent text {0}.", text);
         }
 
         public Rect2 BodyRectangle => WrappedPlayer().BodyRectangle;

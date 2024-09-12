@@ -24,6 +24,8 @@ public partial class AudioManager : Godot.Control
     private bool _dirty;
 
     private double _timer = 10;
+
+    private CreatureAudio _playerAudio;
     
     private class Settings
     {
@@ -49,6 +51,7 @@ public partial class AudioManager : Godot.Control
         {
             _entitySoundPlayers[i] = GetNode<CreatureAudio>("SoundPlayer" + (i + 1));
         }
+        _playerAudio = GetNode<CreatureAudio>("PlayerAudio");
     }
     
     private async void ReplayBgm()
@@ -56,14 +59,23 @@ public partial class AudioManager : Godot.Control
         await Task.Delay(10000);
         _bgmAudioPlayer.Play();
     }
+
+
+    private void ChangeSoundVolume(double v)
+    {
+        var db = (float)Mathf.LinearToDb(v / 100);
+        foreach (var entitySoundPlayer in _entitySoundPlayers)
+        {
+            entitySoundPlayer.VolumeDb = db;
+        }
+        _playerAudio.VolumeDb = db;
+    }
+    
     
     public void OnSoundVolumeChanged(double v)
     {
         SoundVolume = v;
-        foreach (var entitySoundPlayer in _entitySoundPlayers)
-        {
-            entitySoundPlayer.VolumeDb = (float)Mathf.LinearToDb(v / 100);
-        }
+        ChangeSoundVolume(v);
         _dirty = true;
     }
 
@@ -97,6 +109,14 @@ public partial class AudioManager : Godot.Control
     {
         BgmEnabled = enabled;
         _dirty = true;
+        if (!enabled)
+        {
+            _bgmAudioPlayer.Stop();
+        }
+        else
+        {
+            _bgmAudioPlayer.Play();
+        }
     }
 
     
@@ -132,6 +152,8 @@ public partial class AudioManager : Godot.Control
 
     public void PlaySound(EntitySoundMessage message)
     {
+        if (!_settings.SoundEnabled)
+            return;
         foreach (var t in _entitySoundPlayers)
         {
             if (!t.Playing)
@@ -141,9 +163,16 @@ public partial class AudioManager : Godot.Control
             }
         }
     }
+
+    public void PlayCharacterSound(string sound)
+    {
+        if (_settings.SoundEnabled)
+            _playerAudio.PlaySound(sound);
+    }
     
     public void LoadAndPlayBackgroundMusic(string bgm)
     {
+
         var path = "res://assets/bgm/" + bgm + ".mp3";
         if (!FileAccess.FileExists(path))
         {
@@ -154,17 +183,15 @@ public partial class AudioManager : Godot.Control
             var streamWav = ResourceLoader.Load<AudioStreamMP3>(path);
             _bgmAudioPlayer.Stop();
             _bgmAudioPlayer.Stream = streamWav;
-            _bgmAudioPlayer.Play();
+            if (_settings.BgmEnabled)
+                _bgmAudioPlayer.Play();
         }
     }
 
     private void Restore(string bgm)
     {
         _bgmAudioPlayer.VolumeDb = (float)Mathf.LinearToDb(_settings.BgmVolume / 100);
-        foreach (var entitySoundPlayer in _entitySoundPlayers)
-        {
-            entitySoundPlayer.VolumeDb = (float)Mathf.LinearToDb(_settings.SoundVolume / 100);
-        }
+        ChangeSoundVolume(_settings.SoundVolume);
         LoadAndPlayBackgroundMusic(bgm);
     }
 
