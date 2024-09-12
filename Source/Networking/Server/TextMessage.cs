@@ -45,6 +45,10 @@ public class TextMessage : IServerMessage
         
         NINE_TAIL_FOX_SHIFT = 15,
         
+        PLAYER_SHOUT = 16,
+        
+        PLAYER_WHISPER = 18,
+        
         CUSTOM = 1000000
         ,
     }
@@ -63,7 +67,7 @@ public class TextMessage : IServerMessage
         { Type.NOT_ENOUGH_ARM_LIFE, "因攻击力过弱而没能获得经验。" },
         { Type.OUT_OF_AMMO, "没有弹药了。" },
         { Type.NO_MORE_PILL, "无法再服用。" },
-        { Type.MULTI_TRADE, "交易正在进行中。" },
+        { Type.MULTI_TRADE, "另一交易正在进行中。" },
         { Type.KUNGFU_LEVEL_LOW, "辅助性武功只能用于满级武功。" },
         { Type.NINE_TAIL_FOX_SHIFT, "<九尾狐变身>：是谁杀了我的妖华？" },
     };
@@ -90,9 +94,12 @@ public class TextMessage : IServerMessage
     public string Text { get; }
     
     public ColorType ColorType { get; }
+
     
     public void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
     }
+
+    public static readonly TextMessage MultiTrade = new TextMessage("另一交易正在进行中。", TextLocation.DOWN);
 }

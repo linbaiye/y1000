@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using Godot;
+using Microsoft.Extensions.Logging;
 using NLog;
+using y1000.Source.Util;
 using HttpClient = System.Net.Http.HttpClient;
+using ILogger = NLog.ILogger;
 
 namespace y1000.Source.Control;
 
@@ -104,44 +107,32 @@ public partial class Login : NinePatchRect
             tip.Text = "请输入角色名, 最长5字符";
             return;
         }
-
         if (charName.Text.Length > 5)
         {
             tip.Text = "角色名最长5字符";
             return;
         }
         bool male = _maleCheckbox.ButtonPressed;
-        try
+        var result = SendRequest("CREATE_CHAR",
+            new StringContent(JsonSerializer.Serialize(new CreateCharacterRequest(_token, charName.Text, male))));
+        if (result == null)
         {
-            HttpClient httpClient = new();
-            var httpRequestMessage = new HttpRequestMessage();
-            httpRequestMessage.Headers.Add("X-Type", "CREATE_CHAR");
-            httpRequestMessage.RequestUri = new Uri("http://localhost:9901");
-            httpRequestMessage.Method = HttpMethod.Post;
-            httpRequestMessage.Content =
-                new StringContent(JsonSerializer.Serialize(new CreateCharacterRequest(_token, charName.Text, male)));
-            var httpResponseMessage = httpClient.Send(httpRequestMessage);
-            var result = httpResponseMessage.Content.ReadAsStringAsync().Result;
-            var response = JsonSerializer.Deserialize<CreateCharResponse>(result);
-            if (response == null)
-            {
-                tip.Text = "服务器没有响应，请稍后再试";
-                return;
-            }
-            if (response.code != 0)
-            {
-                tip.Text = response.msg;
-            }
-            else
-            {
-                GetNode<ItemList>("CharPanel/Panel/Chars").AddItem(response.charName);
-            }
-            Logger.Debug("Created char result {0}.", result);
-        }
-        catch (Exception e)
-        {
-            Logger.Error(e);
             tip.Text = "服务器没有响应，请稍后再试";
+            return;
+        }
+        var response = JsonSerializer.Deserialize<CreateCharResponse>(result);
+        if (response == null)
+        {
+            tip.Text = "服务器没有响应，请稍后再试";
+            return;
+        }
+        if (response.code != 0)
+        {
+            tip.Text = response.msg;
+        }
+        else
+        {
+            GetNode<ItemList>("CharPanel/Panel/Chars").AddItem(response.charName);
         }
     }
 
@@ -207,7 +198,6 @@ public partial class Login : NinePatchRect
             this.characterName = characterName;
             this.male = male;
         }
-
         public string token { get; set; }
         public string characterName { get; set; }
         public bool male { get; set; }
@@ -240,39 +230,21 @@ public partial class Login : NinePatchRect
             tip.Text = "两次密码不匹配";
             return;
         }
-        var httpRequestMessage = new HttpRequestMessage();
-        httpRequestMessage.Headers.Add("X-Type", "SIGNUP");
-        httpRequestMessage.RequestUri = new Uri("http://localhost:9901");
-        httpRequestMessage.Method = HttpMethod.Post;
-        httpRequestMessage.Content = new StringContent("{\"username\" : \"" + user.Text+ "\", \"password\": \"" + pswd.Text + "\"}");
-        HttpClient httpClient = new();
-        try
+        var result = SendRequest("SIGNUP",
+            new StringContent("{\"username\" : \"" + user.Text + "\", \"password\": \"" + pswd.Text + "\"}"));
+        if (result == null)
         {
-            var httpResponseMessage = httpClient.Send(httpRequestMessage);
-            var result = httpResponseMessage.Content.ReadAsStringAsync().Result;
-            var signupResponse = JsonSerializer.Deserialize<SignupResponse>(result);
-            if (signupResponse == null)
-            {
-                tip.Text = "服务器没有响应，请稍后再试";
-                return;
-            }
-
-            if (signupResponse.code == 0)
-            {
-                tip.Text = "注册成功";
-            }
-            else
-            {
-                tip.Text = signupResponse.msg;
-            }
-        }
-        catch (Exception e)
-        {
-            Logger.Error(e);
             tip.Text = "服务器没有响应，请稍后再试";
+            return;
         }
+        var signupResponse = JsonSerializer.Deserialize<SignupResponse>(result);
+        if (signupResponse == null)
+        {
+            tip.Text = "服务器没有响应，请稍后再试";
+            return;
+        }
+        tip.Text = signupResponse.code == 0 ? "注册成功" : signupResponse.msg;
     }
-
     
     private class LoginResponse
     {
@@ -280,6 +252,28 @@ public partial class Login : NinePatchRect
         public string msg { get; set; }
         public string token { get; set; }
         public List<string> charNames { get; set; }
+    }
+
+    private string? SendRequest(string type, StringContent content)
+    {
+        try
+        {
+            var httpRequestMessage = new HttpRequestMessage();
+            httpRequestMessage.Headers.Add("X-Type", type);
+            httpRequestMessage.RequestUri = new Uri("http://localhost:9901");
+            httpRequestMessage.Method = HttpMethod.Post;
+            httpRequestMessage.Content = content;
+            using HttpClient httpClient = new();
+            var httpResponseMessage = httpClient.Send(httpRequestMessage);
+            var readAsStringAsync = httpResponseMessage.Content.ReadAsStringAsync();
+            readAsStringAsync.Wait();
+            return readAsStringAsync.Result;
+        }
+        catch (Exception e)
+        {
+            Logger.Error(e);
+            return null;
+        }
     }
     
 
@@ -297,39 +291,27 @@ public partial class Login : NinePatchRect
             tip.Text = "请输入密码";
             return;
         }
-        HttpClient httpClient = new();
-        var httpRequestMessage = new HttpRequestMessage();
-        httpRequestMessage.Headers.Add("X-Type", "LOGIN");
-        httpRequestMessage.RequestUri = new Uri("http://localhost:9901");
-        httpRequestMessage.Method = HttpMethod.Post;
-        httpRequestMessage.Content = new StringContent("{\"username\" : \"" + _username.Text+ "\", \"password\": \"" + _password.Text + "\"}");
-        try
-        {
-            var httpResponseMessage = httpClient.Send(httpRequestMessage);
-            var result = httpResponseMessage.Content.ReadAsStringAsync().Result;
-            var loginResponse = JsonSerializer.Deserialize<LoginResponse>(result);
-            if (loginResponse == null)
-            {
-                tip.Text = "服务器没有响应，请稍后再试";
-                return;
-            }
-
-            if (loginResponse.code != 0)
-            {
-                tip.Text = loginResponse.msg;
-            }
-            else
-            {
-                _token = loginResponse.token;
-                _charNames = loginResponse.charNames;
-                SwitchToCharPanel();
-            }
-        }
-        catch (Exception e)
+        var result = SendRequest("LOGIN", new StringContent("{\"username\" : \"" + _username.Text+ "\", \"password\": \"" + _password.Text + "\"}"));
+        if (result == null)
         {
             tip.Text = "服务器没有响应，请稍后再试";
-            Logger.Error(e);
+            return;
         }
-
+        var loginResponse = JsonSerializer.Deserialize<LoginResponse>(result);
+        if (loginResponse == null)
+        {
+            tip.Text = "服务器没有响应，请稍后再试";
+            return;
+        }
+        if (loginResponse.code != 0)
+        {
+            tip.Text = loginResponse.msg;
+        }
+        else
+        {
+            _token = loginResponse.token;
+            _charNames = loginResponse.charNames;
+            SwitchToCharPanel();
+        }
     }
 }

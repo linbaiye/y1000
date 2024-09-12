@@ -44,11 +44,13 @@ public class AtdChecker
 
     public static void ZipAll()
     {
-        var directories = Directory.GetDirectories("D:\\work\\godot\\map");
+        var directories = Directory.GetDirectories("/Users/ab000785/learn/map");
         foreach (var dir in directories)
         {
             Logger.Debug("Zip file {0}.", dir);
-            //ZipFile.CreateFromDirectory(dir, dir + ".zip");
+            if (File.Exists(dir + ".zip"))
+                File.Delete(dir + ".zip");
+            ZipFile.CreateFromDirectory(dir, dir + ".zip");
         }
     }
         

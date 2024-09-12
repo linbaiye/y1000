@@ -5,6 +5,9 @@ namespace y1000.Source.Map;
 
 public interface IMapObjectRepository
 {
+    
+    public static readonly IMapObjectRepository Instance = ZipFileMapObjectRepository.Instance;
+    
     IDictionary<int, Texture2D> LoadTiles(string tileName);
 
     IDictionary<int, MapObject> LoadObjects(string name);

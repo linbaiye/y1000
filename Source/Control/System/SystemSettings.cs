@@ -22,21 +22,49 @@ public partial class SystemSettings : NinePatchRect
         _bgmSlider.DragEnded += OnBgmSliderEnd;
         _bgmSlider.ValueChanged += OnBgmSliderValueChanged;
         _bgmCheckBox = GetNode<CheckBox>("BgmCheckBox");
+        _bgmCheckBox.Pressed += OnBgmCheckBoxChanged;
         _soundSlider = GetNode<HSlider>("SoundVolSlider");
         _soundCheckBox = GetNode<CheckBox>("SoundCheckBox");
+        _soundSlider.DragEnded += OnSndSliderEnd;
+        _soundSlider.ValueChanged += OnSndSliderValueChanged;
         _close = GetNode<Button>("Close");
         _close.Pressed += () => Visible = false;
         Visible = false;
     }
 
+    private void OnBgmCheckBoxChanged()
+    {
+        _audioManager?.OnBgmCheckChanged(_bgmCheckBox.ButtonPressed);
+    }
+    
+    private void OnSoundCheckboxChanged()
+    {
+        _audioManager?.OnSoundCheckChanged(_soundCheckBox.ButtonPressed);
+    }
+
     public void BindAudioManager(AudioManager audioManager)
     {
         _audioManager = audioManager;
+        _bgmCheckBox.ButtonPressed = _audioManager.BgmEnabled;
+        _soundCheckBox.ButtonPressed = _audioManager.SoundEnabled;
+        _bgmSlider.SetValueNoSignal(_audioManager.BgmVolume);
+        _soundSlider.SetValueNoSignal(_audioManager.SoundVolume);
+    }
+    
+    private void OnSndSliderValueChanged(double val)
+    {
+        _audioManager?.OnSoundVolumeChanged(_soundSlider.Value);
+    }
+
+    private void OnSndSliderEnd(bool changed)
+    {
+        if (!changed)
+            return;
+        _audioManager?.OnSoundVolumeChanged(_soundSlider.Value);
     }
 
     private void OnBgmSliderValueChanged(double val)
     {
-        LOGGER.Debug("Value {0}.", _bgmSlider.Value);
         _audioManager?.OnBgmVolumeChanged(_bgmSlider.Value);
     }
 
@@ -44,7 +72,6 @@ public partial class SystemSettings : NinePatchRect
     {
         if (!changed)
             return;
-        LOGGER.Debug("Value {0}.", _bgmSlider.Value);
         _audioManager?.OnBgmVolumeChanged(_bgmSlider.Value);
     }
 }

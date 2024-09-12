@@ -55,8 +55,6 @@ public partial class UIController : CanvasLayer
     
     private SystemSettings _systemSettings;
     
-    private static readonly string TRADING_ERROR = "另一交易正在进行中。";
-
     public override void _Ready()
     {
         _bottomControl = GetNode<BottomControl>("BottomUI");
@@ -136,7 +134,7 @@ public partial class UIController : CanvasLayer
     {
         if (IsTrading())
         {
-            DisplayTextMessage(TRADING_ERROR);
+            DisplayTextMessage(TextMessage.MultiTrade);
         }
         else
         {
@@ -172,7 +170,7 @@ public partial class UIController : CanvasLayer
     {
         if (IsTrading())
         {
-            DisplayTextMessage(TRADING_ERROR);
+            DisplayTextMessage(TextMessage.MultiTrade);
             return;
         }
         if (_itemAttributeControl.HandleDragEvent(slotEvent))
@@ -186,7 +184,7 @@ public partial class UIController : CanvasLayer
     {
         if (IsTrading())
         {
-            DisplayTextMessage(new TextMessage("另一交易正在进行中。", TextMessage.TextLocation.DOWN));
+            DisplayTextMessage(TextMessage.MultiTrade);
             return;
         }
         character.DropItemOnPlayer(messageDrivenPlayer, slot);
@@ -221,7 +219,7 @@ public partial class UIController : CanvasLayer
     {
         if (IsTrading())
         {
-            DisplayTextMessage(new TextMessage("另一交易正在进行中。", TextMessage.TextLocation.DOWN));
+            DisplayTextMessage(TextMessage.MultiTrade);
         }
         else
         {

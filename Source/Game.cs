@@ -493,10 +493,20 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_character.WrappedPlayer().MouseClicked += OnEntityClicked;
 		_autoFillAssistant = AutoFillAssistant.Create(_character);
 		_autoLootAssistant = AutoLootAssistant.Create(_entityManager, _character);
+		_audioManager?.Restore(_character, message.Bgm);
 		_uiController?.BindCharacter(_character, message.RealmName, _autoFillAssistant, _audioManager);
 		MapLayer.BindCharacter(_character, message.MapName, message.TileName, message.ObjName, message.RoofName);
 		_entityManager.Add(_character);
 		AddChild(_character);
-		_audioManager?.LoadAndPlayBackgroundMusic(message.Bgm);
+	}
+	
+	public override void _Notification(int what)
+	{
+		if (what == NotificationWMCloseRequest)
+		{
+			_channel?.WriteAndFlushAsync(ClientSimpleCommandEvent.Quit).Wait();
+			_channel?.CloseAsync().Wait();
+			GetTree().Quit(); 
+		}
 	}
 }

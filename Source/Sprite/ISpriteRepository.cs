@@ -6,7 +6,8 @@ public interface ISpriteRepository
 {
     private static readonly Vector2 DEFAULT_VECTOR = new (16, -12);
     
-    public static readonly ISpriteRepository Instance = ZipFileSpriteRepository.Instance;
+    public static readonly ISpriteRepository Instance = FilesystemSpriteRepository.Instance;
+    //public static readonly ISpriteRepository Instance = ZipFileSpriteRepository.Instance;
     
     AtzSprite LoadByNumberAndOffset(string name, Vector2? offset = null);
 

@@ -18,12 +18,18 @@ public partial class SystemMenu : NinePatchRect
         _exit = GetNode<TextureButton>("ExitButton");
         _return.Pressed += () => Visible = false;
         _setting.Pressed += OnSettingPressed;
+        _exit.Pressed += OnExitPressed;
         Visible = false;
     }
 
     private void OnSettingPressed()
     {
         SettingPressed?.Invoke();
+    }
+
+    private void OnExitPressed()
+    {
+        GetTree().Root.PropagateNotification((int)NotificationWMCloseRequest);
     }
 
     public void OnSystemButtonClicked()

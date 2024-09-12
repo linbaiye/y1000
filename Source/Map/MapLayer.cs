@@ -39,7 +39,7 @@ public partial class MapLayer : TileMap, IMap
 
 	private readonly ISet<string> _animatedObjectSprites = new HashSet<string>();
 
-	private readonly IMapObjectRepository _mapObjectRepository = ZipFileMapObjectRepository.Instance;
+	private readonly IMapObjectRepository _mapObjectRepository = IMapObjectRepository.Instance;
 
 	private const int CameraLimitOffset = 6;
 
@@ -127,7 +127,6 @@ public partial class MapLayer : TileMap, IMap
 		{
 			return;
 		}
-
 		int range = 20;
 		if (coordinate.X < range || coordinate.X > _gameMap.Width -range 
 		    || coordinate.Y < range|| coordinate.Y > _gameMap.Height - range)

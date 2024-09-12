@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=21 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -15,11 +15,10 @@
 [ext_resource type="Script" path="res://Source/Control/Map/MapView.cs" id="13_xh10o"]
 [ext_resource type="PackedScene" uid="uid://bjjg8uukhy3s8" path="res://Scenes/MapNpcView.tscn" id="14_vdhs2"]
 [ext_resource type="PackedScene" uid="uid://ca6kivqahtqcd" path="res://Scenes/Bank.tscn" id="15_25end"]
-[ext_resource type="PackedScene" uid="uid://p7bamjypilc0" path="res://Scenes/SysMenu.tscn" id="16_0v5gr"]
-[ext_resource type="Script" path="res://Source/Audio/CreatureAudio.cs" id="16_ing8y"]
+[ext_resource type="PackedScene" uid="uid://bui7avaiajmjj" path="res://Scenes/SysMenu.tscn" id="16_0v5gr"]
 [ext_resource type="PackedScene" uid="uid://b8qn25p71tho" path="res://assets/test/teleport.tscn" id="16_wmncn"]
-[ext_resource type="PackedScene" uid="uid://qaao0hadvugj" path="res://Scenes/SysSetting.tscn" id="17_77laa"]
-[ext_resource type="PackedScene" uid="uid://cx8diosi0sqr" path="res://Scenes/AudioManager.tscn" id="20_0dkt0"]
+[ext_resource type="PackedScene" uid="uid://l4cqqg7p2mqm" path="res://Scenes/SysSetting.tscn" id="17_77laa"]
+[ext_resource type="PackedScene" path="res://Scenes/AudioManager.tscn" id="20_0dkt0"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
 
@@ -135,9 +134,6 @@ offset_top = -143.5
 offset_right = 131.5
 offset_bottom = 143.5
 
-[node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -12.18
-
 [node name="Teleport" parent="." instance=ExtResource("16_wmncn")]
 visible = false
 z_index = 4
@@ -147,17 +143,5 @@ position = Vector2(3080, 750)
 visible = false
 z_index = 2
 position = Vector2(3840, 1728)
-
-[node name="SoundPlayer1" type="AudioStreamPlayer" parent="."]
-script = ExtResource("16_ing8y")
-
-[node name="SoundPlayer2" type="AudioStreamPlayer" parent="."]
-script = ExtResource("16_ing8y")
-
-[node name="SoundPlayer3" type="AudioStreamPlayer" parent="."]
-script = ExtResource("16_ing8y")
-
-[node name="SoundPlayer4" type="AudioStreamPlayer" parent="."]
-script = ExtResource("16_ing8y")
 
 [node name="AudioManager" parent="." instance=ExtResource("20_0dkt0")]

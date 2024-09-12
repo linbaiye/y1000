@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://p7bamjypilc0"]
+[gd_scene load_steps=9 format=3 uid="uid://bui7avaiajmjj"]
 
 [ext_resource type="Texture2D" uid="uid://bulcyb8u88u71" path="res://assets/ui/sys_menu.png" id="1_ypngt"]
 [ext_resource type="Script" path="res://Source/Control/System/SystemMenu.cs" id="2_3oi7g"]
