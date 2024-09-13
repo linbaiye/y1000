@@ -3,13 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://bjt64qlxydsmx" path="res://assets/ui/assistance.png" id="1_k625j"]
 [ext_resource type="Texture2D" uid="uid://5juyhlq46430" path="res://assets/ui/heal.png" id="2_n4yjs"]
 [ext_resource type="Script" path="res://Source/Control/Assistance/AssistantView.cs" id="2_qbqa2"]
-[ext_resource type="Texture2D" uid="uid://b2i2022f0wiqi" path="res://assets/ui/heal_focus.png" id="3_wrn5u"]
 [ext_resource type="Texture2D" uid="uid://nvndcqsrw0uw" path="res://assets/ui/loot.png" id="4_c5b3e"]
-[ext_resource type="Texture2D" uid="uid://flaafk3pk6sg" path="res://assets/ui/loot_focus.png" id="5_px2ev"]
 [ext_resource type="Texture2D" uid="uid://bqnfyqxgdsnkp" path="res://assets/ui/heal_setting.png" id="6_rvptb"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_0vfar"]
 [ext_resource type="Script" path="res://Source/Control/Assistance/HealItemView.cs" id="7_ifcax"]
 [ext_resource type="Script" path="res://Source/Control/Assistance/AutoFillView.cs" id="8_67i3c"]
+[ext_resource type="Texture2D" uid="uid://c12ndbb5ibdta" path="res://assets/ui/loot_assistance.png" id="11_550bb"]
+[ext_resource type="Script" path="res://Source/Control/Assistance/AutoLootAssistantView.cs" id="12_b2hom"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5aqx"]
 bg_color = Color(0.87451, 0.47451, 0.317647, 0)
@@ -18,7 +18,7 @@ border_color = Color(0.8, 0.8, 0.8, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y06l7"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="Image" id="Image_n4wks"]
+[sub_resource type="Image" id="Image_7brlu"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 179, 179, 179, 153, 178, 178, 178, 166, 184, 184, 184, 18, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 178, 178, 178, 166, 178, 178, 178, 151, 255, 255, 255, 0, 255, 255, 255, 0, 178, 178, 178, 166, 178, 178, 178, 217, 178, 178, 178, 179, 184, 184, 184, 18, 255, 255, 255, 0, 255, 255, 255, 0, 175, 175, 175, 19, 178, 178, 178, 179, 178, 178, 178, 217, 178, 178, 178, 165, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 179, 179, 179, 180, 175, 175, 175, 19, 175, 175, 175, 19, 179, 179, 179, 180, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 178, 178, 178, 181, 178, 178, 178, 181, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 178, 178, 178, 165, 178, 178, 178, 165, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -28,7 +28,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ri8fq"]
-image = SubResource("Image_n4wks")
+image = SubResource("Image_7brlu")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igqr6"]
 content_margin_left = 8.0
@@ -195,8 +195,6 @@ offset_top = 43.0
 offset_right = 61.0
 offset_bottom = 75.0
 texture_normal = ExtResource("2_n4yjs")
-texture_pressed = ExtResource("3_wrn5u")
-texture_focused = ExtResource("3_wrn5u")
 
 [node name="Loot" type="TextureButton" parent="."]
 layout_mode = 0
@@ -205,10 +203,9 @@ offset_top = 43.0
 offset_right = 105.0
 offset_bottom = 75.0
 texture_normal = ExtResource("4_c5b3e")
-texture_pressed = ExtResource("5_px2ev")
-texture_focused = ExtResource("5_px2ev")
 
 [node name="AutoFill" type="NinePatchRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(212, 226)
 layout_mode = 0
 offset_left = 14.0
@@ -563,6 +560,65 @@ text = "10"
 max_length = 4
 flat = true
 caret_blink = true
+
+[node name="AutoLoot" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(208, 240)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 79.0
+offset_right = 224.0
+offset_bottom = 319.0
+texture = ExtResource("11_550bb")
+script = ExtResource("12_b2hom")
+
+[node name="LootItems" type="ItemList" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 24.0
+offset_right = 98.0
+offset_bottom = 157.0
+theme_override_font_sizes/font_size = 12
+
+[node name="SeeItems" type="ItemList" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 24.0
+offset_right = 202.0
+offset_bottom = 157.0
+theme_override_font_sizes/font_size = 12
+
+[node name="LineEdit" type="LineEdit" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 185.0
+offset_right = 135.0
+offset_bottom = 210.0
+theme_override_font_sizes/font_size = 12
+flat = true
+
+[node name="AutoCheckBox" type="CheckBox" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 217.0
+offset_right = 69.0
+offset_bottom = 241.0
+flat = true
+
+[node name="ReverseCheckBox" type="CheckBox" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 217.0
+offset_right = 131.0
+offset_bottom = 241.0
+flat = true
+
+[node name="AddButton" type="Button" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 188.0
+offset_right = 199.0
+offset_bottom = 207.0
+flat = true
 
 [node name="Tip" type="Label" parent="."]
 layout_mode = 0

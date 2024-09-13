@@ -38,10 +38,10 @@ public partial class Shortcuts : NinePatchRect
         { Key.Key2, 1},
         { Key.Key3, 2},
         { Key.Key4, 3},
-        { Key.Q, 4},
-        { Key.W, 5},
-        { Key.E, 6},
-        { Key.R, 7},
+        { Key.Key5, 4},
+        { Key.Key6, 5},
+        { Key.Key7, 6},
+        { Key.Key8, 7},
     };
     
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();

@@ -118,9 +118,10 @@ public partial class UIController : CanvasLayer
     public void BindCharacter(CharacterImpl character,
         string realmName,
         AutoFillAssistant autoFillAssistant,
-        AudioManager? audioManager)
+        AudioManager? audioManager,
+        AutoLootAssistant? autoLootAssistant)
     {
-        _rightControl.BindCharacter(character, autoFillAssistant);
+        _rightControl.BindCharacter(character, autoFillAssistant, autoLootAssistant);
         _bottomControl.BindCharacter(character, realmName);
         _dialogControl.BindCharacter(character);
         _mapView.BindCharacter(character);

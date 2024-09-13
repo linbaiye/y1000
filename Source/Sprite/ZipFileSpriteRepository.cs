@@ -17,6 +17,41 @@ public class ZipFileSpriteRepository : AbstractSpriteRepository
     private const string DirPath = "../sprite/";
     
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
+
+    private readonly Cache<string, AtzSprite> _cache = new();
+    
+    private class Cache<TKey, TValue> where TKey : notnull
+    {
+        private readonly Dictionary<TKey, CacheItem<TValue>> _cache = new();
+
+        public void Store(TKey key, TValue value, TimeSpan expiresAfter)
+        {
+            _cache[key] = new CacheItem<TValue>(value, expiresAfter);
+        }
+
+        public TValue? Get(TKey key)
+        {
+            if (!_cache.TryGetValue(key, out var cached)) return default(TValue);
+            if (DateTimeOffset.Now - cached.Created >= cached.ExpiresAfter)
+            {
+                _cache.Remove(key);
+                return default;
+            }
+            return cached.Value;
+        }
+    }
+    private class CacheItem<T>
+    {
+        public CacheItem(T value, TimeSpan expiresAfter)
+        {
+            Value = value;
+            ExpiresAfter = expiresAfter;
+        }
+        public T Value { get; }
+        internal DateTimeOffset Created { get; } = DateTimeOffset.Now;
+        internal TimeSpan ExpiresAfter { get; }
+    }
+        
     
     private Vector2[] ParseVectors(IEnumerable<string> lines)
     {
@@ -25,6 +60,11 @@ public class ZipFileSpriteRepository : AbstractSpriteRepository
 
     public override AtzSprite LoadByNumberAndOffset(string name, Vector2? offset = null)
     {
+        var sprite = _cache.Get(name);
+        if (sprite != null)
+        {
+            return sprite;
+        }
         using var zipArchive = ZipFile.Open(DirPath + name.ToLower()+ ".zip", ZipArchiveMode.Read);
         var offsetEntry = zipArchive.GetEntry("offset.txt");
         if (offsetEntry == null)
@@ -58,8 +98,10 @@ public class ZipFileSpriteRepository : AbstractSpriteRepository
         {
             LOGGER.Error("Invalid atz {0}.", name);
         }
-        LOGGER.Debug("Loaded {0}, {1} pictures in total.", name, texture2Ds.Count);
-        return new AtzSprite(texture2Ds.ToArray(), vectors, sizes);
+        LOGGER.Debug("Loaded {0}.", name);
+        var atzSprite = new AtzSprite(texture2Ds.ToArray(), vectors, sizes);
+        _cache.Store(name, atzSprite, TimeSpan.FromMinutes(5));
+        return atzSprite;
     }
 
 }

@@ -63,11 +63,12 @@ public partial class RightControl : Godot.Control
     }
 
     
-    public void BindCharacter(CharacterImpl character, AutoFillAssistant assistant)
+    public void BindCharacter(CharacterImpl character, AutoFillAssistant assistant,
+        AutoLootAssistant? autoLootAssistant)
     {
         _inventory?.BindInventory(character.Inventory);
         _kungFuBookView?.BindKungFuBook(character.KungFuBook);
         character.WhenCharacterUpdated += WhenCharacterUpdated;
-        _assistantView.BindCharacter(character, assistant);
+        _assistantView.BindCharacter(character, assistant, autoLootAssistant);
     }
 }

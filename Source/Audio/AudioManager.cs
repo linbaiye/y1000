@@ -195,14 +195,6 @@ public partial class AudioManager : Godot.Control
         LoadAndPlayBackgroundMusic(bgm);
     }
 
-    public override void _Notification(int what)
-    {
-        if (what == NotificationWMCloseRequest && _dirty)
-        {
-            Save();
-        }
-    }
-
     public void Restore(CharacterImpl character, string bgm)
     {
         _storage =  new FileStorage(character.EntityName);

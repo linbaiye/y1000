@@ -42,15 +42,24 @@ public class AtdChecker
         //new ZipFileMapObjectRepository().LoadObjects("start");
     }
 
+    private static void ZipDir(string dir)
+    {
+        if (File.Exists(dir + ".zip"))
+            File.Delete(dir + ".zip");
+        ZipFile.CreateFromDirectory(dir, dir + ".zip");
+    }
+
     public static void ZipAll()
     {
-        var directories = Directory.GetDirectories("/Users/ab000785/learn/map");
+         var directories = Directory.GetDirectories("D:\\work\\godot\\sprite");
+        //var directories = Directory.GetDirectories("/Users/ab000785/learn/map");
         foreach (var dir in directories)
         {
-            Logger.Debug("Zip file {0}.", dir);
-            if (File.Exists(dir + ".zip"))
-                File.Delete(dir + ".zip");
-            ZipFile.CreateFromDirectory(dir, dir + ".zip");
+            if (Path.GetFileName(dir).StartsWith("x"))
+            {
+                Logger.Debug("Zip file {0}.", dir);
+                ZipDir(dir);
+            }
         }
     }
         

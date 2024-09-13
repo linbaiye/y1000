@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text.Json;
 using Godot;
 using NLog;
@@ -148,7 +149,7 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
     public bool HasRoof(string mapName)
     {
         using var zipArchive = ZipFile.Open(DirPath + mapName + ".zip", ZipArchiveMode.Read);
-        return zipArchive.GetEntry(RoofDirName + "/") != null;
+        return zipArchive.Entries.Any(e => e.FullName.StartsWith(RoofDirName + "/"));
     }
 
     public IDictionary<int, MapObject> LoadRoof(string mapName)

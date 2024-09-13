@@ -11,6 +11,8 @@ public partial class AssistantView : NinePatchRect
     
     private AutoFillView _autoFillView;
 
+    private AutoLootAssistantView _autoLootAssistantView;
+
     private TextureButton _heal;
     
     private TextureButton _loot;
@@ -23,13 +25,22 @@ public partial class AssistantView : NinePatchRect
         _close.Pressed += OnClosed;
         _autoFillView = GetNode<AutoFillView>("AutoFill");
         _heal = GetNode<TextureButton>("Heal");
-        _loot = GetNode<TextureButton>("Loot");
         _heal.Pressed += DisplayHealSettings;
+        _loot = GetNode<TextureButton>("Loot");
+        _loot.Pressed += DisplayLootSettings;
+        _autoLootAssistantView = GetNode<AutoLootAssistantView>("AutoLoot");
     }
 
     private void DisplayHealSettings()
     {
         _autoFillView.Visible = true;
+        _autoLootAssistantView.Visible = false;
+    }
+
+    private void DisplayLootSettings()
+    {
+        _autoFillView.Visible = false;
+        _autoLootAssistantView.Visible = true;
     }
 
     public void OnAssistantButtonClicked()
@@ -45,8 +56,9 @@ public partial class AssistantView : NinePatchRect
         _autoFillView.OnClosed();
     }
 
-    public void BindCharacter(CharacterImpl character, AutoFillAssistant autoFillAssistant)
+    public void BindCharacter(CharacterImpl character, AutoFillAssistant autoFillAssistant, AutoLootAssistant? autoLootAssistant)
     {
         _autoFillView.BindCharacter(character, autoFillAssistant);
+        _autoLootAssistantView.Bind(autoLootAssistant);
     }
 }

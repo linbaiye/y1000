@@ -416,7 +416,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		var groundedItem = _entityFactory.CreateOnGroundItem(message);
 		_entityManager.Add(groundedItem);
-		//LOGGER.Debug("Add item {2} at position {0}, {1}.", groundedItem.OffsetBodyPosition, groundedItem.Coordinate, groundedItem.Id);
 		AddChild(groundedItem);
 	}
 
@@ -494,7 +493,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_autoFillAssistant = AutoFillAssistant.Create(_character);
 		_autoLootAssistant = AutoLootAssistant.Create(_entityManager, _character);
 		_audioManager?.Restore(_character, message.Bgm);
-		_uiController?.BindCharacter(_character, message.RealmName, _autoFillAssistant, _audioManager);
+		_uiController?.BindCharacter(_character, message.RealmName, _autoFillAssistant, _audioManager, _autoLootAssistant);
 		MapLayer.BindCharacter(_character, message.MapName, message.TileName, message.ObjName, message.RoofName);
 		_entityManager.Add(_character);
 		AddChild(_character);

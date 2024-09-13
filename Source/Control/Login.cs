@@ -157,7 +157,6 @@ public partial class Login : NinePatchRect
         game.SetToken(_token, itemList.GetItemText(selectedItem));
         _bgm.Stop();
         GetParent().AddChild(game);
-        RemoveChild(this);
         QueueFree();
     }
 

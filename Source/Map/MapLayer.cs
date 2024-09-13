@@ -55,6 +55,7 @@ public partial class MapLayer : TileMap, IMap
 			_gameMap = GameMap.Load(MapDir + "/" +  mapName + ".map");
 			_animatedObjectSprites.Clear();
 			_tileIdToSourceId.Clear();
+			_mapObjectInfos.Clear();
 			Clear();
 			ClearLayer(ObjectLayerName);
 			if (tileName.EndsWith("til.til"))
