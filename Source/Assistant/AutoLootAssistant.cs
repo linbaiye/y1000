@@ -22,7 +22,7 @@ public class AutoLootAssistant
     
     private class Settings
     {
-        public List<string> Loot { get; set; }
+        public List<string> Loot { get; set; } = new();
         public bool Auto { get; set; }
         public bool Reverse { get; set; }
     }
@@ -63,6 +63,7 @@ public class AutoLootAssistant
         _fileStorage = fileStorage;
     }
     
+    
     public void Process(double d)
     {
         if (!Auto)
@@ -71,8 +72,9 @@ public class AutoLootAssistant
         if (_timer > 0)
             return;
         _timer = Interval;
-        var groundItems = _entityManager.Select<GroundItem>(item => item.Coordinate.Distance(_character.Coordinate) <= 2);
-        groundItems.FirstOrDefault()?.Pick();
+        _entityManager
+            .Select<GroundItem>(item => item.Coordinate.Distance(_character.Coordinate) <= 2)
+            .FirstOrDefault(item => Reverse ? !Loot.Contains(item.EntityName) : Loot.Contains(item.EntityName))?.Pick();
     }
     
     public void OnReverseCheckboxChanged(bool enable)

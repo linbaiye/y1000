@@ -100,6 +100,12 @@ public partial class UIController : CanvasLayer
         {
             _leftsideTextControl.Display(message.Text);
         }
+        else if (message.Location == TextMessage.TextLocation.LEFT_UP)
+        {
+        }
+        else if (message.Location == TextMessage.TextLocation.CENTER)
+        {
+        }
         else
         {
             _bottomControl.DisplayMessage(new TextEvent(message.Text, message.ColorType));
@@ -161,11 +167,6 @@ public partial class UIController : CanvasLayer
         _attributeWindow.DisplayAttributes(attributes);
     }
 
-
-    private void DisplayTextMessage(string text)
-    {
-        DisplayTextMessage(new TextMessage(text, TextMessage.TextLocation.DOWN));
-    }
 
     public void DragItem(DragInventorySlotEvent slotEvent, Vector2 mousePosition, CharacterImpl character)
     {

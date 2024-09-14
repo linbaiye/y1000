@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Source.Networking.Protobuf;
-using y1000.Source.Character;
 using y1000.Source.Control.Bottom;
 
 namespace y1000.Source.Networking.Server;
@@ -11,6 +10,8 @@ public class TextMessage : IServerMessage
     {
         DOWN = 1,
         LEFT = 2,
+        LEFT_UP = 3,
+        CENTER = 4,
     }
     
     public enum Type
@@ -49,6 +50,8 @@ public class TextMessage : IServerMessage
         
         PLAYER_WHISPER = 18,
         
+        KUNGFU_EXP_FULL = 19,
+        
         CUSTOM = 1000000
         ,
     }
@@ -83,7 +86,9 @@ public class TextMessage : IServerMessage
     }
     
     
-    public TextMessage(string text, TextLocation location, ColorType colorType = ColorType.SAY)
+    public TextMessage(string text, 
+        TextLocation location,
+        ColorType colorType = ColorType.SAY)
     {
         Text = text;
         Location = location;
@@ -95,12 +100,12 @@ public class TextMessage : IServerMessage
     public string Text { get; }
     
     public ColorType ColorType { get; }
-
+    
     
     public void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
     }
 
-    public static readonly TextMessage MultiTrade = new TextMessage("另一交易正在进行中。", TextLocation.DOWN);
+    public static readonly TextMessage MultiTrade = new("另一交易正在进行中。", TextLocation.DOWN);
 }

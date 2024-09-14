@@ -24,9 +24,9 @@ public partial class AutoLootAssistantView : NinePatchRect
         _auto = GetNode<CheckBox>("AutoCheckBox");
         _auto.Pressed += () => _assistant?.OnAutoCheckboxChanged(_auto.ButtonPressed);
         _reverse = GetNode<CheckBox>("ReverseCheckBox");
-        _reverse.Pressed += () => _assistant?.OnReverseCheckboxChanged(_auto.ButtonPressed);
+        _reverse.Pressed += () => _assistant?.OnReverseCheckboxChanged(_reverse.ButtonPressed);
         _add = GetNode<Button>("AddButton");
-        _lootItems.ItemClicked += OnItemSelected;
+        _lootItems.ItemClicked += OnLootItemSelected;
         _add.Pressed += OnAddClicked;
     }
 
@@ -50,7 +50,7 @@ public partial class AutoLootAssistantView : NinePatchRect
         _assistant?.OnLootItemsChanged(items);
     }
 
-    private void OnItemSelected(long idx, Vector2 pos, long btnIdx)
+    private void OnLootItemSelected(long idx, Vector2 pos, long btnIdx)
     {
         if (btnIdx == (int)MouseButtonMask.Right)
         {
