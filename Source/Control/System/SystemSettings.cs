@@ -22,25 +22,25 @@ public partial class SystemSettings : NinePatchRect
         _bgmSlider.DragEnded += OnBgmSliderEnd;
         _bgmSlider.ValueChanged += OnBgmSliderValueChanged;
         _bgmCheckBox = GetNode<CheckBox>("BgmCheckBox");
-        _bgmCheckBox.Pressed += OnBgmCheckBoxChanged;
+        _bgmCheckBox.Toggled += OnBgmCheckBoxChanged;
         _soundSlider = GetNode<HSlider>("SoundVolSlider");
         _soundSlider.DragEnded += OnSndSliderEnd;
         _soundSlider.ValueChanged += OnSndSliderValueChanged;
         _soundCheckBox = GetNode<CheckBox>("SoundCheckBox");
-        _soundCheckBox.Pressed += OnSoundCheckboxChanged;
+        _soundCheckBox.Toggled += OnSoundCheckboxChanged;
         _close = GetNode<Button>("Close");
         _close.Pressed += () => Visible = false;
         Visible = false;
     }
 
-    private void OnBgmCheckBoxChanged()
+    private void OnBgmCheckBoxChanged(bool enabled)
     {
-        _audioManager?.OnBgmCheckChanged(_bgmCheckBox.ButtonPressed);
+        _audioManager?.OnBgmCheckChanged(enabled);
     }
     
-    private void OnSoundCheckboxChanged()
+    private void OnSoundCheckboxChanged(bool enabled)
     {
-        _audioManager?.OnSoundCheckChanged(_soundCheckBox.ButtonPressed);
+        _audioManager?.OnSoundCheckChanged(enabled);
     }
 
     public void BindAudioManager(AudioManager audioManager)

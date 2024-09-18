@@ -54,6 +54,10 @@ public partial class UIController : CanvasLayer
     private SystemMenu _systemMenu;
     
     private SystemSettings _systemSettings;
+
+    private LeftupText _leftupText;
+    
+    private SystemNotification _systemNotification;
     
     public override void _Ready()
     {
@@ -71,6 +75,8 @@ public partial class UIController : CanvasLayer
         _systemMenu = GetNode<SystemMenu>("SysMenu");
         _systemMenu.SettingPressed += OnSysSettingPressed;
         _systemSettings = GetNode<SystemSettings>("SysSetting");
+        _leftupText = GetNode<LeftupText>("LeftUpText");
+        _systemNotification = GetNode<SystemNotification>("SysNotification");
         BindButtons();
     }
 
@@ -102,9 +108,12 @@ public partial class UIController : CanvasLayer
         }
         else if (message.Location == TextMessage.TextLocation.LEFT_UP)
         {
+            _leftupText.Display(message.Text);
+            _bottomControl.DisplayMessage(new TextEvent(message.Text));
         }
         else if (message.Location == TextMessage.TextLocation.CENTER)
         {
+            _systemNotification.Display(message.Text);
         }
         else
         {

@@ -88,10 +88,12 @@ public class AtdChecker
 
     public static void Dump()
     {
-        var atd = FilesystemAtdRepository.Instance.LoadByName("29");
-        Print(atd.FindFirst(CreatureState.WALK));
-        Print(atd.FindFirst(CreatureState.IDLE));
-        Print(atd.FindFirst(CreatureState.FROZEN));
+        var atd = FilesystemAtdRepository.Instance.LoadByName("31");
+        var actions = atd.Find(CreatureState.IDLE);
+        foreach (var c in actions)
+        {
+            Logger.Debug("Direction: {0}, Number {1}.", c.Direction, c.FrameDescriptors[0].Number);
+        }
     }
 
     public static void Convert()

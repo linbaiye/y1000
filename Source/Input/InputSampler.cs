@@ -56,6 +56,11 @@ namespace y1000.Source.Input
             };
         }
 
+        public RightMousePressedMotion SampleMoveInput(Vector2 mouseOffset)
+        {
+            return InputFactory.CreateRightMousePressedMotion(mouseOffset.GetDirection());
+        }
+
         public IInput? SampleEntityClickInput(InputEventMouseButton button, IEntity entity, Vector2 mouseOffset)
         {
             if (button.ButtonIndex == MouseButton.Left)

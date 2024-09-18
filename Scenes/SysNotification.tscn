@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://crttyejirsfwt"]
+
+[ext_resource type="Texture2D" uid="uid://cy1eqwb8aouo5" path="res://assets/ui/system_notification.png" id="1_k2gx8"]
+[ext_resource type="PackedScene" uid="uid://cddg0m2xyiw2b" path="res://Scenes/ConfirmButton.tscn" id="2_3xbxh"]
+[ext_resource type="Script" path="res://Source/Control/System/SystemNotification.cs" id="2_bwiux"]
+
+[node name="SysNotification" type="NinePatchRect"]
+custom_minimum_size = Vector2(406, 295)
+offset_right = 406.0
+offset_bottom = 295.0
+texture = ExtResource("1_k2gx8")
+script = ExtResource("2_bwiux")
+
+[node name="Text" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 40.0
+offset_right = 393.0
+offset_bottom = 237.0
+text = "服务器将在5分钟后关闭"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Confirm" parent="." instance=ExtResource("2_3xbxh")]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 246.0
+offset_right = 246.0
+offset_bottom = 276.0
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 3.0
+offset_right = 402.0
+offset_bottom = 31.0
+flat = true

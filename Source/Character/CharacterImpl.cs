@@ -461,6 +461,20 @@ namespace y1000.Source.Character
         }
 
         public bool Dead => _state.WrappedState.State == CreatureState.DIE;
+        public bool Idle => _state.WrappedState.State == CreatureState.IDLE;
+        
+        public bool Moving
+        {
+	        get
+	        {
+		        var st = _state.WrappedState.State;
+		        return st == CreatureState.WALK ||
+		               st == CreatureState.FLY ||
+		               st == CreatureState.ENFIGHT_WALK ||
+		               st == CreatureState.RUN;
+	        }
+        }
+                               
 
         private void ToggleBreathKungFu(PlayerToggleKungFuMessage message)
         {

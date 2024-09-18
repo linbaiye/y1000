@@ -64,7 +64,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private AutoFillAssistant? _autoFillAssistant;
 	private AutoLootAssistant? _autoLootAssistant;
+	private AutoMoveAssistant? _autoMoveAssistant;
 
+	
 	private string _token = "";
 	
 	private string _charName = "";
@@ -202,6 +204,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 		if (@event is InputEventKey eventKey)
 		{
+			if (eventKey.Keycode == Key.Numlock && eventKey.IsReleased())
+			{
+				_autoMoveAssistant?.Toggle();
+				return;
+			}
 			LocalTest(eventKey);
 			//return;//
 		}
@@ -225,6 +232,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		HandleMessages();
 		_autoFillAssistant?.Process(delta);
 		_autoLootAssistant?.Process(delta);
+		_autoMoveAssistant?.Process(delta);
 	}
 
 
@@ -301,7 +309,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		_channel = null;
 		_unprocessedMessages.Clear();
-		Reconnect();
+		_uiController?.DisplayTextMessage(new TextMessage("连接已断开", TextMessage.TextLocation.CENTER));
 	}
 
 	public void Visit(PlayerInterpolation playerInterpolation)
@@ -493,6 +501,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_autoFillAssistant = AutoFillAssistant.Create(_character);
 		_autoLootAssistant = AutoLootAssistant.Create(_entityManager, _character);
 		_audioManager?.Restore(_character, message.Bgm);
+		_autoMoveAssistant = new AutoMoveAssistant(_character, _inputSampler);
 		_uiController?.BindCharacter(_character, message.RealmName, _autoFillAssistant, _audioManager, _autoLootAssistant);
 		MapLayer.BindCharacter(_character, message.MapName, message.TileName, message.ObjName, message.RoofName);
 		_entityManager.Add(_character);
@@ -505,7 +514,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			_channel?.WriteAndFlushAsync(ClientSimpleCommandEvent.Quit).Wait();
 			_channel?.CloseAsync().Wait();
-			GetTree().Quit(); 
+			GetTree().Quit();
 		}
 	}
 }

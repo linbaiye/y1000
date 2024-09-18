@@ -83,8 +83,6 @@ namespace y1000.Source.Sprite
             return ret;
         }
 
-        private static readonly ISpriteRepository Repository = new GodotResourceSpriteRepository();
-
         public static AtzSprite LoadOffsetMalePlayerSprites(string nr)
         {
             //return Load("res://sprite/char/" + nr + "/");

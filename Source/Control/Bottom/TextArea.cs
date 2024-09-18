@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using NLog;
+using y1000.Source.Util;
 
 namespace y1000.Source.Control.Bottom;
 
@@ -12,7 +13,7 @@ public partial class TextArea : VBoxContainer
 
     private RichTextLabel[] _lines = new RichTextLabel[MaxSize];
     private const string ThemeName = "normal";
-    
+
     public override void _Ready()
     {
         for (int i = 0; i < _lines.Length; i++)
@@ -58,6 +59,7 @@ public partial class TextArea : VBoxContainer
                 BgColor = color,
             };
         }
+
         return null;
     }
 
@@ -70,6 +72,7 @@ public partial class TextArea : VBoxContainer
                 return i;
             }
         }
+
         return -1;
     }
 
@@ -88,30 +91,40 @@ public partial class TextArea : VBoxContainer
         _lines[MaxSize - 1].RemoveThemeStyleboxOverride(ThemeName);
     }
 
-    private string CreateText(TextEvent textEvent)
+
+    private string CreateText(string text, ColorType colorType)
     {
-        if (_textColors.TryGetValue(textEvent.ColorType, out var color))
+        if (_textColors.TryGetValue(colorType, out var color))
         {
-            return "[color=" + color + "]" + textEvent.Message + "[/color]";
+            return "[color=" + color + "]" + text + "[/color]";
         }
 
-        return textEvent.Message;
+        return text;
     }
 
-    public void Display(TextEvent textEvent)
+    private void Display(string text, ColorType colorType)
     {
         var line = FindEmptyLine();
         if (line != -1)
         {
-            _lines[line].Text = CreateText(textEvent);
-            var styleBoxFlat = CreateStyleBox(textEvent.ColorType);
+            _lines[line].Text = CreateText(text, colorType);
+            var styleBoxFlat = CreateStyleBox(colorType);
             if (styleBoxFlat != null)
                 _lines[line].AddThemeStyleboxOverride(ThemeName, styleBoxFlat);
         }
         else
         {
             MakeSpace();
-            Display(textEvent);
+            Display(text, colorType);
+        }
+    }
+
+    public void Display(TextEvent textEvent)
+    {
+        var textList = textEvent.Message.SplitByNewline();
+        foreach (var text in textList)
+        {
+            Display(text, textEvent.ColorType);
         }
     }
 }

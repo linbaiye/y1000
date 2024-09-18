@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace y1000.Source.Util;
 
 public static class StringUtil
@@ -11,6 +14,11 @@ public static class StringUtil
                 return false;
         }
         return true;
+    }
+
+    public static List<string> SplitByNewline(this string str)
+    {
+        return new List<string>(str.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None));
     }
     
 }
