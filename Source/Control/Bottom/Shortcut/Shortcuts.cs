@@ -7,7 +7,6 @@ using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Control.RightSide.Inventory;
-using y1000.Source.Input;
 using y1000.Source.Item;
 using y1000.Source.KungFu;
 using y1000.Source.Sprite;
@@ -63,9 +62,16 @@ public partial class Shortcuts : NinePatchRect
 
     private void OnSlotMouseEvent(object? sender, SlotMouseEvent mouseEvent)
     {
-        if (mouseEvent.EventType == SlotMouseEvent.Type.MOUSE_LEFT_CLICK ||
-            mouseEvent.EventType == SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
+        if (sender is not InventorySlotView slot)
         {
+            return;
+        }
+        if (mouseEvent.EventType is SlotMouseEvent.Type.MOUSE_LEFT_CLICK or SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
+        {
+            if (_mappedContext.TryGetValue(slot.Number - 1, out var context))
+            {
+                SendShortcutIfAllowed(context);
+            }
         }
     }
 
@@ -74,11 +80,11 @@ public partial class Shortcuts : NinePatchRect
         var milliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         if (milliseconds >= _nextInputAfter)
         {
-            if (context.Receiver == Shortcut.ShortcutContext.Component.KUNGFU_BOOK)
+            if (context.Receiver == Control.ShortcutContext.Component.KUNGFU_BOOK)
             {
                 _kungFuBook?.OnShortcutPressed(context.Page, context.Slot);
             }
-            else if (context.Receiver == Shortcut.ShortcutContext.Component.INVENTORY)
+            else if (context.Receiver == Control.ShortcutContext.Component.INVENTORY)
             {
                 _inventory?.OnUIDoubleClick(context.Slot);
             }
@@ -110,7 +116,7 @@ public partial class Shortcuts : NinePatchRect
             {
                 var index = keyValuePair.Key;
                 var shortcutContext = keyValuePair.Value;
-                if (shortcutContext.Receiver == Shortcut.ShortcutContext.Component.KUNGFU_BOOK)
+                if (shortcutContext.Receiver == Control.ShortcutContext.Component.KUNGFU_BOOK)
                 {
                     var kungFu = kungFuBook.Get(shortcutContext.Page, shortcutContext.Slot);
                     if (kungFu != null)
@@ -121,7 +127,7 @@ public partial class Shortcuts : NinePatchRect
                             _slots[index].PutTextureAndTooltip(texture2D, kungFu.Name + ":" + kungFu.FormatLevel);
                     }
                 }
-                else if (shortcutContext.Receiver == Shortcut.ShortcutContext.Component.INVENTORY)
+                else if (shortcutContext.Receiver == Control.ShortcutContext.Component.INVENTORY)
                 {
                     var item = inventory.Get(shortcutContext.Slot);
                     if (item != null)
@@ -163,7 +169,7 @@ public partial class Shortcuts : NinePatchRect
         }
         if (kungFu == null)
         {
-            _slots[index].Clear();
+            _slots[index].ClearTextureAndTip();
             return;
         }
         int iconId = _magicSdbReader.GetIconId(kungFu.Name);
@@ -182,7 +188,7 @@ public partial class Shortcuts : NinePatchRect
         }
         if (item == null)
         {
-            _slots[index].Clear();
+            _slots[index].ClearTextureAndTip();
             return;
         }
         var texture2D = _itemIconReader.Get(item.IconId);
@@ -211,7 +217,7 @@ public partial class Shortcuts : NinePatchRect
     {
         foreach (var context in _mappedContext.Values)
         {
-            if (context.Receiver == Shortcut.ShortcutContext.Component.KUNGFU_BOOK)
+            if (context.Receiver == Control.ShortcutContext.Component.KUNGFU_BOOK)
             {
                 var kungFu = _kungFuBook?.Get(context.Page, context.Slot);
                 SetKungFu(kungFu, context);
@@ -223,7 +229,7 @@ public partial class Shortcuts : NinePatchRect
     {
         foreach (var context in _mappedContext.Values)
         {
-            if (context.Receiver == Shortcut.ShortcutContext.Component.INVENTORY)
+            if (context.Receiver == Control.ShortcutContext.Component.INVENTORY)
             {
                 SetItem(_inventory?.Get(context.Slot), context);
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Godot;
 using y1000.Source.Assistant;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
@@ -12,6 +13,8 @@ public partial class RightControl : Godot.Control
 {
     private InventoryView? _inventory;
     private KungFuBookView? _kungFuBookView;
+
+    private Hotkeys? _hotkeys;
 
     private AssistantView _assistantView;
     
@@ -64,10 +67,10 @@ public partial class RightControl : Godot.Control
 
     
     public void BindCharacter(CharacterImpl character, AutoFillAssistant assistant,
-        AutoLootAssistant? autoLootAssistant)
+        AutoLootAssistant? autoLootAssistant, Hotkeys hotkeys)
     {
-        _inventory?.BindInventory(character.Inventory);
-        _kungFuBookView?.BindKungFuBook(character.KungFuBook);
+        _inventory?.BindInventory(character.Inventory, hotkeys);
+        _kungFuBookView?.BindKungFuBook(character.KungFuBook, hotkeys);
         character.WhenCharacterUpdated += WhenCharacterUpdated;
         _assistantView.BindCharacter(character, assistant, autoLootAssistant);
     }

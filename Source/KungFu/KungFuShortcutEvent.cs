@@ -1,4 +1,5 @@
 ﻿using System;
+using y1000.Source.Control;
 using y1000.Source.Control.Bottom.Shortcut;
 
 namespace y1000.Source.KungFu;

@@ -62,6 +62,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	
 	private AudioManager? _audioManager;
 
+	private Hotkeys? _hotkeys;
+
 	private AutoFillAssistant? _autoFillAssistant;
 	private AutoLootAssistant? _autoLootAssistant;
 	private AutoMoveAssistant? _autoMoveAssistant;
@@ -152,32 +154,29 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private MapLayer MapLayer => GetNode<MapLayer>("MapLayer");
 
-	private void LocalTest(InputEventKey eventKey)
+	private bool HandleKeyEvent(InputEventKey eventKey)
 	{
 		if (_character == null || !eventKey.IsPressed())
 		{
-			return;
+			return false;
 		}
-
 		if (eventKey.Keycode == Key.M )
 		{
 			_uiController?.ToggleMap(MapLayer);
 		}
-
-		/*if (eventKey.Keycode >= Key.Key1 && eventKey.Keycode <= Key.Key9)
+		else if (eventKey.Keycode == Key.Numlock)
 		{
-			var index = (ColorType)(eventKey.Keycode - Key.Key1);
-			for (int i = 0; i < _entitySoundPlayers.Length; i++)
-			{
-				if (!_entitySoundPlayers[i].Playing)
-				{
-					var name = (8950 + index).ToString();
-					LOGGER.Debug("Play sound {} with player {}", name, i);
-					_entitySoundPlayers[i].PlaySound(name);
-					break;
-				}
-			}
-		}*/
+			_autoMoveAssistant?.Toggle();
+		}
+        else if (_hotkeys != null && _hotkeys.CanHandle(eventKey.Keycode))
+		{
+			_hotkeys.Handle(eventKey.Keycode);
+		}
+		else
+		{
+			return false;
+		}
+		return true;
 	}
 
 
@@ -193,24 +192,16 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 	
-
-	
 	private void HandleInput(InputEvent @event)
 	{
 		if (_character == null)
 		{
 			return;
 		}
-
 		if (@event is InputEventKey eventKey)
 		{
-			if (eventKey.Keycode == Key.Numlock && eventKey.IsReleased())
-			{
-				_autoMoveAssistant?.Toggle();
+			if (HandleKeyEvent(eventKey))
 				return;
-			}
-			LocalTest(eventKey);
-			//return;//
 		}
 		var mousePos = _character.WrappedPlayer().GetLocalMousePosition();
 		var predictableInput = _inputSampler.SampleInput(@event, mousePos);
@@ -288,25 +279,26 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_unprocessedMessages.Enqueue(message);
 	}
 
-	private async void Reconnect()
-	{
-		await Task.Run(() =>
-		{
-			Task.Delay(2000);
-		});
-		try
-		{
-			_channel?.CloseAsync();
-			_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
-		}
-		catch (Exception)
-		{
-			Reconnect();
-		}
-	}
+	// private async void Reconnect()
+	// {
+	// 	await Task.Run(() =>
+	// 	{
+	// 		Task.Delay(2000);
+	// 	});
+	// 	try
+	// 	{
+	// 		_channel?.CloseAsync();
+	// 		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
+	// 	}
+	// 	catch (Exception)
+	// 	{
+	// 		Reconnect();
+	// 	}
+	// }
 
 	public void OnConnectionClosed()
 	{
+		_channel?.CloseAsync().Wait();
 		_channel = null;
 		_unprocessedMessages.Clear();
 		_uiController?.DisplayTextMessage(new TextMessage("连接已断开", TextMessage.TextLocation.CENTER));
@@ -319,7 +311,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (_entityManager.Add(msgDrivenPlayer))
 		{
 			AddChild(msgDrivenPlayer.Player);
-			LOGGER.Debug("Added player {0}.", msgDrivenPlayer.Id);
 		}
 	}
 
@@ -500,9 +491,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_character.WrappedPlayer().MouseClicked += OnEntityClicked;
 		_autoFillAssistant = AutoFillAssistant.Create(_character);
 		_autoLootAssistant = AutoLootAssistant.Create(_entityManager, _character);
-		_audioManager?.Restore(_character, message.Bgm);
+		_hotkeys = Hotkeys.LoadOrCreate(_character);
 		_autoMoveAssistant = new AutoMoveAssistant(_character, _inputSampler);
-		_uiController?.BindCharacter(_character, message.RealmName, _autoFillAssistant, _audioManager, _autoLootAssistant);
+		_audioManager?.Restore(_character, message.Bgm);
+		_uiController?.BindCharacter(_character, message.RealmName, _autoFillAssistant,
+			_audioManager, _autoLootAssistant, _hotkeys);
 		MapLayer.BindCharacter(_character, message.MapName, message.TileName, message.ObjName, message.RoofName);
 		_entityManager.Add(_character);
 		AddChild(_character);

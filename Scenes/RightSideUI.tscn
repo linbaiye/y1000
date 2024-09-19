@@ -160,7 +160,6 @@ theme_override_font_sizes/font_size = 13
 vertical_alignment = 1
 
 [node name="KungFuBook" type="NinePatchRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(252, 384)
 layout_mode = 0
 offset_right = 40.0
@@ -359,4 +358,5 @@ texture_focused = ExtResource("10_6lo56")
 script = ExtResource("10_wleme")
 
 [node name="Assistance" parent="." instance=ExtResource("14_hnjge")]
+visible = false
 layout_mode = 0

@@ -4,6 +4,7 @@ using System.Linq;
 using Godot;
 using NLog;
 using y1000.Source.Character.Event;
+using y1000.Source.Control;
 using y1000.Source.Control.Bottom.Shortcut;
 using y1000.Source.Event;
 using y1000.Source.Item;

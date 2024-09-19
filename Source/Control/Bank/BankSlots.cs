@@ -32,7 +32,7 @@ public partial class BankSlots : GridContainer
 
     public void Clear()
     {
-        Foreach(i => i.Clear());
+        Foreach(i => i.ClearTextureAndTip());
     }
     
 

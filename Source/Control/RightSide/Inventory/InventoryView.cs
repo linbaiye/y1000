@@ -1,6 +1,7 @@
 ﻿using System;
 using Godot;
 using NLog;
+using y1000.Source.Assistant;
 using y1000.Source.Character;
 using y1000.Source.Item;
 using y1000.Source.Sprite;
@@ -22,6 +23,8 @@ public partial class InventoryView : AbstractInventoryView
     private bool _bankMode;
 
     private Action<InventorySlotView>? _dragHandler;
+
+    private Hotkeys? _hotkeys;
     
     public override void _Ready()
     {
@@ -141,19 +144,22 @@ public partial class InventoryView : AbstractInventoryView
             _inventory.OnUISwap(picked.Number, _currentFocused.Number);
         }
     }
+
     
-    public void BindInventory(CharacterInventory inventory)
+    public void BindInventory(CharacterInventory inventory, Hotkeys hotkeys)
     {
         inventory.Foreach(SetIconToSlot);
         inventory.InventoryChanged += OnInventoryUpdated;
         _inventory = inventory;
+        hotkeys.KeyUpdated += hk => UpdateHotKeys(hk, hk.InventoryContexts);
+        _hotkeys = hotkeys;
     }
 
     private void OnInventoryUpdated(object? sender, EventArgs eventArgs)
     {
         if (sender is CharacterInventory inventory)
         {
-            ForeachSlot(slot=>slot.Clear());
+            ForeachSlot(slot=>slot.ClearTextureAndTip());
             inventory.Foreach(SetIconToSlot);
         }
     }
@@ -167,11 +173,20 @@ public partial class InventoryView : AbstractInventoryView
         }
     }
 
+    private void RefreshHotKeys()
+    {
+        if (_hotkeys != null && Visible)
+        {
+            UpdateHotKeys(_hotkeys, _hotkeys.InventoryContexts);
+        }
+    }
+
     public InventorySlotView? FocusedSlotView => _currentFocused;
     
     public void ButtonClicked()
     {
         Visible = !Visible;
         ToggleMouseFilter();
+        RefreshHotKeys();
     }
 }

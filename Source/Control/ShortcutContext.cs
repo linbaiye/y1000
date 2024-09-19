@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace y1000.Source.Control.Bottom.Shortcut;
+namespace y1000.Source.Control;
 
 public class ShortcutContext
 {

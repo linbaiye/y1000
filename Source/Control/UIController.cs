@@ -134,9 +134,10 @@ public partial class UIController : CanvasLayer
         string realmName,
         AutoFillAssistant autoFillAssistant,
         AudioManager? audioManager,
-        AutoLootAssistant? autoLootAssistant)
+        AutoLootAssistant? autoLootAssistant,
+        Hotkeys hotkeys)
     {
-        _rightControl.BindCharacter(character, autoFillAssistant, autoLootAssistant);
+        _rightControl.BindCharacter(character, autoFillAssistant, autoLootAssistant, hotkeys);
         _bottomControl.BindCharacter(character, realmName);
         _dialogControl.BindCharacter(character);
         _mapView.BindCharacter(character);

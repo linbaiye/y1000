@@ -19,9 +19,11 @@ namespace y1000.Source.Networking.Connection
             //LOGGER.Debug("Received message {0}.", msg);
             _eventListener.OnMessageArrived(msg);
         }
+        
 
         public override void ChannelInactive(IChannelHandlerContext context)
         {
+            LOGGER.Debug("Connection closed.");
             _eventListener.OnConnectionClosed();
         }
     }

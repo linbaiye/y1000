@@ -78,11 +78,11 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
     {
         foreach (var slot in _mySlots)
         {
-            slot.Clear();
+            slot.ClearTextureAndTip();
         }
         foreach (var slot in _playerSlots)
         {
-            slot.Clear();
+            slot.ClearTextureAndTip();
         }
         _myNameLabel.Text = "";
         _anoterNameLabel.Text = "";
@@ -130,11 +130,11 @@ public partial class PlayerTradeWindow : NinePatchRect, ISlotDoubleClickHandler
     {
         if (message.Self)
         {
-            _mySlots[message.Slot - 1].Clear();
+            _mySlots[message.Slot - 1].ClearTextureAndTip();
         }
         else
         {
-            _playerSlots[message.Slot - 1].Clear();
+            _playerSlots[message.Slot - 1].ClearTextureAndTip();
         }
         
     }

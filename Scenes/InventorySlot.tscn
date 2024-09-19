@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://drlxeqb568kxo"]
+[gd_scene load_steps=3 format=3 uid="uid://drlxeqb568kxo"]
 
 [ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/InventorySlotView.cs" id="1_ye2up"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvv3r"]
+bg_color = Color(0, 0, 0, 0.286275)
 
 [node name="InventorySlot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
@@ -20,3 +23,14 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer"]
 layout_mode = 2
+stretch_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="."]
+layout_mode = 1
+offset_right = 25.0
+offset_bottom = 14.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 13
+theme_override_font_sizes/bold_font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_uvv3r")
+bbcode_enabled = true
