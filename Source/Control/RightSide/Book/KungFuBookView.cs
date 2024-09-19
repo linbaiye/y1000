@@ -44,6 +44,7 @@ public partial class KungFuBookView : AbstractInventoryView
     {
         _currentPage = bookPage;
         RefreshPage();
+        RefreshHotKeys();
     }
 
     private void OnSlotKeyEvent(object? sender, SlotKeyEvent keyEvent)
@@ -151,10 +152,8 @@ public partial class KungFuBookView : AbstractInventoryView
     {
         Visible = !Visible;
         if (Visible)
-        {
             _currentPage?.GrabFocus();
-            RefreshHotKeys();
-        }
+        RefreshHotKeys();
         ToggleMouseFilter();
     }
 }
