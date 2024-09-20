@@ -1,5 +1,4 @@
 using Godot;
-using y1000.code.player;
 using y1000.Source.Animation;
 
 namespace y1000.Source.Creature.State;

@@ -1,4 +1,4 @@
-namespace y1000.code.networking.message
+namespace y1000.Source.Networking.Server
 {
     public enum PositionType
     {

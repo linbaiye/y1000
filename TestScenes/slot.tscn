@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnkxqdtvgoxeg"]
+
+[ext_resource type="Texture2D" uid="uid://dhrws7psj0qn6" path="res://assets/newmagic/000006.bmp" id="1_oql75"]
+
+[node name="Control" type="Panel"]
+custom_minimum_size = Vector2(40, 40)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_oql75")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 14.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0, 0.282353, 0.192157, 1)
+text = "F5"

@@ -2,9 +2,7 @@
 using Godot;
 using NLog;
 using Source.Networking.Protobuf;
-using y1000.code.networking.message;
 using y1000.Source.Character.Event;
-using y1000.Source.Creature;
 using y1000.Source.Creature.Event;
 using y1000.Source.Item;
 using y1000.Source.KungFu;

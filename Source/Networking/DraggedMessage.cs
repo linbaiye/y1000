@@ -1,7 +1,5 @@
 using Godot;
 using Source.Networking.Protobuf;
-using y1000.code;
-using y1000.code.networking.message;
 using y1000.Source.Creature;
 using y1000.Source.Networking.Server;
 

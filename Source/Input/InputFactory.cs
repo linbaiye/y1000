@@ -1,6 +1,4 @@
 using Godot;
-using y1000.code;
-using y1000.Source.Character.Event;
 using y1000.Source.Creature;
 using y1000.Source.Entity;
 

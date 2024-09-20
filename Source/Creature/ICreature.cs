@@ -1,6 +1,4 @@
 using Godot;
-using y1000.code;
-using y1000.code.entity;
 using y1000.Source.Entity;
 
 namespace y1000.Source.Creature;
