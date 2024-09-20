@@ -246,6 +246,24 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
+	private void HandleEntityLeftClick(IEntity entity)
+	{
+		if (entity is Monster monster && monster.Type == NpcType.BANKER)
+		{
+			if (!monster.IsDead)
+				_eventMediator.NotifyServer(ClientOperateBankEvent.Open(entity.Id));
+		}
+		else if (entity is Merchant merchant)
+		{
+			if (!merchant.IsDead)
+				_uiController?.OnMerchantClicked(merchant);
+		} 
+		else if (entity is IPlayer player)
+		{
+			LOGGER.Debug("Player {0} clicked.", player.Id);
+		}
+	}
+
 	private void OnEntityClicked(object? sender, EntityMouseEventArgs args)
 	{
 		if (_character == null)
@@ -254,22 +272,17 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 		var click = _inputSampler.SampleEntityClickInput(args.MouseEvent, args.Entity, 
 			_character.WrappedPlayer().GetLocalMousePosition());
-		if (click is AttackInput attack)
+		switch (click)
 		{
-			_character?.HandleInput(attack);
-		}
-        else if (args.Entity is Merchant merchant && click is CreatureLeftClick && !merchant.IsDead)
-		{
-			_uiController?.OnMerchantClicked(merchant);
-		}
-		else if (click is IPredictableInput predictableInput)
-		{
-			_character?.HandleInput(predictableInput);
-		}
-		else if (args.Entity is Monster monster && monster.Type == NpcType.BANKER &&
-		         click is CreatureLeftClick)
-		{
-			_eventMediator.NotifyServer(ClientOperateBankEvent.Open(args.Entity.Id));
+			case AttackInput attack:
+				_character?.HandleInput(attack);
+				break;
+			case IPredictableInput predictableInput:
+				_character?.HandleInput(predictableInput);
+				break;
+			case CreatureLeftClick:
+				HandleEntityLeftClick(args.Entity);
+				break;
 		}
 	}
 

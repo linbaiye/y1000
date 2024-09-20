@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using NLog;
 using y1000.Source.Creature;
@@ -26,7 +27,11 @@ namespace y1000.Source.Animation
 		public void SetName(string name)
 		{
 			_label.Text = name;
-			_label.AddThemeColorOverride("font_color", new Color(DyeShader.ColorRgb(101).ToString("X6")));
+		}
+
+		public void SetNameColor(int color)
+		{
+			_label.AddThemeColorOverride("font_color", new Color(color.ToString("X6")));
 		}
 
 		private void MouseEnteredArea()

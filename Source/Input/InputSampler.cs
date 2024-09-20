@@ -71,7 +71,7 @@ namespace y1000.Source.Input
             }
         }
 
-        public IInput? SampleLeftClickInput(InputEventMouseButton button, IEntity entity)
+        private IInput? SampleLeftClickInput(InputEventMouseButton button, IEntity entity)
         {
             if (button.DoubleClick)
             {

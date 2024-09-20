@@ -186,6 +186,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		}
 	}
 
+	public void Visit(PlayerChangeNameColorMessage message)
+	{
+		SetNameColor(message.Color);
+	}
+
 	public IEquipment Equip(PlayerEquipMessage message)
 	{
 		var equipment = EquipmentFactory.Instance.Create(message.EquipmentName, IsMale, message.Color);

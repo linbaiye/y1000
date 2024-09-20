@@ -564,6 +564,11 @@ namespace y1000.Source.Character
 	        WrappedPlayer().RestoreCamera();
         }
 
+        public void Visit(PlayerChangeNameColorMessage message)
+        {
+	        WrappedPlayer().Visit(message);
+        }
+
         public void Visit(RemoveEntityMessage message)
         {
 	        WrappedPlayer().Map.Free(WrappedPlayer());
@@ -629,6 +634,16 @@ namespace y1000.Source.Character
 			        EventMediator?.NotifyTextArea("活力须在50以上");
 			        return;
 		        }
+	        }
+	        else if (text.StartsWith("@设定团队"))
+	        {
+		        var strings = text.Split(" ");
+		        if (strings.Length == 2 && strings[1].DigitOnly())
+		        {
+			        Visit(new PlayerChangeNameColorMessage(Id, DyeShader.ColorRgb(strings[1].ToInt())));
+			        //EventMediator?.NotifyServer(new ClientChangeTeamEvent(strings[1].ToInt()));
+		        }
+		        return;
 	        }
 	        EventMediator?.NotifyServer(new ClientTextEvent(text));
 	        LOGGER.Debug("Sent text {0}.", text);

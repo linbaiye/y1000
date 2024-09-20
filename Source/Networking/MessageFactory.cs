@@ -162,6 +162,7 @@ public class MessageFactory
             Packet.TypedPacketOneofCase.Chat => new PlayerChatMessage(packet.Chat.Id, packet.Chat.Content),
             Packet.TypedPacketOneofCase.OpenBank => OpenBankMessage.FromPacket(packet.OpenBank),
             Packet.TypedPacketOneofCase.UpdateBank => ParseBankOperation(packet.UpdateBank),
+            Packet.TypedPacketOneofCase.NameColor => new PlayerChangeNameColorMessage(packet.NameColor.Id, packet.NameColor.Color),
             _ => throw new NotSupportedException()
         };
     }
