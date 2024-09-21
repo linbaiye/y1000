@@ -189,6 +189,6 @@ public class AtdStructure
     
     public static AtdStructure LoadPlayer(string atdName)
     {
-        return Load( "res://sprite/char/" + atdName, PLAYER_ACTION_MAP);
+        return Load("res://assets/atd/" + atdName, PLAYER_ACTION_MAP);
     }
 }

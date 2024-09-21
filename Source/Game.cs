@@ -138,7 +138,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 				new LengthBasedPacketDecoder(_messageFactory),
 				new MessageHandler(this))
 				)).Channel<TcpSocketChannel>();
-		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
+		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("192.168.1.5"), 9999));
 		await _channel.WriteAndFlushAsync(new LoginEvent(_token, _charName));
 	}
 
@@ -311,10 +311,10 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void OnConnectionClosed()
 	{
-		_channel?.CloseAsync().Wait();
-		_channel = null;
-		_unprocessedMessages.Clear();
-		_uiController?.DisplayTextMessage(new TextMessage("连接已断开", TextMessage.TextLocation.CENTER));
+		//_channel?.CloseAsync().Wait();
+		//_channel = null;
+		//_unprocessedMessages.Clear();
+		//_uiController?.DisplayTextMessage(new TextMessage("连接已断开", TextMessage.TextLocation.CENTER));
 	}
 
 	public void Visit(PlayerInterpolation playerInterpolation)
@@ -519,7 +519,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		if (what == NotificationWMCloseRequest)
 		{
 			_channel?.WriteAndFlushAsync(ClientSimpleCommandEvent.Quit).Wait();
-			_channel?.CloseAsync().Wait();
 			GetTree().Quit();
 		}
 	}

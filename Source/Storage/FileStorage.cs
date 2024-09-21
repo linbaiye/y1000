@@ -12,7 +12,7 @@ public class FileStorage
     public FileStorage(string space)
     {
         _space = space;
-        _dirPath = "res://data/" + _space;
+        _dirPath = "user://data/" + _space;
         if (!DirAccess.DirExistsAbsolute(_dirPath))
             DirAccess.MakeDirRecursiveAbsolute(_dirPath);
     }

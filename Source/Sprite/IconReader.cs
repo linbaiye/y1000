@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Godot;
+using NLog;
 
 namespace y1000.Source.Sprite;
 
 public class IconReader
 {
-    private readonly Dictionary<string, Texture2D> _textures;
+    private readonly Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>();
+
+    private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
     public static readonly IconReader ItemIconReader = LoadItems();
     
@@ -14,24 +17,32 @@ public class IconReader
 
     private readonly string _extname;
 
-    private IconReader(Dictionary<string, Texture2D> textures, string extname)
+    private readonly string _dirname;
+
+
+    private IconReader(string dir, string extname)
     {
-        _textures = textures;
         _extname = extname;
+        _dirname = dir;
     }
 
     
     public Texture2D? Get(int iconId)
     {
-        return _textures.GetValueOrDefault("000" + iconId.ToString("000") + "." + _extname);
+        var path = _dirname + "/" + "000" + iconId.ToString("000") + "." + _extname;
+        LOGGER.Debug("Load {0}.", path);
+        if (ResourceLoader.Load(path) is Texture2D texture)
+            return texture;
+        return null;
     }
     
     private static IconReader LoadItems(string dirpath, string extName)
     {
-        var dirAccess = DirAccess.Open(dirpath);
+        using var dirAccess = DirAccess.Open(dirpath);
         var files = dirAccess.GetFiles();
         if (files == null)
         {
+            LOGGER.Debug("Nothing to load for {0}.", dirpath);
             throw new NotSupportedException();
         }
 
@@ -42,22 +53,24 @@ public class IconReader
             {
                 continue;
             }
-            if (ResourceLoader.Load(dirpath + "/" + file) is Texture2D texture)
+            var path = dirpath + "/" + file;
+            LOGGER.Debug("Loading img: {0}", path);
+            if (ResourceLoader.Load(path) is Texture2D texture)
             {
                 result.TryAdd(file, texture);
             }
         }
-        return new IconReader(result, extName);
+        return new IconReader(dirpath, extName);
     }
     
     private static IconReader LoadKungFu()
     {
-        return LoadItems("res://assets/newmagic", "bmp");
+        return new IconReader("res://assets/newmagic", "bmp");
     }
 
     private static IconReader LoadItems()
     {
-        return LoadItems("res://sprite/item", "png");
+        return new IconReader("res://sprite/item", "png");
     }
     
 }

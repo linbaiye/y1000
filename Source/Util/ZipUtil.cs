@@ -27,5 +27,16 @@ public static class ZipUtil
         var error = image.LoadPngFromBuffer(ms.ToArray());
         return error == Error.Ok ? ImageTexture.CreateFromImage(image) : null;
     }
-    
+
+    public static string ToString(byte[] bytes)
+    {
+        return Encoding.UTF8.GetString(bytes);
+    }
+
+    public static ImageTexture? ToTexture(byte[] bytes)
+    {
+        var image = new Image();
+        var error = image.LoadPngFromBuffer(bytes);
+        return error == Error.Ok ? ImageTexture.CreateFromImage(image) : null;
+    }
 }

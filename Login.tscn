@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cluywph0mcid6"]
+[gd_scene load_steps=5 format=3 uid="uid://cluywph0mcid6"]
 
 [ext_resource type="Texture2D" uid="uid://pfji6mw5d5rv" path="res://assets/ui/login.png" id="1_ku3r6"]
 [ext_resource type="Script" path="res://Source/Control/Login.cs" id="2_llpe0"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_mbscu"]
-[ext_resource type="AudioStream" uid="uid://cswjxfy7fd6y7" path="res://assets/bgm/Logon.mp3" id="3_613tl"]
-[ext_resource type="AudioStream" uid="uid://pmdnyptoo1j8" path="res://assets/bgm/click.wav" id="4_jl1hi"]
+[ext_resource type="AudioStream" uid="uid://pmdnyptoo1j8" path="res://bgm/click.wav" id="4_jl1hi"]
 
 [node name="Login" type="NinePatchRect"]
 custom_minimum_size = Vector2(527, 479)
@@ -17,8 +16,6 @@ texture = ExtResource("1_ku3r6")
 script = ExtResource("2_llpe0")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_613tl")
-autoplay = true
 
 [node name="Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_jl1hi")
@@ -239,6 +236,7 @@ theme_override_font_sizes/font_size = 12
 text = "进入游戏"
 
 [node name="CreateChar" type="Button" parent="CharPanel"]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 336.0
 offset_right = 136.0

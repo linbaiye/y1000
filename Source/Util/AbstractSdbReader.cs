@@ -45,7 +45,6 @@ public abstract class AbstractSdbReader
             throw new NotImplementedException("Item.sdb does not have header.");
         }
         var headers = line.Split(",");
-        Dictionary<string, int> header = new Dictionary<string, int>();
         for (int i = 0; i < headers.Length; i++)
         {
             _header.TryAdd(headers[i], i);

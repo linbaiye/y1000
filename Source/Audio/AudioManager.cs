@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Godot;
 using NLog;
@@ -169,20 +170,28 @@ public partial class AudioManager : Godot.Control
         if (_settings.SoundEnabled)
             _playerAudio.PlaySound(sound);
     }
+
+
+    public static AudioStream? LoadBgmStream(string bgm) {
+        var path = "res://bgm/" + bgm + ".mp3";
+        if (ResourceLoader.Exists(path)) {
+            return ResourceLoader.Load<AudioStreamMP3>(path);
+        }
+        path = "res://bgm/" + bgm + ".wav";
+        if (ResourceLoader.Exists(path)) {
+            return ResourceLoader.Load<AudioStreamWav>(path);
+        }
+        return null;
+    }
+
     
     public void LoadAndPlayBackgroundMusic(string bgm)
     {
-
-        var path = "res://assets/bgm/" + bgm + ".mp3";
-        if (!FileAccess.FileExists(path))
+        AudioStream? stream = LoadBgmStream(bgm);
+        if (stream != null)
         {
-            path = "res://assets/bgm/" + bgm + ".wav";
-        }
-        if (FileAccess.FileExists(path))
-        {
-            var streamWav = ResourceLoader.Load<AudioStreamMP3>(path);
             _bgmAudioPlayer.Stop();
-            _bgmAudioPlayer.Stream = streamWav;
+            _bgmAudioPlayer.Stream = stream;
             if (_settings.BgmEnabled)
                 _bgmAudioPlayer.Play();
         }
@@ -197,9 +206,9 @@ public partial class AudioManager : Godot.Control
 
     public void Restore(CharacterImpl character, string bgm)
     {
-        _storage =  new FileStorage(character.EntityName);
+        _storage = new FileStorage(character.EntityName);
         var content = _storage.Load(FileName);
-        if (content != null)
+        if (!string.IsNullOrEmpty(content))
         {
             var tmp = JsonSerializer.Deserialize<Settings>(content);
             if (tmp != null)
@@ -209,5 +218,5 @@ public partial class AudioManager : Godot.Control
         }
         Restore(bgm);
     }
-    
+
 }

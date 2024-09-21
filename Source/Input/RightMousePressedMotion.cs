@@ -3,13 +3,13 @@ using y1000.Source.Creature;
 
 namespace y1000.Source.Input
 {
-    public class RightMousePressedMotion : AbstractRightClickInput
-    {
+	public class RightMousePressedMotion : AbstractRightClickInput
+	{
 
-        public RightMousePressedMotion(long s, Direction d) : base(s, d)
-        {
-        }
-        public override InputType Type => InputType.MOUSE_RIGHT_MOTION;
+		public RightMousePressedMotion(long s, Direction d) : base(s, d)
+		{
+		}
+		public override InputType Type => InputType.MOUSE_RIGHT_MOTION;
 
-    }
+	}
 }

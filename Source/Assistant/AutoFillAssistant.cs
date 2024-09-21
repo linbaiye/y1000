@@ -196,7 +196,7 @@ public class AutoFillAssistant
         FileStorage fileStorage = new FileStorage(character.EntityName);
         var content = fileStorage.Load(Name);
         var autoFillAssistant = new AutoFillAssistant(character);
-        if (content == null)
+        if (string.IsNullOrEmpty(content))
         {
             return autoFillAssistant;
         }

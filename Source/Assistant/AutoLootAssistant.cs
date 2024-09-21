@@ -106,7 +106,7 @@ public class AutoLootAssistant
             Auto = true,
             Reverse = false,
         };
-        if (content != null)
+        if (!string.IsNullOrEmpty(content))
         {
             var s = JsonSerializer.Deserialize<Settings>(content);
             if (s != null)

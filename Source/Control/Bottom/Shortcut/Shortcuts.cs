@@ -242,7 +242,7 @@ public partial class Shortcuts : NinePatchRect
         BindKungFuBook(character.KungFuBook);
         _fileStorage = new FileStorage(character.EntityName);
         var content = _fileStorage.Load(FileName);
-        if (content != null)
+        if (!string.IsNullOrEmpty(content))
         {
             Restore(content, character.KungFuBook, character.Inventory);
         }

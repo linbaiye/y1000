@@ -8,3 +8,15 @@ y1000.csproj.old*
 assets/maps/
 assets/sound/
 assets/bgm/
+.vs/
+.vscode/
+ScenesTest/
+bgm/
+data/
+data_y1000_windows_x86_64/
+export_presets.cfg
+win_proto.sh
+y1000.console.exe
+y1000.exe
+y1000.pck
+y1000.sln.DotSettings.user

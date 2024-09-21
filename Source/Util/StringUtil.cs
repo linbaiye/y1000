@@ -20,5 +20,6 @@ public static class StringUtil
     {
         return new List<string>(str.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None));
     }
+
     
 }
