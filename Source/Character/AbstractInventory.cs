@@ -58,8 +58,10 @@ public abstract class AbstractInventory
         {
             return false;
         }
-
-        return item is CharacterStackItem stackItem && stackItem.Number >= number;
+        if (item is CharacterStackItem stackItem) {
+            return stackItem.Number >= number;
+        }
+        return true;
     }
 
     public IItem? Find(int slot)

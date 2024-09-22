@@ -81,6 +81,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		InitEquipment<Boot>(info.BootName, info.BootColor, ChangeBoot);
 		InitEquipment<Trouser>(info.TrouserName, info.TrouserColor, ChangeTrouser);
 		InitEquipment<Clothing>(info.ClothingName, info.ClothingColor, ChangeClothing);
+		SetNameColor(info.NameColor);
 	}
 
 	public PlayerWeapon? Weapon { get; private set; }
@@ -189,6 +190,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void Visit(PlayerChangeNameColorMessage message)
 	{
 		SetNameColor(message.Color);
+	}
+
+	private void SetNameColor(int color) {
+		var code = color <= 0 ? "ffffff" : color.ToString("X6");
+		BodySprite?.SetNameColor(code);
 	}
 
 	public IEquipment Equip(PlayerEquipMessage message)

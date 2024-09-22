@@ -260,7 +260,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		} 
 		else if (entity is IPlayer player)
 		{
-			LOGGER.Debug("Player {0} clicked.", player.Id);
+			_eventMediator?.NotifyServer(new ClickEntityEvent(player.Id));
 		}
 	}
 
@@ -520,6 +520,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			_channel?.WriteAndFlushAsync(ClientSimpleCommandEvent.Quit).Wait();
 			GetTree().Quit();
+		}
+		else if (what == NotificationWMMouseEnter) {
+			_autoMoveAssistant?.MouseEnterWindow();
+		}
+		else if (what == NotificationWMMouseExit) { 
+			_autoMoveAssistant?.MouseExitWindow();
 		}
 	}
 }

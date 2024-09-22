@@ -232,4 +232,9 @@ public interface IServerMessageVisitor
     {
         
     }
+
+    void Visit(PlayerChangeNameColorMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
 }

@@ -574,10 +574,6 @@ namespace y1000.Source.Character
 	        WrappedPlayer().Map.Free(WrappedPlayer());
         }
 
-        public void ReachEdge()
-        {
-	        LOGGER.Debug("Reached edge.");
-        }
 
         public void LimitCamera(Vector2I leftUp, Vector2I bottomDown)
         {
@@ -640,8 +636,7 @@ namespace y1000.Source.Character
 		        var strings = text.Split(" ");
 		        if (strings.Length == 2 && strings[1].DigitOnly())
 		        {
-			        Visit(new PlayerChangeNameColorMessage(Id, DyeShader.ColorRgb(strings[1].ToInt())));
-			        //EventMediator?.NotifyServer(new ClientChangeTeamEvent(strings[1].ToInt()));
+			        EventMediator?.NotifyServer(new ClientChangeTeamEvent(strings[1].ToInt()));
 		        }
 		        return;
 	        }

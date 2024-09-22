@@ -1,5 +1,6 @@
 using Godot;
 using NLog;
+using y1000.Source.Creature;
 using y1000.Source.Entity;
 using y1000.Source.Util;
 
@@ -57,6 +58,11 @@ namespace y1000.Source.Input
 		public RightMousePressedMotion SampleMoveInput(Vector2 mouseOffset)
 		{
 			return InputFactory.CreateRightMousePressedMotion(mouseOffset.GetDirection());
+		}
+		
+		public RightMousePressedMotion SampleMoveInput(Direction direction)
+		{
+			return InputFactory.CreateRightMousePressedMotion(direction);
 		}
 
 		public IInput? SampleEntityClickInput(InputEventMouseButton button, IEntity entity, Vector2 mouseOffset)

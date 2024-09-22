@@ -49,8 +49,8 @@ public class TextMessage : IServerMessage
         PLAYER_SHOUT = 16,
         
         PLAYER_WHISPER = 18,
-        
-        KUNGFU_EXP_FULL = 19,
+
+        NOT_ENOUGH_HEAD_LIFE = 19,
         
         CUSTOM = 1000000
         ,
@@ -68,6 +68,7 @@ public class TextMessage : IServerMessage
         { Type.NOT_ENOUGH_INNER_POWER, "内功不足。" },
         { Type.NOT_ENOUGH_OUTER_POWER, "外功不足。" },
         { Type.NOT_ENOUGH_ARM_LIFE, "因攻击力过弱而没能获得经验。" },
+        { Type.NOT_ENOUGH_HEAD_LIFE, "头部活力过低，无法切换武功。" },
         { Type.OUT_OF_AMMO, "没有弹药了。" },
         { Type.NO_MORE_PILL, "无法再服用。" },
         { Type.MULTI_TRADE, "另一交易正在进行中。" },

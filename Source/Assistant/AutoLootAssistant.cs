@@ -62,7 +62,7 @@ public class AutoLootAssistant
         _settings = settings;
         _fileStorage = fileStorage;
     }
-    
+
     
     public void Process(double d)
     {
@@ -74,7 +74,7 @@ public class AutoLootAssistant
         _timer = Interval;
         _entityManager
             .Select<GroundItem>(item => item.Coordinate.Distance(_character.Coordinate) <= 2)
-            .FirstOrDefault(item => Reverse ? !Loot.Contains(item.EntityName) : Loot.Contains(item.EntityName))?.Pick();
+            .FirstOrDefault(item => Reverse ? !Loot.Contains(item.EntityName.Split(":")[0]) : Loot.Contains(item.EntityName.Split(":")[0]))?.Pick();
     }
     
     public void OnReverseCheckboxChanged(bool enable)
@@ -82,6 +82,10 @@ public class AutoLootAssistant
         Reverse = enable;
         Save();
     }
+
+
+    public List<string> VisibleItems => _entityManager.Select<GroundItem>(i => true)
+                .Select(i => i.EntityName.Split(":")[0]).ToList();
 
     public void OnAutoCheckboxChanged(bool enable)
     {
@@ -93,6 +97,17 @@ public class AutoLootAssistant
     {
         Loot = items;
         Save();
+    }
+
+    public void OnAddItemClicked(string item) {
+        if (!Loot.Contains(item)) {
+            Loot.Add(item);
+            Save();
+        }
+    }
+
+    public void OnRemoveLootItemClicked(string item) {
+        Loot.Remove(item);
     }
 
     public static AutoLootAssistant Create(EntityManager entityManager,

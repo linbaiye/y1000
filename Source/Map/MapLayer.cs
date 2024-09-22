@@ -86,6 +86,7 @@ public partial class MapLayer : TileMap, IMap
 		PaintMap();
 		character.WhenCharacterUpdated += OnCharacterEvent;
 		PutCameraLimit(character);
+		HideRoofIfNeed();
 	}
 
 	private void PutCameraLimit(CharacterImpl character)
@@ -122,19 +123,7 @@ public partial class MapLayer : TileMap, IMap
 		return new Vector2I(0, 0);
 	}
 	
-	private void NotifyIfReachEdge(CharacterImpl character, Vector2I coordinate)
-	{
-		if (_gameMap == null)
-		{
-			return;
-		}
-		int range = 20;
-		if (coordinate.X < range || coordinate.X > _gameMap.Width -range 
-		    || coordinate.Y < range|| coordinate.Y > _gameMap.Height - range)
-		{
-			character.ReachEdge();
-		}
-	}
+
 	private void OnCharacterEvent(object? sender, EventArgs args)
 	{
 		if (sender is not CharacterImpl character)

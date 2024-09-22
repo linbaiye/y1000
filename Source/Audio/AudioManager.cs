@@ -27,6 +27,8 @@ public partial class AudioManager : Godot.Control
     private double _timer = 10;
 
     private CreatureAudio _playerAudio;
+
+    private string _currentBgm = "";
     
     private class Settings
     {
@@ -187,6 +189,8 @@ public partial class AudioManager : Godot.Control
     
     public void LoadAndPlayBackgroundMusic(string bgm)
     {
+        if (_currentBgm.Equals(bgm))
+            return;
         AudioStream? stream = LoadBgmStream(bgm);
         if (stream != null)
         {
@@ -194,6 +198,7 @@ public partial class AudioManager : Godot.Control
             _bgmAudioPlayer.Stream = stream;
             if (_settings.BgmEnabled)
                 _bgmAudioPlayer.Play();
+            _currentBgm = bgm;
         }
     }
 

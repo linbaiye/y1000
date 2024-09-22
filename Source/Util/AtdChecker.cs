@@ -4,8 +4,6 @@ using Godot;
 using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
-using y1000.Source.Map;
-using FileAccess = System.IO.FileAccess;
 
 namespace y1000.Source.Util;
 

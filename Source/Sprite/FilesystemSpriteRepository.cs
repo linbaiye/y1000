@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Godot;
 using NLog;
-using FileAccess = System.IO.FileAccess;
 
 namespace y1000.Source.Sprite;
 

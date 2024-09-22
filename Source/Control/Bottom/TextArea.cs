@@ -33,6 +33,7 @@ public partial class TextArea : VBoxContainer
         { ColorType.NINE_GRADE, "#d8bfd8" },
         { ColorType.TEN_GRADE, "#ffff00" },
         { ColorType.PRIVATE_CHAT, "#e139b2" },
+        { ColorType.SYSTEM_TIP, "#dfa100" },
     };
 
     private readonly IDictionary<ColorType, Color> _bgColors = new Dictionary<ColorType, Color>()

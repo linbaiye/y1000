@@ -2,6 +2,7 @@
 using NLog;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
+using y1000.Source.Creature;
 using y1000.Source.Input;
 
 namespace y1000.Source.Assistant;
@@ -13,6 +14,11 @@ public class AutoMoveAssistant
     private const double Interval = 0.5f;
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
     private double _timer;
+
+    private Direction? _current;
+
+    private bool _mouseWithinWindow;
+
     public AutoMoveAssistant(CharacterImpl character,
         InputSampler inputSampler)
     {
@@ -21,6 +27,7 @@ public class AutoMoveAssistant
         character.WhenCharacterUpdated += OnCharacterMoved;
         _timer = 0.5f;
         Enabled = false;
+        _mouseWithinWindow = true;
     }
 
 
@@ -54,32 +61,57 @@ public class AutoMoveAssistant
         DoMove();
     }
 
+
+    public void MouseExitWindow() {
+        _mouseWithinWindow = false;
+    }
+
+    public void MouseEnterWindow() {
+        _mouseWithinWindow = true;
+    }
+
+
+
+    private RightMousePressedMotion CreateInput()
+    {
+        if (!_mouseWithinWindow && _current.HasValue)
+        {
+            return _inputSampler.SampleMoveInput(_current.Value);
+        }
+        else
+        {
+            return _inputSampler.SampleMoveInput(_character.WrappedPlayer().GetLocalMousePosition());
+        }
+    }
+
+
     private void DoMove()
     {
         if (!Enabled)
         {
             return;
         }
-        var input = _inputSampler.SampleMoveInput(_character.WrappedPlayer().GetLocalMousePosition());
+        RightMousePressedMotion input = CreateInput();
         if (!_character.CanMoveOneUnit(input.Direction))
         {
             return;
         }
+        _current = input.Direction;
         if (_character.Idle)
         {
             _character.HandleInput(input);
             if (_character.Moving)
             {
-                _character.HandleInput(_inputSampler.SampleMoveInput(_character.WrappedPlayer().GetLocalMousePosition()));
+                _character.HandleInput(CreateInput());
             }
         }
         else if (_character.Moving)
         {
-            _character.HandleInput(_inputSampler.SampleMoveInput(_character.WrappedPlayer().GetLocalMousePosition()));
+            _character.HandleInput(CreateInput());
         }
     }
-    
-    
+
+
     private void OnCharacterMoved(object? sender, EventArgs eventArgs)
     {
         if (eventArgs is not CharacterMoveEventArgs || sender is not CharacterImpl)

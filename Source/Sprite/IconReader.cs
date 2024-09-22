@@ -30,7 +30,6 @@ public class IconReader
     public Texture2D? Get(int iconId)
     {
         var path = _dirname + "/" + "000" + iconId.ToString("000") + "." + _extname;
-        LOGGER.Debug("Load {0}.", path);
         if (ResourceLoader.Load(path) is Texture2D texture)
             return texture;
         return null;

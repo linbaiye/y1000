@@ -35,8 +35,6 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 
 	public IDictionary<int, Texture2D> LoadTiles(string tileName)
 	{
-		try {
-			LOGGER.Debug("Reading tiles for {0}.", tileName);
 		long start = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 		var texture2Ds = new Dictionary<int, Texture2D>();
 		using var zipArchive = ZipFile.Open(GetAbsPath(tileName), ZipArchiveMode.Read);
@@ -55,10 +53,6 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 		long end = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 		LOGGER.Debug("Took {0} to read tiles for {1}.", end -start, tileName);
 		return texture2Ds;
-		} catch (Exception e) {
-			LOGGER.Error(e);
-			throw new FileNotFoundException();
-		}
 	}
 	
 	private struct Object2Json

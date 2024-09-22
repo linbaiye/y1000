@@ -30,6 +30,7 @@ public partial class ItemAttributeControl : NinePatchRect
     private EventMediator? _eventMediator;
     private int _viewedSlot;
     private bool _mouseHoveredIcon;
+    private bool _viewItem;
     
     public override void _Ready()
     {
@@ -37,7 +38,7 @@ public partial class ItemAttributeControl : NinePatchRect
         _itemName = GetNode<Label>("ItemName");
         _itemDescription = GetNode<RichTextLabel>("ItemDescription");
         _closeButton = GetNode<Button>("CloseButton");
-        _closeButton.Pressed += () => Visible = false;
+        _closeButton.Pressed += () => { Visible = false; _viewItem = false; };
         _slotView.OnMouseInputEvent += OnSlotMouseEvent;
         Visible = false;
         _mouseHoveredIcon = false;
@@ -60,8 +61,10 @@ public partial class ItemAttributeControl : NinePatchRect
     {
         _itemDescription.Text = Regex.Replace(attributeEvent.Description, "<br>", "\n");
         var item = attributeEvent.Item;
-        if (DisplayIcon(item))
+        if (DisplayIcon(item)) {
             _viewedSlot = attributeEvent.Slot;
+            _viewItem = true;
+        }
     }
 
     private void OnSlotMouseEvent(object? sender, SlotMouseEvent mouseEvent)
@@ -74,17 +77,16 @@ public partial class ItemAttributeControl : NinePatchRect
         {
             _mouseHoveredIcon = false;
         }
-        Logger.Debug("Hovered {0}.", _mouseHoveredIcon);
     }
 
     public void BindCharacter(CharacterImpl character)
     {
-        character.Inventory.InventoryChanged += OnInventoryUpdated;
+         character.Inventory.InventoryChanged += OnInventoryUpdated;
     }
 
     private void OnInventoryUpdated(object? sender, EventArgs args)
     {
-        if (!Visible)
+        if (!Visible || !_viewItem)
         {
             return;
         }
@@ -109,6 +111,7 @@ public partial class ItemAttributeControl : NinePatchRect
             _slotView.PutTexture(texture2D);
             _itemName.Text = kungFu.Name;
             Visible = true;
+            _viewItem = false;
         }
     }
 

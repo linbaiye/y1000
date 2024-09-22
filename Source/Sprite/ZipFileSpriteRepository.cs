@@ -9,7 +9,7 @@ using y1000.Source.Util;
 
 namespace y1000.Source.Sprite;
 
-public class ZipFileSpriteRepository : AbstractSpriteRepository
+public class ZipFileSpriteRepository : AbstractSpriteRepository, ISpriteRepository
 {
 	public static readonly ZipFileSpriteRepository Instance = new ();
 	private ZipFileSpriteRepository() {}
@@ -58,11 +58,15 @@ public class ZipFileSpriteRepository : AbstractSpriteRepository
 	{
 		return (from line in lines where line.Contains(',') select ParseLine(line)).ToArray();
 	}
-		private string GetAbsPath(string name)
+
+	private string GetAbsPath(string name)
 	{
 		var path = OS.GetExecutablePath().GetBaseDir();
-		//return ProjectSettings.GlobalizePath("res://" + DirPath + name + ".zip");
 		return path + DirPath + name + ".zip";
+	}
+
+	public bool Exists(string name) {
+		return File.Exists(GetAbsPath(name));
 	}
 
 

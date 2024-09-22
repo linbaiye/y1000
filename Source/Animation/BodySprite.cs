@@ -29,9 +29,9 @@ namespace y1000.Source.Animation
 			_label.Text = name;
 		}
 
-		public void SetNameColor(int color)
+		public void SetNameColor(string color)
 		{
-			_label.AddThemeColorOverride("font_color", new Color(color.ToString("X6")));
+			_label.AddThemeColorOverride("font_color", new Color(color));
 		}
 
 		private void MouseEnteredArea()
