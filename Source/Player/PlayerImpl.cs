@@ -82,6 +82,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		InitEquipment<Trouser>(info.TrouserName, info.TrouserColor, ChangeTrouser);
 		InitEquipment<Clothing>(info.ClothingName, info.ClothingColor, ChangeClothing);
 		SetNameColor(info.NameColor);
+		SetGuildName(info.GuildName);
 	}
 
 	public PlayerWeapon? Weapon { get; private set; }
@@ -194,8 +195,18 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	private void SetNameColor(int color) {
 		var code = color <= 0 ? "ffffff" : color.ToString("X6");
-		BodySprite?.SetNameColor(code);
+		NameColor = code;
+		BodySprite?.UpdateColor();
 	}
+	
+	private void SetGuildName(string? guildName)
+	{
+		GuildName = guildName;
+		BodySprite?.UpdateGuild();
+	}
+
+	public string? GuildName { get; private set; }
+	public string NameColor { get; private set; } = "ffffff";
 
 	public IEquipment Equip(PlayerEquipMessage message)
 	{
@@ -232,6 +243,10 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		}
 	}
 
+	public void Visit(PlayerJoinedGuildMessage message)
+	{
+		SetGuildName(message.Name);
+	}
 
 	public void Visit(PlayerStandUpMessage message)
 	{

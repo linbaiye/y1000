@@ -119,8 +119,18 @@ public class EntityFactory
     {
         PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/DynamicObject.tscn");
         var obj = scene.Instantiate<GameDynamicObject>();
-        var atzSprite = _spriteRepository.LoadByNumberAndOffset("x" + interpolation.Shape, new Vector2I(16, 12));
-        obj.Initialize(interpolation, map, atzSprite.GetAll());
+        if (interpolation.Type == DynamicObjectType.GUILD_STONE)
+        {
+            var texture2D = _itemIconReader.Get(interpolation.Shape.ToInt());
+            if (texture2D == null)
+                throw new ArgumentException("Shape " + interpolation.Shape + " invalid.");
+            obj.Initialize(interpolation, map, new List<OffsetTexture>() {new(texture2D, new Vector2(16, -12))});
+        }
+        else
+        {
+            var atzSprite = _spriteRepository.LoadByNumberAndOffset("x" + interpolation.Shape, new Vector2I(16, 12));
+            obj.Initialize(interpolation, map, atzSprite.GetAll());
+        }
         return obj;
     }
 }

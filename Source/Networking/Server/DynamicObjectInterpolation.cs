@@ -63,7 +63,7 @@ public class DynamicObjectInterpolation : IServerMessage
         }
         return new DynamicObjectInterpolation(packet.HasName ? packet.Name : "", packet.Id, packet.Shape, 
             new Vector2I(packet.X, packet.Y), packet.Start, packet.End, packet.Elapsed, coordinates,
-            packet.Type == 2? (DynamicObjectType)packet.Type : DynamicObjectType.OTHER,
+             (DynamicObjectType)packet.Type,
             packet.HasRequiredItem ? packet.RequiredItem : "", packet.Loop);
     }
 }

@@ -573,13 +573,16 @@ namespace y1000.Source.Character
         {
 	        WrappedPlayer().Map.Free(WrappedPlayer());
         }
-
+        
+        public void Visit(PlayerJoinedGuildMessage message)
+        {
+	        WrappedPlayer().Visit(message);
+        }
 
         public void LimitCamera(Vector2I leftUp, Vector2I bottomDown)
         {
 	        WrappedPlayer().LimitCamera(leftUp, bottomDown);
         }
-
 
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,
 	        IMap map,  ItemFactory itemFactory, EventMediator eventMediator)

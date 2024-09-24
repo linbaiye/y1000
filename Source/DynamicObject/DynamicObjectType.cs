@@ -4,6 +4,14 @@ public enum DynamicObjectType
 {
     TRIGGER = 2,
     
-    OTHER = 8,
+    IMMUNE = 0,
+    //
+    KILLABLE = 1,
+
+    YAOHUA = 7,
+
+    ENTRANCE = 8,
+    
+    GUILD_STONE = 9,
     
 }
