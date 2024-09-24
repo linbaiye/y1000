@@ -68,7 +68,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	private AutoLootAssistant? _autoLootAssistant;
 	private AutoMoveAssistant? _autoMoveAssistant;
 
-	
+	public const string ServerAddress = "127.0.0.1";
+
 	private string _token = "";
 	
 	private string _charName = "";
@@ -138,7 +139,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 				new LengthBasedPacketDecoder(_messageFactory),
 				new MessageHandler(this))
 				)).Channel<TcpSocketChannel>();
-		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("192.168.1.5"), 9999));
+		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse(ServerAddress), 9999));
 		await _channel.WriteAndFlushAsync(new LoginEvent(_token, _charName));
 	}
 

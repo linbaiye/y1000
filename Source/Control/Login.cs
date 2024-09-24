@@ -265,7 +265,7 @@ public partial class Login : NinePatchRect
 		{
 			var httpRequestMessage = new HttpRequestMessage();
 			httpRequestMessage.Headers.Add("X-Type", type);
-			httpRequestMessage.RequestUri = new Uri("http://192.168.1.5:9901");
+			httpRequestMessage.RequestUri = new Uri("http://" + Game.ServerAddress + ":9901");
 			httpRequestMessage.Method = HttpMethod.Post;
 			httpRequestMessage.Content = content;
 			using HttpClient httpClient = new();

@@ -91,207 +91,213 @@ namespace Source.Networking.Protobuf {
             "dGlvblBhY2tldBIMCgR0eXBlGAEgASgFEhAKCGZyb21TbG90GAIgASgFEg4K",
             "BnRvU2xvdBgDIAEoBRIOCgZudW1iZXIYBCABKAMSEAoIYmFua2VySWQYBSAB",
             "KAMiLAoWQ2xpZW50Q2hhbmdlVGVhbVBhY2tldBISCgp0ZWFtTnVtYmVyGAEg",
-            "ASgFIugOCgxDbGllbnRQYWNrZXQSRgoPbW92ZUV2ZW50UGFja2V0GAEgASgL",
-            "MisuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuTW92ZUV2ZW50UGFja2V0",
-            "SAASPgoLY2xpY2tQYWNrZXQYAiABKAsyJy5Tb3VyY2UuTmV0d29ya2luZy5Q",
-            "cm90b2J1Zi5DbGlja1BhY2tldEgAEkQKC2xvZ2luUGFja2V0GAMgASgLMi0u",
-            "U291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVyTG9naW5QYWNrZXRI",
-            "ABJQChFhdHRhY2tFdmVudFBhY2tldBgEIAEoCzIzLlNvdXJjZS5OZXR3b3Jr",
-            "aW5nLlByb3RvYnVmLkNsaWVudEF0dGFja0V2ZW50UGFja2V0SAASVgoXc3dh",
-            "cEludmVudG9yeVNsb3RQYWNrZXQYBSABKAsyMy5Tb3VyY2UuTmV0d29ya2lu",
-            "Zy5Qcm90b2J1Zi5Td2FwSW52ZW50b3J5U2xvdFBhY2tldEgAEmQKHmRvdWJs",
-            "ZUNsaWNrSW52ZW50b3J5U2xvdFBhY2tldBgGIAEoCzI6LlNvdXJjZS5OZXR3",
-            "b3JraW5nLlByb3RvYnVmLkRvdWJsZUNsaWNrSW52ZW50b3J5U2xvdFBhY2tl",
-            "dEgAEj4KCGRyb3BJdGVtGAcgASgLMiouU291cmNlLk5ldHdvcmtpbmcuUHJv",
-            "dG9idWYuRHJvcEl0ZW1QYWNrZXRIABI+CghwaWNrSXRlbRgIIAEoCzIqLlNv",
-            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBpY2tJdGVtUGFja2V0SAASQgoH",
-            "dW5lcXVpcBgJIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNs",
-            "aWVudFVuZXF1aXBQYWNrZXRIABJMCgx0b2dnbGVLdW5nRnUYCiABKAsyNC5T",
-            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGllbnRUb2dnbGVLdW5nRnVQ",
-            "YWNrZXRIABJCCgdzaXREb3duGAsgASgLMi8uU291cmNlLk5ldHdvcmtpbmcu",
-            "UHJvdG9idWYuQ2xpZW50U2l0RG93blBhY2tldEgAEkIKB3N0YW5kVXAYDCAB",
-            "KAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGllbnRTdGFuZFVw",
-            "UGFja2V0SAASTwoJc2VsbEl0ZW1zGA0gASgLMjouU291cmNlLk5ldHdvcmtp",
-            "bmcuUHJvdG9idWYuQ2xpZW50TWVyY2hhbnRUcmFkZUl0ZW1zUGFja2V0SAAS",
-            "TgoIYnV5SXRlbXMYDiABKAsyOi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
-            "Zi5DbGllbnRNZXJjaGFudFRyYWRlSXRlbXNQYWNrZXRIABJCCgpyaWdodENs",
-            "aWNrGA8gASgLMiwuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUmlnaHRD",
-            "bGlja1BhY2tldEgAEksKDHRyYWRlUmVxdWVzdBgQIAEoCzIzLlNvdXJjZS5O",
-            "ZXR3b3JraW5nLlByb3RvYnVmLkNsaWVudFRyYWRlUGxheWVyUGFja2V0SAAS",
-            "SgoLdXBkYXRlVHJhZGUYESABKAsyMy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
-            "b2J1Zi5DbGllbnRVcGRhdGVUcmFkZVBhY2tldEgAElwKFHRyaWdnZXJEeW5h",
-            "bWljT2JqZWN0GBIgASgLMjwuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
-            "Q2xpZW50VHJpZ2dlckR5bmFtaWNPYmplY3RQYWNrZXRIABJQCg5zd2FwS3Vu",
-            "Z0Z1U2xvdBgTIAEoCzI2LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNs",
-            "aWVudFN3YXBLdW5nRnVTbG90UGFja2V0SAASSAoKZHJhZ1BsYXllchgUIAEo",
-            "CzIyLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNsaWVudERyYWdQbGF5",
-            "ZXJQYWNrZXRIABJOCg1zaW1wbGVDb21tYW5kGBUgASgLMjUuU291cmNlLk5l",
-            "dHdvcmtpbmcuUHJvdG9idWYuQ2xpZW50U2ltcGxlQ29tbWFuZFBhY2tldEgA",
-            "EjoKA2R5ZRgWIAEoCzIrLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNs",
-            "aWVudER5ZVBhY2tldEgAEjoKA3NheRgXIAEoCzIrLlNvdXJjZS5OZXR3b3Jr",
-            "aW5nLlByb3RvYnVmLkNsaWVudFNheVBhY2tldEgAEk4KDWJhbmtPcGVyYXRp",
-            "b24YGCABKAsyNS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGllbnRC",
-            "YW5rT3BlcmF0aW9uUGFja2V0SAASSAoKY2hhbmdlVGVhbRgZIAEoCzIyLlNv",
-            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNsaWVudENoYW5nZVRlYW1QYWNr",
-            "ZXRIAEIGCgRUeXBlImQKE0ludGVycG9sYXRpb25QYWNrZXQSDQoFc3RhdGUY",
-            "AiABKAUSFQoNZWxhcHNlZE1pbGxpcxgFIAEoBRIRCglkaXJlY3Rpb24YByAB",
-            "KAUSCQoBeBgIIAEoBRIJCgF5GAkgASgFIl8KFEludGVycG9sYXRpb25zUGFj",
-            "a2V0EkcKDmludGVycG9sYXRpb25zGAEgAygLMi8uU291cmNlLk5ldHdvcmtp",
-            "bmcuUHJvdG9idWYuSW50ZXJwb2xhdGlvblBhY2tldCJiChNJbnZlbnRvcnlJ",
-            "dGVtUGFja2V0EgwKBG5hbWUYASABKAkSDgoGc2xvdElkGAIgASgFEhMKBm51",
-            "bWJlchgDIAEoA0gAiAEBEg0KBWNvbG9yGAQgASgFQgkKB19udW1iZXIiTAoV",
-            "T3BlblRyYWRlV2luZG93UGFja2V0EhcKD2Fub3RoZXJQbGF5ZXJJZBgBIAEo",
-            "AxIRCgRzbG90GAIgASgFSACIAQFCBwoFX3Nsb3QiqgEKF1VwZGF0ZVRyYWRl",
-            "V2luZG93UGFja2V0EgwKBHR5cGUYASABKAUSEQoEbmFtZRgCIAEoCUgAiAEB",
-            "EhMKBm51bWJlchgDIAEoA0gBiAEBEhEKBHNsb3QYBCABKAVIAogBARIRCgRz",
-            "ZWxmGAUgASgISAOIAQESDQoFY29sb3IYBiABKAVCBwoFX25hbWVCCQoHX251",
-            "bWJlckIHCgVfc2xvdEIHCgVfc2VsZiJHCgxLdW5nRnVQYWNrZXQSDAoEbmFt",
-            "ZRgBIAEoCRINCgVsZXZlbBgCIAEoBRIMCgRzbG90GAMgASgFEgwKBHR5cGUY",
-            "BCABKAUiYgoRVGV4dE1lc3NhZ2VQYWNrZXQSDAoEdHlwZRgBIAEoBRIRCgR0",
-            "ZXh0GAIgASgJSACIAQESEAoIbG9jYXRpb24YAyABKAUSEQoJY29sb3JUeXBl",
-            "GAQgASgFQgcKBV90ZXh0Il0KElRvZ2dsZUt1bmdGdVBhY2tldBIMCgRuYW1l",
-            "GAEgASgJEhIKBWxldmVsGAIgASgFSACIAQESCgoCaWQYAyABKAMSDwoHcXVp",
-            "ZXRseRgEIAEoCEIICgZfbGV2ZWwiLAoNTGlmZUJhclBhY2tldBIKCgJpZBgB",
-            "IAEoAxIPCgdwZXJjZW50GAIgASgFIncKDlRlbGVwb3J0UGFja2V0EgkKAXgY",
-            "ASABKAUSCQoBeRgCIAEoBRILCgNtYXAYAyABKAkSDAoEdGlsZRgEIAEoCRIL",
-            "CgNvYmoYBSABKAkSCwoDcm9mGAYgASgJEgsKA2JnbRgHIAEoCRINCgVyZWFs",
-            "bRgIIAEoCSL0BAoLTG9naW5QYWNrZXQSPAoIdGVsZXBvcnQYASABKAsyKi5T",
-            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5UZWxlcG9ydFBhY2tldBI6CgRp",
-            "bmZvGAIgASgLMiwuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVy",
-            "SW5mb1BhY2tldBIYChBhdHRhY2tLdW5nRnVOYW1lGAMgASgJEhsKDmZvb3RL",
-            "dW5nRnVOYW1lGAggASgJSACIAQESRwoOaW52ZW50b3J5SXRlbXMYCSADKAsy",
+            "ASgFIlMKFkNsaWVudEZvdW5kR3VpbGRQYWNrZXQSDAoEbmFtZRgBIAEoCRIJ",
+            "CgF4GAIgASgFEgkKAXkYAyABKAUSFQoNaW52ZW50b3J5U2xvdBgEIAEoBSKy",
+            "DwoMQ2xpZW50UGFja2V0EkYKD21vdmVFdmVudFBhY2tldBgBIAEoCzIrLlNv",
+            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLk1vdmVFdmVudFBhY2tldEgAEj4K",
+            "C2NsaWNrUGFja2V0GAIgASgLMicuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
+            "dWYuQ2xpY2tQYWNrZXRIABJECgtsb2dpblBhY2tldBgDIAEoCzItLlNvdXJj",
+            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllckxvZ2luUGFja2V0SAASUAoR",
+            "YXR0YWNrRXZlbnRQYWNrZXQYBCABKAsyMy5Tb3VyY2UuTmV0d29ya2luZy5Q",
+            "cm90b2J1Zi5DbGllbnRBdHRhY2tFdmVudFBhY2tldEgAElYKF3N3YXBJbnZl",
+            "bnRvcnlTbG90UGFja2V0GAUgASgLMjMuU291cmNlLk5ldHdvcmtpbmcuUHJv",
+            "dG9idWYuU3dhcEludmVudG9yeVNsb3RQYWNrZXRIABJkCh5kb3VibGVDbGlj",
+            "a0ludmVudG9yeVNsb3RQYWNrZXQYBiABKAsyOi5Tb3VyY2UuTmV0d29ya2lu",
+            "Zy5Qcm90b2J1Zi5Eb3VibGVDbGlja0ludmVudG9yeVNsb3RQYWNrZXRIABI+",
+            "Cghkcm9wSXRlbRgHIAEoCzIqLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVm",
+            "LkRyb3BJdGVtUGFja2V0SAASPgoIcGlja0l0ZW0YCCABKAsyKi5Tb3VyY2Uu",
+            "TmV0d29ya2luZy5Qcm90b2J1Zi5QaWNrSXRlbVBhY2tldEgAEkIKB3VuZXF1",
+            "aXAYCSABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGllbnRV",
+            "bmVxdWlwUGFja2V0SAASTAoMdG9nZ2xlS3VuZ0Z1GAogASgLMjQuU291cmNl",
+            "Lk5ldHdvcmtpbmcuUHJvdG9idWYuQ2xpZW50VG9nZ2xlS3VuZ0Z1UGFja2V0",
+            "SAASQgoHc2l0RG93bhgLIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
+            "YnVmLkNsaWVudFNpdERvd25QYWNrZXRIABJCCgdzdGFuZFVwGAwgASgLMi8u",
+            "U291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2xpZW50U3RhbmRVcFBhY2tl",
+            "dEgAEk8KCXNlbGxJdGVtcxgNIAEoCzI6LlNvdXJjZS5OZXR3b3JraW5nLlBy",
+            "b3RvYnVmLkNsaWVudE1lcmNoYW50VHJhZGVJdGVtc1BhY2tldEgAEk4KCGJ1",
+            "eUl0ZW1zGA4gASgLMjouU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2xp",
+            "ZW50TWVyY2hhbnRUcmFkZUl0ZW1zUGFja2V0SAASQgoKcmlnaHRDbGljaxgP",
+            "IAEoCzIsLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlJpZ2h0Q2xpY2tQ",
+            "YWNrZXRIABJLCgx0cmFkZVJlcXVlc3QYECABKAsyMy5Tb3VyY2UuTmV0d29y",
+            "a2luZy5Qcm90b2J1Zi5DbGllbnRUcmFkZVBsYXllclBhY2tldEgAEkoKC3Vw",
+            "ZGF0ZVRyYWRlGBEgASgLMjMuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
+            "Q2xpZW50VXBkYXRlVHJhZGVQYWNrZXRIABJcChR0cmlnZ2VyRHluYW1pY09i",
+            "amVjdBgSIAEoCzI8LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNsaWVu",
+            "dFRyaWdnZXJEeW5hbWljT2JqZWN0UGFja2V0SAASUAoOc3dhcEt1bmdGdVNs",
+            "b3QYEyABKAsyNi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGllbnRT",
+            "d2FwS3VuZ0Z1U2xvdFBhY2tldEgAEkgKCmRyYWdQbGF5ZXIYFCABKAsyMi5T",
+            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGllbnREcmFnUGxheWVyUGFj",
+            "a2V0SAASTgoNc2ltcGxlQ29tbWFuZBgVIAEoCzI1LlNvdXJjZS5OZXR3b3Jr",
+            "aW5nLlByb3RvYnVmLkNsaWVudFNpbXBsZUNvbW1hbmRQYWNrZXRIABI6CgNk",
+            "eWUYFiABKAsyKy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGllbnRE",
+            "eWVQYWNrZXRIABI6CgNzYXkYFyABKAsyKy5Tb3VyY2UuTmV0d29ya2luZy5Q",
+            "cm90b2J1Zi5DbGllbnRTYXlQYWNrZXRIABJOCg1iYW5rT3BlcmF0aW9uGBgg",
+            "ASgLMjUuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ2xpZW50QmFua09w",
+            "ZXJhdGlvblBhY2tldEgAEkgKCmNoYW5nZVRlYW0YGSABKAsyMi5Tb3VyY2Uu",
+            "TmV0d29ya2luZy5Qcm90b2J1Zi5DbGllbnRDaGFuZ2VUZWFtUGFja2V0SAAS",
+            "SAoKZm91bmRHdWlsZBgaIAEoCzIyLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
+            "YnVmLkNsaWVudEZvdW5kR3VpbGRQYWNrZXRIAEIGCgRUeXBlImQKE0ludGVy",
+            "cG9sYXRpb25QYWNrZXQSDQoFc3RhdGUYAiABKAUSFQoNZWxhcHNlZE1pbGxp",
+            "cxgFIAEoBRIRCglkaXJlY3Rpb24YByABKAUSCQoBeBgIIAEoBRIJCgF5GAkg",
+            "ASgFIl8KFEludGVycG9sYXRpb25zUGFja2V0EkcKDmludGVycG9sYXRpb25z",
+            "GAEgAygLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSW50ZXJwb2xh",
+            "dGlvblBhY2tldCJiChNJbnZlbnRvcnlJdGVtUGFja2V0EgwKBG5hbWUYASAB",
+            "KAkSDgoGc2xvdElkGAIgASgFEhMKBm51bWJlchgDIAEoA0gAiAEBEg0KBWNv",
+            "bG9yGAQgASgFQgkKB19udW1iZXIiTAoVT3BlblRyYWRlV2luZG93UGFja2V0",
+            "EhcKD2Fub3RoZXJQbGF5ZXJJZBgBIAEoAxIRCgRzbG90GAIgASgFSACIAQFC",
+            "BwoFX3Nsb3QiqgEKF1VwZGF0ZVRyYWRlV2luZG93UGFja2V0EgwKBHR5cGUY",
+            "ASABKAUSEQoEbmFtZRgCIAEoCUgAiAEBEhMKBm51bWJlchgDIAEoA0gBiAEB",
+            "EhEKBHNsb3QYBCABKAVIAogBARIRCgRzZWxmGAUgASgISAOIAQESDQoFY29s",
+            "b3IYBiABKAVCBwoFX25hbWVCCQoHX251bWJlckIHCgVfc2xvdEIHCgVfc2Vs",
+            "ZiJHCgxLdW5nRnVQYWNrZXQSDAoEbmFtZRgBIAEoCRINCgVsZXZlbBgCIAEo",
+            "BRIMCgRzbG90GAMgASgFEgwKBHR5cGUYBCABKAUiYgoRVGV4dE1lc3NhZ2VQ",
+            "YWNrZXQSDAoEdHlwZRgBIAEoBRIRCgR0ZXh0GAIgASgJSACIAQESEAoIbG9j",
+            "YXRpb24YAyABKAUSEQoJY29sb3JUeXBlGAQgASgFQgcKBV90ZXh0Il0KElRv",
+            "Z2dsZUt1bmdGdVBhY2tldBIMCgRuYW1lGAEgASgJEhIKBWxldmVsGAIgASgF",
+            "SACIAQESCgoCaWQYAyABKAMSDwoHcXVpZXRseRgEIAEoCEIICgZfbGV2ZWwi",
+            "LAoNTGlmZUJhclBhY2tldBIKCgJpZBgBIAEoAxIPCgdwZXJjZW50GAIgASgF",
+            "IncKDlRlbGVwb3J0UGFja2V0EgkKAXgYASABKAUSCQoBeRgCIAEoBRILCgNt",
+            "YXAYAyABKAkSDAoEdGlsZRgEIAEoCRILCgNvYmoYBSABKAkSCwoDcm9mGAYg",
+            "ASgJEgsKA2JnbRgHIAEoCRINCgVyZWFsbRgIIAEoCSL0BAoLTG9naW5QYWNr",
+            "ZXQSPAoIdGVsZXBvcnQYASABKAsyKi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
+            "b2J1Zi5UZWxlcG9ydFBhY2tldBI6CgRpbmZvGAIgASgLMiwuU291cmNlLk5l",
+            "dHdvcmtpbmcuUHJvdG9idWYuUGxheWVySW5mb1BhY2tldBIYChBhdHRhY2tL",
+            "dW5nRnVOYW1lGAMgASgJEhsKDmZvb3RLdW5nRnVOYW1lGAggASgJSACIAQES",
+            "RwoOaW52ZW50b3J5SXRlbXMYCSADKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Q",
+            "cm90b2J1Zi5JbnZlbnRvcnlJdGVtUGFja2V0EkMKEXVubmFtZWRLdW5nRnVM",
+            "aXN0GAsgAygLMiguU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuS3VuZ0Z1",
+            "UGFja2V0EkEKD2Jhc2ljS3VuZ0Z1TGlzdBgMIAMoCzIoLlNvdXJjZS5OZXR3",
+            "b3JraW5nLlByb3RvYnVmLkt1bmdGdVBhY2tldBIdChBwcm90ZWN0aW9uS3Vu",
+            "Z0Z1GA0gASgJSAGIAQESHAoPYXNzaXN0YW50S3VuZ0Z1GA4gASgJSAKIAQES",
+            "GQoMYnJlYXRoS3VuZ0Z1GA8gASgJSAOIAQESPgoJYXR0cmlidXRlGBEgASgL",
+            "MisuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQXR0cmlidXRlUGFja2V0",
+            "QhEKD19mb290S3VuZ0Z1TmFtZUITChFfcHJvdGVjdGlvbkt1bmdGdUISChBf",
+            "YXNzaXN0YW50S3VuZ0Z1Qg8KDV9icmVhdGhLdW5nRnUilgIKD0F0dHJpYnV0",
+            "ZVBhY2tldBIPCgdjdXJMaWZlGAEgASgFEg8KB21heExpZmUYAiABKAUSEAoI",
+            "Y3VyUG93ZXIYAyABKAUSEAoIbWF4UG93ZXIYBCABKAUSFQoNY3VySW5uZXJQ",
+            "b3dlchgFIAEoBRIVCg1tYXhJbm5lclBvd2VyGAYgASgFEhUKDWN1ck91dGVy",
+            "UG93ZXIYByABKAUSFQoNbWF4T3V0ZXJQb3dlchgIIAEoBRIRCgljdXJFbmVy",
+            "Z3kYCSABKAUSEQoJbWF4RW5lcmd5GAogASgFEhMKC2hlYWRQZXJjZW50GAsg",
+            "ASgFEhIKCmFybVBlcmNlbnQYDCABKAUSEgoKbGVnUGVyY2VudBgNIAEoBSLk",
+            "AgofUGxheWVyUmlnaHRDbGlja0F0dHJpYnV0ZVBhY2tldBITCgthdHRhY2tT",
+            "cGVlZBgBIAEoBRIPCgdtYXhMaWZlGAIgASgFEhEKCWF2b2lkYW5jZRgDIAEo",
+            "BRIQCghtYXhQb3dlchgEIAEoBRIQCghyZWNvdmVyeRgFIAEoBRIVCg1tYXhJ",
+            "bm5lclBvd2VyGAYgASgFEhUKDW1heE91dGVyUG93ZXIYCCABKAUSEQoJbWF4",
+            "RW5lcmd5GAogASgFEhIKCmJvZHlEYW1hZ2UYByABKAUSEgoKaGVhZERhbWFn",
+            "ZRgJIAEoBRIRCglhcm1EYW1hZ2UYCyABKAUSEQoJbGVnRGFtYWdlGAwgASgF",
+            "EhEKCWJvZHlBcm1vchgNIAEoBRIRCgloZWFkQXJtb3IYDiABKAUSEAoIYXJt",
+            "QXJtb3IYDyABKAUSEAoIbGVnQXJtb3IYECABKAUSCwoDYWdlGBEgASgFIjgK",
+            "E1BsYXllclVuZXF1aXBQYWNrZXQSCgoCaWQYASABKAMSFQoNZXF1aXBtZW50",
+            "VHlwZRgCIAEoBSJFChFQbGF5ZXJFcXVpcFBhY2tldBIKCgJpZBgBIAEoAxIV",
+            "Cg1lcXVpcG1lbnROYW1lGAIgASgJEg0KBWNvbG9yGAMgASgFIiEKE1BsYXll",
+            "clNpdERvd25QYWNrZXQSCgoCaWQYASABKAMiIQoTUGxheWVyU3RhbmRVcFBh",
+            "Y2tldBIKCgJpZBgBIAEoAyIiChRQbGF5ZXJDb29sZG93blBhY2tldBIKCgJp",
+            "ZBgBIAEoAyIgChJQbGF5ZXJSZXZpdmVQYWNrZXQSCgoCaWQYASABKAMiQgoT",
+            "UGxheWVyR2FpbkV4cFBhY2tldBIMCgRuYW1lGAEgASgJEg0KBWxldmVsGAIg",
+            "ASgFEg4KBmt1bmdGdRgDIAEoCCJaChBQcm9qZWN0aWxlUGFja2V0EgoKAmlk",
+            "GAEgASgDEhAKCHRhcmdldElkGAIgASgDEhgKEGZseWluZ1RpbWVNaWxsaXMY",
+            "AyABKAUSDgoGc3ByaXRlGAQgASgFIl0KE0l0ZW1BdHRyaWJ1dGVQYWNrZXQS",
+            "DAoEdHlwZRgBIAEoBRIOCgZzbG90SWQYAiABKAUSEQoEcGFnZRgDIAEoBUgA",
+            "iAEBEgwKBHRleHQYBCABKAlCBwoFX3BhZ2Ui+wEKF1Nob3dEeW5hbWljT2Jq",
+            "ZWN0UGFja2V0EgoKAmlkGAEgASgDEgkKAXgYAiABKAUSCQoBeRgDIAEoBRIM",
+            "CgR0eXBlGAQgASgFEg0KBXN0YXJ0GAUgASgFEgsKA2VuZBgGIAEoBRINCgVz",
+            "aGFwZRgHIAEoCRIPCgdlbGFwc2VkGAggASgFEhEKBG5hbWUYCSABKAlIAIgB",
+            "ARIOCgZndWFyZFgYCiADKAUSDgoGZ3VhcmRZGAsgAygFEhkKDHJlcXVpcmVk",
+            "SXRlbRgMIAEoCUgBiAEBEgwKBGxvb3AYDSABKAhCBwoFX25hbWVCDwoNX3Jl",
+            "cXVpcmVkSXRlbSJRChlVcGRhdGVEeW5hbWljT2JqZWN0UGFja2V0EgoKAmlk",
+            "GAEgASgDEg0KBXN0YXJ0GAIgASgFEgsKA2VuZBgDIAEoBRIMCgRsb29wGAQg",
+            "ASgIIh0KD0JyZWFrUm9wZVBhY2tldBIKCgJpZBgBIAEoAyJDChFOcGNQb3Np",
+            "dGlvblBhY2tldBINCgV4TGlzdBgBIAMoBRINCgV5TGlzdBgCIAMoBRIQCghu",
+            "YW1lTGlzdBgDIAMoCSIpCgpDaGF0UGFja2V0EgoKAmlkGAEgASgDEg8KB2Nv",
+            "bnRlbnQYAiABKAkidAoOT3BlbkJhbmtQYWNrZXQSPgoFaXRlbXMYASADKAsy",
             "Ly5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnZlbnRvcnlJdGVtUGFj",
-            "a2V0EkMKEXVubmFtZWRLdW5nRnVMaXN0GAsgAygLMiguU291cmNlLk5ldHdv",
-            "cmtpbmcuUHJvdG9idWYuS3VuZ0Z1UGFja2V0EkEKD2Jhc2ljS3VuZ0Z1TGlz",
-            "dBgMIAMoCzIoLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkt1bmdGdVBh",
-            "Y2tldBIdChBwcm90ZWN0aW9uS3VuZ0Z1GA0gASgJSAGIAQESHAoPYXNzaXN0",
-            "YW50S3VuZ0Z1GA4gASgJSAKIAQESGQoMYnJlYXRoS3VuZ0Z1GA8gASgJSAOI",
-            "AQESPgoJYXR0cmlidXRlGBEgASgLMisuU291cmNlLk5ldHdvcmtpbmcuUHJv",
-            "dG9idWYuQXR0cmlidXRlUGFja2V0QhEKD19mb290S3VuZ0Z1TmFtZUITChFf",
-            "cHJvdGVjdGlvbkt1bmdGdUISChBfYXNzaXN0YW50S3VuZ0Z1Qg8KDV9icmVh",
-            "dGhLdW5nRnUilgIKD0F0dHJpYnV0ZVBhY2tldBIPCgdjdXJMaWZlGAEgASgF",
-            "Eg8KB21heExpZmUYAiABKAUSEAoIY3VyUG93ZXIYAyABKAUSEAoIbWF4UG93",
-            "ZXIYBCABKAUSFQoNY3VySW5uZXJQb3dlchgFIAEoBRIVCg1tYXhJbm5lclBv",
-            "d2VyGAYgASgFEhUKDWN1ck91dGVyUG93ZXIYByABKAUSFQoNbWF4T3V0ZXJQ",
-            "b3dlchgIIAEoBRIRCgljdXJFbmVyZ3kYCSABKAUSEQoJbWF4RW5lcmd5GAog",
-            "ASgFEhMKC2hlYWRQZXJjZW50GAsgASgFEhIKCmFybVBlcmNlbnQYDCABKAUS",
-            "EgoKbGVnUGVyY2VudBgNIAEoBSLkAgofUGxheWVyUmlnaHRDbGlja0F0dHJp",
-            "YnV0ZVBhY2tldBITCgthdHRhY2tTcGVlZBgBIAEoBRIPCgdtYXhMaWZlGAIg",
-            "ASgFEhEKCWF2b2lkYW5jZRgDIAEoBRIQCghtYXhQb3dlchgEIAEoBRIQCghy",
-            "ZWNvdmVyeRgFIAEoBRIVCg1tYXhJbm5lclBvd2VyGAYgASgFEhUKDW1heE91",
-            "dGVyUG93ZXIYCCABKAUSEQoJbWF4RW5lcmd5GAogASgFEhIKCmJvZHlEYW1h",
-            "Z2UYByABKAUSEgoKaGVhZERhbWFnZRgJIAEoBRIRCglhcm1EYW1hZ2UYCyAB",
-            "KAUSEQoJbGVnRGFtYWdlGAwgASgFEhEKCWJvZHlBcm1vchgNIAEoBRIRCglo",
-            "ZWFkQXJtb3IYDiABKAUSEAoIYXJtQXJtb3IYDyABKAUSEAoIbGVnQXJtb3IY",
-            "ECABKAUSCwoDYWdlGBEgASgFIjgKE1BsYXllclVuZXF1aXBQYWNrZXQSCgoC",
-            "aWQYASABKAMSFQoNZXF1aXBtZW50VHlwZRgCIAEoBSJFChFQbGF5ZXJFcXVp",
-            "cFBhY2tldBIKCgJpZBgBIAEoAxIVCg1lcXVpcG1lbnROYW1lGAIgASgJEg0K",
-            "BWNvbG9yGAMgASgFIiEKE1BsYXllclNpdERvd25QYWNrZXQSCgoCaWQYASAB",
-            "KAMiIQoTUGxheWVyU3RhbmRVcFBhY2tldBIKCgJpZBgBIAEoAyIiChRQbGF5",
-            "ZXJDb29sZG93blBhY2tldBIKCgJpZBgBIAEoAyIgChJQbGF5ZXJSZXZpdmVQ",
-            "YWNrZXQSCgoCaWQYASABKAMiQgoTUGxheWVyR2FpbkV4cFBhY2tldBIMCgRu",
-            "YW1lGAEgASgJEg0KBWxldmVsGAIgASgFEg4KBmt1bmdGdRgDIAEoCCJaChBQ",
-            "cm9qZWN0aWxlUGFja2V0EgoKAmlkGAEgASgDEhAKCHRhcmdldElkGAIgASgD",
-            "EhgKEGZseWluZ1RpbWVNaWxsaXMYAyABKAUSDgoGc3ByaXRlGAQgASgFIl0K",
-            "E0l0ZW1BdHRyaWJ1dGVQYWNrZXQSDAoEdHlwZRgBIAEoBRIOCgZzbG90SWQY",
-            "AiABKAUSEQoEcGFnZRgDIAEoBUgAiAEBEgwKBHRleHQYBCABKAlCBwoFX3Bh",
-            "Z2Ui+wEKF1Nob3dEeW5hbWljT2JqZWN0UGFja2V0EgoKAmlkGAEgASgDEgkK",
-            "AXgYAiABKAUSCQoBeRgDIAEoBRIMCgR0eXBlGAQgASgFEg0KBXN0YXJ0GAUg",
-            "ASgFEgsKA2VuZBgGIAEoBRINCgVzaGFwZRgHIAEoCRIPCgdlbGFwc2VkGAgg",
-            "ASgFEhEKBG5hbWUYCSABKAlIAIgBARIOCgZndWFyZFgYCiADKAUSDgoGZ3Vh",
-            "cmRZGAsgAygFEhkKDHJlcXVpcmVkSXRlbRgMIAEoCUgBiAEBEgwKBGxvb3AY",
-            "DSABKAhCBwoFX25hbWVCDwoNX3JlcXVpcmVkSXRlbSJRChlVcGRhdGVEeW5h",
-            "bWljT2JqZWN0UGFja2V0EgoKAmlkGAEgASgDEg0KBXN0YXJ0GAIgASgFEgsK",
-            "A2VuZBgDIAEoBRIMCgRsb29wGAQgASgIIh0KD0JyZWFrUm9wZVBhY2tldBIK",
-            "CgJpZBgBIAEoAyJDChFOcGNQb3NpdGlvblBhY2tldBINCgV4TGlzdBgBIAMo",
-            "BRINCgV5TGlzdBgCIAMoBRIQCghuYW1lTGlzdBgDIAMoCSIpCgpDaGF0UGFj",
-            "a2V0EgoKAmlkGAEgASgDEg8KB2NvbnRlbnQYAiABKAkidAoOT3BlbkJhbmtQ",
-            "YWNrZXQSPgoFaXRlbXMYASADKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
-            "b2J1Zi5JbnZlbnRvcnlJdGVtUGFja2V0EhAKCGNhcGFjaXR5GAIgASgFEhAK",
-            "CHVubG9ja2VkGAMgASgFInkKEFVwZGF0ZUJhbmtQYWNrZXQSDAoEdHlwZRgB",
-            "IAEoBRJICgp1cGRhdGVTbG90GAIgASgLMi8uU291cmNlLk5ldHdvcmtpbmcu",
-            "UHJvdG9idWYuSW52ZW50b3J5SXRlbVBhY2tldEgAiAEBQg0KC191cGRhdGVT",
-            "bG90IiwKD05hbWVDb2xvclBhY2tldBIKCgJpZBgBIAEoAxINCgVjb2xvchgC",
-            "IAEoBSKgGgoGUGFja2V0EkQKDnBvc2l0aW9uUGFja2V0GAEgASgLMiouU291",
-            "cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUG9zaXRpb25QYWNrZXRIABJYChVj",
-            "cmVhdHVyZUludGVycG9sYXRpb24YAiABKAsyNy5Tb3VyY2UuTmV0d29ya2lu",
-            "Zy5Qcm90b2J1Zi5DcmVhdHVyZUludGVycG9sYXRpb25QYWNrZXRIABI+Cgts",
-            "b2dpblBhY2tldBgEIAEoCzInLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVm",
-            "LkxvZ2luUGFja2V0SAASSgoOaW50ZXJwb2xhdGlvbnMYBSABKAsyMC5Tb3Vy",
-            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uc1BhY2tldEgA",
-            "EkkKDnJlc3BvbnNlUGFja2V0GAYgASgLMi8uU291cmNlLk5ldHdvcmtpbmcu",
-            "UHJvdG9idWYuSW5wdXRSZXNwb25zZVBhY2tldEgAElQKE3BsYXllckludGVy",
-            "cG9sYXRpb24YByABKAsyNS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Q",
-            "bGF5ZXJJbnRlcnBvbGF0aW9uUGFja2V0SAASRgoMcmVtb3ZlRW50aXR5GAgg",
-            "ASgLMi4uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUmVtb3ZlRW50aXR5",
-            "UGFja2V0SAASWwoZYXR0YWNrRXZlbnRSZXNwb25zZVBhY2tldBgJIAEoCzI2",
-            "LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNsaWVudEF0dGFja1Jlc3Bv",
-            "bnNlUGFja2V0SAASUgoRYXR0YWNrRXZlbnRQYWNrZXQYCiABKAsyNS5Tb3Vy",
-            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DcmVhdHVyZUF0dGFja0V2ZW50UGFj",
-            "a2V0SAASTgoPaHVydEV2ZW50UGFja2V0GAsgASgLMjMuU291cmNlLk5ldHdv",
-            "cmtpbmcuUHJvdG9idWYuQ3JlYXR1cmVIdXJ0RXZlbnRQYWNrZXRIABJKChFj",
-            "aGFuZ2VTdGF0ZVBhY2tldBgMIAEoCzItLlNvdXJjZS5OZXR3b3JraW5nLlBy",
-            "b3RvYnVmLkNoYW5nZVN0YXRlUGFja2V0SAASVgoXc3dhcEludmVudG9yeVNs",
-            "b3RQYWNrZXQYDSABKAsyMy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5T",
-            "d2FwSW52ZW50b3J5U2xvdFBhY2tldEgAEkUKCGRyb3BJdGVtGBAgASgLMjEu",
-            "U291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuRHJvcEl0ZW1Db25maXJtUGFj",
-            "a2V0SAASPgoIc2hvd0l0ZW0YESABKAsyKi5Tb3VyY2UuTmV0d29ya2luZy5Q",
-            "cm90b2J1Zi5TaG93SXRlbVBhY2tldEgAEkUKCnVwZGF0ZVNsb3QYEiABKAsy",
-            "Ly5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnZlbnRvcnlJdGVtUGFj",
-            "a2V0SAASPQoEdGV4dBgTIAEoCzItLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
-            "YnVmLlRleHRNZXNzYWdlUGFja2V0SAASQgoHdW5lcXVpcBgUIAEoCzIvLlNv",
-            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllclVuZXF1aXBQYWNrZXRI",
-            "ABI+CgVlcXVpcBgVIAEoCzItLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVm",
-            "LlBsYXllckVxdWlwUGFja2V0SAASTAoPb3BlblRyYWRlV2luZG93GBYgASgL",
-            "MjEuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuT3BlblRyYWRlV2luZG93",
-            "UGFja2V0SAASRgoMdG9nZ2xlS3VuZ0Z1GBcgASgLMi4uU291cmNlLk5ldHdv",
-            "cmtpbmcuUHJvdG9idWYuVG9nZ2xlS3VuZ0Z1UGFja2V0SAASQgoHc2l0RG93",
-            "bhgYIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllclNp",
-            "dERvd25QYWNrZXRIABJCCgdzdGFuZFVwGBkgASgLMi8uU291cmNlLk5ldHdv",
-            "cmtpbmcuUHJvdG9idWYuUGxheWVyU3RhbmRVcFBhY2tldEgAEkQKCGNvb2xk",
-            "b3duGBogASgLMjAuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVy",
-            "Q29vbGRvd25QYWNrZXRIABJACglhdHRyaWJ1dGUYGyABKAsyKy5Tb3VyY2Uu",
-            "TmV0d29ya2luZy5Qcm90b2J1Zi5BdHRyaWJ1dGVQYWNrZXRIABJFCgVzb3Vu",
-            "ZBgcIAEoCzI0LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNyZWF0dXJl",
-            "U291bmRFdmVudFBhY2tldEgAEkEKA2RpZRgdIAEoCzIyLlNvdXJjZS5OZXR3",
-            "b3JraW5nLlByb3RvYnVmLkNyZWF0dXJlRGllRXZlbnRQYWNrZXRIABJGCgxw",
-            "bGF5ZXJSZXZpdmUYHiABKAsyLi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
-            "Zi5QbGF5ZXJSZXZpdmVQYWNrZXRIABJCCgdnYWluRXhwGB8gASgLMi8uU291",
-            "cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVyR2FpbkV4cFBhY2tldEgA",
-            "EkIKCnByb2plY3RpbGUYICABKAsyLC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
-            "b2J1Zi5Qcm9qZWN0aWxlUGFja2V0SAASSQoLbW9uc3Rlck1vdmUYISABKAsy",
-            "Mi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Nb25zdGVyTW92ZUV2ZW50",
-            "UGFja2V0SAASPwoLbGVhcm5LdW5nRnUYIiABKAsyKC5Tb3VyY2UuTmV0d29y",
-            "a2luZy5Qcm90b2J1Zi5LdW5nRnVQYWNrZXRIABJICg1pdGVtQXR0cmlidXRl",
-            "GCMgASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSXRlbUF0dHJp",
-            "YnV0ZVBhY2tldEgAEloKE3JpZ2h0Q2xpY2tBdHRyaWJ1dGUYJCABKAsyOy5T",
-            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJSaWdodENsaWNrQXR0",
-            "cmlidXRlUGFja2V0SAASUAoRdXBkYXRlVHJhZGVXaW5kb3cYJSABKAsyMy5T",
-            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5VcGRhdGVUcmFkZVdpbmRvd1Bh",
-            "Y2tldEgAElAKEXNob3dEeW5hbWljT2JqZWN0GCYgASgLMjMuU291cmNlLk5l",
-            "dHdvcmtpbmcuUHJvdG9idWYuU2hvd0R5bmFtaWNPYmplY3RQYWNrZXRIABJU",
-            "ChN1cGRhdGVEeW5hbWljT2JqZWN0GCcgASgLMjUuU291cmNlLk5ldHdvcmtp",
-            "bmcuUHJvdG9idWYuVXBkYXRlRHluYW1pY09iamVjdFBhY2tldEgAEj4KCHRl",
-            "bGVwb3J0GCggASgLMiouU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuVGVs",
-            "ZXBvcnRQYWNrZXRIABI8CgdsaWZlYmFyGCkgASgLMikuU291cmNlLk5ldHdv",
-            "cmtpbmcuUHJvdG9idWYuTGlmZUJhclBhY2tldEgAEkQKEHVwZGF0ZUt1bmdG",
-            "dVNsb3QYKiABKAsyKC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5LdW5n",
-            "RnVQYWNrZXRIABJGCgxzaG93VGVsZXBvcnQYKyABKAsyLi5Tb3VyY2UuTmV0",
-            "d29ya2luZy5Qcm90b2J1Zi5TaG93VGVsZXBvcnRQYWNrZXRIABJACglicmVh",
-            "a1JvcGUYLCABKAsyKy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5CcmVh",
-            "a1JvcGVQYWNrZXRIABJECgtucGNQb3NpdGlvbhgtIAEoCzItLlNvdXJjZS5O",
-            "ZXR3b3JraW5nLlByb3RvYnVmLk5wY1Bvc2l0aW9uUGFja2V0SAASNgoEY2hh",
-            "dBguIAEoCzImLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNoYXRQYWNr",
-            "ZXRIABI+CghvcGVuQmFuaxgvIAEoCzIqLlNvdXJjZS5OZXR3b3JraW5nLlBy",
-            "b3RvYnVmLk9wZW5CYW5rUGFja2V0SAASQgoKdXBkYXRlQmFuaxgwIAEoCzIs",
-            "LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlVwZGF0ZUJhbmtQYWNrZXRI",
-            "ABJACgluYW1lQ29sb3IYMSABKAsyKy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
-            "b2J1Zi5OYW1lQ29sb3JQYWNrZXRIAEINCgtUeXBlZFBhY2tldCLZAQobQ3Jl",
+            "a2V0EhAKCGNhcGFjaXR5GAIgASgFEhAKCHVubG9ja2VkGAMgASgFInkKEFVw",
+            "ZGF0ZUJhbmtQYWNrZXQSDAoEdHlwZRgBIAEoBRJICgp1cGRhdGVTbG90GAIg",
+            "ASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSW52ZW50b3J5SXRl",
+            "bVBhY2tldEgAiAEBQg0KC191cGRhdGVTbG90IiwKD05hbWVDb2xvclBhY2tl",
+            "dBIKCgJpZBgBIAEoAxINCgVjb2xvchgCIAEoBSIrCg9Kb2luR3VpbGRQYWNr",
+            "ZXQSCgoCaWQYASABKAMSDAoEbmFtZRgCIAEoCSLiGgoGUGFja2V0EkQKDnBv",
+            "c2l0aW9uUGFja2V0GAEgASgLMiouU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
+            "dWYuUG9zaXRpb25QYWNrZXRIABJYChVjcmVhdHVyZUludGVycG9sYXRpb24Y",
+            "AiABKAsyNy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DcmVhdHVyZUlu",
+            "dGVycG9sYXRpb25QYWNrZXRIABI+Cgtsb2dpblBhY2tldBgEIAEoCzInLlNv",
+            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkxvZ2luUGFja2V0SAASSgoOaW50",
+            "ZXJwb2xhdGlvbnMYBSABKAsyMC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
+            "Zi5JbnRlcnBvbGF0aW9uc1BhY2tldEgAEkkKDnJlc3BvbnNlUGFja2V0GAYg",
+            "ASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSW5wdXRSZXNwb25z",
+            "ZVBhY2tldEgAElQKE3BsYXllckludGVycG9sYXRpb24YByABKAsyNS5Tb3Vy",
+            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJJbnRlcnBvbGF0aW9uUGFj",
+            "a2V0SAASRgoMcmVtb3ZlRW50aXR5GAggASgLMi4uU291cmNlLk5ldHdvcmtp",
+            "bmcuUHJvdG9idWYuUmVtb3ZlRW50aXR5UGFja2V0SAASWwoZYXR0YWNrRXZl",
+            "bnRSZXNwb25zZVBhY2tldBgJIAEoCzI2LlNvdXJjZS5OZXR3b3JraW5nLlBy",
+            "b3RvYnVmLkNsaWVudEF0dGFja1Jlc3BvbnNlUGFja2V0SAASUgoRYXR0YWNr",
+            "RXZlbnRQYWNrZXQYCiABKAsyNS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
+            "Zi5DcmVhdHVyZUF0dGFja0V2ZW50UGFja2V0SAASTgoPaHVydEV2ZW50UGFj",
+            "a2V0GAsgASgLMjMuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ3JlYXR1",
+            "cmVIdXJ0RXZlbnRQYWNrZXRIABJKChFjaGFuZ2VTdGF0ZVBhY2tldBgMIAEo",
+            "CzItLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNoYW5nZVN0YXRlUGFj",
+            "a2V0SAASVgoXc3dhcEludmVudG9yeVNsb3RQYWNrZXQYDSABKAsyMy5Tb3Vy",
+            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Td2FwSW52ZW50b3J5U2xvdFBhY2tl",
+            "dEgAEkUKCGRyb3BJdGVtGBAgASgLMjEuU291cmNlLk5ldHdvcmtpbmcuUHJv",
+            "dG9idWYuRHJvcEl0ZW1Db25maXJtUGFja2V0SAASPgoIc2hvd0l0ZW0YESAB",
+            "KAsyKi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5TaG93SXRlbVBhY2tl",
+            "dEgAEkUKCnVwZGF0ZVNsb3QYEiABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Q",
+            "cm90b2J1Zi5JbnZlbnRvcnlJdGVtUGFja2V0SAASPQoEdGV4dBgTIAEoCzIt",
+            "LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlRleHRNZXNzYWdlUGFja2V0",
+            "SAASQgoHdW5lcXVpcBgUIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
+            "YnVmLlBsYXllclVuZXF1aXBQYWNrZXRIABI+CgVlcXVpcBgVIAEoCzItLlNv",
+            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllckVxdWlwUGFja2V0SAAS",
+            "TAoPb3BlblRyYWRlV2luZG93GBYgASgLMjEuU291cmNlLk5ldHdvcmtpbmcu",
+            "UHJvdG9idWYuT3BlblRyYWRlV2luZG93UGFja2V0SAASRgoMdG9nZ2xlS3Vu",
+            "Z0Z1GBcgASgLMi4uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuVG9nZ2xl",
+            "S3VuZ0Z1UGFja2V0SAASQgoHc2l0RG93bhgYIAEoCzIvLlNvdXJjZS5OZXR3",
+            "b3JraW5nLlByb3RvYnVmLlBsYXllclNpdERvd25QYWNrZXRIABJCCgdzdGFu",
+            "ZFVwGBkgASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVy",
+            "U3RhbmRVcFBhY2tldEgAEkQKCGNvb2xkb3duGBogASgLMjAuU291cmNlLk5l",
+            "dHdvcmtpbmcuUHJvdG9idWYuUGxheWVyQ29vbGRvd25QYWNrZXRIABJACglh",
+            "dHRyaWJ1dGUYGyABKAsyKy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5B",
+            "dHRyaWJ1dGVQYWNrZXRIABJFCgVzb3VuZBgcIAEoCzI0LlNvdXJjZS5OZXR3",
+            "b3JraW5nLlByb3RvYnVmLkNyZWF0dXJlU291bmRFdmVudFBhY2tldEgAEkEK",
+            "A2RpZRgdIAEoCzIyLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNyZWF0",
+            "dXJlRGllRXZlbnRQYWNrZXRIABJGCgxwbGF5ZXJSZXZpdmUYHiABKAsyLi5T",
+            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJSZXZpdmVQYWNrZXRI",
+            "ABJCCgdnYWluRXhwGB8gASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
+            "dWYuUGxheWVyR2FpbkV4cFBhY2tldEgAEkIKCnByb2plY3RpbGUYICABKAsy",
+            "LC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Qcm9qZWN0aWxlUGFja2V0",
+            "SAASSQoLbW9uc3Rlck1vdmUYISABKAsyMi5Tb3VyY2UuTmV0d29ya2luZy5Q",
+            "cm90b2J1Zi5Nb25zdGVyTW92ZUV2ZW50UGFja2V0SAASPwoLbGVhcm5LdW5n",
+            "RnUYIiABKAsyKC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5LdW5nRnVQ",
+            "YWNrZXRIABJICg1pdGVtQXR0cmlidXRlGCMgASgLMi8uU291cmNlLk5ldHdv",
+            "cmtpbmcuUHJvdG9idWYuSXRlbUF0dHJpYnV0ZVBhY2tldEgAEloKE3JpZ2h0",
+            "Q2xpY2tBdHRyaWJ1dGUYJCABKAsyOy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
+            "b2J1Zi5QbGF5ZXJSaWdodENsaWNrQXR0cmlidXRlUGFja2V0SAASUAoRdXBk",
+            "YXRlVHJhZGVXaW5kb3cYJSABKAsyMy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
+            "b2J1Zi5VcGRhdGVUcmFkZVdpbmRvd1BhY2tldEgAElAKEXNob3dEeW5hbWlj",
+            "T2JqZWN0GCYgASgLMjMuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuU2hv",
+            "d0R5bmFtaWNPYmplY3RQYWNrZXRIABJUChN1cGRhdGVEeW5hbWljT2JqZWN0",
+            "GCcgASgLMjUuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuVXBkYXRlRHlu",
+            "YW1pY09iamVjdFBhY2tldEgAEj4KCHRlbGVwb3J0GCggASgLMiouU291cmNl",
+            "Lk5ldHdvcmtpbmcuUHJvdG9idWYuVGVsZXBvcnRQYWNrZXRIABI8CgdsaWZl",
+            "YmFyGCkgASgLMikuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuTGlmZUJh",
+            "clBhY2tldEgAEkQKEHVwZGF0ZUt1bmdGdVNsb3QYKiABKAsyKC5Tb3VyY2Uu",
+            "TmV0d29ya2luZy5Qcm90b2J1Zi5LdW5nRnVQYWNrZXRIABJGCgxzaG93VGVs",
+            "ZXBvcnQYKyABKAsyLi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5TaG93",
+            "VGVsZXBvcnRQYWNrZXRIABJACglicmVha1JvcGUYLCABKAsyKy5Tb3VyY2Uu",
+            "TmV0d29ya2luZy5Qcm90b2J1Zi5CcmVha1JvcGVQYWNrZXRIABJECgtucGNQ",
+            "b3NpdGlvbhgtIAEoCzItLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLk5w",
+            "Y1Bvc2l0aW9uUGFja2V0SAASNgoEY2hhdBguIAEoCzImLlNvdXJjZS5OZXR3",
+            "b3JraW5nLlByb3RvYnVmLkNoYXRQYWNrZXRIABI+CghvcGVuQmFuaxgvIAEo",
+            "CzIqLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLk9wZW5CYW5rUGFja2V0",
+            "SAASQgoKdXBkYXRlQmFuaxgwIAEoCzIsLlNvdXJjZS5OZXR3b3JraW5nLlBy",
+            "b3RvYnVmLlVwZGF0ZUJhbmtQYWNrZXRIABJACgluYW1lQ29sb3IYMSABKAsy",
+            "Ky5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5OYW1lQ29sb3JQYWNrZXRI",
+            "ABJACglqb2luR3VpbGQYMiABKAsyKy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
+            "b2J1Zi5Kb2luR3VpbGRQYWNrZXRIAEINCgtUeXBlZFBhY2tldCLZAQobQ3Jl",
             "YXR1cmVJbnRlcnBvbGF0aW9uUGFja2V0EkYKDWludGVycG9sYXRpb24YASAB",
             "KAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9u",
             "UGFja2V0EgoKAmlkGAIgASgDEgwKBG5hbWUYAyABKAkSDAoEdHlwZRgEIAEo",
             "BRIZCgxtZXJjaGFudEZpbGUYBSABKAlIAIgBARINCgVzaGFwZRgGIAEoCRIP",
-            "CgdhbmltYXRlGAcgASgJQg8KDV9tZXJjaGFudEZpbGUijgQKEFBsYXllcklu",
+            "CgdhbmltYXRlGAcgASgJQg8KDV9tZXJjaGFudEZpbGUitAQKEFBsYXllcklu",
             "Zm9QYWNrZXQSCgoCaWQYAiABKAMSDAoEbWFsZRgDIAEoCBIMCgRuYW1lGAQg",
             "ASgJEhcKCndlYXBvbk5hbWUYBSABKAlIAIgBARIWCgljaGVzdE5hbWUYBiAB",
             "KAlIAYgBARIVCghoYWlyTmFtZRgHIAEoCUgCiAEBEhQKB2hhdE5hbWUYCCAB",
@@ -300,14 +306,15 @@ namespace Source.Networking.Protobuf {
             "ZXJOYW1lGAwgASgJSAeIAQESEgoKY2hlc3RDb2xvchgNIAEoBRIRCgloYWly",
             "Q29sb3IYDiABKAUSEAoIaGF0Q29sb3IYDyABKAUSEgoKd3Jpc3RDb2xvchgQ",
             "IAEoBRIRCglib290Q29sb3IYESABKAUSFQoNY2xvdGhpbmdDb2xvchgSIAEo",
-            "BRIUCgx0cm91c2VyQ29sb3IYEyABKAUSEQoJbmFtZUNvbG9yGBQgASgFQg0K",
-            "C193ZWFwb25OYW1lQgwKCl9jaGVzdE5hbWVCCwoJX2hhaXJOYW1lQgoKCF9o",
-            "YXROYW1lQgwKCl93cmlzdE5hbWVCCwoJX2Jvb3ROYW1lQg8KDV9jbG90aGlu",
-            "Z05hbWVCDgoMX3Ryb3VzZXJOYW1lIp8BChlQbGF5ZXJJbnRlcnBvbGF0aW9u",
-            "UGFja2V0EkYKDWludGVycG9sYXRpb24YASABKAsyLy5Tb3VyY2UuTmV0d29y",
-            "a2luZy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EjoKBGluZm8YAiAB",
-            "KAsyLC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJJbmZvUGFj",
-            "a2V0IiAKElJlbW92ZUVudGl0eVBhY2tldBIKCgJpZBgBIAEoA2IGcHJvdG8z"));
+            "BRIUCgx0cm91c2VyQ29sb3IYEyABKAUSEQoJbmFtZUNvbG9yGBQgASgFEhYK",
+            "CWd1aWxkTmFtZRgVIAEoCUgIiAEBQg0KC193ZWFwb25OYW1lQgwKCl9jaGVz",
+            "dE5hbWVCCwoJX2hhaXJOYW1lQgoKCF9oYXROYW1lQgwKCl93cmlzdE5hbWVC",
+            "CwoJX2Jvb3ROYW1lQg8KDV9jbG90aGluZ05hbWVCDgoMX3Ryb3VzZXJOYW1l",
+            "QgwKCl9ndWlsZE5hbWUinwEKGVBsYXllckludGVycG9sYXRpb25QYWNrZXQS",
+            "RgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlBy",
+            "b3RvYnVmLkludGVycG9sYXRpb25QYWNrZXQSOgoEaW5mbxgCIAEoCzIsLlNv",
+            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllckluZm9QYWNrZXQiIAoS",
+            "UmVtb3ZlRW50aXR5UGFja2V0EgoKAmlkGAEgASgDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -350,7 +357,8 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientSayPacket), global::Source.Networking.Protobuf.ClientSayPacket.Parser, new[]{ "Text" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientBankOperationPacket), global::Source.Networking.Protobuf.ClientBankOperationPacket.Parser, new[]{ "Type", "FromSlot", "ToSlot", "Number", "BankerId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientChangeTeamPacket), global::Source.Networking.Protobuf.ClientChangeTeamPacket.Parser, new[]{ "TeamNumber" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientPacket), global::Source.Networking.Protobuf.ClientPacket.Parser, new[]{ "MoveEventPacket", "ClickPacket", "LoginPacket", "AttackEventPacket", "SwapInventorySlotPacket", "DoubleClickInventorySlotPacket", "DropItem", "PickItem", "Unequip", "ToggleKungFu", "SitDown", "StandUp", "SellItems", "BuyItems", "RightClick", "TradeRequest", "UpdateTrade", "TriggerDynamicObject", "SwapKungFuSlot", "DragPlayer", "SimpleCommand", "Dye", "Say", "BankOperation", "ChangeTeam" }, new[]{ "Type" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientFoundGuildPacket), global::Source.Networking.Protobuf.ClientFoundGuildPacket.Parser, new[]{ "Name", "X", "Y", "InventorySlot" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.ClientPacket), global::Source.Networking.Protobuf.ClientPacket.Parser, new[]{ "MoveEventPacket", "ClickPacket", "LoginPacket", "AttackEventPacket", "SwapInventorySlotPacket", "DoubleClickInventorySlotPacket", "DropItem", "PickItem", "Unequip", "ToggleKungFu", "SitDown", "StandUp", "SellItems", "BuyItems", "RightClick", "TradeRequest", "UpdateTrade", "TriggerDynamicObject", "SwapKungFuSlot", "DragPlayer", "SimpleCommand", "Dye", "Say", "BankOperation", "ChangeTeam", "FoundGuild" }, new[]{ "Type" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationPacket), global::Source.Networking.Protobuf.InterpolationPacket.Parser, new[]{ "State", "ElapsedMillis", "Direction", "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationsPacket), global::Source.Networking.Protobuf.InterpolationsPacket.Parser, new[]{ "Interpolations" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InventoryItemPacket), global::Source.Networking.Protobuf.InventoryItemPacket.Parser, new[]{ "Name", "SlotId", "Number", "Color" }, new[]{ "Number" }, null, null, null),
@@ -381,9 +389,10 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.OpenBankPacket), global::Source.Networking.Protobuf.OpenBankPacket.Parser, new[]{ "Items", "Capacity", "Unlocked" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.UpdateBankPacket), global::Source.Networking.Protobuf.UpdateBankPacket.Parser, new[]{ "Type", "UpdateSlot" }, new[]{ "UpdateSlot" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.NameColorPacket), global::Source.Networking.Protobuf.NameColorPacket.Parser, new[]{ "Id", "Color" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.Packet), global::Source.Networking.Protobuf.Packet.Parser, new[]{ "PositionPacket", "CreatureInterpolation", "LoginPacket", "Interpolations", "ResponsePacket", "PlayerInterpolation", "RemoveEntity", "AttackEventResponsePacket", "AttackEventPacket", "HurtEventPacket", "ChangeStatePacket", "SwapInventorySlotPacket", "DropItem", "ShowItem", "UpdateSlot", "Text", "Unequip", "Equip", "OpenTradeWindow", "ToggleKungFu", "SitDown", "StandUp", "Cooldown", "Attribute", "Sound", "Die", "PlayerRevive", "GainExp", "Projectile", "MonsterMove", "LearnKungFu", "ItemAttribute", "RightClickAttribute", "UpdateTradeWindow", "ShowDynamicObject", "UpdateDynamicObject", "Teleport", "Lifebar", "UpdateKungFuSlot", "ShowTeleport", "BreakRope", "NpcPosition", "Chat", "OpenBank", "UpdateBank", "NameColor" }, new[]{ "TypedPacket" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.JoinGuildPacket), global::Source.Networking.Protobuf.JoinGuildPacket.Parser, new[]{ "Id", "Name" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.Packet), global::Source.Networking.Protobuf.Packet.Parser, new[]{ "PositionPacket", "CreatureInterpolation", "LoginPacket", "Interpolations", "ResponsePacket", "PlayerInterpolation", "RemoveEntity", "AttackEventResponsePacket", "AttackEventPacket", "HurtEventPacket", "ChangeStatePacket", "SwapInventorySlotPacket", "DropItem", "ShowItem", "UpdateSlot", "Text", "Unequip", "Equip", "OpenTradeWindow", "ToggleKungFu", "SitDown", "StandUp", "Cooldown", "Attribute", "Sound", "Die", "PlayerRevive", "GainExp", "Projectile", "MonsterMove", "LearnKungFu", "ItemAttribute", "RightClickAttribute", "UpdateTradeWindow", "ShowDynamicObject", "UpdateDynamicObject", "Teleport", "Lifebar", "UpdateKungFuSlot", "ShowTeleport", "BreakRope", "NpcPosition", "Chat", "OpenBank", "UpdateBank", "NameColor", "JoinGuild" }, new[]{ "TypedPacket" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.CreatureInterpolationPacket), global::Source.Networking.Protobuf.CreatureInterpolationPacket.Parser, new[]{ "Interpolation", "Id", "Name", "Type", "MerchantFile", "Shape", "Animate" }, new[]{ "MerchantFile" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInfoPacket), global::Source.Networking.Protobuf.PlayerInfoPacket.Parser, new[]{ "Id", "Male", "Name", "WeaponName", "ChestName", "HairName", "HatName", "WristName", "BootName", "ClothingName", "TrouserName", "ChestColor", "HairColor", "HatColor", "WristColor", "BootColor", "ClothingColor", "TrouserColor", "NameColor" }, new[]{ "WeaponName", "ChestName", "HairName", "HatName", "WristName", "BootName", "ClothingName", "TrouserName" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInfoPacket), global::Source.Networking.Protobuf.PlayerInfoPacket.Parser, new[]{ "Id", "Male", "Name", "WeaponName", "ChestName", "HairName", "HatName", "WristName", "BootName", "ClothingName", "TrouserName", "ChestColor", "HairColor", "HatColor", "WristColor", "BootColor", "ClothingColor", "TrouserColor", "NameColor", "GuildName" }, new[]{ "WeaponName", "ChestName", "HairName", "HatName", "WristName", "BootName", "ClothingName", "TrouserName", "GuildName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.PlayerInterpolationPacket), global::Source.Networking.Protobuf.PlayerInterpolationPacket.Parser, new[]{ "Interpolation", "Info" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.RemoveEntityPacket), global::Source.Networking.Protobuf.RemoveEntityPacket.Parser, new[]{ "Id" }, null, null, null, null)
           }));
@@ -693,7 +702,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -732,7 +745,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1039,7 +1056,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1074,7 +1095,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1293,7 +1318,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1319,7 +1348,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1555,7 +1588,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1582,7 +1619,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1761,7 +1802,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1780,7 +1825,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2041,7 +2090,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2068,7 +2121,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2305,7 +2362,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2332,7 +2393,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2511,7 +2576,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2530,7 +2599,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2730,7 +2803,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2753,7 +2830,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2928,7 +3009,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2947,7 +3032,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -3309,7 +3398,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3352,7 +3445,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -3576,7 +3673,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3599,7 +3700,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -3948,7 +4053,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3991,7 +4100,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -4215,7 +4328,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -4238,7 +4355,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -4474,7 +4595,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -4504,7 +4629,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -4773,7 +4902,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -4804,7 +4937,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -5062,7 +5199,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -5089,7 +5230,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -5268,7 +5413,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -5287,7 +5436,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -5487,7 +5640,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -5510,7 +5667,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -5714,7 +5875,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -5737,7 +5902,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -5912,7 +6081,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -5931,7 +6104,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -6131,7 +6308,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -6154,7 +6335,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -6329,7 +6514,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -6348,7 +6537,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -6664,7 +6857,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -6703,7 +6900,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -6923,7 +7124,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -6946,7 +7151,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -7283,7 +7492,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -7322,7 +7535,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -7629,7 +7846,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -7664,7 +7885,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -7851,7 +8076,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -7870,7 +8099,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -8099,7 +8332,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -8126,7 +8363,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -8334,7 +8575,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -8357,7 +8602,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -8619,7 +8868,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -8650,7 +8903,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -8851,7 +9108,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -8874,7 +9135,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -9078,7 +9343,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -9101,7 +9370,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -9334,7 +9607,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -9361,7 +9638,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -9569,7 +9850,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -9592,7 +9877,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -9796,7 +10085,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -9819,7 +10112,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -9994,7 +10291,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -10013,7 +10314,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -10300,7 +10605,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -10335,7 +10644,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -10522,7 +10835,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -10541,12 +10858,325 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
             TeamNumber = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class ClientFoundGuildPacket : pb::IMessage<ClientFoundGuildPacket>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ClientFoundGuildPacket> _parser = new pb::MessageParser<ClientFoundGuildPacket>(() => new ClientFoundGuildPacket());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<ClientFoundGuildPacket> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[39]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ClientFoundGuildPacket() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ClientFoundGuildPacket(ClientFoundGuildPacket other) : this() {
+      name_ = other.name_;
+      x_ = other.x_;
+      y_ = other.y_;
+      inventorySlot_ = other.inventorySlot_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ClientFoundGuildPacket Clone() {
+      return new ClientFoundGuildPacket(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "x" field.</summary>
+    public const int XFieldNumber = 2;
+    private int x_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int X {
+      get { return x_; }
+      set {
+        x_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "y" field.</summary>
+    public const int YFieldNumber = 3;
+    private int y_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Y {
+      get { return y_; }
+      set {
+        y_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "inventorySlot" field.</summary>
+    public const int InventorySlotFieldNumber = 4;
+    private int inventorySlot_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int InventorySlot {
+      get { return inventorySlot_; }
+      set {
+        inventorySlot_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as ClientFoundGuildPacket);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(ClientFoundGuildPacket other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (X != other.X) return false;
+      if (Y != other.Y) return false;
+      if (InventorySlot != other.InventorySlot) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (X != 0) hash ^= X.GetHashCode();
+      if (Y != 0) hash ^= Y.GetHashCode();
+      if (InventorySlot != 0) hash ^= InventorySlot.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (X != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(X);
+      }
+      if (Y != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Y);
+      }
+      if (InventorySlot != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(InventorySlot);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (X != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(X);
+      }
+      if (Y != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Y);
+      }
+      if (InventorySlot != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(InventorySlot);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (X != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
+      }
+      if (Y != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
+      }
+      if (InventorySlot != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(InventorySlot);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(ClientFoundGuildPacket other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.X != 0) {
+        X = other.X;
+      }
+      if (other.Y != 0) {
+        Y = other.Y;
+      }
+      if (other.InventorySlot != 0) {
+        InventorySlot = other.InventorySlot;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Y = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            InventorySlot = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Y = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            InventorySlot = input.ReadInt32();
             break;
           }
         }
@@ -10571,7 +11201,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[39]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[40]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -10666,6 +11296,9 @@ namespace Source.Networking.Protobuf {
           break;
         case TypeOneofCase.ChangeTeam:
           ChangeTeam = other.ChangeTeam.Clone();
+          break;
+        case TypeOneofCase.FoundGuild:
+          FoundGuild = other.FoundGuild.Clone();
           break;
       }
 
@@ -10978,6 +11611,18 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "foundGuild" field.</summary>
+    public const int FoundGuildFieldNumber = 26;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Source.Networking.Protobuf.ClientFoundGuildPacket FoundGuild {
+      get { return typeCase_ == TypeOneofCase.FoundGuild ? (global::Source.Networking.Protobuf.ClientFoundGuildPacket) type_ : null; }
+      set {
+        type_ = value;
+        typeCase_ = value == null ? TypeOneofCase.None : TypeOneofCase.FoundGuild;
+      }
+    }
+
     private object type_;
     /// <summary>Enum of possible cases for the "Type" oneof.</summary>
     public enum TypeOneofCase {
@@ -11007,6 +11652,7 @@ namespace Source.Networking.Protobuf {
       Say = 23,
       BankOperation = 24,
       ChangeTeam = 25,
+      FoundGuild = 26,
     }
     private TypeOneofCase typeCase_ = TypeOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11062,6 +11708,7 @@ namespace Source.Networking.Protobuf {
       if (!object.Equals(Say, other.Say)) return false;
       if (!object.Equals(BankOperation, other.BankOperation)) return false;
       if (!object.Equals(ChangeTeam, other.ChangeTeam)) return false;
+      if (!object.Equals(FoundGuild, other.FoundGuild)) return false;
       if (TypeCase != other.TypeCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -11095,6 +11742,7 @@ namespace Source.Networking.Protobuf {
       if (typeCase_ == TypeOneofCase.Say) hash ^= Say.GetHashCode();
       if (typeCase_ == TypeOneofCase.BankOperation) hash ^= BankOperation.GetHashCode();
       if (typeCase_ == TypeOneofCase.ChangeTeam) hash ^= ChangeTeam.GetHashCode();
+      if (typeCase_ == TypeOneofCase.FoundGuild) hash ^= FoundGuild.GetHashCode();
       hash ^= (int) typeCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -11214,6 +11862,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(202, 1);
         output.WriteMessage(ChangeTeam);
       }
+      if (typeCase_ == TypeOneofCase.FoundGuild) {
+        output.WriteRawTag(210, 1);
+        output.WriteMessage(FoundGuild);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -11324,6 +11976,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(202, 1);
         output.WriteMessage(ChangeTeam);
       }
+      if (typeCase_ == TypeOneofCase.FoundGuild) {
+        output.WriteRawTag(210, 1);
+        output.WriteMessage(FoundGuild);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -11408,6 +12064,9 @@ namespace Source.Networking.Protobuf {
       }
       if (typeCase_ == TypeOneofCase.ChangeTeam) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(ChangeTeam);
+      }
+      if (typeCase_ == TypeOneofCase.FoundGuild) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(FoundGuild);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -11572,6 +12231,12 @@ namespace Source.Networking.Protobuf {
           }
           ChangeTeam.MergeFrom(other.ChangeTeam);
           break;
+        case TypeOneofCase.FoundGuild:
+          if (FoundGuild == null) {
+            FoundGuild = new global::Source.Networking.Protobuf.ClientFoundGuildPacket();
+          }
+          FoundGuild.MergeFrom(other.FoundGuild);
+          break;
       }
 
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -11585,7 +12250,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -11814,6 +12483,15 @@ namespace Source.Networking.Protobuf {
             ChangeTeam = subBuilder;
             break;
           }
+          case 210: {
+            global::Source.Networking.Protobuf.ClientFoundGuildPacket subBuilder = new global::Source.Networking.Protobuf.ClientFoundGuildPacket();
+            if (typeCase_ == TypeOneofCase.FoundGuild) {
+              subBuilder.MergeFrom(FoundGuild);
+            }
+            input.ReadMessage(subBuilder);
+            FoundGuild = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -11825,7 +12503,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -12054,6 +12736,15 @@ namespace Source.Networking.Protobuf {
             ChangeTeam = subBuilder;
             break;
           }
+          case 210: {
+            global::Source.Networking.Protobuf.ClientFoundGuildPacket subBuilder = new global::Source.Networking.Protobuf.ClientFoundGuildPacket();
+            if (typeCase_ == TypeOneofCase.FoundGuild) {
+              subBuilder.MergeFrom(FoundGuild);
+            }
+            input.ReadMessage(subBuilder);
+            FoundGuild = subBuilder;
+            break;
+          }
         }
       }
     }
@@ -12076,7 +12767,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[40]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[41]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12333,7 +13024,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -12368,7 +13063,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -12414,7 +13113,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[41]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[42]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12544,7 +13243,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -12563,7 +13266,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -12594,7 +13301,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[42]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[43]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12838,7 +13545,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -12869,7 +13580,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -12912,7 +13627,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[43]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[44]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -13098,7 +13813,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -13121,7 +13840,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -13156,7 +13879,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[44]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[45]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -13502,7 +14225,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -13541,7 +14268,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -13591,7 +14322,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[45]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[46]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -13819,7 +14550,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -13850,7 +14585,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -13892,7 +14631,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[46]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[47]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -14134,7 +14873,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -14165,7 +14908,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -14208,7 +14955,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[47]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[48]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -14452,7 +15199,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -14483,7 +15234,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -14525,7 +15280,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[48]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[49]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -14695,7 +15450,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -14718,7 +15477,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -14752,7 +15515,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[49]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[50]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -15096,7 +15859,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -15143,7 +15910,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -15201,7 +15972,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[50]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[51]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -15664,7 +16435,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -15732,7 +16507,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -15811,7 +16590,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[51]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[52]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -16300,7 +17079,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -16367,7 +17150,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -16445,7 +17232,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[52]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[53]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -17050,7 +17837,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -17133,7 +17924,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -17227,7 +18022,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[53]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[54]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -17397,7 +18192,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -17420,7 +18219,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -17454,7 +18257,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[54]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[55]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -17653,7 +18456,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -17680,7 +18487,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -17718,7 +18529,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[55]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[56]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -17859,7 +18670,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -17878,7 +18693,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -17908,7 +18727,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[56]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[57]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -18049,7 +18868,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -18068,7 +18891,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -18098,7 +18925,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[57]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[58]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -18239,7 +19066,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -18258,7 +19089,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -18288,7 +19123,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[58]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[59]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -18429,7 +19264,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -18448,7 +19287,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -18478,7 +19321,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[59]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[60]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -18677,7 +19520,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -18704,7 +19551,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -18742,7 +19593,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[60]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[61]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -18970,7 +19821,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -19001,7 +19856,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -19044,7 +19903,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[61]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[62]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -19288,7 +20147,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -19319,7 +20182,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -19361,7 +20228,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[62]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[63]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -19856,7 +20723,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -19925,7 +20796,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -20005,7 +20880,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[63]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[64]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -20233,7 +21108,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -20264,7 +21143,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -20306,7 +21189,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[64]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[65]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -20447,7 +21330,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -20466,7 +21353,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -20496,7 +21387,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[65]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[66]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -20662,7 +21553,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -20691,7 +21586,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -20731,7 +21630,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[66]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[67]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -20901,7 +21800,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -20924,7 +21827,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -20958,7 +21865,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[67]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[68]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -21146,7 +22053,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -21173,7 +22084,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -21211,7 +22126,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[68]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[69]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -21384,7 +22299,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -21410,7 +22329,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -21447,7 +22370,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[69]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[70]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -21617,7 +22540,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -21640,7 +22567,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -21650,6 +22581,241 @@ namespace Source.Networking.Protobuf {
           }
           case 16: {
             Color = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class JoinGuildPacket : pb::IMessage<JoinGuildPacket>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<JoinGuildPacket> _parser = new pb::MessageParser<JoinGuildPacket>(() => new JoinGuildPacket());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<JoinGuildPacket> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[71]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public JoinGuildPacket() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public JoinGuildPacket(JoinGuildPacket other) : this() {
+      id_ = other.id_;
+      name_ = other.name_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public JoinGuildPacket Clone() {
+      return new JoinGuildPacket(this);
+    }
+
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private long id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 2;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as JoinGuildPacket);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(JoinGuildPacket other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (Name != other.Name) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0L) hash ^= Id.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(JoinGuildPacket other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0L) {
+        Id = other.Id;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            Name = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            Name = input.ReadString();
             break;
           }
         }
@@ -21674,7 +22840,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[70]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[72]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -21832,6 +22998,9 @@ namespace Source.Networking.Protobuf {
           break;
         case TypedPacketOneofCase.NameColor:
           NameColor = other.NameColor.Clone();
+          break;
+        case TypedPacketOneofCase.JoinGuild:
+          JoinGuild = other.JoinGuild.Clone();
           break;
       }
 
@@ -22396,6 +23565,18 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "joinGuild" field.</summary>
+    public const int JoinGuildFieldNumber = 50;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Source.Networking.Protobuf.JoinGuildPacket JoinGuild {
+      get { return typedPacketCase_ == TypedPacketOneofCase.JoinGuild ? (global::Source.Networking.Protobuf.JoinGuildPacket) typedPacket_ : null; }
+      set {
+        typedPacket_ = value;
+        typedPacketCase_ = value == null ? TypedPacketOneofCase.None : TypedPacketOneofCase.JoinGuild;
+      }
+    }
+
     private object typedPacket_;
     /// <summary>Enum of possible cases for the "TypedPacket" oneof.</summary>
     public enum TypedPacketOneofCase {
@@ -22446,6 +23627,7 @@ namespace Source.Networking.Protobuf {
       OpenBank = 47,
       UpdateBank = 48,
       NameColor = 49,
+      JoinGuild = 50,
     }
     private TypedPacketOneofCase typedPacketCase_ = TypedPacketOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -22522,6 +23704,7 @@ namespace Source.Networking.Protobuf {
       if (!object.Equals(OpenBank, other.OpenBank)) return false;
       if (!object.Equals(UpdateBank, other.UpdateBank)) return false;
       if (!object.Equals(NameColor, other.NameColor)) return false;
+      if (!object.Equals(JoinGuild, other.JoinGuild)) return false;
       if (TypedPacketCase != other.TypedPacketCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -22576,6 +23759,7 @@ namespace Source.Networking.Protobuf {
       if (typedPacketCase_ == TypedPacketOneofCase.OpenBank) hash ^= OpenBank.GetHashCode();
       if (typedPacketCase_ == TypedPacketOneofCase.UpdateBank) hash ^= UpdateBank.GetHashCode();
       if (typedPacketCase_ == TypedPacketOneofCase.NameColor) hash ^= NameColor.GetHashCode();
+      if (typedPacketCase_ == TypedPacketOneofCase.JoinGuild) hash ^= JoinGuild.GetHashCode();
       hash ^= (int) typedPacketCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -22779,6 +23963,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(138, 3);
         output.WriteMessage(NameColor);
       }
+      if (typedPacketCase_ == TypedPacketOneofCase.JoinGuild) {
+        output.WriteRawTag(146, 3);
+        output.WriteMessage(JoinGuild);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -22973,6 +24161,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(138, 3);
         output.WriteMessage(NameColor);
       }
+      if (typedPacketCase_ == TypedPacketOneofCase.JoinGuild) {
+        output.WriteRawTag(146, 3);
+        output.WriteMessage(JoinGuild);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -23120,6 +24312,9 @@ namespace Source.Networking.Protobuf {
       }
       if (typedPacketCase_ == TypedPacketOneofCase.NameColor) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(NameColor);
+      }
+      if (typedPacketCase_ == TypedPacketOneofCase.JoinGuild) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(JoinGuild);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -23410,6 +24605,12 @@ namespace Source.Networking.Protobuf {
           }
           NameColor.MergeFrom(other.NameColor);
           break;
+        case TypedPacketOneofCase.JoinGuild:
+          if (JoinGuild == null) {
+            JoinGuild = new global::Source.Networking.Protobuf.JoinGuildPacket();
+          }
+          JoinGuild.MergeFrom(other.JoinGuild);
+          break;
       }
 
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -23423,7 +24624,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -23841,6 +25046,15 @@ namespace Source.Networking.Protobuf {
             NameColor = subBuilder;
             break;
           }
+          case 402: {
+            global::Source.Networking.Protobuf.JoinGuildPacket subBuilder = new global::Source.Networking.Protobuf.JoinGuildPacket();
+            if (typedPacketCase_ == TypedPacketOneofCase.JoinGuild) {
+              subBuilder.MergeFrom(JoinGuild);
+            }
+            input.ReadMessage(subBuilder);
+            JoinGuild = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -23852,7 +25066,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -24270,6 +25488,15 @@ namespace Source.Networking.Protobuf {
             NameColor = subBuilder;
             break;
           }
+          case 402: {
+            global::Source.Networking.Protobuf.JoinGuildPacket subBuilder = new global::Source.Networking.Protobuf.JoinGuildPacket();
+            if (typedPacketCase_ == TypedPacketOneofCase.JoinGuild) {
+              subBuilder.MergeFrom(JoinGuild);
+            }
+            input.ReadMessage(subBuilder);
+            JoinGuild = subBuilder;
+            break;
+          }
         }
       }
     }
@@ -24292,7 +25519,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[71]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[73]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -24624,7 +25851,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -24670,7 +25901,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -24727,7 +25962,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[72]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[74]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -24766,6 +26001,7 @@ namespace Source.Networking.Protobuf {
       clothingColor_ = other.clothingColor_;
       trouserColor_ = other.trouserColor_;
       nameColor_ = other.nameColor_;
+      guildName_ = other.guildName_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -25115,6 +26351,32 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "guildName" field.</summary>
+    public const int GuildNameFieldNumber = 21;
+    private readonly static string GuildNameDefaultValue = "";
+
+    private string guildName_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string GuildName {
+      get { return guildName_ ?? GuildNameDefaultValue; }
+      set {
+        guildName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "guildName" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasGuildName {
+      get { return guildName_ != null; }
+    }
+    /// <summary>Clears the value of the "guildName" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearGuildName() {
+      guildName_ = null;
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -25149,6 +26411,7 @@ namespace Source.Networking.Protobuf {
       if (ClothingColor != other.ClothingColor) return false;
       if (TrouserColor != other.TrouserColor) return false;
       if (NameColor != other.NameColor) return false;
+      if (GuildName != other.GuildName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -25175,6 +26438,7 @@ namespace Source.Networking.Protobuf {
       if (ClothingColor != 0) hash ^= ClothingColor.GetHashCode();
       if (TrouserColor != 0) hash ^= TrouserColor.GetHashCode();
       if (NameColor != 0) hash ^= NameColor.GetHashCode();
+      if (HasGuildName) hash ^= GuildName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -25269,6 +26533,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(160, 1);
         output.WriteInt32(NameColor);
       }
+      if (HasGuildName) {
+        output.WriteRawTag(170, 1);
+        output.WriteString(GuildName);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -25355,6 +26623,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(160, 1);
         output.WriteInt32(NameColor);
       }
+      if (HasGuildName) {
+        output.WriteRawTag(170, 1);
+        output.WriteString(GuildName);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -25421,6 +26693,9 @@ namespace Source.Networking.Protobuf {
       }
       if (NameColor != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(NameColor);
+      }
+      if (HasGuildName) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(GuildName);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -25491,6 +26766,9 @@ namespace Source.Networking.Protobuf {
       if (other.NameColor != 0) {
         NameColor = other.NameColor;
       }
+      if (other.HasGuildName) {
+        GuildName = other.GuildName;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -25502,7 +26780,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -25582,6 +26864,10 @@ namespace Source.Networking.Protobuf {
             NameColor = input.ReadInt32();
             break;
           }
+          case 170: {
+            GuildName = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -25593,7 +26879,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -25673,6 +26963,10 @@ namespace Source.Networking.Protobuf {
             NameColor = input.ReadInt32();
             break;
           }
+          case 170: {
+            GuildName = input.ReadString();
+            break;
+          }
         }
       }
     }
@@ -25695,7 +26989,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[73]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[75]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -25871,7 +27165,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -25900,7 +27198,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -25940,7 +27242,7 @@ namespace Source.Networking.Protobuf {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[74]; }
+      get { return global::Source.Networking.Protobuf.MessageReflection.Descriptor.MessageTypes[76]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -26081,7 +27383,11 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -26100,7 +27406,11 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;

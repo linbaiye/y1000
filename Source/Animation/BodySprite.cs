@@ -1,8 +1,6 @@
-using System;
 using Godot;
 using NLog;
 using y1000.Source.Creature;
-using y1000.Source.Util;
 
 namespace y1000.Source.Animation
 {
@@ -14,6 +12,7 @@ namespace y1000.Source.Animation
 
 		private Panel _panel;
 		private Label _label;
+		private Label _label2;
 
 		public override void _Ready()
 		{
@@ -22,6 +21,10 @@ namespace y1000.Source.Animation
 			_panel.MouseExited += MouseExitedArea;
 			_label = GetNode<Label>("Label");
 			_label.Visible = false;
+			_label2 = GetNode<Label>("Label2");
+			_label2.Visible = false;
+			UpdateColor();
+			UpdateGuild();
 		}
 
 		public void SetName(string name)
@@ -29,19 +32,36 @@ namespace y1000.Source.Animation
 			_label.Text = name;
 		}
 
-		public void SetNameColor(string color)
+		public void UpdateColor()
 		{
+			var color = GetParent<IBody>().NameColor;
 			_label.AddThemeColorOverride("font_color", new Color(color));
+		}
+
+		public void UpdateGuild()
+		{
+			var guildName = GetParent<IBody>().GuildName;
+			if (guildName != null)
+			{
+				_label2.Text = guildName;
+			}
+			else
+			{
+				_label2.Text = "";
+			}
 		}
 
 		private void MouseEnteredArea()
 		{
 			_label.Visible = true;
+			if (!string.IsNullOrEmpty(_label2.Text))
+				_label2.Visible = true;
 		}
 		
 		private void MouseExitedArea()
 		{
 			_label.Visible = false;
+			_label2.Visible = false;
 		}
 
 		public Panel Area => _panel;

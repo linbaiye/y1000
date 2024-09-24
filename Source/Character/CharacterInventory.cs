@@ -274,9 +274,17 @@ public class CharacterInventory : AbstractInventory
             }
         }
         var item = Get(slot);
-        if (item != null && item.ItemName.Equals("福袋"))
+        if (item == null)
+        {
+            return;
+        }
+        if (item.ItemName.Equals("福袋"))
         {
             _eventMediator?.NotifyServer(ClientOperateBankEvent.Unlock(slot));
+        }
+        else if (item.ItemName.Equals("门派石"))
+        {
+            _eventMediator?.NotifyServer(new ClientFoundGuildEvent("门派名字不能太长了",  new Vector2I(507, 516), 1));
         }
         else
         {

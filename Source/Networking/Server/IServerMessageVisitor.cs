@@ -237,4 +237,9 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)message);
     }
+
+    void Visit(PlayerJoinedGuildMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
 }
