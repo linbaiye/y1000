@@ -643,6 +643,41 @@ namespace y1000.Source.Character
 		        }
 		        return;
 	        }
+			else if (text.StartsWith("@创立门派"))
+			{
+				int slot = Inventory.FindSlot("门派石");
+				if (slot == 0)
+				{
+			        EventMediator?.NotifyTextArea("没有门派石。");
+					return;
+				}
+		        var strings = text.Split(" ");
+				if (strings.Length != 3)
+				{
+			        EventMediator?.NotifyTextArea("格式错误, 格式 @创立门派 <名字> <门石坐标>, 示例: @创立门派 武当 500.500");
+					return;
+				}
+				var coorStrings = strings[2].Split(".");
+				if (coorStrings.Length != 2) 
+				{
+			        EventMediator?.NotifyTextArea("格式错误, 格式 @创立门派 <名字> <门石坐标>, 示例: @创立门派 武当 500.500");
+					return;
+				}
+				if (!coorStrings[0].DigitOnly() || !coorStrings[1].DigitOnly())
+				{
+			        EventMediator?.NotifyTextArea("格式错误, 格式 @创立门派 <名字> <门石坐标>, 示例: @创立门派 武当 500.500");
+					return;
+				}
+				var coordinate = new Vector2I(coorStrings[0].ToInt(), coorStrings[1].ToInt());
+				if (coordinate.Distance(Coordinate) > 4)
+				{
+			        EventMediator?.NotifyTextArea("距离过远, 人物和目标坐标的距离需为4以内。");
+					return;
+				}
+				EventMediator?.NotifyServer(new ClientFoundGuildEvent(strings[1], coordinate, slot));
+				return;
+			}
+
 	        EventMediator?.NotifyServer(new ClientTextEvent(text));
 	        LOGGER.Debug("Sent text {0}.", text);
         }

@@ -124,7 +124,7 @@ public class EntityFactory
             var texture2D = _itemIconReader.Get(interpolation.Shape.ToInt());
             if (texture2D == null)
                 throw new ArgumentException("Shape " + interpolation.Shape + " invalid.");
-            obj.Initialize(interpolation, map, new List<OffsetTexture>() {new(texture2D, new Vector2(16, -12))});
+            obj.Initialize(interpolation, map, new List<OffsetTexture>() {new(texture2D, new Vector2(8, -12))});
         }
         else
         {

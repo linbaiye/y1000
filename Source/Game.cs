@@ -169,7 +169,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			_autoMoveAssistant?.Toggle();
 		}
-        else if (_hotkeys != null && _hotkeys.CanHandle(eventKey.Keycode))
+		else if (_hotkeys != null && _hotkeys.CanHandle(eventKey.Keycode))
 		{
 			_hotkeys.Handle(eventKey.Keycode);
 		}
