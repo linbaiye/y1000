@@ -163,7 +163,7 @@ public class MessageFactory
 			Packet.TypedPacketOneofCase.OpenBank => OpenBankMessage.FromPacket(packet.OpenBank),
 			Packet.TypedPacketOneofCase.UpdateBank => ParseBankOperation(packet.UpdateBank),
 			Packet.TypedPacketOneofCase.NameColor => new PlayerChangeNameColorMessage(packet.NameColor.Id, packet.NameColor.Color),
-			Packet.TypedPacketOneofCase.JoinGuild => new PlayerJoinedGuildMessage(packet.JoinGuild.Id, packet.JoinGuild.Name),
+			Packet.TypedPacketOneofCase.UpdateGuild => new PlayerUpdateGuildMessage(packet.UpdateGuild.Id, packet.UpdateGuild.Name),
 			_ => throw new NotSupportedException()
 		};
 	}

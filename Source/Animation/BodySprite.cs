@@ -41,7 +41,7 @@ namespace y1000.Source.Animation
 		public void UpdateGuild()
 		{
 			var guildName = GetParent<IBody>().GuildName;
-			if (guildName != null)
+			if (!string.IsNullOrEmpty(guildName))
 			{
 				_label2.Text = guildName;
 			}

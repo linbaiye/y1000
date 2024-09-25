@@ -243,7 +243,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		}
 	}
 
-	public void Visit(PlayerJoinedGuildMessage message)
+	public void Visit(PlayerUpdateGuildMessage message)
 	{
 		SetGuildName(message.Name);
 	}

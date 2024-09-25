@@ -574,7 +574,7 @@ namespace y1000.Source.Character
 	        WrappedPlayer().Map.Free(WrappedPlayer());
         }
         
-        public void Visit(PlayerJoinedGuildMessage message)
+        public void Visit(PlayerUpdateGuildMessage message)
         {
 	        WrappedPlayer().Visit(message);
         }

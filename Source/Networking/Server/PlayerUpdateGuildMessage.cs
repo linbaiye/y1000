@@ -1,8 +1,8 @@
 namespace y1000.Source.Networking.Server;
 
-public class PlayerJoinedGuildMessage : AbstractEntityMessage
+public class PlayerUpdateGuildMessage : AbstractEntityMessage
 {
-    public PlayerJoinedGuildMessage(long id, string name) : base(id)
+    public PlayerUpdateGuildMessage(long id, string name) : base(id)
     {
         Name = name;
     }

@@ -23,7 +23,7 @@ public partial class LeftsideTextControl : VBoxContainer
     {
         ProcessMode = ProcessModeEnum.Always;
         Visible = true;
-        LeftsideTextLabel[] labels = new[] { _label1, _label2, _label3, _label4, _label5 };
+        LeftsideTextLabel[] labels = { _label1, _label2, _label3, _label4, _label5 };
         for (int i = 0; i < labels.Length; i++)
         {
             if (labels[i].Visible == false)
@@ -32,29 +32,41 @@ public partial class LeftsideTextControl : VBoxContainer
                 return;
             }
         }
+
+        Move();
+        labels[^1].SetText(text);
+    }
+
+    private void Move()
+    {
+        LeftsideTextLabel[] labels = { _label1, _label2, _label3, _label4, _label5 };
         for (int i = 1; i < labels.Length; i++)
         {
             labels[i - 1].SetText(labels[i].Text, labels[i].Time);
         }
-        labels[^1].SetText(text);
     }
 
     public override void _Process(double delta)
     {
-        LeftsideTextLabel[] labels = new[] { _label1, _label2, _label3, _label4, _label5 };
+        LeftsideTextLabel[] labels = { _label1, _label2, _label3, _label4, _label5 };
         bool needHide = true;
         for (int i = 0; i < labels.Length; i++)
         {
             if (!labels[i].Update(delta))
             {
                 needHide = false;
+                break;
             }
         }
-
         if (needHide)
         {
             ProcessMode = ProcessModeEnum.Disabled;
             Visible = false;
+        }
+        else
+        {
+            if (!labels[0].Visible)
+                Move();
         }
     }
 }
