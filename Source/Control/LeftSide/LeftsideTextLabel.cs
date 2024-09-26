@@ -5,7 +5,12 @@ namespace y1000.Source.Control.LeftSide;
 public partial class LeftsideTextLabel : RichTextLabel
 {
     private double _time;
-    public void SetText(string text)
+
+    public override void _Ready()
+    {
+        Clean();
+    }
+    public void Display(string text)
     {
         _time = 4;
         Text = "[color='yellow']" + text + "[/color]";
@@ -14,26 +19,30 @@ public partial class LeftsideTextLabel : RichTextLabel
 
     public double Time => _time;
 
-    public void SetText(string text, double time)
+    public void Clean()
     {
-        _time = time;
-        Text = "[color='yellow']" + text + "[/color]";
-        Visible = true;
+        _time = 0;
+        Text = "";
+        Visible = false;
     }
-    
-    public bool Update(double delta)
+
+    public void Copy(LeftsideTextLabel another)
+    {
+        _time = another._time;
+        Text = another.Text;
+        Visible = another.Visible;
+    }
+
+    public void Update(double delta)
     {
         if (_time <= 0)
         {
-            return true;
+            return;
         }
         _time -= delta;
         if (_time <= 0)
         {
-            Text = "";
-            Visible = false;
-            return true;
+            Clean();
         }
-        return false;
     }
 }

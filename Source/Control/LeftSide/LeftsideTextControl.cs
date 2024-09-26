@@ -19,54 +19,55 @@ public partial class LeftsideTextControl : VBoxContainer
         _label5 = GetNode<LeftsideTextLabel>("Label5");
     }
 
+
     public void Display(string text)
     {
-        ProcessMode = ProcessModeEnum.Always;
         Visible = true;
         LeftsideTextLabel[] labels = { _label1, _label2, _label3, _label4, _label5 };
         for (int i = 0; i < labels.Length; i++)
         {
-            if (labels[i].Visible == false)
+            if (!labels[i].Visible)
             {
-                labels[i].SetText(text);
+                labels[i].Display(text);
                 return;
             }
         }
-
-        Move();
-        labels[^1].SetText(text);
+        Compact();
+        labels[^1].Display(text);
     }
 
-    private void Move()
+    private void Compact()
     {
         LeftsideTextLabel[] labels = { _label1, _label2, _label3, _label4, _label5 };
         for (int i = 1; i < labels.Length; i++)
         {
-            labels[i - 1].SetText(labels[i].Text, labels[i].Time);
+            labels[i - i].Copy(labels[i]);
+            labels[i].Clean();
         }
     }
 
     public override void _Process(double delta)
     {
+        if (!Visible)
+            return;
         LeftsideTextLabel[] labels = { _label1, _label2, _label3, _label4, _label5 };
         bool needHide = true;
         for (int i = 0; i < labels.Length; i++)
         {
-            if (!labels[i].Update(delta))
+            labels[i].Update(delta);
+            if (labels[i].Visible)
             {
                 needHide = false;
-                break;
             }
         }
         if (needHide)
         {
-            ProcessMode = ProcessModeEnum.Disabled;
             Visible = false;
         }
         else
         {
-            if (!labels[0].Visible)
-                Move();
+            if (!_label1.Visible)
+                Compact();
         }
     }
 }
