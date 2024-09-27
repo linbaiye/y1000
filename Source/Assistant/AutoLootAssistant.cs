@@ -93,12 +93,6 @@ public class AutoLootAssistant
         Save();
     }
 
-    public void OnLootItemsChanged(List<string> items)
-    {
-        Loot = items;
-        Save();
-    }
-
     public void OnAddItemClicked(string item) {
         if (!Loot.Contains(item)) {
             Loot.Add(item);
