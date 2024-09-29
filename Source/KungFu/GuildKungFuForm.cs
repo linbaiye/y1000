@@ -1,9 +1,11 @@
 
+using Source.Networking.Protobuf;
+using y1000.Source.Input;
 using y1000.Source.KungFu.Attack;
 
 namespace y1000.Source.KungFu;
 
-public class GuildKungFuForm
+public class GuildKungFuForm : IClientEvent
 {
     public string? Name { get; init; } = "";
     public int Speed {get; init;}
@@ -22,6 +24,32 @@ public class GuildKungFuForm
     public int OuterPowerToSwing {get; init;}
     public int LifeToSwing {get; init;}
     public AttackKungFuType Type {get; init;}
+
+    public ClientPacket ToPacket()
+    {
+        return new ClientPacket() {
+            CreateGuildKungFu = new ClientCreateGuildKungFuPacket() {
+                Name = Name,
+                AttackSpeed = Speed,
+                Recovery = Recovery,
+                Avoidance = Avoid,
+                Type = (int)Type,
+                BodyDamage = BodyDamage,
+                HeadDamage = HeadDamage,
+                LegDamage = LegDamage,
+                ArmDamage = ArmDamage,
+                BodyArmor = BodyArmor,
+                HeadArmor = HeadArmor,
+                ArmArmor = ArmArmor,
+                LegArmor = LegArmor,
+                Life = LifeToSwing,
+                Power = PowerToSwing,
+                InnerPower = InnerPowerToSwing,
+                OuterPower = OuterPowerToSwing,
+            }
+        };
+    }
+
 
     public string Validate()
     {
@@ -86,12 +114,12 @@ public class GuildKungFuForm
         if (HeadDamage + ArmDamage + LegDamage  
                 + BodyArmor + HeadArmor + ArmArmor 
                 + LegArmor != 228) {
-            return "头攻+手攻+脚攻+身防+头防+手防+脚防\n\r需要等于228";
+            return "头攻+手攻+脚攻+身防+头防+手防+脚防\r\n需要等于228";
         }
 
         if (OuterPowerToSwing + LifeToSwing + PowerToSwing + InnerPowerToSwing != 80)
         {
-            return "外功消耗+内功消耗+武功消耗+活力消耗\n\r需要等于80";
+            return "外功消耗+内功消耗+武功消耗+活力消耗\r\n需要等于80";
         }
 
         return "";

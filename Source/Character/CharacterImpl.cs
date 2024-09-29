@@ -677,11 +677,37 @@ namespace y1000.Source.Character
 				EventMediator?.NotifyServer(new ClientFoundGuildEvent(strings[1], coordinate, slot));
 				return;
 			}
+			else if (text.StartsWith("@申请门武"))
+			{
+				EventMediator?.NotifyUiEvent(OpenKungFuFormEvent.Instance);
+				return;
+			}
+			else if (text.StartsWith("@传授门武"))
+			{
+				var strings = text.Split(" ");
+				if (strings.Length != 2)
+				{
+					EventMediator?.NotifyTextArea("格式错误, 格式 @传授门武 <玩家名字>, 示例: @传授门武 张三");
+					return;
+				}
+				EventMediator?.NotifyServer(ClientManageGuildEvent.Teach(strings[1]));
+				return;
+			}
+			else if (text.StartsWith("@邀请门人"))
+			{
+				var strings = text.Split(" ");
+				if (strings.Length != 2)
+				{
+					EventMediator?.NotifyTextArea("格式错误, 格式 @邀请门人 <玩家名字>, 示例: @邀请门人 张三");
+					return;
+				}
+				EventMediator?.NotifyServer(ClientManageGuildEvent.Invite(strings[1]));
+				return;
+			}
+			EventMediator?.NotifyServer(new ClientTextEvent(text));
+			LOGGER.Debug("Sent text {0}.", text);
+		}
 
-	        EventMediator?.NotifyServer(new ClientTextEvent(text));
-	        LOGGER.Debug("Sent text {0}.", text);
-        }
-
-        public Rect2 BodyRectangle => WrappedPlayer().BodyRectangle;
+		public Rect2 BodyRectangle => WrappedPlayer().BodyRectangle;
 	}
 }

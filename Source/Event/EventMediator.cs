@@ -71,5 +71,9 @@ public class EventMediator
         {
             _uiController?.DisplayCharacterAttributes(message.FormatAttributes());
         }
+        else if (e is OpenKungFuFormEvent)
+        {
+            _uiController?.OpenKungFuForm();
+        }
     }
 }

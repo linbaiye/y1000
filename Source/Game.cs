@@ -498,6 +498,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController?.OperateBank(message);
 	}
 
+	public void Visit(UpdateGuildKungFuMessage message) 
+	{
+		_uiController?.OperateKungFuForm(message);
+	}
+
 	public void Visit(JoinedRealmMessage message)
 	{
 		_character = CharacterImpl.LoggedIn(message, MapLayer, _itemFactory, _eventMediator);

@@ -104,7 +104,7 @@ public partial class ItemAttributeControl : NinePatchRect
 	public void Display(IKungFu kungFu, string description)
 	{
 		_itemDescription.Text = Regex.Replace(description, "<br>", "\n");
-		var iconId = _magicSdbReader.GetIconId(kungFu.Name);
+		var iconId = _magicSdbReader.GetIconId(kungFu);
 		var texture2D = _kungfuIconReader.Get(iconId);
 		if (texture2D != null)
 		{

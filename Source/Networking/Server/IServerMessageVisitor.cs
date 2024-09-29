@@ -242,4 +242,9 @@ public interface IServerMessageVisitor
     {
         Visit((IEntityMessage)message);
     }
+
+    void Visit(UpdateGuildKungFuMessage message)
+    {
+
+    }
 }

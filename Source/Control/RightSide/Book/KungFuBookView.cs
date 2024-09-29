@@ -99,7 +99,7 @@ public partial class KungFuBookView : AbstractInventoryView
 
     private void SetSlotView(int index, IKungFu kungFu)
     {
-        var iconId = _magicSdbReader.GetIconId(kungFu.Name);
+        var iconId = _magicSdbReader.GetIconId(kungFu);
         var texture2D = _iconReader.Get(iconId);
         if (texture2D != null)
         {

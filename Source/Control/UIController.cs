@@ -8,6 +8,7 @@ using y1000.Source.Character;
 using y1000.Source.Control.Bank;
 using y1000.Source.Control.Bottom;
 using y1000.Source.Control.Dialog;
+using y1000.Source.Control.Guild;
 using y1000.Source.Control.LeftSide;
 using y1000.Source.Control.Map;
 using y1000.Source.Control.PlayerAttribute;
@@ -58,6 +59,8 @@ public partial class UIController : CanvasLayer
     private LeftupText _leftupText;
     
     private SystemNotification _systemNotification;
+
+    private GuildKungFuFormView _guildKungFuFormView;
     
     public override void _Ready()
     {
@@ -77,6 +80,7 @@ public partial class UIController : CanvasLayer
         _systemSettings = GetNode<SystemSettings>("SysSetting");
         _leftupText = GetNode<LeftupText>("LeftUpText");
         _systemNotification = GetNode<SystemNotification>("SysNotification");
+        _guildKungFuFormView = GetNode<GuildKungFuFormView>("KungFuApplicationForm");
         BindButtons();
     }
 
@@ -98,6 +102,7 @@ public partial class UIController : CanvasLayer
         _mapView.Initialize(eventMediator);
         _itemAttributeControl.Initialize(eventMediator);
         _bankView.Initialize(eventMediator, _tradeInputWindow);
+        _guildKungFuFormView.Initialize(eventMediator);
     }
 
     public void DisplayTextMessage(TextMessage message)
@@ -242,5 +247,15 @@ public partial class UIController : CanvasLayer
     public void OperateBank(BankOperationMessage message)
     {
         _bankView.Operate(message);
+    }
+
+    public void OpenKungFuForm()
+    {
+        _guildKungFuFormView.Open();
+    }
+
+    public void OperateKungFuForm(UpdateGuildKungFuMessage message)
+    {
+        _guildKungFuFormView.Handle(message);
     }
 }

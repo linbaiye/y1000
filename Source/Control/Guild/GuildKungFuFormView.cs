@@ -1,7 +1,9 @@
 using System;
 using Godot;
+using y1000.Source.Event;
 using y1000.Source.KungFu;
 using y1000.Source.KungFu.Attack;
+using y1000.Source.Networking.Server;
 using y1000.Source.Util;
 
 namespace y1000.Source.Control.Guild
@@ -32,6 +34,9 @@ namespace y1000.Source.Control.Guild
         private LineEdit _avoid;
         private LineEdit _bodyArmor;
         private Label _label;
+
+        private EventMediator? _eventMediator;
+
         public override void _Ready()
         {
             _name = GetNode<LineEdit>("Name");
@@ -69,6 +74,11 @@ namespace y1000.Source.Control.Guild
             _fist.SetPressedNoSignal(true);
         }
 
+        public void Initialize(EventMediator eventMediator)
+        {
+            _eventMediator = eventMediator;
+        }
+
         private void OnChecked(CheckBox checkBox)
         {
             _fist.SetPressedNoSignal(false);
@@ -88,6 +98,7 @@ namespace y1000.Source.Control.Guild
             }
             return true;
         }
+
         
         private bool CheckInputs()
         {
@@ -159,6 +170,43 @@ namespace y1000.Source.Control.Guild
             return true;
         }
 
+        public void Open()
+        {
+            _attackSpeed.Text = 30.ToString();
+            _bodyDamage.Text = 70.ToString();
+            _recovery.Text = 50.ToString();
+            _avoid.Text = 50.ToString();
+            _headDamage.Text = 40.ToString();
+            _armDamage.Text = 40.ToString();
+            _legDamage.Text = 40.ToString();
+            _bodyArmor.Text = 40.ToString();
+            _headArmor.Text = 40.ToString();
+            _armArmor.Text = 14.ToString();
+            _legArmor.Text = 14.ToString();
+            _swingInnerPower.Text = 20.ToString();
+            _swingOuterPower.Text = 20.ToString();
+            _swingPower.Text = 20.ToString();
+            _swingLife.Text = 20.ToString();
+            Visible = true;
+        }
+
+        public void Handle(UpdateGuildKungFuMessage message) 
+        {
+            if (message.IsClose)
+            {
+                Visible = false;
+                return;
+            }
+            else if (message.IsText)
+            {
+                _label.Text = message.Text;
+            }
+            else if (message.IsOpen)
+            {
+                Visible = true;
+            }
+        }
+
         private AttackKungFuType GetAttackKungFuType()
         {
             if (_fist.ButtonPressed)
@@ -207,7 +255,7 @@ namespace y1000.Source.Control.Guild
                 _label.Text = ret;
                 return;
             }
+            _eventMediator?.NotifyServer(guildKungFuForm);
         }
-
     }
 }

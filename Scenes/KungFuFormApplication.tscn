@@ -83,6 +83,7 @@ offset_right = 454.0
 offset_bottom = 150.0
 theme = ExtResource("4_nh536")
 flat = true
+text_overrun_behavior = 1
 
 [node name="ConfirmButton" parent="." instance=ExtResource("2_us11u")]
 layout_mode = 0

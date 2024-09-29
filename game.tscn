@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=26 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://Source/Control/LeftupText.cs" id="19_8q55g"]
 [ext_resource type="PackedScene" uid="uid://cx8diosi0sqr" path="res://Scenes/AudioManager.tscn" id="20_0dkt0"]
 [ext_resource type="PackedScene" uid="uid://crttyejirsfwt" path="res://Scenes/SysNotification.tscn" id="20_7c85q"]
+[ext_resource type="PackedScene" uid="uid://c7l7trn60dvkb" path="res://Scenes/KungFuFormApplication.tscn" id="21_awqce"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
 
@@ -168,6 +169,18 @@ offset_right = 203.0
 offset_bottom = 147.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="KungFuApplicationForm" parent="UILayer" instance=ExtResource("21_awqce")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = -206.5
+offset_right = 271.0
+offset_bottom = 206.5
 
 [node name="Teleport" parent="." instance=ExtResource("16_wmncn")]
 visible = false

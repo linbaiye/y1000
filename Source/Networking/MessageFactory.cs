@@ -104,7 +104,7 @@ public class MessageFactory
 	private PlayerToggleKungFuMessage Parse(ToggleKungFuPacket packet)
 	{
 		int level = packet.HasLevel ? packet.Level : 0;
-		KungFuType type = _magicSdbReader.GetType(packet.Name);
+		KungFuType type = (KungFuType)packet.Type;
 		return new PlayerToggleKungFuMessage(packet.Id, packet.Name, level, type, packet.Quietly);
 	}
 
@@ -164,6 +164,7 @@ public class MessageFactory
 			Packet.TypedPacketOneofCase.UpdateBank => ParseBankOperation(packet.UpdateBank),
 			Packet.TypedPacketOneofCase.NameColor => new PlayerChangeNameColorMessage(packet.NameColor.Id, packet.NameColor.Color),
 			Packet.TypedPacketOneofCase.UpdateGuild => new PlayerUpdateGuildMessage(packet.UpdateGuild.Id, packet.UpdateGuild.Name),
+			Packet.TypedPacketOneofCase.KungFuForm => new UpdateGuildKungFuMessage(packet.KungFuForm.Command, packet.KungFuForm.Text),
 			_ => throw new NotSupportedException()
 		};
 	}

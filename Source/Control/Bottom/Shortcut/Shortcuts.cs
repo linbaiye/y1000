@@ -121,7 +121,7 @@ public partial class Shortcuts : NinePatchRect
                     var kungFu = kungFuBook.Get(shortcutContext.Page, shortcutContext.Slot);
                     if (kungFu != null)
                     {
-                        int iconId = _magicSdbReader.GetIconId(kungFu.Name);
+                        int iconId = _magicSdbReader.GetIconId(kungFu);
                         var texture2D = _kungfuIconReader.Get(iconId);
                         if (texture2D != null)
                             _slots[index].PutTextureAndTooltip(texture2D, kungFu.Name + ":" + kungFu.FormatLevel);
@@ -172,7 +172,7 @@ public partial class Shortcuts : NinePatchRect
             _slots[index].ClearTextureAndTip();
             return;
         }
-        int iconId = _magicSdbReader.GetIconId(kungFu.Name);
+        int iconId = _magicSdbReader.GetIconId(kungFu);
         var texture2D = _kungfuIconReader.Get(iconId);
         if (texture2D != null)
         {
