@@ -36,4 +36,3 @@ BUYITEM:女子长发
 BUYITEM:女子黄龙手套
 BUYITEM:女子黄龙弓服
 BUYITEM:女子黄龙鞋
-BUYITEM:女子青龙护腕

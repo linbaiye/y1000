@@ -12,6 +12,7 @@ offset_right = -904.0
 offset_bottom = -640.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_kpyqx")
 
 [node name="Label1" type="RichTextLabel" parent="."]
