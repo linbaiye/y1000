@@ -8,6 +8,7 @@ using y1000.Source.Entity;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
+using y1000.Source.Player;
 using y1000.Source.Util;
 using ILogger = NLog.ILogger;
 
@@ -106,6 +107,11 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	{
 		SetPosition(moveMessage.Coordinate, moveMessage.Direction);
 		ChangeState(MonsterMoveState.Move(MonsterAnimation, moveMessage.Direction, moveMessage.Speed));
+	}
+
+	public void Visit(EntityChatMessage message)
+	{
+		GetNode<KungFuTip>("ChatPopup").Display(message.Content);
 	}
 
 	public void Visit(HurtMessage hurtMessage)

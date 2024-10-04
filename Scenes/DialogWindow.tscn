@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dxnphjmgrpcpn" path="res://assets/ui/merchant_dialog.png" id="1_1x3gh"]
 [ext_resource type="Script" path="res://Source/Control/Dialog/DialogControl.cs" id="1_qlj7o"]
-[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_hml38"]
 [ext_resource type="Script" path="res://Source/Control/Dialog/MerchantControl.cs" id="3_vbo2e"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="4_cpdyx"]
 [ext_resource type="Texture2D" uid="uid://c2vm1csclhxbx" path="res://assets/ui/trading_dialog.png" id="5_wnqco"]
 [ext_resource type="Script" path="res://Source/Control/Dialog/MerchantTradingControl.cs" id="6_hxhsb"]
 [ext_resource type="PackedScene" uid="uid://brl3lwfss84w8" path="res://Scenes/ItemsContainer.tscn" id="7_ahhg2"]
@@ -19,6 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_qlj7o")
 
 [node name="Merchant" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 380.0
 offset_bottom = 304.0
@@ -31,8 +32,7 @@ offset_left = 74.0
 offset_top = 8.0
 offset_right = 303.0
 offset_bottom = 27.0
-theme_override_fonts/font = ExtResource("2_hml38")
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("4_cpdyx")
 text = "老板娘"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -43,7 +43,7 @@ offset_left = 119.0
 offset_top = 47.0
 offset_right = 358.0
 offset_bottom = 132.0
-theme_override_font_sizes/normal_font_size = 14
+theme = ExtResource("4_cpdyx")
 text = "有什么要买卖的吗"
 
 [node name="Avatar" type="TextureRect" parent="Merchant"]
@@ -64,7 +64,7 @@ offset_left = 147.0
 offset_top = 153.0
 offset_right = 159.14
 offset_bottom = 127.832
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("4_cpdyx")
 text = "卖 物品"
 
 [node name="Buy" type="Button" parent="Merchant"]
@@ -72,11 +72,11 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.097
 anchor_bottom = 0.142
-offset_left = 147.0
+offset_left = 144.0
 offset_top = 181.0
-offset_right = 164.14
+offset_right = 161.14
 offset_bottom = 160.832
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("4_cpdyx")
 text = "买 物品"
 
 [node name="Close" type="Button" parent="Merchant"]
@@ -104,8 +104,7 @@ offset_left = 74.0
 offset_top = 8.0
 offset_right = 303.0
 offset_bottom = 27.0
-theme_override_fonts/font = ExtResource("2_hml38")
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("4_cpdyx")
 text = "老板娘"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -116,7 +115,7 @@ offset_left = 119.0
 offset_top = 47.0
 offset_right = 362.0
 offset_bottom = 157.0
-theme_override_font_sizes/normal_font_size = 14
+theme = ExtResource("4_cpdyx")
 
 [node name="Avatar" type="TextureRect" parent="MerchantTrading"]
 layout_mode = 1
@@ -164,7 +163,7 @@ offset_left = 31.0
 offset_top = 348.0
 offset_right = 146.0
 offset_bottom = 365.0
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_cpdyx")
 vertical_alignment = 1
 
 [node name="ConfirmButton" type="TextureButton" parent="MerchantTrading"]

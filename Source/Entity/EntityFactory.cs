@@ -89,7 +89,7 @@ public class EntityFactory
         Monster.Initialize(monster, interpolation, map);
         return monster;
     }
-    
+
 
     public Monster CreateNpc(NpcInterpolation interpolation, IMap map)
     {

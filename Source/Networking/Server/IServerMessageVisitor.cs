@@ -219,7 +219,7 @@ public interface IServerMessageVisitor
     {
     }
 
-    void Visit(PlayerChatMessage message)
+    void Visit(EntityChatMessage message)
     {
     }
 
@@ -244,6 +244,11 @@ public interface IServerMessageVisitor
     }
 
     void Visit(UpdateGuildKungFuMessage message)
+    {
+
+    }
+
+    void Visit(UpdateQuestWindowMessage message)
     {
 
     }

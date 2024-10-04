@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Source/Entity/GroundItem.cs" id="1_mtrgt"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="1_nkhl7"]
-[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="3_tdav7"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="3_f6gmy"]
 
 [node name="GroundItem" type="Node2D"]
 z_index = 2
@@ -18,5 +18,4 @@ offset_bottom = 30.0
 [node name="Name" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("3_tdav7")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("3_f6gmy")

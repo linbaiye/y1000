@@ -249,16 +249,17 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private void HandleEntityLeftClick(IEntity entity)
 	{
-		if (entity is Monster monster && monster.Type == NpcType.BANKER)
+		if (entity is Monster monster)
 		{
-			if (!monster.IsDead)
+			if (monster.IsDead)
+				return;
+			if (monster.Type == NpcType.BANKER)
 				_eventMediator.NotifyServer(ClientOperateBankEvent.Open(entity.Id));
-		}
-		else if (entity is Merchant merchant)
-		{
-			if (!merchant.IsDead)
+			else if (monster.Type == NpcType.QUESTER)
+				_eventMediator?.NotifyServer(new ClickEntityEvent(monster.Id));
+			else if (monster is Merchant merchant)
 				_uiController?.OnMerchantClicked(merchant);
-		} 
+		}
 		else if (entity is IPlayer player)
 		{
 			_eventMediator?.NotifyServer(new ClickEntityEvent(player.Id));
@@ -271,8 +272,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			return;
 		}
-		var click = _inputSampler.SampleEntityClickInput(args.MouseEvent, args.Entity, 
-			_character.WrappedPlayer().GetLocalMousePosition());
+		var click = _inputSampler.SampleEntityClickInput(args.MouseEvent, args.Entity,
+			_character.WrappedPlayer().GetLocalMousePosition(), _character.IsEnfight);
 		switch (click)
 		{
 			case AttackInput attack:
@@ -476,7 +477,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 		_uiController?.OpenTrade(_character, player.EntityName, message.SlotId);
 	}
-	
+
 	public void Visit(UpdateTradeWindowMessage message)
 	{
 		_uiController?.UpdateTrade(message);
@@ -487,7 +488,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController?.DrawNpc(message);
 	}
 
-	public void Visit(PlayerChatMessage message)
+	public void Visit(EntityChatMessage message)
 	{
 		_uiController?.DisplayTextMessage(new TextMessage(message.Content, TextMessage.TextLocation.DOWN));
 		Visit((IEntityMessage)message);
@@ -498,9 +499,14 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController?.OperateBank(message);
 	}
 
-	public void Visit(UpdateGuildKungFuMessage message) 
+	public void Visit(UpdateGuildKungFuMessage message)
 	{
 		_uiController?.OperateKungFuForm(message);
+	}
+
+	public void Visit(UpdateQuestWindowMessage message)
+	{
+		_uiController?.OperateQuestWindow(message);
 	}
 
 	public void Visit(JoinedRealmMessage message)
@@ -519,7 +525,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_entityManager.Add(_character);
 		AddChild(_character);
 	}
-	
+
 	public override void _Notification(int what)
 	{
 		if (what == NotificationWMCloseRequest)
@@ -527,10 +533,12 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			_channel?.WriteAndFlushAsync(ClientSimpleCommandEvent.Quit).Wait();
 			GetTree().Quit();
 		}
-		else if (what == NotificationWMMouseEnter) {
+		else if (what == NotificationWMMouseEnter)
+		{
 			_autoMoveAssistant?.MouseEnterWindow();
 		}
-		else if (what == NotificationWMMouseExit) { 
+		else if (what == NotificationWMMouseExit)
+		{
 			_autoMoveAssistant?.MouseExitWindow();
 		}
 	}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=28 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -22,7 +22,9 @@
 [ext_resource type="Script" path="res://Source/Control/LeftupText.cs" id="19_8q55g"]
 [ext_resource type="PackedScene" uid="uid://cx8diosi0sqr" path="res://Scenes/AudioManager.tscn" id="20_0dkt0"]
 [ext_resource type="PackedScene" uid="uid://crttyejirsfwt" path="res://Scenes/SysNotification.tscn" id="20_7c85q"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="20_qycf0"]
 [ext_resource type="PackedScene" uid="uid://c7l7trn60dvkb" path="res://Scenes/KungFuFormApplication.tscn" id="21_awqce"]
+[ext_resource type="PackedScene" uid="uid://bb06kt427u0u1" path="res://Scenes/QuesterDialog.tscn" id="23_87w6h"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
 
@@ -71,7 +73,6 @@ offset_left = 3.0
 offset_top = 486.0
 offset_right = -775.0
 offset_bottom = -172.0
-mouse_filter = 2
 
 [node name="ItemAttribute" parent="UILayer" instance=ExtResource("10_xy80o")]
 visible = false
@@ -102,6 +103,7 @@ z_index = 4
 layout_mode = 0
 offset_right = 0.0
 offset_bottom = 0.0
+theme = ExtResource("20_qycf0")
 
 [node name="Bank" parent="UILayer" instance=ExtResource("15_25end")]
 visible = false
@@ -152,7 +154,7 @@ script = ExtResource("19_8q55g")
 layout_mode = 0
 offset_right = 263.0
 offset_bottom = 71.0
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("20_qycf0")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bldau")
 vertical_alignment = 1
 
@@ -181,6 +183,18 @@ offset_left = -271.0
 offset_top = -206.5
 offset_right = 271.0
 offset_bottom = 206.5
+
+[node name="QuestDialog" parent="UILayer" instance=ExtResource("23_87w6h")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -152.0
+offset_right = 190.0
+offset_bottom = 152.0
 
 [node name="Teleport" parent="." instance=ExtResource("16_wmncn")]
 visible = false

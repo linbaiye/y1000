@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dw4kky7kku6qg"]
+[gd_scene load_steps=6 format=3 uid="uid://dw4kky7kku6qg"]
 
 [ext_resource type="Texture2D" uid="uid://dqvduyhkh1vab" path="res://assets/ui/item_attribute_window.png" id="1_imumr"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_2pw5q"]
 [ext_resource type="Script" path="res://Source/Control/ItemAttributeControl.cs" id="2_j3t8l"]
-[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="3_3lwp1"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="4_e5v0t"]
+[ext_resource type="FontFile" uid="uid://d0thly37ucq4c" path="res://fonts/JiYingHuiPianHuiSong-2.ttf" id="4_xr5hn"]
 
 [node name="ItemAttribute" type="NinePatchRect"]
 anchors_preset = 15
@@ -22,8 +23,7 @@ offset_left = 60.0
 offset_top = 19.0
 offset_right = 203.0
 offset_bottom = 36.0
-theme_override_fonts/font = ExtResource("3_3lwp1")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_e5v0t")
 vertical_alignment = 1
 
 [node name="ItemDescription" type="RichTextLabel" parent="."]
@@ -32,8 +32,7 @@ offset_left = 14.0
 offset_top = 58.0
 offset_right = 234.0
 offset_bottom = 162.0
-theme_override_fonts/normal_font = ExtResource("3_3lwp1")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("4_e5v0t")
 
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 0
@@ -41,7 +40,7 @@ offset_left = 210.0
 offset_top = 163.0
 offset_right = 239.0
 offset_bottom = 182.0
-theme_override_fonts/font = ExtResource("3_3lwp1")
+theme_override_fonts/font = ExtResource("4_xr5hn")
 theme_override_font_sizes/font_size = 10
 text = "关闭"
 

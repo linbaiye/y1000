@@ -13,6 +13,7 @@ using y1000.Source.Control.LeftSide;
 using y1000.Source.Control.Map;
 using y1000.Source.Control.PlayerAttribute;
 using y1000.Source.Control.PlayerTrade;
+using y1000.Source.Control.Quest;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Control.System;
 using y1000.Source.Creature.Monster;
@@ -61,6 +62,8 @@ public partial class UIController : CanvasLayer
     private SystemNotification _systemNotification;
 
     private GuildKungFuFormView _guildKungFuFormView;
+
+    private QuestDialogView _questDialogView;
     
     public override void _Ready()
     {
@@ -81,6 +84,7 @@ public partial class UIController : CanvasLayer
         _leftupText = GetNode<LeftupText>("LeftUpText");
         _systemNotification = GetNode<SystemNotification>("SysNotification");
         _guildKungFuFormView = GetNode<GuildKungFuFormView>("KungFuApplicationForm");
+        _questDialogView = GetNode<QuestDialogView>("QuestDialog");
         BindButtons();
     }
 
@@ -103,6 +107,7 @@ public partial class UIController : CanvasLayer
         _itemAttributeControl.Initialize(eventMediator);
         _bankView.Initialize(eventMediator, _tradeInputWindow);
         _guildKungFuFormView.Initialize(eventMediator);
+        _questDialogView.Initialize(eventMediator);
     }
 
     public void DisplayTextMessage(TextMessage message)
@@ -257,5 +262,10 @@ public partial class UIController : CanvasLayer
     public void OperateKungFuForm(UpdateGuildKungFuMessage message)
     {
         _guildKungFuFormView.Handle(message);
+    }
+
+    public void OperateQuestWindow(UpdateQuestWindowMessage message)
+    {
+        _questDialogView.Handle(message);
     }
 }

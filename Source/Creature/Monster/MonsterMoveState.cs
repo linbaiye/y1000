@@ -46,8 +46,9 @@ public sealed class MonsterMoveState : AbstractCreatureMoveState<Monster>, IMons
 
     public static MonsterMoveState Move(MonsterAnimation animation, Direction towards, int speed, int elapsed = 0)
     {
-        var originSpeed= animation.AnimationMillis(CreatureState.WALK);
-        int rate = originSpeed / speed;
+        var originSpeed = animation.AnimationMillis(CreatureState.WALK);
+        //int rate = originSpeed / speed;
         return new MonsterMoveState(originSpeed, towards, elapsed, 1);
+        //return new MonsterMoveState(originSpeed, towards, elapsed, 2);
     }
 }

@@ -102,6 +102,7 @@ public class AutoLootAssistant
 
     public void OnRemoveLootItemClicked(string item) {
         Loot.Remove(item);
+        Save();
     }
 
     public static AutoLootAssistant Create(EntityManager entityManager,

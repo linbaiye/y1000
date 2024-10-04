@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Source/Control/Bottom/TextArea.cs" id="3_56n7n"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/Avatar.cs" id="4_mdb7g"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/AvatarPart.cs" id="5_rq0is"]
-[ext_resource type="FontFile" uid="uid://dncxdf0s1udqa" path="res://fonts/SweiSpringSugarCJKtc-ExtraLight.ttf" id="6_k2h1g"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="5_w80km"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_v430x"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/UsedKungFuView.cs" id="8_hxdqm"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/BlinkingText.cs" id="8_qgpy2"]
@@ -55,7 +55,7 @@ offset_right = 886.0
 offset_bottom = 187.0
 theme_override_colors/font_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_colors/font_focus_color = Color(0.847656, 0.688255, 0.062912, 1)
-theme_override_fonts/font = ExtResource("6_k2h1g")
+theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3amq6")
@@ -69,7 +69,7 @@ offset_right = 926.0
 offset_bottom = 188.0
 theme_override_colors/font_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_colors/font_focus_color = Color(0.847656, 0.688255, 0.062912, 1)
-theme_override_fonts/font = ExtResource("6_k2h1g")
+theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3amq6")
@@ -83,7 +83,7 @@ offset_right = 966.0
 offset_bottom = 188.0
 theme_override_colors/font_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_colors/font_focus_color = Color(0.847656, 0.688255, 0.062912, 1)
-theme_override_fonts/font = ExtResource("6_k2h1g")
+theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3amq6")
@@ -97,7 +97,7 @@ offset_right = 1006.0
 offset_bottom = 188.0
 theme_override_colors/font_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_colors/font_focus_color = Color(0.847656, 0.688255, 0.062912, 1)
-theme_override_fonts/font = ExtResource("6_k2h1g")
+theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3amq6")
@@ -106,44 +106,40 @@ text = "系统"
 [node name="TextArea" type="VBoxContainer" parent="Container"]
 layout_mode = 0
 offset_left = 261.0
-offset_top = 78.0
+offset_top = 80.0
 offset_right = 759.0
 offset_bottom = 164.0
+theme_override_constants/separation = 1
 script = ExtResource("3_56n7n")
 
 [node name="Line1" type="RichTextLabel" parent="Container/TextArea"]
-custom_minimum_size = Vector2(0, 14)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("7_v430x")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("5_w80km")
 bbcode_enabled = true
 
 [node name="Line2" type="RichTextLabel" parent="Container/TextArea"]
-custom_minimum_size = Vector2(0, 14)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("7_v430x")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("5_w80km")
 bbcode_enabled = true
 
 [node name="Line3" type="RichTextLabel" parent="Container/TextArea"]
-custom_minimum_size = Vector2(0, 14)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("7_v430x")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("5_w80km")
 bbcode_enabled = true
 
 [node name="Line4" type="RichTextLabel" parent="Container/TextArea"]
-custom_minimum_size = Vector2(0, 14)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("7_v430x")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("5_w80km")
 bbcode_enabled = true
 
 [node name="Line5" type="RichTextLabel" parent="Container/TextArea"]
-custom_minimum_size = Vector2(0, 14)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("7_v430x")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("5_w80km")
 bbcode_enabled = true
 
 [node name="Coordinate" type="Label" parent="Container"]
@@ -152,9 +148,9 @@ offset_left = 55.0
 offset_top = 168.0
 offset_right = 121.0
 offset_bottom = 189.0
+theme = ExtResource("5_w80km")
 theme_override_colors/font_color = Color(0.905882, 0.8, 0.717647, 1)
-theme_override_fonts/font = ExtResource("7_v430x")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 13
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -164,9 +160,8 @@ offset_left = 164.0
 offset_top = 168.0
 offset_right = 253.0
 offset_bottom = 189.0
+theme = ExtResource("5_w80km")
 theme_override_colors/font_color = Color(0.905882, 0.8, 0.717647, 1)
-theme_override_fonts/font = ExtResource("7_v430x")
-theme_override_font_sizes/font_size = 14
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -254,9 +249,8 @@ layout_mode = 0
 offset_top = 3.0
 offset_right = 81.0
 offset_bottom = 17.0
+theme = ExtResource("5_w80km")
 theme_override_colors/font_color = Color(0.898039, 0.890196, 0, 1)
-theme_override_fonts/font = ExtResource("6_k2h1g")
-theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 
 [node name="BlinkingText" type="RichTextLabel" parent="Container/Avatar"]
@@ -264,8 +258,7 @@ layout_mode = 0
 offset_top = 97.0
 offset_right = 81.0
 offset_bottom = 111.0
-theme_override_fonts/normal_font = ExtResource("6_k2h1g")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("5_w80km")
 bbcode_enabled = true
 script = ExtResource("8_qgpy2")
 
@@ -281,32 +274,28 @@ script = ExtResource("8_hxdqm")
 [node name="Label1" type="RichTextLabel" parent="Container/UsedKungFuView"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("7_v430x")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("5_w80km")
 bbcode_enabled = true
 script = ExtResource("9_4y8pv")
 
 [node name="Label2" type="RichTextLabel" parent="Container/UsedKungFuView"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("7_v430x")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("5_w80km")
 bbcode_enabled = true
 script = ExtResource("9_4y8pv")
 
 [node name="Label3" type="RichTextLabel" parent="Container/UsedKungFuView"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("7_v430x")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("5_w80km")
 bbcode_enabled = true
 script = ExtResource("9_4y8pv")
 
 [node name="Label4" type="RichTextLabel" parent="Container/UsedKungFuView"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("7_v430x")
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("5_w80km")
 bbcode_enabled = true
 script = ExtResource("9_4y8pv")
 
@@ -316,6 +305,7 @@ offset_left = 897.0
 offset_top = 88.0
 offset_right = 995.0
 offset_bottom = 97.0
+theme = ExtResource("5_w80km")
 value = 100.0
 texture_progress = ExtResource("9_xgwoi")
 
@@ -325,6 +315,7 @@ offset_left = 897.0
 offset_top = 103.0
 offset_right = 995.0
 offset_bottom = 113.0
+theme = ExtResource("5_w80km")
 value = 100.0
 texture_progress = ExtResource("10_0ueev")
 
@@ -336,6 +327,7 @@ offset_top = 118.0
 offset_right = 995.0
 offset_bottom = 128.0
 mouse_filter = 0
+theme = ExtResource("5_w80km")
 value = 100.0
 texture_progress = ExtResource("10_0ueev")
 
@@ -345,6 +337,7 @@ offset_left = 897.0
 offset_top = 133.0
 offset_right = 995.0
 offset_bottom = 142.0
+theme = ExtResource("5_w80km")
 value = 100.0
 texture_progress = ExtResource("10_0ueev")
 
@@ -354,6 +347,7 @@ offset_left = 897.0
 offset_top = 148.0
 offset_right = 995.0
 offset_bottom = 157.0
+theme = ExtResource("5_w80km")
 value = 100.0
 texture_progress = ExtResource("11_igjoo")
 
@@ -363,6 +357,7 @@ offset_left = 170.0
 offset_top = 119.0
 offset_right = 241.0
 offset_bottom = 125.0
+theme = ExtResource("5_w80km")
 value = 100.0
 texture_progress = ExtResource("12_5cibo")
 
@@ -372,6 +367,7 @@ offset_left = 170.0
 offset_top = 90.0
 offset_right = 241.0
 offset_bottom = 95.0
+theme = ExtResource("5_w80km")
 value = 100.0
 texture_progress = ExtResource("15_kfsle")
 
@@ -381,6 +377,7 @@ offset_left = 170.0
 offset_top = 99.0
 offset_right = 241.0
 offset_bottom = 104.0
+theme = ExtResource("5_w80km")
 value = 100.0
 texture_progress = ExtResource("16_jqb70")
 
@@ -390,6 +387,7 @@ offset_left = 170.0
 offset_top = 134.0
 offset_right = 241.0
 offset_bottom = 140.0
+theme = ExtResource("5_w80km")
 value = 100.0
 texture_progress = ExtResource("12_5cibo")
 
@@ -399,6 +397,7 @@ offset_left = 170.0
 offset_top = 149.0
 offset_right = 241.0
 offset_bottom = 155.0
+theme = ExtResource("5_w80km")
 value = 100.0
 texture_progress = ExtResource("12_5cibo")
 
@@ -480,8 +479,7 @@ offset_left = 308.0
 offset_top = 164.0
 offset_right = 738.0
 offset_bottom = 189.0
-theme_override_fonts/font = ExtResource("7_v430x")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("5_w80km")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ov7pw")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7grrv")
 caret_blink = true

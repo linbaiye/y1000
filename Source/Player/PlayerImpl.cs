@@ -421,7 +421,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		ShowLifePercent(0);
 	}
 
-	public void Visit(PlayerChatMessage message)
+	public void Visit(EntityChatMessage message)
 	{
 		_kungFuTip?.Display(message.Content);
 	}

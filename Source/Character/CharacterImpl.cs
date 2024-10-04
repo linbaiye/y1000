@@ -462,6 +462,7 @@ namespace y1000.Source.Character
 
         public bool Dead => _state.WrappedState.State == CreatureState.DIE;
         public bool Idle => _state.WrappedState.State == CreatureState.IDLE;
+        public bool IsEnfight => _state.WrappedState.State == CreatureState.COOLDOWN;
         
         public bool Moving
         {
@@ -614,7 +615,7 @@ namespace y1000.Source.Character
 	        return character;
         }
 
-        public void Visit(PlayerChatMessage message)
+        public void Visit(EntityChatMessage message)
         {
 	        WrappedPlayer().Visit(message);
         }
@@ -624,10 +625,6 @@ namespace y1000.Source.Character
         {
 	        if (text.StartsWith("!"))
 	        {
-		        if (Dead)
-		        {
-			        return;
-		        }
 		        if (HealthBar.Current < 5000)
 		        {
 			        EventMediator?.NotifyTextArea("活力须在50以上");

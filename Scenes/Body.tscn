@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Source/Animation/BodySprite.cs" id="1_4876e"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="1_c3rp6"]
-[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="3_0vasa"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="3_yr2nv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x2j3f"]
 shader = ExtResource("1_c3rp6")
@@ -31,8 +31,8 @@ offset_top = -20.0
 offset_right = 44.0
 offset_bottom = -7.0
 size_flags_horizontal = 3
+theme = ExtResource("3_yr2nv")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_0vasa")
 theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 
@@ -43,7 +43,6 @@ offset_top = -33.0
 offset_right = 72.0
 offset_bottom = -20.0
 size_flags_horizontal = 3
+theme = ExtResource("3_yr2nv")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_0vasa")
-theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1

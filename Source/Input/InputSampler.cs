@@ -65,11 +65,11 @@ namespace y1000.Source.Input
 			return InputFactory.CreateRightMousePressedMotion(direction);
 		}
 
-		public IInput? SampleEntityClickInput(InputEventMouseButton button, IEntity entity, Vector2 mouseOffset)
+		public IInput? SampleEntityClickInput(InputEventMouseButton button, IEntity entity, Vector2 mouseOffset, bool enfightState = false)
 		{
 			if (button.ButtonIndex == MouseButton.Left)
 			{
-				return SampleLeftClickInput(button, entity);
+				return SampleLeftClickInput(button, entity, enfightState);
 			}
 			else
 			{
@@ -77,11 +77,11 @@ namespace y1000.Source.Input
 			}
 		}
 
-		private IInput? SampleLeftClickInput(InputEventMouseButton button, IEntity entity)
+		private IInput? SampleLeftClickInput(InputEventMouseButton button, IEntity entity, bool enfight = false)
 		{
 			if (button.DoubleClick)
 			{
-				if ((button.GetModifiersMask() & KeyModifierMask.MaskShift) != 0)
+				if (((button.GetModifiersMask() & KeyModifierMask.MaskShift) != 0) || enfight)
 				{
 					return InputFactory.CreateAttack(entity);
 				}

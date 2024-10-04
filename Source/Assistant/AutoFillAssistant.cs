@@ -179,6 +179,14 @@ public class AutoFillAssistant
             UseItem(_currentFill);
             return;
         }
+        if (Settings.TryGetValue(AutoFillOption.LOW_LIFE, out var s))
+        {
+            if (ShouldUse(s.Option, s.Threshold))
+            {
+                UseItem(s);
+                return;
+            }
+        }
         foreach (var setting in Settings.Values)
         {
             if (IsValid(setting) && ShouldUse(setting.Option, setting.Threshold))

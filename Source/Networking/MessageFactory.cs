@@ -159,12 +159,13 @@ public class MessageFactory
 			Packet.TypedPacketOneofCase.ShowTeleport => Parse(packet.ShowTeleport),
 			Packet.TypedPacketOneofCase.BreakRope => DragEndedMessage.Instance,
 			Packet.TypedPacketOneofCase.NpcPosition => NpcPositionMessage.FromPacket(packet.NpcPosition),
-			Packet.TypedPacketOneofCase.Chat => new PlayerChatMessage(packet.Chat.Id, packet.Chat.Content),
+			Packet.TypedPacketOneofCase.Chat => new EntityChatMessage(packet.Chat.Id, packet.Chat.Content),
 			Packet.TypedPacketOneofCase.OpenBank => OpenBankMessage.FromPacket(packet.OpenBank),
 			Packet.TypedPacketOneofCase.UpdateBank => ParseBankOperation(packet.UpdateBank),
 			Packet.TypedPacketOneofCase.NameColor => new PlayerChangeNameColorMessage(packet.NameColor.Id, packet.NameColor.Color),
 			Packet.TypedPacketOneofCase.UpdateGuild => new PlayerUpdateGuildMessage(packet.UpdateGuild.Id, packet.UpdateGuild.Name),
 			Packet.TypedPacketOneofCase.KungFuForm => new UpdateGuildKungFuMessage(packet.KungFuForm.Command, packet.KungFuForm.Text),
+			Packet.TypedPacketOneofCase.QuestWindow => UpdateQuestWindowMessage.Parse(packet.QuestWindow),
 			_ => throw new NotSupportedException()
 		};
 	}

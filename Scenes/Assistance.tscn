@@ -205,7 +205,6 @@ offset_bottom = 75.0
 texture_normal = ExtResource("4_c5b3e")
 
 [node name="AutoFill" type="NinePatchRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(212, 226)
 layout_mode = 0
 offset_left = 14.0
@@ -562,6 +561,7 @@ flat = true
 caret_blink = true
 
 [node name="AutoLoot" type="NinePatchRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(208, 240)
 layout_mode = 0
 offset_left = 16.0
