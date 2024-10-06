@@ -20,5 +20,7 @@ public class SlotMouseEvent : EventArgs
     }
     
     public Type EventType { get; }
-    
+
+    public bool IsRightClick => EventType == Type.MOUSE_RIGHT_CLICK;
+
 }

@@ -14,10 +14,13 @@ public class ClientSimpleCommandEvent : IClientEvent
     {
         NPC_POSITION = 1,
         CLIENT_QUIT = 2,
+
+        CANCEL_BUFF= 3,
     }
 
     public static readonly ClientSimpleCommandEvent NpcPosition = new ClientSimpleCommandEvent(SimpleCommand.NPC_POSITION);
     public static readonly ClientSimpleCommandEvent Quit = new(SimpleCommand.CLIENT_QUIT);
+    public static readonly ClientSimpleCommandEvent CancelBuff = new(SimpleCommand.CANCEL_BUFF);
 
     private SimpleCommand Command { get; }
 

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using Source.Networking.Protobuf;
 using y1000.Source.Creature.Monster;
@@ -7,7 +9,8 @@ namespace y1000.Source.Networking;
 
 public class NpcInterpolation : IServerMessage
 {
-	private NpcInterpolation(string name, Interpolation interpolation, long id, NpcType npcType, string textFile, string animate, string shape)
+	private NpcInterpolation(string name, Interpolation interpolation, long id, NpcType npcType, string textFile, string animate,
+	 string shape, string? q)
 	{
 		
 		Name = name;
@@ -17,6 +20,7 @@ public class NpcInterpolation : IServerMessage
 		TextFile = textFile;
 		Animate = animate;
 		Shape = shape;
+		Quest = q;
 	}
 
 	public override string ToString()
@@ -37,7 +41,9 @@ public class NpcInterpolation : IServerMessage
 	public string Animate { get; }
 	
 	public string Shape { get; }
-	
+
+	public string? Quest {get; }
+
 	
 	public void Accept(IServerMessageVisitor visitor)
 	{
@@ -47,7 +53,7 @@ public class NpcInterpolation : IServerMessage
 	public static NpcInterpolation FromPacket(CreatureInterpolationPacket packet)
 	{
 		return new NpcInterpolation(packet.Name, Interpolation.FromPacket(packet.Interpolation), packet.Id, (NpcType)packet.Type, packet.HasMerchantFile ? packet.MerchantFile : "",
-			packet.Animate, packet.Shape);
+			packet.Animate, packet.Shape, packet.Menus.FirstOrDefault());
 	}
 
 }

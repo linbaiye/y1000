@@ -79,6 +79,17 @@ offset_bottom = 160.832
 theme = ExtResource("4_cpdyx")
 text = "买 物品"
 
+[node name="Quest" type="Button" parent="Merchant"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.097
+anchor_bottom = 0.142
+offset_left = 144.0
+offset_top = 209.0
+offset_right = 161.14
+offset_bottom = 188.832
+theme = ExtResource("4_cpdyx")
+
 [node name="Close" type="Button" parent="Merchant"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -144,18 +155,6 @@ offset_left = 12.0
 offset_top = 174.0
 offset_right = 365.0
 offset_bottom = 326.0
-
-[node name="ItemList" type="ItemList" parent="MerchantTrading"]
-visible = false
-layout_mode = 0
-offset_left = 13.0
-offset_top = 173.0
-offset_right = 366.0
-offset_bottom = 325.0
-theme_override_font_sizes/font_size = 12
-allow_search = false
-same_column_width = true
-fixed_icon_size = Vector2i(20, 20)
 
 [node name="Total" type="Label" parent="MerchantTrading"]
 layout_mode = 0

@@ -30,6 +30,7 @@ public partial class DialogControl : Godot.Control
     {
         _spriteRepository = spriteRepository;
         _merchantTrading?.Initialize(tradeInputWindow, eventMediator, itemFactory);
+        _merchantControl?.Initialize(eventMediator);
     }
 
     private void OnTradeClicked(bool sell)

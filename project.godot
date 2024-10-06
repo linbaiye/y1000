@@ -10,11 +10,11 @@ config_version=5
 
 [application]
 
-config/name="y1000"
+config/name="千年:轮回"
 run/main_scene="res://Login.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 run/low_processor_mode=true
-config/icon="res://icon.svg"
+config/icon="res://assets/ui/1000yicon.png"
 
 [autoload]
 
@@ -30,10 +30,6 @@ window/vsync/vsync_mode=0
 [dotnet]
 
 project/assembly_name="y1000"
-
-[editor_plugins]
-
-enabled=PackedStringArray()
 
 [gui]
 

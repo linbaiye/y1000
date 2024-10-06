@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://db0iclaskno1q"]
+[gd_scene load_steps=29 format=3 uid="uid://db0iclaskno1q"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
@@ -25,6 +25,7 @@
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="20_qycf0"]
 [ext_resource type="PackedScene" uid="uid://c7l7trn60dvkb" path="res://Scenes/KungFuFormApplication.tscn" id="21_awqce"]
 [ext_resource type="PackedScene" uid="uid://bb06kt427u0u1" path="res://Scenes/QuesterDialog.tscn" id="23_87w6h"]
+[ext_resource type="PackedScene" uid="uid://dxc8fwlpctxs5" path="res://Scenes/BuffContainer.tscn" id="24_dxk12"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
 
@@ -94,6 +95,7 @@ offset_left = 282.0
 offset_top = 111.0
 offset_right = 742.0
 offset_bottom = 459.0
+theme = ExtResource("20_qycf0")
 texture = SubResource("CompressedTexture2D_ufimi")
 stretch_mode = 2
 script = ExtResource("13_xh10o")
@@ -195,6 +197,15 @@ offset_left = -190.0
 offset_top = -152.0
 offset_right = 190.0
 offset_bottom = 152.0
+
+[node name="BuffContainer" parent="UILayer" instance=ExtResource("24_dxk12")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_right = 0.0
+offset_bottom = 49.0
+grow_horizontal = 0
 
 [node name="Teleport" parent="." instance=ExtResource("16_wmncn")]
 visible = false

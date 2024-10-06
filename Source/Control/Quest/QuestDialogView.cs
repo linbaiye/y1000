@@ -32,6 +32,7 @@ namespace y1000.Source.Control.Quest
             _questItem.SubmitPressed += HandleSubmit;
             _close = GetNode<Button>("Close");
             _close.Pressed += () => Visible = false;
+            Visible = false;
         }
 
         private void HandleSubmit(QuestItemView which)

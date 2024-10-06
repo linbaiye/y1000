@@ -31,3 +31,4 @@ BUYITEM:男子黄龙手套
 BUYITEM:男子黄龙鞋
 BUYITEM:男子木屐
 BUYITEM:男子斗笠
+BUYITEM:犀牛皮

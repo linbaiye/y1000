@@ -252,4 +252,9 @@ public interface IServerMessageVisitor
     {
 
     }
+
+    void Visit(UpdateBuffMessage message)
+    {
+
+    }
 }

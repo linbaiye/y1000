@@ -11,8 +11,6 @@ namespace y1000.Source.Control.Dialog;
 
 public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoubleClickHandler
 {
-    private ItemList _itemList;
-    
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
     private readonly IconReader _iconReader = IconReader.ItemIconReader;
@@ -38,7 +36,6 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
     public override void _Ready()
     {
         base._Ready();
-        _itemList = GetNode<ItemList>("ItemList");
         _confirmButton = GetNode<TextureButton>("ConfirmButton");
         _confirmButton.Pressed += OnConfirmTrade;
         GetNode<TextureButton>("CancelButton").Pressed += Close;
@@ -103,7 +100,6 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
             _inventory?.RollbackBuying(_trade);
         }
         Visible = false;
-        _itemList.Clear();
         _itemsContainer.Clear();
     }
 
@@ -146,18 +142,18 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
             _eventMediator?.NotifyTextArea("物品栏已满。");
             return;
         }
-        var item = _itemFactory.CreateCharacterItem(_tradeInputWindow.ItemName, _tradeInputWindow.Number);
-        Logger.Debug("Buying item {0} for {1}.", item.ItemName, total);
+        var i = _itemsContainer.FindItem(_tradeInputWindow.ItemName);
+        if (i == null)
+        {
+            return;
+        }
+        var item = _itemFactory.CreateCharacterItem(_tradeInputWindow.ItemName, i.IconColor, _tradeInputWindow.Number);
         if (!_inventory.Buy(item, total, _trade))
         {
             return;
         }
-        var i = _itemsContainer.FindItem(item.ItemName);
-        if (i != null)
-        {
-            i.Lock("购买数量: " + _tradeInputWindow.Number);
-            AddToTotal(_tradeInputWindow.Number * i.Price);
-        }
+        i.Lock("购买数量: " + _tradeInputWindow.Number);
+        AddToTotal(_tradeInputWindow.Number * i.Price);
     }
 
 
@@ -204,7 +200,6 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
 
     private void RefreshItemList(List<Merchant.Item> items)
     {
-        _itemList.Clear();
         _itemsContainer.Clear();
         foreach (var item in items)
         {

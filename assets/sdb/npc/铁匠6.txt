@@ -16,3 +16,5 @@ BUYITEM:浪人长剑
 BUYITEM:浪人长刀
 BUYITEM:浪人长枪
 BUYITEM:浪人铁槌
+BUYITEM:犀牛角
+BUYITEM:老虎指甲

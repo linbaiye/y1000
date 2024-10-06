@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxc8fwlpctxs5"]
+
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="1_ksyf5"]
+[ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_ydbg7"]
+[ext_resource type="Script" path="res://Source/Control/Buff/BuffContainer.cs" id="2_ylmmp"]
+
+[node name="BuffContainer" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme = ExtResource("1_ksyf5")
+theme_override_constants/separation = -3
+script = ExtResource("2_ylmmp")
+
+[node name="InventorySlot1" parent="." instance=ExtResource("2_ydbg7")]
+self_modulate = Color(1, 1, 1, 0.345098)
+clip_contents = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="Text" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("1_ksyf5")
+theme_override_constants/line_spacing = -4
+horizontal_alignment = 1

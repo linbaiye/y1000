@@ -27,3 +27,4 @@ BUYITEM:男子浪人道袍
 BUYITEM:男子浪人鞋
 BUYITEM:男子浪人护腕
 BUYITEM:男子浪人斗笠
+BUYITEM:犀牛皮

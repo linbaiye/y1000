@@ -7,6 +7,7 @@ using y1000.Source.Audio;
 using y1000.Source.Character;
 using y1000.Source.Control.Bank;
 using y1000.Source.Control.Bottom;
+using y1000.Source.Control.Buff;
 using y1000.Source.Control.Dialog;
 using y1000.Source.Control.Guild;
 using y1000.Source.Control.LeftSide;
@@ -64,6 +65,8 @@ public partial class UIController : CanvasLayer
     private GuildKungFuFormView _guildKungFuFormView;
 
     private QuestDialogView _questDialogView;
+
+    private BuffContainer _buffContainer;
     
     public override void _Ready()
     {
@@ -85,6 +88,7 @@ public partial class UIController : CanvasLayer
         _systemNotification = GetNode<SystemNotification>("SysNotification");
         _guildKungFuFormView = GetNode<GuildKungFuFormView>("KungFuApplicationForm");
         _questDialogView = GetNode<QuestDialogView>("QuestDialog");
+        _buffContainer = GetNode<BuffContainer>("BuffContainer");
         BindButtons();
     }
 
@@ -108,6 +112,7 @@ public partial class UIController : CanvasLayer
         _bankView.Initialize(eventMediator, _tradeInputWindow);
         _guildKungFuFormView.Initialize(eventMediator);
         _questDialogView.Initialize(eventMediator);
+        _buffContainer.Initialize(eventMediator);
     }
 
     public void DisplayTextMessage(TextMessage message)
@@ -267,5 +272,10 @@ public partial class UIController : CanvasLayer
     public void OperateQuestWindow(UpdateQuestWindowMessage message)
     {
         _questDialogView.Handle(message);
+    }
+
+    public void OperateBuffWindow(UpdateBuffMessage message)
+    {
+        _buffContainer.Handle(message);
     }
 }

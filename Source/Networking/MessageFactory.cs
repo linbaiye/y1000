@@ -7,6 +7,7 @@ using y1000.Source.Creature.Event;
 using y1000.Source.Item;
 using y1000.Source.KungFu;
 using y1000.Source.Networking.Server;
+using y1000.Source.Sprite;
 using y1000.Source.Util;
 using TextMessage = y1000.Source.Networking.Server.TextMessage;
 
@@ -17,12 +18,15 @@ public class MessageFactory
 	private readonly ItemFactory _itemFactory;
 
 	private readonly MagicSdbReader _magicSdbReader;
+
+	private readonly IconReader _iconReader;
 	private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
 	public MessageFactory(ItemFactory factory)
 	{
 		_itemFactory = factory;
 		_magicSdbReader = MagicSdbReader.Instance;
+		_iconReader = IconReader.ItemIconReader;
 	}
 	
 	private AbstractPositionMessage DecodePositionMessage(PositionPacket positionPacket)
@@ -166,6 +170,7 @@ public class MessageFactory
 			Packet.TypedPacketOneofCase.UpdateGuild => new PlayerUpdateGuildMessage(packet.UpdateGuild.Id, packet.UpdateGuild.Name),
 			Packet.TypedPacketOneofCase.KungFuForm => new UpdateGuildKungFuMessage(packet.KungFuForm.Command, packet.KungFuForm.Text),
 			Packet.TypedPacketOneofCase.QuestWindow => UpdateQuestWindowMessage.Parse(packet.QuestWindow),
+			Packet.TypedPacketOneofCase.UpdateBuff => UpdateBuffMessage.Parse(packet.UpdateBuff, _iconReader),
 			_ => throw new NotSupportedException()
 		};
 	}

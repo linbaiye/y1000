@@ -134,7 +134,7 @@ public partial class Shortcuts : NinePatchRect
                     {
                         var texture2D = _itemIconReader.Get(item.IconId);
                         if (texture2D != null)
-                            _slots[index].PutTextureAndTooltip(texture2D, item.ItemName);
+                            _slots[index].PutTextureAndTooltip(texture2D, item.ItemName, item.Color);
                     }
                 }
             }
@@ -146,9 +146,9 @@ public partial class Shortcuts : NinePatchRect
     }
 
 
-    private void Bind(Texture2D texture2D, string text, int index, ShortcutContext context)
+    private void Bind(Texture2D texture2D, string text, int index, ShortcutContext context, int color = 0)
     {
-        _slots[index].PutTextureAndTooltip(texture2D, text);
+        _slots[index].PutTextureAndTooltip(texture2D, text, color);
         _mappedContext[index] = context;
         _fileStorage?.Save(FileName, JsonSerializer.Serialize(_mappedContext));
     }
@@ -194,7 +194,7 @@ public partial class Shortcuts : NinePatchRect
         var texture2D = _itemIconReader.Get(item.IconId);
         if (texture2D != null)
         {
-            Bind(texture2D, item.ItemName, index, context);
+            Bind(texture2D, item.ItemName, index, context, item.Color);
         }
     }
 

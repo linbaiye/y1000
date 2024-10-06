@@ -78,7 +78,7 @@ public class EntityFactory
             }
         }
         fileAccess.Dispose();
-        merchant.InitializeMerchant(interpolation, map, items[0], items[1], avNubmer);
+        merchant.InitializeMerchant(interpolation, map, items[0], items[1], avNubmer, interpolation.Quest);
         return merchant;
     }
 
@@ -93,7 +93,8 @@ public class EntityFactory
 
     public Monster CreateNpc(NpcInterpolation interpolation, IMap map)
     {
-        if (interpolation.NpcType == NpcType.MERCHANT)
+        if (interpolation.NpcType == NpcType.MERCHANT || interpolation.NpcType == 
+        NpcType.MERCHANT_QUESTER)
         {
             return CreateMerchant(interpolation, map);
         }

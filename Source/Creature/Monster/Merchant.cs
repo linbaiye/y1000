@@ -44,14 +44,18 @@ public partial class Merchant : Monster
     {
         return BuyItems.Any(i => i.Name.Equals(name));
     }
+
+    public string? QuestName {get; set;}
     
     public void InitializeMerchant(
         NpcInterpolation npcInterpolation, IMap map,
-        List<Item> sell, List<Item> buy, int avNumber)
+        List<Item> sell, List<Item> buy, int avNumber,
+        string? q)
     {
         Initialize(this, npcInterpolation, map);
         SellItems = sell;
         BuyItems = buy;
         AvatarSpriteNumber = avNumber;
+        QuestName = q;
     }
 }

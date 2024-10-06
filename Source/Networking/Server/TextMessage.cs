@@ -81,7 +81,7 @@ public class TextMessage : IServerMessage
         var type = (Type)packet.Type;
         if (TYPE_MAP.TryGetValue(type, out var str))
         {
-            return new TextMessage(str, (TextLocation)packet.Location, (ColorType)packet.ColorType);
+            return new TextMessage(str, (TextLocation)packet.Location, ColorType.SYSTEM_TIP);
         }
         return new TextMessage(packet.Text, (TextLocation)packet.Location, (ColorType)packet.ColorType);
     }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://crttyejirsfwt"]
+[gd_scene load_steps=5 format=3 uid="uid://crttyejirsfwt"]
 
 [ext_resource type="Texture2D" uid="uid://cy1eqwb8aouo5" path="res://assets/ui/system_notification.png" id="1_k2gx8"]
 [ext_resource type="PackedScene" uid="uid://cddg0m2xyiw2b" path="res://Scenes/ConfirmButton.tscn" id="2_3xbxh"]
 [ext_resource type="Script" path="res://Source/Control/System/SystemNotification.cs" id="2_bwiux"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="3_k2dc3"]
 
 [node name="SysNotification" type="NinePatchRect"]
 custom_minimum_size = Vector2(406, 295)
@@ -17,6 +18,8 @@ offset_left = 12.0
 offset_top = 40.0
 offset_right = 393.0
 offset_bottom = 237.0
+theme = ExtResource("3_k2dc3")
+theme_override_font_sizes/font_size = 14
 text = "服务器将在5分钟后关闭"
 horizontal_alignment = 1
 vertical_alignment = 1

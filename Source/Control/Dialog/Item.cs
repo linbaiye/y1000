@@ -19,6 +19,8 @@ public partial class Item : Panel
     
     private bool _locked;
 
+    private int _iconColor;
+
     public event EventHandler<SlotMouseEvent>? Clicked;
     public override void _Ready()
     {
@@ -32,6 +34,8 @@ public partial class Item : Panel
     public string ItemName => _name.Text;
 
     public int Price => int.Parse(_price.Text);
+
+    public int IconColor => _iconColor;
 
     public void ToggleHighlight(bool highlight)
     {
@@ -84,6 +88,7 @@ public partial class Item : Panel
         {
             textureRect.Material = DyeShader.CreateShaderMaterial(iconColor);
         }
+        _iconColor = iconColor;
     }
 
     public void Lock(string text = "")

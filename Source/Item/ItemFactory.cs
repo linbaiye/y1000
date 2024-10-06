@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using y1000.Source.Animation;
-using y1000.Source.Entity;
-using y1000.Source.KungFu.Attack;
-using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
-using y1000.Source.Sprite;
 using y1000.Source.Util;
 
 namespace y1000.Source.Item;
