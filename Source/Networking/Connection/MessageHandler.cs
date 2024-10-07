@@ -7,7 +7,8 @@ namespace y1000.Source.Networking.Connection
     {
         private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
         
-        private readonly IConnectionEventListener _eventListener;
+        private IConnectionEventListener? _eventListener;
+
 
         public MessageHandler(IConnectionEventListener eventListener)
         {
@@ -16,15 +17,13 @@ namespace y1000.Source.Networking.Connection
 
         protected override void ChannelRead0(IChannelHandlerContext ctx, object msg)
         {
-            //LOGGER.Debug("Received message {0}.", msg);
-            _eventListener.OnMessageArrived(msg);
+            _eventListener?.OnMessageArrived(msg);
         }
-        
 
         public override void ChannelInactive(IChannelHandlerContext context)
         {
-            LOGGER.Debug("Connection closed.");
-            _eventListener.OnConnectionClosed();
+            _eventListener = null;
+            base.ChannelInactive(context);
         }
     }
 }

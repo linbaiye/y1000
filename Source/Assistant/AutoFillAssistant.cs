@@ -66,6 +66,7 @@ public class AutoFillAssistant
         switch (option)
         {
             case AutoFillOption.LIFE:
+            case AutoFillOption.LOW_LIFE:
                 return _character.HealthBar.Percent < threshold;
             case AutoFillOption.POWER:
                 return _character.PowerBar.Percent < threshold;

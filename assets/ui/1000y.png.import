@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bunepai2jw545"
-path="res://.godot/imported/1000yicon.png-fdbdcd3d00424ab410a4df960663674a.ctex"
+uid="uid://dule4gs3i3bqg"
+path="res://.godot/imported/1000y.png-d28949ad02c097a84b2553fe77127013.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/1000yicon.png"
-dest_files=["res://.godot/imported/1000yicon.png-fdbdcd3d00424ab410a4df960663674a.ctex"]
+source_file="res://assets/ui/1000y.png"
+dest_files=["res://.godot/imported/1000y.png-d28949ad02c097a84b2553fe77127013.ctex"]
 
 [params]
 

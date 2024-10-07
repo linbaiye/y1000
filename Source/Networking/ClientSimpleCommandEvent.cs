@@ -16,11 +16,14 @@ public class ClientSimpleCommandEvent : IClientEvent
         CLIENT_QUIT = 2,
 
         CANCEL_BUFF= 3,
+        PING = 4,
+        PONG = 5,
     }
 
     public static readonly ClientSimpleCommandEvent NpcPosition = new ClientSimpleCommandEvent(SimpleCommand.NPC_POSITION);
     public static readonly ClientSimpleCommandEvent Quit = new(SimpleCommand.CLIENT_QUIT);
     public static readonly ClientSimpleCommandEvent CancelBuff = new(SimpleCommand.CANCEL_BUFF);
+    public static readonly ClientSimpleCommandEvent PING = new(SimpleCommand.PING);
 
     private SimpleCommand Command { get; }
 

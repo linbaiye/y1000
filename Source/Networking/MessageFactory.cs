@@ -17,15 +17,12 @@ public class MessageFactory
 {
 	private readonly ItemFactory _itemFactory;
 
-	private readonly MagicSdbReader _magicSdbReader;
-
 	private readonly IconReader _iconReader;
 	private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
 	public MessageFactory(ItemFactory factory)
 	{
 		_itemFactory = factory;
-		_magicSdbReader = MagicSdbReader.Instance;
 		_iconReader = IconReader.ItemIconReader;
 	}
 	

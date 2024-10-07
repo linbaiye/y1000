@@ -7,8 +7,6 @@ namespace y1000.Source.Sprite;
 
 public class IconReader
 {
-    private readonly Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>();
-
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
     public static readonly IconReader ItemIconReader = LoadItems();

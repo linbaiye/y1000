@@ -14,7 +14,9 @@ config/name="千年:轮回"
 run/main_scene="res://Login.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 run/low_processor_mode=true
-config/icon="res://assets/ui/1000yicon.png"
+boot_splash/image="res://assets/ui/login.png"
+config/icon="res://assets/ui/1000y.png"
+config/windows_native_icon="res://assets/ui/1000y.ico"
 
 [autoload]
 
@@ -24,6 +26,7 @@ LogInit="*res://Source/LogInit.cs"
 
 window/size/viewport_width=527
 window/size/viewport_height=479
+window/size/resizable=false
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
@@ -33,7 +36,7 @@ project/assembly_name="y1000"
 
 [gui]
 
-theme/custom_font="res://fonts/SweiSpringSugarCJKtc-Regular.ttf"
+theme/custom_font="res://fonts/JiYingHuiPianHuiSong-2.ttf"
 
 [input]
 

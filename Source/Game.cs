@@ -73,6 +73,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	
 	private string _charName = "";
 
+	private	IEventLoopGroup _group;
+
+
+	private double _keepAliveTimer = 10;
+
 
 	public Game()
 	{
@@ -84,6 +89,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_spriteRepository = ISpriteRepository.Instance;;
 		_entityFactory = new EntityFactory(_eventMediator, _spriteRepository);
 		_character = null;
+		_group = new SingleThreadEventLoop();
 	}
 
 	private EventMediator InitializeEventMediator()
@@ -132,7 +138,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	private async void SetupNetwork()
 	{
-		_bootstrap.Group(new MultithreadEventLoopGroup()).Handler(
+		_bootstrap.Group(_group).Handler(
 				new ActionChannelInitializer<ISocketChannel>(c => c.Pipeline.AddLast(
 				new LengthFieldPrepender(4), 
 				new MessageEncoder(),
@@ -161,11 +167,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		{
 			return false;
 		}
-		if (eventKey.Keycode == Key.M )
+		if (eventKey.Keycode == Key.M)
 		{
 			_uiController?.ToggleMap(MapLayer);
 		}
-		else if (eventKey.Keycode == Key.Numlock)
+		else if (eventKey.Keycode == Key.Z)
 		{
 			_autoMoveAssistant?.Toggle();
 		}
@@ -225,6 +231,18 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_autoFillAssistant?.Process(delta);
 		_autoLootAssistant?.Process(delta);
 		_autoMoveAssistant?.Process(delta);
+		KeepAlive(delta);
+	}
+
+
+	private void KeepAlive(double delta)
+	{
+		_keepAliveTimer -= delta;
+		if (_keepAliveTimer <= 0)
+		{
+			_eventMediator.NotifyServer(ClientSimpleCommandEvent.PING);
+			_keepAliveTimer = 10;
+		}
 	}
 
 
@@ -294,22 +312,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_unprocessedMessages.Enqueue(message);
 	}
 
-	// private async void Reconnect()
-	// {
-	// 	await Task.Run(() =>
-	// 	{
-	// 		Task.Delay(2000);
-	// 	});
-	// 	try
-	// 	{
-	// 		_channel?.CloseAsync();
-	// 		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
-	// 	}
-	// 	catch (Exception)
-	// 	{
-	// 		Reconnect();
-	// 	}
-	// }
 
 	public void OnConnectionClosed()
 	{
@@ -533,18 +535,29 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public override void _Notification(int what)
 	{
-		if (what == NotificationWMCloseRequest)
+		try
 		{
-			_channel?.WriteAndFlushAsync(ClientSimpleCommandEvent.Quit).Wait();
-			GetTree().Quit();
+			if (what == NotificationWMCloseRequest)
+			{
+				_channel?.WriteAndFlushAsync(ClientSimpleCommandEvent.Quit).Wait(1000);
+				_channel?.CloseAsync().Wait(1000);
+				_group.ShutdownGracefullyAsync().Wait(3000);
+				System.Environment.Exit(0);
+				//GetTree().Quit();
+			}
+			else if (what == NotificationWMMouseEnter)
+			{
+				_autoMoveAssistant?.MouseEnterWindow();
+			}
+			else if (what == NotificationWMMouseExit)
+			{
+				_autoMoveAssistant?.MouseExitWindow();
+			}
 		}
-		else if (what == NotificationWMMouseEnter)
+		catch (Exception e)
 		{
-			_autoMoveAssistant?.MouseEnterWindow();
-		}
-		else if (what == NotificationWMMouseExit)
-		{
-			_autoMoveAssistant?.MouseExitWindow();
+			LOGGER.Error(e, "Exception");
+			System.Environment.Exit(1);
 		}
 	}
 }
