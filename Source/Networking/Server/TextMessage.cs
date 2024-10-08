@@ -108,5 +108,5 @@ public class TextMessage : IServerMessage
         visitor.Visit(this);
     }
 
-    public static readonly TextMessage MultiTrade = new("另一交易正在进行中。", TextLocation.DOWN);
+    public static readonly TextMessage MultiTrade = new("另一交易正在进行中。", TextLocation.DOWN, ColorType.SYSTEM_TIP);
 }
