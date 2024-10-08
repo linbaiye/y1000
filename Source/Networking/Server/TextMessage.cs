@@ -52,7 +52,7 @@ public class TextMessage : IServerMessage
 
         NOT_ENOUGH_HEAD_LIFE = 19,
         
-        CUSTOM = 1000000
+        CUSTOM = 1000000,
         ,
     }
 
@@ -108,5 +108,5 @@ public class TextMessage : IServerMessage
         visitor.Visit(this);
     }
 
-    public static readonly TextMessage MultiTrade = new("另一交易正在进行中。", TextLocation.DOWN);
+    public static readonly TextMessage MultiTrade = new("另一交易正在进行中。", TextLocation.DOWN, ColorType.SYSTEM_TIP);
 }
