@@ -81,27 +81,33 @@ public class TextMessage : IServerMessage
         var type = (Type)packet.Type;
         if (TYPE_MAP.TryGetValue(type, out var str))
         {
-            return new TextMessage(str, (TextLocation)packet.Location, ColorType.SYSTEM_TIP);
+            return new TextMessage(str, (TextLocation)packet.Location, packet.HasFromPlayer ? packet.FromPlayer : null, ColorType.SYSTEM_TIP);
         }
-        return new TextMessage(packet.Text, (TextLocation)packet.Location, (ColorType)packet.ColorType);
+        return new TextMessage(packet.Text, (TextLocation)packet.Location, packet.HasFromPlayer? packet.FromPlayer : null, (ColorType)packet.ColorType);
     }
-    
     
     public TextMessage(string text, 
         TextLocation location,
+        string? player,
         ColorType colorType = ColorType.SAY)
     {
         Text = text;
         Location = location;
         ColorType = colorType;
+        Player = player;
     }
+
+    public TextMessage(string text,
+        TextLocation location,
+        ColorType colorType = ColorType.SAY) : this(text, location, null, colorType) {}
     
-    public TextLocation Location { get; set; }
+    public TextLocation Location { get; }
 
     public string Text { get; }
     
     public ColorType ColorType { get; }
     
+    public string? Player { get; }
     
     public void Accept(IServerMessageVisitor visitor)
     {

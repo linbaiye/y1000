@@ -352,7 +352,7 @@ namespace y1000.Source.Character
 	        }
 	        if (Inventory.IsFull)
 	        {
-		        EventMediator?.NotifyTextArea("物品栏已满");
+		        EventMediator?.NotifyTextArea("物品栏已满。");
 		        return;
 	        }
 	        EventMediator?.NotifyServer(new ClientUnequipEvent(type));
@@ -627,7 +627,7 @@ namespace y1000.Source.Character
 	        {
 		        if (HealthBar.Current < 5000)
 		        {
-			        EventMediator?.NotifyTextArea("活力须在50以上");
+			        EventMediator?.NotifyTextArea("活力须在50以上。");
 			        return;
 		        }
 	        }
@@ -702,7 +702,6 @@ namespace y1000.Source.Character
 				return;
 			}
 			EventMediator?.NotifyServer(new ClientTextEvent(text));
-			LOGGER.Debug("Sent text {0}.", text);
 		}
 
 		public Rect2 BodyRectangle => WrappedPlayer().BodyRectangle;

@@ -48,14 +48,9 @@ public class EventMediator
         _bottomControl?.DisplayMessage(message);
     }
 
-
     public void NotifyUiEvent(IUiEvent e)
     {
-        if (e is TextEvent textEvent)
-        {
-            _bottomControl?.DisplayMessage(textEvent);
-        }
-        else if (e is DragInventorySlotEvent dragInventorySlotEvent)
+        if (e is DragInventorySlotEvent dragInventorySlotEvent)
         {
             _dragItemHandler?.Invoke(dragInventorySlotEvent);
         }

@@ -8,7 +8,6 @@ using y1000.Source.Item;
 using y1000.Source.KungFu;
 using y1000.Source.Networking.Server;
 using y1000.Source.Sprite;
-using y1000.Source.Util;
 using TextMessage = y1000.Source.Networking.Server.TextMessage;
 
 namespace y1000.Source.Networking;
@@ -160,7 +159,7 @@ public class MessageFactory
 			Packet.TypedPacketOneofCase.ShowTeleport => Parse(packet.ShowTeleport),
 			Packet.TypedPacketOneofCase.BreakRope => DragEndedMessage.Instance,
 			Packet.TypedPacketOneofCase.NpcPosition => NpcPositionMessage.FromPacket(packet.NpcPosition),
-			Packet.TypedPacketOneofCase.Chat => new EntityChatMessage(packet.Chat.Id, packet.Chat.Content),
+			Packet.TypedPacketOneofCase.Chat => EntityChatMessage.Parse(packet.Chat),
 			Packet.TypedPacketOneofCase.OpenBank => OpenBankMessage.FromPacket(packet.OpenBank),
 			Packet.TypedPacketOneofCase.UpdateBank => ParseBankOperation(packet.UpdateBank),
 			Packet.TypedPacketOneofCase.NameColor => new PlayerChangeNameColorMessage(packet.NameColor.Id, packet.NameColor.Color),

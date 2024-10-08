@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Godot;
 using NLog;
 using y1000.Source.Assistant;
@@ -124,7 +123,7 @@ public partial class UIController : CanvasLayer
         else if (message.Location == TextMessage.TextLocation.LEFT_UP)
         {
             _leftupText.Display(message.Text);
-            _bottomControl.DisplayMessage(new TextEvent(message.Text));
+            _bottomControl.DisplayMessage(new TextMessage(message.Text, TextMessage.TextLocation.DOWN));
         }
         else if (message.Location == TextMessage.TextLocation.CENTER)
         {
@@ -132,7 +131,7 @@ public partial class UIController : CanvasLayer
         }
         else
         {
-            _bottomControl.DisplayMessage(new TextEvent(message.Text, message.ColorType));
+            _bottomControl.DisplayMessage(message);
         }
     }
 
