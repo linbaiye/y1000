@@ -10,7 +10,7 @@ public struct ValueBar
         Max = max;
     }
 
-    private int Current { get; }
+    public int Current { get; }
 
     public int Max { get; }
 

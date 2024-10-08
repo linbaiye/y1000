@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2o8maeqnuvf6"]
+
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="1_3glxm"]
+[ext_resource type="Script" path="res://Source/Player/KungFuTip.cs" id="2_ur8vt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51gj6"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 0.415686)
+
+[node name="KungFuTip" type="Label"]
+z_index = 1
+offset_left = 20.0
+offset_top = -72.0
+offset_right = 13.75
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_3glxm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_51gj6")
+horizontal_alignment = 1
+script = ExtResource("2_ur8vt")

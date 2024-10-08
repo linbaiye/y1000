@@ -21,7 +21,7 @@ public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimati
 
     private static WeaponEffectAnimation Load(string name, CreatureState state1, CreatureState? state2 = null)
     {
-        AtzSprite attack = FilesystemSpriteRepository.Instance.LoadByNumberAndOffset(name, new Vector2(16, -12));
+        AtzSprite attack = ISpriteRepository.Instance.LoadByNumberAndOffset(name, new Vector2(16, -12));
         var playerAnimation = new WeaponEffectAnimation(state1, state2);
         playerAnimation.ConfigureState(state1, AtdStructure, attack);
         if (state2 != null)
@@ -68,16 +68,16 @@ public class WeaponEffectAnimation : AbstractPlayerAnimation<WeaponEffectAnimati
     {
         return state switch 
         {
-            CreatureState.FIST => Load("_/_" + id, CreatureState.FIST, CreatureState.KICK),
-            CreatureState.KICK => Load("_/_" + id, CreatureState.FIST, CreatureState.KICK),
-            CreatureState.SWORD => Load("_/_" + id, CreatureState.SWORD, CreatureState.SWORD2H),
-            CreatureState.SWORD2H => Load("_/_" + id, CreatureState.SWORD, CreatureState.SWORD2H),
-            CreatureState.BLADE => Load("_/_" + id, CreatureState.BLADE, CreatureState.BLADE2H),
-            CreatureState.BLADE2H => Load("_/_" + id, CreatureState.BLADE, CreatureState.BLADE2H),
-            CreatureState.AXE => Load("_/_" + id, CreatureState.AXE),
-            CreatureState.SPEAR => Load("_/_" + id, CreatureState.SPEAR),
-            CreatureState.BOW => Load("_/_" + id, CreatureState.BOW),
-            CreatureState.THROW => Load("_/_" + id, CreatureState.THROW),
+            CreatureState.FIST => Load("_" + id, CreatureState.FIST, CreatureState.KICK),
+            CreatureState.KICK => Load("_" + id, CreatureState.FIST, CreatureState.KICK),
+            CreatureState.SWORD => Load("_" + id, CreatureState.SWORD, CreatureState.SWORD2H),
+            CreatureState.SWORD2H => Load("_" + id, CreatureState.SWORD, CreatureState.SWORD2H),
+            CreatureState.BLADE => Load("_" + id, CreatureState.BLADE, CreatureState.BLADE2H),
+            CreatureState.BLADE2H => Load("_" + id, CreatureState.BLADE, CreatureState.BLADE2H),
+            CreatureState.AXE => Load("_" + id, CreatureState.AXE),
+            CreatureState.SPEAR => Load("_" + id, CreatureState.SPEAR),
+            CreatureState.BOW => Load("_" + id, CreatureState.BOW),
+            CreatureState.THROW => Load("_" + id, CreatureState.THROW),
             _ => throw new NotImplementedException()
         };
     }

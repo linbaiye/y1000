@@ -1,6 +1,6 @@
 ﻿namespace y1000.Source.Item;
 
-public class CharacterStackItem : ICharacterItem
+public class CharacterStackItem : IItem
 {
     public CharacterStackItem(int iconId, string name, long number, int color = 0)
     {
@@ -16,5 +16,9 @@ public class CharacterStackItem : ICharacterItem
     public string ItemName { get; }
 
     public static readonly string MoneyName = "钱币";
-    
+
+    public override string ToString()
+    {
+        return ItemName + ":" + Number;
+    }
 }

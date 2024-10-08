@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using Godot;
 
 namespace y1000.Source.Control.LeftSide;
@@ -5,35 +6,45 @@ namespace y1000.Source.Control.LeftSide;
 public partial class LeftsideTextLabel : RichTextLabel
 {
     private double _time;
-    public void SetText(string text)
+
+    public override void _Ready()
     {
-        _time = 4;
+        Clean();
+    }
+    public void Display(string text)
+    {
+        _time = 1;
         Text = "[color='yellow']" + text + "[/color]";
         Visible = true;
     }
 
     public double Time => _time;
 
-    public void SetText(string text, double time)
+    public void Clean()
     {
-        _time = time;
-        Text = "[color='yellow']" + text + "[/color]";
-        Visible = true;
+        _time = 0;
+        Text = "";
+        //Visible = false;
     }
-    
-    public bool Update(double delta)
+
+    public void Copy(LeftsideTextLabel another)
     {
-        if (_time <= 0)
+        Text = another.Text;
+        //Visible = another.Visible;
+        _time = 1;
+    }
+
+    public bool Timeout => _time <= 0 && !string.IsNullOrEmpty(Text);
+
+    public bool Empty => string.IsNullOrEmpty(Text);
+
+    public bool Available => _time <= 0 && string.IsNullOrEmpty(Text);
+
+    public void Update(double delta)
+    {
+        if (_time > 0)
         {
-            return true;
+            _time -= delta;
         }
-        _time -= delta;
-        if (_time <= 0)
-        {
-            Text = "";
-            Visible = false;
-            return true;
-        }
-        return false;
     }
 }

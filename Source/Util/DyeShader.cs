@@ -2,7 +2,7 @@
 
 namespace y1000.Source.Util;
 
-public class DyeShader
+public static class DyeShader
 {
     
     private static readonly int[] COLOR_TABLE = {
@@ -37,17 +37,24 @@ public class DyeShader
 
     private const float Max = 31;
 
+    public static int ColorRgb(int clrIndex)
+    {
+        var index = clrIndex % 256;
+        return COLOR_TABLE[index * 2];
+    }
+    
+
     public static ShaderMaterial CreateShaderMaterial(int clrIndex)
     {
         var colorIndex = clrIndex is < 0 or >= 256 ? 0 : clrIndex;
         var color = COLOR_TABLE[colorIndex * 2];
         var add = COLOR_TABLE[colorIndex * 2 + 1];
-        var shader = ResourceLoader.Load<Shader>("res://Shaders/Dye.gdshader");
-        var shaderMaterial = new ShaderMaterial();
-        shaderMaterial.Shader = shader;
         var red = (color >> 10) & 0x1f;
         var green = (color >> 5) & 0x1f;
         var blue = color & 0x1f;
+        var shader = ResourceLoader.Load<Shader>("res://Shaders/Dye.gdshader");
+        var shaderMaterial = new ShaderMaterial();
+        shaderMaterial.Shader = shader;
         shaderMaterial.SetShaderParameter("ar", red / Max);
         shaderMaterial.SetShaderParameter("ag", green / Max);
         shaderMaterial.SetShaderParameter("ab", blue / Max);

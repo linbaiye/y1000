@@ -218,4 +218,43 @@ public interface IServerMessageVisitor
     void Visit(NpcPositionMessage message)
     {
     }
+
+    void Visit(EntityChatMessage message)
+    {
+    }
+
+    void Visit(OpenBankMessage message)
+    {
+        
+    }
+
+    void Visit(BankOperationMessage operationMessage)
+    {
+        
+    }
+
+    void Visit(PlayerChangeNameColorMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
+
+    void Visit(PlayerUpdateGuildMessage message)
+    {
+        Visit((IEntityMessage)message);
+    }
+
+    void Visit(UpdateGuildKungFuMessage message)
+    {
+
+    }
+
+    void Visit(UpdateQuestWindowMessage message)
+    {
+
+    }
+
+    void Visit(UpdateBuffMessage message)
+    {
+
+    }
 }

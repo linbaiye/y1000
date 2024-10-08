@@ -1,0 +1,291 @@
+[gd_scene load_steps=5 format=3 uid="uid://cluywph0mcid6"]
+
+[ext_resource type="Texture2D" uid="uid://pfji6mw5d5rv" path="res://assets/ui/login.png" id="1_ku3r6"]
+[ext_resource type="Script" path="res://Source/Control/Login.cs" id="2_llpe0"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_mbscu"]
+[ext_resource type="AudioStream" uid="uid://pmdnyptoo1j8" path="res://bgm/click.wav" id="4_jl1hi"]
+
+[node name="Login" type="NinePatchRect"]
+custom_minimum_size = Vector2(527, 479)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ku3r6")
+script = ExtResource("2_llpe0")
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jl1hi")
+
+[node name="Entrance" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Username" type="HBoxContainer" parent="Entrance"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 185.0
+offset_right = 178.0
+offset_bottom = 206.0
+
+[node name="Label" type="Label" parent="Entrance/Username"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mbscu")
+theme_override_font_sizes/font_size = 12
+text = "账号"
+
+[node name="Input" type="LineEdit" parent="Entrance/Username"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_mbscu")
+theme_override_font_sizes/font_size = 12
+caret_blink = true
+
+[node name="Password" type="HBoxContainer" parent="Entrance"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 216.0
+offset_right = 178.0
+offset_bottom = 237.0
+
+[node name="Label" type="Label" parent="Entrance/Password"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mbscu")
+theme_override_font_sizes/font_size = 12
+text = "密码"
+
+[node name="Input" type="LineEdit" parent="Entrance/Password"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_mbscu")
+theme_override_font_sizes/font_size = 12
+caret_blink = true
+secret = true
+secret_character = "*"
+
+[node name="Signin" type="Button" parent="Entrance"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 246.0
+offset_right = 107.0
+offset_bottom = 267.0
+theme_override_font_sizes/font_size = 12
+text = "登录"
+
+[node name="Signup" type="Button" parent="Entrance"]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 247.0
+offset_right = 178.0
+offset_bottom = 268.0
+theme_override_font_sizes/font_size = 12
+text = "注册"
+
+[node name="Tip" type="Label" parent="Entrance"]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 280.0
+offset_right = 180.0
+offset_bottom = 297.0
+theme_override_colors/font_color = Color(0.666667, 0.0666667, 0.113725, 0.945098)
+theme_override_font_sizes/font_size = 12
+clip_text = true
+
+[node name="Signup" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 209.0
+offset_bottom = 279.0
+
+[node name="Username" type="HBoxContainer" parent="Signup"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 185.0
+offset_right = 178.0
+offset_bottom = 206.0
+
+[node name="Label" type="Label" parent="Signup/Username"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mbscu")
+theme_override_font_sizes/font_size = 12
+text = "账号"
+
+[node name="Input" type="LineEdit" parent="Signup/Username"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_mbscu")
+theme_override_font_sizes/font_size = 12
+caret_blink = true
+
+[node name="Password" type="HBoxContainer" parent="Signup"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 216.0
+offset_right = 178.0
+offset_bottom = 237.0
+
+[node name="Label" type="Label" parent="Signup/Password"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mbscu")
+theme_override_font_sizes/font_size = 12
+text = "密码"
+
+[node name="Input" type="LineEdit" parent="Signup/Password"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_mbscu")
+theme_override_font_sizes/font_size = 12
+caret_blink = true
+secret = true
+secret_character = "*"
+
+[node name="Confirm" type="HBoxContainer" parent="Signup"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 246.0
+offset_right = 178.0
+offset_bottom = 267.0
+
+[node name="Label" type="Label" parent="Signup/Confirm"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mbscu")
+theme_override_font_sizes/font_size = 12
+text = "确认"
+
+[node name="Input" type="LineEdit" parent="Signup/Confirm"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_mbscu")
+theme_override_font_sizes/font_size = 12
+caret_blink = true
+secret = true
+secret_character = "*"
+
+[node name="Return" type="Button" parent="Signup"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 275.0
+offset_right = 108.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 12
+text = "返回"
+
+[node name="Signup" type="Button" parent="Signup"]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 275.0
+offset_right = 174.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 12
+text = "注册"
+
+[node name="Tip" type="Label" parent="Signup"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 307.0
+offset_right = 179.0
+offset_bottom = 324.0
+theme_override_colors/font_color = Color(0.666667, 0.0666667, 0.113725, 0.945098)
+theme_override_font_sizes/font_size = 12
+clip_text = true
+
+[node name="CharPanel" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CharPanel"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 84.0
+offset_right = 186.0
+offset_bottom = 175.0
+
+[node name="Chars" type="ItemList" parent="CharPanel/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+allow_search = false
+
+[node name="LineEdit" type="LineEdit" parent="CharPanel"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 273.0
+offset_right = 180.0
+offset_bottom = 298.0
+theme_override_font_sizes/font_size = 12
+caret_blink = true
+
+[node name="JoinRealm" type="Button" parent="CharPanel"]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 186.0
+offset_right = 135.0
+offset_bottom = 207.0
+theme_override_font_sizes/font_size = 12
+text = "进入游戏"
+
+[node name="CreateChar" type="Button" parent="CharPanel"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 336.0
+offset_right = 136.0
+offset_bottom = 357.0
+theme_override_font_sizes/font_size = 12
+text = "创建角色"
+
+[node name="Label" type="Label" parent="CharPanel"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 251.0
+offset_right = 99.0
+offset_bottom = 268.0
+theme_override_font_sizes/font_size = 12
+text = "角色名字："
+
+[node name="Label2" type="Label" parent="CharPanel"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 309.0
+offset_right = 99.0
+offset_bottom = 326.0
+theme_override_font_sizes/font_size = 12
+text = "性别："
+
+[node name="Tip" type="Label" parent="CharPanel"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 368.0
+offset_right = 181.0
+offset_bottom = 385.0
+theme_override_colors/font_color = Color(0.666667, 0.0666667, 0.113725, 0.945098)
+theme_override_font_sizes/font_size = 12
+clip_text = true
+
+[node name="Male" type="CheckBox" parent="CharPanel"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 304.0
+offset_right = 104.0
+offset_bottom = 328.0
+theme_override_font_sizes/font_size = 12
+text = "男"
+
+[node name="Female" type="CheckBox" parent="CharPanel"]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 304.0
+offset_right = 180.0
+offset_bottom = 328.0
+theme_override_font_sizes/font_size = 12
+text = "女"

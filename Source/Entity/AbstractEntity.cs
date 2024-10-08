@@ -26,8 +26,9 @@ public abstract partial class AbstractEntity : Node2D, IEntity
     public abstract OffsetTexture BodyOffsetTexture { get; }
     
     public Vector2 OffsetBodyPosition => Position + BodyOffsetTexture.Offset;
-    
-    
+
+    protected BodySprite? BodySprite => _bodySprite;
+
     protected void Init(long id, Vector2I coordinate, string name)
     {
         Id = id;

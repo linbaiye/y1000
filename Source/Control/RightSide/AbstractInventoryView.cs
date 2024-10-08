@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Godot;
+using y1000.Source.Assistant;
 using y1000.Source.Control.RightSide.Inventory;
 
 namespace y1000.Source.Control.RightSide;
@@ -24,7 +26,7 @@ public abstract partial class AbstractInventoryView : NinePatchRect
         MouseFilter = Visible ? MouseFilterEnum.Stop : MouseFilterEnum.Ignore;
     }
 
-    public void ForeachSlot(Action<InventorySlotView> action)
+    protected void ForeachSlot(Action<InventorySlotView> action)
     {
         var container = GetNode<Godot.GridContainer>("Slots");
         foreach (var child in container.GetChildren())
@@ -33,6 +35,16 @@ public abstract partial class AbstractInventoryView : NinePatchRect
             {
                 action.Invoke(slot);
             }
+        }
+    }
+    
+    protected void UpdateHotKeys(Hotkeys hotkeys, IEnumerable<ShortcutContext> contexts)
+    {
+        ForeachSlot(slot=>slot.ClearText());
+        foreach (var context in contexts)
+        {
+            var keyString = hotkeys.GetKeyString(context.Key);
+            GetNode<InventorySlotView>("Slots/Slot" + context.Slot).PutText(keyString);
         }
     }
 

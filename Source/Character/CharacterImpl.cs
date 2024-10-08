@@ -198,21 +198,14 @@ namespace y1000.Source.Character
         {
 	        SetPositionAndState(message.Coordinate, message.Direction, CharacterHurtState.Hurt(message.AfterHurtState));
 	        WrappedPlayer().ShowLifePercent(message.LifePercent);
-	        WrappedPlayer().PlaySound(message.Sound);
 	        HealthBar = new ValueBar(message.CurrentLife, message.MaxLife);
 	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
         }
-        public void Visit(EntitySoundMessage message)
-        {
-	        WrappedPlayer().Visit(message);
-        }
-
-
+ 
         public void Visit(CreatureDieMessage message)
         {
 	        ChangeState(ICharacterState.Create(CreatureState.DIE));
 	        HealthBar = new ValueBar(0, HealthBar.Max);
-	        WrappedPlayer().PlaySound(message.Sound);
 	        WrappedPlayer().ShowLifePercent(HealthBar.Percent);
 	        WhenCharacterUpdated?.Invoke(this, PlayerAttributeEvent.Instance);
 	        EventMediator?.NotifyTextArea("请稍后。");
@@ -413,7 +406,7 @@ namespace y1000.Source.Character
 		        var characterItem = Inventory.Find(message.SlotId);
 		        if (characterItem != null)
 		        {
-			        EventMediator?.NotifyUiEvent(new ItemAttributeEvent(characterItem, message.Description));
+			        EventMediator?.NotifyUiEvent(new ItemAttributeEvent(characterItem, message.Description, message.SlotId));
 		        }
 	        } else if (message.Type == RightClickType.KUNGFU)
 	        {
@@ -468,6 +461,21 @@ namespace y1000.Source.Character
         }
 
         public bool Dead => _state.WrappedState.State == CreatureState.DIE;
+        public bool Idle => _state.WrappedState.State == CreatureState.IDLE;
+        public bool IsEnfight => _state.WrappedState.State == CreatureState.COOLDOWN;
+        
+        public bool Moving
+        {
+	        get
+	        {
+		        var st = _state.WrappedState.State;
+		        return st == CreatureState.WALK ||
+		               st == CreatureState.FLY ||
+		               st == CreatureState.ENFIGHT_WALK ||
+		               st == CreatureState.RUN;
+	        }
+        }
+                               
 
         private void ToggleBreathKungFu(PlayerToggleKungFuMessage message)
         {
@@ -557,21 +565,25 @@ namespace y1000.Source.Character
 	        WrappedPlayer().RestoreCamera();
         }
 
+        public void Visit(PlayerChangeNameColorMessage message)
+        {
+	        WrappedPlayer().Visit(message);
+        }
+
         public void Visit(RemoveEntityMessage message)
         {
 	        WrappedPlayer().Map.Free(WrappedPlayer());
         }
-
-        public void ReachEdge()
+        
+        public void Visit(PlayerUpdateGuildMessage message)
         {
-	        LOGGER.Debug("Reached edge.");
+	        WrappedPlayer().Visit(message);
         }
 
         public void LimitCamera(Vector2I leftUp, Vector2I bottomDown)
         {
 	        WrappedPlayer().LimitCamera(leftUp, bottomDown);
         }
-
 
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,
 	        IMap map,  ItemFactory itemFactory, EventMediator eventMediator)
@@ -603,6 +615,96 @@ namespace y1000.Source.Character
 	        return character;
         }
 
-        public Rect2 BodyRectangle => WrappedPlayer().BodyRectangle;
+        public void Visit(EntityChatMessage message)
+        {
+	        WrappedPlayer().Visit(message);
+        }
+        
+
+        public void Chat(string text)
+        {
+	        if (text.StartsWith("!"))
+	        {
+		        if (HealthBar.Current < 5000)
+		        {
+			        EventMediator?.NotifyTextArea("活力须在50以上");
+			        return;
+		        }
+	        }
+	        else if (text.StartsWith("@设定团队"))
+	        {
+		        var strings = text.Split(" ");
+		        if (strings.Length == 2 && strings[1].DigitOnly())
+		        {
+			        EventMediator?.NotifyServer(new ClientChangeTeamEvent(strings[1].ToInt()));
+		        }
+		        return;
+	        }
+			else if (text.StartsWith("@创立门派"))
+			{
+				int slot = Inventory.FindSlot("门派石");
+				if (slot == 0)
+				{
+			        EventMediator?.NotifyTextArea("没有门派石。");
+					return;
+				}
+		        var strings = text.Split(" ");
+				if (strings.Length != 3)
+				{
+			        EventMediator?.NotifyTextArea("格式错误, 格式 @创立门派 <名字> <门石坐标>, 示例: @创立门派 武当 500.500");
+					return;
+				}
+				var coorStrings = strings[2].Split(".");
+				if (coorStrings.Length != 2) 
+				{
+			        EventMediator?.NotifyTextArea("格式错误, 格式 @创立门派 <名字> <门石坐标>, 示例: @创立门派 武当 500.500");
+					return;
+				}
+				if (!coorStrings[0].DigitOnly() || !coorStrings[1].DigitOnly())
+				{
+			        EventMediator?.NotifyTextArea("格式错误, 格式 @创立门派 <名字> <门石坐标>, 示例: @创立门派 武当 500.500");
+					return;
+				}
+				var coordinate = new Vector2I(coorStrings[0].ToInt(), coorStrings[1].ToInt());
+				if (coordinate.Distance(Coordinate) > 4)
+				{
+			        EventMediator?.NotifyTextArea("距离过远, 人物和目标坐标的距离需为4以内。");
+					return;
+				}
+				EventMediator?.NotifyServer(new ClientFoundGuildEvent(strings[1], coordinate, slot));
+				return;
+			}
+			else if (text.StartsWith("@申请门武"))
+			{
+				EventMediator?.NotifyUiEvent(OpenKungFuFormEvent.Instance);
+				return;
+			}
+			else if (text.StartsWith("@传授门武"))
+			{
+				var strings = text.Split(" ");
+				if (strings.Length != 2)
+				{
+					EventMediator?.NotifyTextArea("格式错误, 格式 @传授门武 <玩家名字>, 示例: @传授门武 张三");
+					return;
+				}
+				EventMediator?.NotifyServer(ClientManageGuildEvent.Teach(strings[1]));
+				return;
+			}
+			else if (text.StartsWith("@邀请门人"))
+			{
+				var strings = text.Split(" ");
+				if (strings.Length != 2)
+				{
+					EventMediator?.NotifyTextArea("格式错误, 格式 @邀请门人 <玩家名字>, 示例: @邀请门人 张三");
+					return;
+				}
+				EventMediator?.NotifyServer(ClientManageGuildEvent.Invite(strings[1]));
+				return;
+			}
+			EventMediator?.NotifyServer(new ClientTextEvent(text));
+			LOGGER.Debug("Sent text {0}.", text);
+		}
+
+		public Rect2 BodyRectangle => WrappedPlayer().BodyRectangle;
 	}
 }

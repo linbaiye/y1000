@@ -3,12 +3,22 @@ using y1000.Source.Input;
 
 namespace y1000.Source.Character.Event;
 
-public class ClickEntityEvent : IInput
+public class ClickEntityEvent : IClientEvent
 {
-    public ClientPacket ToPacket()
-    {
-        throw new System.NotImplementedException();
+
+    private long _clickedId;
+
+    public ClickEntityEvent(long c) {
+        _clickedId = c;
     }
 
-    public InputType Type => InputType.LEFT_CLICK;
+    public ClientPacket ToPacket()
+    {
+        return new ClientPacket() {
+            ClickPacket  = new ClickPacket() {
+                Id = _clickedId,
+            }
+        };
+    }
+
 }

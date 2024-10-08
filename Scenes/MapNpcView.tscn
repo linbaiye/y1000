@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bjjg8uukhy3s8"]
 
 [ext_resource type="Script" path="res://Source/Control/Map/MapCreatureView.cs" id="1_4y2c4"]
-[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="1_f8rt5"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_68rc7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4rep"]
 bg_color = Color(1, 0, 0, 1)
@@ -18,5 +18,4 @@ script = ExtResource("1_4y2c4")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("1_f8rt5")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("2_68rc7")

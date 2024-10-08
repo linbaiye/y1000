@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cd5x0sshtxe2x"]
+[gd_scene load_steps=3 format=3 uid="uid://bvco6ldh4uo3v"]
 
 [ext_resource type="Script" path="res://Source/Character/CharacterImpl.cs" id="1_0btks"]
-[ext_resource type="PackedScene" uid="uid://duo0butuerf3j" path="res://scene/player.tscn" id="2_od4km"]
+[ext_resource type="PackedScene" uid="uid://b6q1rfqdvifym" path="res://scene/player.tscn" id="2_od4km"]
 
 [node name="Character" type="Node2D"]
 z_index = 3

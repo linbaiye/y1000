@@ -7,14 +7,14 @@ public class MerchantTrade
 {
     public class InventoryItem
     {
-        public InventoryItem(int slotId, ICharacterItem item)
+        public InventoryItem(int slotId, IItem item)
         {
             Slot = slotId;
             Item = item;
         }
 
         public int Slot { get; }
-        public ICharacterItem Item { get; }
+        public IItem Item { get; }
         public string Name => Item.ItemName;
         public long Number => Item is CharacterStackItem stackItem ? stackItem.Number : 1;
     }
@@ -27,7 +27,7 @@ public class MerchantTrade
 
     public List<InventoryItem> Items => _items;
 
-    public void AddItem(ICharacterItem item, int slot,
+    public void AddItem(IItem item, int slot,
         CharacterStackItem money, int moneySlot)
     {
         if (item is not CharacterStackItem addStackItem)

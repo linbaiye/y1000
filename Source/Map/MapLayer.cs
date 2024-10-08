@@ -39,17 +39,9 @@ public partial class MapLayer : TileMap, IMap
 
 	private readonly ISet<string> _animatedObjectSprites = new HashSet<string>();
 
-	private readonly IMapObjectRepository _mapObjectRepository = FilesystemMapObjectRepository.Instance;
+	private readonly IMapObjectRepository _mapObjectRepository = IMapObjectRepository.Instance;
 
 	private const int CameraLimitOffset = 6;
-
-	public override void _Ready()
-	{
-		/*_gameMap = GameMap.Load(MapDir + "start.map");
-		BuildTileSets("start");
-		BuildObjectSets("start");*/
-	}
-
 
 	private void InitMap(string mapName, string tileName, string objName, string rofName)
 	{
@@ -63,6 +55,7 @@ public partial class MapLayer : TileMap, IMap
 			_gameMap = GameMap.Load(MapDir + "/" +  mapName + ".map");
 			_animatedObjectSprites.Clear();
 			_tileIdToSourceId.Clear();
+			_mapObjectInfos.Clear();
 			Clear();
 			ClearLayer(ObjectLayerName);
 			if (tileName.EndsWith("til.til"))
@@ -93,6 +86,7 @@ public partial class MapLayer : TileMap, IMap
 		PaintMap();
 		character.WhenCharacterUpdated += OnCharacterEvent;
 		PutCameraLimit(character);
+		HideRoofIfNeed();
 	}
 
 	private void PutCameraLimit(CharacterImpl character)
@@ -129,20 +123,7 @@ public partial class MapLayer : TileMap, IMap
 		return new Vector2I(0, 0);
 	}
 	
-	private void NotifyIfReachEdge(CharacterImpl character, Vector2I coordinate)
-	{
-		if (_gameMap == null)
-		{
-			return;
-		}
 
-		int range = 20;
-		if (coordinate.X < range || coordinate.X > _gameMap.Width -range 
-		    || coordinate.Y < range|| coordinate.Y > _gameMap.Height - range)
-		{
-			character.ReachEdge();
-		}
-	}
 	private void OnCharacterEvent(object? sender, EventArgs args)
 	{
 		if (sender is not CharacterImpl character)
@@ -217,37 +198,6 @@ public partial class MapLayer : TileMap, IMap
 		});
 	}
 	
-	public struct Object2Json
-	{
-		public Object2Json()
-		{
-			Width = 0;
-			Height = 0;
-			X = 0;
-			Y = 0;
-			Number = 1;
-			Delay = 0;
-		}
-
-		public byte Version => 2;
-
-		public int Width { get; set; }
-
-		public int Height { get; set; }
-
-		public int X { get; set; }
-		public int Y { get; set; }
-
-		public int Number { get; set; }
-		
-		public int Delay { get; set; }
-
-		public static Object2Json FromJsonString(string jsonString)
-		{
-			return JsonSerializer.Deserialize<Object2Json>(jsonString);
-		}
-	}
-
 	private void HideRoofIfNeed()
 	{
 		if (_gameMap != null && _gameMap.HideRoof(_origin))  

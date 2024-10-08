@@ -81,6 +81,8 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		InitEquipment<Boot>(info.BootName, info.BootColor, ChangeBoot);
 		InitEquipment<Trouser>(info.TrouserName, info.TrouserColor, ChangeTrouser);
 		InitEquipment<Clothing>(info.ClothingName, info.ClothingColor, ChangeClothing);
+		SetNameColor(info.NameColor);
+		SetGuildName(info.GuildName);
 	}
 
 	public PlayerWeapon? Weapon { get; private set; }
@@ -186,6 +188,26 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		}
 	}
 
+	public void Visit(PlayerChangeNameColorMessage message)
+	{
+		SetNameColor(message.Color);
+	}
+
+	private void SetNameColor(int color) {
+		var code = color <= 0 ? "ffffff" : color.ToString("X6");
+		NameColor = code;
+		BodySprite?.UpdateColor();
+	}
+	
+	private void SetGuildName(string? guildName)
+	{
+		GuildName = guildName;
+		BodySprite?.UpdateGuild();
+	}
+
+	public string? GuildName { get; private set; }
+	public string NameColor { get; private set; } = "ffffff";
+
 	public IEquipment Equip(PlayerEquipMessage message)
 	{
 		var equipment = EquipmentFactory.Instance.Create(message.EquipmentName, IsMale, message.Color);
@@ -221,6 +243,10 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		}
 	}
 
+	public void Visit(PlayerUpdateGuildMessage message)
+	{
+		SetGuildName(message.Name);
+	}
 
 	public void Visit(PlayerStandUpMessage message)
 	{
@@ -261,9 +287,9 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 			_kungFuTip?.Display(message.Name);
 	}
 
-
 	public void Visit(PlayerMoveMessage message)
 	{
+		SetPosition(message.Coordinate, message.Direction);
 		var playerState = IPlayerState.NonHurtState(message.State, message.Direction);
 		ChangeState(playerState);
 	}
@@ -334,11 +360,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		ChangeState(IPlayerState.NonHurtState(CreatureState.SIT));
 	}
 	
-	public void Visit(EntitySoundMessage message)
-	{
-		PlaySound(message.Sound);
-	}
-
 	public void ResetState()
 	{
 		_state.Reset();
@@ -397,8 +418,12 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void Visit(CreatureDieMessage message)
 	{
 		ChangeState(IPlayerState.NonHurtState(CreatureState.DIE));
-		PlaySound(message.Sound);
 		ShowLifePercent(0);
+	}
+
+	public void Visit(EntityChatMessage message)
+	{
+		_kungFuTip?.Display(message.Content);
 	}
 
 	private string Location()

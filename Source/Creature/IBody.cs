@@ -9,5 +9,8 @@ namespace y1000.Source.Creature
         
         Vector2 OffsetBodyPosition { get; }
 
+        string? GuildName => null;
+
+        string NameColor => "ffffff";
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using Godot;
 using NLog;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Control.RightSide.Inventory;
-using y1000.Source.Input;
 using y1000.Source.Item;
 using y1000.Source.KungFu;
 using y1000.Source.Sprite;
+using y1000.Source.Storage;
 using y1000.Source.Util;
 
 namespace y1000.Source.Control.Bottom.Shortcut;
@@ -19,12 +20,16 @@ public partial class Shortcuts : NinePatchRect
 
     private readonly InventorySlotView[] _slots = new InventorySlotView[8];
     
-    private readonly IDictionary<int, ShortcutContext> _mappedContext= new Dictionary<int, ShortcutContext>();
+    private IDictionary<int, ShortcutContext> _mappedContext = new Dictionary<int, ShortcutContext>();
 
     private KungFuBook? _kungFuBook;
     private CharacterInventory? _inventory;
 
+    private const string FileName = "shortcut";
+
     private long _nextInputAfter;
+
+    private FileStorage? _fileStorage;
 
     private static readonly IDictionary<Key, int> KEY_TO_INDEX = new Dictionary<Key, int>()
     {
@@ -32,10 +37,10 @@ public partial class Shortcuts : NinePatchRect
         { Key.Key2, 1},
         { Key.Key3, 2},
         { Key.Key4, 3},
-        { Key.Q, 4},
-        { Key.W, 5},
-        { Key.E, 6},
-        { Key.R, 7},
+        { Key.Key5, 4},
+        { Key.Key6, 5},
+        { Key.Key7, 6},
+        { Key.Key8, 7},
     };
     
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
@@ -57,9 +62,16 @@ public partial class Shortcuts : NinePatchRect
 
     private void OnSlotMouseEvent(object? sender, SlotMouseEvent mouseEvent)
     {
-        if (mouseEvent.EventType == SlotMouseEvent.Type.MOUSE_LEFT_CLICK ||
-            mouseEvent.EventType == SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
+        if (sender is not InventorySlotView slot)
         {
+            return;
+        }
+        if (mouseEvent.EventType is SlotMouseEvent.Type.MOUSE_LEFT_CLICK or SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
+        {
+            if (_mappedContext.TryGetValue(slot.Number - 1, out var context))
+            {
+                SendShortcutIfAllowed(context);
+            }
         }
     }
 
@@ -68,11 +80,11 @@ public partial class Shortcuts : NinePatchRect
         var milliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         if (milliseconds >= _nextInputAfter)
         {
-            if (context.Receiver == Shortcut.ShortcutContext.Component.KUNGFU_BOOK)
+            if (context.Receiver == Control.ShortcutContext.Component.KUNGFU_BOOK)
             {
                 _kungFuBook?.OnShortcutPressed(context.Page, context.Slot);
             }
-            else if (context.Receiver == Shortcut.ShortcutContext.Component.INVENTORY)
+            else if (context.Receiver == Control.ShortcutContext.Component.INVENTORY)
             {
                 _inventory?.OnUIDoubleClick(context.Slot);
             }
@@ -90,11 +102,55 @@ public partial class Shortcuts : NinePatchRect
         }
     }
 
-
-    private void Bind(Texture2D texture2D, string text, int index, ShortcutContext context)
+    private void Restore(string content, KungFuBook kungFuBook, CharacterInventory inventory)
     {
-        _slots[index].PutTextureAndTooltip(texture2D, text);
+        try
+        {
+            var ret = JsonSerializer.Deserialize<Dictionary<int, ShortcutContext>>(content);
+            if (ret == null)
+            {
+                return;
+            }
+            _mappedContext = ret;
+            foreach (KeyValuePair<int, ShortcutContext> keyValuePair in _mappedContext)
+            {
+                var index = keyValuePair.Key;
+                var shortcutContext = keyValuePair.Value;
+                if (shortcutContext.Receiver == Control.ShortcutContext.Component.KUNGFU_BOOK)
+                {
+                    var kungFu = kungFuBook.Get(shortcutContext.Page, shortcutContext.Slot);
+                    if (kungFu != null)
+                    {
+                        int iconId = _magicSdbReader.GetIconId(kungFu);
+                        var texture2D = _kungfuIconReader.Get(iconId);
+                        if (texture2D != null)
+                            _slots[index].PutTextureAndTooltip(texture2D, kungFu.Name + ":" + kungFu.FormatLevel);
+                    }
+                }
+                else if (shortcutContext.Receiver == Control.ShortcutContext.Component.INVENTORY)
+                {
+                    var item = inventory.Get(shortcutContext.Slot);
+                    if (item != null)
+                    {
+                        var texture2D = _itemIconReader.Get(item.IconId);
+                        if (texture2D != null)
+                            _slots[index].PutTextureAndTooltip(texture2D, item.ItemName, item.Color);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.Error(e);
+        }
+    }
+
+
+    private void Bind(Texture2D texture2D, string text, int index, ShortcutContext context, int color = 0)
+    {
+        _slots[index].PutTextureAndTooltip(texture2D, text, color);
         _mappedContext[index] = context;
+        _fileStorage?.Save(FileName, JsonSerializer.Serialize(_mappedContext));
     }
 
     private void SetKungFuShortcut(object? sender, KungFuShortcutEvent shortcutEvent)
@@ -113,10 +169,10 @@ public partial class Shortcuts : NinePatchRect
         }
         if (kungFu == null)
         {
-            _slots[index].Clear();
+            _slots[index].ClearTextureAndTip();
             return;
         }
-        int iconId = _magicSdbReader.GetIconId(kungFu.Name);
+        int iconId = _magicSdbReader.GetIconId(kungFu);
         var texture2D = _kungfuIconReader.Get(iconId);
         if (texture2D != null)
         {
@@ -132,26 +188,25 @@ public partial class Shortcuts : NinePatchRect
         }
         if (item == null)
         {
-            _slots[index].Clear();
+            _slots[index].ClearTextureAndTip();
             return;
         }
         var texture2D = _itemIconReader.Get(item.IconId);
         if (texture2D != null)
         {
-            Bind(texture2D, item.ItemName, index, context);
+            Bind(texture2D, item.ItemName, index, context, item.Color);
         }
     }
 
     private void SetInventoryShortcut(object? sender, InventoryShortcutEvent shortcutEvent)
     {
-        Logger.Debug("Received shortcut.");
         if (sender is CharacterInventory)
         {
             SetItem(shortcutEvent.Item, shortcutEvent.Context);
         }
     }
 
-    public void BindKungFuBook(KungFuBook kungFuBook)
+    private void BindKungFuBook(KungFuBook kungFuBook)
     {
         kungFuBook.ShortcutPressed += SetKungFuShortcut;
         _kungFuBook = kungFuBook;
@@ -162,7 +217,7 @@ public partial class Shortcuts : NinePatchRect
     {
         foreach (var context in _mappedContext.Values)
         {
-            if (context.Receiver == Shortcut.ShortcutContext.Component.KUNGFU_BOOK)
+            if (context.Receiver == Control.ShortcutContext.Component.KUNGFU_BOOK)
             {
                 var kungFu = _kungFuBook?.Get(context.Page, context.Slot);
                 SetKungFu(kungFu, context);
@@ -174,14 +229,26 @@ public partial class Shortcuts : NinePatchRect
     {
         foreach (var context in _mappedContext.Values)
         {
-            if (context.Receiver == Shortcut.ShortcutContext.Component.INVENTORY)
+            if (context.Receiver == Control.ShortcutContext.Component.INVENTORY)
             {
                 SetItem(_inventory?.Get(context.Slot), context);
             }
         }
     }
 
-    public void BindInventory(CharacterInventory inventory)
+    public void Bind(CharacterImpl character)
+    {
+        BindInventory(character.Inventory);
+        BindKungFuBook(character.KungFuBook);
+        _fileStorage = new FileStorage(character.EntityName);
+        var content = _fileStorage.Load(FileName);
+        if (!string.IsNullOrEmpty(content))
+        {
+            Restore(content, character.KungFuBook, character.Inventory);
+        }
+    }
+
+    private void BindInventory(CharacterInventory inventory)
     {
         _inventory = inventory;
         inventory.InventoryChanged += OnInventoryUpdated;

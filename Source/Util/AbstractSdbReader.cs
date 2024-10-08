@@ -35,6 +35,7 @@ public abstract class AbstractSdbReader
         return Parse(name, key, s => s);
     }
     
+    
     protected void Read(string filepath)
     {
         var fileAccess = FileAccess.Open(filepath, FileAccess.ModeFlags.Read);
@@ -44,7 +45,6 @@ public abstract class AbstractSdbReader
             throw new NotImplementedException("Item.sdb does not have header.");
         }
         var headers = line.Split(",");
-        Dictionary<string, int> header = new Dictionary<string, int>();
         for (int i = 0; i < headers.Length; i++)
         {
             _header.TryAdd(headers[i], i);

@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using y1000.Source.Control.RightSide;
 using y1000.Source.Control.RightSide.Inventory;
 using y1000.Source.Event;
@@ -16,21 +16,27 @@ public partial class GroundItem  :  Node2D, IEntity, IServerMessageVisitor
 
     private Label _name;
 
+    private Texture2D? _texture;
+
+    private int _color;
+
     public override void _Ready()
     {
         _name = GetNode<Label>("Name");
+        _slotView = GetNode<InventorySlotView>("Slot1");
         _slotView.OnMouseInputEvent += OnEvent;
+        if (_texture != null)
+            _slotView.PutTexture(_texture, _color);
     }
 
     private void Init(long id, string entityName, 
-        Vector2I coordinate, Texture2D texture2D)
+        Vector2I coordinate, Texture2D texture2D, int color)
     {
-        _slotView = GetNode<InventorySlotView>("Slot1");
-        _slotView._Ready();
         Id = id;
+        _color = color;
         EntityName = entityName;
         Position = coordinate.ToPosition();
-        _slotView.PutTexture(texture2D);
+        _texture = texture2D;
     }
 
     private void OnEvent(object? sender, SlotMouseEvent slotMouseEvent)
@@ -49,6 +55,11 @@ public partial class GroundItem  :  Node2D, IEntity, IServerMessageVisitor
         }
     }
 
+    public void Pick()
+    {
+        EventMediator?.NotifyServer(new PickItemEvent((int)Id));
+    }
+
     public long Id { get; private set; }
     
     public string EntityName { get; private set; } = "";
@@ -61,7 +72,7 @@ public partial class GroundItem  :  Node2D, IEntity, IServerMessageVisitor
         PackedScene scene = ResourceLoader.Load<PackedScene>("res://Scenes/GroundItem.tscn");
         var item = scene.Instantiate<GroundItem>();
         var name = message.Number > 0 ? message.Name + ":" + message.Number : message.Name;
-        item.Init(message.Id, name, message.Coordinate, texture2D);
+        item.Init(message.Id, name, message.Coordinate, texture2D, message.Color);
         item.EventMediator = eventMediator;
         return item;
     }

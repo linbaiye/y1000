@@ -24,16 +24,6 @@ SELLITEM:女子中长发
 BUYTITLE:牛美
 BUYCAPTION:收购技能造女子衣服与首饰.
 BUYIMAGE:106
-BUYITEM:女子中长发
-BUYITEM:女子长靴
-BUYITEM:女子长裤
-BUYITEM:女子束裤
-BUYITEM:女子夫人发
-BUYITEM:女子麻花辫
-BUYITEM:女子束长发
-BUYITEM:女子束发
-BUYITEM:女子长发
 BUYITEM:女子黄龙手套
 BUYITEM:女子黄龙弓服
 BUYITEM:女子黄龙鞋
-BUYITEM:女子青龙护腕

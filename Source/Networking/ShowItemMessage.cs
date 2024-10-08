@@ -11,15 +11,18 @@ public class ShowItemMessage : AbstractEntityMessage
     
     public Vector2I Coordinate { get; }
     
+    public int Color { get; }
+    
     public override void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
     }
 
-    public ShowItemMessage(long id, string name, int number, Vector2I coordinate) : base(id)
+    public ShowItemMessage(long id, string name, int number, Vector2I coordinate, int color) : base(id)
     {
         Name = name;
         Number = number;
         Coordinate = coordinate;
+        Color = color;
     }
 }

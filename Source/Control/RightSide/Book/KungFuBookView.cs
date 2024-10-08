@@ -1,5 +1,7 @@
 ﻿
+using System.Linq;
 using NLog;
+using y1000.Source.Assistant;
 using y1000.Source.Control.RightSide.Inventory;
 using y1000.Source.KungFu;
 using y1000.Source.Sprite;
@@ -18,9 +20,11 @@ public partial class KungFuBookView : AbstractInventoryView
     private readonly MagicSdbReader _magicSdbReader = MagicSdbReader.Instance;
 
     private BookPage? _currentPage;
+    
     private InventorySlotView? _currentFocused;
-    
-    
+
+    private Hotkeys? _hotkeys;
+
     public override void _Ready()
     {
         base._Ready();
@@ -40,6 +44,7 @@ public partial class KungFuBookView : AbstractInventoryView
     {
         _currentPage = bookPage;
         RefreshPage();
+        RefreshHotKeys();
     }
 
     private void OnSlotKeyEvent(object? sender, SlotKeyEvent keyEvent)
@@ -47,6 +52,7 @@ public partial class KungFuBookView : AbstractInventoryView
         if (sender is InventorySlotView slotView && _currentPage != null)
             _kungFuBook.OnKeyPressed(_currentPage.Number, slotView.Number, keyEvent.Key);
     }
+    
 
     private void OnSlotEvent(object? sender, SlotMouseEvent inputMouseEvent)
     {
@@ -87,14 +93,13 @@ public partial class KungFuBookView : AbstractInventoryView
         }
         if (picked.Number != _currentFocused.Number)
         {
-            Log.Debug("Swap drag slots {0} {1}.", picked.Number, _currentFocused.Number);
             _kungFuBook.OnUISwapSlot(_currentPage.Number, picked.Number, _currentFocused.Number);
         }
     }
 
     private void SetSlotView(int index, IKungFu kungFu)
     {
-        var iconId = _magicSdbReader.GetIconId(kungFu.Name);
+        var iconId = _magicSdbReader.GetIconId(kungFu);
         var texture2D = _iconReader.Get(iconId);
         if (texture2D != null)
         {
@@ -105,7 +110,7 @@ public partial class KungFuBookView : AbstractInventoryView
 
     public void RefreshPage()
     {
-        ForeachSlot(slot=>slot.Clear());
+        ForeachSlot(slot=>slot.ClearTextureAndTip());
         if (_currentPage?.Number == 1)
         {
             _kungFuBook.ForeachUnnamed(SetSlotView);
@@ -116,11 +121,31 @@ public partial class KungFuBookView : AbstractInventoryView
         }
     }
 
-    public void BindKungFuBook(KungFuBook book)
+    private void OnHotkeyUpdated(Hotkeys hotkeys)
+    {
+        if (_currentPage == null)
+        {
+            return;
+        }
+        var number = _currentPage.Number;
+        UpdateHotKeys(hotkeys, hotkeys.KungFuContexts.Where(ctx => ctx.Page == number));
+    }
+
+    public void BindKungFuBook(KungFuBook book, Hotkeys hotkeys)
     {
         _kungFuBook = book;
         RefreshPage();
         book.UpdatedEvent += (_, _) => RefreshPage();
+        hotkeys.KeyUpdated += OnHotkeyUpdated;
+        _hotkeys = hotkeys;
+    }
+    
+    private void RefreshHotKeys()
+    {
+        if (_hotkeys != null && Visible)
+        {
+            OnHotkeyUpdated(_hotkeys);
+        }
     }
     
     public void ButtonClicked()
@@ -128,6 +153,7 @@ public partial class KungFuBookView : AbstractInventoryView
         Visible = !Visible;
         if (Visible)
             _currentPage?.GrabFocus();
+        RefreshHotKeys();
         ToggleMouseFilter();
     }
 }

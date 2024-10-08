@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bf5l5nu0lr8qr"]
+[gd_scene load_steps=7 format=3 uid="uid://bf5l5nu0lr8qr"]
 
 [ext_resource type="Texture2D" uid="uid://cj3np7357yr60" path="res://assets/ui/player_attribute.png" id="1_d6a61"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_cdrvo"]
 [ext_resource type="Script" path="res://Source/Control/PlayerAttribute/PlayerAttributeWindow.cs" id="2_y6m1e"]
 [ext_resource type="Script" path="res://Source/Control/PlayerAttribute/PlayerAttributeGroup.cs" id="3_0d3v6"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="5_0al77"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h3xdh"]
 
@@ -200,7 +201,7 @@ offset_left = 282.0
 offset_top = 314.0
 offset_right = 314.0
 offset_bottom = 335.0
-theme_override_fonts/font = ExtResource("2_cdrvo")
+theme = ExtResource("5_0al77")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_h3xdh")
 text = "关闭"

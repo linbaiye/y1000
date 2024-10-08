@@ -8,6 +8,7 @@ using y1000.Source.Entity;
 using y1000.Source.Map;
 using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
+using y1000.Source.Player;
 using y1000.Source.Util;
 using ILogger = NLog.ILogger;
 
@@ -32,15 +33,19 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	
 	public OffsetTexture? EffectOffsetTexture => _state.EffectOffsetTexture(this);
 
+
+	public NpcType Type { get; set; } = NpcType.MONSTER;
 	
 	private void Init(long id, Direction direction, IMonsterState state, Vector2I coordinate, IMap map,
-		string name, MonsterAnimation animation, string atz, MonsterAnimation? effect)
+		string name, MonsterAnimation animation, string atz, MonsterAnimation? effect,
+		NpcType type)
 	{
 		base.Init(id, direction, coordinate, map, name);
 		_state = state;
 		_animation = animation;
 		AtzName = atz;
 		_effectAnimation = effect;
+		Type = type;
 	}
 
 	public MonsterAnimation MonsterAnimation => _animation;
@@ -104,6 +109,11 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		ChangeState(MonsterMoveState.Move(MonsterAnimation, moveMessage.Direction, moveMessage.Speed));
 	}
 
+	public void Visit(EntityChatMessage message)
+	{
+		GetNode<KungFuTip>("ChatPopup").Display(message.Content);
+	}
+
 	public void Visit(HurtMessage hurtMessage)
 	{
 		ChangeState(MonsterStillState.Hurt(MonsterAnimation));
@@ -134,15 +144,10 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 		Delete();
 	}
 
-	public void Visit(EntitySoundMessage message)
-	{
-		PlaySound(message.Sound);
-	}
 
 	public void Visit(CreatureDieMessage message)
 	{
 		ChangeState(MonsterStillState.Die(MonsterAnimation));
-		PlaySound(message.Sound);
 		ShowLifePercent(0);
 	}
 
@@ -156,7 +161,6 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 	{
 		var interpolation = npcInterpolation.Interpolation;
 		var name = npcInterpolation.Name;
-		LOGGER.Debug("Trying to initialize {0}", npcInterpolation.Name);
 		var monsterAnimation = MonsterAnimationFactory.Instance.Load("z" + npcInterpolation.Shape,
 			npcInterpolation.Animate);
 		var effectAnimation =
@@ -166,7 +170,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 			interpolation.ElapsedMillis, interpolation.Direction, monsterAnimation);
 		monster.Init(npcInterpolation.Id, interpolation.Direction, 
 			state, interpolation.Coordinate, map, name, monsterAnimation,
-			"z" + npcInterpolation.Shape, effectAnimation);
+			"z" + npcInterpolation.Shape, effectAnimation, npcInterpolation.NpcType);
 		if (state is AbstractCreatureMoveState<Monster> moveState)
 		{
 			moveState.DriftPosition(monster);

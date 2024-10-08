@@ -1,10 +1,10 @@
 ﻿using System;
 using Godot;
 using NLog;
+using y1000.Source.Assistant;
 using y1000.Source.Character;
 using y1000.Source.Item;
 using y1000.Source.Sprite;
-using y1000.Source.Util;
 
 namespace y1000.Source.Control.RightSide.Inventory;
 
@@ -19,6 +19,12 @@ public partial class InventoryView : AbstractInventoryView
     private CharacterInventory _inventory = CharacterInventory.Empty;
 
     private Label? _textLabel;
+
+    private bool _bankMode;
+
+    private Action<InventorySlotView>? _dragHandler;
+
+    private Hotkeys? _hotkeys;
     
     public override void _Ready()
     {
@@ -29,7 +35,47 @@ public partial class InventoryView : AbstractInventoryView
             view.OnKeyboardEvent += OnSlotKeyEvent;
         });
         _textLabel = GetNode<Label>("TextLabel");
+        _bankMode = false;
+        Visible = false;
     }
+
+    public void EnableBankMode(Action<InventorySlotView> dragHandler)
+    {
+        _bankMode = true;
+        _dragHandler = dragHandler;
+    }
+
+    public void DisableBankMode()
+    {
+        _bankMode = false;
+    }
+
+    private void OnBankModeSlotEvent(InventorySlotView slot, SlotMouseEvent mouseEvent)
+    {
+        var type = mouseEvent.EventType;
+        if (type == SlotMouseEvent.Type.MOUSE_LEFT_RELEASE)
+        {
+            _dragHandler?.Invoke(slot);
+        }
+    }
+
+    private void OnInventorySlotEvent(InventorySlotView slot, SlotMouseEvent mouseEvent)
+    {
+        var type = mouseEvent.EventType;
+        if (type == SlotMouseEvent.Type.MOUSE_LEFT_RELEASE)
+        {
+            OnMouseLeftRelease(slot);
+        }
+        else if (type == SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
+        {
+            _inventory.OnUIDoubleClick(slot.Number);
+        }
+        else if (type == SlotMouseEvent.Type.MOUSE_RIGHT_CLICK)
+        {
+            _inventory.OnRightClick(slot.Number);
+        }
+    }
+    
 
     private void OnSlotEvent(object? sender, SlotMouseEvent mouseEvent)
     {
@@ -46,17 +92,16 @@ public partial class InventoryView : AbstractInventoryView
         {
             OnMouseGone();
         }
-        else if (type == SlotMouseEvent.Type.MOUSE_LEFT_RELEASE)
+        else
         {
-            OnMouseLeftRelease(slot);
-        }
-        else if (type == SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK)
-        {
-            _inventory.OnUIDoubleClick(slot.Number);
-        }
-        else if (type == SlotMouseEvent.Type.MOUSE_RIGHT_CLICK)
-        {
-            _inventory.OnRightClick(slot.Number);
+            if (_bankMode)
+            {
+                OnBankModeSlotEvent(slot, mouseEvent);
+            }
+            else
+            {
+                OnInventorySlotEvent(slot, mouseEvent);
+            }
         }
     }
     
@@ -66,15 +111,6 @@ public partial class InventoryView : AbstractInventoryView
             _inventory.OnViewKeyPressed(slotView.Number, keyEvent.Key);
     }
 
-    private string Format(ICharacterItem item)
-    {
-        if (item is CharacterStackItem stackItem)
-        {
-            return item.ItemName + ":" + stackItem.Number;
-        }
-
-        return item.ItemName;
-    }
 
 
     private void OnMouseEntered(InventorySlotView slot)
@@ -83,7 +119,7 @@ public partial class InventoryView : AbstractInventoryView
         var item = _inventory.Find(slot.Number);
         if (item != null && _textLabel != null)
         {
-            _textLabel.Text = Format(item);
+            _textLabel.Text = item.ToString();
         }
     }
 
@@ -108,24 +144,27 @@ public partial class InventoryView : AbstractInventoryView
             _inventory.OnUISwap(picked.Number, _currentFocused.Number);
         }
     }
+
     
-    public void BindInventory(CharacterInventory inventory)
+    public void BindInventory(CharacterInventory inventory, Hotkeys hotkeys)
     {
         inventory.Foreach(SetIconToSlot);
         inventory.InventoryChanged += OnInventoryUpdated;
         _inventory = inventory;
+        hotkeys.KeyUpdated += hk => UpdateHotKeys(hk, hk.InventoryContexts);
+        _hotkeys = hotkeys;
     }
 
     private void OnInventoryUpdated(object? sender, EventArgs eventArgs)
     {
         if (sender is CharacterInventory inventory)
         {
-            ForeachSlot(slot=>slot.Clear());
+            ForeachSlot(slot=>slot.ClearTextureAndTip());
             inventory.Foreach(SetIconToSlot);
         }
     }
     
-    private void SetIconToSlot(int slot, ICharacterItem item)
+    private void SetIconToSlot(int slot, IItem item)
     {
         var texture = TEXTURE_READER.Get(item.IconId);
         if (texture != null)
@@ -133,9 +172,21 @@ public partial class InventoryView : AbstractInventoryView
             GetNode<InventorySlotView>("Slots/Slot" + slot).PutTexture(texture, item.Color);
         }
     }
+
+    private void RefreshHotKeys()
+    {
+        if (_hotkeys != null && Visible)
+        {
+            UpdateHotKeys(_hotkeys, _hotkeys.InventoryContexts);
+        }
+    }
+
+    public InventorySlotView? FocusedSlotView => _currentFocused;
+    
     public void ButtonClicked()
     {
         Visible = !Visible;
         ToggleMouseFilter();
+        RefreshHotKeys();
     }
 }

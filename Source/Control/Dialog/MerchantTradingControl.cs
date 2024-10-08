@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Godot;
 using NLog;
 using y1000.Source.Character;
@@ -12,8 +11,6 @@ namespace y1000.Source.Control.Dialog;
 
 public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoubleClickHandler
 {
-    private ItemList _itemList;
-    
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
     private readonly IconReader _iconReader = IconReader.ItemIconReader;
@@ -31,24 +28,21 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
     private CharacterInventory? _inventory;
 
     private MerchantTrade _trade = new();
-
-    private ItemFactory? _itemFactory;
     
-    private class Item
-    {
-        private Item(int price, string name)
-        {
-            Price = price;
-            Name = name;
-        }
-        public string Name { get; }
-        public int Price { get; }
+    private ItemFactory? _itemFactory;
 
-        public static Item Parse(string text)
-        {
-            var tokens = Regex.Split(text, @"\s+");
-            return new Item(int.Parse(tokens[1]), tokens[0]);
-        }
+    private ItemsContainer _itemsContainer;
+    
+    public override void _Ready()
+    {
+        base._Ready();
+        _confirmButton = GetNode<TextureButton>("ConfirmButton");
+        _confirmButton.Pressed += OnConfirmTrade;
+        GetNode<TextureButton>("CancelButton").Pressed += Close;
+        _total = GetNode<Label>("Total");
+        _itemsContainer = GetNode<ItemsContainer>("ItemsContainer");
+        _itemsContainer.ItemDoubleClicked += OnItemDoubleClicked;
+        Close();
     }
 
     private void AddToTotal(long delta)
@@ -57,18 +51,22 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         _total.Text = (current + delta).ToString();
     }
 
-    public override void _Ready()
+    private void OnItemDoubleClicked(Item item)
     {
-        base._Ready();
-        _itemList = GetNode<ItemList>("ItemList");
-        _confirmButton = GetNode<TextureButton>("ConfirmButton");
-        _confirmButton.Pressed += OnConfirmTrade;
-        GetNode<TextureButton>("CancelButton").Pressed += Close;
-        _total = GetNode<Label>("Total");
-        _itemList.ItemClicked += OnItemClicked;
-        Close();
+        if (_tradeInputWindow == null || _itemFactory == null)
+        {
+            return;
+        }
+        var itemName = item.ItemName;
+        if (_itemFactory.IsStackItem(itemName))
+        {
+            _tradeInputWindow.Open(itemName, OnInputWindowAction);
+        }
+        else
+        {
+            _tradeInputWindow.OpenUniqueItem(itemName, OnInputWindowAction);
+        }
     }
-
     private void OnConfirmTrade()
     {
         if (_trade.IsEmpty || Merchant == null)
@@ -102,28 +100,8 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
             _inventory?.RollbackBuying(_trade);
         }
         Visible = false;
-        _itemList.Clear();
+        _itemsContainer.Clear();
     }
-
-    private void OnItemClicked(long index, Vector2 vector2, long buttonIndex)
-    {
-        if ((int)buttonIndex != (int)MouseButtonMask.Left || _tradeInputWindow == null)
-        {
-            return;
-        }
-        var itemText = _itemList.GetItemText((int)index);
-        Item item = Item.Parse(itemText);
-        if (_itemFactory.IsStackItem(item.Name))
-        {
-            _tradeInputWindow.Open(item.Name, OnInputWindowAction);
-        }
-        else
-        {
-            _tradeInputWindow.OpenUniqueItem(item.Name, OnInputWindowAction);
-        }
-    }
-
-
 
     private void OnInputWindowAction(bool confirmed)
     {
@@ -164,40 +142,20 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
             _eventMediator?.NotifyTextArea("物品栏已满。");
             return;
         }
-        var item = _itemFactory.CreateCharacterItem(_tradeInputWindow.ItemName, _tradeInputWindow.Number);
-        Logger.Debug("Buying item {0} for {1}.", item.ItemName, total);
+        var i = _itemsContainer.FindItem(_tradeInputWindow.ItemName);
+        if (i == null)
+        {
+            return;
+        }
+        var item = _itemFactory.CreateCharacterItem(_tradeInputWindow.ItemName, i.IconColor, _tradeInputWindow.Number);
         if (!_inventory.Buy(item, total, _trade))
         {
             return;
         }
-        var selectedItems = _itemList.GetSelectedItems();
-        LockItem(selectedItems);
+        i.Lock("购买数量: " + _tradeInputWindow.Number);
+        AddToTotal(_tradeInputWindow.Number * i.Price);
     }
 
-    private void LockItem(int[] indices)
-    {
-        if (_tradeInputWindow == null || _tradeInputWindow.ItemName == null)
-        {
-            return;
-        }
-        var name = _tradeInputWindow.ItemName;
-        foreach (var idx in indices)
-        {
-            var text = _itemList.GetItemText(idx);
-            if (text == null)
-            {
-                continue;
-            }
-            var item = Item.Parse(text);
-            if (item.Name.Equals(name))
-            {
-                _itemList.SetItemText(idx, text + "    " + (_playerSelling ? "出售" : "购买") + "数量: " + _tradeInputWindow.Number);
-                _itemList.SetItemDisabled(idx, true);
-                AddToTotal(_tradeInputWindow.Number * item.Price);
-                break;
-            }
-        }
-    }
 
     private void OnConfirmSellItem()
     {
@@ -232,21 +190,22 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         {
             return;
         }
-        var array = new List<int>();
-        for (var i = 0; i < _itemList.ItemCount; i++)
+        var i = _itemsContainer.FindItem(name);
+        if (i != null)
         {
-            array.Add(i);
+            i.Lock("出售数量: " + _tradeInputWindow.Number);
+            AddToTotal(_tradeInputWindow.Number * i.Price);
         }
-        LockItem(array.ToArray());
     }
 
     private void RefreshItemList(List<Merchant.Item> items)
     {
-        _itemList.Clear();
+        _itemsContainer.Clear();
         foreach (var item in items)
         {
             var icon = _iconReader.Get(item.IconId);
-            _itemList.AddItem(item.Name + "  " + item.Price, icon);
+            if (icon != null)
+                _itemsContainer.AddItem(item.Name, icon, item.Color, item.Price);
         }
     }
 

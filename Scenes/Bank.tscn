@@ -1,0 +1,171 @@
+[gd_scene load_steps=8 format=3 uid="uid://ca6kivqahtqcd"]
+
+[ext_resource type="Texture2D" uid="uid://bbhl24jlqorty" path="res://assets/ui/bank.png" id="1_hh7pn"]
+[ext_resource type="Script" path="res://Source/Control/Bank/BankView.cs" id="2_lwrk5"]
+[ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_ugmqg"]
+[ext_resource type="PackedScene" uid="uid://cddg0m2xyiw2b" path="res://Scenes/ConfirmButton.tscn" id="2_xx01r"]
+[ext_resource type="PackedScene" uid="uid://bx54mp4v8uiii" path="res://Scenes/CancelButton.tscn" id="3_a1n88"]
+[ext_resource type="Script" path="res://Source/Control/Bank/BankSlots.cs" id="3_tjbvg"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_pjerj"]
+
+[node name="Bank" type="NinePatchRect"]
+offset_right = 478.0
+offset_bottom = 298.0
+texture = ExtResource("1_hh7pn")
+script = ExtResource("2_lwrk5")
+
+[node name="Slots" type="GridContainer" parent="."]
+clip_contents = true
+layout_mode = 0
+offset_left = 17.0
+offset_top = 42.0
+offset_right = 463.0
+offset_bottom = 217.0
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 10
+script = ExtResource("3_tjbvg")
+
+[node name="Slot1" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot2" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot3" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot4" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot5" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot6" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot7" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot8" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot9" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot10" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot11" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot12" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot13" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot14" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot15" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot16" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot17" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot18" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot19" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot20" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot21" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot22" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot23" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot24" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot25" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot26" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot27" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot28" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot29" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot30" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot31" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot32" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot33" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot34" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot35" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot36" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot37" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot38" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot39" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="Slot40" parent="Slots" instance=ExtResource("2_ugmqg")]
+layout_mode = 2
+
+[node name="ConfirmButton" parent="." instance=ExtResource("2_xx01r")]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 235.0
+offset_right = 458.0
+offset_bottom = 265.0
+
+[node name="CancelButton" parent="." instance=ExtResource("3_a1n88")]
+visible = false
+layout_mode = 0
+offset_left = 86.0
+offset_top = 236.0
+offset_right = 166.0
+offset_bottom = 266.0
+
+[node name="TextLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 242.0
+offset_right = 175.0
+offset_bottom = 259.0
+theme_override_fonts/font = ExtResource("7_pjerj")
+theme_override_font_sizes/font_size = 12

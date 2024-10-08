@@ -1,6 +1,6 @@
 ﻿namespace y1000.Source.Item;
 
-public class CharacterItem : ICharacterItem
+public class CharacterItem : IItem
 {
     public CharacterItem(int iconId, string itemName, int color)
     {
@@ -10,7 +10,12 @@ public class CharacterItem : ICharacterItem
     }
 
     public string ItemName { get; }
-    
+
     public int IconId { get; }
     public int Color { get; }
+
+    public override string ToString()
+    {
+        return ItemName;
+    }
 }

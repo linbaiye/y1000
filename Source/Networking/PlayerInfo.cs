@@ -33,6 +33,9 @@ public class PlayerInfo
     public int ClothingColor { get; set; }
     public int BootColor { get; set; }
     public int WristColor { get; set; }
+    public int NameColor { get; set; }
+    
+    public string? GuildName { get; set; }
 
     public static PlayerInfo FromPacket(PlayerInfoPacket packet)
     {
@@ -56,6 +59,8 @@ public class PlayerInfo
             ClothingColor = packet.ClothingColor,
             BootColor = packet.BootColor,
             WristColor = packet.WristColor,
+            NameColor = packet.NameColor,
+            GuildName = packet.GuildName,
         };
     }
     

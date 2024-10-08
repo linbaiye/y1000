@@ -24,11 +24,19 @@ public partial class TradeInputWindow : NinePatchRect
 	
 	public class InventoryTradeItem
 	{
-		public InventoryTradeItem(string name, int slot)
+		private readonly object? _extraData;
+		public InventoryTradeItem(string name, int slot, object? extraData = null)
 		{
 			Name = name;
 			Slot = slot;
+			_extraData = extraData;
 		}
+		
+		public T? ExtData<T>()
+		{
+			return _extraData is T data ? data : default;
+		}
+		
 		public string Name { get; }
 		public int Slot { get; }
 	}

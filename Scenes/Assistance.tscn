@@ -1,0 +1,649 @@
+[gd_scene load_steps=28 format=3 uid="uid://bgcmf4adq48gs"]
+
+[ext_resource type="Texture2D" uid="uid://bjt64qlxydsmx" path="res://assets/ui/assistance.png" id="1_k625j"]
+[ext_resource type="Texture2D" uid="uid://5juyhlq46430" path="res://assets/ui/heal.png" id="2_n4yjs"]
+[ext_resource type="Script" path="res://Source/Control/Assistance/AssistantView.cs" id="2_qbqa2"]
+[ext_resource type="Texture2D" uid="uid://nvndcqsrw0uw" path="res://assets/ui/loot.png" id="4_c5b3e"]
+[ext_resource type="Texture2D" uid="uid://bqnfyqxgdsnkp" path="res://assets/ui/heal_setting.png" id="6_rvptb"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_0vfar"]
+[ext_resource type="Script" path="res://Source/Control/Assistance/HealItemView.cs" id="7_ifcax"]
+[ext_resource type="Script" path="res://Source/Control/Assistance/AutoFillView.cs" id="8_67i3c"]
+[ext_resource type="Texture2D" uid="uid://c12ndbb5ibdta" path="res://assets/ui/loot_assistance.png" id="11_550bb"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="11_ybejs"]
+[ext_resource type="Script" path="res://Source/Control/Assistance/AutoLootAssistantView.cs" id="12_b2hom"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5aqx"]
+bg_color = Color(0.87451, 0.47451, 0.317647, 0)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y06l7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Image" id="Image_r3rgr"]
+data = {
+"data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 179, 179, 179, 153, 178, 178, 178, 166, 184, 184, 184, 18, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 178, 178, 178, 166, 178, 178, 178, 151, 255, 255, 255, 0, 255, 255, 255, 0, 178, 178, 178, 166, 178, 178, 178, 217, 178, 178, 178, 179, 184, 184, 184, 18, 255, 255, 255, 0, 255, 255, 255, 0, 175, 175, 175, 19, 178, 178, 178, 179, 178, 178, 178, 217, 178, 178, 178, 165, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 179, 179, 179, 180, 175, 175, 175, 19, 175, 175, 175, 19, 179, 179, 179, 180, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 178, 178, 178, 181, 178, 178, 178, 181, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 178, 178, 178, 165, 178, 178, 178, 165, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
+"format": "RGBA8",
+"height": 12,
+"mipmaps": false,
+"width": 12
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_ri8fq"]
+image = SubResource("Image_r3rgr")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igqr6"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 21.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6vpd"]
+content_margin_left = 21.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41j4u"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xhii"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 21.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bsmr"]
+content_margin_left = 21.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dcqu"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 21.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne252"]
+content_margin_left = 21.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uk5ye"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 21.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mmiu"]
+content_margin_left = 21.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_jcvvp"]
+CheckBox/font_sizes/font_size = 14
+MenuButton/font_sizes/font_size = 12
+OptionButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+OptionButton/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+OptionButton/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+OptionButton/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+OptionButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+OptionButton/colors/font_outline_color = Color(1, 1, 1, 1)
+OptionButton/colors/font_pressed_color = Color(1, 1, 1, 1)
+OptionButton/constants/arrow_margin = 4
+OptionButton/constants/h_separation = 4
+OptionButton/constants/modulate_arrow = 0
+OptionButton/constants/outline_size = 0
+OptionButton/font_sizes/font_size = 12
+OptionButton/fonts/font = ExtResource("7_0vfar")
+OptionButton/icons/arrow = SubResource("ImageTexture_ri8fq")
+OptionButton/styles/disabled = SubResource("StyleBoxFlat_igqr6")
+OptionButton/styles/disabled_mirrored = SubResource("StyleBoxFlat_v6vpd")
+OptionButton/styles/focus = SubResource("StyleBoxFlat_41j4u")
+OptionButton/styles/hover = SubResource("StyleBoxFlat_0xhii")
+OptionButton/styles/hover_mirrored = SubResource("StyleBoxFlat_8bsmr")
+OptionButton/styles/normal = SubResource("StyleBoxFlat_8dcqu")
+OptionButton/styles/normal_mirrored = SubResource("StyleBoxFlat_ne252")
+OptionButton/styles/pressed = SubResource("StyleBoxFlat_uk5ye")
+OptionButton/styles/pressed_mirrored = SubResource("StyleBoxFlat_5mmiu")
+PopupMenu/font_sizes/font_separator_size = 12
+PopupMenu/font_sizes/font_size = 12
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_a2q7i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amcp4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Assistance" type="NinePatchRect"]
+custom_minimum_size = Vector2(240, 365)
+offset_right = 240.0
+offset_bottom = 365.0
+texture = ExtResource("1_k625j")
+script = ExtResource("2_qbqa2")
+
+[node name="Heal" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 43.0
+offset_right = 61.0
+offset_bottom = 75.0
+texture_normal = ExtResource("2_n4yjs")
+
+[node name="Loot" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 43.0
+offset_right = 105.0
+offset_bottom = 75.0
+texture_normal = ExtResource("4_c5b3e")
+
+[node name="AutoFill" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(212, 226)
+layout_mode = 0
+offset_left = 14.0
+offset_top = 77.0
+offset_right = 226.0
+offset_bottom = 303.0
+texture = ExtResource("6_rvptb")
+script = ExtResource("8_67i3c")
+
+[node name="Item1" type="NinePatchRect" parent="AutoFill"]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 22.0
+offset_right = 211.0
+offset_bottom = 46.0
+script = ExtResource("7_ifcax")
+
+[node name="CheckBox" type="CheckBox" parent="AutoFill/Item1"]
+custom_minimum_size = Vector2(22, 22)
+layout_direction = 1
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_n5aqx")
+flat = true
+clip_text = true
+
+[node name="LineEdit" type="LineEdit" parent="AutoFill/Item1"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+offset_left = 78.0
+offset_top = 1.0
+offset_right = 133.0
+offset_bottom = 25.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_y06l7")
+text = "10"
+max_length = 2
+flat = true
+caret_blink = true
+
+[node name="OptionButton" type="OptionButton" parent="AutoFill/Item1"]
+layout_mode = 2
+offset_left = 132.0
+offset_top = 1.0
+offset_right = 208.0
+offset_bottom = 25.0
+theme = SubResource("Theme_jcvvp")
+theme_override_font_sizes/font_size = 12
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
+theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+flat = true
+item_count = 3
+popup/item_0/text = "生药"
+popup/item_0/id = 0
+popup/item_1/text = "丸药"
+popup/item_1/id = 1
+popup/item_2/text = "弹药"
+popup/item_2/id = 2
+
+[node name="Item2" type="NinePatchRect" parent="AutoFill"]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 51.0
+offset_right = 211.0
+offset_bottom = 75.0
+script = ExtResource("7_ifcax")
+
+[node name="CheckBox" type="CheckBox" parent="AutoFill/Item2"]
+custom_minimum_size = Vector2(22, 22)
+layout_direction = 1
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_n5aqx")
+flat = true
+clip_text = true
+
+[node name="LineEdit" type="LineEdit" parent="AutoFill/Item2"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+offset_left = 78.0
+offset_top = 1.0
+offset_right = 133.0
+offset_bottom = 25.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_y06l7")
+text = "10"
+max_length = 2
+flat = true
+caret_blink = true
+
+[node name="OptionButton" type="OptionButton" parent="AutoFill/Item2"]
+layout_mode = 2
+offset_left = 132.0
+offset_top = 1.0
+offset_right = 208.0
+offset_bottom = 25.0
+theme = SubResource("Theme_jcvvp")
+theme_override_font_sizes/font_size = 12
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
+theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+flat = true
+item_count = 3
+popup/item_0/text = "生药"
+popup/item_0/id = 0
+popup/item_1/text = "丸药"
+popup/item_1/id = 1
+popup/item_2/text = "弹药"
+popup/item_2/id = 2
+
+[node name="Item3" type="NinePatchRect" parent="AutoFill"]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 81.0
+offset_right = 211.0
+offset_bottom = 105.0
+script = ExtResource("7_ifcax")
+
+[node name="CheckBox" type="CheckBox" parent="AutoFill/Item3"]
+custom_minimum_size = Vector2(22, 22)
+layout_direction = 1
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_n5aqx")
+flat = true
+clip_text = true
+
+[node name="LineEdit" type="LineEdit" parent="AutoFill/Item3"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+offset_left = 78.0
+offset_top = 1.0
+offset_right = 133.0
+offset_bottom = 25.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_y06l7")
+text = "10"
+max_length = 2
+flat = true
+caret_blink = true
+
+[node name="OptionButton" type="OptionButton" parent="AutoFill/Item3"]
+layout_mode = 2
+offset_left = 132.0
+offset_top = 1.0
+offset_right = 208.0
+offset_bottom = 25.0
+theme = SubResource("Theme_jcvvp")
+theme_override_font_sizes/font_size = 12
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
+theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+flat = true
+item_count = 3
+popup/item_0/text = "生药"
+popup/item_0/id = 0
+popup/item_1/text = "丸药"
+popup/item_1/id = 1
+popup/item_2/text = "弹药"
+popup/item_2/id = 2
+
+[node name="Item4" type="NinePatchRect" parent="AutoFill"]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 110.0
+offset_right = 211.0
+offset_bottom = 134.0
+script = ExtResource("7_ifcax")
+
+[node name="CheckBox" type="CheckBox" parent="AutoFill/Item4"]
+custom_minimum_size = Vector2(22, 22)
+layout_direction = 1
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_n5aqx")
+flat = true
+clip_text = true
+
+[node name="LineEdit" type="LineEdit" parent="AutoFill/Item4"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+offset_left = 78.0
+offset_top = 1.0
+offset_right = 133.0
+offset_bottom = 25.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_y06l7")
+text = "10"
+max_length = 2
+flat = true
+caret_blink = true
+
+[node name="OptionButton" type="OptionButton" parent="AutoFill/Item4"]
+layout_mode = 2
+offset_left = 132.0
+offset_top = 1.0
+offset_right = 208.0
+offset_bottom = 25.0
+theme = SubResource("Theme_jcvvp")
+theme_override_font_sizes/font_size = 12
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
+theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+flat = true
+item_count = 3
+popup/item_0/text = "生药"
+popup/item_0/id = 0
+popup/item_1/text = "丸药"
+popup/item_1/id = 1
+popup/item_2/text = "弹药"
+popup/item_2/id = 2
+
+[node name="Item5" type="NinePatchRect" parent="AutoFill"]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 140.0
+offset_right = 211.0
+offset_bottom = 164.0
+script = ExtResource("7_ifcax")
+
+[node name="CheckBox" type="CheckBox" parent="AutoFill/Item5"]
+custom_minimum_size = Vector2(22, 22)
+layout_direction = 1
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_n5aqx")
+flat = true
+clip_text = true
+
+[node name="LineEdit" type="LineEdit" parent="AutoFill/Item5"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+offset_left = 78.0
+offset_top = 1.0
+offset_right = 133.0
+offset_bottom = 25.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_y06l7")
+text = "10"
+max_length = 2
+flat = true
+caret_blink = true
+
+[node name="OptionButton" type="OptionButton" parent="AutoFill/Item5"]
+layout_mode = 2
+offset_left = 132.0
+offset_top = 1.0
+offset_right = 208.0
+offset_bottom = 25.0
+theme = SubResource("Theme_jcvvp")
+theme_override_font_sizes/font_size = 12
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
+theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+flat = true
+item_count = 3
+popup/item_0/text = "生药"
+popup/item_0/id = 0
+popup/item_1/text = "丸药"
+popup/item_1/id = 1
+popup/item_2/text = "弹药"
+popup/item_2/id = 2
+
+[node name="Item6" type="NinePatchRect" parent="AutoFill"]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 169.0
+offset_right = 211.0
+offset_bottom = 193.0
+script = ExtResource("7_ifcax")
+
+[node name="CheckBox" type="CheckBox" parent="AutoFill/Item6"]
+custom_minimum_size = Vector2(22, 22)
+layout_direction = 1
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_n5aqx")
+flat = true
+clip_text = true
+
+[node name="LineEdit" type="LineEdit" parent="AutoFill/Item6"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+offset_left = 78.0
+offset_top = 1.0
+offset_right = 133.0
+offset_bottom = 25.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_y06l7")
+text = "10"
+max_length = 2
+flat = true
+caret_blink = true
+
+[node name="OptionButton" type="OptionButton" parent="AutoFill/Item6"]
+layout_mode = 2
+offset_left = 132.0
+offset_top = 1.0
+offset_right = 208.0
+offset_bottom = 25.0
+theme = SubResource("Theme_jcvvp")
+theme_override_font_sizes/font_size = 12
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
+theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+flat = true
+item_count = 3
+popup/item_0/text = "生药"
+popup/item_0/id = 0
+popup/item_1/text = "丸药"
+popup/item_1/id = 1
+popup/item_2/text = "弹药"
+popup/item_2/id = 2
+
+[node name="GrindExp" type="CheckBox" parent="AutoFill"]
+custom_minimum_size = Vector2(22, 22)
+layout_direction = 1
+layout_mode = 2
+offset_left = -1.0
+offset_top = 199.0
+offset_right = 23.0
+offset_bottom = 223.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_n5aqx")
+flat = true
+clip_text = true
+
+[node name="Interval" type="LineEdit" parent="AutoFill"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+offset_left = 77.0
+offset_top = 200.0
+offset_right = 132.0
+offset_bottom = 224.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_y06l7")
+text = "10"
+max_length = 4
+flat = true
+caret_blink = true
+
+[node name="AutoLoot" type="NinePatchRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(208, 240)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 79.0
+offset_right = 224.0
+offset_bottom = 319.0
+texture = ExtResource("11_550bb")
+script = ExtResource("12_b2hom")
+
+[node name="LootItems" type="ItemList" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 24.0
+offset_right = 98.0
+offset_bottom = 157.0
+theme = ExtResource("11_ybejs")
+
+[node name="SeeItems" type="ItemList" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 24.0
+offset_right = 202.0
+offset_bottom = 157.0
+theme = ExtResource("11_ybejs")
+
+[node name="LineEdit" type="LineEdit" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 185.0
+offset_right = 135.0
+offset_bottom = 210.0
+theme_override_font_sizes/font_size = 12
+flat = true
+
+[node name="AutoCheckBox" type="CheckBox" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 217.0
+offset_right = 69.0
+offset_bottom = 241.0
+flat = true
+
+[node name="ReverseCheckBox" type="CheckBox" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 217.0
+offset_right = 131.0
+offset_bottom = 241.0
+flat = true
+
+[node name="AddButton" type="Button" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 188.0
+offset_right = 199.0
+offset_bottom = 207.0
+flat = true
+
+[node name="Label" type="Label" parent="AutoLoot"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 166.0
+offset_right = 119.0
+offset_bottom = 183.0
+theme = ExtResource("11_ybejs")
+theme_override_colors/font_color = Color(0.741176, 0.631373, 0.509804, 1)
+text = "右键添加或删除物品拾取"
+
+[node name="Tip" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 327.0
+offset_right = 228.0
+offset_bottom = 356.0
+theme = ExtResource("11_ybejs")
+vertical_alignment = 1
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 5.0
+offset_right = 236.0
+offset_bottom = 30.0
+flat = true

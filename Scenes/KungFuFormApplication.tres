@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://d1hwxjbwc7nu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnvqr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhgso"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+CheckBox/styles/focus = SubResource("StyleBoxFlat_fnvqr")
+LineEdit/font_sizes/font_size = 12
+LineEdit/styles/focus = SubResource("StyleBoxFlat_fhgso")

@@ -18,6 +18,8 @@ public partial class InventorySlotView : Panel
 	private bool _mouseHovered;
 
 	private TextureRect _textureRect;
+
+	private RichTextLabel _label;
 	
 	public override void _GuiInput(InputEvent @event)
 	{
@@ -50,10 +52,10 @@ public partial class InventorySlotView : Panel
 			{
 				OnMouseInputEvent?.Invoke(this, new SlotMouseEvent(SlotMouseEvent.Type.MOUSE_LEFT_DOUBLE_CLICK));
 			}
-			// else if (eventMouse.Pressed)
-			// {
-			// 	OnInputEvent?.Invoke(this, new SlotEvent(SlotEvent.Type.MOUSE_LEFT_CLICK));
-			// }
+			else if (eventMouse.Pressed)
+			{
+				OnMouseInputEvent?.Invoke(this, new SlotMouseEvent(SlotMouseEvent.Type.MOUSE_LEFT_CLICK));
+			}
 			else if (eventMouse.IsReleased())
 			{
 				OnMouseInputEvent?.Invoke(this, new SlotMouseEvent(SlotMouseEvent.Type.MOUSE_LEFT_RELEASE));
@@ -84,6 +86,7 @@ public partial class InventorySlotView : Panel
 		MouseEntered += OnMouseEntered;
 		MouseExited += OnMouseExited;
 		_textureRect = GetNode<TextureRect>("CenterContainer/TextureRect");
+		_label = GetNode<RichTextLabel>("Label");
 	}
 
 
@@ -100,6 +103,16 @@ public partial class InventorySlotView : Panel
 		PutTextureAndTooltip(texture2D, "", color);
 	}
 
+	public void PutText(string text)
+	{
+		_label.Text = "[b]" + text;
+	}
+
+	public void ClearText()
+	{
+		_label.Text = "";
+	}
+
 	public void PutTextureAndTooltip(Texture2D texture2D, string tip, int color = 0)
 	{
 		_textureRect.Material = null;
@@ -113,7 +126,7 @@ public partial class InventorySlotView : Panel
 
 	public Texture2D Texture => _textureRect.Texture;
 
-	public void Clear()
+	public void ClearTextureAndTip()
 	{
 		_textureRect.Texture = null;
 		TooltipText = "";

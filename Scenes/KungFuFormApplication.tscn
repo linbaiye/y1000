@@ -1,0 +1,272 @@
+[gd_scene load_steps=9 format=3 uid="uid://c7l7trn60dvkb"]
+
+[ext_resource type="Texture2D" uid="uid://bieajxkf477vv" path="res://assets/ui/kungfu_form.png" id="1_leqbw"]
+[ext_resource type="Script" path="res://Source/Control/Guild/GuildKungFuFormView.cs" id="2_7v53f"]
+[ext_resource type="PackedScene" uid="uid://cddg0m2xyiw2b" path="res://Scenes/ConfirmButton.tscn" id="2_us11u"]
+[ext_resource type="PackedScene" uid="uid://bx54mp4v8uiii" path="res://Scenes/CancelButton.tscn" id="3_06bvc"]
+[ext_resource type="Theme" uid="uid://d1hwxjbwc7nu" path="res://Scenes/KungFuFormApplication.tres" id="4_nh536"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51500"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btbui"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7gdi"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="KungFuApplicationForm" type="NinePatchRect"]
+custom_minimum_size = Vector2(542, 413)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 15.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_leqbw")
+script = ExtResource("2_7v53f")
+
+[node name="Name" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 66.0
+offset_right = 284.0
+offset_bottom = 91.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+text = "破剑式"
+flat = true
+caret_blink = true
+
+[node name="Fist" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 126.0
+offset_right = 75.0
+offset_bottom = 150.0
+theme = ExtResource("4_nh536")
+flat = true
+
+[node name="Sword" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 126.0
+offset_right = 170.0
+offset_bottom = 150.0
+theme = ExtResource("4_nh536")
+flat = true
+
+[node name="Blade" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 241.0
+offset_top = 126.0
+offset_right = 265.0
+offset_bottom = 150.0
+theme = ExtResource("4_nh536")
+flat = true
+
+[node name="Axe" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 126.0
+offset_right = 360.0
+offset_bottom = 150.0
+theme = ExtResource("4_nh536")
+flat = true
+
+[node name="Spear" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 126.0
+offset_right = 454.0
+offset_bottom = 150.0
+theme = ExtResource("4_nh536")
+flat = true
+text_overrun_behavior = 1
+
+[node name="ConfirmButton" parent="." instance=ExtResource("2_us11u")]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 321.0
+offset_right = 398.0
+offset_bottom = 351.0
+
+[node name="CancelButton" parent="." instance=ExtResource("3_06bvc")]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 321.0
+offset_right = 504.0
+offset_bottom = 351.0
+
+[node name="AttackSpeed" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 160.0
+offset_right = 159.0
+offset_bottom = 185.0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_51500")
+flat = true
+caret_blink = true
+
+[node name="HeadDamage" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 191.0
+offset_right = 159.0
+offset_bottom = 216.0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_btbui")
+flat = true
+caret_blink = true
+
+[node name="HeadArmor" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 223.0
+offset_right = 159.0
+offset_bottom = 248.0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_o7gdi")
+flat = true
+caret_blink = true
+
+[node name="SwingInnerPower" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 255.0
+offset_right = 159.0
+offset_bottom = 280.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+
+[node name="SwingOuterPower" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 255.0
+offset_right = 279.0
+offset_bottom = 280.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="SwingPower" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 255.0
+offset_right = 398.0
+offset_bottom = 280.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="SwingLife" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 255.0
+offset_right = 518.0
+offset_bottom = 280.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="BodyDamage" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 160.0
+offset_right = 279.0
+offset_bottom = 185.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="ArmDamage" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 191.0
+offset_right = 279.0
+offset_bottom = 216.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="ArmArmor" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 223.0
+offset_right = 279.0
+offset_bottom = 248.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="Recovery" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 160.0
+offset_right = 398.0
+offset_bottom = 185.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="LegDamage" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 191.0
+offset_right = 398.0
+offset_bottom = 216.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="LegArmor" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 223.0
+offset_right = 398.0
+offset_bottom = 248.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="Avoid" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 160.0
+offset_right = 518.0
+offset_bottom = 185.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="BodyArmor" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 191.0
+offset_right = 518.0
+offset_bottom = 216.0
+theme = ExtResource("4_nh536")
+theme_override_font_sizes/font_size = 12
+flat = true
+caret_blink = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 310.0
+offset_right = 285.0
+offset_bottom = 363.0
+theme_override_font_sizes/font_size = 12

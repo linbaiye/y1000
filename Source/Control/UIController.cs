@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using Godot;
 using NLog;
+using y1000.Source.Assistant;
+using y1000.Source.Audio;
 using y1000.Source.Character;
+using y1000.Source.Control.Bank;
 using y1000.Source.Control.Bottom;
+using y1000.Source.Control.Buff;
 using y1000.Source.Control.Dialog;
+using y1000.Source.Control.Guild;
 using y1000.Source.Control.LeftSide;
 using y1000.Source.Control.Map;
 using y1000.Source.Control.PlayerAttribute;
 using y1000.Source.Control.PlayerTrade;
+using y1000.Source.Control.Quest;
 using y1000.Source.Control.RightSide;
+using y1000.Source.Control.System;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Item;
@@ -45,9 +52,22 @@ public partial class UIController : CanvasLayer
 
     private MapView _mapView;
 
-    
-    private static readonly string TRADING_ERROR = "另一交易正在进行中。";
+    private BankView _bankView;
 
+    private SystemMenu _systemMenu;
+    
+    private SystemSettings _systemSettings;
+
+    private LeftupText _leftupText;
+    
+    private SystemNotification _systemNotification;
+
+    private GuildKungFuFormView _guildKungFuFormView;
+
+    private QuestDialogView _questDialogView;
+
+    private BuffContainer _buffContainer;
+    
     public override void _Ready()
     {
         _bottomControl = GetNode<BottomControl>("BottomUI");
@@ -60,7 +80,22 @@ public partial class UIController : CanvasLayer
         _attributeWindow = GetNode<PlayerAttributeWindow>("PlayerAttributeWindow");
         _playerTradeWindow = GetNode<PlayerTradeWindow>("PlayerTradeWindow");
         _mapView = GetNode<MapView>("MapView");
+        _bankView = GetNode<BankView>("Bank");
+        _systemMenu = GetNode<SystemMenu>("SysMenu");
+        _systemMenu.SettingPressed += OnSysSettingPressed;
+        _systemSettings = GetNode<SystemSettings>("SysSetting");
+        _leftupText = GetNode<LeftupText>("LeftUpText");
+        _systemNotification = GetNode<SystemNotification>("SysNotification");
+        _guildKungFuFormView = GetNode<GuildKungFuFormView>("KungFuApplicationForm");
+        _questDialogView = GetNode<QuestDialogView>("QuestDialog");
+        _buffContainer = GetNode<BuffContainer>("BuffContainer");
         BindButtons();
+    }
+
+    private void OnSysSettingPressed()
+    {
+        _systemMenu.Visible = false;
+        _systemSettings.Visible = true;
     }
 
     public void Initialize(EventMediator eventMediator,
@@ -74,6 +109,10 @@ public partial class UIController : CanvasLayer
         _playerTradeWindow.Initialize(_tradeInputWindow, eventMediator);
         _mapView.Initialize(eventMediator);
         _itemAttributeControl.Initialize(eventMediator);
+        _bankView.Initialize(eventMediator, _tradeInputWindow);
+        _guildKungFuFormView.Initialize(eventMediator);
+        _questDialogView.Initialize(eventMediator);
+        _buffContainer.Initialize(eventMediator);
     }
 
     public void DisplayTextMessage(TextMessage message)
@@ -82,27 +121,44 @@ public partial class UIController : CanvasLayer
         {
             _leftsideTextControl.Display(message.Text);
         }
+        else if (message.Location == TextMessage.TextLocation.LEFT_UP)
+        {
+            _leftupText.Display(message.Text);
+            _bottomControl.DisplayMessage(new TextEvent(message.Text));
+        }
+        else if (message.Location == TextMessage.TextLocation.CENTER)
+        {
+            _systemNotification.Display(message.Text);
+        }
         else
         {
             _bottomControl.DisplayMessage(new TextEvent(message.Text, message.ColorType));
         }
     }
 
-    
 
     private void BindButtons()
     {
         _bottomControl.InventoryButton.Pressed += _rightControl.OnInventoryButtonClicked;
         _bottomControl.KungFuButton.Pressed += _rightControl.OnKungFuButtonClicked;
+        _bottomControl.AssistantButton.Pressed += _rightControl.OnAssistantClicked;
+        _bottomControl.SystemButton.Pressed += _systemMenu.OnSystemButtonClicked;
     }
     
-    public void BindCharacter(CharacterImpl character, string realmName)
+    public void BindCharacter(CharacterImpl character,
+        string realmName,
+        AutoFillAssistant autoFillAssistant,
+        AudioManager? audioManager,
+        AutoLootAssistant? autoLootAssistant,
+        Hotkeys hotkeys)
     {
-        _rightControl.BindCharacter(character);
+        _rightControl.BindCharacter(character, autoFillAssistant, autoLootAssistant, hotkeys);
         _bottomControl.BindCharacter(character, realmName);
         _dialogControl.BindCharacter(character);
         _mapView.BindCharacter(character);
-        //_bottomControl.BindShortcuts(_rightControl.InventoryView, character.KungFuBook);
+        _itemAttributeControl.BindCharacter(character);
+        if (audioManager != null)
+            _systemSettings.BindAudioManager(audioManager);
     }
     
 
@@ -110,7 +166,7 @@ public partial class UIController : CanvasLayer
     {
         if (IsTrading())
         {
-            DisplayTextMessage(TRADING_ERROR);
+            DisplayTextMessage(TextMessage.MultiTrade);
         }
         else
         {
@@ -119,9 +175,9 @@ public partial class UIController : CanvasLayer
     }
 
     // Triggered by right-clicking item.
-    public void DisplayItemAttribute(IItem item, string description)
+    public void DisplayItemAttribute(ItemAttributeEvent itemAttributeEvent)
     {
-        _itemAttributeControl.Display(item, description);
+        _itemAttributeControl.Display(itemAttributeEvent);
     }
     
     // Triggered by right-clicking kungfu.
@@ -137,19 +193,14 @@ public partial class UIController : CanvasLayer
     }
 
 
-    private void DisplayTextMessage(string text)
-    {
-        DisplayTextMessage(new TextMessage(text, TextMessage.TextLocation.DOWN));
-    }
-
     public void DragItem(DragInventorySlotEvent slotEvent, Vector2 mousePosition, CharacterImpl character)
     {
         if (IsTrading())
         {
-            DisplayTextMessage(TRADING_ERROR);
+            DisplayTextMessage(TextMessage.MultiTrade);
             return;
         }
-        if (_itemAttributeControl.HandleDragEvent(slotEvent, character))
+        if (_itemAttributeControl.HandleDragEvent(slotEvent))
         {
             return;
         }
@@ -160,7 +211,7 @@ public partial class UIController : CanvasLayer
     {
         if (IsTrading())
         {
-            DisplayTextMessage(new TextMessage("另一交易正在进行中。", TextMessage.TextLocation.DOWN));
+            DisplayTextMessage(TextMessage.MultiTrade);
             return;
         }
         character.DropItemOnPlayer(messageDrivenPlayer, slot);
@@ -178,7 +229,7 @@ public partial class UIController : CanvasLayer
 
     private bool IsTrading()
     {
-        return _dialogControl.IsTrading || _dropItemUi.Visible;
+        return _dialogControl.IsTrading || _dropItemUi.Visible || _bankView.Visible;
     }
 
     public void ToggleMap(IMap map)
@@ -190,5 +241,41 @@ public partial class UIController : CanvasLayer
     {
         _mapView.DrawNpcs(message);
     }
-    
+
+    public void OpenBank(CharacterBank bank, CharacterInventory inventory)
+    {
+        if (IsTrading())
+        {
+            DisplayTextMessage(TextMessage.MultiTrade);
+        }
+        else
+        {
+            _bankView.Open(bank, inventory, _rightControl.InventoryView);
+        }
+    }
+
+    public void OperateBank(BankOperationMessage message)
+    {
+        _bankView.Operate(message);
+    }
+
+    public void OpenKungFuForm()
+    {
+        _guildKungFuFormView.Open();
+    }
+
+    public void OperateKungFuForm(UpdateGuildKungFuMessage message)
+    {
+        _guildKungFuFormView.Handle(message);
+    }
+
+    public void OperateQuestWindow(UpdateQuestWindowMessage message)
+    {
+        _questDialogView.Handle(message);
+    }
+
+    public void OperateBuffWindow(UpdateBuffMessage message)
+    {
+        _buffContainer.Handle(message);
+    }
 }

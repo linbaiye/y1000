@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.IO.Compression;
+using Godot;
 using NLog;
 using y1000.Source.Animation;
 using y1000.Source.Creature;
@@ -26,6 +28,40 @@ public class AtdChecker
         }
     }
 
+    public static void TestZip()
+    {
+        // var zipArchive = ZipFile.Open("/Users/ab000785/learn/map/start.zip", ZipArchiveMode.Read);
+        // var zipArchiveEntry = zipArchive.GetEntry("start/object/101/0.png");
+        // if (zipArchiveEntry != null)
+        // {
+        //     var stream = zipArchiveEntry.Open();
+        //     Logger.Debug("Readable {0}.", stream.CanRead);
+        // }
+        //new ZipFileMapObjectRepository().LoadObjects("start");
+    }
+
+    private static void ZipDir(string dir)
+    {
+        if (File.Exists(dir + ".zip"))
+            File.Delete(dir + ".zip");
+        ZipFile.CreateFromDirectory(dir, dir + ".zip");
+    }
+
+    public static void ZipAll()
+    {
+         var directories = Directory.GetDirectories("D:\\work\\godot\\sprite");
+        //var directories = Directory.GetDirectories("/Users/ab000785/learn/map");
+        foreach (var dir in directories)
+        {
+            if (Path.GetFileName(dir).StartsWith("x"))
+            {
+                Logger.Debug("Zip file {0}.", dir);
+                ZipDir(dir);
+            }
+        }
+    }
+        
+
     public static void Check()
     {
         for (int i = 1; i <= 139; i++)
@@ -50,10 +86,12 @@ public class AtdChecker
 
     public static void Dump()
     {
-        var atd = FilesystemAtdRepository.Instance.LoadByName("29");
-        Print(atd.FindFirst(CreatureState.WALK));
-        Print(atd.FindFirst(CreatureState.IDLE));
-        Print(atd.FindFirst(CreatureState.FROZEN));
+        var atd = FilesystemAtdRepository.Instance.LoadByName("31");
+        var actions = atd.Find(CreatureState.IDLE);
+        foreach (var c in actions)
+        {
+            Logger.Debug("Direction: {0}, Number {1}.", c.Direction, c.FrameDescriptors[0].Number);
+        }
     }
 
     public static void Convert()

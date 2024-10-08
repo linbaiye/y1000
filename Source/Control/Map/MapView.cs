@@ -125,15 +125,13 @@ public partial class MapView : TextureRect
             CloseView();
             return;
         }
-        var image = ImageTexture.CreateFromImage(Image.LoadFromFile("assets/maps/" + map.MapName + ".bmp"));
-        if (image != null)
+        if (ResourceLoader.Load("res://assets/maps/" + map.MapName + ".bmp") is Texture2D texture)
         {
-            Texture = image;
+            Texture = texture;
             Position = ComputeImagePosition(Texture.GetSize());
             _mapSize = map.MapSize;
             Visible = true;
             UpdateCharacterPosition();
-            Logger.Debug("Map position {0}, Size {1}.", Position, Texture.GetSize());
             _eventMediator?.NotifyServer(ClientSimpleCommandEvent.NpcPosition);
         }
     }

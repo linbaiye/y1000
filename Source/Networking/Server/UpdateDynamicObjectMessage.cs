@@ -1,9 +1,11 @@
-﻿using Source.Networking.Protobuf;
+﻿using NLog;
+using Source.Networking.Protobuf;
 
 namespace y1000.Source.Networking.Server;
 
 public class UpdateDynamicObjectMessage : IEntityMessage
 {
+    private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
     public UpdateDynamicObjectMessage(long id, int frameStart, int frameEnd, bool loop)
     {
         FrameStart = frameStart;

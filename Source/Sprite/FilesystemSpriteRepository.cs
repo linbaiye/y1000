@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Godot;
 using NLog;
-using FileAccess = System.IO.FileAccess;
 
 namespace y1000.Source.Sprite;
 
@@ -57,11 +56,6 @@ public class FilesystemSpriteRepository: AbstractSpriteRepository, ISpriteReposi
             Cache.TryAdd(name,atzSprite);
         }
         return atzSprite;
-    }
-
-    public override AtzSprite LoadByPath(string path, Vector2? offset = null)
-    {
-        return new AtzSprite(new Texture2D[1], new Vector2[1]);
     }
 
     public bool Exists(string number)

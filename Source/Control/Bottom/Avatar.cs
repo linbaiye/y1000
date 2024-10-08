@@ -34,7 +34,7 @@ public partial class Avatar : NinePatchRect
 
 	public Avatar()
 	{
-		_spriteRepository = FilesystemSpriteRepository.Instance;
+		_spriteRepository = ISpriteRepository.Instance;
 		_body = MAKE_COMPILER_HAPPY;
 		_hand = MAKE_COMPILER_HAPPY;
 		_chest = MAKE_COMPILER_HAPPY;

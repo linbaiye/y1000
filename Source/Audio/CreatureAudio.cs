@@ -11,7 +11,7 @@ public partial class CreatureAudio : AudioStreamPlayer
             return;
         }
         var path = "res://assets/sound/" + name + ".wav";
-        if (FileAccess.FileExists(path))
+        if (ResourceLoader.Exists(path))
         {
             var streamWav = ResourceLoader.Load<AudioStreamWav>(path);
             Stream = streamWav;

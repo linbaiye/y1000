@@ -13,4 +13,6 @@ public enum ColorType
     NINE_GRADE,
     TEN_GRADE,
     SAY,
+    PRIVATE_CHAT,
+    SYSTEM_TIP,
 }

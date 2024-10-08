@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dl23ystytknc0"]
+
+[ext_resource type="FontFile" uid="uid://d0thly37ucq4c" path="res://fonts/JiYingHuiPianHuiSong-2.ttf" id="1_xgm2x"]
+
+[resource]
+Button/font_sizes/font_size = 12
+Button/fonts/font = ExtResource("1_xgm2x")
+ItemList/font_sizes/font_size = 12
+ItemList/fonts/font = ExtResource("1_xgm2x")
+Label/font_sizes/font_size = 12
+Label/fonts/font = ExtResource("1_xgm2x")
+LineEdit/font_sizes/font_size = 12
+LineEdit/fonts/font = ExtResource("1_xgm2x")
+RichTextLabel/font_sizes/bold_font_size = 12
+RichTextLabel/font_sizes/bold_italics_font_size = 12
+RichTextLabel/font_sizes/italics_font_size = 12
+RichTextLabel/font_sizes/mono_font_size = 12
+RichTextLabel/font_sizes/normal_font_size = 12
+RichTextLabel/fonts/bold_font = ExtResource("1_xgm2x")
+RichTextLabel/fonts/mono_font = ExtResource("1_xgm2x")
+RichTextLabel/fonts/normal_font = ExtResource("1_xgm2x")

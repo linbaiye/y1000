@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using y1000.Source.Control;
 using y1000.Source.Control.Bottom.Shortcut;
 using y1000.Source.Event;
 using y1000.Source.KungFu.Attack;

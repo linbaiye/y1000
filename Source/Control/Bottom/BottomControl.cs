@@ -1,13 +1,9 @@
 using System;
 using Godot;
-using NLog;
 using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Control.Bottom.Shortcut;
-using y1000.Source.Control.RightSide.Book;
-using y1000.Source.Control.RightSide.Inventory;
 using y1000.Source.Event;
-using y1000.Source.KungFu;
 using y1000.Source.Util;
 
 namespace y1000.Source.Control.Bottom;
@@ -39,6 +35,8 @@ public partial class BottomControl : Godot.Control
 
 	private Shortcuts? _shortcuts;
 
+	private InputEdit? _inputEdit;
+
 	public override void _Ready()
 	{
 		_textArea = GetNode<TextArea>("Container/TextArea");
@@ -54,6 +52,7 @@ public partial class BottomControl : Godot.Control
 		_armLifeBar = GetNode<TextureProgressBar>("Container/ArmLifeBar");
 		_legLifeBar = GetNode<TextureProgressBar>("Container/LegLifeBar");
 		_shortcuts = GetNode<Shortcuts>("Container/Shortcuts");
+		_inputEdit = GetNode<InputEdit>("Container/InputLine");
 	}
 
 	private void UpdateCoordinate(Vector2I coordinate)
@@ -141,8 +140,8 @@ public partial class BottomControl : Godot.Control
 		BindAttributeBars(character);
 		BindAttackKungFuExpBars(character);
 		UpdateRealmName(realmName);
-		_shortcuts?.BindKungFuBook(character.KungFuBook);
-		_shortcuts?.BindInventory(character.Inventory);
+		_shortcuts?.Bind(character);
+		_inputEdit?.BindCharacter(character);
 	}
 
 
@@ -191,5 +190,7 @@ public partial class BottomControl : Godot.Control
 
 	public Button InventoryButton => GetNode<Button>("Container/InventoryButton");
 	public Button KungFuButton => GetNode<Button>("Container/KungFuButton");
+	public Button AssistantButton => GetNode<Button>("Container/AssistantButton");
+	public Button SystemButton => GetNode<Button>("Container/SystemButton");
 
 }

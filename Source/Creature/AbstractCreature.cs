@@ -1,7 +1,6 @@
 using System;
 using Godot;
 using NLog;
-using y1000.Source.Audio;
 using y1000.Source.Entity;
 using y1000.Source.Map;
 using y1000.Source.Networking.Server;
@@ -64,12 +63,6 @@ public abstract partial class AbstractCreature : AbstractEntity, ICreature
     {
         SetPosition(hurtMessage.Coordinate, hurtMessage.Direction);
         ShowLifePercent(hurtMessage.LifePercent);
-        PlaySound(hurtMessage.Sound);
-    }
-    
-    public void PlaySound(string name)
-    {
-        GetNode<CreatureAudio>("Audio").PlaySound(name);
     }
     
     public void SetPosition(AbstractPositionMessage positionMessage)
