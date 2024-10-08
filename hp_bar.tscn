@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5vg7e8j45yqb"]
+
+[ext_resource type="Texture2D" uid="uid://befguf7egbi3s" path="res://hpbar.png" id="1_nlidh"]
+
+[node name="HPBar" type="TextureProgressBar"]
+texture_filter = 1
+clip_contents = true
+layout_direction = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_right = 16.0
+offset_bottom = 5.0
+grow_horizontal = 2
+value = 30.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_nlidh")
+texture_progress = ExtResource("1_nlidh")
+tint_under = Color(0, 0, 0, 1)
+tint_progress = Color(1, 0, 0, 1)
