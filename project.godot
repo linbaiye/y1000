@@ -24,8 +24,8 @@ LogInit="*res://Source/LogInit.cs"
 
 [display]
 
-window/size/viewport_width=527
-window/size/viewport_height=479
+window/size/viewport_width=1024
+window/size/viewport_height=768
 window/size/resizable=false
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
@@ -33,6 +33,10 @@ window/vsync/vsync_mode=0
 [dotnet]
 
 project/assembly_name="y1000"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
 
 [gui]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bgcmf4adq48gs"]
+[gd_scene load_steps=27 format=3 uid="uid://bgcmf4adq48gs"]
 
 [ext_resource type="Texture2D" uid="uid://bjt64qlxydsmx" path="res://assets/ui/assistance.png" id="1_k625j"]
 [ext_resource type="Texture2D" uid="uid://5juyhlq46430" path="res://assets/ui/heal.png" id="2_n4yjs"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://Source/Control/Assistance/HealItemView.cs" id="7_ifcax"]
 [ext_resource type="Script" path="res://Source/Control/Assistance/AutoFillView.cs" id="8_67i3c"]
 [ext_resource type="Texture2D" uid="uid://c12ndbb5ibdta" path="res://assets/ui/loot_assistance.png" id="11_550bb"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="11_ybejs"]
 [ext_resource type="Script" path="res://Source/Control/Assistance/AutoLootAssistantView.cs" id="12_b2hom"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5aqx"]
@@ -19,7 +18,7 @@ border_color = Color(0.8, 0.8, 0.8, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y06l7"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="Image" id="Image_r3rgr"]
+[sub_resource type="Image" id="Image_jisik"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 179, 179, 179, 153, 178, 178, 178, 166, 184, 184, 184, 18, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 178, 178, 178, 166, 178, 178, 178, 151, 255, 255, 255, 0, 255, 255, 255, 0, 178, 178, 178, 166, 178, 178, 178, 217, 178, 178, 178, 179, 184, 184, 184, 18, 255, 255, 255, 0, 255, 255, 255, 0, 175, 175, 175, 19, 178, 178, 178, 179, 178, 178, 178, 217, 178, 178, 178, 165, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 179, 179, 179, 180, 175, 175, 175, 19, 175, 175, 175, 19, 179, 179, 179, 180, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 178, 178, 178, 181, 178, 178, 178, 181, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 178, 178, 178, 165, 178, 178, 178, 165, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -29,7 +28,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ri8fq"]
-image = SubResource("Image_r3rgr")
+image = SubResource("Image_jisik")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igqr6"]
 content_margin_left = 8.0
@@ -206,6 +205,7 @@ offset_bottom = 75.0
 texture_normal = ExtResource("4_c5b3e")
 
 [node name="AutoFill" type="NinePatchRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(212, 226)
 layout_mode = 0
 offset_left = 14.0
@@ -562,7 +562,6 @@ flat = true
 caret_blink = true
 
 [node name="AutoLoot" type="NinePatchRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(208, 240)
 layout_mode = 0
 offset_left = 16.0
@@ -578,7 +577,7 @@ offset_left = 6.0
 offset_top = 24.0
 offset_right = 98.0
 offset_bottom = 157.0
-theme = ExtResource("11_ybejs")
+theme_override_font_sizes/font_size = 12
 
 [node name="SeeItems" type="ItemList" parent="AutoLoot"]
 layout_mode = 0
@@ -586,7 +585,7 @@ offset_left = 110.0
 offset_top = 24.0
 offset_right = 202.0
 offset_bottom = 157.0
-theme = ExtResource("11_ybejs")
+theme_override_font_sizes/font_size = 12
 
 [node name="LineEdit" type="LineEdit" parent="AutoLoot"]
 layout_mode = 0
@@ -627,8 +626,8 @@ offset_left = 8.0
 offset_top = 166.0
 offset_right = 119.0
 offset_bottom = 183.0
-theme = ExtResource("11_ybejs")
 theme_override_colors/font_color = Color(0.741176, 0.631373, 0.509804, 1)
+theme_override_font_sizes/font_size = 12
 text = "右键添加或删除物品拾取"
 
 [node name="Tip" type="Label" parent="."]
@@ -637,7 +636,7 @@ offset_left = 11.0
 offset_top = 327.0
 offset_right = 228.0
 offset_bottom = 356.0
-theme = ExtResource("11_ybejs")
+theme_override_font_sizes/font_size = 12
 vertical_alignment = 1
 
 [node name="Close" type="Button" parent="."]

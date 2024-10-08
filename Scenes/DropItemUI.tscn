@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cfx457p5xg6y4" path="res://assets/ui/input.png" id="1_k7t35"]
 [ext_resource type="Script" path="res://Source/Control/DropItemUI.cs" id="2_8cjci"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="3_c6il6"]
+[ext_resource type="Theme" path="res://Scenes/Label.tres" id="3_c6il6"]
 [ext_resource type="Texture2D" uid="uid://637xatose3tu" path="res://assets/ui/input_confirm_down.png" id="3_rm3bi"]
 [ext_resource type="Texture2D" uid="uid://cgpjvsiqfgifo" path="res://assets/ui/input_cancel_down.png" id="4_jxjs7"]
 
