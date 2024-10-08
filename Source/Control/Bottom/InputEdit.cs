@@ -29,7 +29,7 @@ public partial class InputEdit : LineEdit
             AcceptEvent();
             return;
         }
-        if (inputEvent.Keycode != Key.Enter)
+        if (inputEvent.Keycode != Key.Enter && inputEvent.Keycode != Key.KpEnter)
             return;
         if (HasFocus() && inputEvent.IsReleased())
         {

@@ -492,7 +492,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(EntityChatMessage message)
 	{
-		_uiController?.DisplayTextMessage(new TextMessage(message.Content, TextMessage.TextLocation.DOWN));
+		_uiController?.DisplayTextMessage(message.ToTextMessage());
 		Visit((IEntityMessage)message);
 	}
 

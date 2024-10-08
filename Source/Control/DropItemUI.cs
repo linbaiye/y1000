@@ -121,7 +121,7 @@ public partial class DropItemUI : NinePatchRect
 		var validation = ValidateInput();
 		if (validation != null)
 		{
-			_eventMediator?.NotifyUiEvent(new TextEvent(validation));
+			_eventMediator?.NotifyTextArea(validation);
 		}
 		else
 		{

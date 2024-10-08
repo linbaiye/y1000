@@ -4,6 +4,7 @@ using y1000.Source.Character;
 using y1000.Source.Character.Event;
 using y1000.Source.Control.Bottom.Shortcut;
 using y1000.Source.Event;
+using y1000.Source.Networking.Server;
 using y1000.Source.Util;
 
 namespace y1000.Source.Control.Bottom;
@@ -64,15 +65,14 @@ public partial class BottomControl : Godot.Control
 		}
 	}
 
-
-	public void DisplayMessage(TextEvent @event)
+	public void DisplayMessage(TextMessage message)
 	{
-		_textArea?.Display(@event);
+		_textArea?.Display(message);
 	}
 	
 	public void DisplayMessage(string message)
 	{
-		_textArea?.Display(new TextEvent(message));
+		_textArea?.Display(new TextMessage(message, TextMessage.TextLocation.DOWN, ColorType.SYSTEM_TIP));
 	}
 	
 	private void WhenCharacterUpdated(object? sender, EventArgs args)

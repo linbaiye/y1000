@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using NLog;
+using y1000.Source.Networking.Server;
 using y1000.Source.Util;
 
 namespace y1000.Source.Control.Bottom;
@@ -8,7 +9,6 @@ namespace y1000.Source.Control.Bottom;
 public partial class TextArea : VBoxContainer
 {
     private const int MaxSize = 5;
-    private readonly Queue<TextEvent> _messages = new(MaxSize);
     private static readonly ILogger LOG = LogManager.GetCurrentClassLogger();
 
     private RichTextLabel[] _lines = new RichTextLabel[MaxSize];
@@ -120,12 +120,12 @@ public partial class TextArea : VBoxContainer
         }
     }
 
-    public void Display(TextEvent textEvent)
+    public void Display(TextMessage message)
     {
-        var textList = textEvent.Message.SplitByNewline();
+        var textList = message.Text.SplitByNewline();
         foreach (var text in textList)
         {
-            Display(text, textEvent.ColorType);
+            Display(text, message.ColorType);
         }
     }
 }
