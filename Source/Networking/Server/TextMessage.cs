@@ -52,7 +52,7 @@ public class TextMessage : IServerMessage
 
         NOT_ENOUGH_HEAD_LIFE = 19,
         
-        CUSTOM = 1000000,
+        CUSTOM = 1000000
         ,
     }
 
