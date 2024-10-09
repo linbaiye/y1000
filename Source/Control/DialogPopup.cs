@@ -10,6 +10,7 @@ public partial class DialogPopup : PanelContainer
     private Label _label;
 
     private Timer _timer;
+    private const int MaxLength = 40;
     public override void _Ready()
     {
         _label = GetNode<Label>("Label");
@@ -38,7 +39,7 @@ public partial class DialogPopup : PanelContainer
     public void Display(string text)
     {
         ZIndex = 2;
-        _label.Text = text;
+        _label.Text = text.Length > MaxLength ? text.Substring(0, MaxWidth - 1) : text;
         Visible = true;
         _timer.Start();
     }
