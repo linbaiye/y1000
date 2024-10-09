@@ -2,6 +2,7 @@ using System;
 using Godot;
 using NLog;
 using y1000.Source.Animation;
+using y1000.Source.Control;
 using y1000.Source.Creature;
 using y1000.Source.Item;
 using y1000.Source.Map;
@@ -37,7 +38,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	
 	private WeaponEffectAnimation? _effectAnimation;
 
-	private KungFuTip? _kungFuTip;
 
 	private void InitEquipment<T>(string? name, Func<string, T> creator, Action<T> equip)
 	{
@@ -260,7 +260,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		{
 			_state = IPlayerState.Idle();
 		}
-		_kungFuTip = GetNode<KungFuTip>("KungFuTip");
 	}
 
 	public bool IsMale { get; private set; }
@@ -284,7 +283,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	public void Visit(PlayerToggleKungFuMessage message)
 	{
 		if (!message.Quietly)
-			_kungFuTip?.Display(message.Name);
+			DisplayDialog(message.Name);
 	}
 
 	public void Visit(PlayerMoveMessage message)
@@ -295,7 +294,6 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	}
 	
 	
-	//public override void _Process(double delta)
 	public override void _PhysicsProcess(double delta)
 	{
 		_state.Update(this, (int)(delta * 1000));
@@ -423,7 +421,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 
 	public void Visit(EntityChatMessage message)
 	{
-		_kungFuTip?.Display(message.Content);
+		DisplayDialog(message.Content);
 	}
 
 	private string Location()

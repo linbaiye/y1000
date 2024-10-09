@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dqvduyhkh1vab" path="res://assets/ui/item_attribute_window.png" id="1_imumr"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_2pw5q"]
 [ext_resource type="Script" path="res://Source/Control/ItemAttributeControl.cs" id="2_j3t8l"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="4_e5v0t"]
+[ext_resource type="Theme" uid="uid://daxo2yv4foluf" path="res://Scenes/Label.tres" id="4_e5v0t"]
 [ext_resource type="FontFile" uid="uid://d0thly37ucq4c" path="res://fonts/JiYingHuiPianHuiSong-2.ttf" id="4_xr5hn"]
 
 [node name="ItemAttribute" type="NinePatchRect"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6q1rfqdvifym"]
+[gd_scene load_steps=15 format=3 uid="uid://b6q1rfqdvifym"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerImpl.cs" id="1_68hen"]
 [ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_1av6c"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://Source/Player/HatSprite.cs" id="6_vu6ta"]
 [ext_resource type="Script" path="res://Source/Player/BootSprite.cs" id="8_1757e"]
 [ext_resource type="Script" path="res://Source/Player/AttackEffectSprite.cs" id="11_vx863"]
-[ext_resource type="PackedScene" path="res://Scenes/ChatPopup.tscn" id="13_s8ma5"]
 [ext_resource type="PackedScene" uid="uid://bqjthq3o0r0ot" path="res://Scenes/HealthBar.tscn" id="15_7nysb"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p7g52"]
@@ -86,16 +85,5 @@ y_sort_enabled = true
 material = SubResource("CanvasItemMaterial_p7g52")
 centered = false
 script = ExtResource("11_vx863")
-
-[node name="KungFuTip" parent="." instance=ExtResource("13_s8ma5")]
-clip_contents = true
-layout_direction = 2
-offset_left = -23.125
-offset_top = -77.0
-offset_right = 56.875
-size_flags_horizontal = 3
-size_flags_vertical = 6
-vertical_alignment = 2
-autowrap_mode = 1
 
 [node name="HealthBar" parent="." instance=ExtResource("15_7nysb")]

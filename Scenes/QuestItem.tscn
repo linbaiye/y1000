@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cumcwjyhtccim"]
+[gd_scene load_steps=3 format=3 uid="uid://d0orlktd40jh4"]
 
 [ext_resource type="Script" path="res://Source/Control/Quest/QuestItemView.cs" id="1_0q1k4"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_vys6w"]
+[ext_resource type="Theme" uid="uid://daxo2yv4foluf" path="res://Scenes/Label.tres" id="2_vys6w"]
 
 [node name="QuestItem" type="HFlowContainer"]
 clip_contents = true

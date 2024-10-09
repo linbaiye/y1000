@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using NLog;
+using y1000.Source.Control;
 using y1000.Source.Entity;
 using y1000.Source.Map;
 using y1000.Source.Networking.Server;
@@ -19,6 +20,8 @@ public abstract partial class AbstractCreature : AbstractEntity, ICreature
     public IMap Map { get; private set; } = IMap.Empty;
     
     public Direction Direction { get; set; }
+    
+	private DialogPopup? _dialogPopup;
 
     protected override void MyEvent(InputEvent @event)
     {
@@ -26,6 +29,20 @@ public abstract partial class AbstractCreature : AbstractEntity, ICreature
         {
             MouseClicked?.Invoke(this, new EntityMouseEventArgs(this, mouseButton));
         }
+    }
+    
+    protected void DisplayDialog(String message)
+    {
+        if (_dialogPopup != null)
+        {
+            _dialogPopup.Delete();
+            _dialogPopup = null;
+        }
+        PackedScene packedScene = ResourceLoader.Load<PackedScene>("res://Scenes/DialogPopup.tscn");
+        _dialogPopup = packedScene.Instantiate<DialogPopup>();
+        AddChild(_dialogPopup);
+        _dialogPopup.Position = new Vector2(12, -76);
+        _dialogPopup.Display(message);
     }
     
     public void NotifyAnimationFinished(CreatureAnimationDoneEventArgs args)

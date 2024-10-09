@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bb06kt427u0u1"]
+[gd_scene load_steps=5 format=3 uid="uid://bnv5uptygi8q1"]
 
 [ext_resource type="Texture2D" uid="uid://drtgvfdjdfik3" path="res://assets/ui/quest_dialog.png" id="1_cm86r"]
 [ext_resource type="Script" path="res://Source/Control/Quest/QuestDialogView.cs" id="2_8f1o3"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_r0y81"]
-[ext_resource type="PackedScene" uid="uid://cumcwjyhtccim" path="res://Scenes/QuestItem.tscn" id="3_nk35k"]
+[ext_resource type="Theme" uid="uid://daxo2yv4foluf" path="res://Scenes/Label.tres" id="2_r0y81"]
+[ext_resource type="PackedScene" uid="uid://d0orlktd40jh4" path="res://Scenes/QuestItem.tscn" id="3_nk35k"]
 
 [node name="QuesterDialog" type="NinePatchRect"]
 custom_minimum_size = Vector2(380, 304)

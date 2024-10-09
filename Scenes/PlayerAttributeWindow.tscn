@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_cdrvo"]
 [ext_resource type="Script" path="res://Source/Control/PlayerAttribute/PlayerAttributeWindow.cs" id="2_y6m1e"]
 [ext_resource type="Script" path="res://Source/Control/PlayerAttribute/PlayerAttributeGroup.cs" id="3_0d3v6"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="5_0al77"]
+[ext_resource type="Theme" uid="uid://daxo2yv4foluf" path="res://Scenes/Label.tres" id="5_0al77"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h3xdh"]
 

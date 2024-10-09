@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqtmvg303wl2s"]
 
 [ext_resource type="Script" path="res://Source/Control/LeftSide/LeftsideTextControl.cs" id="1_kpyqx"]
-[ext_resource type="Theme" path="res://Scenes/Label.tres" id="2_2s2ox"]
+[ext_resource type="Theme" uid="uid://daxo2yv4foluf" path="res://Scenes/Label.tres" id="2_2s2ox"]
 [ext_resource type="Script" path="res://Source/Control/LeftSide/LeftsideTextLabel.cs" id="2_qd4dk"]
 
 [node name="LeftsideTextArea" type="VBoxContainer"]

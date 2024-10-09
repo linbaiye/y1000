@@ -111,7 +111,7 @@ public partial class Monster : AbstractCreature, IEntity, IServerMessageVisitor
 
 	public void Visit(EntityChatMessage message)
 	{
-		GetNode<KungFuTip>("ChatPopup").Display(message.Content);
+		DisplayDialog(message.Content);
 	}
 
 	public void Visit(HurtMessage hurtMessage)
