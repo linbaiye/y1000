@@ -39,7 +39,7 @@ public partial class DialogPopup : PanelContainer
     public void Display(string text)
     {
         ZIndex = 2;
-        _label.Text = text.Length > MaxLength ? text.Substring(0, MaxWidth - 1) : text;
+        _label.Text = text.Length > MaxLength ? text.Substring(0, text.Length - 1) : text;
         Visible = true;
         _timer.Start();
     }

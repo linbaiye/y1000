@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dryc0mgv1xxfa"]
+[gd_scene load_steps=4 format=3 uid="uid://b24frt4f071fk"]
 
 [ext_resource type="Script" path="res://Source/Control/DialogPopup.cs" id="1_8w2l6"]
-[ext_resource type="Theme" uid="uid://daxo2yv4foluf" path="res://Scenes/Label.tres" id="2_ti2bq"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_ti2bq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n17t5"]
 content_margin_left = 5.0
@@ -26,6 +26,7 @@ script = ExtResource("1_8w2l6")
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 theme = ExtResource("2_ti2bq")
+vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.209
