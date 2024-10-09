@@ -69,9 +69,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	private AutoLootAssistant? _autoLootAssistant;
 	private AutoMoveAssistant? _autoMoveAssistant;
 
-	private string _token = "";
-	
-	private string _charName = "";
 
 	private	IEventLoopGroup _group;
 
@@ -100,20 +97,21 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		return eventMediator;
 	}
 
-	public void SetToken(string t, string n)
-	{
-		_token = t;
-		_charName = n;
-	}
-
 	public override void _Ready()
 	{
-		SetupNetwork();
+		/*SetupNetwork();
 		_uiController = GetNode<UIController>("UILayer");
-		_uiController.Initialize(_eventMediator, _spriteRepository, _itemFactory);
-		GetWindow().Size = new Vector2I(1024, 768);
-		GetWindow().ContentScaleSize = new Vector2I(1024, 768);
+		_uiController.Initialize(_eventMediator, _spriteRepository, _itemFactory);*/
 		_audioManager = GetNode<AudioManager>("AudioManager");
+	}
+
+	public void Start(string token, string charName, UIController uiController)
+	{
+		if (_uiController != null)
+			return;
+		_uiController = uiController;
+		_uiController.Initialize(_eventMediator, _spriteRepository, _itemFactory);
+		SetupNetwork(token, charName);
 	}
 
 	private void OnCharacterEvent(object? sender, EventArgs eventArgs)
@@ -136,7 +134,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		}
 	}
 
-	private async void SetupNetwork()
+	private async void SetupNetwork(string token, string charName)
 	{
 		_bootstrap.Group(_group).Handler(
 				new ActionChannelInitializer<ISocketChannel>(c => c.Pipeline.AddLast(
@@ -146,7 +144,7 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 				new MessageHandler(this))
 				)).Channel<TcpSocketChannel>();
 		_channel = await _bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse(Configuration.Instance.ServerAddr), 9999));
-		await _channel.WriteAndFlushAsync(new LoginEvent(_token, _charName));
+		await _channel.WriteAndFlushAsync(new LoginEvent(token, charName));
 	}
 
 	private async void WriteMessage(IClientEvent message)

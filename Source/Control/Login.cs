@@ -158,13 +158,13 @@ public partial class Login : NinePatchRect
 			tip.Text = "请选择角色";
 			return;
 		}
-		var packedScene = ResourceLoader.Load<PackedScene>("res://game.tscn");
-		var game = packedScene.Instantiate<Game>();
+		var mainScene = ResourceLoader.Load<PackedScene>("res://Main.tscn");
+		var main = mainScene.Instantiate<Main>();
 		var selectedItem = itemList.GetSelectedItems()[0];
-		game.SetToken(_token, itemList.GetItemText(selectedItem));
 		_bgm.Stop();
-		GetParent().AddChild(game);
+		GetParent().AddChild(main);
 		QueueFree();
+		main.Start(_token, itemList.GetItemText(selectedItem));
 	}
 
 	private void SwitchToSignupUi()
