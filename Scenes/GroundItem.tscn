@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Source/Entity/GroundItem.cs" id="1_mtrgt"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="1_nkhl7"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="3_f6gmy"]
+[ext_resource type="Theme" uid="uid://daxo2yv4foluf" path="res://Scenes/Label.tres" id="3_f6gmy"]
 
 [node name="GroundItem" type="Node2D"]
 z_index = 2
