@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b50oaa3iiic8f" path="res://assets/ui/inventory.png" id="1_ka7tb"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/InventoryView.cs" id="2_px3kf"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_qq6s2"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="5_sv1h5"]
+[ext_resource type="Theme" path="res://Scenes/Label.tres" id="5_sv1h5"]
 [ext_resource type="Texture2D" uid="uid://d3ks8ifdrhwa1" path="res://assets/ui/kungfu.png" id="6_w6c7c"]
 [ext_resource type="Script" path="res://Source/Control/RightSide/Book/KungFuBookView.cs" id="7_p6auv"]
 [ext_resource type="Texture2D" uid="uid://4s1riaocw8va" path="res://assets/ui/unnamed.png" id="8_s76w2"]

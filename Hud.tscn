@@ -1,0 +1,196 @@
+[gd_scene load_steps=25 format=3 uid="uid://f6u180j10jio"]
+
+[ext_resource type="Script" path="res://Source/Control/UIController.cs" id="1_xjixt"]
+[ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://bottom_ui.tscn" id="2_t1cjk"]
+[ext_resource type="PackedScene" uid="uid://7ghuvlfmi4pd" path="res://Scenes/RightSideUI.tscn" id="3_3lv4o"]
+[ext_resource type="PackedScene" uid="uid://bqv6d0i2cli8e" path="res://Scenes/DropItemUI.tscn" id="4_ab1p8"]
+[ext_resource type="Script" path="res://Source/Control/TradeInputWindow.cs" id="5_4xdqj"]
+[ext_resource type="PackedScene" uid="uid://dj8hiigwray" path="res://Scenes/DialogWindow.tscn" id="6_wluyo"]
+[ext_resource type="PackedScene" uid="uid://cqtmvg303wl2s" path="res://Scenes/LeftsideTextArea.tscn" id="7_8qy0h"]
+[ext_resource type="PackedScene" uid="uid://dw4kky7kku6qg" path="res://Scenes/ItemAttribute.tscn" id="8_xs2cv"]
+[ext_resource type="PackedScene" uid="uid://bf5l5nu0lr8qr" path="res://Scenes/PlayerAttributeWindow.tscn" id="9_2wuku"]
+[ext_resource type="PackedScene" uid="uid://clr852egfmuqb" path="res://Scenes/TradePlayerWindow.tscn" id="10_ort1l"]
+[ext_resource type="Theme" path="res://Scenes/Label.tres" id="11_skdim"]
+[ext_resource type="Script" path="res://Source/Control/Map/MapView.cs" id="12_w6ub7"]
+[ext_resource type="PackedScene" uid="uid://bjjg8uukhy3s8" path="res://Scenes/MapNpcView.tscn" id="13_htgod"]
+[ext_resource type="PackedScene" uid="uid://ca6kivqahtqcd" path="res://Scenes/Bank.tscn" id="14_f60wq"]
+[ext_resource type="PackedScene" uid="uid://p7bamjypilc0" path="res://Scenes/SysMenu.tscn" id="15_wfhce"]
+[ext_resource type="PackedScene" uid="uid://qaao0hadvugj" path="res://Scenes/SysSetting.tscn" id="16_58trx"]
+[ext_resource type="Texture2D" uid="uid://co188yc1ctgcc" path="res://assets/ui/left_up_text.png" id="17_w1rvm"]
+[ext_resource type="Script" path="res://Source/Control/LeftupText.cs" id="18_buape"]
+[ext_resource type="PackedScene" uid="uid://crttyejirsfwt" path="res://Scenes/SysNotification.tscn" id="19_yllhq"]
+[ext_resource type="PackedScene" uid="uid://c7l7trn60dvkb" path="res://Scenes/KungFuFormApplication.tscn" id="20_xqc31"]
+[ext_resource type="PackedScene" path="res://Scenes/QuesterDialog.tscn" id="21_l3nyl"]
+[ext_resource type="PackedScene" path="res://Scenes/BuffContainer.tscn" id="22_g08ql"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bldau"]
+content_margin_left = 20.0
+
+[node name="UILayer" type="CanvasLayer"]
+script = ExtResource("1_xjixt")
+
+[node name="BottomUI" parent="." instance=ExtResource("2_t1cjk")]
+mouse_filter = 1
+
+[node name="RightSideUI" parent="." instance=ExtResource("3_3lv4o")]
+anchors_preset = -1
+anchor_left = 0.75
+anchor_bottom = 0.75
+offset_left = 5.0
+offset_top = 220.0
+offset_bottom = 29.0
+
+[node name="DropItemUI" parent="." instance=ExtResource("4_ab1p8")]
+visible = false
+
+[node name="InputWindow" parent="." instance=ExtResource("4_ab1p8")]
+visible = false
+script = ExtResource("5_4xdqj")
+
+[node name="DialogUI" parent="." instance=ExtResource("6_wluyo")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="LeftsideTextArea" parent="." instance=ExtResource("7_8qy0h")]
+visible = false
+offset_left = 3.0
+offset_top = 486.0
+offset_right = -775.0
+offset_bottom = -172.0
+
+[node name="ItemAttribute" parent="." instance=ExtResource("8_xs2cv")]
+visible = false
+offset_left = 383.0
+offset_top = 226.0
+offset_right = -385.0
+offset_bottom = -355.0
+
+[node name="PlayerAttributeWindow" parent="." instance=ExtResource("9_2wuku")]
+visible = false
+
+[node name="PlayerTradeWindow" parent="." instance=ExtResource("10_ort1l")]
+visible = false
+
+[node name="MapView" type="TextureRect" parent="."]
+visible = false
+z_index = 4
+offset_left = 282.0
+offset_top = 111.0
+offset_right = 742.0
+offset_bottom = 459.0
+theme = ExtResource("11_skdim")
+texture = SubResource("CompressedTexture2D_ufimi")
+stretch_mode = 2
+script = ExtResource("12_w6ub7")
+
+[node name="Character" parent="MapView" instance=ExtResource("13_htgod")]
+z_index = 4
+layout_mode = 0
+offset_right = 0.0
+offset_bottom = 0.0
+theme = ExtResource("11_skdim")
+
+[node name="Bank" parent="." instance=ExtResource("14_f60wq")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -239.0
+offset_top = -149.0
+offset_right = 239.0
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SysMenu" parent="." instance=ExtResource("15_wfhce")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -127.5
+offset_right = 86.0
+offset_bottom = 127.5
+
+[node name="SysSetting" parent="." instance=ExtResource("16_58trx")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -131.5
+offset_top = -143.5
+offset_right = 131.5
+offset_bottom = 143.5
+
+[node name="LeftUpText" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("17_w1rvm")
+script = ExtResource("18_buape")
+
+[node name="Label" type="Label" parent="LeftUpText"]
+layout_mode = 0
+offset_right = 263.0
+offset_bottom = 71.0
+theme = ExtResource("11_skdim")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bldau")
+vertical_alignment = 1
+
+[node name="SysNotification" parent="." instance=ExtResource("19_yllhq")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -147.5
+offset_right = 203.0
+offset_bottom = 147.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KungFuApplicationForm" parent="." instance=ExtResource("20_xqc31")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = -206.5
+offset_right = 271.0
+offset_bottom = 206.5
+
+[node name="QuestDialog" parent="." instance=ExtResource("21_l3nyl")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -152.0
+offset_right = 190.0
+offset_bottom = 152.0
+
+[node name="BuffContainer" parent="." instance=ExtResource("22_g08ql")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_right = 0.0
+offset_bottom = 49.0
+grow_horizontal = 0

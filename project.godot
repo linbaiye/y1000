@@ -34,6 +34,10 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="y1000"
 
+[editor_plugins]
+
+enabled=PackedStringArray()
+
 [gui]
 
 theme/custom_font="res://fonts/JiYingHuiPianHuiSong-2.ttf"

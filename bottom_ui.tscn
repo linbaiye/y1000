@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Source/Control/Bottom/TextArea.cs" id="3_56n7n"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/Avatar.cs" id="4_mdb7g"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/AvatarPart.cs" id="5_rq0is"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="5_w80km"]
+[ext_resource type="Theme" path="res://Scenes/Label.tres" id="5_w80km"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_v430x"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/UsedKungFuView.cs" id="8_hxdqm"]
 [ext_resource type="Script" path="res://Source/Control/Bottom/BlinkingText.cs" id="8_qgpy2"]

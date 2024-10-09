@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dxnphjmgrpcpn" path="res://assets/ui/merchant_dialog.png" id="1_1x3gh"]
 [ext_resource type="Script" path="res://Source/Control/Dialog/DialogControl.cs" id="1_qlj7o"]
 [ext_resource type="Script" path="res://Source/Control/Dialog/MerchantControl.cs" id="3_vbo2e"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="4_cpdyx"]
+[ext_resource type="Theme" path="res://Scenes/Label.tres" id="4_cpdyx"]
 [ext_resource type="Texture2D" uid="uid://c2vm1csclhxbx" path="res://assets/ui/trading_dialog.png" id="5_wnqco"]
 [ext_resource type="Script" path="res://Source/Control/Dialog/MerchantTradingControl.cs" id="6_hxhsb"]
 [ext_resource type="PackedScene" uid="uid://brl3lwfss84w8" path="res://Scenes/ItemsContainer.tscn" id="7_ahhg2"]

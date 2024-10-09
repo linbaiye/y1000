@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://drlxeqb568kxo"]
 
 [ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/InventorySlotView.cs" id="1_ye2up"]
-[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_s3xfv"]
+[ext_resource type="Theme" path="res://Scenes/Label.tres" id="2_s3xfv"]
 
 [node name="InventorySlot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
