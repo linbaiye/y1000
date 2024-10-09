@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Source/Control/DialogPopup.cs" id="1_8w2l6"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_ti2bq"]
-[ext_resource type="FontFile" uid="uid://mollreqlgrvn" path="res://fonts/CC0_思源真黑体-P-Light.ttf" id="3_fqje3"]
+[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="3_odrob"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n17t5"]
 content_margin_left = 5.0
@@ -29,7 +29,7 @@ layout_mode = 2
 theme = ExtResource("2_ti2bq")
 theme_override_colors/font_outline_color = Color(0.976471, 0.996078, 1, 1)
 theme_override_constants/outline_size = 1
-theme_override_fonts/font = ExtResource("3_fqje3")
+theme_override_fonts/font = ExtResource("3_odrob")
 vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]

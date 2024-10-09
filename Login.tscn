@@ -17,7 +17,6 @@ script = ExtResource("2_llpe0")
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 
 [node name="Sound" type="AudioStreamPlayer" parent="."]
-stream = null
 
 [node name="Entrance" type="Control" parent="."]
 anchors_preset = 0
@@ -72,6 +71,7 @@ offset_left = 75.0
 offset_top = 246.0
 offset_right = 107.0
 offset_bottom = 267.0
+theme_override_fonts/font = ExtResource("2_mbscu")
 theme_override_font_sizes/font_size = 12
 text = "登录"
 
@@ -81,6 +81,7 @@ offset_left = 146.0
 offset_top = 247.0
 offset_right = 178.0
 offset_bottom = 268.0
+theme_override_fonts/font = ExtResource("2_mbscu")
 theme_override_font_sizes/font_size = 12
 text = "注册"
 
