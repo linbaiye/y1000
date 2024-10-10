@@ -151,7 +151,7 @@ offset_right = 121.0
 offset_bottom = 189.0
 theme = ExtResource("5_w80km")
 theme_override_colors/font_color = Color(0.905882, 0.8, 0.717647, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 vertical_alignment = 1
 
