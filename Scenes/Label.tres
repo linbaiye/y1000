@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://daxo2yv4foluf"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dl23ystytknc0"]
 
 [ext_resource type="FontFile" uid="uid://d0thly37ucq4c" path="res://fonts/JiYingHuiPianHuiSong-2.ttf" id="1_xgm2x"]
 
@@ -7,6 +7,7 @@ Button/font_sizes/font_size = 12
 Button/fonts/font = ExtResource("1_xgm2x")
 ItemList/font_sizes/font_size = 12
 ItemList/fonts/font = ExtResource("1_xgm2x")
+Label/colors/font_color = Color(1, 1, 1, 1)
 Label/font_sizes/font_size = 12
 Label/fonts/font = ExtResource("1_xgm2x")
 LineEdit/font_sizes/font_size = 12
