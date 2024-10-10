@@ -25,7 +25,7 @@ public partial class DialogPopup : PanelContainer
         CustomMinimumSize = new Vector2(Math.Min(MaxWidth, Size.X), Size.Y);
         if (Size.X > MaxWidth)
         {
-            _label.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+            _label.AutowrapMode = TextServer.AutowrapMode.Word;
             _label.HorizontalAlignment = HorizontalAlignment.Left;
             _label.VerticalAlignment = VerticalAlignment.Top;
         }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://07lvg4v1wt2f"]
+[gd_scene load_steps=25 format=3 uid="uid://sfju506faap2"]
 
 [ext_resource type="Script" path="res://Source/Control/UIController.cs" id="1_xjixt"]
 [ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://bottom_ui.tscn" id="2_t1cjk"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dw4kky7kku6qg" path="res://Scenes/ItemAttribute.tscn" id="8_xs2cv"]
 [ext_resource type="PackedScene" uid="uid://bf5l5nu0lr8qr" path="res://Scenes/PlayerAttributeWindow.tscn" id="9_2wuku"]
 [ext_resource type="PackedScene" uid="uid://clr852egfmuqb" path="res://Scenes/TradePlayerWindow.tscn" id="10_ort1l"]
-[ext_resource type="Theme" uid="uid://daxo2yv4foluf" path="res://Scenes/Label.tres" id="11_skdim"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="11_skdim"]
 [ext_resource type="Script" path="res://Source/Control/Map/MapView.cs" id="12_w6ub7"]
 [ext_resource type="PackedScene" uid="uid://bjjg8uukhy3s8" path="res://Scenes/MapNpcView.tscn" id="13_htgod"]
 [ext_resource type="PackedScene" uid="uid://ca6kivqahtqcd" path="res://Scenes/Bank.tscn" id="14_f60wq"]

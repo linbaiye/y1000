@@ -1,28 +1,50 @@
 [gd_resource type="Theme" load_steps=4 format=3 uid="uid://dl23ystytknc0"]
 
-[ext_resource type="FontFile" uid="uid://d0thly37ucq4c" path="res://fonts/JiYingHuiPianHuiSong-2.ttf" id="1_xgm2x"]
+[ext_resource type="FontFile" uid="uid://dhmdf35oga5i2" path="res://fonts/SourceHanSerifSC-ExtraLight.otf" id="3_h2due"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gp1l0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3o5cq"]
 
 [resource]
-Button/font_sizes/font_size = 12
-Button/fonts/font = ExtResource("1_xgm2x")
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_outline_color = Color(1, 1, 1, 1)
+Button/constants/outline_size = 1
+Button/font_sizes/font_size = 11
+Button/fonts/font = ExtResource("3_h2due")
 Button/styles/focus = SubResource("StyleBoxEmpty_gp1l0")
 Button/styles/pressed = SubResource("StyleBoxEmpty_3o5cq")
-ItemList/font_sizes/font_size = 12
-ItemList/fonts/font = ExtResource("1_xgm2x")
+ItemList/colors/font_color = Color(1, 1, 1, 1)
+ItemList/colors/font_outline_color = Color(1, 1, 1, 1)
+ItemList/constants/outline_size = 1
+ItemList/font_sizes/font_size = 11
+ItemList/fonts/font = ExtResource("3_h2due")
 Label/colors/font_color = Color(1, 1, 1, 1)
-Label/font_sizes/font_size = 12
-Label/fonts/font = ExtResource("1_xgm2x")
-LineEdit/font_sizes/font_size = 12
-LineEdit/fonts/font = ExtResource("1_xgm2x")
-RichTextLabel/font_sizes/bold_font_size = 12
-RichTextLabel/font_sizes/bold_italics_font_size = 12
-RichTextLabel/font_sizes/italics_font_size = 12
-RichTextLabel/font_sizes/mono_font_size = 12
-RichTextLabel/font_sizes/normal_font_size = 12
-RichTextLabel/fonts/bold_font = ExtResource("1_xgm2x")
-RichTextLabel/fonts/mono_font = ExtResource("1_xgm2x")
-RichTextLabel/fonts/normal_font = ExtResource("1_xgm2x")
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.670588)
+Label/constants/outline_size = 1
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 11
+Label/fonts/font = ExtResource("3_h2due")
+LineEdit/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+LineEdit/colors/font_outline_color = Color(1, 1, 1, 1)
+LineEdit/constants/outline_size = 1
+LineEdit/font_sizes/font_size = 11
+LineEdit/fonts/font = ExtResource("3_h2due")
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.760784)
+RichTextLabel/constants/outline_size = 1
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/shadow_outline_size = 1
+RichTextLabel/font_sizes/bold_font_size = 11
+RichTextLabel/font_sizes/bold_italics_font_size = 11
+RichTextLabel/font_sizes/italics_font_size = 11
+RichTextLabel/font_sizes/mono_font_size = 11
+RichTextLabel/font_sizes/normal_font_size = 11
+RichTextLabel/fonts/bold_font = ExtResource("3_h2due")
+RichTextLabel/fonts/bold_italics_font = ExtResource("3_h2due")
+RichTextLabel/fonts/italics_font = ExtResource("3_h2due")
+RichTextLabel/fonts/mono_font = ExtResource("3_h2due")
+RichTextLabel/fonts/normal_font = ExtResource("3_h2due")

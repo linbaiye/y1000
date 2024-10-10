@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Source/Animation/BodySprite.cs" id="1_4876e"]
 [ext_resource type="Shader" path="res://MaleShadow.gdshader" id="1_c3rp6"]
-[ext_resource type="Theme" uid="uid://daxo2yv4foluf" path="res://Scenes/Label.tres" id="3_yr2nv"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="3_yr2nv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x2j3f"]
 shader = ExtResource("1_c3rp6")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwu4hdppidtua"]
+[gd_scene load_steps=5 format=3 uid="uid://bwu4hdppidtua"]
 
 [ext_resource type="Script" path="res://Source/Control/Dialog/Item.cs" id="1_pvaax"]
 [ext_resource type="Texture2D" uid="uid://b557jvyog0gwn" path="res://sprite/item/000052.png" id="2_tgqmi"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="3_dbu8q"]
 
 [sub_resource type="Theme" id="Theme_1r13o"]
 default_font_size = 0
@@ -35,7 +36,7 @@ stretch_mode = 3
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("3_dbu8q")
 text = "女子短裙"
 vertical_alignment = 1
 text_direction = 3
@@ -44,7 +45,7 @@ text_direction = 3
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("3_dbu8q")
 text = "100"
 vertical_alignment = 1
 text_direction = 3
@@ -53,6 +54,6 @@ text_direction = 3
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("3_dbu8q")
 vertical_alignment = 1
 text_direction = 3

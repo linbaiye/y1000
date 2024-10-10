@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cluywph0mcid6"]
+[gd_scene load_steps=5 format=3 uid="uid://cluywph0mcid6"]
 
 [ext_resource type="Texture2D" uid="uid://pfji6mw5d5rv" path="res://assets/ui/login.png" id="1_ku3r6"]
 [ext_resource type="Script" path="res://Source/Control/Login.cs" id="2_llpe0"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_mbscu"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="4_py4jd"]
 
 [node name="Login" type="NinePatchRect"]
 custom_minimum_size = Vector2(527, 479)
@@ -32,15 +33,13 @@ offset_bottom = 206.0
 
 [node name="Label" type="Label" parent="Entrance/Username"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "账号"
 
 [node name="Input" type="LineEdit" parent="Entrance/Username"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 caret_blink = true
 
 [node name="Password" type="HBoxContainer" parent="Entrance"]
@@ -52,8 +51,7 @@ offset_bottom = 237.0
 
 [node name="Label" type="Label" parent="Entrance/Password"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "密码"
 
 [node name="Input" type="LineEdit" parent="Entrance/Password"]
@@ -71,8 +69,7 @@ offset_left = 75.0
 offset_top = 246.0
 offset_right = 107.0
 offset_bottom = 267.0
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "登录"
 
 [node name="Signup" type="Button" parent="Entrance"]
@@ -81,8 +78,7 @@ offset_left = 146.0
 offset_top = 247.0
 offset_right = 178.0
 offset_bottom = 268.0
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "注册"
 
 [node name="Tip" type="Label" parent="Entrance"]
@@ -180,7 +176,6 @@ offset_left = 142.0
 offset_top = 275.0
 offset_right = 174.0
 offset_bottom = 296.0
-theme_override_font_sizes/font_size = 12
 text = "注册"
 
 [node name="Tip" type="Label" parent="Signup"]
@@ -190,7 +185,6 @@ offset_top = 307.0
 offset_right = 179.0
 offset_bottom = 324.0
 theme_override_colors/font_color = Color(0.666667, 0.0666667, 0.113725, 0.945098)
-theme_override_font_sizes/font_size = 12
 clip_text = true
 
 [node name="CharPanel" type="Control" parent="."]
