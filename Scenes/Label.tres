@@ -1,10 +1,16 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dl23ystytknc0"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dl23ystytknc0"]
 
 [ext_resource type="FontFile" uid="uid://d0thly37ucq4c" path="res://fonts/JiYingHuiPianHuiSong-2.ttf" id="1_xgm2x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gp1l0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3o5cq"]
 
 [resource]
 Button/font_sizes/font_size = 12
 Button/fonts/font = ExtResource("1_xgm2x")
+Button/styles/focus = SubResource("StyleBoxEmpty_gp1l0")
+Button/styles/pressed = SubResource("StyleBoxEmpty_3o5cq")
 ItemList/font_sizes/font_size = 12
 ItemList/fonts/font = ExtResource("1_xgm2x")
 Label/colors/font_color = Color(1, 1, 1, 1)
