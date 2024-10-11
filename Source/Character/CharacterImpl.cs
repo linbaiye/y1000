@@ -588,10 +588,13 @@ namespace y1000.Source.Character
         public static CharacterImpl LoggedIn(JoinedRealmMessage message,
 	        IMap map,  ItemFactory itemFactory, EventMediator eventMediator)
         {
+	        GD.Print("initing char");
 	        PackedScene scene = ResourceLoader.Load<PackedScene>("res://scene/character.tscn");
 	        var character = scene.Instantiate<CharacterImpl>();
+	        GD.Print("Inited char");
 	        var state = IPlayerState.Idle();
 	        var player = character.WrappedPlayer();
+	        GD.Print("Initing player");
 	        player.Init(state, Direction.DOWN, message.Coordinate, map, message.MyInfo);
 	        player.StateAnimationEventHandler += character.OnPlayerAnimationFinished;
 	        character.FootMagic = message.FootKungFu;
@@ -611,7 +614,9 @@ namespace y1000.Source.Character
 	        character.HeadPercent = message.HeadPercent;
 	        character.ArmPercent = message.ArmPercent;
 	        character.LegPercent = message.LegPercent;
+	        GD.Print("Adding item");
 	        AddItems(character, message, itemFactory);
+	        GD.Print("Added item");
 	        return character;
         }
 

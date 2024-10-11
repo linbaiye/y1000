@@ -39,4 +39,14 @@ public static class ZipUtil
         var error = image.LoadPngFromBuffer(bytes);
         return error == Error.Ok ? ImageTexture.CreateFromImage(image) : null;
     }
+    
+    public static string ReadTextFile(this ZipReader reader, string path)
+    {
+        return ToString(reader.ReadFile(path));
+    }
+    
+    public static ImageTexture? ReadTextureFile(this ZipReader reader, string path)
+    {
+        return ToTexture(reader.ReadFile(path));
+    }
 }

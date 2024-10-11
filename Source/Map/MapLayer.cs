@@ -81,12 +81,20 @@ public partial class MapLayer : TileMap, IMap
 
 	public void BindCharacter(CharacterImpl character, string mapName, string tileName, string objName, string rofName)
 	{
-		InitMap(mapName, tileName, objName, rofName);
-		_origin = character.Coordinate;
-		PaintMap();
-		character.WhenCharacterUpdated += OnCharacterEvent;
-		PutCameraLimit(character);
-		HideRoofIfNeed();
+		GD.Print("Begin to draw map.");
+		try
+		{
+			InitMap(mapName, tileName, objName, rofName);
+			_origin = character.Coordinate;
+			PaintMap();
+			character.WhenCharacterUpdated += OnCharacterEvent;
+			PutCameraLimit(character);
+			HideRoofIfNeed();
+		}
+		catch (Exception e)
+		{
+			GD.PrintErr(e);
+		}
 	}
 
 	private void PutCameraLimit(CharacterImpl character)

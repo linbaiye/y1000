@@ -23,7 +23,7 @@ namespace y1000.Source.Storage
         {
             var path = OS.GetExecutablePath().GetBaseDir();
             var fullPath = path + "/" + FileName;
-            if (File.Exists(fullPath))
+            if (!File.Exists(fullPath))
             {
                 ServerAddr = "193.112.251.231";
             }

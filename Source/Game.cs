@@ -516,7 +516,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 
 	public void Visit(JoinedRealmMessage message)
 	{
+		GD.Print("Received login message for " + message.MyInfo.Name);
 		_character = CharacterImpl.LoggedIn(message, MapLayer, _itemFactory, _eventMediator);
+		GD.Print("Created " + message.MyInfo.Name);
 		_character.WhenCharacterUpdated += OnCharacterEvent;
 		_character.WrappedPlayer().MouseClicked += OnEntityClicked;
 		_autoFillAssistant = AutoFillAssistant.Create(_character);
@@ -528,7 +530,9 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			_audioManager, _autoLootAssistant, _hotkeys);
 		MapLayer.BindCharacter(_character, message.MapName, message.TileName, message.ObjName, message.RoofName);
 		_entityManager.Add(_character);
+		GD.Print("Adding char");
 		AddChild(_character);
+		GD.Print("Added char");
 	}
 
 	public override void _Notification(int what)

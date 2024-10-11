@@ -69,9 +69,11 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 	
 	public void Init(IPlayerState state, Direction direction,  Vector2I coordinate, IMap map, PlayerInfo info)
 	{
+		GD.Print("init base attr");
 		base.Init(info.Id, direction, coordinate, map, info.Name);
 		IsMale = info.Male;
 		_state = state;
+		GD.Print("init equipments");
 		var equipmentFactory = EquipmentFactory.Instance;
 		InitEquipment(info.WeaponName, n => equipmentFactory.CreatePlayerWeapon(n, IsMale), ChangeWeapon);
 		InitEquipment<PlayerChest>(info.ChestName, info.ChestColor, ChangeChest);
@@ -83,6 +85,7 @@ public partial class PlayerImpl: AbstractCreature, IPlayer, IServerMessageVisito
 		InitEquipment<Clothing>(info.ClothingName, info.ClothingColor, ChangeClothing);
 		SetNameColor(info.NameColor);
 		SetGuildName(info.GuildName);
+		GD.Print("Done equipments");
 	}
 
 	public PlayerWeapon? Weapon { get; private set; }

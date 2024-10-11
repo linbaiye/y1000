@@ -37,16 +37,21 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 	{
 		long start = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 		var texture2Ds = new Dictionary<int, Texture2D>();
-		using var zipArchive = ZipFile.Open(GetAbsPath(tileName), ZipArchiveMode.Read);
+		return texture2Ds;
+		//var archiveFileName = GetAbsPath(tileName);
+		var zipReader = new ZipReader();
+		zipReader.Open("res://Maps/" + tileName + ".zip");
 		var tilepath =  TileDirName + "/";
-		foreach (var entry in zipArchive.Entries)
+		string[] files = zipReader.GetFiles();
+		foreach (var entry in files)
 		{
-			if (!entry.FullName.StartsWith(tilepath))
+			GD.Print("Reading file " + entry);
+			if (!entry.StartsWith(tilepath) || !entry.EndsWith("*.png"))
 				continue;
-			var imageTextureFromEntry = entry.ReadAsTexture();
+			var imageTextureFromEntry = zipReader.ReadTextureFile(entry);
 			if (imageTextureFromEntry != null)
 			{
-				var name = Path.GetFileNameWithoutExtension(entry.FullName);
+				var name = Path.GetFileNameWithoutExtension(entry);
 				texture2Ds.Add(name.ToInt(), imageTextureFromEntry);
 			}
 		}
@@ -95,24 +100,29 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 	private IDictionary<int, MapObject> LoadObjects(string mapName, string dirName)
 	{
 		IDictionary<int, MapObject> dictionary = new Dictionary<int, MapObject>();
-		using var zipArchive = ZipFile.Open(GetAbsPath(mapName), ZipArchiveMode.Read);
+
+		return dictionary;
+		
+		var reader = new ZipReader();
+		reader.Open("res://Maps/" + mapName  + ".zip");
 		IDictionary<int, IDictionary<int, Texture2D>> textures = new Dictionary<int, IDictionary<int, Texture2D>>();
 		IDictionary<int, Object2Json> structJson = new Dictionary<int, Object2Json>();
 		var objpath = dirName + "/";
 		long start = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-		foreach (var entry in zipArchive.Entries)
+		var files = reader.GetFiles();
+		foreach (var entry in files)
 		{
-			if (!entry.FullName.StartsWith(objpath))
+			if (!entry.StartsWith(objpath))
 				continue;
-			if (entry.FullName.EndsWith("struct.json"))
+			if (entry.EndsWith("struct.json"))
 			{
-				int number = Number(entry.FullName);
-				structJson.Add(number, JsonSerializer.Deserialize<Object2Json>(entry.ReadAsString()));
+				int number = Number(entry);
+				structJson.Add(number, JsonSerializer.Deserialize<Object2Json>(reader.ReadTextFile(entry)));
 			}
-			else if (entry.FullName.EndsWith(".png"))
+			else if (entry.EndsWith(".png"))
 			{
-				int number = Number(entry.FullName);
-				var imageTextureFromEntry = entry.ReadAsTexture();
+				int number = Number(entry);
+				var imageTextureFromEntry = reader.ReadTextureFile(entry);
 				if (imageTextureFromEntry == null)
 				{
 					continue;
@@ -121,7 +131,7 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 					textures.Add(number, new Dictionary<int, Texture2D>());
 				if (textures.TryGetValue(number, out var map))
 				{
-					var name = Path.GetFileNameWithoutExtension(entry.FullName);
+					var name = Path.GetFileNameWithoutExtension(entry);
 					map.Add(name.ToInt(), imageTextureFromEntry);
 				}
 			}

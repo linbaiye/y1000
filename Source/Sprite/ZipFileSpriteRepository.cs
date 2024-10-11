@@ -6,6 +6,7 @@ using System.Linq;
 using Godot;
 using NLog;
 using y1000.Source.Util;
+using FileAccess = Godot.FileAccess;
 
 namespace y1000.Source.Sprite;
 
@@ -68,7 +69,7 @@ public class ZipFileSpriteRepository : AbstractSpriteRepository, ISpriteReposito
 	public bool Exists(string name) {
 		return File.Exists(GetAbsPath(name));
 	}
-
+	
 
 	public override AtzSprite LoadByNumberAndOffset(string name, Vector2? offset = null)
 	{
@@ -77,46 +78,55 @@ public class ZipFileSpriteRepository : AbstractSpriteRepository, ISpriteReposito
 		{
 			return sprite;
 		}
-		//var path = ProjectSettings.GlobalizePath("res://" + DirPath + name.ToLower() + ".zip");
-		//using var zipArchive = ZipFile.Open(path, ZipArchiveMode.Read);
-		using var zipArchive = ZipFile.Open(GetAbsPath(name.ToLower()), ZipArchiveMode.Read);
-		//using var zipArchive = ZipFile.Open(dir + DirPath + name.ToLower()+ ".zip", ZipArchiveMode.Read);
-		var offsetEntry = zipArchive.GetEntry("offset.txt");
-		if (offsetEntry == null)
+		try
 		{
-			throw new FileNotFoundException("Bad atz zip file: " + name);
-		}
-		var sizeEntry  = zipArchive.GetEntry("size.txt");
-		if (sizeEntry == null)
-		{
-			throw new FileNotFoundException("Bad atz zip file: " + name);
-		}
-		var vectors = ParseVectors(offsetEntry.ReadAsString().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None));
-		var sizes = ParseVectors(sizeEntry.ReadAsString().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None));
-		List<Texture2D> texture2Ds = new List<Texture2D>();
-		for (int i = 0; i < vectors.Length; i++)
-		{
-			var filename = "000" + i.ToString("D3") + ".png";
-			var zipArchiveEntry = zipArchive.GetEntry(filename);
-			var texture = zipArchiveEntry?.ReadAsTexture();
-			if (texture == null)
+			var resPath = "res://Sprites/" + name.ToLower() + ".zip";
+			var fileAccess = FileAccess.Open(resPath, FileAccess.ModeFlags.Read);
+			fileAccess.GetBuffer((int)fileAccess.GetLength());
+			bool ret = File.Exists(fileAccess.GetPathAbsolute());
+			GD.Print("Test path " + fileAccess.GetPathAbsolute() + ", result : " + ret);
+			var reader = new ZipReader();
+			reader.Open("res://Sprites/" + name.ToLower() + ".zip");
+			if (!reader.FileExists("offset.txt"))
 			{
-				continue;
+				GD.Print(" no offset ");
+				throw new FileNotFoundException("Bad atz zip file: " + name);
 			}
-			texture2Ds.Add(texture);
-			if (offset.HasValue)
+			GD.Print("Loading atz " + name);
+			var offsetEntry = reader.ReadTextFile("offset.txt");
+			var sizeEntry = reader.ReadTextFile("size.txt");
+			var vectors = ParseVectors(offsetEntry.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None));
+			var sizes = ParseVectors(sizeEntry.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None));
+			List<Texture2D> texture2Ds = new List<Texture2D>();
+			for (int i = 0; i < vectors.Length; i++)
 			{
-				vectors[i] += offset.Value;
+				var filename = "000" + i.ToString("D3") + ".png";
+				var texture = reader.ReadTextureFile(filename);
+				if (texture == null)
+				{
+					continue;
+				}
+				texture2Ds.Add(texture);
+				if (offset.HasValue)
+				{
+					vectors[i] += offset.Value;
+				}
 			}
+
+			if (texture2Ds.Count != vectors.Length)
+			{
+				LOGGER.Error("Invalid atz {0}.", name);
+			}
+			LOGGER.Debug("Loaded {0}.", name);
+			var atzSprite = new AtzSprite(texture2Ds.ToArray(), vectors, sizes);
+			_cache.Store(name, atzSprite, TimeSpan.FromMinutes(5));
+			return atzSprite;
 		}
-		if (texture2Ds.Count != vectors.Length)
+		catch (Exception e)
 		{
-			LOGGER.Error("Invalid atz {0}.", name);
-		}
-		LOGGER.Debug("Loaded {0}.", name);
-		var atzSprite = new AtzSprite(texture2Ds.ToArray(), vectors, sizes);
-		_cache.Store(name, atzSprite, TimeSpan.FromMinutes(5));
-		return atzSprite;
+			GD.PrintErr(e);
+            throw;
+        }
 	}
 
 }

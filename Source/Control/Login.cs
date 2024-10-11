@@ -5,6 +5,7 @@ using System.Text.Json;
 using Godot;
 using NLog;
 using y1000.Source.Audio;
+using y1000.Source.Sprite;
 using y1000.Source.Storage;
 using HttpClient = System.Net.Http.HttpClient;
 using ILogger = NLog.ILogger;
@@ -262,23 +263,18 @@ public partial class Login : NinePatchRect
 	{
 		try
 		{
-			var tip = GetNode<Label>("Entrance/Tip");
-			if (tip != null)
-				tip.Text = "begin request";
 			var httpRequestMessage = new HttpRequestMessage();
 			httpRequestMessage.Headers.Add("X-Type", type);
 			httpRequestMessage.RequestUri = new Uri("http://" + Configuration.Instance.ServerAddr + ":9901");
 			httpRequestMessage.Method = HttpMethod.Post;
 			httpRequestMessage.Content = content;
 			using HttpClient httpClient = new();
-			httpClient.Timeout = TimeSpan.FromSeconds(10);
-			if (tip != null)
-				tip.Text = "sending request";
+			GD.Print("Sending request to server");
+			httpClient.Timeout = TimeSpan.FromSeconds(5);
 			var httpResponseMessage = httpClient.Send(httpRequestMessage);
 			var readAsStringAsync = httpResponseMessage.Content.ReadAsStringAsync();
-			if (tip != null)
-				tip.Text = "wait request";
 			readAsStringAsync.Wait();
+			GD.Print("Got response, return now.");
 			return readAsStringAsync.Result;
 		}
 		catch (Exception e)
