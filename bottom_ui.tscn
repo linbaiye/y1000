@@ -268,8 +268,9 @@ horizontal_alignment = 1
 layout_mode = 0
 offset_top = 97.0
 offset_right = 81.0
-offset_bottom = 111.0
+offset_bottom = 114.0
 theme = ExtResource("5_w80km")
+theme_override_font_sizes/normal_font_size = 11
 bbcode_enabled = true
 script = ExtResource("8_qgpy2")
 
@@ -283,28 +284,28 @@ theme_override_constants/separation = 1
 script = ExtResource("8_hxdqm")
 
 [node name="Label1" type="RichTextLabel" parent="Container/UsedKungFuView"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme = ExtResource("5_w80km")
 bbcode_enabled = true
 script = ExtResource("9_4y8pv")
 
 [node name="Label2" type="RichTextLabel" parent="Container/UsedKungFuView"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme = ExtResource("5_w80km")
 bbcode_enabled = true
 script = ExtResource("9_4y8pv")
 
 [node name="Label3" type="RichTextLabel" parent="Container/UsedKungFuView"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme = ExtResource("5_w80km")
 bbcode_enabled = true
 script = ExtResource("9_4y8pv")
 
 [node name="Label4" type="RichTextLabel" parent="Container/UsedKungFuView"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme = ExtResource("5_w80km")
 bbcode_enabled = true

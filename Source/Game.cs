@@ -222,7 +222,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	{
 		try
 		{
-			GD.Print("Handling input.");
 			HandleInput(@event);
 		}
 		catch (Exception e)

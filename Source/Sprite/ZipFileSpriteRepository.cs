@@ -71,14 +71,6 @@ public class ZipFileSpriteRepository : AbstractSpriteRepository, ISpriteReposito
 	}
 	
 
-	private ZipArchive GetZipArchive(string name)
-	{
-		using var fa = FileAccess.Open("res://Sprites/" + name.ToLower() + ".zip", FileAccess.ModeFlags.Read);
-		var bytes = fa.GetBuffer((int)fa.GetLength());
-		Stream stream = new MemoryStream(bytes);
-		return new ZipArchive(stream);
-	}
-
 	public override AtzSprite LoadByNumberAndOffset(string name, Vector2? offset = null)
 	{
 		var sprite = _cache.Get(name);

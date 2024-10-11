@@ -1,61 +1,63 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Text.Json;
 using Godot;
 using NLog;
 using y1000.Source.Util;
-using FileAccess = Godot.FileAccess;
 
 namespace y1000.Source.Map;
 
 public class ZipFileMapObjectRepository : IMapObjectRepository
 {
-	private const string DirPath = "/Maps/";
-	//private const string DirPath = "../map/";
-	
 	private const string ObjectDirName = "object";
-	private const string TileDirName =  "tile";
+	private const string TileDirName = "tile";
 	private const string RoofDirName = "roof";
-	
+
 	private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
 
 	public static readonly ZipFileMapObjectRepository Instance = new();
-	private ZipFileMapObjectRepository(){ }
+	private ZipFileMapObjectRepository() { }
 
 
-	private string GetAbsPath(string name)
+	private string MakePath(string name)
 	{
-		var path = OS.GetExecutablePath().GetBaseDir();
-		//return ProjectSettings.GlobalizePath("res://" + DirPath + name + ".zip");
-		return path + DirPath + name + ".zip";
+		return "res://Maps/" + name + ".zip";
 	}
-	
 
 	public IDictionary<int, Texture2D> LoadTiles(string tileName)
 	{
 		long start = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+		var zipPath = MakePath(tileName);
 		var texture2Ds = new Dictionary<int, Texture2D>();
-		using var zipArchive = ZipUtil.LoadZipFile("res://Maps/" + tileName + ".zip");
-		var tilepath =  TileDirName + "/";
-		foreach (var entry in zipArchive.Entries)
+		GD.Print("Loading file:" + zipPath);
+		try
 		{
-			if (!entry.FullName.StartsWith(tilepath))
-				continue;
-			var imageTextureFromEntry = entry.ReadAsTexture();
-			if (imageTextureFromEntry != null)
+			using var zipArchive = ZipUtil.LoadZipFile(zipPath);
+			var tilepath = TileDirName + "/";
+			foreach (var entry in zipArchive.Entries)
 			{
-				var name = Path.GetFileNameWithoutExtension(entry.FullName);
-				texture2Ds.Add(name.ToInt(), imageTextureFromEntry);
+				if (!entry.FullName.StartsWith(tilepath))
+					continue;
+				var imageTextureFromEntry = entry.ReadAsTexture();
+				if (imageTextureFromEntry != null)
+				{
+					var name = Path.GetFileNameWithoutExtension(entry.FullName);
+					texture2Ds.Add(name.ToInt(), imageTextureFromEntry);
+				}
 			}
+			long end = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+			LOGGER.Debug("Took {0} to read tiles for {1}.", end - start, tileName);
+			return texture2Ds;
 		}
-		long end = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-		LOGGER.Debug("Took {0} to read tiles for {1}.", end -start, tileName);
-		return texture2Ds;
+		catch (Exception e)
+		{
+			GD.PrintErr(e);
+			throw;
+		}
 	}
-	
+
 	private struct Object2Json
 	{
 		public Object2Json()
@@ -78,7 +80,7 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 		public int Y { get; set; }
 
 		public int Number { get; set; }
-		
+
 		public int Delay { get; set; }
 
 		public static Object2Json FromJsonString(string jsonString)
@@ -96,60 +98,69 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 	private IDictionary<int, MapObject> LoadObjects(string mapName, string dirName)
 	{
 		IDictionary<int, MapObject> dictionary = new Dictionary<int, MapObject>();
-		using var zipArchive = ZipUtil.LoadZipFile("res://Maps/" + mapName + ".zip");
-		//using var zipArchive = ZipFile.Open(GetAbsPath(mapName), ZipArchiveMode.Read);
-		IDictionary<int, IDictionary<int, Texture2D>> textures = new Dictionary<int, IDictionary<int, Texture2D>>();
-		IDictionary<int, Object2Json> structJson = new Dictionary<int, Object2Json>();
-		var objpath = dirName + "/";
-		long start = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-		foreach (var entry in zipArchive.Entries)
+		var path = MakePath(mapName);
+		GD.Print("Loading zip path " + path);
+		try
 		{
-			if (!entry.FullName.StartsWith(objpath))
-				continue;
-			if (entry.FullName.EndsWith("struct.json"))
+			using var zipArchive = ZipUtil.LoadZipFile(path);
+			IDictionary<int, IDictionary<int, Texture2D>> textures = new Dictionary<int, IDictionary<int, Texture2D>>();
+			IDictionary<int, Object2Json> structJson = new Dictionary<int, Object2Json>();
+			var objpath = dirName + "/";
+			long start = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+			foreach (var entry in zipArchive.Entries)
 			{
-				int number = Number(entry.FullName);
-				structJson.Add(number, JsonSerializer.Deserialize<Object2Json>(entry.ReadAsString()));
+				if (!entry.FullName.StartsWith(objpath))
+					continue;
+				if (entry.FullName.EndsWith("struct.json"))
+				{
+					int number = Number(entry.FullName);
+					structJson.Add(number, JsonSerializer.Deserialize<Object2Json>(entry.ReadAsString()));
+				}
+				else if (entry.FullName.EndsWith(".png"))
+				{
+					int number = Number(entry.FullName);
+					var imageTextureFromEntry = entry.ReadAsTexture();
+					if (imageTextureFromEntry == null)
+					{
+						continue;
+					}
+					if (!textures.ContainsKey(number))
+						textures.Add(number, new Dictionary<int, Texture2D>());
+					if (textures.TryGetValue(number, out var map))
+					{
+						var name = Path.GetFileNameWithoutExtension(entry.FullName);
+						map.Add(name.ToInt(), imageTextureFromEntry);
+					}
+				}
 			}
-			else if (entry.FullName.EndsWith(".png"))
+
+			foreach (var kv in structJson)
 			{
-				int number = Number(entry.FullName);
-				var imageTextureFromEntry = entry.ReadAsTexture();
-				if (imageTextureFromEntry == null)
+				var index = kv.Key;
+				var json = kv.Value;
+				if (!textures.TryGetValue(index, out var map))
 				{
 					continue;
 				}
-				if (!textures.ContainsKey(number))
-					textures.Add(number, new Dictionary<int, Texture2D>());
-				if (textures.TryGetValue(number, out var map))
+				var texture2Ds = new Texture2D[json.Number];
+				for (int i = 0; i < json.Number; i++)
 				{
-					var name = Path.GetFileNameWithoutExtension(entry.FullName);
-					map.Add(name.ToInt(), imageTextureFromEntry);
+					if (map.TryGetValue(i, out var t))
+					{
+						texture2Ds[i] = t;
+					}
 				}
+				dictionary.TryAdd(index, new MapObject(texture2Ds, new Vector2(json.X, json.Y), index));
 			}
+			long end = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+			LOGGER.Debug("Took {0} to read {1} for {2}.", end - start, dirName, mapName);
+			return dictionary;
 		}
-
-		foreach (var kv in structJson)
+		catch (Exception e)
 		{
-			var index = kv.Key;
-			var json = kv.Value;
-			if (!textures.TryGetValue(index, out var map))
-			{
-				continue;
-			}
-			var texture2Ds = new Texture2D[json.Number];
-			for (int i = 0; i < json.Number; i++)
-			{
-				if (map.TryGetValue(i, out var t))
-				{
-					texture2Ds[i] = t;
-				}
-			}
-			dictionary.TryAdd(index, new MapObject(texture2Ds, new Vector2(json.X, json.Y), index));
+			GD.PrintErr(e);
+			throw;
 		}
-		long end = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-		LOGGER.Debug("Took {0} to read {1} for {2}.", end -start, dirName, mapName);
-		return dictionary;
 	}
 
 	public IDictionary<int, MapObject> LoadObjects(string name)
@@ -159,7 +170,7 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 
 	public bool HasRoof(string mapName)
 	{
-		var path = "res://Maps/" + mapName + ".zip";
+		var path = MakePath(mapName);
 		using var zipArchive = ZipUtil.LoadZipFile(path);
 		return zipArchive.Entries.Any(e => e.FullName.StartsWith(RoofDirName + "/"));
 	}
