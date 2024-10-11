@@ -80,13 +80,9 @@ public class AndroidZipRepository : AbstractSpriteRepository
 		{
 			return sprite;
 		}
-		//var path = ProjectSettings.GlobalizePath("res://" + DirPath + name.ToLower() + ".zip");
-		//using var zipArchive = ZipFile.Open(path, ZipArchiveMode.Read);
 		var fileAccess = FileAccess.Open("res://Sprites/" + name.ToLower() + ".zip", FileAccess.ModeFlags.Read);
 		byte[] bytes = fileAccess.GetBuffer((int)fileAccess.GetLength());
 		var zipArchive = GetZipDataFromBinary(bytes);
-		//using var zipArchive = ZipFile.Open(GetAbsPath(name.ToLower()), ZipArchiveMode.Read);
-		//using var zipArchive = ZipFile.Open(dir + DirPath + name.ToLower()+ ".zip", ZipArchiveMode.Read);
 		var offsetEntry = zipArchive.GetEntry("offset.txt");
 		if (offsetEntry == null)
 		{
