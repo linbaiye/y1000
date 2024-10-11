@@ -60,6 +60,10 @@ attack={
 ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [physics]
 
 common/physics_jitter_fix=0.0

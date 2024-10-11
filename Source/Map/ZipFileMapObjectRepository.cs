@@ -7,6 +7,7 @@ using System.Text.Json;
 using Godot;
 using NLog;
 using y1000.Source.Util;
+using FileAccess = Godot.FileAccess;
 
 namespace y1000.Source.Map;
 
@@ -37,7 +38,7 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 	{
 		long start = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 		var texture2Ds = new Dictionary<int, Texture2D>();
-		using var zipArchive = ZipFile.Open(GetAbsPath(tileName), ZipArchiveMode.Read);
+		using var zipArchive = ZipUtil.LoadZipFile("res://Maps/" + tileName + ".zip");
 		var tilepath =  TileDirName + "/";
 		foreach (var entry in zipArchive.Entries)
 		{
@@ -95,7 +96,8 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 	private IDictionary<int, MapObject> LoadObjects(string mapName, string dirName)
 	{
 		IDictionary<int, MapObject> dictionary = new Dictionary<int, MapObject>();
-		using var zipArchive = ZipFile.Open(GetAbsPath(mapName), ZipArchiveMode.Read);
+		using var zipArchive = ZipUtil.LoadZipFile("res://Maps/" + mapName + ".zip");
+		//using var zipArchive = ZipFile.Open(GetAbsPath(mapName), ZipArchiveMode.Read);
 		IDictionary<int, IDictionary<int, Texture2D>> textures = new Dictionary<int, IDictionary<int, Texture2D>>();
 		IDictionary<int, Object2Json> structJson = new Dictionary<int, Object2Json>();
 		var objpath = dirName + "/";
@@ -157,7 +159,8 @@ public class ZipFileMapObjectRepository : IMapObjectRepository
 
 	public bool HasRoof(string mapName)
 	{
-		using var zipArchive = ZipFile.Open(GetAbsPath(mapName), ZipArchiveMode.Read);
+		var path = "res://Maps/" + mapName + ".zip";
+		using var zipArchive = ZipUtil.LoadZipFile(path);
 		return zipArchive.Entries.Any(e => e.FullName.StartsWith(RoofDirName + "/"));
 	}
 

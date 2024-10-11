@@ -215,11 +215,20 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			_character.HandleInput(predictableInput);
 		}
 	}
-	
 
-	public override void _UnhandledInput(InputEvent @event)
+
+	//public override void _UnhandledInput(InputEvent @event)
+	public override void _Input(InputEvent @event)
 	{
-		HandleInput(@event);
+		try
+		{
+			GD.Print("Handling input.");
+			HandleInput(@event);
+		}
+		catch (Exception e)
+		{
+			GD.PrintErr(e);
+		}
 	}
 
 
@@ -541,7 +550,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 				_channel?.CloseAsync().Wait(1000);
 				_group.ShutdownGracefullyAsync().Wait(3000);
 				System.Environment.Exit(0);
-				//GetTree().Quit();
 			}
 			else if (what == NotificationWMMouseEnter)
 			{

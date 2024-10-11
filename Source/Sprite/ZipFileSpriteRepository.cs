@@ -6,6 +6,7 @@ using System.Linq;
 using Godot;
 using NLog;
 using y1000.Source.Util;
+using FileAccess = Godot.FileAccess;
 
 namespace y1000.Source.Sprite;
 
@@ -68,7 +69,15 @@ public class ZipFileSpriteRepository : AbstractSpriteRepository, ISpriteReposito
 	public bool Exists(string name) {
 		return File.Exists(GetAbsPath(name));
 	}
+	
 
+	private ZipArchive GetZipArchive(string name)
+	{
+		using var fa = FileAccess.Open("res://Sprites/" + name.ToLower() + ".zip", FileAccess.ModeFlags.Read);
+		var bytes = fa.GetBuffer((int)fa.GetLength());
+		Stream stream = new MemoryStream(bytes);
+		return new ZipArchive(stream);
+	}
 
 	public override AtzSprite LoadByNumberAndOffset(string name, Vector2? offset = null)
 	{
@@ -77,10 +86,7 @@ public class ZipFileSpriteRepository : AbstractSpriteRepository, ISpriteReposito
 		{
 			return sprite;
 		}
-		//var path = ProjectSettings.GlobalizePath("res://" + DirPath + name.ToLower() + ".zip");
-		//using var zipArchive = ZipFile.Open(path, ZipArchiveMode.Read);
-		using var zipArchive = ZipFile.Open(GetAbsPath(name.ToLower()), ZipArchiveMode.Read);
-		//using var zipArchive = ZipFile.Open(dir + DirPath + name.ToLower()+ ".zip", ZipArchiveMode.Read);
+		using var zipArchive = ZipUtil.LoadZipFile("res://Sprites/" + name.ToLower() + ".zip");
 		var offsetEntry = zipArchive.GetEntry("offset.txt");
 		if (offsetEntry == null)
 		{

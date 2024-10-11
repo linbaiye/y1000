@@ -10,20 +10,18 @@ namespace y1000.Source.Storage
 {
     public class Configuration
     {
-        public static readonly Configuration Instance = new Configuration();
+        public static readonly Configuration Instance = new();
 
         private const string FileName = "config.txt";
 
-        public string ServerAddr { get; set; } = "";
+        public string ServerAddr { get; }
 
-
-        private static readonly Configuration Default = new Configuration() {ServerAddr = "193.112.251.231"};
 
         private Configuration()
         {
             var path = OS.GetExecutablePath().GetBaseDir();
             var fullPath = path + "/" + FileName;
-            if (File.Exists(fullPath))
+            if (!File.Exists(fullPath))
             {
                 ServerAddr = "193.112.251.231";
             }
