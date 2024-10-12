@@ -6,11 +6,12 @@
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="4_5xntu"]
 
 [node name="NpcInteractionMainMenu" type="NinePatchRect"]
+custom_minimum_size = Vector2(380, 304)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -167.0
-offset_bottom = -139.0
+offset_right = -147.0
+offset_bottom = -175.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_6pfg6")
@@ -18,10 +19,10 @@ script = ExtResource("2_f4lh2")
 
 [node name="InteractionGroups" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 112.0
-offset_top = 182.0
-offset_right = 347.0
-offset_bottom = 292.0
+offset_left = 122.0
+offset_top = 150.0
+offset_right = 357.0
+offset_bottom = 260.0
 script = ExtResource("3_y6hfk")
 
 [node name="InteractionGroup1" type="VBoxContainer" parent="InteractionGroups"]
@@ -54,30 +55,36 @@ layout_mode = 2
 
 [node name="Avatar" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 53.0
-offset_right = 103.0
-offset_bottom = 173.0
+offset_left = 49.0
+offset_top = 60.0
+offset_right = 106.0
+offset_bottom = 145.0
+mouse_filter = 2
+stretch_mode = 3
 
 [node name="Text" type="Label" parent="."]
 layout_mode = 0
-offset_left = 115.0
-offset_top = 55.0
-offset_right = 338.0
-offset_bottom = 145.0
+offset_left = 125.0
+offset_top = 53.0
+offset_right = 352.0
+offset_bottom = 125.0
+theme = ExtResource("4_5xntu")
 
 [node name="Name" type="Label" parent="."]
 layout_mode = 0
-offset_left = 74.0
-offset_top = 10.0
-offset_right = 286.0
-offset_bottom = 29.0
+offset_left = 77.0
+offset_top = 7.0
+offset_right = 298.0
+offset_bottom = 26.0
+theme = ExtResource("4_5xntu")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Close" type="Button" parent="."]
 layout_mode = 0
-offset_left = 330.0
-offset_top = 4.0
-offset_right = 356.0
-offset_bottom = 34.0
+offset_left = 348.0
+offset_top = 3.0
+offset_right = 376.0
+offset_bottom = 31.0
 theme = ExtResource("4_5xntu")
 flat = true

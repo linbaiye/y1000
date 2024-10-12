@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c01bththg5lko"]
+[gd_scene load_steps=4 format=3 uid="uid://062pj8tci0qe"]
 
 [ext_resource type="PackedScene" uid="uid://db0iclaskno1q" path="res://game.tscn" id="1_lvtrq"]
 [ext_resource type="Script" path="res://Source/Main.cs" id="1_u2p7n"]
@@ -8,7 +8,6 @@
 script = ExtResource("1_u2p7n")
 
 [node name="UILayer" parent="." instance=ExtResource("2_thq77")]
-follow_viewport_enabled = true
 
 [node name="GameViewportContainer" type="SubViewportContainer" parent="."]
 custom_minimum_size = Vector2(1024, 648)

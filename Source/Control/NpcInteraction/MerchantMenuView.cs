@@ -1,16 +1,27 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using NLog;
 using y1000.Source.Character;
+using y1000.Source.Control.Dialog;
 using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Sprite;
 
-namespace y1000.Source.Control.Dialog;
+namespace y1000.Source.Control.NpcInteraction;
 
-public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoubleClickHandler
+public partial class MerchantMenuView  : NinePatchRect
 {
+    
+    private Label _nameLabel;
+    
+    private RichTextLabel _dialog;
+
+    private TextureRect _avatar;
+
+    private Button _close;
+    
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
     private readonly IconReader _iconReader = IconReader.ItemIconReader;
@@ -33,9 +44,50 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
 
     private ItemsContainer _itemsContainer;
     
+    private List<Item> SellItems { get; set; } = new();
+
+    private List<Item> BuyItems { get; set; } = new ();
+    
+    private 
+
+    public class Item
+    {
+        public Item(string name, int price, int iconId, int color = 0)
+        {
+            Price = price;
+            IconId = iconId;
+            Color = color;
+            Name = name;
+        }
+        public string Name { get; }
+        public int Price { get; }
+        public int IconId { get; }
+        
+        public int Color { get; }
+    }
+
+    public Item? FindInSell(string name)
+    {
+        return SellItems.FirstOrDefault(i => i.Name.Equals(name));
+    }
+    
+    public Item? FindInBuy(string name)
+    {
+        return BuyItems.FirstOrDefault(i => i.Name.Equals(name));
+    }
+
+    private bool Buys(string name)
+    {
+        return BuyItems.Any(i => i.Name.Equals(name));
+    }
+    
     public override void _Ready()
     {
-        base._Ready();
+        _nameLabel = GetNode<Label>("Name");
+        _dialog = GetNode<RichTextLabel>("Dialog");
+        _avatar = GetNode<TextureRect>("Avatar");
+        _close = GetNode<Button>("Close");
+        _close.Pressed += Close;
         _confirmButton = GetNode<TextureButton>("ConfirmButton");
         _confirmButton.Pressed += OnConfirmTrade;
         GetNode<TextureButton>("CancelButton").Pressed += Close;
@@ -44,14 +96,14 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         _itemsContainer.ItemDoubleClicked += OnItemDoubleClicked;
         Close();
     }
-
-    private void AddToTotal(long delta)
+    
+        private void AddToTotal(long delta)
     {
         long current = string.IsNullOrEmpty(_total.Text) ? 0 : long.Parse(_total.Text);
         _total.Text = (current + delta).ToString();
     }
 
-    private void OnItemDoubleClicked(Item item)
+    private void OnItemDoubleClicked(Dialog.Item item)
     {
         if (_tradeInputWindow == null || _itemFactory == null)
         {
@@ -69,13 +121,13 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
     }
     private void OnConfirmTrade()
     {
-        if (_trade.IsEmpty || Merchant == null)
+        if (_trade.IsEmpty)
         {
             return;
         }
         if (_playerSelling)
         {
-            _inventory?.OnSell(Merchant.Id, _trade);
+            _inventory?.OnSell(Id, _trade);
         }
         else
         {
@@ -89,7 +141,7 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         _inventory = inventory;
     }
 
-    public override void Close()
+    public void Close()
     {
         if (_playerSelling)
         {
@@ -159,7 +211,7 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
 
     private void OnConfirmSellItem()
     {
-        if (_tradeInputWindow == null || _inventory == null || _itemFactory == null || Merchant == null)
+        if (_tradeInputWindow == null || _inventory == null || _itemFactory == null || !SellItems.Any())
         {
             return;
         }
@@ -168,7 +220,7 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         {
             return;
         }
-        var buyingItem = Merchant.FindInBuy(name);
+        var buyingItem = FindInBuy(name);
         if (buyingItem == null)
         {
             return;
@@ -284,4 +336,5 @@ public partial class MerchantTradingControl : AbstractMerchantControl, ISlotDoub
         return true;
     }
 
+    
 }

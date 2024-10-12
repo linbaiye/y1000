@@ -11,6 +11,7 @@ using y1000.Source.Control.Dialog;
 using y1000.Source.Control.Guild;
 using y1000.Source.Control.LeftSide;
 using y1000.Source.Control.Map;
+using y1000.Source.Control.NpcInteraction;
 using y1000.Source.Control.PlayerAttribute;
 using y1000.Source.Control.PlayerTrade;
 using y1000.Source.Control.Quest;
@@ -21,13 +22,15 @@ using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.KungFu;
 using y1000.Source.Map;
+using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 using y1000.Source.Sprite;
+using NotImplementedException = System.NotImplementedException;
 
 namespace y1000.Source.Control;
 
-public partial class UIController : CanvasLayer
+public partial class UIController : CanvasLayer, IUiMessageVisitor
 {
     private static readonly ILogger LOGGER = LogManager.GetCurrentClassLogger();
     
@@ -66,6 +69,10 @@ public partial class UIController : CanvasLayer
     private QuestDialogView _questDialogView;
 
     private BuffContainer _buffContainer;
+
+    private NpcInteractionMainMenuView _interactionMainMenu;
+
+    private MerchantTradingControl _merchantTranding;
     
     public override void _Ready()
     {
@@ -88,6 +95,8 @@ public partial class UIController : CanvasLayer
         _guildKungFuFormView = GetNode<GuildKungFuFormView>("KungFuApplicationForm");
         _questDialogView = GetNode<QuestDialogView>("QuestDialog");
         _buffContainer = GetNode<BuffContainer>("BuffContainer");
+        _interactionMainMenu = GetNode<NpcInteractionMainMenuView>("NpcInteractionMainMenu");
+        _merchantTranding = GetNode<MerchantTradingControl>("MerchantTrading");
         BindButtons();
     }
 
@@ -112,6 +121,8 @@ public partial class UIController : CanvasLayer
         _guildKungFuFormView.Initialize(eventMediator);
         _questDialogView.Initialize(eventMediator);
         _buffContainer.Initialize(eventMediator);
+        _interactionMainMenu.Initialize(eventMediator);
+        _merchantTranding.Initialize(_tradeInputWindow, eventMediator, itemFactory);
     }
 
     public void DisplayTextMessage(TextMessage message)
@@ -276,5 +287,20 @@ public partial class UIController : CanvasLayer
     public void OperateBuffWindow(UpdateBuffMessage message)
     {
         _buffContainer.Handle(message);
+    }
+
+    public void Visit(NpcInteractionMenuMessage message)
+    {
+        _interactionMainMenu.Handle(message);
+    }
+    
+    public void Handle(MerchantMenuMessage message)
+    {
+        _merchantTranding.Handle(message, );
+    }
+    
+    public void Handle(IUiMessage message)
+    {
+        message.Accept(this);
     }
 }

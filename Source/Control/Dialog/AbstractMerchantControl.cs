@@ -32,6 +32,7 @@ public abstract partial class AbstractMerchantControl : NinePatchRect
     {
         Visible = true;
     }
+    
 
     protected void PopulateCommonFields(Merchant merchant, ISpriteRepository spriteRepository, string dialog)
     {

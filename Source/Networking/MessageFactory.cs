@@ -167,6 +167,8 @@ public class MessageFactory
 			Packet.TypedPacketOneofCase.KungFuForm => new UpdateGuildKungFuMessage(packet.KungFuForm.Command, packet.KungFuForm.Text),
 			Packet.TypedPacketOneofCase.QuestWindow => UpdateQuestWindowMessage.Parse(packet.QuestWindow),
 			Packet.TypedPacketOneofCase.UpdateBuff => UpdateBuffMessage.Parse(packet.UpdateBuff, _iconReader),
+			Packet.TypedPacketOneofCase.InteractionMenu => NpcInteractionMenuMessage.Parse(packet.InteractionMenu, ISpriteRepository.Instance),
+			Packet.TypedPacketOneofCase.MerchantMenu => MerchantMenuMessage.Parse(packet.MerchantMenu, ISpriteRepository.Instance),
 			_ => throw new NotSupportedException()
 		};
 	}

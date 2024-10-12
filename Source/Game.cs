@@ -279,8 +279,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 				return;
 			if (monster.Type == NpcType.BANKER)
 				_eventMediator.NotifyServer(ClientOperateBankEvent.Open(entity.Id));
-			else if (monster.Type == NpcType.QUESTER)
-				_eventMediator?.NotifyServer(new ClickEntityEvent(monster.Id));
+			else if (monster.Type is NpcType.QUESTER or NpcType.INTERACTABLE)
+				_eventMediator.NotifyServer(new ClickEntityEvent(monster.Id));
 			else if (monster is Merchant merchant)
 				_uiController?.OnMerchantClicked(merchant);
 		}
@@ -520,6 +520,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 	public void Visit(UpdateBuffMessage message)
 	{
 		_uiController?.OperateBuffWindow(message);
+	}
+
+	public void Visit(IUiMessage uiMessage)
+	{
+		_uiController?.Handle(uiMessage);
 	}
 
 	public void Visit(JoinedRealmMessage message)
