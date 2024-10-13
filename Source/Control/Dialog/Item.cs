@@ -104,6 +104,16 @@ public partial class Item : Panel
         });
     }
 
+    public void UpdateText(string text) 
+    {
+        RemoveThemeStyleboxOverride("panel");
+        _lockedReason.Text = text;
+        AddThemeStyleboxOverride("panel", new StyleBoxFlat()
+        {
+            BgColor = new Color("4a4a4a")
+        });
+    }
+
     public static Item Create()
     {
         return ResourceLoader

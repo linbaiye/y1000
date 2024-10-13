@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://blmufpbvbu8ur"]
+[gd_scene load_steps=6 format=3 uid="uid://cotr8m5n38b5d"]
 
 [ext_resource type="Texture2D" uid="uid://c2vm1csclhxbx" path="res://assets/ui/trading_dialog.png" id="1_tb1rf"]
-[ext_resource type="Script" path="res://Source/Control/Dialog/MerchantTradingControl.cs" id="2_0j0df"]
+[ext_resource type="Script" path="res://Source/Control/NpcInteraction/MerchantMenuView.cs" id="2_12ncq"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="3_yplgj"]
 [ext_resource type="PackedScene" uid="uid://brl3lwfss84w8" path="res://Scenes/ItemsContainer.tscn" id="4_ueef8"]
 [ext_resource type="Texture2D" uid="uid://cgpjvsiqfgifo" path="res://assets/ui/input_cancel_down.png" id="5_hlwlf"]
@@ -10,7 +10,7 @@
 offset_right = 380.0
 offset_bottom = 404.0
 texture = ExtResource("1_tb1rf")
-script = ExtResource("2_0j0df")
+script = ExtResource("2_12ncq")
 
 [node name="Name" type="Label" parent="."]
 layout_mode = 0

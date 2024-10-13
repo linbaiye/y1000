@@ -15,12 +15,12 @@ public class ClientTradeEvent : IClientEvent
         Selling = selling;
     }
     
-    public static ClientTradeEvent Sell(MerchantTrade trade, long merchantId)
+    public static ClientTradeEvent PlayerSell(MerchantTrade trade, long merchantId)
     {
         return new ClientTradeEvent(trade, merchantId);
     }
 
-    public static ClientTradeEvent Buy(MerchantTrade trade, long merchantId)
+    public static ClientTradeEvent PlayerBuy(MerchantTrade trade, long merchantId)
     {
         return new ClientTradeEvent(trade, merchantId, false);
     }

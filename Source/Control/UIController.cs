@@ -26,7 +26,6 @@ using y1000.Source.Networking;
 using y1000.Source.Networking.Server;
 using y1000.Source.Player;
 using y1000.Source.Sprite;
-using NotImplementedException = System.NotImplementedException;
 
 namespace y1000.Source.Control;
 
@@ -40,7 +39,7 @@ public partial class UIController : CanvasLayer, IUiMessageVisitor
 
     private DropItemUI _dropItemUi;
 
-    private DialogControl _dialogControl;
+    //private DialogControl _dialogControl;
     
     private TradeInputWindow _tradeInputWindow;
     
@@ -72,14 +71,14 @@ public partial class UIController : CanvasLayer, IUiMessageVisitor
 
     private NpcInteractionMainMenuView _interactionMainMenu;
 
-    private MerchantTradingControl _merchantTranding;
+    private MerchantMenuView _merchantTrading;
     
     public override void _Ready()
     {
         _bottomControl = GetNode<BottomControl>("BottomUI");
         _rightControl = GetNode<RightControl>("RightSideUI");
         _dropItemUi = GetNode<DropItemUI>("DropItemUI");
-        _dialogControl = GetNode<DialogControl>("DialogUI");
+        //_dialogControl = GetNode<DialogControl>("DialogUI");
         _leftsideTextControl = GetNode<LeftsideTextControl>("LeftsideTextArea");
         _tradeInputWindow = GetNode<TradeInputWindow>("InputWindow");
         _itemAttributeControl = GetNode<ItemAttributeControl>("ItemAttribute");
@@ -96,7 +95,7 @@ public partial class UIController : CanvasLayer, IUiMessageVisitor
         _questDialogView = GetNode<QuestDialogView>("QuestDialog");
         _buffContainer = GetNode<BuffContainer>("BuffContainer");
         _interactionMainMenu = GetNode<NpcInteractionMainMenuView>("NpcInteractionMainMenu");
-        _merchantTranding = GetNode<MerchantTradingControl>("MerchantTrading");
+        _merchantTrading = GetNode<MerchantMenuView>("MerchantTrading");
         BindButtons();
     }
 
@@ -113,7 +112,7 @@ public partial class UIController : CanvasLayer, IUiMessageVisitor
         eventMediator.SetComponent(_bottomControl);
         _tradeInputWindow.BindEventMediator(eventMediator);
         _dropItemUi.BindEventMediator(eventMediator);
-        _dialogControl.Initialize(spriteRepository, _tradeInputWindow, eventMediator, itemFactory);
+       // _dialogControl.Initialize(spriteRepository, _tradeInputWindow, eventMediator, itemFactory);
         _playerTradeWindow.Initialize(_tradeInputWindow, eventMediator);
         _mapView.Initialize(eventMediator);
         _itemAttributeControl.Initialize(eventMediator);
@@ -122,7 +121,7 @@ public partial class UIController : CanvasLayer, IUiMessageVisitor
         _questDialogView.Initialize(eventMediator);
         _buffContainer.Initialize(eventMediator);
         _interactionMainMenu.Initialize(eventMediator);
-        _merchantTranding.Initialize(_tradeInputWindow, eventMediator, itemFactory);
+        _merchantTrading.Initialize(_tradeInputWindow, eventMediator, itemFactory);
     }
 
     public void DisplayTextMessage(TextMessage message)
@@ -164,11 +163,11 @@ public partial class UIController : CanvasLayer, IUiMessageVisitor
     {
         _rightControl.BindCharacter(character, autoFillAssistant, autoLootAssistant, hotkeys);
         _bottomControl.BindCharacter(character, realmName);
-        _dialogControl.BindCharacter(character);
         _mapView.BindCharacter(character);
         _itemAttributeControl.BindCharacter(character);
         if (audioManager != null)
             _systemSettings.BindAudioManager(audioManager);
+        _merchantTrading.BindInventory(character.Inventory);
     }
     
 
@@ -180,7 +179,7 @@ public partial class UIController : CanvasLayer, IUiMessageVisitor
         }
         else
         {
-            _dialogControl.OnMerchantClicked(merchant);
+            //_dialogControl.OnMerchantClicked(merchant);
         }
     }
 
@@ -239,7 +238,7 @@ public partial class UIController : CanvasLayer, IUiMessageVisitor
 
     private bool IsTrading()
     {
-        return _dialogControl.IsTrading || _dropItemUi.Visible || _bankView.Visible;
+        return _merchantTrading.IsTrading || _dropItemUi.Visible || _bankView.Visible;
     }
 
     public void ToggleMap(IMap map)
@@ -294,9 +293,9 @@ public partial class UIController : CanvasLayer, IUiMessageVisitor
         _interactionMainMenu.Handle(message);
     }
     
-    public void Handle(MerchantMenuMessage message)
+    public void Visit(MerchantMenuMessage message)
     {
-        _merchantTranding.Handle(message, );
+        _merchantTrading.Handle(message);
     }
     
     public void Handle(IUiMessage message)

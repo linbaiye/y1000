@@ -32,8 +32,9 @@ public abstract class AbstractInventory
     public bool HasEnough(string name, long number)
     {
         var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
-        return item is CharacterStackItem stackItem && stackItem.Number >= number
-               || item != null;
+        if (item is CharacterStackItem stackItem)
+            return stackItem.Number >= number;
+        return number == 1 && item != null;
     }
     
     protected bool CanPut(IItem item, int slot)

@@ -162,204 +162,204 @@ namespace Source.Networking.Protobuf {
             "Lk5ldHdvcmtpbmcuUHJvdG9idWYuSW50ZXJwb2xhdGlvblBhY2tldCJiChNJ",
             "bnZlbnRvcnlJdGVtUGFja2V0EgwKBG5hbWUYASABKAkSDgoGc2xvdElkGAIg",
             "ASgFEhMKBm51bWJlchgDIAEoA0gAiAEBEg0KBWNvbG9yGAQgASgFQgkKB19u",
-            "dW1iZXIiSQoNTnBjSXRlbVBhY2tldBIMCgRuYW1lGAEgASgJEgwKBGljb24Y",
-            "AiABKAUSDQoFY29sb3IYAyABKAUSDQoFcHJpY2UYBCABKAUiTAoVT3BlblRy",
-            "YWRlV2luZG93UGFja2V0EhcKD2Fub3RoZXJQbGF5ZXJJZBgBIAEoAxIRCgRz",
-            "bG90GAIgASgFSACIAQFCBwoFX3Nsb3QiqgEKF1VwZGF0ZVRyYWRlV2luZG93",
-            "UGFja2V0EgwKBHR5cGUYASABKAUSEQoEbmFtZRgCIAEoCUgAiAEBEhMKBm51",
-            "bWJlchgDIAEoA0gBiAEBEhEKBHNsb3QYBCABKAVIAogBARIRCgRzZWxmGAUg",
-            "ASgISAOIAQESDQoFY29sb3IYBiABKAVCBwoFX25hbWVCCQoHX251bWJlckIH",
-            "CgVfc2xvdEIHCgVfc2VsZiJHCgxLdW5nRnVQYWNrZXQSDAoEbmFtZRgBIAEo",
-            "CRINCgVsZXZlbBgCIAEoBRIMCgRzbG90GAMgASgFEgwKBHR5cGUYBCABKAUi",
-            "igEKEVRleHRNZXNzYWdlUGFja2V0EgwKBHR5cGUYASABKAUSEQoEdGV4dBgC",
-            "IAEoCUgAiAEBEhAKCGxvY2F0aW9uGAMgASgFEhEKCWNvbG9yVHlwZRgEIAEo",
-            "BRIXCgpmcm9tUGxheWVyGAUgASgJSAGIAQFCBwoFX3RleHRCDQoLX2Zyb21Q",
-            "bGF5ZXIiawoSVG9nZ2xlS3VuZ0Z1UGFja2V0EgwKBG5hbWUYASABKAkSEgoF",
-            "bGV2ZWwYAiABKAVIAIgBARIKCgJpZBgDIAEoAxIPCgdxdWlldGx5GAQgASgI",
-            "EgwKBHR5cGUYBSABKAVCCAoGX2xldmVsIiwKDUxpZmVCYXJQYWNrZXQSCgoC",
-            "aWQYASABKAMSDwoHcGVyY2VudBgCIAEoBSJ3Cg5UZWxlcG9ydFBhY2tldBIJ",
-            "CgF4GAEgASgFEgkKAXkYAiABKAUSCwoDbWFwGAMgASgJEgwKBHRpbGUYBCAB",
-            "KAkSCwoDb2JqGAUgASgJEgsKA3JvZhgGIAEoCRILCgNiZ20YByABKAkSDQoF",
-            "cmVhbG0YCCABKAki9AQKC0xvZ2luUGFja2V0EjwKCHRlbGVwb3J0GAEgASgL",
-            "MiouU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuVGVsZXBvcnRQYWNrZXQS",
-            "OgoEaW5mbxgCIAEoCzIsLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBs",
-            "YXllckluZm9QYWNrZXQSGAoQYXR0YWNrS3VuZ0Z1TmFtZRgDIAEoCRIbCg5m",
-            "b290S3VuZ0Z1TmFtZRgIIAEoCUgAiAEBEkcKDmludmVudG9yeUl0ZW1zGAkg",
-            "AygLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSW52ZW50b3J5SXRl",
-            "bVBhY2tldBJDChF1bm5hbWVkS3VuZ0Z1TGlzdBgLIAMoCzIoLlNvdXJjZS5O",
-            "ZXR3b3JraW5nLlByb3RvYnVmLkt1bmdGdVBhY2tldBJBCg9iYXNpY0t1bmdG",
-            "dUxpc3QYDCADKAsyKC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5LdW5n",
-            "RnVQYWNrZXQSHQoQcHJvdGVjdGlvbkt1bmdGdRgNIAEoCUgBiAEBEhwKD2Fz",
-            "c2lzdGFudEt1bmdGdRgOIAEoCUgCiAEBEhkKDGJyZWF0aEt1bmdGdRgPIAEo",
-            "CUgDiAEBEj4KCWF0dHJpYnV0ZRgRIAEoCzIrLlNvdXJjZS5OZXR3b3JraW5n",
-            "LlByb3RvYnVmLkF0dHJpYnV0ZVBhY2tldEIRCg9fZm9vdEt1bmdGdU5hbWVC",
-            "EwoRX3Byb3RlY3Rpb25LdW5nRnVCEgoQX2Fzc2lzdGFudEt1bmdGdUIPCg1f",
-            "YnJlYXRoS3VuZ0Z1IpYCCg9BdHRyaWJ1dGVQYWNrZXQSDwoHY3VyTGlmZRgB",
-            "IAEoBRIPCgdtYXhMaWZlGAIgASgFEhAKCGN1clBvd2VyGAMgASgFEhAKCG1h",
-            "eFBvd2VyGAQgASgFEhUKDWN1cklubmVyUG93ZXIYBSABKAUSFQoNbWF4SW5u",
-            "ZXJQb3dlchgGIAEoBRIVCg1jdXJPdXRlclBvd2VyGAcgASgFEhUKDW1heE91",
-            "dGVyUG93ZXIYCCABKAUSEQoJY3VyRW5lcmd5GAkgASgFEhEKCW1heEVuZXJn",
-            "eRgKIAEoBRITCgtoZWFkUGVyY2VudBgLIAEoBRISCgphcm1QZXJjZW50GAwg",
-            "ASgFEhIKCmxlZ1BlcmNlbnQYDSABKAUi5AIKH1BsYXllclJpZ2h0Q2xpY2tB",
-            "dHRyaWJ1dGVQYWNrZXQSEwoLYXR0YWNrU3BlZWQYASABKAUSDwoHbWF4TGlm",
-            "ZRgCIAEoBRIRCglhdm9pZGFuY2UYAyABKAUSEAoIbWF4UG93ZXIYBCABKAUS",
-            "EAoIcmVjb3ZlcnkYBSABKAUSFQoNbWF4SW5uZXJQb3dlchgGIAEoBRIVCg1t",
-            "YXhPdXRlclBvd2VyGAggASgFEhEKCW1heEVuZXJneRgKIAEoBRISCgpib2R5",
-            "RGFtYWdlGAcgASgFEhIKCmhlYWREYW1hZ2UYCSABKAUSEQoJYXJtRGFtYWdl",
-            "GAsgASgFEhEKCWxlZ0RhbWFnZRgMIAEoBRIRCglib2R5QXJtb3IYDSABKAUS",
-            "EQoJaGVhZEFybW9yGA4gASgFEhAKCGFybUFybW9yGA8gASgFEhAKCGxlZ0Fy",
-            "bW9yGBAgASgFEgsKA2FnZRgRIAEoBSI4ChNQbGF5ZXJVbmVxdWlwUGFja2V0",
-            "EgoKAmlkGAEgASgDEhUKDWVxdWlwbWVudFR5cGUYAiABKAUiRQoRUGxheWVy",
-            "RXF1aXBQYWNrZXQSCgoCaWQYASABKAMSFQoNZXF1aXBtZW50TmFtZRgCIAEo",
-            "CRINCgVjb2xvchgDIAEoBSIhChNQbGF5ZXJTaXREb3duUGFja2V0EgoKAmlk",
-            "GAEgASgDIiEKE1BsYXllclN0YW5kVXBQYWNrZXQSCgoCaWQYASABKAMiIgoU",
-            "UGxheWVyQ29vbGRvd25QYWNrZXQSCgoCaWQYASABKAMiIAoSUGxheWVyUmV2",
-            "aXZlUGFja2V0EgoKAmlkGAEgASgDIkIKE1BsYXllckdhaW5FeHBQYWNrZXQS",
-            "DAoEbmFtZRgBIAEoCRINCgVsZXZlbBgCIAEoBRIOCgZrdW5nRnUYAyABKAgi",
-            "WgoQUHJvamVjdGlsZVBhY2tldBIKCgJpZBgBIAEoAxIQCgh0YXJnZXRJZBgC",
-            "IAEoAxIYChBmbHlpbmdUaW1lTWlsbGlzGAMgASgFEg4KBnNwcml0ZRgEIAEo",
-            "BSJdChNJdGVtQXR0cmlidXRlUGFja2V0EgwKBHR5cGUYASABKAUSDgoGc2xv",
-            "dElkGAIgASgFEhEKBHBhZ2UYAyABKAVIAIgBARIMCgR0ZXh0GAQgASgJQgcK",
-            "BV9wYWdlIvsBChdTaG93RHluYW1pY09iamVjdFBhY2tldBIKCgJpZBgBIAEo",
-            "AxIJCgF4GAIgASgFEgkKAXkYAyABKAUSDAoEdHlwZRgEIAEoBRINCgVzdGFy",
-            "dBgFIAEoBRILCgNlbmQYBiABKAUSDQoFc2hhcGUYByABKAkSDwoHZWxhcHNl",
-            "ZBgIIAEoBRIRCgRuYW1lGAkgASgJSACIAQESDgoGZ3VhcmRYGAogAygFEg4K",
-            "Bmd1YXJkWRgLIAMoBRIZCgxyZXF1aXJlZEl0ZW0YDCABKAlIAYgBARIMCgRs",
-            "b29wGA0gASgIQgcKBV9uYW1lQg8KDV9yZXF1aXJlZEl0ZW0iUQoZVXBkYXRl",
-            "RHluYW1pY09iamVjdFBhY2tldBIKCgJpZBgBIAEoAxINCgVzdGFydBgCIAEo",
-            "BRILCgNlbmQYAyABKAUSDAoEbG9vcBgEIAEoCCIdCg9CcmVha1JvcGVQYWNr",
-            "ZXQSCgoCaWQYASABKAMiQwoRTnBjUG9zaXRpb25QYWNrZXQSDQoFeExpc3QY",
-            "ASADKAUSDQoFeUxpc3QYAiADKAUSEAoIbmFtZUxpc3QYAyADKAkiUQoKQ2hh",
-            "dFBhY2tldBIKCgJpZBgBIAEoAxIPCgdjb250ZW50GAIgASgJEhcKCmZyb21Q",
-            "bGF5ZXIYAyABKAlIAIgBAUINCgtfZnJvbVBsYXllciJ0Cg5PcGVuQmFua1Bh",
-            "Y2tldBI+CgVpdGVtcxgBIAMoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
-            "YnVmLkludmVudG9yeUl0ZW1QYWNrZXQSEAoIY2FwYWNpdHkYAiABKAUSEAoI",
-            "dW5sb2NrZWQYAyABKAUieQoQVXBkYXRlQmFua1BhY2tldBIMCgR0eXBlGAEg",
-            "ASgFEkgKCnVwZGF0ZVNsb3QYAiABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Q",
-            "cm90b2J1Zi5JbnZlbnRvcnlJdGVtUGFja2V0SACIAQFCDQoLX3VwZGF0ZVNs",
-            "b3QiLAoPTmFtZUNvbG9yUGFja2V0EgoKAmlkGAEgASgDEg0KBWNvbG9yGAIg",
-            "ASgFIi0KEVVwZGF0ZUd1aWxkUGFja2V0EgoKAmlkGAEgASgDEgwKBG5hbWUY",
-            "AiABKAkiPAobVXBkYXRlR3VpbGRLdW5nRnVGb3JtUGFja2V0Eg8KB2NvbW1h",
-            "bmQYASABKAUSDAoEdGV4dBgCIAEoCSJ3ChdVcGRhdGVRdWVzdFdpbmRvd1Bh",
-            "Y2tldBIKCgJpZBgBIAEoAxIRCglxdWVzdE5hbWUYAiABKAkSGAoQcXVlc3RE",
-            "ZXNjcmlwdGlvbhgDIAEoCRISCgpzdWJtaXRUZXh0GAQgASgJEg8KB25wY05h",
-            "bWUYBSABKAkieAoQVXBkYXRlQnVmZlBhY2tldBIMCgR0eXBlGAEgASgFEgwK",
-            "BGljb24YAiABKAUSDQoFY29sb3IYAyABKAUSDwoHc2Vjb25kcxgEIAEoBRIY",
-            "CgtkZXNjcmlwdGlvbhgFIAEoCUgAiAEBQg4KDF9kZXNjcmlwdGlvbiJ+ChhO",
-            "cGNJbnRlcmFjdGlvbk1lbnVQYWNrZXQSCgoCaWQYASABKAMSEAoIdmlld05h",
-            "bWUYAiABKAkSDQoFc2hhcGUYAyABKAkSEQoJYXZhdGFySWR4GAQgASgFEgwK",
-            "BHRleHQYBSABKAkSFAoMaW50ZXJhY3Rpb25zGAYgAygJIqoBChJNZXJjaGFu",
-            "dE1lbnVQYWNrZXQSCgoCaWQYASABKAMSEAoIdmlld05hbWUYAiABKAkSDQoF",
-            "c2hhcGUYAyABKAkSEQoJYXZhdGFySWR4GAQgASgFEgwKBHRleHQYBSABKAkS",
-            "OAoFaXRlbXMYBiADKAsyKS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5O",
-            "cGNJdGVtUGFja2V0EgwKBHNlbGwYByABKAgi3h0KBlBhY2tldBJECg5wb3Np",
-            "dGlvblBhY2tldBgBIAEoCzIqLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVm",
-            "LlBvc2l0aW9uUGFja2V0SAASWAoVY3JlYXR1cmVJbnRlcnBvbGF0aW9uGAIg",
-            "ASgLMjcuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQ3JlYXR1cmVJbnRl",
-            "cnBvbGF0aW9uUGFja2V0SAASPgoLbG9naW5QYWNrZXQYBCABKAsyJy5Tb3Vy",
-            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Mb2dpblBhY2tldEgAEkoKDmludGVy",
-            "cG9sYXRpb25zGAUgASgLMjAuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
-            "SW50ZXJwb2xhdGlvbnNQYWNrZXRIABJJCg5yZXNwb25zZVBhY2tldBgGIAEo",
-            "CzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLklucHV0UmVzcG9uc2VQ",
-            "YWNrZXRIABJUChNwbGF5ZXJJbnRlcnBvbGF0aW9uGAcgASgLMjUuU291cmNl",
-            "Lk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVySW50ZXJwb2xhdGlvblBhY2tl",
-            "dEgAEkYKDHJlbW92ZUVudGl0eRgIIAEoCzIuLlNvdXJjZS5OZXR3b3JraW5n",
-            "LlByb3RvYnVmLlJlbW92ZUVudGl0eVBhY2tldEgAElsKGWF0dGFja0V2ZW50",
-            "UmVzcG9uc2VQYWNrZXQYCSABKAsyNi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
-            "b2J1Zi5DbGllbnRBdHRhY2tSZXNwb25zZVBhY2tldEgAElIKEWF0dGFja0V2",
-            "ZW50UGFja2V0GAogASgLMjUuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
-            "Q3JlYXR1cmVBdHRhY2tFdmVudFBhY2tldEgAEk4KD2h1cnRFdmVudFBhY2tl",
-            "dBgLIAEoCzIzLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkNyZWF0dXJl",
-            "SHVydEV2ZW50UGFja2V0SAASSgoRY2hhbmdlU3RhdGVQYWNrZXQYDCABKAsy",
-            "LS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DaGFuZ2VTdGF0ZVBhY2tl",
-            "dEgAElYKF3N3YXBJbnZlbnRvcnlTbG90UGFja2V0GA0gASgLMjMuU291cmNl",
-            "Lk5ldHdvcmtpbmcuUHJvdG9idWYuU3dhcEludmVudG9yeVNsb3RQYWNrZXRI",
-            "ABJFCghkcm9wSXRlbRgQIAEoCzIxLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
-            "YnVmLkRyb3BJdGVtQ29uZmlybVBhY2tldEgAEj4KCHNob3dJdGVtGBEgASgL",
-            "MiouU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuU2hvd0l0ZW1QYWNrZXRI",
-            "ABJFCgp1cGRhdGVTbG90GBIgASgLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJv",
-            "dG9idWYuSW52ZW50b3J5SXRlbVBhY2tldEgAEj0KBHRleHQYEyABKAsyLS5T",
-            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5UZXh0TWVzc2FnZVBhY2tldEgA",
-            "EkIKB3VuZXF1aXAYFCABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
-            "Zi5QbGF5ZXJVbmVxdWlwUGFja2V0SAASPgoFZXF1aXAYFSABKAsyLS5Tb3Vy",
-            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJFcXVpcFBhY2tldEgAEkwK",
-            "D29wZW5UcmFkZVdpbmRvdxgWIAEoCzIxLlNvdXJjZS5OZXR3b3JraW5nLlBy",
-            "b3RvYnVmLk9wZW5UcmFkZVdpbmRvd1BhY2tldEgAEkYKDHRvZ2dsZUt1bmdG",
-            "dRgXIAEoCzIuLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlRvZ2dsZUt1",
-            "bmdGdVBhY2tldEgAEkIKB3NpdERvd24YGCABKAsyLy5Tb3VyY2UuTmV0d29y",
-            "a2luZy5Qcm90b2J1Zi5QbGF5ZXJTaXREb3duUGFja2V0SAASQgoHc3RhbmRV",
-            "cBgZIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllclN0",
-            "YW5kVXBQYWNrZXRIABJECghjb29sZG93bhgaIAEoCzIwLlNvdXJjZS5OZXR3",
-            "b3JraW5nLlByb3RvYnVmLlBsYXllckNvb2xkb3duUGFja2V0SAASQAoJYXR0",
-            "cmlidXRlGBsgASgLMisuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQXR0",
-            "cmlidXRlUGFja2V0SAASRQoFc291bmQYHCABKAsyNC5Tb3VyY2UuTmV0d29y",
-            "a2luZy5Qcm90b2J1Zi5DcmVhdHVyZVNvdW5kRXZlbnRQYWNrZXRIABJBCgNk",
-            "aWUYHSABKAsyMi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DcmVhdHVy",
-            "ZURpZUV2ZW50UGFja2V0SAASRgoMcGxheWVyUmV2aXZlGB4gASgLMi4uU291",
-            "cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVyUmV2aXZlUGFja2V0SAAS",
-            "QgoHZ2FpbkV4cBgfIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVm",
-            "LlBsYXllckdhaW5FeHBQYWNrZXRIABJCCgpwcm9qZWN0aWxlGCAgASgLMiwu",
-            "U291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUHJvamVjdGlsZVBhY2tldEgA",
-            "EkkKC21vbnN0ZXJNb3ZlGCEgASgLMjIuU291cmNlLk5ldHdvcmtpbmcuUHJv",
-            "dG9idWYuTW9uc3Rlck1vdmVFdmVudFBhY2tldEgAEj8KC2xlYXJuS3VuZ0Z1",
-            "GCIgASgLMiguU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuS3VuZ0Z1UGFj",
-            "a2V0SAASSAoNaXRlbUF0dHJpYnV0ZRgjIAEoCzIvLlNvdXJjZS5OZXR3b3Jr",
-            "aW5nLlByb3RvYnVmLkl0ZW1BdHRyaWJ1dGVQYWNrZXRIABJaChNyaWdodENs",
-            "aWNrQXR0cmlidXRlGCQgASgLMjsuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
-            "dWYuUGxheWVyUmlnaHRDbGlja0F0dHJpYnV0ZVBhY2tldEgAElAKEXVwZGF0",
-            "ZVRyYWRlV2luZG93GCUgASgLMjMuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
-            "dWYuVXBkYXRlVHJhZGVXaW5kb3dQYWNrZXRIABJQChFzaG93RHluYW1pY09i",
-            "amVjdBgmIAEoCzIzLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlNob3dE",
-            "eW5hbWljT2JqZWN0UGFja2V0SAASVAoTdXBkYXRlRHluYW1pY09iamVjdBgn",
-            "IAEoCzI1LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlVwZGF0ZUR5bmFt",
-            "aWNPYmplY3RQYWNrZXRIABI+Cgh0ZWxlcG9ydBgoIAEoCzIqLlNvdXJjZS5O",
-            "ZXR3b3JraW5nLlByb3RvYnVmLlRlbGVwb3J0UGFja2V0SAASPAoHbGlmZWJh",
-            "chgpIAEoCzIpLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkxpZmVCYXJQ",
-            "YWNrZXRIABJEChB1cGRhdGVLdW5nRnVTbG90GCogASgLMiguU291cmNlLk5l",
-            "dHdvcmtpbmcuUHJvdG9idWYuS3VuZ0Z1UGFja2V0SAASRgoMc2hvd1RlbGVw",
-            "b3J0GCsgASgLMi4uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuU2hvd1Rl",
-            "bGVwb3J0UGFja2V0SAASQAoJYnJlYWtSb3BlGCwgASgLMisuU291cmNlLk5l",
-            "dHdvcmtpbmcuUHJvdG9idWYuQnJlYWtSb3BlUGFja2V0SAASRAoLbnBjUG9z",
-            "aXRpb24YLSABKAsyLS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5OcGNQ",
-            "b3NpdGlvblBhY2tldEgAEjYKBGNoYXQYLiABKAsyJi5Tb3VyY2UuTmV0d29y",
-            "a2luZy5Qcm90b2J1Zi5DaGF0UGFja2V0SAASPgoIb3BlbkJhbmsYLyABKAsy",
-            "Ki5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5PcGVuQmFua1BhY2tldEgA",
-            "EkIKCnVwZGF0ZUJhbmsYMCABKAsyLC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
-            "b2J1Zi5VcGRhdGVCYW5rUGFja2V0SAASQAoJbmFtZUNvbG9yGDEgASgLMisu",
-            "U291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuTmFtZUNvbG9yUGFja2V0SAAS",
-            "RAoLdXBkYXRlR3VpbGQYMiABKAsyLS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
-            "b2J1Zi5VcGRhdGVHdWlsZFBhY2tldEgAEk0KCmt1bmdGdUZvcm0YMyABKAsy",
-            "Ny5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5VcGRhdGVHdWlsZEt1bmdG",
-            "dUZvcm1QYWNrZXRIABJKCgtxdWVzdFdpbmRvdxg0IAEoCzIzLlNvdXJjZS5O",
-            "ZXR3b3JraW5nLlByb3RvYnVmLlVwZGF0ZVF1ZXN0V2luZG93UGFja2V0SAAS",
-            "QgoKdXBkYXRlQnVmZhg1IAEoCzIsLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
-            "YnVmLlVwZGF0ZUJ1ZmZQYWNrZXRIABJPCg9pbnRlcmFjdGlvbk1lbnUYNiAB",
-            "KAsyNC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5OcGNJbnRlcmFjdGlv",
-            "bk1lbnVQYWNrZXRIABJGCgxtZXJjaGFudE1lbnUYNyABKAsyLi5Tb3VyY2Uu",
-            "TmV0d29ya2luZy5Qcm90b2J1Zi5NZXJjaGFudE1lbnVQYWNrZXRIAEINCgtU",
-            "eXBlZFBhY2tldCLoAQobQ3JlYXR1cmVJbnRlcnBvbGF0aW9uUGFja2V0EkYK",
-            "DWludGVycG9sYXRpb24YASABKAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
-            "b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EgoKAmlkGAIgASgDEgwKBG5hbWUY",
-            "AyABKAkSDAoEdHlwZRgEIAEoBRIZCgxtZXJjaGFudEZpbGUYBSABKAlIAIgB",
-            "ARINCgVzaGFwZRgGIAEoCRIPCgdhbmltYXRlGAcgASgJEg0KBW1lbnVzGAgg",
-            "AygJQg8KDV9tZXJjaGFudEZpbGUitAQKEFBsYXllckluZm9QYWNrZXQSCgoC",
-            "aWQYAiABKAMSDAoEbWFsZRgDIAEoCBIMCgRuYW1lGAQgASgJEhcKCndlYXBv",
-            "bk5hbWUYBSABKAlIAIgBARIWCgljaGVzdE5hbWUYBiABKAlIAYgBARIVCgho",
-            "YWlyTmFtZRgHIAEoCUgCiAEBEhQKB2hhdE5hbWUYCCABKAlIA4gBARIWCgl3",
-            "cmlzdE5hbWUYCSABKAlIBIgBARIVCghib290TmFtZRgKIAEoCUgFiAEBEhkK",
-            "DGNsb3RoaW5nTmFtZRgLIAEoCUgGiAEBEhgKC3Ryb3VzZXJOYW1lGAwgASgJ",
-            "SAeIAQESEgoKY2hlc3RDb2xvchgNIAEoBRIRCgloYWlyQ29sb3IYDiABKAUS",
-            "EAoIaGF0Q29sb3IYDyABKAUSEgoKd3Jpc3RDb2xvchgQIAEoBRIRCglib290",
-            "Q29sb3IYESABKAUSFQoNY2xvdGhpbmdDb2xvchgSIAEoBRIUCgx0cm91c2Vy",
-            "Q29sb3IYEyABKAUSEQoJbmFtZUNvbG9yGBQgASgFEhYKCWd1aWxkTmFtZRgV",
-            "IAEoCUgIiAEBQg0KC193ZWFwb25OYW1lQgwKCl9jaGVzdE5hbWVCCwoJX2hh",
-            "aXJOYW1lQgoKCF9oYXROYW1lQgwKCl93cmlzdE5hbWVCCwoJX2Jvb3ROYW1l",
-            "Qg8KDV9jbG90aGluZ05hbWVCDgoMX3Ryb3VzZXJOYW1lQgwKCl9ndWlsZE5h",
-            "bWUinwEKGVBsYXllckludGVycG9sYXRpb25QYWNrZXQSRgoNaW50ZXJwb2xh",
-            "dGlvbhgBIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkludGVy",
-            "cG9sYXRpb25QYWNrZXQSOgoEaW5mbxgCIAEoCzIsLlNvdXJjZS5OZXR3b3Jr",
-            "aW5nLlByb3RvYnVmLlBsYXllckluZm9QYWNrZXQiIAoSUmVtb3ZlRW50aXR5",
-            "UGFja2V0EgoKAmlkGAEgASgDYgZwcm90bzM="));
+            "dW1iZXIiWwoNTnBjSXRlbVBhY2tldBIMCgRuYW1lGAEgASgJEgwKBGljb24Y",
+            "AiABKAUSDQoFY29sb3IYAyABKAUSDQoFcHJpY2UYBCABKAUSEAoIY2FuU3Rh",
+            "Y2sYBSABKAgiTAoVT3BlblRyYWRlV2luZG93UGFja2V0EhcKD2Fub3RoZXJQ",
+            "bGF5ZXJJZBgBIAEoAxIRCgRzbG90GAIgASgFSACIAQFCBwoFX3Nsb3QiqgEK",
+            "F1VwZGF0ZVRyYWRlV2luZG93UGFja2V0EgwKBHR5cGUYASABKAUSEQoEbmFt",
+            "ZRgCIAEoCUgAiAEBEhMKBm51bWJlchgDIAEoA0gBiAEBEhEKBHNsb3QYBCAB",
+            "KAVIAogBARIRCgRzZWxmGAUgASgISAOIAQESDQoFY29sb3IYBiABKAVCBwoF",
+            "X25hbWVCCQoHX251bWJlckIHCgVfc2xvdEIHCgVfc2VsZiJHCgxLdW5nRnVQ",
+            "YWNrZXQSDAoEbmFtZRgBIAEoCRINCgVsZXZlbBgCIAEoBRIMCgRzbG90GAMg",
+            "ASgFEgwKBHR5cGUYBCABKAUiigEKEVRleHRNZXNzYWdlUGFja2V0EgwKBHR5",
+            "cGUYASABKAUSEQoEdGV4dBgCIAEoCUgAiAEBEhAKCGxvY2F0aW9uGAMgASgF",
+            "EhEKCWNvbG9yVHlwZRgEIAEoBRIXCgpmcm9tUGxheWVyGAUgASgJSAGIAQFC",
+            "BwoFX3RleHRCDQoLX2Zyb21QbGF5ZXIiawoSVG9nZ2xlS3VuZ0Z1UGFja2V0",
+            "EgwKBG5hbWUYASABKAkSEgoFbGV2ZWwYAiABKAVIAIgBARIKCgJpZBgDIAEo",
+            "AxIPCgdxdWlldGx5GAQgASgIEgwKBHR5cGUYBSABKAVCCAoGX2xldmVsIiwK",
+            "DUxpZmVCYXJQYWNrZXQSCgoCaWQYASABKAMSDwoHcGVyY2VudBgCIAEoBSJ3",
+            "Cg5UZWxlcG9ydFBhY2tldBIJCgF4GAEgASgFEgkKAXkYAiABKAUSCwoDbWFw",
+            "GAMgASgJEgwKBHRpbGUYBCABKAkSCwoDb2JqGAUgASgJEgsKA3JvZhgGIAEo",
+            "CRILCgNiZ20YByABKAkSDQoFcmVhbG0YCCABKAki9AQKC0xvZ2luUGFja2V0",
+            "EjwKCHRlbGVwb3J0GAEgASgLMiouU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
+            "dWYuVGVsZXBvcnRQYWNrZXQSOgoEaW5mbxgCIAEoCzIsLlNvdXJjZS5OZXR3",
+            "b3JraW5nLlByb3RvYnVmLlBsYXllckluZm9QYWNrZXQSGAoQYXR0YWNrS3Vu",
+            "Z0Z1TmFtZRgDIAEoCRIbCg5mb290S3VuZ0Z1TmFtZRgIIAEoCUgAiAEBEkcK",
+            "DmludmVudG9yeUl0ZW1zGAkgAygLMi8uU291cmNlLk5ldHdvcmtpbmcuUHJv",
+            "dG9idWYuSW52ZW50b3J5SXRlbVBhY2tldBJDChF1bm5hbWVkS3VuZ0Z1TGlz",
+            "dBgLIAMoCzIoLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkt1bmdGdVBh",
+            "Y2tldBJBCg9iYXNpY0t1bmdGdUxpc3QYDCADKAsyKC5Tb3VyY2UuTmV0d29y",
+            "a2luZy5Qcm90b2J1Zi5LdW5nRnVQYWNrZXQSHQoQcHJvdGVjdGlvbkt1bmdG",
+            "dRgNIAEoCUgBiAEBEhwKD2Fzc2lzdGFudEt1bmdGdRgOIAEoCUgCiAEBEhkK",
+            "DGJyZWF0aEt1bmdGdRgPIAEoCUgDiAEBEj4KCWF0dHJpYnV0ZRgRIAEoCzIr",
+            "LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkF0dHJpYnV0ZVBhY2tldEIR",
+            "Cg9fZm9vdEt1bmdGdU5hbWVCEwoRX3Byb3RlY3Rpb25LdW5nRnVCEgoQX2Fz",
+            "c2lzdGFudEt1bmdGdUIPCg1fYnJlYXRoS3VuZ0Z1IpYCCg9BdHRyaWJ1dGVQ",
+            "YWNrZXQSDwoHY3VyTGlmZRgBIAEoBRIPCgdtYXhMaWZlGAIgASgFEhAKCGN1",
+            "clBvd2VyGAMgASgFEhAKCG1heFBvd2VyGAQgASgFEhUKDWN1cklubmVyUG93",
+            "ZXIYBSABKAUSFQoNbWF4SW5uZXJQb3dlchgGIAEoBRIVCg1jdXJPdXRlclBv",
+            "d2VyGAcgASgFEhUKDW1heE91dGVyUG93ZXIYCCABKAUSEQoJY3VyRW5lcmd5",
+            "GAkgASgFEhEKCW1heEVuZXJneRgKIAEoBRITCgtoZWFkUGVyY2VudBgLIAEo",
+            "BRISCgphcm1QZXJjZW50GAwgASgFEhIKCmxlZ1BlcmNlbnQYDSABKAUi5AIK",
+            "H1BsYXllclJpZ2h0Q2xpY2tBdHRyaWJ1dGVQYWNrZXQSEwoLYXR0YWNrU3Bl",
+            "ZWQYASABKAUSDwoHbWF4TGlmZRgCIAEoBRIRCglhdm9pZGFuY2UYAyABKAUS",
+            "EAoIbWF4UG93ZXIYBCABKAUSEAoIcmVjb3ZlcnkYBSABKAUSFQoNbWF4SW5u",
+            "ZXJQb3dlchgGIAEoBRIVCg1tYXhPdXRlclBvd2VyGAggASgFEhEKCW1heEVu",
+            "ZXJneRgKIAEoBRISCgpib2R5RGFtYWdlGAcgASgFEhIKCmhlYWREYW1hZ2UY",
+            "CSABKAUSEQoJYXJtRGFtYWdlGAsgASgFEhEKCWxlZ0RhbWFnZRgMIAEoBRIR",
+            "Cglib2R5QXJtb3IYDSABKAUSEQoJaGVhZEFybW9yGA4gASgFEhAKCGFybUFy",
+            "bW9yGA8gASgFEhAKCGxlZ0FybW9yGBAgASgFEgsKA2FnZRgRIAEoBSI4ChNQ",
+            "bGF5ZXJVbmVxdWlwUGFja2V0EgoKAmlkGAEgASgDEhUKDWVxdWlwbWVudFR5",
+            "cGUYAiABKAUiRQoRUGxheWVyRXF1aXBQYWNrZXQSCgoCaWQYASABKAMSFQoN",
+            "ZXF1aXBtZW50TmFtZRgCIAEoCRINCgVjb2xvchgDIAEoBSIhChNQbGF5ZXJT",
+            "aXREb3duUGFja2V0EgoKAmlkGAEgASgDIiEKE1BsYXllclN0YW5kVXBQYWNr",
+            "ZXQSCgoCaWQYASABKAMiIgoUUGxheWVyQ29vbGRvd25QYWNrZXQSCgoCaWQY",
+            "ASABKAMiIAoSUGxheWVyUmV2aXZlUGFja2V0EgoKAmlkGAEgASgDIkIKE1Bs",
+            "YXllckdhaW5FeHBQYWNrZXQSDAoEbmFtZRgBIAEoCRINCgVsZXZlbBgCIAEo",
+            "BRIOCgZrdW5nRnUYAyABKAgiWgoQUHJvamVjdGlsZVBhY2tldBIKCgJpZBgB",
+            "IAEoAxIQCgh0YXJnZXRJZBgCIAEoAxIYChBmbHlpbmdUaW1lTWlsbGlzGAMg",
+            "ASgFEg4KBnNwcml0ZRgEIAEoBSJdChNJdGVtQXR0cmlidXRlUGFja2V0EgwK",
+            "BHR5cGUYASABKAUSDgoGc2xvdElkGAIgASgFEhEKBHBhZ2UYAyABKAVIAIgB",
+            "ARIMCgR0ZXh0GAQgASgJQgcKBV9wYWdlIvsBChdTaG93RHluYW1pY09iamVj",
+            "dFBhY2tldBIKCgJpZBgBIAEoAxIJCgF4GAIgASgFEgkKAXkYAyABKAUSDAoE",
+            "dHlwZRgEIAEoBRINCgVzdGFydBgFIAEoBRILCgNlbmQYBiABKAUSDQoFc2hh",
+            "cGUYByABKAkSDwoHZWxhcHNlZBgIIAEoBRIRCgRuYW1lGAkgASgJSACIAQES",
+            "DgoGZ3VhcmRYGAogAygFEg4KBmd1YXJkWRgLIAMoBRIZCgxyZXF1aXJlZEl0",
+            "ZW0YDCABKAlIAYgBARIMCgRsb29wGA0gASgIQgcKBV9uYW1lQg8KDV9yZXF1",
+            "aXJlZEl0ZW0iUQoZVXBkYXRlRHluYW1pY09iamVjdFBhY2tldBIKCgJpZBgB",
+            "IAEoAxINCgVzdGFydBgCIAEoBRILCgNlbmQYAyABKAUSDAoEbG9vcBgEIAEo",
+            "CCIdCg9CcmVha1JvcGVQYWNrZXQSCgoCaWQYASABKAMiQwoRTnBjUG9zaXRp",
+            "b25QYWNrZXQSDQoFeExpc3QYASADKAUSDQoFeUxpc3QYAiADKAUSEAoIbmFt",
+            "ZUxpc3QYAyADKAkiUQoKQ2hhdFBhY2tldBIKCgJpZBgBIAEoAxIPCgdjb250",
+            "ZW50GAIgASgJEhcKCmZyb21QbGF5ZXIYAyABKAlIAIgBAUINCgtfZnJvbVBs",
+            "YXllciJ0Cg5PcGVuQmFua1BhY2tldBI+CgVpdGVtcxgBIAMoCzIvLlNvdXJj",
+            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLkludmVudG9yeUl0ZW1QYWNrZXQSEAoI",
+            "Y2FwYWNpdHkYAiABKAUSEAoIdW5sb2NrZWQYAyABKAUieQoQVXBkYXRlQmFu",
+            "a1BhY2tldBIMCgR0eXBlGAEgASgFEkgKCnVwZGF0ZVNsb3QYAiABKAsyLy5T",
+            "b3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnZlbnRvcnlJdGVtUGFja2V0",
+            "SACIAQFCDQoLX3VwZGF0ZVNsb3QiLAoPTmFtZUNvbG9yUGFja2V0EgoKAmlk",
+            "GAEgASgDEg0KBWNvbG9yGAIgASgFIi0KEVVwZGF0ZUd1aWxkUGFja2V0EgoK",
+            "AmlkGAEgASgDEgwKBG5hbWUYAiABKAkiPAobVXBkYXRlR3VpbGRLdW5nRnVG",
+            "b3JtUGFja2V0Eg8KB2NvbW1hbmQYASABKAUSDAoEdGV4dBgCIAEoCSJ3ChdV",
+            "cGRhdGVRdWVzdFdpbmRvd1BhY2tldBIKCgJpZBgBIAEoAxIRCglxdWVzdE5h",
+            "bWUYAiABKAkSGAoQcXVlc3REZXNjcmlwdGlvbhgDIAEoCRISCgpzdWJtaXRU",
+            "ZXh0GAQgASgJEg8KB25wY05hbWUYBSABKAkieAoQVXBkYXRlQnVmZlBhY2tl",
+            "dBIMCgR0eXBlGAEgASgFEgwKBGljb24YAiABKAUSDQoFY29sb3IYAyABKAUS",
+            "DwoHc2Vjb25kcxgEIAEoBRIYCgtkZXNjcmlwdGlvbhgFIAEoCUgAiAEBQg4K",
+            "DF9kZXNjcmlwdGlvbiJ+ChhOcGNJbnRlcmFjdGlvbk1lbnVQYWNrZXQSCgoC",
+            "aWQYASABKAMSEAoIdmlld05hbWUYAiABKAkSDQoFc2hhcGUYAyABKAkSEQoJ",
+            "YXZhdGFySWR4GAQgASgFEgwKBHRleHQYBSABKAkSFAoMaW50ZXJhY3Rpb25z",
+            "GAYgAygJIqoBChJNZXJjaGFudE1lbnVQYWNrZXQSCgoCaWQYASABKAMSEAoI",
+            "dmlld05hbWUYAiABKAkSDQoFc2hhcGUYAyABKAkSEQoJYXZhdGFySWR4GAQg",
+            "ASgFEgwKBHRleHQYBSABKAkSOAoFaXRlbXMYBiADKAsyKS5Tb3VyY2UuTmV0",
+            "d29ya2luZy5Qcm90b2J1Zi5OcGNJdGVtUGFja2V0EgwKBHNlbGwYByABKAgi",
+            "3h0KBlBhY2tldBJECg5wb3NpdGlvblBhY2tldBgBIAEoCzIqLlNvdXJjZS5O",
+            "ZXR3b3JraW5nLlByb3RvYnVmLlBvc2l0aW9uUGFja2V0SAASWAoVY3JlYXR1",
+            "cmVJbnRlcnBvbGF0aW9uGAIgASgLMjcuU291cmNlLk5ldHdvcmtpbmcuUHJv",
+            "dG9idWYuQ3JlYXR1cmVJbnRlcnBvbGF0aW9uUGFja2V0SAASPgoLbG9naW5Q",
+            "YWNrZXQYBCABKAsyJy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5Mb2dp",
+            "blBhY2tldEgAEkoKDmludGVycG9sYXRpb25zGAUgASgLMjAuU291cmNlLk5l",
+            "dHdvcmtpbmcuUHJvdG9idWYuSW50ZXJwb2xhdGlvbnNQYWNrZXRIABJJCg5y",
+            "ZXNwb25zZVBhY2tldBgGIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3Rv",
+            "YnVmLklucHV0UmVzcG9uc2VQYWNrZXRIABJUChNwbGF5ZXJJbnRlcnBvbGF0",
+            "aW9uGAcgASgLMjUuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVy",
+            "SW50ZXJwb2xhdGlvblBhY2tldEgAEkYKDHJlbW92ZUVudGl0eRgIIAEoCzIu",
+            "LlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlJlbW92ZUVudGl0eVBhY2tl",
+            "dEgAElsKGWF0dGFja0V2ZW50UmVzcG9uc2VQYWNrZXQYCSABKAsyNi5Tb3Vy",
+            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DbGllbnRBdHRhY2tSZXNwb25zZVBh",
+            "Y2tldEgAElIKEWF0dGFja0V2ZW50UGFja2V0GAogASgLMjUuU291cmNlLk5l",
+            "dHdvcmtpbmcuUHJvdG9idWYuQ3JlYXR1cmVBdHRhY2tFdmVudFBhY2tldEgA",
+            "Ek4KD2h1cnRFdmVudFBhY2tldBgLIAEoCzIzLlNvdXJjZS5OZXR3b3JraW5n",
+            "LlByb3RvYnVmLkNyZWF0dXJlSHVydEV2ZW50UGFja2V0SAASSgoRY2hhbmdl",
+            "U3RhdGVQYWNrZXQYDCABKAsyLS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
+            "Zi5DaGFuZ2VTdGF0ZVBhY2tldEgAElYKF3N3YXBJbnZlbnRvcnlTbG90UGFj",
+            "a2V0GA0gASgLMjMuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuU3dhcElu",
+            "dmVudG9yeVNsb3RQYWNrZXRIABJFCghkcm9wSXRlbRgQIAEoCzIxLlNvdXJj",
+            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLkRyb3BJdGVtQ29uZmlybVBhY2tldEgA",
+            "Ej4KCHNob3dJdGVtGBEgASgLMiouU291cmNlLk5ldHdvcmtpbmcuUHJvdG9i",
+            "dWYuU2hvd0l0ZW1QYWNrZXRIABJFCgp1cGRhdGVTbG90GBIgASgLMi8uU291",
+            "cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuSW52ZW50b3J5SXRlbVBhY2tldEgA",
+            "Ej0KBHRleHQYEyABKAsyLS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5U",
+            "ZXh0TWVzc2FnZVBhY2tldEgAEkIKB3VuZXF1aXAYFCABKAsyLy5Tb3VyY2Uu",
+            "TmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJVbmVxdWlwUGFja2V0SAASPgoF",
+            "ZXF1aXAYFSABKAsyLS5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5",
+            "ZXJFcXVpcFBhY2tldEgAEkwKD29wZW5UcmFkZVdpbmRvdxgWIAEoCzIxLlNv",
+            "dXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLk9wZW5UcmFkZVdpbmRvd1BhY2tl",
+            "dEgAEkYKDHRvZ2dsZUt1bmdGdRgXIAEoCzIuLlNvdXJjZS5OZXR3b3JraW5n",
+            "LlByb3RvYnVmLlRvZ2dsZUt1bmdGdVBhY2tldEgAEkIKB3NpdERvd24YGCAB",
+            "KAsyLy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5QbGF5ZXJTaXREb3du",
+            "UGFja2V0SAASQgoHc3RhbmRVcBgZIAEoCzIvLlNvdXJjZS5OZXR3b3JraW5n",
+            "LlByb3RvYnVmLlBsYXllclN0YW5kVXBQYWNrZXRIABJECghjb29sZG93bhga",
+            "IAEoCzIwLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllckNvb2xk",
+            "b3duUGFja2V0SAASQAoJYXR0cmlidXRlGBsgASgLMisuU291cmNlLk5ldHdv",
+            "cmtpbmcuUHJvdG9idWYuQXR0cmlidXRlUGFja2V0SAASRQoFc291bmQYHCAB",
+            "KAsyNC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DcmVhdHVyZVNvdW5k",
+            "RXZlbnRQYWNrZXRIABJBCgNkaWUYHSABKAsyMi5Tb3VyY2UuTmV0d29ya2lu",
+            "Zy5Qcm90b2J1Zi5DcmVhdHVyZURpZUV2ZW50UGFja2V0SAASRgoMcGxheWVy",
+            "UmV2aXZlGB4gASgLMi4uU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuUGxh",
+            "eWVyUmV2aXZlUGFja2V0SAASQgoHZ2FpbkV4cBgfIAEoCzIvLlNvdXJjZS5O",
+            "ZXR3b3JraW5nLlByb3RvYnVmLlBsYXllckdhaW5FeHBQYWNrZXRIABJCCgpw",
+            "cm9qZWN0aWxlGCAgASgLMiwuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
+            "UHJvamVjdGlsZVBhY2tldEgAEkkKC21vbnN0ZXJNb3ZlGCEgASgLMjIuU291",
+            "cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuTW9uc3Rlck1vdmVFdmVudFBhY2tl",
+            "dEgAEj8KC2xlYXJuS3VuZ0Z1GCIgASgLMiguU291cmNlLk5ldHdvcmtpbmcu",
+            "UHJvdG9idWYuS3VuZ0Z1UGFja2V0SAASSAoNaXRlbUF0dHJpYnV0ZRgjIAEo",
+            "CzIvLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLkl0ZW1BdHRyaWJ1dGVQ",
+            "YWNrZXRIABJaChNyaWdodENsaWNrQXR0cmlidXRlGCQgASgLMjsuU291cmNl",
+            "Lk5ldHdvcmtpbmcuUHJvdG9idWYuUGxheWVyUmlnaHRDbGlja0F0dHJpYnV0",
+            "ZVBhY2tldEgAElAKEXVwZGF0ZVRyYWRlV2luZG93GCUgASgLMjMuU291cmNl",
+            "Lk5ldHdvcmtpbmcuUHJvdG9idWYuVXBkYXRlVHJhZGVXaW5kb3dQYWNrZXRI",
+            "ABJQChFzaG93RHluYW1pY09iamVjdBgmIAEoCzIzLlNvdXJjZS5OZXR3b3Jr",
+            "aW5nLlByb3RvYnVmLlNob3dEeW5hbWljT2JqZWN0UGFja2V0SAASVAoTdXBk",
+            "YXRlRHluYW1pY09iamVjdBgnIAEoCzI1LlNvdXJjZS5OZXR3b3JraW5nLlBy",
+            "b3RvYnVmLlVwZGF0ZUR5bmFtaWNPYmplY3RQYWNrZXRIABI+Cgh0ZWxlcG9y",
+            "dBgoIAEoCzIqLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlRlbGVwb3J0",
+            "UGFja2V0SAASPAoHbGlmZWJhchgpIAEoCzIpLlNvdXJjZS5OZXR3b3JraW5n",
+            "LlByb3RvYnVmLkxpZmVCYXJQYWNrZXRIABJEChB1cGRhdGVLdW5nRnVTbG90",
+            "GCogASgLMiguU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuS3VuZ0Z1UGFj",
+            "a2V0SAASRgoMc2hvd1RlbGVwb3J0GCsgASgLMi4uU291cmNlLk5ldHdvcmtp",
+            "bmcuUHJvdG9idWYuU2hvd1RlbGVwb3J0UGFja2V0SAASQAoJYnJlYWtSb3Bl",
+            "GCwgASgLMisuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYuQnJlYWtSb3Bl",
+            "UGFja2V0SAASRAoLbnBjUG9zaXRpb24YLSABKAsyLS5Tb3VyY2UuTmV0d29y",
+            "a2luZy5Qcm90b2J1Zi5OcGNQb3NpdGlvblBhY2tldEgAEjYKBGNoYXQYLiAB",
+            "KAsyJi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5DaGF0UGFja2V0SAAS",
+            "PgoIb3BlbkJhbmsYLyABKAsyKi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
+            "Zi5PcGVuQmFua1BhY2tldEgAEkIKCnVwZGF0ZUJhbmsYMCABKAsyLC5Tb3Vy",
+            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5VcGRhdGVCYW5rUGFja2V0SAASQAoJ",
+            "bmFtZUNvbG9yGDEgASgLMisuU291cmNlLk5ldHdvcmtpbmcuUHJvdG9idWYu",
+            "TmFtZUNvbG9yUGFja2V0SAASRAoLdXBkYXRlR3VpbGQYMiABKAsyLS5Tb3Vy",
+            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5VcGRhdGVHdWlsZFBhY2tldEgAEk0K",
+            "Cmt1bmdGdUZvcm0YMyABKAsyNy5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1",
+            "Zi5VcGRhdGVHdWlsZEt1bmdGdUZvcm1QYWNrZXRIABJKCgtxdWVzdFdpbmRv",
+            "dxg0IAEoCzIzLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlVwZGF0ZVF1",
+            "ZXN0V2luZG93UGFja2V0SAASQgoKdXBkYXRlQnVmZhg1IAEoCzIsLlNvdXJj",
+            "ZS5OZXR3b3JraW5nLlByb3RvYnVmLlVwZGF0ZUJ1ZmZQYWNrZXRIABJPCg9p",
+            "bnRlcmFjdGlvbk1lbnUYNiABKAsyNC5Tb3VyY2UuTmV0d29ya2luZy5Qcm90",
+            "b2J1Zi5OcGNJbnRlcmFjdGlvbk1lbnVQYWNrZXRIABJGCgxtZXJjaGFudE1l",
+            "bnUYNyABKAsyLi5Tb3VyY2UuTmV0d29ya2luZy5Qcm90b2J1Zi5NZXJjaGFu",
+            "dE1lbnVQYWNrZXRIAEINCgtUeXBlZFBhY2tldCLoAQobQ3JlYXR1cmVJbnRl",
+            "cnBvbGF0aW9uUGFja2V0EkYKDWludGVycG9sYXRpb24YASABKAsyLy5Tb3Vy",
+            "Y2UuTmV0d29ya2luZy5Qcm90b2J1Zi5JbnRlcnBvbGF0aW9uUGFja2V0EgoK",
+            "AmlkGAIgASgDEgwKBG5hbWUYAyABKAkSDAoEdHlwZRgEIAEoBRIZCgxtZXJj",
+            "aGFudEZpbGUYBSABKAlIAIgBARINCgVzaGFwZRgGIAEoCRIPCgdhbmltYXRl",
+            "GAcgASgJEg0KBW1lbnVzGAggAygJQg8KDV9tZXJjaGFudEZpbGUitAQKEFBs",
+            "YXllckluZm9QYWNrZXQSCgoCaWQYAiABKAMSDAoEbWFsZRgDIAEoCBIMCgRu",
+            "YW1lGAQgASgJEhcKCndlYXBvbk5hbWUYBSABKAlIAIgBARIWCgljaGVzdE5h",
+            "bWUYBiABKAlIAYgBARIVCghoYWlyTmFtZRgHIAEoCUgCiAEBEhQKB2hhdE5h",
+            "bWUYCCABKAlIA4gBARIWCgl3cmlzdE5hbWUYCSABKAlIBIgBARIVCghib290",
+            "TmFtZRgKIAEoCUgFiAEBEhkKDGNsb3RoaW5nTmFtZRgLIAEoCUgGiAEBEhgK",
+            "C3Ryb3VzZXJOYW1lGAwgASgJSAeIAQESEgoKY2hlc3RDb2xvchgNIAEoBRIR",
+            "CgloYWlyQ29sb3IYDiABKAUSEAoIaGF0Q29sb3IYDyABKAUSEgoKd3Jpc3RD",
+            "b2xvchgQIAEoBRIRCglib290Q29sb3IYESABKAUSFQoNY2xvdGhpbmdDb2xv",
+            "chgSIAEoBRIUCgx0cm91c2VyQ29sb3IYEyABKAUSEQoJbmFtZUNvbG9yGBQg",
+            "ASgFEhYKCWd1aWxkTmFtZRgVIAEoCUgIiAEBQg0KC193ZWFwb25OYW1lQgwK",
+            "Cl9jaGVzdE5hbWVCCwoJX2hhaXJOYW1lQgoKCF9oYXROYW1lQgwKCl93cmlz",
+            "dE5hbWVCCwoJX2Jvb3ROYW1lQg8KDV9jbG90aGluZ05hbWVCDgoMX3Ryb3Vz",
+            "ZXJOYW1lQgwKCl9ndWlsZE5hbWUinwEKGVBsYXllckludGVycG9sYXRpb25Q",
+            "YWNrZXQSRgoNaW50ZXJwb2xhdGlvbhgBIAEoCzIvLlNvdXJjZS5OZXR3b3Jr",
+            "aW5nLlByb3RvYnVmLkludGVycG9sYXRpb25QYWNrZXQSOgoEaW5mbxgCIAEo",
+            "CzIsLlNvdXJjZS5OZXR3b3JraW5nLlByb3RvYnVmLlBsYXllckluZm9QYWNr",
+            "ZXQiIAoSUmVtb3ZlRW50aXR5UGFja2V0EgoKAmlkGAEgASgDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -411,7 +411,7 @@ namespace Source.Networking.Protobuf {
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationPacket), global::Source.Networking.Protobuf.InterpolationPacket.Parser, new[]{ "State", "ElapsedMillis", "Direction", "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InterpolationsPacket), global::Source.Networking.Protobuf.InterpolationsPacket.Parser, new[]{ "Interpolations" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.InventoryItemPacket), global::Source.Networking.Protobuf.InventoryItemPacket.Parser, new[]{ "Name", "SlotId", "Number", "Color" }, new[]{ "Number" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.NpcItemPacket), global::Source.Networking.Protobuf.NpcItemPacket.Parser, new[]{ "Name", "Icon", "Color", "Price" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.NpcItemPacket), global::Source.Networking.Protobuf.NpcItemPacket.Parser, new[]{ "Name", "Icon", "Color", "Price", "CanStack" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.OpenTradeWindowPacket), global::Source.Networking.Protobuf.OpenTradeWindowPacket.Parser, new[]{ "AnotherPlayerId", "Slot" }, new[]{ "Slot" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.UpdateTradeWindowPacket), global::Source.Networking.Protobuf.UpdateTradeWindowPacket.Parser, new[]{ "Type", "Name", "Number", "Slot", "Self", "Color" }, new[]{ "Name", "Number", "Slot", "Self" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Source.Networking.Protobuf.KungFuPacket), global::Source.Networking.Protobuf.KungFuPacket.Parser, new[]{ "Name", "Level", "Slot", "Type" }, null, null, null, null),
@@ -757,11 +757,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -800,11 +796,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1111,11 +1103,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1150,11 +1138,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1373,11 +1357,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1403,11 +1383,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1643,11 +1619,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1674,11 +1646,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1857,11 +1825,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1880,11 +1844,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2145,11 +2105,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2176,11 +2132,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2417,11 +2369,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2448,11 +2396,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2631,11 +2575,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2654,11 +2594,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2858,11 +2794,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2885,11 +2817,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -3064,11 +2992,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3087,11 +3011,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -3453,11 +3373,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3500,11 +3416,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -3728,11 +3640,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3755,11 +3663,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -4108,11 +4012,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -4155,11 +4055,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -4383,11 +4279,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -4410,11 +4302,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -4650,11 +4538,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -4684,11 +4568,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -4957,11 +4837,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -4992,11 +4868,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -5254,11 +5126,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -5285,11 +5153,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -5468,11 +5332,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -5491,11 +5351,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -5695,11 +5551,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -5722,11 +5574,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -5930,11 +5778,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -5957,11 +5801,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -6136,11 +5976,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -6159,11 +5995,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -6363,11 +6195,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -6390,11 +6218,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -6569,11 +6393,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -6592,11 +6412,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -6912,11 +6728,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -6955,11 +6767,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -7179,11 +6987,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -7206,11 +7010,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -7547,11 +7347,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -7590,11 +7386,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -7901,11 +7693,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -7940,11 +7728,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -8131,11 +7915,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -8154,11 +7934,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -8387,11 +8163,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -8418,11 +8190,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -8630,11 +8398,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -8657,11 +8421,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -8923,11 +8683,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -8958,11 +8714,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -9163,11 +8915,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -9190,11 +8938,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -9398,11 +9142,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -9425,11 +9165,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -9662,11 +9398,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -9693,11 +9425,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -9905,11 +9633,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -9932,11 +9656,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -10140,11 +9860,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -10167,11 +9883,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -10346,11 +10058,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -10369,11 +10077,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -10660,11 +10364,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -10699,11 +10399,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -10890,11 +10586,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -10913,11 +10605,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -11175,11 +10863,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -11210,11 +10894,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -11861,11 +11541,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -11948,11 +11624,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -12216,11 +11888,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -12243,11 +11911,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -12451,11 +12115,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -12478,11 +12138,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -12686,11 +12342,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -12713,11 +12365,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -13940,11 +13588,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -14229,11 +13873,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -14786,11 +14426,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -14825,11 +14461,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -15005,11 +14637,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -15028,11 +14656,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -15307,11 +14931,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -15342,11 +14962,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -15412,6 +15028,7 @@ namespace Source.Networking.Protobuf {
       icon_ = other.icon_;
       color_ = other.color_;
       price_ = other.price_;
+      canStack_ = other.canStack_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -15469,6 +15086,18 @@ namespace Source.Networking.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "canStack" field.</summary>
+    public const int CanStackFieldNumber = 5;
+    private bool canStack_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool CanStack {
+      get { return canStack_; }
+      set {
+        canStack_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -15488,6 +15117,7 @@ namespace Source.Networking.Protobuf {
       if (Icon != other.Icon) return false;
       if (Color != other.Color) return false;
       if (Price != other.Price) return false;
+      if (CanStack != other.CanStack) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -15499,6 +15129,7 @@ namespace Source.Networking.Protobuf {
       if (Icon != 0) hash ^= Icon.GetHashCode();
       if (Color != 0) hash ^= Color.GetHashCode();
       if (Price != 0) hash ^= Price.GetHashCode();
+      if (CanStack != false) hash ^= CanStack.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -15533,6 +15164,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(32);
         output.WriteInt32(Price);
       }
+      if (CanStack != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(CanStack);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -15559,6 +15194,10 @@ namespace Source.Networking.Protobuf {
         output.WriteRawTag(32);
         output.WriteInt32(Price);
       }
+      if (CanStack != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(CanStack);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -15580,6 +15219,9 @@ namespace Source.Networking.Protobuf {
       }
       if (Price != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Price);
+      }
+      if (CanStack != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -15605,6 +15247,9 @@ namespace Source.Networking.Protobuf {
       if (other.Price != 0) {
         Price = other.Price;
       }
+      if (other.CanStack != false) {
+        CanStack = other.CanStack;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -15616,11 +15261,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -15640,6 +15281,10 @@ namespace Source.Networking.Protobuf {
             Price = input.ReadInt32();
             break;
           }
+          case 40: {
+            CanStack = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -15651,11 +15296,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -15673,6 +15314,10 @@ namespace Source.Networking.Protobuf {
           }
           case 32: {
             Price = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            CanStack = input.ReadBool();
             break;
           }
         }
@@ -15884,11 +15529,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -15911,11 +15552,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -16296,11 +15933,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -16339,11 +15972,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -16621,11 +16250,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -16656,11 +16281,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -16987,11 +16608,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -17026,11 +16643,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -17350,11 +16963,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -17389,11 +16998,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -17609,11 +17214,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -17636,11 +17237,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -18018,11 +17615,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -18069,11 +17662,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -18594,11 +18183,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -18666,11 +18251,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -19238,11 +18819,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -19309,11 +18886,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -19996,11 +19569,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -20083,11 +19652,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -20351,11 +19916,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -20378,11 +19939,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -20615,11 +20172,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -20646,11 +20199,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -20829,11 +20378,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -20852,11 +20397,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -21027,11 +20568,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -21050,11 +20587,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -21225,11 +20758,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -21248,11 +20777,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -21423,11 +20948,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -21446,11 +20967,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -21679,11 +21196,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -21710,11 +21223,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -21980,11 +21489,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -22015,11 +21520,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -22306,11 +21807,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -22341,11 +21838,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -22882,11 +22375,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -22955,11 +22444,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -23267,11 +22752,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -23302,11 +22783,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -23489,11 +22966,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -23512,11 +22985,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -23712,11 +23181,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -23745,11 +23210,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -24002,11 +23463,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -24033,11 +23490,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -24263,11 +23716,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -24294,11 +23743,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -24509,11 +23954,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -24539,11 +23980,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -24750,11 +24187,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -24777,11 +24210,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -24985,11 +24414,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -25012,11 +24437,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -25220,11 +24641,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -25247,11 +24664,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -25542,11 +24955,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -25581,11 +24990,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -25902,11 +25307,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -25941,11 +25342,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -26266,11 +25663,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -26309,11 +25702,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -26667,11 +26056,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -26714,11 +26099,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -28731,11 +28112,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -29218,11 +28595,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -30066,11 +29439,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -30120,11 +29489,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -31003,11 +30368,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -31102,11 +30463,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -31388,11 +30745,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -31421,11 +30774,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -31606,11 +30955,7 @@ namespace Source.Networking.Protobuf {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -31629,11 +30974,7 @@ namespace Source.Networking.Protobuf {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
+        switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
