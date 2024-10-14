@@ -7,13 +7,13 @@ namespace y1000.Source.Item;
 public class MerchantTrade
 {
 
-    public long NpcId {get;} 
+    public long NpcId {get;}
 
-    public List<MerchantItem> MerchantItems {get;} 
+    private List<MerchantItem> MerchantItems {get;} 
 
-    public bool Selling {get; set;}
+    public bool Selling {get; }
 
-    public long TotalMoney {get; set;}
+    public long TotalMoney {get; private set;}
 
     public MerchantTrade() :this(0, new List<MerchantItem>())
     {
@@ -30,9 +30,9 @@ public class MerchantTrade
     }
 
 
-    public class InventoryItem
+    public class TradingItem
     {
-        public InventoryItem(int slotId, IItem item)
+        public TradingItem(int slotId, IItem item)
         {
             Slot = slotId;
             Item = item;
@@ -44,20 +44,20 @@ public class MerchantTrade
         public long Number => Item is CharacterStackItem stackItem ? stackItem.Number : 1;
     }
 
-    private readonly List<InventoryItem> _items = new();
+    private readonly List<TradingItem> _items = new();
 
-    private InventoryItem? _money;
+    private TradingItem? _money;
 
-    public InventoryItem? Money => _money;
+    public TradingItem? Money => _money;
 
-    public List<InventoryItem> Items => _items;
+    public List<TradingItem> Items => _items;
 
     public void AddItem(IItem item, int slot,
         CharacterStackItem money, int moneySlot)
     {
         if (item is not CharacterStackItem addStackItem)
         {
-            _items.Add(new InventoryItem(slot, item));
+            _items.Add(new TradingItem(slot, item));
         }
         else
         {
@@ -73,12 +73,12 @@ public class MerchantTrade
             }
             if (!added)
             {
-                _items.Add(new InventoryItem(slot, item));
+                _items.Add(new TradingItem(slot, item));
             }
         }
         if (_money == null)
         {
-            _money = new InventoryItem(moneySlot, money);
+            _money = new TradingItem(moneySlot, money);
         }
         else
         {
@@ -92,9 +92,7 @@ public class MerchantTrade
     {
         if (!IsBuying)
             return "交易中的窗口不可变更。";
-        if (!MerchantItems.Where(i => i.ItemName.Equals(clickedItemName)).Any())
-            return "不买此种物品。";
-        return Items.Where(i => i.Item.Equals(clickedItemName)).Any() ? "交易中的物品不可变更。" : null;
+        return MerchantItems.Any(i => i.ItemName.Equals(clickedItemName)) ? null : "不买此种物品。";
     }
 
     public bool IsEmpty => _items.Count == 0;
@@ -105,7 +103,7 @@ public class MerchantTrade
     }
 
 
-    private string? SellItmesToPlayer(string itemName, long number, CharacterInventory inventory)
+    private string? SellItemsToPlayer(string itemName, long number, CharacterInventory inventory)
     {
         var merchantItem = FindMerchantItem(itemName);
         if (merchantItem == null)
@@ -127,7 +125,6 @@ public class MerchantTrade
     private string? BuyItemsFromPlayer(string itemName, long number,
      CharacterInventory inventory, ItemFactory itemFactory)
     {
-
         var merchantItem = FindMerchantItem(itemName);
         if (merchantItem == null)
             return "不买该物品。";
@@ -144,9 +141,26 @@ public class MerchantTrade
     }
 
 
-    public InventoryItem? FindInventoryItem(string name)
+    public long ComputeTradingItemNumber(string name)
     {
-        return Items.First(i => i.Name.Equals(name));
+        long count = 0;
+        foreach (var item in Items)
+        {
+            if (!item.Item.ItemName.Equals(name))
+            {
+                continue;
+            }
+
+            if (item.Item is CharacterStackItem stackItem)
+            {
+                count += stackItem.Number;
+            }
+            else
+            {
+                count += 1;
+            }
+        }
+        return count;
     }
 
     public MerchantItem? FindMerchantItem(string name)
@@ -158,14 +172,8 @@ public class MerchantTrade
     {
         if (number <= 0)
             return "请输入正确数量。";
-        if (Selling)
-        {
-            return SellItmesToPlayer(item, number, inventory);
-        }
-        else
-        {
-            return BuyItemsFromPlayer(item, number, inventory, itemFactory);
-        }
+        return Selling ? SellItemsToPlayer(item, number, inventory) :
+            BuyItemsFromPlayer(item, number, inventory, itemFactory);
     }
 
     public void Rollback(CharacterInventory inventory)

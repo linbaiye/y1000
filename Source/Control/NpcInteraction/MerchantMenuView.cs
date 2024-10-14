@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 using NLog;
 using y1000.Source.Character;
 using y1000.Source.Control.Dialog;
-using y1000.Source.Creature.Monster;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Networking;
@@ -109,8 +107,8 @@ public partial class MerchantMenuView  : NinePatchRect, ISlotDoubleClickHandler
 
     private void OnInputWindowAction(bool confirmed)
     {
-        if (!confirmed || _trade == null || _tradeInputWindow == null ||
-            _tradeInputWindow.ItemName == null || _inventory == null || _itemFactory == null)
+        if (!confirmed || _tradeInputWindow == null || _tradeInputWindow.ItemName == null ||
+            _inventory == null || _itemFactory == null)
         {
             return;
         }
@@ -120,11 +118,9 @@ public partial class MerchantMenuView  : NinePatchRect, ISlotDoubleClickHandler
             _eventMediator?.NotifyTextArea(ret);
             return;
         }
-        var tradeItem = _trade.FindInventoryItem(_tradeInputWindow.ItemName);
-        if (tradeItem == null)
-            return;
+        var number = _trade.ComputeTradingItemNumber(_tradeInputWindow.ItemName);
         var i = _itemsContainer.FindItem(_tradeInputWindow.ItemName);
-        i?.UpdateText((_trade.Selling ? "购买数量：" : "出售数量：") + tradeItem.Number);
+        i?.UpdateText((_trade.Selling ? "购买数量：" : "出售数量：") + number);
         _total.Text = _trade.TotalMoney.ToString();
     }
 
