@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://cotr8m5n38b5d"]
+
+[ext_resource type="Texture2D" uid="uid://c2vm1csclhxbx" path="res://assets/ui/trading_dialog.png" id="1_tb1rf"]
+[ext_resource type="Script" path="res://Source/Control/NpcInteraction/MerchantMenuView.cs" id="2_12ncq"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="3_yplgj"]
+[ext_resource type="PackedScene" uid="uid://brl3lwfss84w8" path="res://Scenes/ItemsContainer.tscn" id="4_ueef8"]
+[ext_resource type="Texture2D" uid="uid://cgpjvsiqfgifo" path="res://assets/ui/input_cancel_down.png" id="5_hlwlf"]
+
+[node name="MerchantTrading" type="NinePatchRect"]
+offset_right = 380.0
+offset_bottom = 404.0
+texture = ExtResource("1_tb1rf")
+script = ExtResource("2_12ncq")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 8.0
+offset_right = 303.0
+offset_bottom = 27.0
+theme = ExtResource("3_yplgj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialog" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 52.0
+offset_right = 355.0
+offset_bottom = 150.0
+theme = ExtResource("3_yplgj")
+
+[node name="Avatar" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 108.0
+offset_bottom = 154.0
+pivot_offset = Vector2(-1, 0)
+stretch_mode = 3
+
+[node name="Close" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.097
+anchor_bottom = 0.142
+offset_left = 351.0
+offset_top = 5.0
+offset_right = 336.14
+offset_bottom = -28.368
+theme_override_font_sizes/font_size = 14
+flat = true
+
+[node name="ItemsContainer" parent="." instance=ExtResource("4_ueef8")]
+layout_mode = 1
+offset_left = 12.0
+offset_top = 174.0
+offset_right = 365.0
+offset_bottom = 326.0
+
+[node name="Total" type="Label" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 348.0
+offset_right = 146.0
+offset_bottom = 365.0
+theme = ExtResource("3_yplgj")
+vertical_alignment = 1
+
+[node name="ConfirmButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 341.0
+offset_right = 264.0
+offset_bottom = 371.0
+
+[node name="CancelButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 276.0
+offset_top = 342.0
+offset_right = 356.0
+offset_bottom = 372.0
+texture_pressed = ExtResource("5_hlwlf")

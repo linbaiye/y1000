@@ -1,5 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
+Sprites/
+Maps/
 .Tests/.godot/
 .vscode/launch.json
 .vscode/tasks.json

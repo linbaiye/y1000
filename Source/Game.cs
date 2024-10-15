@@ -215,11 +215,19 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 			_character.HandleInput(predictableInput);
 		}
 	}
-	
 
-	public override void _UnhandledInput(InputEvent @event)
+
+	//public override void _UnhandledInput(InputEvent @event)
+	public override void _Input(InputEvent @event)
 	{
-		HandleInput(@event);
+		try
+		{
+			HandleInput(@event);
+		}
+		catch (Exception e)
+		{
+			GD.PrintErr(e);
+		}
 	}
 
 
@@ -271,8 +279,8 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 				return;
 			if (monster.Type == NpcType.BANKER)
 				_eventMediator.NotifyServer(ClientOperateBankEvent.Open(entity.Id));
-			else if (monster.Type == NpcType.QUESTER)
-				_eventMediator?.NotifyServer(new ClickEntityEvent(monster.Id));
+			else if (monster.Type is NpcType.QUESTER or NpcType.INTERACTABLE)
+				_eventMediator.NotifyServer(new ClickEntityEvent(monster.Id));
 			else if (monster is Merchant merchant)
 				_uiController?.OnMerchantClicked(merchant);
 		}
@@ -514,6 +522,11 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 		_uiController?.OperateBuffWindow(message);
 	}
 
+	public void Visit(IUiMessage uiMessage)
+	{
+		_uiController?.Handle(uiMessage);
+	}
+
 	public void Visit(JoinedRealmMessage message)
 	{
 		_character = CharacterImpl.LoggedIn(message, MapLayer, _itemFactory, _eventMediator);
@@ -541,7 +554,6 @@ public partial class Game : Node2D, IConnectionEventListener, IServerMessageVisi
 				_channel?.CloseAsync().Wait(1000);
 				_group.ShutdownGracefullyAsync().Wait(3000);
 				System.Environment.Exit(0);
-				//GetTree().Quit();
 			}
 			else if (what == NotificationWMMouseEnter)
 			{

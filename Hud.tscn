@@ -1,16 +1,15 @@
-[gd_scene load_steps=25 format=3 uid="uid://07lvg4v1wt2f"]
+[gd_scene load_steps=26 format=3 uid="uid://sfju506faap2"]
 
 [ext_resource type="Script" path="res://Source/Control/UIController.cs" id="1_xjixt"]
 [ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://bottom_ui.tscn" id="2_t1cjk"]
 [ext_resource type="PackedScene" uid="uid://7ghuvlfmi4pd" path="res://Scenes/RightSideUI.tscn" id="3_3lv4o"]
 [ext_resource type="PackedScene" uid="uid://bqv6d0i2cli8e" path="res://Scenes/DropItemUI.tscn" id="4_ab1p8"]
 [ext_resource type="Script" path="res://Source/Control/TradeInputWindow.cs" id="5_4xdqj"]
-[ext_resource type="PackedScene" uid="uid://dj8hiigwray" path="res://Scenes/DialogWindow.tscn" id="6_wluyo"]
 [ext_resource type="PackedScene" uid="uid://cqtmvg303wl2s" path="res://Scenes/LeftsideTextArea.tscn" id="7_8qy0h"]
 [ext_resource type="PackedScene" uid="uid://dw4kky7kku6qg" path="res://Scenes/ItemAttribute.tscn" id="8_xs2cv"]
 [ext_resource type="PackedScene" uid="uid://bf5l5nu0lr8qr" path="res://Scenes/PlayerAttributeWindow.tscn" id="9_2wuku"]
 [ext_resource type="PackedScene" uid="uid://clr852egfmuqb" path="res://Scenes/TradePlayerWindow.tscn" id="10_ort1l"]
-[ext_resource type="Theme" uid="uid://daxo2yv4foluf" path="res://Scenes/Label.tres" id="11_skdim"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="11_skdim"]
 [ext_resource type="Script" path="res://Source/Control/Map/MapView.cs" id="12_w6ub7"]
 [ext_resource type="PackedScene" uid="uid://bjjg8uukhy3s8" path="res://Scenes/MapNpcView.tscn" id="13_htgod"]
 [ext_resource type="PackedScene" uid="uid://ca6kivqahtqcd" path="res://Scenes/Bank.tscn" id="14_f60wq"]
@@ -22,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://c7l7trn60dvkb" path="res://Scenes/KungFuFormApplication.tscn" id="20_xqc31"]
 [ext_resource type="PackedScene" uid="uid://bnv5uptygi8q1" path="res://Scenes/QuesterDialog.tscn" id="21_l3nyl"]
 [ext_resource type="PackedScene" uid="uid://taimkmoi0ssl" path="res://Scenes/BuffContainer.tscn" id="22_g08ql"]
+[ext_resource type="PackedScene" uid="uid://c1gat7dv1jayr" path="res://Scenes/NpcInteractionMainMenu.tscn" id="23_ncdnv"]
+[ext_resource type="PackedScene" uid="uid://blmufpbvbu8ur" path="res://Scenes/MerchantTrading.tscn" id="24_iglx5"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
 
@@ -48,13 +49,6 @@ visible = false
 [node name="InputWindow" parent="." instance=ExtResource("4_ab1p8")]
 visible = false
 script = ExtResource("5_4xdqj")
-
-[node name="DialogUI" parent="." instance=ExtResource("6_wluyo")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="LeftsideTextArea" parent="." instance=ExtResource("7_8qy0h")]
 visible = false
@@ -194,3 +188,26 @@ offset_left = -40.0
 offset_right = 0.0
 offset_bottom = 49.0
 grow_horizontal = 0
+
+[node name="NpcInteractionMainMenu" parent="." instance=ExtResource("23_ncdnv")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="MerchantTrading" parent="." instance=ExtResource("24_iglx5")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -202.0
+offset_right = 190.0
+offset_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2

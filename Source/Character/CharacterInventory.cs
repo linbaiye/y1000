@@ -216,6 +216,51 @@ public class CharacterInventory : AbstractInventory
         return true;
     }
 
+    public bool Sell(IItem sellingItem, CharacterStackItem money)
+    {
+        if (!HasMoneySpace())
+        {
+            return false;
+        }
+        IItem? slotItem = null;
+        int i = 1;
+        for (; i <= MaxSize; i++)
+        {
+            if (_items.TryGetValue(i, out slotItem) &&
+                slotItem.ItemName.Equals(sellingItem.ItemName))
+            {
+                break;
+            }
+        }
+        if (slotItem == null)
+        {
+            return false;
+        }
+        if (slotItem is CharacterItem)
+        {
+            _items.Remove(i);
+        } 
+        else if (slotItem is CharacterStackItem stackItem)
+        {
+            stackItem.Number -= ((CharacterStackItem)sellingItem).Number;
+            if (stackItem.Number <= 0)
+            {
+                _items.Remove(i);
+            }
+        }
+        int moneySlot = FindMoneySlot(out var moneyItem);
+        if (moneyItem != null)
+        {
+            moneyItem.Number += money.Number;
+        }
+        else
+        {
+            AddItem(money);
+        }
+        Notify();
+        return true;
+    }
+
     public bool Buy(IItem item, long totalMoney, MerchantTrade trade)
     {
         if (!CanBuy(item.ItemName, totalMoney))
@@ -239,6 +284,30 @@ public class CharacterInventory : AbstractInventory
             Notify();
         }
         return slot != 0;
+    }
+
+    public int Buy(IItem item, long totalMoney)
+    {
+        if (!CanBuy(item.ItemName, totalMoney))
+        {
+            return 0;
+        }
+        var moneySlot = FindMoneySlot(out var money);
+        if (money == null)
+        {
+            return 0;
+        }
+        var slot = AddItem(item);
+        if (slot != 0)
+        {
+            money.Number -= totalMoney;
+            if (money.Number <= 0)
+            {
+                _items.Remove(moneySlot);
+            }
+            Notify();
+        }
+        return slot ;
     }
 
 
@@ -303,13 +372,13 @@ public class CharacterInventory : AbstractInventory
 
     public void OnSell(long merchantId, MerchantTrade trade)
     {
-        _eventMediator?.NotifyServer(ClientTradeEvent.Sell(trade, merchantId));
+        _eventMediator?.NotifyServer(ClientTradeEvent.PlayerSell(trade, merchantId));
     }
 
     
     public void OnBuy(long merchantId, MerchantTrade trade)
     {
-        _eventMediator?.NotifyServer(ClientTradeEvent.Buy(trade, merchantId));
+        _eventMediator?.NotifyServer(ClientTradeEvent.PlayerBuy(trade, merchantId));
     }
 
     public void SetEventMediator(EventMediator eventMediator)

@@ -257,4 +257,8 @@ public interface IServerMessageVisitor
     {
 
     }
+
+    void Visit(IUiMessage uiMessage)
+    {
+    }
 }

@@ -17,8 +17,15 @@ public partial class Main : Node
 
     public void Start(string token, string charName)
     {
-		GetWindow().Size = new Vector2I(1024, 768);
-		GetWindow().ContentScaleSize = new Vector2I(1024, 768);
+        if (OS.GetName().ToLower().Equals("android"))
+        {
+            GetWindow().Size = new Vector2I(1280, 720);
+        }
+        else
+        {
+            GetWindow().Size = new Vector2I(1024, 768);
+            GetWindow().ContentScaleSize = new Vector2I(1024, 768);
+        }
         _game.Start(token, charName, _controller);
     }
 }

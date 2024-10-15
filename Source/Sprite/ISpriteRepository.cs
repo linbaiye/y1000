@@ -12,6 +12,8 @@ public interface ISpriteRepository
     AtzSprite LoadByNumberAndOffset(string name, Vector2? offset = null);
 
     AtzSprite LoadByNumber(string number) => LoadByNumberAndOffset(number, DEFAULT_VECTOR);
+    
+    AtzSprite LoadNpcWithPrefix(string number) => LoadByNumberAndOffset("z" + number, DEFAULT_VECTOR);
 
     bool Exists(string number)
     {

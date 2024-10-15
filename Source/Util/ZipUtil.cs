@@ -2,6 +2,7 @@
 using System.IO.Compression;
 using System.Text;
 using Godot;
+using FileAccess = Godot.FileAccess;
 
 namespace y1000.Source.Util;
 
@@ -31,6 +32,15 @@ public static class ZipUtil
     public static string ToString(byte[] bytes)
     {
         return Encoding.UTF8.GetString(bytes);
+    }
+
+    public static ZipArchive LoadZipFile(string resourcePath)
+    {
+        using var fa = FileAccess.Open(resourcePath, FileAccess.ModeFlags.Read);
+        var bytes = fa.GetBuffer((int)fa.GetLength());
+        Stream stream = new MemoryStream(bytes);
+        return new ZipArchive(stream);
+        
     }
 
     public static ImageTexture? ToTexture(byte[] bytes)
