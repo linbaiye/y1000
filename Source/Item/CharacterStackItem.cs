@@ -15,8 +15,11 @@ public class CharacterStackItem : IItem
     public long Number { get; set; }
     public string ItemName { get; }
 
-    public static readonly string MoneyName = "钱币";
-
+    public CharacterStackItem Duplicate()
+    {
+        return new CharacterStackItem(IconId, ItemName, Number, Color);
+    }
+    
     public override string ToString()
     {
         return ItemName + ":" + Number;

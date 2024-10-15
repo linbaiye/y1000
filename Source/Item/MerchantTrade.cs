@@ -62,18 +62,19 @@ public class MerchantTrade
         else
         {
             bool added = false;
-            foreach (var loseItem in _items)
+            foreach (var tradingItem in _items)
             {
-                if (loseItem.Item.ItemName.Equals(item.ItemName) &&
-                    loseItem.Item is CharacterStackItem stackItem)
+                if (tradingItem.Item.ItemName.Equals(item.ItemName) &&
+                    tradingItem.Item is CharacterStackItem stackItem)
                 {
                     stackItem.Number += addStackItem.Number;
                     added = true;
+                    break;
                 }
             }
             if (!added)
             {
-                _items.Add(new TradingItem(slot, item));
+                _items.Add(new TradingItem(slot, addStackItem.Duplicate()));
             }
         }
         if (_money == null)
@@ -96,11 +97,6 @@ public class MerchantTrade
     }
 
     public bool IsEmpty => _items.Count == 0;
-
-    public bool Contains(string name)
-    {
-        return _items.Any(i => i.Item.ItemName.Equals(name));
-    }
 
 
     private string? SellItemsToPlayer(string itemName, long number, CharacterInventory inventory)
@@ -165,7 +161,7 @@ public class MerchantTrade
 
     public MerchantItem? FindMerchantItem(string name)
     {
-        return MerchantItems.First(i => i.ItemName.Equals(name));
+        return MerchantItems.FirstOrDefault(i => i.ItemName.Equals(name));
     }
 
     public string? OnInputNumberWindowConfirmed(string item, long number, CharacterInventory inventory, ItemFactory itemFactory)
