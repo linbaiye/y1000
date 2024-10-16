@@ -5,7 +5,6 @@ using Godot;
 using NLog;
 using y1000.Source.Character.Event;
 using y1000.Source.Control;
-using y1000.Source.Control.Bottom.Shortcut;
 using y1000.Source.Event;
 using y1000.Source.Item;
 using y1000.Source.Networking;
@@ -32,11 +31,6 @@ public class CharacterInventory : AbstractInventory
     private const string Money = "钱币";
 
     private readonly List<ISlotDoubleClickHandler> _rightClickHandlers = new();
-
-    public bool CanBuy(string name, long totalMoney)
-    {
-        return HasEnoughMoney(totalMoney) && HasSpace(name);
-    }
 
     public void RegisterRightClickHandler(ISlotDoubleClickHandler handler)
     {
@@ -101,162 +95,6 @@ public class CharacterInventory : AbstractInventory
         var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(Money));
         return item is CharacterStackItem money && money.Number >= number;
     }
-
-    private int FindMoneySlot(out CharacterStackItem? stackItem)
-    {
-        for (int i = 1; i <= MaxSize; i++)
-        {
-            if (_items.TryGetValue(i, out var slotItem) && slotItem.ItemName.Equals(Money) && 
-                slotItem is CharacterStackItem characterStackItem)
-            {
-                stackItem = characterStackItem;
-                return i;
-            }
-        }
-        stackItem = null;
-        return 0;
-    }
-
-    public bool Sell(IItem sellingItem, CharacterStackItem money, MerchantTrade trade)
-    {
-        if (!HasMoneySpace())
-        {
-            return false;
-        }
-        IItem? slotItem = null;
-        int i = 1;
-        for (; i <= MaxSize; i++)
-        {
-            if (_items.TryGetValue(i, out slotItem) &&
-                slotItem.ItemName.Equals(sellingItem.ItemName))
-            {
-                break;
-            }
-        }
-        if (slotItem == null)
-        {
-            return false;
-        }
-        if (slotItem is CharacterItem)
-        {
-            _items.Remove(i);
-        } 
-        else if (slotItem is CharacterStackItem stackItem)
-        {
-            stackItem.Number -= ((CharacterStackItem)sellingItem).Number;
-            if (stackItem.Number <= 0)
-            {
-                _items.Remove(i);
-            }
-        }
-        int moneySlot = FindMoneySlot(out var moneyItem);
-        if (moneyItem != null)
-        {
-            moneyItem.Number += money.Number;
-        }
-        else
-        {
-            AddItem(money);
-        }
-        trade.AddTrade(sellingItem, i, money, moneySlot);
-        Notify();
-        return true;
-    }
-
-    public bool Sell(IItem sellingItem, CharacterStackItem money)
-    {
-        if (!HasMoneySpace())
-        {
-            return false;
-        }
-        IItem? slotItem = null;
-        int i = 1;
-        for (; i <= MaxSize; i++)
-        {
-            if (_items.TryGetValue(i, out slotItem) &&
-                slotItem.ItemName.Equals(sellingItem.ItemName))
-            {
-                break;
-            }
-        }
-        if (slotItem == null)
-        {
-            return false;
-        }
-        if (slotItem is CharacterItem)
-        {
-            _items.Remove(i);
-        } 
-        else if (slotItem is CharacterStackItem stackItem)
-        {
-            stackItem.Number -= ((CharacterStackItem)sellingItem).Number;
-            if (stackItem.Number <= 0)
-            {
-                _items.Remove(i);
-            }
-        }
-        int moneySlot = FindMoneySlot(out var moneyItem);
-        if (moneyItem != null)
-        {
-            moneyItem.Number += money.Number;
-        }
-        else
-        {
-            AddItem(money);
-        }
-        Notify();
-        return true;
-    }
-
-    public bool Buy(IItem item, long totalMoney, MerchantTrade trade)
-    {
-        if (!CanBuy(item.ItemName, totalMoney))
-        {
-            return false;
-        }
-        var moneySlot = FindMoneySlot(out var money);
-        if (money == null)
-        {
-            return false;
-        }
-        var slot = AddItem(item);
-        if (slot != 0)
-        {
-            money.Number -= totalMoney;
-            if (money.Number <= 0)
-            {
-                _items.Remove(moneySlot);
-            }
-            trade.AddTrade(item, slot, new CharacterStackItem(money.IconId, money.ItemName, totalMoney), moneySlot);
-            Notify();
-        }
-        return slot != 0;
-    }
-
-    public int Buy(IItem item, long totalMoney)
-    {
-        if (!CanBuy(item.ItemName, totalMoney))
-        {
-            return 0;
-        }
-        var moneySlot = FindMoneySlot(out var money);
-        if (money == null)
-        {
-            return 0;
-        }
-        var slot = AddItem(item);
-        if (slot != 0)
-        {
-            money.Number -= totalMoney;
-            if (money.Number <= 0)
-            {
-                _items.Remove(moneySlot);
-            }
-            Notify();
-        }
-        return slot ;
-    }
-
 
     public void DropItem(int slot, int numberLeft)
     {
