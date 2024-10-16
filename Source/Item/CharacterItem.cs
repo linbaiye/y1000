@@ -8,6 +8,11 @@ public class CharacterItem : IItem
         Color = color;
         IconId = iconId;
     }
+    
+    public IItem Duplicate()
+    {
+        return new CharacterItem(IconId, ItemName, Color);
+    }
 
     public string ItemName { get; }
 
@@ -18,4 +23,5 @@ public class CharacterItem : IItem
     {
         return ItemName;
     }
+    
 }

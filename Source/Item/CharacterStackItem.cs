@@ -15,9 +15,14 @@ public class CharacterStackItem : IItem
     public long Number { get; set; }
     public string ItemName { get; }
 
-    public CharacterStackItem Duplicate()
+    public IItem Duplicate()
     {
         return new CharacterStackItem(IconId, ItemName, Number, Color);
+    }
+    
+    public CharacterStackItem WithNumber(long number)
+    {
+        return new CharacterStackItem(IconId, ItemName, number, Color);
     }
     
     public override string ToString()

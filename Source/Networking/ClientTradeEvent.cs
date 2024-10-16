@@ -31,7 +31,7 @@ public class ClientTradeEvent : IClientEvent
 
     private MerchantTrade Trade { get; }
 
-    private List<InventoryItemPacket> Items => Trade.Items.Select(i => new InventoryItemPacket() {SlotId = i.Slot, Name = i.Name, Number = i.Number}).ToList();
+    private List<InventoryItemPacket> Items => Trade.TradingItems.Select(i => new InventoryItemPacket() {SlotId = i.Slot, Name = i.Name, Number = i.Number}).ToList();
     public ClientPacket ToPacket()
     {
         return Selling ? new ClientPacket()

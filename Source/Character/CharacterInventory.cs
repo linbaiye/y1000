@@ -78,76 +78,23 @@ public class CharacterInventory : AbstractInventory
     {
         return HasSpace(Money);
     }
-
-    public void RollbackSelling(MerchantTrade trade)
+    
+    public CharacterStackItem? DecreaseMoney(long number)
     {
-        if (trade.IsEmpty)
+        int slot = FindMoneySlot();
+        if (slot != 0)
         {
-            return;
+            var money = (CharacterStackItem)Get(slot)!;
+            Remove(slot, number);
+            return money.WithNumber(number);
         }
-        foreach (var inventoryItem in trade.Items)
-        {
-            if (_items.TryGetValue(inventoryItem.Slot, out var slotItem))
-            {
-                if (slotItem is CharacterStackItem stackItem)
-                {
-                    stackItem.Number += inventoryItem.Number;
-                }
-            }
-            else
-            {
-                _items.TryAdd(inventoryItem.Slot, inventoryItem.Item);
-            }
-        }
-        int slot = FindMoneySlot(out var money);
-        if (money != null)
-        {
-            money.Number -= trade.Money?.Number ?? 0;
-            if (money.Number <= 0)
-            {
-                _items.Remove(slot);
-            }
-        }
-        Notify();
+        return null;
     }
 
-    public void RollbackBuying(MerchantTrade trade)
+    public int FindMoneySlot()
     {
-        if (trade.IsEmpty || trade.Money == null)
-        {
-            return;
-        }
-        foreach (var tradeItem in trade.Items)
-        {
-            bool needRemove = false;
-            if (_items.TryGetValue(tradeItem.Slot, out var characterItem))
-            {
-                if (characterItem is CharacterStackItem stackItem)
-                {
-                    stackItem.Number -= tradeItem.Number;
-                    needRemove = stackItem.Number <= 0;
-                }
-                else
-                {
-                    needRemove = true;
-                }
-            }
-            if (needRemove)
-            {
-                _items.Remove(tradeItem.Slot);
-            }
-        }
-        if (_items.TryGetValue(trade.Money.Slot, out var moneyInSlot))
-        {
-            ((CharacterStackItem)moneyInSlot).Number += trade.Money.Number;
-        }
-        else
-        {
-            _items.TryAdd(trade.Money.Slot, trade.Money.Item);
-        }
-        Notify();
+        return FindSlot(Money);
     }
-
 
     public bool HasEnoughMoney(long number)
     {
@@ -211,7 +158,7 @@ public class CharacterInventory : AbstractInventory
         {
             AddItem(money);
         }
-        trade.AddItem(sellingItem, i, money, moneySlot);
+        trade.AddTrade(sellingItem, i, money, moneySlot);
         Notify();
         return true;
     }
@@ -280,7 +227,7 @@ public class CharacterInventory : AbstractInventory
             {
                 _items.Remove(moneySlot);
             }
-            trade.AddItem(item, slot, new CharacterStackItem(money.IconId, money.ItemName, totalMoney), moneySlot);
+            trade.AddTrade(item, slot, new CharacterStackItem(money.IconId, money.ItemName, totalMoney), moneySlot);
             Notify();
         }
         return slot != 0;
@@ -328,7 +275,6 @@ public class CharacterInventory : AbstractInventory
         Notify();
     }
 
-
     public void OnUIDoubleClick(int slot)
     {
         if (!_items.ContainsKey(slot))
@@ -369,18 +315,6 @@ public class CharacterInventory : AbstractInventory
         }
     }
 
-
-    public void OnSell(long merchantId, MerchantTrade trade)
-    {
-        _eventMediator?.NotifyServer(ClientTradeEvent.PlayerSell(trade, merchantId));
-    }
-
-    
-    public void OnBuy(long merchantId, MerchantTrade trade)
-    {
-        _eventMediator?.NotifyServer(ClientTradeEvent.PlayerBuy(trade, merchantId));
-    }
-
     public void SetEventMediator(EventMediator eventMediator)
     {
         _eventMediator = eventMediator;
@@ -399,6 +333,69 @@ public class CharacterInventory : AbstractInventory
         }
     }
 
+    public IItem? Remove(int slot, long number = 1)
+    {
+        IItem? removed = null;
+        var slotItem = Get(slot);
+        if (slotItem is CharacterItem)
+        {
+            _items.Remove(slot);
+            removed = slotItem;
+        } 
+        else if (slotItem is CharacterStackItem stackItem)
+        {
+            stackItem.Number -= number;
+            if (stackItem.Number <= 0)
+            {
+                _items.Remove(slot);
+            }
+            removed = stackItem.WithNumber(number);
+        }
+        if (removed != null)
+            Notify();
+        return removed;
+    }
+
+    public int Add(IItem item)
+    {
+        var slot = FindSlot(item.ItemName);
+        if (slot != 0)
+        {
+            if (Add(item, slot))
+                return slot;
+        }
+        for (int i = 1; i <= MaxSize; i++)
+        {
+            if (_items.TryAdd(i, item))
+            {
+                slot = i;
+                break;
+            }
+        }
+        Notify();
+        return slot;
+    }
+
+    public bool Add(IItem item, int slot)
+    {
+        bool added = false;
+        var slotItem = Get(slot);
+        if (slotItem == null)
+        {
+            _items.Add(slot, item);
+            added = true;
+        }
+        else if (slotItem is CharacterStackItem slotStackItem && item is CharacterStackItem stackItem &&
+                 slotItem.ItemName.Equals(item.ItemName))
+        {
+            slotStackItem.Number += stackItem.Number;
+            added = true;
+        }
+        if (added)
+            Notify();
+        return added;
+    }
+
     public void OnViewKeyPressed(int slot, Key key)
     {
         if (_items.TryGetValue(slot, out var item))
@@ -406,7 +403,6 @@ public class CharacterInventory : AbstractInventory
             ShortcutEvent?.Invoke(this, new InventoryShortcutEvent(ShortcutContext.OfInventory(slot, key), item));
         }
     }
-
 
     protected override void Notify()
     {

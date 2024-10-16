@@ -18,6 +18,10 @@ namespace y1000.Source.Item
         public int IconId { get; }
 
         public int Color { get; }
+        public IItem Duplicate()
+        {
+            return new MerchantItem(ItemName, IconId, Color, Price, CanStack);
+        }
 
         public int Price { get; }
 
