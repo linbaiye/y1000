@@ -112,7 +112,11 @@ public partial class MerchantMenuView  : NinePatchRect, ISlotDoubleClickHandler
         {
             return;
         }
-        var ret = _trade.OnInputNumberWindowConfirmed(_tradeInputWindow.ItemName, _tradeInputWindow.Number, _inventory, _itemFactory);
+        string? ret;
+        if (_trade.Selling)
+            ret = _trade.OnInputNumberWindowConfirmed(_tradeInputWindow.ItemName, _tradeInputWindow.Number, _inventory, _itemFactory);
+        else
+            ret = _trade.OnInputNumberWindowConfirmed(_tradeInputWindow.TradeItem.Name, _tradeInputWindow.Number, _inventory, _itemFactory, _tradeInputWindow.TradeItem.Slot);
         if (ret != null)
         {
             _eventMediator?.NotifyTextArea(ret);
@@ -198,11 +202,11 @@ public partial class MerchantMenuView  : NinePatchRect, ISlotDoubleClickHandler
         }
         if (characterItem is CharacterStackItem stackItem)
         {
-            _tradeInputWindow?.Open(stackItem.ItemName, stackItem.Number, OnInputWindowAction);
+            _tradeInputWindow?.Open(new TradeInputWindow.InventoryTradeItem(characterItem.ItemName, slot), stackItem.Number, OnInputWindowAction);
         }
         else
         {
-            _tradeInputWindow?.Open(characterItem.ItemName, 1, OnInputWindowAction);
+            _tradeInputWindow?.Open(new TradeInputWindow.InventoryTradeItem(characterItem.ItemName, slot), 1, OnInputWindowAction);
         }
         return true;
     }

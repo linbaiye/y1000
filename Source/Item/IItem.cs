@@ -7,5 +7,6 @@ public interface IItem
     int IconId { get; }
     
     int Color { get; }
+    IItem Duplicate();
 
 }
