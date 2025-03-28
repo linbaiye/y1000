@@ -1,9 +1,3 @@
-# 1000y
+#  godot复刻复古网游千年客户端。
 
-
-## How to run unit tests
-* Install NuGet Package Manager GUI in order to install dependencies.
-    * Install NUnit NUGet
-* Install .NET Core Test Explorer extension (to run unit tests?).
-* Create a new .net project named Tests, and modify Tests.csproj to use SDK : Godot.NET.Sdk/4.1.1
-* 
+<img width="770" alt="image" src="https://github.com/user-attachments/assets/116f98b6-7e3a-4de1-95f2-5f7a805584fd" />
