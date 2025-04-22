@@ -2,8 +2,8 @@
 <p>引擎：godot，语言：c#</p>
 <img width="770" alt="image" src="https://github.com/user-attachments/assets/116f98b6-7e3a-4de1-95f2-5f7a805584fd" />
 
-# 服务器端
-https://github.com/linbaiye/1000server
+# 搭建服务器端
+<p>请参考：https://github.com/linbaiye/1000server</p>
 
 # 如何开发调试
 * 下载godot: https://godotengine.org/
