@@ -8,7 +8,7 @@ Maps/
 y1000.csproj.old*
 .idea/
 assets/maps/
-assets/sound/
+#assets/sound/
 assets/bgm/
 .vs/
 .vscode/
