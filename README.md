@@ -8,7 +8,8 @@ https://github.com/linbaiye/1000server
 # 如何开发调试
 * 下载godot: https://godotengine.org/
 * 下载资源包: 
-* Clone 本项目
+* Clone 本项目: git clone https://github.com/linbaiye/y1000.git
 * Godot打开本项目调试UI, 动画等。
-* 使用Rider打开本项目编写调试代码: https://www.jetbrains.com/rider/
+* 使用Rider打开本项目编写调试代码, rider下载地址: https://www.jetbrains.com/rider/
 
+# 仅供学习交流使用
