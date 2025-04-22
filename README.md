@@ -6,9 +6,9 @@
 https://github.com/linbaiye/1000server
 
 # 如何开发调试
-下载godot: https://godotengine.org/
-下载资源包: 
-clone 本项目
-Godot打开本项目调试UI, 动画等。
-使用Rider打开本项目编写调试代码: https://www.jetbrains.com/rider/
+* 下载godot: https://godotengine.org/
+* 下载资源包: 
+* Clone 本项目
+* Godot打开本项目调试UI, 动画等。
+* 使用Rider打开本项目编写调试代码: https://www.jetbrains.com/rider/
 
