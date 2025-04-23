@@ -6,7 +6,7 @@
 <p>请参考：https://github.com/linbaiye/1000server</p>
 
 # 如何开发调试
-* 下载godot: https://godotengine.org/
+* 下载godot: https://godotengine.org/, 注意选择.net版本
 * 下载资源包: 
 * Clone 本项目: git clone https://github.com/linbaiye/y1000.git 或者下载源码包: https://github.com/linbaiye/y1000/archive/refs/tags/v1.0.0.zip
 * Godot打开本项目调试UI, 动画等。
