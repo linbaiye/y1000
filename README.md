@@ -13,3 +13,4 @@
 * 使用Rider打开本项目编写调试代码, rider下载地址: https://www.jetbrains.com/rider/
 
 # 仅供学习交流使用
+Q群: 33640123
