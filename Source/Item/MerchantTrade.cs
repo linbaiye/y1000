@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Godot.NativeInterop;
 using y1000.Source.Character;
 
 namespace y1000.Source.Item;
@@ -13,7 +14,7 @@ public class MerchantTrade
 
     public bool Selling {get; }
 
-    public long TotalMoney {get; private set;}
+    public long TotalMoney => Money?.Number ?? 0;
 
     public MerchantTrade() :this(0, new List<MerchantItem>())
     {
@@ -26,7 +27,6 @@ public class MerchantTrade
         NpcId = id;
         MerchantItems = items;
         Selling = sell;
-        TotalMoney = 0;
     }
 
 
@@ -44,25 +44,25 @@ public class MerchantTrade
         public long Number => Item is CharacterStackItem stackItem ? stackItem.Number : 1;
     }
 
-    private readonly List<TradingItem> _items = new();
+    private readonly List<TradingItem> _tradingItems = new();
 
     private TradingItem? _money;
 
-    public TradingItem? Money => _money;
+    private TradingItem? Money => _money;
 
-    public List<TradingItem> Items => _items;
-
-    public void AddItem(IItem item, int slot,
+    public List<TradingItem> TradingItems => _tradingItems;
+    
+    public void AddTrade(IItem item, int slot,
         CharacterStackItem money, int moneySlot)
     {
         if (item is not CharacterStackItem addStackItem)
         {
-            _items.Add(new TradingItem(slot, item));
+            _tradingItems.Add(new TradingItem(slot, item.Duplicate()));
         }
         else
         {
             bool added = false;
-            foreach (var tradingItem in _items)
+            foreach (var tradingItem in _tradingItems)
             {
                 if (tradingItem.Item.ItemName.Equals(item.ItemName) &&
                     tradingItem.Item is CharacterStackItem stackItem)
@@ -74,12 +74,12 @@ public class MerchantTrade
             }
             if (!added)
             {
-                _items.Add(new TradingItem(slot, addStackItem.Duplicate()));
+                _tradingItems.Add(new TradingItem(slot, addStackItem.Duplicate()));
             }
         }
         if (_money == null)
         {
-            _money = new TradingItem(moneySlot, money);
+            _money = new TradingItem(moneySlot, money.Duplicate());
         }
         else
         {
@@ -96,7 +96,7 @@ public class MerchantTrade
         return MerchantItems.Any(i => i.ItemName.Equals(clickedItemName)) ? null : "不买此种物品。";
     }
 
-    public bool IsEmpty => _items.Count == 0;
+    public bool IsEmpty => _tradingItems.Count == 0;
 
 
     private string? SellItemsToPlayer(string itemName, long number, CharacterInventory inventory)
@@ -104,35 +104,41 @@ public class MerchantTrade
         var merchantItem = FindMerchantItem(itemName);
         if (merchantItem == null)
             return "不卖该物品。";
-        if (!merchantItem.CanStack && number > 1)
+        if ((!merchantItem.CanStack && number > 1) || number > 10000000)
             return "超出数量。";
         var cost = merchantItem.Price * number;
         if (!inventory.HasEnoughMoney(cost))
         {
             return "没有足够钱币。";
         }
-        TotalMoney += cost;
+        if (!inventory.HasSpace(itemName))
+        {
+            return "物品栏已满。";
+        }
         var item = merchantItem.ToItem(number);
-        inventory.Buy(item, cost, this);
+        int itemSlot = inventory.Add(item);
+        int moneySlot = inventory.FindMoneySlot();
+        var money = inventory.DecreaseMoney(cost);
+        AddTrade(item, itemSlot, money, moneySlot);
         return null;
     }
 
     
     private string? BuyItemsFromPlayer(string itemName, long number,
-     CharacterInventory inventory, ItemFactory itemFactory)
+     CharacterInventory inventory, ItemFactory itemFactory, int slot)
     {
         var merchantItem = FindMerchantItem(itemName);
         if (merchantItem == null)
             return "不买该物品。";
-        if (!inventory.HasEnough(itemName, number))
+        if (!inventory.HasEnough(slot, number))
             return "没有足够数量。";
         if (!inventory.HasMoneySpace())
             return "物品栏已满。";
         var cost = merchantItem.Price * number;
-        TotalMoney += cost;
-        var item = merchantItem.ToItem(number);
-        var money = (CharacterStackItem)itemFactory.CreateCharacterItem("钱币", TotalMoney);
-        inventory.Sell(item, money, this);
+        var item = inventory.Remove(slot, number);
+        var money = (CharacterStackItem)itemFactory.CreateCharacterItem("钱币", cost);
+        int moneySlot = inventory.Add(money);
+        AddTrade(item, slot, money, moneySlot);
         return null;
     }
 
@@ -140,7 +146,7 @@ public class MerchantTrade
     public long ComputeTradingItemNumber(string name)
     {
         long count = 0;
-        foreach (var item in Items)
+        foreach (var item in TradingItems)
         {
             if (!item.Item.ItemName.Equals(name))
             {
@@ -164,19 +170,47 @@ public class MerchantTrade
         return MerchantItems.FirstOrDefault(i => i.ItemName.Equals(name));
     }
 
-    public string? OnInputNumberWindowConfirmed(string item, long number, CharacterInventory inventory, ItemFactory itemFactory)
+    public string? OnInputNumberWindowConfirmed(string item, long number, CharacterInventory inventory, ItemFactory itemFactory, int slot = 0)
     {
         if (number <= 0)
             return "请输入正确数量。";
         return Selling ? SellItemsToPlayer(item, number, inventory) :
-            BuyItemsFromPlayer(item, number, inventory, itemFactory);
+            BuyItemsFromPlayer(item, number, inventory, itemFactory, slot);
+    }
+
+
+    private void RollbackSelling(CharacterInventory inventory)
+    {
+        foreach (var tradingItem in TradingItems)
+        {
+            if (tradingItem.Item is CharacterItem)
+            {
+                inventory.Remove(tradingItem.Slot);
+            }
+            else if (tradingItem.Item is CharacterStackItem stackItem)
+            {
+                inventory.Remove(tradingItem.Slot, stackItem.Number);
+            }
+        }
+        if (Money != null)
+            inventory.Add(Money.Item, Money.Slot);
+    }
+
+    private void RollbackBuying(CharacterInventory inventory)
+    {
+        if (Money != null)
+            inventory.Remove(Money.Slot, Money.Number);
+        foreach (var tradingItem in TradingItems)
+        {
+            inventory.Add(tradingItem.Item, tradingItem.Slot);
+        }
     }
 
     public void Rollback(CharacterInventory inventory)
     {
         if (IsBuying)
-            inventory.RollbackSelling(this);
+            RollbackBuying(inventory);
         else
-            inventory.RollbackBuying(this);
+            RollbackSelling(inventory);
     }
 }

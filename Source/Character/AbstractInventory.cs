@@ -29,9 +29,10 @@ public abstract class AbstractInventory
         return _items.ContainsKey(slot);
     }
 
-    public bool HasEnough(string name, long number)
+    
+    public bool HasEnough(int slot, long number)
     {
-        var item = _items.Values.FirstOrDefault(i => i.ItemName.Equals(name));
+        var item = Get(slot);
         if (item is CharacterStackItem stackItem)
             return stackItem.Number >= number;
         return number == 1 && item != null;
