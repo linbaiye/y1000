@@ -1,16 +1,16 @@
 [gd_scene load_steps=14 format=3 uid="uid://7ghuvlfmi4pd"]
 
-[ext_resource type="Script" path="res://Source/Control/RightSide/RightControl.cs" id="1_j2rwp"]
+[ext_resource type="Script" uid="uid://br2hvwosoivtc" path="res://Source/Control/RightSide/RightControl.cs" id="1_j2rwp"]
 [ext_resource type="Texture2D" uid="uid://b50oaa3iiic8f" path="res://assets/ui/inventory.png" id="1_ka7tb"]
-[ext_resource type="Script" path="res://Source/Control/RightSide/Inventory/InventoryView.cs" id="2_px3kf"]
+[ext_resource type="Script" uid="uid://bnaeenyowh7mc" path="res://Source/Control/RightSide/Inventory/InventoryView.cs" id="2_px3kf"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_qq6s2"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="5_sv1h5"]
 [ext_resource type="Texture2D" uid="uid://d3ks8ifdrhwa1" path="res://assets/ui/kungfu.png" id="6_w6c7c"]
-[ext_resource type="Script" path="res://Source/Control/RightSide/Book/KungFuBookView.cs" id="7_p6auv"]
+[ext_resource type="Script" uid="uid://fya7e1qlvsax" path="res://Source/Control/RightSide/Book/KungFuBookView.cs" id="7_p6auv"]
 [ext_resource type="Texture2D" uid="uid://4s1riaocw8va" path="res://assets/ui/unnamed.png" id="8_s76w2"]
 [ext_resource type="Texture2D" uid="uid://bjyvvn2iffhwr" path="res://assets/ui/unnamed_focus.png" id="9_x0r7q"]
 [ext_resource type="Texture2D" uid="uid://dayrbfw53butg" path="res://assets/ui/basic_focus.png" id="10_6lo56"]
-[ext_resource type="Script" path="res://Source/Control/RightSide/Book/BookPage.cs" id="10_wleme"]
+[ext_resource type="Script" uid="uid://7okdxtviaewv" path="res://Source/Control/RightSide/Book/BookPage.cs" id="10_wleme"]
 [ext_resource type="Texture2D" uid="uid://cfa4a1ocdta6f" path="res://assets/ui/basic.png" id="11_cxd45"]
 [ext_resource type="PackedScene" uid="uid://bgcmf4adq48gs" path="res://Scenes/Assistance.tscn" id="14_hnjge"]
 
@@ -25,7 +25,6 @@ mouse_filter = 2
 script = ExtResource("1_j2rwp")
 
 [node name="Inventory" type="NinePatchRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(252, 384)
 layout_mode = 0
 offset_right = 40.0
@@ -151,7 +150,6 @@ theme = ExtResource("5_sv1h5")
 vertical_alignment = 1
 
 [node name="KungFuBook" type="NinePatchRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(252, 384)
 layout_mode = 0
 offset_right = 40.0

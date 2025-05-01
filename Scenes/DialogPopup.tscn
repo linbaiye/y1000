@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b24frt4f071fk"]
+[gd_scene load_steps=6 format=3 uid="uid://b24frt4f071fk"]
 
-[ext_resource type="Script" path="res://Source/Control/DialogPopup.cs" id="1_8w2l6"]
-[ext_resource type="FontFile" uid="uid://dhmdf35oga5i2" path="res://fonts/SourceHanSerifSC-ExtraLight.otf" id="2_a6san"]
+[ext_resource type="Script" uid="uid://dc6tndb7daanq" path="res://Source/Control/DialogPopup.cs" id="1_8w2l6"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_ns5hd"]
+[ext_resource type="FontFile" uid="uid://b3d5nujmesucc" path="res://fonts/JiYingHuiPianHuiSong-2.ttf" id="3_ns5hd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n17t5"]
 content_margin_left = 5.0
@@ -10,11 +11,10 @@ content_margin_right = 5.0
 content_margin_bottom = 2.0
 bg_color = Color(0, 0, 0, 0.352941)
 
-[sub_resource type="LabelSettings" id="LabelSettings_tdoxw"]
-font = ExtResource("2_a6san")
-font_size = 11
-outline_size = 1
-shadow_color = Color(0, 0, 0, 0.709804)
+[sub_resource type="LabelSettings" id="LabelSettings_ns5hd"]
+font = ExtResource("3_ns5hd")
+font_size = 12
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="DialogPopup" type="PanelContainer"]
 anchors_preset = 15
@@ -32,8 +32,8 @@ script = ExtResource("1_8w2l6")
 [node name="Label" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
-label_settings = SubResource("LabelSettings_tdoxw")
+theme = ExtResource("2_ns5hd")
+label_settings = SubResource("LabelSettings_ns5hd")
 vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]

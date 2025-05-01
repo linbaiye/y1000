@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bygupor5h581m" path="res://assets/healthbarUnder.png" id="1_7si6n"]
 [ext_resource type="Texture2D" uid="uid://bx3o5n7hjxuna" path="res://assets/ui/life_bar.png" id="2_b40nm"]
-[ext_resource type="Script" path="res://Source/Creature/LifePercentBar.cs" id="3_yyxxb"]
+[ext_resource type="Script" uid="uid://sxbw5s0wnimp" path="res://Source/Creature/LifePercentBar.cs" id="3_yyxxb"]
 
 [node name="HealthBar" type="TextureProgressBar"]
 z_index = 1

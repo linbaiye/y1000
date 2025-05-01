@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://db0iclaskno1q"]
 
-[ext_resource type="Script" path="res://Source/Game.cs" id="1_yu5bc"]
+[ext_resource type="Script" uid="uid://dsxpx6xoscywe" path="res://Source/Game.cs" id="1_yu5bc"]
 [ext_resource type="PackedScene" uid="uid://53yxyci6nw2t" path="res://map_layer.tscn" id="2_r4kyb"]
 [ext_resource type="PackedScene" uid="uid://cx8diosi0sqr" path="res://Scenes/AudioManager.tscn" id="20_0dkt0"]
 

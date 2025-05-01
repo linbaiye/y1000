@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cumcwjyhtccim"]
 
-[ext_resource type="Script" path="res://Source/Control/Quest/QuestItemView.cs" id="1_0q1k4"]
+[ext_resource type="Script" uid="uid://bl6yakfjs5eva" path="res://Source/Control/Quest/QuestItemView.cs" id="1_0q1k4"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_vys6w"]
 
 [node name="QuestItem" type="HFlowContainer"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://qaao0hadvugj"]
 
 [ext_resource type="Texture2D" uid="uid://c10dt2ie4f3if" path="res://assets/ui/sys_setting.png" id="1_8hr4h"]
-[ext_resource type="Script" path="res://Source/Control/System/SystemSettings.cs" id="2_mgyti"]
+[ext_resource type="Script" uid="uid://dmax3onojt1qf" path="res://Source/Control/System/SystemSettings.cs" id="2_mgyti"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kvt7"]
 

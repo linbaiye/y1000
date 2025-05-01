@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="1_ksyf5"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="2_ydbg7"]
-[ext_resource type="Script" path="res://Source/Control/Buff/BuffContainer.cs" id="2_ylmmp"]
+[ext_resource type="Script" uid="uid://daxslouil1td8" path="res://Source/Control/Buff/BuffContainer.cs" id="2_ylmmp"]
 
 [node name="BuffContainer" type="VBoxContainer"]
 offset_right = 40.0

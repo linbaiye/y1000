@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://p7bamjypilc0"]
 
 [ext_resource type="Texture2D" uid="uid://bulcyb8u88u71" path="res://assets/ui/sys_menu.png" id="1_ypngt"]
-[ext_resource type="Script" path="res://Source/Control/System/SystemMenu.cs" id="2_3oi7g"]
+[ext_resource type="Script" uid="uid://c252qyblvixyp" path="res://Source/Control/System/SystemMenu.cs" id="2_3oi7g"]
 [ext_resource type="Texture2D" uid="uid://dk6r5vlo8em1l" path="res://assets/ui/sys_setting_btn.png" id="2_ae3dr"]
 [ext_resource type="Texture2D" uid="uid://d24kfiiy1borh" path="res://assets/ui/sys_setting_down_btn.png" id="3_4ruyx"]
 [ext_resource type="Texture2D" uid="uid://ca4jle6ejh1n3" path="res://assets/ui/return_game.png" id="4_y37eu"]

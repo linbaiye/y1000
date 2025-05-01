@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://53yxyci6nw2t"]
 
-[ext_resource type="Script" path="res://Source/Map/MapLayer.cs" id="1_hdth7"]
+[ext_resource type="Script" uid="uid://mdeldugdjr8i" path="res://Source/Map/MapLayer.cs" id="1_hdth7"]
 
 [sub_resource type="TileSet" id="TileSet_jlhjp"]
 tile_size = Vector2i(32, 24)

@@ -1,32 +1,32 @@
 [gd_scene load_steps=24 format=3 uid="uid://c8pmfxkqej1vd"]
 
-[ext_resource type="Script" path="res://Source/Control/Bottom/BottomControl.cs" id="1_nx2kl"]
+[ext_resource type="Script" uid="uid://3jm687m32d26" path="res://Source/Control/Bottom/BottomControl.cs" id="1_nx2kl"]
 [ext_resource type="Texture2D" uid="uid://d25ml37vvq5mp" path="res://assets/ui/hud_bottom.png" id="2_mrib6"]
-[ext_resource type="Script" path="res://Source/Control/Bottom/TextArea.cs" id="3_56n7n"]
-[ext_resource type="Script" path="res://Source/Control/Bottom/Avatar.cs" id="4_mdb7g"]
-[ext_resource type="Script" path="res://Source/Control/Bottom/AvatarPart.cs" id="5_rq0is"]
+[ext_resource type="Script" uid="uid://b7ogfbu04e1ot" path="res://Source/Control/Bottom/TextArea.cs" id="3_56n7n"]
+[ext_resource type="Script" uid="uid://hdix671dw4cj" path="res://Source/Control/Bottom/Avatar.cs" id="4_mdb7g"]
+[ext_resource type="Script" uid="uid://x5osmokee354" path="res://Source/Control/Bottom/AvatarPart.cs" id="5_rq0is"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="5_w80km"]
 [ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_v430x"]
-[ext_resource type="Script" path="res://Source/Control/Bottom/UsedKungFuView.cs" id="8_hxdqm"]
-[ext_resource type="Script" path="res://Source/Control/Bottom/BlinkingText.cs" id="8_qgpy2"]
-[ext_resource type="Script" path="res://Source/Control/Bottom/UsedKungFuLabel.cs" id="9_4y8pv"]
+[ext_resource type="Script" uid="uid://bmyvvveif3ofp" path="res://Source/Control/Bottom/UsedKungFuView.cs" id="8_hxdqm"]
+[ext_resource type="Script" uid="uid://ul7gkqqod76s" path="res://Source/Control/Bottom/BlinkingText.cs" id="8_qgpy2"]
+[ext_resource type="Script" uid="uid://ce5xxqbgbelv4" path="res://Source/Control/Bottom/UsedKungFuLabel.cs" id="9_4y8pv"]
 [ext_resource type="Texture2D" uid="uid://b58wt8qgc1hyq" path="res://assets/ui/yuanqi_bar.png" id="9_xgwoi"]
 [ext_resource type="Texture2D" uid="uid://36kyaq6oqkqc" path="res://assets/ui/power_bar.png" id="10_0ueev"]
 [ext_resource type="Texture2D" uid="uid://bx3o5n7hjxuna" path="res://assets/ui/life_bar.png" id="11_igjoo"]
 [ext_resource type="Texture2D" uid="uid://c1aocdayxnuiv" path="res://assets/ui/hal_bar.png" id="12_5cibo"]
 [ext_resource type="Texture2D" uid="uid://bc2n2y6iilswj" path="res://assets/ui/exp_up.png" id="15_kfsle"]
 [ext_resource type="Texture2D" uid="uid://bt4hl6nb11bon" path="res://assets/ui/exp_down.png" id="16_jqb70"]
-[ext_resource type="Script" path="res://Source/Control/Bottom/Shortcut/Shortcuts.cs" id="17_d3qri"]
+[ext_resource type="Script" uid="uid://cqsnox3th7dso" path="res://Source/Control/Bottom/Shortcut/Shortcuts.cs" id="17_d3qri"]
 [ext_resource type="PackedScene" uid="uid://drlxeqb568kxo" path="res://Scenes/InventorySlot.tscn" id="17_meto4"]
-[ext_resource type="Script" path="res://Source/Control/Bottom/InputEdit.cs" id="19_ysobf"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kljs2"]
+[ext_resource type="Script" uid="uid://b622lq3en2ppb" path="res://Source/Control/Bottom/InputEdit.cs" id="19_ysobf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3amq6"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ov7pw"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kljs2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7grrv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ov7pw"]
 
 [node name="BottomUI" type="Control"]
 layout_direction = 1
@@ -57,8 +57,8 @@ theme_override_colors/font_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_colors/font_focus_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 13
-theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3amq6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 text = "物品"
 
 [node name="KungFuButton" type="Button" parent="Container"]
@@ -71,8 +71,8 @@ theme_override_colors/font_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_colors/font_focus_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 13
-theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3amq6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 text = "武功"
 
 [node name="AssistantButton" type="Button" parent="Container"]
@@ -85,8 +85,8 @@ theme_override_colors/font_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_colors/font_focus_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 13
-theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3amq6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 text = "辅助"
 
 [node name="SystemButton" type="Button" parent="Container"]
@@ -99,8 +99,8 @@ theme_override_colors/font_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_colors/font_focus_color = Color(0.847656, 0.688255, 0.062912, 1)
 theme_override_fonts/font = ExtResource("7_v430x")
 theme_override_font_sizes/font_size = 13
-theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3amq6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kljs2")
 text = "系统"
 
 [node name="TextArea" type="VBoxContainer" parent="Container"]
@@ -492,7 +492,7 @@ offset_top = 164.0
 offset_right = 738.0
 offset_bottom = 189.0
 theme = ExtResource("5_w80km")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ov7pw")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7grrv")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ov7pw")
 caret_blink = true
 script = ExtResource("19_ysobf")

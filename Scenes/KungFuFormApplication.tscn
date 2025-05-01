@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c7l7trn60dvkb"]
 
 [ext_resource type="Texture2D" uid="uid://bieajxkf477vv" path="res://assets/ui/kungfu_form.png" id="1_leqbw"]
-[ext_resource type="Script" path="res://Source/Control/Guild/GuildKungFuFormView.cs" id="2_7v53f"]
+[ext_resource type="Script" uid="uid://ctf2hdpx2jbeq" path="res://Source/Control/Guild/GuildKungFuFormView.cs" id="2_7v53f"]
 [ext_resource type="PackedScene" uid="uid://cddg0m2xyiw2b" path="res://Scenes/ConfirmButton.tscn" id="2_us11u"]
 [ext_resource type="PackedScene" uid="uid://bx54mp4v8uiii" path="res://Scenes/CancelButton.tscn" id="3_06bvc"]
 [ext_resource type="Theme" uid="uid://d1hwxjbwc7nu" path="res://Scenes/KungFuFormApplication.tres" id="4_nh536"]

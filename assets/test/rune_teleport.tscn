@@ -36,8 +36,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xstr6"]
 _data = {
-"RESET": SubResource("Animation_0v3sw"),
-"new_animation": SubResource("Animation_x531u")
+&"RESET": SubResource("Animation_0v3sw"),
+&"new_animation": SubResource("Animation_x531u")
 }
 
 [node name="RuneTeleport" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://brl3lwfss84w8"]
 
-[ext_resource type="Script" path="res://Source/Control/Dialog/ItemsContainer.cs" id="1_gp537"]
+[ext_resource type="Script" uid="uid://bh1bq2fpjc865" path="res://Source/Control/Dialog/ItemsContainer.cs" id="1_gp537"]
 
 [node name="ItemsContainer" type="ScrollContainer"]
 offset_right = 353.0

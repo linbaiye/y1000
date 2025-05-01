@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwu4hdppidtua"]
 
-[ext_resource type="Script" path="res://Source/Control/Dialog/Item.cs" id="1_pvaax"]
+[ext_resource type="Script" uid="uid://djcubr5cxbffq" path="res://Source/Control/Dialog/Item.cs" id="1_pvaax"]
 [ext_resource type="Texture2D" uid="uid://b557jvyog0gwn" path="res://sprite/item/000052.png" id="2_tgqmi"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="3_dbu8q"]
 

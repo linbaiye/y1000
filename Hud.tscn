@@ -1,28 +1,28 @@
 [gd_scene load_steps=26 format=3 uid="uid://sfju506faap2"]
 
-[ext_resource type="Script" path="res://Source/Control/UIController.cs" id="1_xjixt"]
+[ext_resource type="Script" uid="uid://cuym8hqqi1qn7" path="res://Source/Control/UIController.cs" id="1_xjixt"]
 [ext_resource type="PackedScene" uid="uid://c8pmfxkqej1vd" path="res://bottom_ui.tscn" id="2_t1cjk"]
 [ext_resource type="PackedScene" uid="uid://7ghuvlfmi4pd" path="res://Scenes/RightSideUI.tscn" id="3_3lv4o"]
 [ext_resource type="PackedScene" uid="uid://bqv6d0i2cli8e" path="res://Scenes/DropItemUI.tscn" id="4_ab1p8"]
-[ext_resource type="Script" path="res://Source/Control/TradeInputWindow.cs" id="5_4xdqj"]
+[ext_resource type="Script" uid="uid://ww2a771yp6pc" path="res://Source/Control/TradeInputWindow.cs" id="5_4xdqj"]
 [ext_resource type="PackedScene" uid="uid://cqtmvg303wl2s" path="res://Scenes/LeftsideTextArea.tscn" id="7_8qy0h"]
 [ext_resource type="PackedScene" uid="uid://dw4kky7kku6qg" path="res://Scenes/ItemAttribute.tscn" id="8_xs2cv"]
 [ext_resource type="PackedScene" uid="uid://bf5l5nu0lr8qr" path="res://Scenes/PlayerAttributeWindow.tscn" id="9_2wuku"]
 [ext_resource type="PackedScene" uid="uid://clr852egfmuqb" path="res://Scenes/TradePlayerWindow.tscn" id="10_ort1l"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="11_skdim"]
-[ext_resource type="Script" path="res://Source/Control/Map/MapView.cs" id="12_w6ub7"]
+[ext_resource type="Script" uid="uid://cxovpcnvdubxe" path="res://Source/Control/Map/MapView.cs" id="12_w6ub7"]
 [ext_resource type="PackedScene" uid="uid://bjjg8uukhy3s8" path="res://Scenes/MapNpcView.tscn" id="13_htgod"]
 [ext_resource type="PackedScene" uid="uid://ca6kivqahtqcd" path="res://Scenes/Bank.tscn" id="14_f60wq"]
 [ext_resource type="PackedScene" uid="uid://p7bamjypilc0" path="res://Scenes/SysMenu.tscn" id="15_wfhce"]
 [ext_resource type="PackedScene" uid="uid://qaao0hadvugj" path="res://Scenes/SysSetting.tscn" id="16_58trx"]
 [ext_resource type="Texture2D" uid="uid://co188yc1ctgcc" path="res://assets/ui/left_up_text.png" id="17_w1rvm"]
-[ext_resource type="Script" path="res://Source/Control/LeftupText.cs" id="18_buape"]
+[ext_resource type="Script" uid="uid://caube5r2j5i0j" path="res://Source/Control/LeftupText.cs" id="18_buape"]
 [ext_resource type="PackedScene" uid="uid://crttyejirsfwt" path="res://Scenes/SysNotification.tscn" id="19_yllhq"]
 [ext_resource type="PackedScene" uid="uid://c7l7trn60dvkb" path="res://Scenes/KungFuFormApplication.tscn" id="20_xqc31"]
 [ext_resource type="PackedScene" uid="uid://bnv5uptygi8q1" path="res://Scenes/QuesterDialog.tscn" id="21_l3nyl"]
 [ext_resource type="PackedScene" uid="uid://taimkmoi0ssl" path="res://Scenes/BuffContainer.tscn" id="22_g08ql"]
 [ext_resource type="PackedScene" uid="uid://c1gat7dv1jayr" path="res://Scenes/NpcInteractionMainMenu.tscn" id="23_ncdnv"]
-[ext_resource type="PackedScene" uid="uid://blmufpbvbu8ur" path="res://Scenes/MerchantTrading.tscn" id="24_iglx5"]
+[ext_resource type="PackedScene" uid="uid://cotr8m5n38b5d" path="res://Scenes/MerchantTrading.tscn" id="24_iglx5"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufimi"]
 
@@ -44,34 +44,27 @@ offset_top = 220.0
 offset_bottom = 29.0
 
 [node name="DropItemUI" parent="." instance=ExtResource("4_ab1p8")]
-visible = false
 
 [node name="InputWindow" parent="." instance=ExtResource("4_ab1p8")]
-visible = false
 script = ExtResource("5_4xdqj")
 
 [node name="LeftsideTextArea" parent="." instance=ExtResource("7_8qy0h")]
-visible = false
 offset_left = 3.0
 offset_top = 486.0
 offset_right = -775.0
 offset_bottom = -172.0
 
 [node name="ItemAttribute" parent="." instance=ExtResource("8_xs2cv")]
-visible = false
 offset_left = 383.0
 offset_top = 226.0
 offset_right = -385.0
 offset_bottom = -355.0
 
 [node name="PlayerAttributeWindow" parent="." instance=ExtResource("9_2wuku")]
-visible = false
 
 [node name="PlayerTradeWindow" parent="." instance=ExtResource("10_ort1l")]
-visible = false
 
 [node name="MapView" type="TextureRect" parent="."]
-visible = false
 z_index = 4
 offset_left = 282.0
 offset_top = 111.0
@@ -104,7 +97,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SysMenu" parent="." instance=ExtResource("15_wfhce")]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -116,7 +108,6 @@ offset_right = 86.0
 offset_bottom = 127.5
 
 [node name="SysSetting" parent="." instance=ExtResource("16_58trx")]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -143,7 +134,6 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_bldau")
 vertical_alignment = 1
 
 [node name="SysNotification" parent="." instance=ExtResource("19_yllhq")]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -169,7 +159,6 @@ offset_right = 271.0
 offset_bottom = 206.5
 
 [node name="QuestDialog" parent="." instance=ExtResource("21_l3nyl")]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -190,7 +179,6 @@ offset_bottom = 49.0
 grow_horizontal = 0
 
 [node name="NpcInteractionMainMenu" parent="." instance=ExtResource("23_ncdnv")]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

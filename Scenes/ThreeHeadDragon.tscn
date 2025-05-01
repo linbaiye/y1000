@@ -61,8 +61,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dacsr"]
 _data = {
-"RESET": SubResource("Animation_7vi3j"),
-"new_animation": SubResource("Animation_bju2c")
+&"RESET": SubResource("Animation_7vi3j"),
+&"new_animation": SubResource("Animation_bju2c")
 }
 
 [node name="ThreeHeadDragon" type="Node2D"]

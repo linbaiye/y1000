@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://ctox857khwxv3"]
 
-[ext_resource type="Script" path="res://Source/Creature/Monster/Monster.cs" id="1_k86rw"]
+[ext_resource type="Script" uid="uid://op6vjxf4afl6" path="res://Source/Creature/Monster/Monster.cs" id="1_k86rw"]
 [ext_resource type="PackedScene" uid="uid://c57ou51buf7xb" path="res://Scenes/Body.tscn" id="2_qsi3r"]
-[ext_resource type="Script" path="res://Source/Creature/Monster/MonsterEffectSprite.cs" id="3_s6wlh"]
+[ext_resource type="Script" uid="uid://byupeb1qpdf1y" path="res://Source/Creature/Monster/MonsterEffectSprite.cs" id="3_s6wlh"]
 [ext_resource type="PackedScene" uid="uid://bqjthq3o0r0ot" path="res://Scenes/HealthBar.tscn" id="3_sf2jp"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g6ou6"]

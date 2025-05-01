@@ -2,14 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://bjt64qlxydsmx" path="res://assets/ui/assistance.png" id="1_k625j"]
 [ext_resource type="Texture2D" uid="uid://5juyhlq46430" path="res://assets/ui/heal.png" id="2_n4yjs"]
-[ext_resource type="Script" path="res://Source/Control/Assistance/AssistantView.cs" id="2_qbqa2"]
+[ext_resource type="Script" uid="uid://crwhny8s5h31x" path="res://Source/Control/Assistance/AssistantView.cs" id="2_qbqa2"]
 [ext_resource type="Texture2D" uid="uid://nvndcqsrw0uw" path="res://assets/ui/loot.png" id="4_c5b3e"]
 [ext_resource type="Texture2D" uid="uid://bqnfyqxgdsnkp" path="res://assets/ui/heal_setting.png" id="6_rvptb"]
-[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="7_0vfar"]
-[ext_resource type="Script" path="res://Source/Control/Assistance/HealItemView.cs" id="7_ifcax"]
-[ext_resource type="Script" path="res://Source/Control/Assistance/AutoFillView.cs" id="8_67i3c"]
+[ext_resource type="Script" uid="uid://cw7i3ubcp76fs" path="res://Source/Control/Assistance/HealItemView.cs" id="7_ifcax"]
+[ext_resource type="Script" uid="uid://c1f6iwvatbavd" path="res://Source/Control/Assistance/AutoFillView.cs" id="8_67i3c"]
+[ext_resource type="FontFile" uid="uid://b3d5nujmesucc" path="res://fonts/JiYingHuiPianHuiSong-2.ttf" id="8_anoml"]
 [ext_resource type="Texture2D" uid="uid://c12ndbb5ibdta" path="res://assets/ui/loot_assistance.png" id="11_550bb"]
-[ext_resource type="Script" path="res://Source/Control/Assistance/AutoLootAssistantView.cs" id="12_b2hom"]
+[ext_resource type="Script" uid="uid://cdsen86r3qi7l" path="res://Source/Control/Assistance/AutoLootAssistantView.cs" id="12_b2hom"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5aqx"]
 bg_color = Color(0.87451, 0.47451, 0.317647, 0)
@@ -18,7 +18,7 @@ border_color = Color(0.8, 0.8, 0.8, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y06l7"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="Image" id="Image_ksy7x"]
+[sub_resource type="Image" id="Image_ijiu0"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 179, 179, 179, 153, 178, 178, 178, 166, 184, 184, 184, 18, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 178, 178, 178, 166, 178, 178, 178, 151, 255, 255, 255, 0, 255, 255, 255, 0, 178, 178, 178, 166, 178, 178, 178, 217, 178, 178, 178, 179, 184, 184, 184, 18, 255, 255, 255, 0, 255, 255, 255, 0, 175, 175, 175, 19, 178, 178, 178, 179, 178, 178, 178, 217, 178, 178, 178, 165, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 179, 179, 179, 180, 175, 175, 175, 19, 175, 175, 175, 19, 179, 179, 179, 180, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 178, 178, 178, 181, 178, 178, 178, 181, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 177, 177, 177, 179, 178, 178, 178, 217, 178, 178, 178, 217, 177, 177, 177, 179, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 184, 184, 184, 18, 178, 178, 178, 165, 178, 178, 178, 165, 180, 180, 180, 17, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -28,7 +28,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ri8fq"]
-image = SubResource("Image_ksy7x")
+image = SubResource("Image_ijiu0")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igqr6"]
 content_margin_left = 8.0
@@ -162,7 +162,7 @@ OptionButton/constants/h_separation = 4
 OptionButton/constants/modulate_arrow = 0
 OptionButton/constants/outline_size = 0
 OptionButton/font_sizes/font_size = 12
-OptionButton/fonts/font = ExtResource("7_0vfar")
+OptionButton/fonts/font = ExtResource("8_anoml")
 OptionButton/icons/arrow = SubResource("ImageTexture_ri8fq")
 OptionButton/styles/disabled = SubResource("StyleBoxFlat_igqr6")
 OptionButton/styles/disabled_mirrored = SubResource("StyleBoxFlat_v6vpd")
@@ -176,10 +176,10 @@ OptionButton/styles/pressed_mirrored = SubResource("StyleBoxFlat_5mmiu")
 PopupMenu/font_sizes/font_separator_size = 12
 PopupMenu/font_sizes/font_size = 12
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_a2q7i"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amcp4"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_a2q7i"]
 
 [node name="Assistance" type="NinePatchRect"]
 custom_minimum_size = Vector2(240, 365)
@@ -205,7 +205,6 @@ offset_bottom = 75.0
 texture_normal = ExtResource("4_c5b3e")
 
 [node name="AutoFill" type="NinePatchRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(212, 226)
 layout_mode = 0
 offset_left = 14.0
@@ -242,6 +241,7 @@ offset_top = 1.0
 offset_right = 133.0
 offset_bottom = 25.0
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("8_anoml")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/focus = SubResource("StyleBoxFlat_y06l7")
 text = "10"
@@ -257,8 +257,8 @@ offset_right = 208.0
 offset_bottom = 25.0
 theme = SubResource("Theme_jcvvp")
 theme_override_font_sizes/font_size = 12
-theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 flat = true
 item_count = 3
 popup/item_0/text = "生药"
@@ -310,8 +310,8 @@ offset_right = 208.0
 offset_bottom = 25.0
 theme = SubResource("Theme_jcvvp")
 theme_override_font_sizes/font_size = 12
-theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 flat = true
 item_count = 3
 popup/item_0/text = "生药"
@@ -363,8 +363,8 @@ offset_right = 208.0
 offset_bottom = 25.0
 theme = SubResource("Theme_jcvvp")
 theme_override_font_sizes/font_size = 12
-theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 flat = true
 item_count = 3
 popup/item_0/text = "生药"
@@ -416,8 +416,8 @@ offset_right = 208.0
 offset_bottom = 25.0
 theme = SubResource("Theme_jcvvp")
 theme_override_font_sizes/font_size = 12
-theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 flat = true
 item_count = 3
 popup/item_0/text = "生药"
@@ -469,8 +469,8 @@ offset_right = 208.0
 offset_bottom = 25.0
 theme = SubResource("Theme_jcvvp")
 theme_override_font_sizes/font_size = 12
-theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 flat = true
 item_count = 3
 popup/item_0/text = "生药"
@@ -522,8 +522,8 @@ offset_right = 208.0
 offset_bottom = 25.0
 theme = SubResource("Theme_jcvvp")
 theme_override_font_sizes/font_size = 12
-theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 theme_override_styles/focus = SubResource("StyleBoxFlat_amcp4")
+theme_override_icons/arrow = SubResource("CanvasTexture_a2q7i")
 flat = true
 item_count = 3
 popup/item_0/text = "生药"
@@ -562,6 +562,7 @@ flat = true
 caret_blink = true
 
 [node name="AutoLoot" type="NinePatchRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(208, 240)
 layout_mode = 0
 offset_left = 16.0

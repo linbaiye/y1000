@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1gat7dv1jayr"]
 
 [ext_resource type="Texture2D" uid="uid://dxnphjmgrpcpn" path="res://assets/ui/merchant_dialog.png" id="1_6pfg6"]
-[ext_resource type="Script" path="res://Source/Control/NpcInteraction/NpcInteractionMainMenuView.cs" id="2_f4lh2"]
-[ext_resource type="Script" path="res://Source/Control/NpcInteraction/InteractionGroups.cs" id="3_y6hfk"]
+[ext_resource type="Script" uid="uid://bbkxjetkdfnnu" path="res://Source/Control/NpcInteraction/NpcInteractionMainMenuView.cs" id="2_f4lh2"]
+[ext_resource type="Script" uid="uid://cctuyt46o7t5x" path="res://Source/Control/NpcInteraction/InteractionGroups.cs" id="3_y6hfk"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="4_5xntu"]
 
 [node name="NpcInteractionMainMenu" type="NinePatchRect"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bjjg8uukhy3s8"]
 
-[ext_resource type="Script" path="res://Source/Control/Map/MapCreatureView.cs" id="1_4y2c4"]
+[ext_resource type="Script" uid="uid://b71if6hjv1me1" path="res://Source/Control/Map/MapCreatureView.cs" id="1_4y2c4"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_68rc7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4rep"]

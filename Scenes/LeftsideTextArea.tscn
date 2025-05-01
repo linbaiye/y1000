@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqtmvg303wl2s"]
 
-[ext_resource type="Script" path="res://Source/Control/LeftSide/LeftsideTextControl.cs" id="1_kpyqx"]
+[ext_resource type="Script" uid="uid://ckorg7brcigo5" path="res://Source/Control/LeftSide/LeftsideTextControl.cs" id="1_kpyqx"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_2s2ox"]
-[ext_resource type="Script" path="res://Source/Control/LeftSide/LeftsideTextLabel.cs" id="2_qd4dk"]
+[ext_resource type="Script" uid="uid://d265juypqqp05" path="res://Source/Control/LeftSide/LeftsideTextLabel.cs" id="2_qd4dk"]
 
 [node name="LeftsideTextArea" type="VBoxContainer"]
 anchors_preset = 15

@@ -38,8 +38,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gpyya"]
 _data = {
-"RESET": SubResource("Animation_ir0au"),
-"new_animation": SubResource("Animation_wwr2j")
+&"RESET": SubResource("Animation_ir0au"),
+&"new_animation": SubResource("Animation_wwr2j")
 }
 
 [node name="Teleport" type="Node2D"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cluywph0mcid6"]
+[gd_scene load_steps=4 format=3 uid="uid://cluywph0mcid6"]
 
 [ext_resource type="Texture2D" uid="uid://pfji6mw5d5rv" path="res://assets/ui/login.png" id="1_ku3r6"]
-[ext_resource type="Script" path="res://Source/Control/Login.cs" id="2_llpe0"]
-[ext_resource type="FontFile" uid="uid://co8h6uigyxfea" path="res://fonts/SweiSpringSugarCJKtc-Regular.ttf" id="2_mbscu"]
+[ext_resource type="Script" uid="uid://ety6yeny1ap8" path="res://Source/Control/Login.cs" id="2_llpe0"]
 [ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="4_py4jd"]
 
 [node name="Login" type="NinePatchRect"]
@@ -57,8 +56,7 @@ text = "密码"
 [node name="Input" type="LineEdit" parent="Entrance/Password"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 caret_blink = true
 secret = true
 secret_character = "*"
@@ -87,8 +85,8 @@ offset_left = 77.0
 offset_top = 280.0
 offset_right = 180.0
 offset_bottom = 297.0
+theme = ExtResource("4_py4jd")
 theme_override_colors/font_color = Color(0.666667, 0.0666667, 0.113725, 0.945098)
-theme_override_font_sizes/font_size = 12
 clip_text = true
 
 [node name="Signup" type="Control" parent="."]
@@ -106,15 +104,13 @@ offset_bottom = 206.0
 
 [node name="Label" type="Label" parent="Signup/Username"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "账号"
 
 [node name="Input" type="LineEdit" parent="Signup/Username"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 caret_blink = true
 
 [node name="Password" type="HBoxContainer" parent="Signup"]
@@ -126,15 +122,13 @@ offset_bottom = 237.0
 
 [node name="Label" type="Label" parent="Signup/Password"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "密码"
 
 [node name="Input" type="LineEdit" parent="Signup/Password"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 caret_blink = true
 secret = true
 secret_character = "*"
@@ -148,15 +142,13 @@ offset_bottom = 267.0
 
 [node name="Label" type="Label" parent="Signup/Confirm"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "确认"
 
 [node name="Input" type="LineEdit" parent="Signup/Confirm"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("2_mbscu")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 caret_blink = true
 secret = true
 secret_character = "*"
@@ -167,7 +159,7 @@ offset_left = 76.0
 offset_top = 275.0
 offset_right = 108.0
 offset_bottom = 296.0
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "返回"
 
 [node name="Signup" type="Button" parent="Signup"]
@@ -176,6 +168,7 @@ offset_left = 142.0
 offset_top = 275.0
 offset_right = 174.0
 offset_bottom = 296.0
+theme = ExtResource("4_py4jd")
 text = "注册"
 
 [node name="Tip" type="Label" parent="Signup"]
@@ -184,6 +177,7 @@ offset_left = 76.0
 offset_top = 307.0
 offset_right = 179.0
 offset_bottom = 324.0
+theme = ExtResource("4_py4jd")
 theme_override_colors/font_color = Color(0.666667, 0.0666667, 0.113725, 0.945098)
 clip_text = true
 
@@ -208,7 +202,7 @@ anchor_bottom = 1.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 allow_search = false
 
 [node name="LineEdit" type="LineEdit" parent="CharPanel"]
@@ -217,7 +211,7 @@ offset_left = 38.0
 offset_top = 273.0
 offset_right = 180.0
 offset_bottom = 298.0
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 caret_blink = true
 
 [node name="JoinRealm" type="Button" parent="CharPanel"]
@@ -226,7 +220,7 @@ offset_left = 79.0
 offset_top = 186.0
 offset_right = 135.0
 offset_bottom = 207.0
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "进入游戏"
 
 [node name="CreateChar" type="Button" parent="CharPanel"]
@@ -235,7 +229,7 @@ offset_left = 80.0
 offset_top = 336.0
 offset_right = 136.0
 offset_bottom = 357.0
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "创建角色"
 
 [node name="Label" type="Label" parent="CharPanel"]
@@ -244,7 +238,7 @@ offset_left = 39.0
 offset_top = 251.0
 offset_right = 99.0
 offset_bottom = 268.0
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "角色名字："
 
 [node name="Label2" type="Label" parent="CharPanel"]
@@ -253,7 +247,7 @@ offset_left = 39.0
 offset_top = 309.0
 offset_right = 99.0
 offset_bottom = 326.0
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "性别："
 
 [node name="Tip" type="Label" parent="CharPanel"]
@@ -263,7 +257,6 @@ offset_top = 368.0
 offset_right = 181.0
 offset_bottom = 385.0
 theme_override_colors/font_color = Color(0.666667, 0.0666667, 0.113725, 0.945098)
-theme_override_font_sizes/font_size = 12
 clip_text = true
 
 [node name="Male" type="CheckBox" parent="CharPanel"]
@@ -272,7 +265,7 @@ offset_left = 80.0
 offset_top = 304.0
 offset_right = 104.0
 offset_bottom = 328.0
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "男"
 
 [node name="Female" type="CheckBox" parent="CharPanel"]
@@ -281,5 +274,5 @@ offset_left = 140.0
 offset_top = 304.0
 offset_right = 180.0
 offset_bottom = 328.0
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("4_py4jd")
 text = "女"
