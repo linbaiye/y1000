@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://brl3lwfss84w8"]
+[gd_scene load_steps=3 format=3 uid="uid://brl3lwfss84w8"]
 
 [ext_resource type="Script" uid="uid://bh1bq2fpjc865" path="res://Source/Control/Dialog/ItemsContainer.cs" id="1_gp537"]
+[ext_resource type="Theme" uid="uid://dl23ystytknc0" path="res://Scenes/Label.tres" id="2_1i2y8"]
 
 [node name="ItemsContainer" type="ScrollContainer"]
 offset_right = 353.0
@@ -11,4 +12,5 @@ script = ExtResource("1_gp537")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("2_1i2y8")
 theme_override_constants/separation = 1
