@@ -180,6 +180,7 @@ offset_bottom = 49.0
 grow_horizontal = 0
 
 [node name="NpcInteractionMainMenu" parent="." instance=ExtResource("23_ncdnv")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -189,6 +190,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 
 [node name="MerchantTrading" parent="." instance=ExtResource("24_iglx5")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
